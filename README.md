@@ -1,16 +1,18 @@
-## 当前进度（第一阶段）
+## 当前进度（第二阶段）
 
-已完成环境准备、输入组织和D01无模型检查；真实模型请求、正式评测与改进还没运行。唯一整合报告：[report.md](report.md)，当前还不是最终报告；AI辅助和公开评测输入接触情况见报告与基础/开发记录.md。
+我已经完成环境准备、输入组织和本地模型接入，共保留10次开发与诊断调用。请求链可以运行，但仍有答案错误和引用遗漏；目前没有证据证明提示词变体有效。正式评测、实际输入改进和进阶B还没完成。
 
-从仓库根目录检查：`python -X utf8 -B 基础/tests/check_student.py`。该命令不调用模型，会保留新的dry-run记录。
+唯一整合报告：[report.md](report.md)。原始运行记录位于基础/runs，实际辅助过程见基础/开发记录.md及报告。
+
+从仓库根目录执行 `python -X utf8 -B 基础/tests/check_student.py` 可以检查输入组织，不调用模型，但会新增dry-run记录。本地真实调用需要先启动模型服务，再按report.md中的命令运行。
 
 源码上游：https://github.com/Shiina413/ANTLab-Agent-Tasks
 
-个人Fork：https://github.com/kevinZhang2007/ANTLab-Agent-Tasks
+我的Fork：https://github.com/kevinZhang2007/ANTLab-Agent-Tasks
 
 原始源码基点：`b028d90f43f44585cf085a3f607516a94f485e88`
 
-第一阶段版本以包含这份文件的Git提交为准，最终考核版本将在完成后登记。查看改动用 `git diff b028d90f43f44585cf085a3f607516a94f485e88`，新增文件用 `git status --short --untracked-files=all`。
+第一阶段提交：`b39d2cf53c99fd29edd1717b482976761161df3c`。最终考核版本会在完成后登记。
 
 # ANTLab Agent Tasks
 

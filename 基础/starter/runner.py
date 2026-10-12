@@ -36,9 +36,11 @@ def execute(cid,condition,variant,config,*,mock=False,dry=False,outdir=None):
     c,original,selected,msgs=prepare(cid,condition,variant)
     record={'schema_version':1,'run_id':str(uuid.uuid4()),'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
             'case_id':cid,'split':c['split'],'condition':condition,'variant':variant,
-            'mode':'dry' if dry else ('mock' if mock else 'paid'),
+            'mode':'dry' if dry else ('mock' if mock else ('local' if config.get('provider')=='llama.cpp' else 'paid')),
+            'run_kind':'dry_run' if dry else ('mock' if mock else 'live_api'),
             'config':copy.deepcopy(config), 'data_sha256':digest((BASE/'data/cases.json').read_bytes()), 'dataset_version':json.loads((BASE/'data/manifest.json').read_text(encoding='utf-8'))['version'],
             'student_sha256':digest((BASE/'starter/student.py').read_bytes()),
+            'provider_sha256':digest((BASE/'starter/provider.py').read_bytes()),
             'original_passage_ids':[p['id'] for p in original],
             'selected_passage_ids':[p['id'] for p in selected], 'messages':msgs,
             'input_characters':sum(len(m['content']) for m in msgs)}
@@ -48,12 +50,12 @@ def execute(cid,condition,variant,config,*,mock=False,dry=False,outdir=None):
     (folder/(record['run_id']+'.json')).write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
     return record
 def main():
-    p=argparse.ArgumentParser(description='默认只预览；付费调用必须显式--paid')
+    p=argparse.ArgumentParser(description='默认只预览；本机调用用--local，付费调用用--paid')
     p.add_argument('--config',default=str(BASE/'config.example.json'))
     p.add_argument('--split',choices=['dev','evaluation'],default='dev')
     p.add_argument('--case');p.add_argument('--condition',choices=['E','R0','R1','R2','K','all'],default='R0')
     p.add_argument('--variant',choices=['baseline','improved'],default='baseline')
-    mode=p.add_mutually_exclusive_group();mode.add_argument('--paid',action='store_true');mode.add_argument('--mock',action='store_true');mode.add_argument('--dry-run',action='store_true')
+    mode=p.add_mutually_exclusive_group();mode.add_argument('--local',action='store_true');mode.add_argument('--paid',action='store_true');mode.add_argument('--mock',action='store_true');mode.add_argument('--dry-run',action='store_true')
     p.add_argument('--limit',type=int,default=1);p.add_argument('--order-seed',type=int,default=20261006)
     args=p.parse_args()
     if args.limit<1 or args.limit>100: p.error('limit须在1～100之间')
@@ -62,7 +64,9 @@ def main():
     if not jobs: p.error('没有匹配任务')
     random.Random(args.order_seed).shuffle(jobs)
     conf=load_config(args.config)
+    if args.local and conf['provider']!='llama.cpp': p.error('--local要求provider为llama.cpp')
+    if args.paid and conf['provider']=='llama.cpp': p.error('本机调用请用--local，不用--paid')
     for cid,cond in jobs[:args.limit]:
-        r=execute(cid,cond,args.variant,conf,mock=args.mock,dry=not(args.paid or args.mock))
+        r=execute(cid,cond,args.variant,conf,mock=args.mock,dry=not(args.paid or args.mock or args.local))
         print(r['run_id'],cid,cond,r['status'])
 if __name__=='__main__':main()

@@ -1,0 +1,62 @@
+{
+  "record_kind": "local_runtime_metadata",
+  "run_id": "62a41e78-da75-48ca-b9a3-d0ec29127825",
+  "recorded_at_utc": "2026-10-12T07:34:30.597746+00:00",
+  "model": {
+    "repository": "Qwen/Qwen3-0.6B-GGUF",
+    "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+    "file": "Qwen3-0.6B-Q8_0.gguf",
+    "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "bytes": 639446688,
+    "source": "https://huggingface.co/Qwen/Qwen3-0.6B-GGUF",
+    "storage": "%LOCALAPPDATA%/ANTLabLocalModel/models"
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "release": "b11429",
+    "version_output": "0.6.0-dev (build 11429, commit d81235049)",
+    "package_sha256": "1283323272b04cd07905816a597a0da810918102de958f4ff6f7bbaa70ed2efe",
+    "source": "https://github.com/ggml-org/llama.cpp/releases/tag/b11429",
+    "storage": "%LOCALAPPDATA%/ANTLabLocalModel/llama-b11429"
+  },
+  "server_command": "llama-server.exe -m <仓库外模型目录>/Qwen3-0.6B-Q8_0.gguf --host 127.0.0.1 --port 8080 --alias Qwen3-0.6B-Q8_0 --ctx-size 2048 --parallel 1 --batch-size 128 --ubatch-size 64 --threads 4 --gpu-layers 0 --reasoning off",
+  "client_command": "python -X utf8 -B starter/runner.py --case D01 --condition E --variant baseline --local --config config.local.json",
+  "client_working_directory": "基础",
+  "generation_parameters": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 1.5,
+    "seed": 42,
+    "max_tokens": 256
+  },
+  "runner_sha256": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045",
+  "hardware": {
+    "cpu": "Intel Core i5-12500H",
+    "gpu": "Intel Iris Xe",
+    "execution_device": "CPU",
+    "memory_total_gib": 15.63,
+    "memory_available_before_load_gib": 1.87,
+    "memory_available_after_load_gib": 1.55,
+    "server_working_set_after_load_bytes": 942936064
+  },
+  "request_count": 1,
+  "condition": "D01 E",
+  "finish_reason": "stop",
+  "quality_check": {
+    "checked_by": "Codex",
+    "basis": "Only visible D01 E passages; no answer file",
+    "observed_model_answer": "证据不足",
+    "citation_ids_in_input": true,
+    "visible_evidence_calculation": "68 / 85 * 100 = 80%",
+    "conclusion": "Request succeeded, model answer did not use the available cross-passage evidence",
+    "user_verified": false
+  },
+  "notes": [
+    "Previous download failure record remains setup_failure with model_call_attempted=false.",
+    "No retry, evaluation-set execution, cloud API, or mock output.",
+    "Server shut down after this single test to release memory."
+  ],
+  "server_log": "0.00.032.974 I srv  llama_server: initializing ...\n0.00.032.982 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)\n0.00.033.504 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)\n0.00.050.531 I srv    load_model: loading model '%LOCALAPPDATA%\\ANTLabLocalModel\\models\\Qwen3-0.6B-Q8_0.gguf'\n0.00.722.377 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden\n0.01.009.032 I cmn          init: llama threadpool init, n_threads = 4\n0.01.241.925 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 2048, kv_unified = 'false'\n0.01.254.375 I srv  llama_server: model loaded\n0.01.254.385 I srv  llama_server: listening on http://127.0.0.1:8080\n0.01.254.385 W srv  llama_server: notice: server default port will be changed to :9931 in a future release (ref: https://github.com/ggml-org/llama.cpp/pull/26508)\n1.01.462.737 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1\n1.01.462.851 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0\n1.05.257.412 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =    640, progress = 0.78, t =   3.79 s / 168.67 tokens per second\n1.06.045.450 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =    768, progress = 0.93, t =   4.58 s / 167.59 tokens per second\n1.07.095.889 I slot print_timing: id  0 | task 0 | prompt eval time =    5093.95 ms /   824 tokens (    6.18 ms per token,   161.76 tokens per second)\n1.07.095.896 I slot print_timing: id  0 | task 0 |        eval time =     539.00 ms /    18 tokens (   31.71 ms per token,    31.54 tokens per second)\n1.07.095.897 I slot print_timing: id  0 | task 0 |       total time =    5632.95 ms /   842 tokens\n1.07.095.898 I slot print_timing: id  0 | task 0 |    graphs reused =         26\n1.07.096.119 I slot      release: id  0 | task 0 | stop processing: n_tokens = 841, truncated = 0\n"
+}

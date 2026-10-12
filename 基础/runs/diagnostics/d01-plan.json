@@ -1,0 +1,79 @@
+{
+  "record_kind": "pre_call_diagnostic_plan",
+  "recorded_at": "2026-10-12T15:43:52.745228+08:00",
+  "original_run_id": "62a41e78-da75-48ca-b9a3-d0ec29127825",
+  "scope": "D01 E only; at most four new generations; no answer files; prompt and improve unchanged; no retry or best-result selection",
+  "available_evidence": {
+    "original_prompt_tokens": 824,
+    "reconstructed_prompt_tokens": 824,
+    "original_completion_tokens": 18,
+    "finish_reason": "stop",
+    "original_log_truncated": false,
+    "template_contains_complete_messages": true,
+    "thinking_off_rendered_suffix": "<think>\n\n</think>\n\n"
+  },
+  "limitations": [
+    "Historical server request body was not captured. Reconstruction is supporting evidence, not historical packet capture.",
+    "Endpoint /props reports defaults, not parameters applied to the old request.",
+    "No internal reasoning trace is available for the original non-thinking answer."
+  ],
+  "hypotheses": [
+    {
+      "id": "H1",
+      "cause": "presence_penalty=1.5 may suppress useful repeated terms or evidence IDs and encourage early abstention",
+      "prediction": "With only presence_penalty changed to 0, answer should move toward 80% with both source IDs if H1 matters; unchanged or worse output weakens H1 for this case",
+      "contrast": "Original settings vs presence_penalty=0, same seed=42, messages and thinking mode"
+    },
+    {
+      "id": "H2",
+      "cause": "Non-thinking mode may limit cross-passage linking and calculation on this input",
+      "prediction": "With only enable_thinking=true, the model may connect CS41 and compute 68/85; if the 256-token output budget is exhausted, no final answer cannot refute H2",
+      "contrast": "Original settings vs chat_template_kwargs.enable_thinking=true, same seed=42, messages and output cap"
+    }
+  ],
+  "ordered_calls": [
+    {
+      "label": "baseline_replay",
+      "changed_factor": "none; exact request reproduction after server restart",
+      "changes": {}
+    },
+    {
+      "label": "seed_43",
+      "changed_factor": "seed only",
+      "changes": {
+        "seed": 43
+      }
+    },
+    {
+      "label": "presence_penalty_0",
+      "changed_factor": "presence_penalty only",
+      "changes": {
+        "presence_penalty": 0
+      }
+    },
+    {
+      "label": "thinking_on",
+      "changed_factor": "thinking template flag only",
+      "changes": {
+        "chat_template_kwargs": {
+          "enable_thinking": true
+        }
+      }
+    }
+  ],
+  "judgment_basis": "Visible D01 E text: total valid=85, supported=68; 68/85*100=80%. Check JSON format, answer and both citation IDs separately. Not a hidden gold answer.",
+  "timing_note": "Record cache and full client time; do not treat time differences as causal gains. Clear slot cache between calls if supported.",
+  "source_hashes": {
+    "student.py": "6a255e7e3d32af5d12f01a8b7fe8067fb416e08259a8062dcdc2a0003a4431d6",
+    "provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045"
+  },
+  "old_record_hashes": {
+    "runs\\46eef393-1778-4952-b9f8-e0bb6f7eaac0.json": "cc8b0abb4e5660f7b805506263b92cd95af923c8e17e0303c33990a1c38f6214",
+    "runs\\62a41e78-da75-48ca-b9a3-d0ec29127825.json": "959983f080428b803fd21c3afae796a5789dc8a3e5a4c1c5c8ca569171ed02c5",
+    "runs\\a93a378c-5f0a-4690-af00-387bee4f5ba4.json": "44dde4175f1af5d39d50d1c26fe394b286d75e5406647bc108ba7b8d3f66b1fa",
+    "runs\\e3b3ce3a-f88b-4168-93b3-98ca6fdec97e.json": "844ca4c2800c0d9abe18e6318f544de1e407fdea9c40dfb6371084645ff0a1a2",
+    "runs\\setup\\62a41e78-da75-48ca-b9a3-d0ec29127825_runtime.json": "0de37de7dbdd57f2ded84e020c148fe9ea494512569152897a73129b7790dec6",
+    "runs\\setup\\ca16ab3c-f189-41f9-99f8-291950b5ec4c.json": "c26f3988b909a153e3d5849ec57dadfd0f0724fe9fc06c464cdf710261b25e6b"
+  }
+}

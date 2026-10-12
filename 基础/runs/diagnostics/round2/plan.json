@@ -1,0 +1,80 @@
+{
+  "record_kind": "pre_call_plan",
+  "recorded_at": "2026-10-12T15:56:54.677638+08:00",
+  "phase": "round2_development_diagnostics",
+  "call_limit": 6,
+  "planned_call_count": 5,
+  "development_cases": [
+    "D01",
+    "D02",
+    "D03",
+    "D04"
+  ],
+  "condition": "E",
+  "original_nonthinking_run": "62a41e78-da75-48ca-b9a3-d0ec29127825",
+  "previous_thinking_run": "79089565-adab-43b0-b9b5-e6a89260c9a5",
+  "source_hashes": {
+    "student.py": "6a255e7e3d32af5d12f01a8b7fe8067fb416e08259a8062dcdc2a0003a4431d6",
+    "provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045"
+  },
+  "old_record_hashes": {
+    "runs\\46eef393-1778-4952-b9f8-e0bb6f7eaac0.json": "cc8b0abb4e5660f7b805506263b92cd95af923c8e17e0303c33990a1c38f6214",
+    "runs\\62a41e78-da75-48ca-b9a3-d0ec29127825.json": "959983f080428b803fd21c3afae796a5789dc8a3e5a4c1c5c8ca569171ed02c5",
+    "runs\\a93a378c-5f0a-4690-af00-387bee4f5ba4.json": "44dde4175f1af5d39d50d1c26fe394b286d75e5406647bc108ba7b8d3f66b1fa",
+    "runs\\e3b3ce3a-f88b-4168-93b3-98ca6fdec97e.json": "844ca4c2800c0d9abe18e6318f544de1e407fdea9c40dfb6371084645ff0a1a2",
+    "runs\\diagnostics\\d01-final-audit.json": "18d4f92a25194f0725777a2616435330770408ee7aff7a8dbceaf1ef4136ebcf",
+    "runs\\diagnostics\\d01-input-audit.json": "e3b16217f677ed9e24f6e9275bc6c1888ee134a09aae15deb20903497949b7af",
+    "runs\\diagnostics\\d01-plan.json": "12fa2add941522a6e70a03fa6cecbc1741c563aa4ade7ad9e950d10c65839490",
+    "runs\\diagnostics\\d01-preflight-failure.json": "16def7f524db4eeff990b059d5fcb55134798ef58ae81633749af8957ed3656c",
+    "runs\\diagnostics\\d01-results.json": "0c48a1ad1fd553a518a38d48499dcad1f3383c4f2fedfe11ae7c3a320c60051f",
+    "runs\\diagnostics\\d01-server-log.txt": "7f24c0e98c4d7a57750390aece334eb721eb5ec791ad1f9ebcbd5f4c79194d73",
+    "runs\\diagnostics\\run-47a37604-66e6-4208-bdcc-2c31d8eabc3c.json": "e7ce9097ac7c418d87ff8ea6e2d1eb0435deb26a89af9b6fa2d7e8864b142b74",
+    "runs\\diagnostics\\run-79089565-adab-43b0-b9b5-e6a89260c9a5.json": "c31970adbbcd335f4e631335140ad8057ebcc204478cff72c034421eb63a8193",
+    "runs\\diagnostics\\run-d94cb9c1-8a03-44a2-b447-d023d5c802f7.json": "0b21ba9a3dc6e2ea9bf22890307bf00a8eac3f76e0aaa1f1ba6c290b1094e195",
+    "runs\\diagnostics\\run-ff0b31af-80f5-42ff-a65e-92d013e83a81.json": "00e571214c8ff652281e0c833b38103ef331a63622b84ddf6d4d6f198956b63c",
+    "runs\\setup\\62a41e78-da75-48ca-b9a3-d0ec29127825_runtime.json": "0de37de7dbdd57f2ded84e020c148fe9ea494512569152897a73129b7790dec6",
+    "runs\\setup\\ca16ab3c-f189-41f9-99f8-291950b5ec4c.json": "c26f3988b909a153e3d5849ec57dadfd0f0724fe9fc06c464cdf710261b25e6b"
+  },
+  "public_answer_use": "Evaluation only after receiving each model response. Never copied into messages, config, or prompt variant; no answer constructed by inference code.",
+  "metric_check": {
+    "case_id": "D01",
+    "evaluation_basis": "P312446:85 valid questions, denominator includes format errors; P898100:68 supported questions; public answer reason confirms 68/85=80%.",
+    "public_answers_sha256": "96c5a6dc7063011632fc3e6b2ae5f16c111a714b862afdfb337ab0b95bd80e72"
+  },
+  "variants": {
+    "A": {
+      "reference": "previous thinking-on 256 run",
+      "single_change": "max_tokens:256 -> 1024",
+      "prompt": "original",
+      "thinking": true,
+      "prediction": "More output budget may allow a final JSON answer; correctness may still fail if metric interpretation remains wrong. If 1024 is exhausted, record failure and do not raise budget again."
+    },
+    "B": {
+      "reference": "original non-thinking 256 run",
+      "single_change": "Append exactly the separately saved generic sentence to system message",
+      "max_tokens": 256,
+      "thinking": false,
+      "prediction": "Explicitly distinguishing numerator, denominator and count/percentage may reduce D01 misinterpretation; may have no effect and must not cause unsupported guesses on other dev tasks."
+    }
+  },
+  "comparison_scope": "A vs previous thinking256; B vs previous nonthinking256. A vs B changes multiple factors, no single-factor causal attribution.",
+  "selection_rule": "Qualify only if exact answer/citations JSON schema, answer matches public answer and visible text, citation IDs belong to actual input, and cited content is sufficient. Select B if B qualifies (also if both qualify); select A only if A qualifies and B does not; if neither qualifies, select B as an unvalidated low-budget candidate and explicitly report no improvement.",
+  "transfer": "Use selected setting unchanged on D02, D03, D04 E once each, without per-case prompt tuning.",
+  "stop_conditions": [
+    "Only five planned generation calls.",
+    "Sixth call reserved only for a concrete technical failure with a identified/remedied cause; link retry to failed record.",
+    "Wrong answers, malformed model JSON and length-limited model output are not technical retry grounds.",
+    "No further budget increase after A, even if length-limited.",
+    "No formal evaluation, cloud service, source prompt changes, commit or push."
+  ],
+  "evaluation_dimensions": [
+    "complete exact answer/citations JSON with string answer and list of string citations",
+    "answer agrees with public dev answer and visible text",
+    "citation IDs in actual input",
+    "citation text semantically sufficient (separate from ID existence)",
+    "client time, generated tokens, finish reason and failure reason"
+  ],
+  "insufficient_answer_rule": "For D02, public evidence_ids is empty because the answer is insufficient; check actual citations as inspection sources, especially noncollected GPU fields, rather than treating the empty gold list as a mandate for zero citations.",
+  "runtime": "Same Qwen3-0.6B-Q8_0, llama.cpp b11429, CPU, ctx2048, threads4, parallel1, reasoning off default; request kwargs enables A; empty slot cache before each call."
+}
