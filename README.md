@@ -1,3 +1,17 @@
+## 当前进度（第一阶段）
+
+已完成环境准备、输入组织和D01无模型检查；真实模型请求、正式评测与改进还没运行。唯一整合报告：[report.md](report.md)，当前还不是最终报告；AI辅助和公开评测输入接触情况见报告与基础/开发记录.md。
+
+从仓库根目录检查：`python -X utf8 -B 基础/tests/check_student.py`。该命令不调用模型，会保留新的dry-run记录。
+
+源码上游：https://github.com/Shiina413/ANTLab-Agent-Tasks
+
+个人Fork：https://github.com/kevinZhang2007/ANTLab-Agent-Tasks
+
+原始源码基点：`b028d90f43f44585cf085a3f607516a94f485e88`
+
+第一阶段版本以包含这份文件的Git提交为准，最终考核版本将在完成后登记。查看改动用 `git diff b028d90f43f44585cf085a3f607516a94f485e88`，新增文件用 `git status --short --untracked-files=all`。
+
 # ANTLab Agent Tasks
 
 文档阅读与信息核验方向 Agent 项目的应用层开发者招募考核：先完成基础题，再从进阶 A/B/C 中选择一套完成。
