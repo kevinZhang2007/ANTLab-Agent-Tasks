@@ -1,0 +1,30 @@
+{
+  "recorded_at": "2026-10-13T13:12:03.377747+08:00",
+  "status": "待确认执行规则",
+  "main_tasks": 40,
+  "independent_paired_units": 8,
+  "first_attempt": "每个清单项attempt=1立即保存；主表保留首次尝试状态。首次技术成功响应是first_valid_attempt，即使格式错、无答案或答错也不得质量重试。",
+  "denominators": {
+    "baseline": 32,
+    "improved": 8,
+    "pairing": "8组R0 baseline/improved；8组R0/R1/R2顺序观察；K另列选择和数量变化。",
+    "not_executed": "如因技术停止，不伪造剩余结果；列实际执行分母和计划40项完成率，未执行不当作模型回答错误。",
+    "technical_success_subset": "另列首次技术成功子集及对应分母，首次失败仍保留在主任务表。"
+  },
+  "technical_failure": "HTTP非成功、超时、服务退出、请求参数失效、内存不足、容量超限或输入与清单不一致；保留请求和错误后立即停止整轮。",
+  "quality_failure": "错误答案、合法证据不足、空引用、错误引用、格式错误或预算耗尽是结果，不自动重试。",
+  "retry_policy": "本轮准备不授权任何生成或重试。正式执行若技术失败须先排查并另获恢复授权；若重试，使用同设置，记录attempt、retry_of及修复，不覆盖首次失败，不挑最佳。设置改变须作为独立探索，不能混入主轮次。",
+  "stop_before_generation": [
+    "全部40项容量已核验且满足4096；超限保存后停止，不删段、不截断、不换设置继续。",
+    "正式执行前需确认配置并单独登记冻结时间、哈希及40项实际输入清单。",
+    "实际模型哈希、代码、数据、参数和服务设置须与确认版本一致。"
+  ],
+  "no_generation_this_round": true,
+  "capacity_only_endpoints": [
+    "health",
+    "props",
+    "apply-template",
+    "tokenize"
+  ],
+  "position_limit": "R0/R1/R2同资料换顺序；K改变选择及数量；小样本不声称统计显著或稳定性能提升。"
+}

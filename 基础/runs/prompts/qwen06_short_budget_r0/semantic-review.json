@@ -1,0 +1,444 @@
+[
+  {
+    "case_id": "D01",
+    "round": 1,
+    "run_id": "aabee1ad-592f-4821-b4f8-b5980e39f4ac",
+    "record_path": "基础/runs/prompts/qwen06_short_budget_r0/round1/run-aabee1ad-592f-4821-b4f8-b5980e39f4ac.json",
+    "raw_content": "{\"answer\":\"91%\",\"citations\":[\"P312446\",\"P191745\"]}",
+    "raw_reasoning_text": null,
+    "http_success": true,
+    "format_complete": true,
+    "answer_correct": false,
+    "semantic_consistent": false,
+    "specified_answer_form": null,
+    "citation_ids_exist": true,
+    "necessary_evidence_covered": false,
+    "irrelevant_citations": [
+      "P191745"
+    ],
+    "citation_support_sufficient": false,
+    "complete_success": false,
+    "source_basis": "P312446：正式回归CS41共85个有效问题，格式错误计入分母；P898100：CS41有68个问题的必要结论获完整支持。68/85=80%。P191745是岫光项目，不能代替澄石正式回归。",
+    "cited_source_quotes": [
+      {
+        "id": "P312446",
+        "source": "模拟记录/D01/页1",
+        "text": "澄石项目R4版本在2026-03的记录：正式回归批次代号CS41，共收录85个有效问题；分母采用冻结后的有效问题数，格式错误也计入。"
+      },
+      {
+        "id": "P191745",
+        "source": "模拟记录/D01/页4",
+        "text": "岫光项目R4版本在2026-03登记同名指标和批次XQ50，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。"
+      }
+    ],
+    "seconds": 13.080377000034787,
+    "output_tokens": 27,
+    "input_tokens": 2114,
+    "max_tokens": 256,
+    "finish_reason": "stop",
+    "budget_exhausted": false,
+    "judgment": [
+      "最终答案不符合公开开发答案或问题要求的表达形式。",
+      "引用缺少必要依据。",
+      "含范围不符或不能支持结论的引用：P191745"
+    ],
+    "reference_original": {
+      "run_id": "7568375a-c56d-44d5-aa7b-03c10503f225",
+      "raw_content": "{\"answer\":\"91%\",\"citations\":[\"P191745\"]}",
+      "answer_correct": false,
+      "complete_success": false,
+      "seconds": 12.448485199944116
+    }
+  },
+  {
+    "case_id": "D02",
+    "round": 1,
+    "run_id": "3bfbf495-d379-44e3-aa48-79f6534d5d1c",
+    "record_path": "基础/runs/prompts/qwen06_short_budget_r0/round1/run-3bfbf495-d379-44e3-aa48-79f6534d5d1c.json",
+    "raw_content": "{\"answer\":\"青岚项目R6版本在2026-04夜间组使用的服务端GPU具体型号是NVIDIA A100。\",\"citations\":[\"P406170\"]}",
+    "raw_reasoning_text": null,
+    "http_success": true,
+    "format_complete": true,
+    "answer_correct": false,
+    "semantic_consistent": false,
+    "specified_answer_form": false,
+    "citation_ids_exist": true,
+    "necessary_evidence_covered": true,
+    "irrelevant_citations": [],
+    "citation_support_sufficient": false,
+    "complete_success": false,
+    "source_basis": "P406170：夜间组QL62只收到HTTP响应和模型显示名，服务端内部阶段没有被观测；P562395：QL62资产、设备遥测与推理节点字段均未被采集。两段都支持无法确定具体GPU型号；压力组及其他版本不能代替夜间组。",
+    "cited_source_quotes": [
+      {
+        "id": "P406170",
+        "source": "模拟记录/D02/页5",
+        "text": "青岚项目R6版本在2026-04的记录：夜间组代号QL62，24次请求经共享网关转发，客户端只收到HTTP响应和模型显示名。"
+      }
+    ],
+    "seconds": 13.608018600032665,
+    "output_tokens": 47,
+    "input_tokens": 2102,
+    "max_tokens": 256,
+    "finish_reason": "stop",
+    "budget_exhausted": false,
+    "judgment": [
+      "最终答案不符合公开开发答案或问题要求的表达形式。"
+    ],
+    "reference_original": {
+      "run_id": "cb87bc45-5c12-43d8-991c-a28adcebba20",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P406170\"]}",
+      "answer_correct": true,
+      "complete_success": true,
+      "seconds": 12.88700530002825
+    }
+  },
+  {
+    "case_id": "D03",
+    "round": 1,
+    "run_id": "3150ef95-be6a-4922-817a-9911de0dff71",
+    "record_path": "基础/runs/prompts/qwen06_short_budget_r0/round1/run-3150ef95-be6a-4922-817a-9911de0dff71.json",
+    "raw_content": "{\"answer\": \"0.2\", \"citations\":[\"P695887\",\"P482205\",\"P995129\",\"P104320\",\"P590520\",\"P779882\",\"P419087\"]}",
+    "raw_reasoning_text": null,
+    "http_success": true,
+    "format_complete": true,
+    "answer_correct": false,
+    "semantic_consistent": false,
+    "specified_answer_form": null,
+    "citation_ids_exist": true,
+    "necessary_evidence_covered": true,
+    "irrelevant_citations": [
+      "P482205",
+      "P995129",
+      "P104320",
+      "P590520",
+      "P779882"
+    ],
+    "citation_support_sufficient": false,
+    "complete_success": false,
+    "source_basis": "P695887：单并发主测BY53甲中位数7.6秒；P419087：同一BY53乙为5.8秒，40个问题及模型、输出上限、重试设置相同。7.6-5.8=1.8；P482205是4月探索组。",
+    "cited_source_quotes": [
+      {
+        "id": "P695887",
+        "source": "模拟记录/D03/页1",
+        "text": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。"
+      },
+      {
+        "id": "P482205",
+        "source": "模拟记录/D03/页2",
+        "text": "白榆项目R5版本在2026-04的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。"
+      },
+      {
+        "id": "P995129",
+        "source": "模拟记录/D03/页6",
+        "text": "白榆项目R5版本在2026-05的压力组使用八并发请求，96项返回成功、4项超时，P50为3.7秒；项目另列压力组汇总。"
+      },
+      {
+        "id": "P104320",
+        "source": "模拟记录/D03/页7",
+        "text": "岫光项目R5版本在2026-05登记同名指标和批次XQ52，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。"
+      },
+      {
+        "id": "P590520",
+        "source": "模拟记录/D03/页4",
+        "text": "白榆项目R5版本在2026-05的迁移批次XQ52处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。"
+      },
+      {
+        "id": "P779882",
+        "source": "模拟记录/D03/页5",
+        "text": "白榆项目R4版本在2026-05的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。"
+      },
+      {
+        "id": "P419087",
+        "source": "模拟记录/D03/页3",
+        "text": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。"
+      }
+    ],
+    "seconds": 16.80600460001733,
+    "output_tokens": 69,
+    "input_tokens": 2126,
+    "max_tokens": 256,
+    "finish_reason": "stop",
+    "budget_exhausted": false,
+    "judgment": [
+      "最终答案不符合公开开发答案或问题要求的表达形式。",
+      "含范围不符或不能支持结论的引用：P482205,P995129,P104320,P590520,P779882"
+    ],
+    "reference_original": {
+      "run_id": "c0f527a5-f30c-4857-8b51-890197941ba6",
+      "raw_content": "{\"answer\":\"1.4秒\",\"citations\":[\"P695887\"]}",
+      "answer_correct": false,
+      "complete_success": false,
+      "seconds": 13.008822300005704
+    }
+  },
+  {
+    "case_id": "D04",
+    "round": 1,
+    "run_id": "74a3bb1d-45e5-46b0-b165-d558490bbed5",
+    "record_path": "基础/runs/prompts/qwen06_short_budget_r0/round1/run-74a3bb1d-45e5-46b0-b165-d558490bbed5.json",
+    "raw_content": "{\"answer\":\"配置丙\",\"citations\":[\"P579223\",\"P108958\",\"P681014\",\"P188543\",\"P580199\",\"P653457\",\"P611709\"]}",
+    "raw_reasoning_text": null,
+    "http_success": true,
+    "format_complete": true,
+    "answer_correct": true,
+    "semantic_consistent": true,
+    "specified_answer_form": null,
+    "citation_ids_exist": true,
+    "necessary_evidence_covered": true,
+    "irrelevant_citations": [
+      "P108958",
+      "P681014",
+      "P188543",
+      "P580199",
+      "P653457"
+    ],
+    "citation_support_sufficient": false,
+    "complete_success": false,
+    "source_basis": "P579223：WC34乙89%、预算1980、失败1次，丙88%、1720、0次；P611709：至少88%且失败不超过1次，再按预算从低到高。乙丙合格，应选预算更低的丙；需要数据与规则两段。",
+    "cited_source_quotes": [
+      {
+        "id": "P579223",
+        "source": "模拟记录/D04/页4",
+        "text": "雾川项目R3版本在2026-06的记录：正式选择表WC34登记配置甲覆盖率86%、预算1450、格式失败4次；配置乙89%、1980、1次；配置丙88%、1720、0次。"
+      },
+      {
+        "id": "P108958",
+        "source": "模拟记录/D04/页3",
+        "text": "雾川项目R2版本在2026-06的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。"
+      },
+      {
+        "id": "P681014",
+        "source": "模拟记录/D04/页2",
+        "text": "雾川项目R3版本在2026-05的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。"
+      },
+      {
+        "id": "P188543",
+        "source": "模拟记录/D04/页1",
+        "text": "雾川项目R3版本在2026-06的压力组使用八并发请求，96项返回成功、4项超时，P50为3.7秒；项目另列压力组汇总。"
+      },
+      {
+        "id": "P580199",
+        "source": "模拟记录/D04/页5",
+        "text": "雾川项目R3版本在2026-06的迁移批次XQ53处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。"
+      },
+      {
+        "id": "P653457",
+        "source": "模拟记录/D04/页6",
+        "text": "岫光项目R3版本在2026-06登记同名指标和批次XQ53，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。"
+      },
+      {
+        "id": "P611709",
+        "source": "模拟记录/D04/页7",
+        "text": "批次WC34的复核补页：WC34签署规则为覆盖率至少88%且格式失败不超过1次，再在合格项中按输入预算从低到高决定。"
+      }
+    ],
+    "seconds": 14.934763500001281,
+    "output_tokens": 66,
+    "input_tokens": 2132,
+    "max_tokens": 256,
+    "finish_reason": "stop",
+    "budget_exhausted": false,
+    "judgment": [
+      "含范围不符或不能支持结论的引用：P108958,P681014,P188543,P580199,P653457"
+    ],
+    "reference_original": {
+      "run_id": "3b3a602f-0ec5-4e03-9383-406b4b8616e1",
+      "raw_content": "{\"answer\":\"配置丙\",\"citations\":[\"P579223\"]}",
+      "answer_correct": true,
+      "complete_success": false,
+      "seconds": 13.006352600059472
+    }
+  },
+  {
+    "case_id": "D01",
+    "round": 2,
+    "run_id": "3eaab0d9-aaf0-45b9-8067-da066208f0e4",
+    "record_path": "基础/runs/prompts/qwen06_short_budget_r0/round2/run-3eaab0d9-aaf0-45b9-8067-da066208f0e4.json",
+    "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P312446\"]}",
+    "raw_reasoning_text": "好的，我现在需要解决用户的问题：澄石项目R4版本在2026-03正式回归批次的核验率是多少？答案要写成百分数，并且只输出JSON格式。\n\n首先，我需要找到所有与该问题相关的段落。根据提供的资料，有多个段落提到了澄石项目R4版本在2026-03的情况。我需要仔细检查每个段落，看看是否有提到核验率的数据。\n\n查看段落P312446的内容：其中提到“正式回归批次代号CS41，共收录85个有效问题；分母采用冻结后的有效问题数，格式错误也计入”。这里没有直接给出核验率的数值，但可能包含相关数据。同样，其他段落如P765807、P191745等也提到了批次的数据，但具体核验率并未明确给出。\n\n接下来，我需要确认是否有其他段落提到核验率。例如，P133261提到压力组使用八并发请求，96项成功，4项超时，P50为3.7秒；P771469提到了R3版本的完整支持率88%，但这是另一个版本的信息，不是R4。因此，在提供的资料中，只有P312446提到CS41批次有85个有效问题，而没有直接给出核验率。\n\n这时候需要考虑是否还有其他段落可能提供核验率的数据。例如，P771469中的“完整支持率为88%”和“流程甲平均耗时4.2秒”，但这些都是关于R3版本的信息，不是R4的核验率。因此，目前在提供的资料中，没有明确提到R4版本在CS41批次的核验率。\n\n这时候需要判断是否证据不足。因为问题询问的是核验率，而资料中没有直接给出具体数值，也没有其他相关信息支持这个数值。因此，答案应该是证据不足，填写“证据不足”。\n\n最后，确认所有引用的段落ID正确，并且只返回JSON格式，不包含任何额外信息。\n",
+    "http_success": true,
+    "format_complete": true,
+    "answer_correct": false,
+    "semantic_consistent": false,
+    "specified_answer_form": null,
+    "citation_ids_exist": true,
+    "necessary_evidence_covered": false,
+    "irrelevant_citations": [],
+    "citation_support_sufficient": false,
+    "complete_success": false,
+    "source_basis": "P312446：正式回归CS41共85个有效问题，格式错误计入分母；P898100：CS41有68个问题的必要结论获完整支持。68/85=80%。P191745是岫光项目，不能代替澄石正式回归。",
+    "cited_source_quotes": [
+      {
+        "id": "P312446",
+        "source": "模拟记录/D01/页1",
+        "text": "澄石项目R4版本在2026-03的记录：正式回归批次代号CS41，共收录85个有效问题；分母采用冻结后的有效问题数，格式错误也计入。"
+      }
+    ],
+    "seconds": 36.74050289997831,
+    "output_tokens": 485,
+    "input_tokens": 2110,
+    "max_tokens": 1024,
+    "finish_reason": "stop",
+    "budget_exhausted": false,
+    "judgment": [
+      "最终答案不符合公开开发答案或问题要求的表达形式。",
+      "引用缺少必要依据。"
+    ],
+    "reference_original": {
+      "run_id": "7568375a-c56d-44d5-aa7b-03c10503f225",
+      "raw_content": "{\"answer\":\"91%\",\"citations\":[\"P191745\"]}",
+      "answer_correct": false,
+      "complete_success": false,
+      "seconds": 12.448485199944116
+    }
+  },
+  {
+    "case_id": "D02",
+    "round": 2,
+    "run_id": "699bc78e-60d4-4dab-a8dd-abe5538a6643",
+    "record_path": "基础/runs/prompts/qwen06_short_budget_r0/round2/run-699bc78e-60d4-4dab-a8dd-abe5538a6643.json",
+    "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P406170\",\"P640945\",\"P831879\"]}",
+    "raw_reasoning_text": "好的，我现在需要解决用户的问题：“青岚项目R6版本在2026-04夜间组使用的服务端GPU具体型号是什么？”首先，我需要仔细查看提供的资料，找到相关的信息。\n\n首先，用户的问题涉及时间、版本和GPU型号，所以我要在各个段落中查找这些关键词。注意到问题中的日期是2026-04，而所有段落的日期都是2026年，因此可以确定时间部分正确。\n\n接下来，我需要寻找关于青岚项目R6版本在夜间组使用的GPU型号的信息。查看各个段落的文本，发现P406170和P974958提到过相关的内容。例如，在P974958中，有“24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒”，但没有提到GPU型号。同样，在P640945和P831879中也提到了版本R6，但同样没有具体说明GPU型号。\n\n现在，我需要确认是否有其他段落可能提供相关信息。例如，检查是否有提到服务端的GPU配置或相关参数。然而，所有段落中的描述都是关于请求处理、响应时间等指标，没有直接涉及GPU的具体型号。\n\n接下来，我需要考虑是否存在遗漏的信息或者是否有其他来源未被提及。但根据提供的资料，目前没有找到与GPU型号相关的具体信息。因此，可能需要在答案中说明证据不足，或者引用相关段落的文本。\n\n根据用户的要求，如果证据不足，应该填写“证据不足”。而现有的资料中没有明确提到具体的GPU型号，因此无法确认答案。因此，最终的答案应该是“证据不足”，并列出相关的段落ID作为citations。\n",
+    "http_success": true,
+    "format_complete": true,
+    "answer_correct": true,
+    "semantic_consistent": true,
+    "specified_answer_form": true,
+    "citation_ids_exist": true,
+    "necessary_evidence_covered": true,
+    "irrelevant_citations": [
+      "P640945",
+      "P831879"
+    ],
+    "citation_support_sufficient": false,
+    "complete_success": false,
+    "source_basis": "P406170：夜间组QL62只收到HTTP响应和模型显示名，服务端内部阶段没有被观测；P562395：QL62资产、设备遥测与推理节点字段均未被采集。两段都支持无法确定具体GPU型号；压力组及其他版本不能代替夜间组。",
+    "cited_source_quotes": [
+      {
+        "id": "P406170",
+        "source": "模拟记录/D02/页5",
+        "text": "青岚项目R6版本在2026-04的记录：夜间组代号QL62，24次请求经共享网关转发，客户端只收到HTTP响应和模型显示名。"
+      },
+      {
+        "id": "P640945",
+        "source": "模拟记录/D02/页2",
+        "text": "青岚项目R6版本在2026-04的压力组使用八并发请求，96项返回成功、4项超时，P50为3.7秒；项目另列压力组汇总。"
+      },
+      {
+        "id": "P831879",
+        "source": "模拟记录/D02/页7",
+        "text": "青岚项目R5版本在2026-04的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。"
+      }
+    ],
+    "seconds": 34.08183239994105,
+    "output_tokens": 413,
+    "input_tokens": 2098,
+    "max_tokens": 1024,
+    "finish_reason": "stop",
+    "budget_exhausted": false,
+    "judgment": [
+      "含范围不符或不能支持结论的引用：P640945,P831879"
+    ],
+    "reference_original": {
+      "run_id": "cb87bc45-5c12-43d8-991c-a28adcebba20",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P406170\"]}",
+      "answer_correct": true,
+      "complete_success": true,
+      "seconds": 12.88700530002825
+    }
+  },
+  {
+    "case_id": "D03",
+    "round": 2,
+    "run_id": "bb760859-3134-4478-94b5-493f0f7fd111",
+    "record_path": "基础/runs/prompts/qwen06_short_budget_r0/round2/run-bb760859-3134-4478-94b5-493f0f7fd111.json",
+    "raw_content": "{\"answer\":\"1.6\",\"citations\":[\"P695887\",\"P482205\"]}",
+    "raw_reasoning_text": "好的，我现在需要解决用户的问题：白榆项目R5版本在2026-05单并发主测中，方案乙的完整响应耗时中位数比方案甲少多少秒？首先，我得仔细看一下用户提供的资料，找到相关的段落。\n\n首先，用户的问题涉及两个方案，方案甲和方案乙，以及它们的耗时比较。根据提供的资料，我需要找到直接提到这两个方案的耗时数据。\n\n查看各个段落的文本，发现P695887和P482205提到了白榆项目R5版本在2026-05的记录。其中，P695887详细描述了方案甲的完整响应耗时中位数是7.6秒。而P482205提到方案乙的耗时中位数为6.0秒。用户的问题是要比较两者之间的差异，即方案乙比方案甲少多少秒。\n\n接下来，我需要确认这两个数据是否准确对应问题中的时间范围和版本。根据资料，都是在2026-05这个日期范围内，且对应的版本是R5，所以数据是有效的。\n\n现在，计算两者的差值：7.6秒减去6.0秒等于1.6秒。因此，答案应该是1.6秒，但需要确认是否有其他信息可能影响这个结果，比如是否有其他段落提到不同的数据，但根据提供的资料，这两个段落明确给出了方案乙和甲的耗时中位数，所以应该正确。\n\n最后，确保没有遗漏其他可能影响比较的数据，但目前的信息足够直接。因此，最终答案应该是1.6秒，并且引用相关的段落P695887和P482205。\n",
+    "http_success": true,
+    "format_complete": true,
+    "answer_correct": false,
+    "semantic_consistent": false,
+    "specified_answer_form": null,
+    "citation_ids_exist": true,
+    "necessary_evidence_covered": false,
+    "irrelevant_citations": [
+      "P482205"
+    ],
+    "citation_support_sufficient": false,
+    "complete_success": false,
+    "source_basis": "P695887：单并发主测BY53甲中位数7.6秒；P419087：同一BY53乙为5.8秒，40个问题及模型、输出上限、重试设置相同。7.6-5.8=1.8；P482205是4月探索组。",
+    "cited_source_quotes": [
+      {
+        "id": "P695887",
+        "source": "模拟记录/D03/页1",
+        "text": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。"
+      },
+      {
+        "id": "P482205",
+        "source": "模拟记录/D03/页2",
+        "text": "白榆项目R5版本在2026-04的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。"
+      }
+    ],
+    "seconds": 34.66184129996691,
+    "output_tokens": 410,
+    "input_tokens": 2122,
+    "max_tokens": 1024,
+    "finish_reason": "stop",
+    "budget_exhausted": false,
+    "judgment": [
+      "最终答案不符合公开开发答案或问题要求的表达形式。",
+      "引用缺少必要依据。",
+      "含范围不符或不能支持结论的引用：P482205"
+    ],
+    "reference_original": {
+      "run_id": "c0f527a5-f30c-4857-8b51-890197941ba6",
+      "raw_content": "{\"answer\":\"1.4秒\",\"citations\":[\"P695887\"]}",
+      "answer_correct": false,
+      "complete_success": false,
+      "seconds": 13.008822300005704
+    }
+  },
+  {
+    "case_id": "D04",
+    "round": 2,
+    "run_id": "38c8604c-f078-4b4b-a0e2-7954fa9e3a2d",
+    "record_path": "基础/runs/prompts/qwen06_short_budget_r0/round2/run-38c8604c-f078-4b4b-a0e2-7954fa9e3a2d.json",
+    "raw_content": "{\n  \"answer\": \"配置乙\",\n  \"citations\": [\"P579223\"]\n}",
+    "raw_reasoning_text": "好的，我现在需要解决用户的问题，即根据雾川项目R3版本2026-06的正式选择表规则，选择哪项配置。首先，我需要仔细阅读提供的资料，找出与问题相关的部分。\n\n用户的问题明确提到要选择“某项配置”，所以重点在于找到该版本中关于配置的选择信息。接下来，我查看各个段落的内容，寻找是否有直接提到不同配置及其参数的信息。\n\n在P579223段落中，提到了配置甲、乙和丙的覆盖率、预算和失败次数。配置甲86%，预算1450，失败4次；配置乙89%，预算1980，失败1次；配置丙88%，预算1720，失败0次。这里直接列出了三个配置的数据，但用户的问题可能希望选择其中一个，但需要确认是否有更详细的规则或是否这些配置是最终决定的因素。\n\n接下来检查其他段落，比如P681014、P580199等，但这些内容更多描述了不同的批次和迁移情况，没有直接提到配置的选择条件。因此，可能只有P579223提供了关于配置的具体数值信息，而其他段落的信息可能与问题无关。\n\n根据规则，选择表需要项目、版本、窗口、批次一致的记录比较。资料中确实提到了这些条件，但问题只是询问配置名称，而不是具体的选择过程。因此，答案应基于P579223中的配置数据。\n\n确认没有其他段落提到配置的选择规则或参数，因此可以确定答案是配置甲或乙，根据其覆盖率和预算。但需要看题目是否有特定的规则要求选择哪一个。如果问题只问哪项配置，而资料中并没有进一步说明，可能需要选择最符合的，即配置甲或乙。但根据提供的信息，可能只需要列出配置名称即可，因为问题只问配置名称，不需要具体数值。\n\n因此，最终答案应为配置名称，并引用相关段落ID。\n",
+    "http_success": true,
+    "format_complete": true,
+    "answer_correct": false,
+    "semantic_consistent": false,
+    "specified_answer_form": null,
+    "citation_ids_exist": true,
+    "necessary_evidence_covered": false,
+    "irrelevant_citations": [],
+    "citation_support_sufficient": false,
+    "complete_success": false,
+    "source_basis": "P579223：WC34乙89%、预算1980、失败1次，丙88%、1720、0次；P611709：至少88%且失败不超过1次，再按预算从低到高。乙丙合格，应选预算更低的丙；需要数据与规则两段。",
+    "cited_source_quotes": [
+      {
+        "id": "P579223",
+        "source": "模拟记录/D04/页4",
+        "text": "雾川项目R3版本在2026-06的记录：正式选择表WC34登记配置甲覆盖率86%、预算1450、格式失败4次；配置乙89%、1980、1次；配置丙88%、1720、0次。"
+      }
+    ],
+    "seconds": 36.4379066999536,
+    "output_tokens": 456,
+    "input_tokens": 2128,
+    "max_tokens": 1024,
+    "finish_reason": "stop",
+    "budget_exhausted": false,
+    "judgment": [
+      "最终答案不符合公开开发答案或问题要求的表达形式。",
+      "引用缺少必要依据。"
+    ],
+    "reference_original": {
+      "run_id": "3b3a602f-0ec5-4e03-9383-406b4b8616e1",
+      "raw_content": "{\"answer\":\"配置丙\",\"citations\":[\"P579223\"]}",
+      "answer_correct": true,
+      "complete_success": false,
+      "seconds": 13.006352600059472
+    }
+  }
+]

@@ -1,0 +1,2598 @@
+{
+  "reviewed_at": "2026-10-13T13:41:11.716077+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+  "rows": [
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "实际K只有P555495和P130348，缺QY71发布规则，不能确定release_snapshot；S19为迁移快照，不能当交付结论。",
+      "coverage_reason": "所需发布规则未进入K，现有引用不能覆盖交付选择。",
+      "support_reason": "P555495不含S19；P130348的迁移S19即使可见也不能补为交付证据。",
+      "irrelevant_reason": "实际引用是问题同范围的数据或规则，虽不充分或答案错误，但不因错误答案就把相关原文算为无关。",
+      "run_id": "255742bf-ae31-4e89-b8a7-a0ac3003cae4",
+      "record_path": "基础/runs/formal/round1/run-255742bf-ae31-4e89-b8a7-a0ac3003cae4.json",
+      "raw_content": "{\"answer\":\"S19\",\"citations\":[\"P555495\"]}",
+      "answer": "S19",
+      "citations": [
+        "P555495"
+      ],
+      "actual_input_ids": [
+        "P555495",
+        "P130348"
+      ],
+      "elapsed_seconds": 6.151197199942544,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "quote": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P761989",
+          "source": "模拟记录/T01/页6",
+          "quote": "批次QY71的复核补页：QY71的release_snapshot规则要求同一快照完成上述三项检查，且不存在未关闭定位问题；评审表按该规则发布。",
+          "visible_in_this_run": false
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "实际K只有P555495和P130348，缺QY71发布规则，不能确定release_snapshot；S19为迁移快照，不能当交付结论。",
+        "semantic_consistent": "实际K只有P555495和P130348，缺QY71发布规则，不能确定release_snapshot；S19为迁移快照，不能当交付结论。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "所需发布规则未进入K，现有引用不能覆盖交付选择。",
+        "support_actual_answer": "P555495不含S19；P130348的迁移S19即使可见也不能补为交付证据。",
+        "irrelevant_citations": "实际引用是问题同范围的数据或规则，虽不充分或答案错误，但不因错误答案就把相关原文算为无关。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T01",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T01.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "答案是段落ID而非快照编号；完整资料可推出S24。",
+      "coverage_reason": "只引P761989规则，缺P555495候选检查数据。",
+      "support_reason": "P761989没有将自身段落ID登记为快照，不能支持answer。",
+      "irrelevant_reason": "实际引用是问题同范围的数据或规则，虽不充分或答案错误，但不因错误答案就把相关原文算为无关。",
+      "run_id": "866f1bb0-ec99-4f2d-83ec-2cf8a989cbea",
+      "record_path": "基础/runs/formal/round1/run-866f1bb0-ec99-4f2d-83ec-2cf8a989cbea.json",
+      "raw_content": "{\"answer\":\"P761989\",\"citations\":[\"P761989\"]}",
+      "answer": "P761989",
+      "citations": [
+        "P761989"
+      ],
+      "actual_input_ids": [
+        "P761989",
+        "P555495",
+        "P564279",
+        "P130348",
+        "P408739",
+        "P306998",
+        "P455007"
+      ],
+      "elapsed_seconds": 15.11672589997761,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "quote": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P761989",
+          "source": "模拟记录/T01/页6",
+          "quote": "批次QY71的复核补页：QY71的release_snapshot规则要求同一快照完成上述三项检查，且不存在未关闭定位问题；评审表按该规则发布。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "答案是段落ID而非快照编号；完整资料可推出S24。",
+        "semantic_consistent": "答案是段落ID而非快照编号；完整资料可推出S24。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "只引P761989规则，缺P555495候选检查数据。",
+        "support_actual_answer": "P761989没有将自身段落ID登记为快照，不能支持answer。",
+        "irrelevant_citations": "实际引用是问题同范围的数据或规则，虽不充分或答案错误，但不因错误答案就把相关原文算为无关。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T01",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T01.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "improved",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "S19是迁移批次XQ54快照，非QY71交付结论。",
+      "coverage_reason": "只引P555495候选数据，缺P761989规则。",
+      "support_reason": "P555495没有S19，且实际完整输入中的S19属于迁移批次，不能支持该answer。",
+      "irrelevant_reason": "实际引用是问题同范围的数据或规则，虽不充分或答案错误，但不因错误答案就把相关原文算为无关。",
+      "run_id": "b2de837c-5943-4ea7-8bd8-19360752653c",
+      "record_path": "基础/runs/formal/round1/run-b2de837c-5943-4ea7-8bd8-19360752653c.json",
+      "raw_content": "{\"answer\":\"S19\",\"citations\":[\"P555495\"]}",
+      "answer": "S19",
+      "citations": [
+        "P555495"
+      ],
+      "actual_input_ids": [
+        "P555495",
+        "P564279",
+        "P130348",
+        "P306998",
+        "P408739",
+        "P455007",
+        "P761989"
+      ],
+      "elapsed_seconds": 13.992667199927382,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "quote": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P761989",
+          "source": "模拟记录/T01/页6",
+          "quote": "批次QY71的复核补页：QY71的release_snapshot规则要求同一快照完成上述三项检查，且不存在未关闭定位问题；评审表按该规则发布。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "S19是迁移批次XQ54快照，非QY71交付结论。",
+        "semantic_consistent": "S19是迁移批次XQ54快照，非QY71交付结论。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "只引P555495候选数据，缺P761989规则。",
+        "support_actual_answer": "P555495没有S19，且实际完整输入中的S19属于迁移批次，不能支持该answer。",
+        "irrelevant_citations": "实际引用是问题同范围的数据或规则，虽不充分或答案错误，但不因错误答案就把相关原文算为无关。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T01",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T01.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R1",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "答案是段落ID而非快照编号；完整资料可推出S24。",
+      "coverage_reason": "只引P761989规则，缺P555495候选检查数据。",
+      "support_reason": "P761989没有将自身段落ID登记为快照，不能支持answer。",
+      "irrelevant_reason": "实际引用是问题同范围的数据或规则，虽不充分或答案错误，但不因错误答案就把相关原文算为无关。",
+      "run_id": "b145c38d-370f-407b-82ab-93efc9c043d5",
+      "record_path": "基础/runs/formal/round1/run-b145c38d-370f-407b-82ab-93efc9c043d5.json",
+      "raw_content": "{\"answer\":\"P761989\",\"citations\":[\"P761989\"]}",
+      "answer": "P761989",
+      "citations": [
+        "P761989"
+      ],
+      "actual_input_ids": [
+        "P761989",
+        "P408739",
+        "P564279",
+        "P555495",
+        "P130348",
+        "P455007",
+        "P306998"
+      ],
+      "elapsed_seconds": 14.08565769996494,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "quote": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P761989",
+          "source": "模拟记录/T01/页6",
+          "quote": "批次QY71的复核补页：QY71的release_snapshot规则要求同一快照完成上述三项检查，且不存在未关闭定位问题；评审表按该规则发布。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "答案是段落ID而非快照编号；完整资料可推出S24。",
+        "semantic_consistent": "答案是段落ID而非快照编号；完整资料可推出S24。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "只引P761989规则，缺P555495候选检查数据。",
+        "support_actual_answer": "P761989没有将自身段落ID登记为快照，不能支持answer。",
+        "irrelevant_citations": "实际引用是问题同范围的数据或规则，虽不充分或答案错误，但不因错误答案就把相关原文算为无关。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T01",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T01.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R2",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P455007"
+      ],
+      "reason": "S31属于岫光项目，问题是栖云QY71；正确推导为S24。",
+      "coverage_reason": "引用岫光P455007，未覆盖QY71数据及规则。",
+      "support_reason": "P455007的S31范围与问题冲突，不能支持栖云交付结论。",
+      "irrelevant_reason": "P455007为另一项目，范围冲突。",
+      "run_id": "eda9ad1a-b67a-44df-84b4-7d37ef696e18",
+      "record_path": "基础/runs/formal/round1/run-eda9ad1a-b67a-44df-84b4-7d37ef696e18.json",
+      "raw_content": "{\"answer\":\"S31\",\"citations\":[\"P455007\"]}",
+      "answer": "S31",
+      "citations": [
+        "P455007"
+      ],
+      "actual_input_ids": [
+        "P455007",
+        "P564279",
+        "P555495",
+        "P306998",
+        "P761989",
+        "P408739",
+        "P130348"
+      ],
+      "elapsed_seconds": 14.014750799979083,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "quote": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P761989",
+          "source": "模拟记录/T01/页6",
+          "quote": "批次QY71的复核补页：QY71的release_snapshot规则要求同一快照完成上述三项检查，且不存在未关闭定位问题；评审表按该规则发布。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P455007",
+          "source": "模拟记录/T01/页1",
+          "quote": "岫光项目R7版本在2026-02登记同名指标和批次XQ54，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "S31属于岫光项目，问题是栖云QY71；正确推导为S24。",
+        "semantic_consistent": "S31属于岫光项目，问题是栖云QY71；正确推导为S24。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用岫光P455007，未覆盖QY71数据及规则。",
+        "support_actual_answer": "P455007的S31范围与问题冲突，不能支持栖云交付结论。",
+        "irrelevant_citations": "P455007为另一项目，范围冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T01",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T01.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "irrelevant_ids": [],
+      "reason": "K只有LX63分母与其他迁移批次统计，缺LX63分子；证据不足符合当前可见资料。",
+      "coverage_reason": "拒答的P552476定位正确LX63冻结范围和分母，结合实际K清单确认缺完全支持计数。",
+      "support_reason": "实际K没有P169676；迁移XQ55计数不能代替LX63，引用正确范围检查来源可支持不足。",
+      "irrelevant_reason": "P552476为有效检查来源，不要求引用固定拒答短语或迁移干扰段。",
+      "run_id": "13a0d062-7321-40ad-958f-41f8461c4e41",
+      "record_path": "基础/runs/formal/round1/run-13a0d062-7321-40ad-958f-41f8461c4e41.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P552476\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P552476"
+      ],
+      "actual_input_ids": [
+        "P552476",
+        "P500295"
+      ],
+      "elapsed_seconds": 5.3691461000125855,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": true,
+      "source_basis": [
+        {
+          "id": "P552476",
+          "source": "模拟记录/T02/页6",
+          "quote": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P169676",
+          "source": "模拟记录/T02/页2",
+          "quote": "批次LX63的复核补页：LX63人工复核显示76条完全支持、9条部分支持、7条矛盾、8条无可定位引用；完整支持只计完全支持。",
+          "visible_in_this_run": false
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "K只有LX63分母与其他迁移批次统计，缺LX63分子；证据不足符合当前可见资料。",
+        "semantic_consistent": "K只有LX63分母与其他迁移批次统计，缺LX63分子；证据不足符合当前可见资料。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "拒答的P552476定位正确LX63冻结范围和分母，结合实际K清单确认缺完全支持计数。",
+        "support_actual_answer": "实际K没有P169676；迁移XQ55计数不能代替LX63，引用正确范围检查来源可支持不足。",
+        "irrelevant_citations": "P552476为有效检查来源，不要求引用固定拒答短语或迁移干扰段。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T02",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T02.json",
+      "support_status": "supported"
+    },
+    {
+      "condition": "R0",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P505639"
+      ],
+      "reason": "完整输入给LX63的100条分母和76条完全支持，可推出76%；回答证据不足不成立。",
+      "coverage_reason": "P505639是岫光项目，未覆盖LX63分母或分子。",
+      "support_reason": "另一项目的91%不能支持临溪LX63证据不足。",
+      "irrelevant_reason": "P505639项目与问题范围冲突。",
+      "run_id": "a3f2d8ea-f7df-4335-a3c0-7bc85fdc959e",
+      "record_path": "基础/runs/formal/round1/run-a3f2d8ea-f7df-4335-a3c0-7bc85fdc959e.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P505639\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P505639"
+      ],
+      "actual_input_ids": [
+        "P505639",
+        "P185211",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P500295",
+        "P169676"
+      ],
+      "elapsed_seconds": 15.252545999945141,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P552476",
+          "source": "模拟记录/T02/页6",
+          "quote": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P169676",
+          "source": "模拟记录/T02/页2",
+          "quote": "批次LX63的复核补页：LX63人工复核显示76条完全支持、9条部分支持、7条矛盾、8条无可定位引用；完整支持只计完全支持。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P505639",
+          "source": "模拟记录/T02/页4",
+          "quote": "岫光项目R6版本在2026-03登记同名指标和批次XQ55，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整输入给LX63的100条分母和76条完全支持，可推出76%；回答证据不足不成立。",
+        "semantic_consistent": "完整输入给LX63的100条分母和76条完全支持，可推出76%；回答证据不足不成立。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P505639是岫光项目，未覆盖LX63分母或分子。",
+        "support_actual_answer": "另一项目的91%不能支持临溪LX63证据不足。",
+        "irrelevant_citations": "P505639项目与问题范围冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T02",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T02.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "improved",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "完整资料包含76条完全支持及100分母，证据不足错误。",
+      "coverage_reason": "P552476仅提供分母，缺分子及完整支持定义。",
+      "support_reason": "分母段本身不含分子，但实际完整输入另有P169676，不能据此判定整份输入证据不足。",
+      "irrelevant_reason": "P552476是正确范围的必要分母，相关但不充分。",
+      "run_id": "bfdd41c9-5467-4777-b705-0fae7dae8eea",
+      "record_path": "基础/runs/formal/round1/run-bfdd41c9-5467-4777-b705-0fae7dae8eea.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P552476\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P552476"
+      ],
+      "actual_input_ids": [
+        "P552476",
+        "P185211",
+        "P588872",
+        "P500295",
+        "P627886",
+        "P505639",
+        "P169676"
+      ],
+      "elapsed_seconds": 14.755279900040478,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P552476",
+          "source": "模拟记录/T02/页6",
+          "quote": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P169676",
+          "source": "模拟记录/T02/页2",
+          "quote": "批次LX63的复核补页：LX63人工复核显示76条完全支持、9条部分支持、7条矛盾、8条无可定位引用；完整支持只计完全支持。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整资料包含76条完全支持及100分母，证据不足错误。",
+        "semantic_consistent": "完整资料包含76条完全支持及100分母，证据不足错误。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P552476仅提供分母，缺分子及完整支持定义。",
+        "support_actual_answer": "分母段本身不含分子，但实际完整输入另有P169676，不能据此判定整份输入证据不足。",
+        "irrelevant_citations": "P552476是正确范围的必要分母，相关但不充分。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T02",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T02.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R1",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P185211"
+      ],
+      "reason": "完整输入足以计算76%，不能因2026-02探索组记录拒答。",
+      "coverage_reason": "P185211是上月探索组，未覆盖2026-03冻结主张统计。",
+      "support_reason": "旧月探索数据不能证明本次完整输入缺证。",
+      "irrelevant_reason": "P185211时间和统计范围冲突，不是LX63检查来源。",
+      "run_id": "532b8274-6a66-44d0-9e1d-215210615821",
+      "record_path": "基础/runs/formal/round1/run-532b8274-6a66-44d0-9e1d-215210615821.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P185211\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P185211"
+      ],
+      "actual_input_ids": [
+        "P185211",
+        "P500295",
+        "P505639",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P169676"
+      ],
+      "elapsed_seconds": 13.845561600057408,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P552476",
+          "source": "模拟记录/T02/页6",
+          "quote": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P169676",
+          "source": "模拟记录/T02/页2",
+          "quote": "批次LX63的复核补页：LX63人工复核显示76条完全支持、9条部分支持、7条矛盾、8条无可定位引用；完整支持只计完全支持。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P185211",
+          "source": "模拟记录/T02/页5",
+          "quote": "临溪项目R6版本在2026-02的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整输入足以计算76%，不能因2026-02探索组记录拒答。",
+        "semantic_consistent": "完整输入足以计算76%，不能因2026-02探索组记录拒答。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P185211是上月探索组，未覆盖2026-03冻结主张统计。",
+        "support_actual_answer": "旧月探索数据不能证明本次完整输入缺证。",
+        "irrelevant_citations": "P185211时间和统计范围冲突，不是LX63检查来源。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T02",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T02.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R2",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P505639"
+      ],
+      "reason": "91%来自岫光，不是临溪LX63；应为76%。",
+      "coverage_reason": "未引LX63分母及完全支持计数。",
+      "support_reason": "P505639只支持另一项目的91%，不支持问题指定范围。",
+      "irrelevant_reason": "另一项目同名指标，范围冲突。",
+      "run_id": "46844d93-bf48-455f-85bd-42ccdcc8ba27",
+      "record_path": "基础/runs/formal/round1/run-46844d93-bf48-455f-85bd-42ccdcc8ba27.json",
+      "raw_content": "{\"answer\":\"91%\",\"citations\":[\"P505639\"]}",
+      "answer": "91%",
+      "citations": [
+        "P505639"
+      ],
+      "actual_input_ids": [
+        "P505639",
+        "P552476",
+        "P169676",
+        "P627886",
+        "P500295",
+        "P588872",
+        "P185211"
+      ],
+      "elapsed_seconds": 16.516419999999925,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P552476",
+          "source": "模拟记录/T02/页6",
+          "quote": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P169676",
+          "source": "模拟记录/T02/页2",
+          "quote": "批次LX63的复核补页：LX63人工复核显示76条完全支持、9条部分支持、7条矛盾、8条无可定位引用；完整支持只计完全支持。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P505639",
+          "source": "模拟记录/T02/页4",
+          "quote": "岫光项目R6版本在2026-03登记同名指标和批次XQ55，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "91%来自岫光，不是临溪LX63；应为76%。",
+        "semantic_consistent": "91%来自岫光，不是临溪LX63；应为76%。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "未引LX63分母及完全支持计数。",
+        "support_actual_answer": "P505639只支持另一项目的91%，不支持问题指定范围。",
+        "irrelevant_citations": "另一项目同名指标，范围冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T02",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T02.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "answer_correct": "ambiguous",
+      "semantic_consistent": "ambiguous",
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P728510"
+      ],
+      "reason": "K未提供同机WS84候选中位数，只能判缺证，不能给0.5。",
+      "coverage_reason": "P385105是目标基础；P728510是迁移批次，不能补目标候选。",
+      "support_reason": "当前K不能计算目标差，且即便错误混用9.4与5.9也不是0.5。",
+      "irrelevant_reason": "P728510批次和实验用途冲突。",
+      "run_id": "2df3c9f4-f1c6-48b4-9fdc-ec3672d787f6",
+      "record_path": "基础/runs/formal/round1/run-2df3c9f4-f1c6-48b4-9fdc-ec3672d787f6.json",
+      "raw_content": "{\"answer\":\"0.5\",\"citations\":[\"P385105\",\"P728510\"]}",
+      "answer": "0.5",
+      "citations": [
+        "P385105",
+        "P728510"
+      ],
+      "actual_input_ids": [
+        "P385105",
+        "P728510"
+      ],
+      "elapsed_seconds": 5.397614900022745,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P385105",
+          "source": "模拟记录/T03/页4",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P362285",
+          "source": "模拟记录/T03/页7",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "visible_in_this_run": false
+        },
+        {
+          "id": "P728510",
+          "source": "模拟记录/T03/页5",
+          "quote": "望舒项目R8版本在2026-04的迁移批次XQ56处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "K缺WS84候选中位数，不能凭不可见的6.8和全文答案2.6确定0.5的事实正确性；暂标ambiguous。0.5没有当前证据支持、混入迁移引用且必要覆盖不足仍明确失败，不计完整成功。",
+        "semantic_consistent": "K缺WS84候选中位数，不能凭不可见的6.8和全文答案2.6确定0.5的事实正确性；暂标ambiguous。0.5没有当前证据支持、混入迁移引用且必要覆盖不足仍明确失败，不计完整成功。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P385105是目标基础；P728510是迁移批次，不能补目标候选。",
+        "support_actual_answer": "当前K不能计算目标差，且即便错误混用9.4与5.9也不是0.5。",
+        "irrelevant_citations": "P728510批次和实验用途冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T03",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T03.json",
+      "review_adjustment_reason": "K缺WS84候选中位数，不能凭不可见的6.8和全文答案2.6确定0.5的事实正确性；暂标ambiguous。0.5没有当前证据支持、混入迁移引用且必要覆盖不足仍明确失败，不计完整成功。",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P275307"
+      ],
+      "reason": "0.3秒与WS84的9.4-6.8=2.6不符，且附单位不符合只输出数值。",
+      "coverage_reason": "引用2026-03探索组，未覆盖WS84两项中位数。",
+      "support_reason": "P275307仅给探索组6.0秒，不能支持本次中位数差0.3秒。",
+      "irrelevant_reason": "P275307时间及实验批次与问题冲突。",
+      "run_id": "27ea49f0-a543-418e-91c0-bec2e024eb76",
+      "record_path": "基础/runs/formal/round1/run-27ea49f0-a543-418e-91c0-bec2e024eb76.json",
+      "raw_content": "{\"answer\":\"0.3秒\",\"citations\":[\"P275307\"]}",
+      "answer": "0.3秒",
+      "citations": [
+        "P275307"
+      ],
+      "actual_input_ids": [
+        "P275307",
+        "P350359",
+        "P728510",
+        "P482103",
+        "P723425",
+        "P362285",
+        "P385105"
+      ],
+      "elapsed_seconds": 14.789220100035891,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P385105",
+          "source": "模拟记录/T03/页4",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P362285",
+          "source": "模拟记录/T03/页7",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P275307",
+          "source": "模拟记录/T03/页6",
+          "quote": "望舒项目R8版本在2026-03的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "0.3秒与WS84的9.4-6.8=2.6不符，且附单位不符合只输出数值。",
+        "semantic_consistent": "0.3秒与WS84的9.4-6.8=2.6不符，且附单位不符合只输出数值。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用2026-03探索组，未覆盖WS84两项中位数。",
+        "support_actual_answer": "P275307仅给探索组6.0秒，不能支持本次中位数差0.3秒。",
+        "irrelevant_citations": "P275307时间及实验批次与问题冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T03",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T03.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "improved",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "0.5秒不符合2.6及只填数值要求。",
+      "coverage_reason": "只引目标基础段，缺候选中位数。",
+      "support_reason": "P385105只有9.4，不能推出0.5。",
+      "irrelevant_reason": "目标基础记录是相关部分证据，不因错答算无关。",
+      "run_id": "0c450520-87ac-4d98-8bb4-4b0681976633",
+      "record_path": "基础/runs/formal/round1/run-0c450520-87ac-4d98-8bb4-4b0681976633.json",
+      "raw_content": "{\"answer\":\"0.5秒\",\"citations\":[\"P385105\"]}",
+      "answer": "0.5秒",
+      "citations": [
+        "P385105"
+      ],
+      "actual_input_ids": [
+        "P385105",
+        "P728510",
+        "P275307",
+        "P350359",
+        "P482103",
+        "P362285",
+        "P723425"
+      ],
+      "elapsed_seconds": 14.340805100044236,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P385105",
+          "source": "模拟记录/T03/页4",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P362285",
+          "source": "模拟记录/T03/页7",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "0.5秒不符合2.6及只填数值要求。",
+        "semantic_consistent": "0.5秒不符合2.6及只填数值要求。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "只引目标基础段，缺候选中位数。",
+        "support_actual_answer": "P385105只有9.4，不能推出0.5。",
+        "irrelevant_citations": "目标基础记录是相关部分证据，不因错答算无关。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T03",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T03.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R1",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "0.4秒错误，正确差为2.6，且应不带秒。",
+      "coverage_reason": "P385105提供基础9.4，缺候选6.8及可比条件。",
+      "support_reason": "基础段没有0.4秒差值，单一运算量不能推出该answer。",
+      "irrelevant_reason": "P385105为目标基础数据，相关但不充分。",
+      "run_id": "2796de89-3abb-4abe-be17-afaea0ca84d8",
+      "record_path": "基础/runs/formal/round1/run-2796de89-3abb-4abe-be17-afaea0ca84d8.json",
+      "raw_content": "{\"answer\":\"0.4秒\",\"citations\":[\"P385105\"]}",
+      "answer": "0.4秒",
+      "citations": [
+        "P385105"
+      ],
+      "actual_input_ids": [
+        "P385105",
+        "P275307",
+        "P362285",
+        "P482103",
+        "P350359",
+        "P728510",
+        "P723425"
+      ],
+      "elapsed_seconds": 13.88519120006822,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P385105",
+          "source": "模拟记录/T03/页4",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P362285",
+          "source": "模拟记录/T03/页7",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "0.4秒错误，正确差为2.6，且应不带秒。",
+        "semantic_consistent": "0.4秒错误，正确差为2.6，且应不带秒。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P385105提供基础9.4，缺候选6.8及可比条件。",
+        "support_actual_answer": "基础段没有0.4秒差值，单一运算量不能推出该answer。",
+        "irrelevant_citations": "P385105为目标基础数据，相关但不充分。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T03",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T03.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R2",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "irrelevant_ids": [
+        "P723425",
+        "P275307",
+        "P350359",
+        "P728510"
+      ],
+      "reason": "2.6秒数值和单位语义正确，但问题要求只输出数值，因此指定答法不符。",
+      "semantic_reason": "目标两段明确9.4和6.8，差为2.6秒，语义一致。",
+      "coverage_reason": "P385105和P362285覆盖两个运算量及同条件。",
+      "support_reason": "有效子集可推出实际2.6秒；额外无关引用不否认已存在的集合支持。",
+      "irrelevant_reason": "另外四段分别是旧版、上月探索、另一项目平均、迁移批次；不能支持WS84差值。",
+      "run_id": "82b6494c-dc32-4213-8006-0aeff8246df2",
+      "record_path": "基础/runs/formal/round1/run-82b6494c-dc32-4213-8006-0aeff8246df2.json",
+      "raw_content": "{\"answer\":\"2.6秒\",\"citations\":[\"P385105\",\"P362285\",\"P723425\",\"P275307\",\"P350359\",\"P728510\"]}",
+      "answer": "2.6秒",
+      "citations": [
+        "P385105",
+        "P362285",
+        "P723425",
+        "P275307",
+        "P350359",
+        "P728510"
+      ],
+      "actual_input_ids": [
+        "P385105",
+        "P362285",
+        "P723425",
+        "P275307",
+        "P350359",
+        "P728510",
+        "P482103"
+      ],
+      "elapsed_seconds": 15.945386599982157,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P385105",
+          "source": "模拟记录/T03/页4",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P362285",
+          "source": "模拟记录/T03/页7",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P723425",
+          "source": "模拟记录/T03/页3",
+          "quote": "望舒项目R7版本在2026-04的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P275307",
+          "source": "模拟记录/T03/页6",
+          "quote": "望舒项目R8版本在2026-03的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P350359",
+          "source": "模拟记录/T03/页1",
+          "quote": "岫光项目R8版本在2026-04登记同名指标和批次XQ56，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P728510",
+          "source": "模拟记录/T03/页5",
+          "quote": "望舒项目R8版本在2026-04的迁移批次XQ56处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "2.6秒数值和单位语义正确，但问题要求只输出数值，因此指定答法不符。",
+        "semantic_consistent": "目标两段明确9.4和6.8，差为2.6秒，语义一致。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P385105和P362285覆盖两个运算量及同条件。",
+        "support_actual_answer": "有效子集可推出实际2.6秒；额外无关引用不否认已存在的集合支持。",
+        "irrelevant_citations": "另外四段分别是旧版、上月探索、另一项目平均、迁移批次；不能支持WS84差值。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T03",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T03.json",
+      "support_status": "supported"
+    },
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "answer_correct": "ambiguous",
+      "semantic_consistent": "ambiguous",
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "实际K只有候选数据和迁移记录，没有正式选择规则。乙与全文推导名称一致，但不能用K不可见规则确认正确性，保留ambiguous。",
+      "coverage_reason": "K排除了P660995，引用数据不能覆盖题目指定选择规则。",
+      "support_reason": "当前可见数据未给资格门槛或优化次序，不足支持按正式规则选乙。",
+      "irrelevant_reason": "所引P758661为正确范围数据，不因缺规则算无关。",
+      "run_id": "828f35e6-2295-4c3d-b03e-33025c4d619a",
+      "record_path": "基础/runs/formal/round1/run-828f35e6-2295-4c3d-b03e-33025c4d619a.json",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P758661\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P758661"
+      ],
+      "actual_input_ids": [
+        "P758661",
+        "P194167"
+      ],
+      "elapsed_seconds": 5.327344699995592,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+          "visible_in_this_run": false
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "实际K只有候选数据和迁移记录，没有正式选择规则。乙与全文推导名称一致，但不能用K不可见规则确认正确性，保留ambiguous。",
+        "semantic_consistent": "实际K只有候选数据和迁移记录，没有正式选择规则。乙与全文推导名称一致，但不能用K不可见规则确认正确性，保留ambiguous。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "K排除了P660995，引用数据不能覆盖题目指定选择规则。",
+        "support_actual_answer": "当前可见数据未给资格门槛或优化次序，不足支持按正式规则选乙。",
+        "irrelevant_citations": "所引P758661为正确范围数据，不因缺规则算无关。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T04",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T04.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "完整输入按错误数≤3仅乙合格，流程乙正确且符合名称形式。",
+      "coverage_reason": "只引P758661候选数据，缺P660995资格及优先顺序。",
+      "support_reason": "召回数据本身不能决定为什么选乙，所引证据未给错误数门槛。",
+      "irrelevant_reason": "目标候选数据相关，但缺规则。",
+      "run_id": "308cc600-80fb-4216-b506-8489a6f576ca",
+      "record_path": "基础/runs/formal/round1/run-308cc600-80fb-4216-b506-8489a6f576ca.json",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P758661\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P758661"
+      ],
+      "actual_input_ids": [
+        "P194167",
+        "P758661",
+        "P660995",
+        "P455277",
+        "P208944",
+        "P191263",
+        "P688472"
+      ],
+      "elapsed_seconds": 14.846717400010675,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整输入按错误数≤3仅乙合格，流程乙正确且符合名称形式。",
+        "semantic_consistent": "完整输入按错误数≤3仅乙合格，流程乙正确且符合名称形式。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "只引P758661候选数据，缺P660995资格及优先顺序。",
+        "support_actual_answer": "召回数据本身不能决定为什么选乙，所引证据未给错误数门槛。",
+        "irrelevant_citations": "目标候选数据相关，但缺规则。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T04",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T04.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "improved",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "完整资料可推出流程乙，指定名称正确。",
+      "coverage_reason": "P758661给数据，P660995规则没有引用。",
+      "support_reason": "缺错误证据≤3及最大化召回规则，单数据段不能证明选乙。",
+      "irrelevant_reason": "相关数据，没有无关引用，但不充分。",
+      "run_id": "1c042090-9ee4-4a47-912e-9290ad1da105",
+      "record_path": "基础/runs/formal/round1/run-1c042090-9ee4-4a47-912e-9290ad1da105.json",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P758661\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P758661"
+      ],
+      "actual_input_ids": [
+        "P758661",
+        "P455277",
+        "P208944",
+        "P194167",
+        "P688472",
+        "P191263",
+        "P660995"
+      ],
+      "elapsed_seconds": 13.016188399982639,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整资料可推出流程乙，指定名称正确。",
+        "semantic_consistent": "完整资料可推出流程乙，指定名称正确。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P758661给数据，P660995规则没有引用。",
+        "support_actual_answer": "缺错误证据≤3及最大化召回规则，单数据段不能证明选乙。",
+        "irrelevant_citations": "相关数据，没有无关引用，但不充分。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T04",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T04.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R1",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P208944"
+      ],
+      "reason": "答案流程乙与完整资料推导相符，但引用不是正确依据。",
+      "coverage_reason": "另一项目P208944不覆盖NZ95数据和规则。",
+      "support_reason": "岫光平均耗时段不能支持南枝核验流程选择，即使同名流程乙。",
+      "irrelevant_reason": "项目、批次及指标范围冲突。",
+      "run_id": "18e08618-fe14-47ba-be5d-1221642e94da",
+      "record_path": "基础/runs/formal/round1/run-18e08618-fe14-47ba-be5d-1221642e94da.json",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P208944\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P208944"
+      ],
+      "actual_input_ids": [
+        "P758661",
+        "P208944",
+        "P455277",
+        "P688472",
+        "P191263",
+        "P660995",
+        "P194167"
+      ],
+      "elapsed_seconds": 12.493616000050679,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P208944",
+          "source": "模拟记录/T04/页5",
+          "quote": "岫光项目R9版本在2026-05登记同名指标和批次XQ57，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "答案流程乙与完整资料推导相符，但引用不是正确依据。",
+        "semantic_consistent": "答案流程乙与完整资料推导相符，但引用不是正确依据。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "另一项目P208944不覆盖NZ95数据和规则。",
+        "support_actual_answer": "岫光平均耗时段不能支持南枝核验流程选择，即使同名流程乙。",
+        "irrelevant_citations": "项目、批次及指标范围冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T04",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T04.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R2",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P208944"
+      ],
+      "reason": "完整资料推导流程乙，答案对但依据错误。",
+      "coverage_reason": "未引目标NZ95候选与选择规则。",
+      "support_reason": "P208944的另一项目流程乙不是本题资格判断。",
+      "irrelevant_reason": "同名不同项目，是无关且范围冲突引用。",
+      "run_id": "9cc1d154-cf90-4a90-abc0-47044c5292fb",
+      "record_path": "基础/runs/formal/round1/run-9cc1d154-cf90-4a90-abc0-47044c5292fb.json",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P208944\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P208944"
+      ],
+      "actual_input_ids": [
+        "P194167",
+        "P660995",
+        "P208944",
+        "P758661",
+        "P688472",
+        "P455277",
+        "P191263"
+      ],
+      "elapsed_seconds": 14.86968539992813,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P208944",
+          "source": "模拟记录/T04/页5",
+          "quote": "岫光项目R9版本在2026-05登记同名指标和批次XQ57，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整资料推导流程乙，答案对但依据错误。",
+        "semantic_consistent": "完整资料推导流程乙，答案对但依据错误。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "未引目标NZ95候选与选择规则。",
+        "support_actual_answer": "P208944的另一项目流程乙不是本题资格判断。",
+        "irrelevant_citations": "同名不同项目，是无关且范围冲突引用。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T04",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T04.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "irrelevant_ids": [],
+      "reason": "当前资料未给功率或能耗，无法计算焦耳/请求；证据不足符合原文。",
+      "coverage_reason": "P286497是本题校内TL46记录，给客户端采集范围，属于有效检查来源。",
+      "support_reason": "记录仅客户端耗时、状态、模型名称，服务端内部阶段未观测；当前输入不能推得焦耳，支持不足判断。",
+      "irrelevant_reason": "正确范围的检查来源，不要求每次都引用补页或固定措辞。",
+      "run_id": "604f9bd8-25df-4423-a0db-4466f6594114",
+      "record_path": "基础/runs/formal/round1/run-604f9bd8-25df-4423-a0db-4466f6594114.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P286497\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P286497"
+      ],
+      "actual_input_ids": [
+        "P286497",
+        "P371242"
+      ],
+      "elapsed_seconds": 4.69656039995607,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": true,
+      "source_basis": [
+        {
+          "id": "P286497",
+          "source": "模拟记录/T05/页3",
+          "quote": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P452207",
+          "source": "模拟记录/T05/页1",
+          "quote": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。",
+          "visible_in_this_run": false
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "当前资料未给功率或能耗，无法计算焦耳/请求；证据不足符合原文。",
+        "semantic_consistent": "当前资料未给功率或能耗，无法计算焦耳/请求；证据不足符合原文。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P286497是本题校内TL46记录，给客户端采集范围，属于有效检查来源。",
+        "support_actual_answer": "记录仅客户端耗时、状态、模型名称，服务端内部阶段未观测；当前输入不能推得焦耳，支持不足判断。",
+        "irrelevant_citations": "正确范围的检查来源，不要求每次都引用补页或固定措辞。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T05",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T05.json",
+      "support_status": "supported"
+    },
+    {
+      "condition": "R0",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P925403"
+      ],
+      "reason": "完整原文没有功率或能耗，回答证据不足正确。",
+      "coverage_reason": "引用的是迁移XQ58，未引用校内TL46采集边界。",
+      "support_reason": "其他批次未写能耗不能证明校内TL46缺能耗；答案正确与所引来源不足分开记录。",
+      "irrelevant_reason": "该引用用途/批次不是校内TL46，范围冲突。",
+      "run_id": "ff4dc554-109e-4a55-9662-0524e5222004",
+      "record_path": "基础/runs/formal/round1/run-ff4dc554-109e-4a55-9662-0524e5222004.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P925403\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P925403"
+      ],
+      "actual_input_ids": [
+        "P925403",
+        "P371242",
+        "P452207",
+        "P286497",
+        "P876164",
+        "P484198",
+        "P753851"
+      ],
+      "elapsed_seconds": 14.230091399978846,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P286497",
+          "source": "模拟记录/T05/页3",
+          "quote": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P452207",
+          "source": "模拟记录/T05/页1",
+          "quote": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P925403",
+          "source": "模拟记录/T05/页4",
+          "quote": "听澜项目R4版本在2026-06的迁移批次XQ58处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整原文没有功率或能耗，回答证据不足正确。",
+        "semantic_consistent": "完整原文没有功率或能耗，回答证据不足正确。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用的是迁移XQ58，未引用校内TL46采集边界。",
+        "support_actual_answer": "其他批次未写能耗不能证明校内TL46缺能耗；答案正确与所引来源不足分开记录。",
+        "irrelevant_citations": "该引用用途/批次不是校内TL46，范围冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T05",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T05.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "improved",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "irrelevant_ids": [],
+      "reason": "当前资料未给功率或能耗，无法计算焦耳/请求；证据不足符合原文。",
+      "coverage_reason": "P286497是本题校内TL46记录，给客户端采集范围，属于有效检查来源。",
+      "support_reason": "记录仅客户端耗时、状态、模型名称，服务端内部阶段未观测；当前输入不能推得焦耳，支持不足判断。",
+      "irrelevant_reason": "正确范围的检查来源，不要求每次都引用补页或固定措辞。",
+      "run_id": "adc920d1-e809-444a-ba1e-b6da98222675",
+      "record_path": "基础/runs/formal/round1/run-adc920d1-e809-444a-ba1e-b6da98222675.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P286497\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P286497"
+      ],
+      "actual_input_ids": [
+        "P286497",
+        "P876164",
+        "P371242",
+        "P925403",
+        "P753851",
+        "P484198",
+        "P452207"
+      ],
+      "elapsed_seconds": 16.28597520000767,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": true,
+      "source_basis": [
+        {
+          "id": "P286497",
+          "source": "模拟记录/T05/页3",
+          "quote": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P452207",
+          "source": "模拟记录/T05/页1",
+          "quote": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "当前资料未给功率或能耗，无法计算焦耳/请求；证据不足符合原文。",
+        "semantic_consistent": "当前资料未给功率或能耗，无法计算焦耳/请求；证据不足符合原文。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P286497是本题校内TL46记录，给客户端采集范围，属于有效检查来源。",
+        "support_actual_answer": "记录仅客户端耗时、状态、模型名称，服务端内部阶段未观测；当前输入不能推得焦耳，支持不足判断。",
+        "irrelevant_citations": "正确范围的检查来源，不要求每次都引用补页或固定措辞。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T05",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T05.json",
+      "support_status": "supported"
+    },
+    {
+      "condition": "R1",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P925403"
+      ],
+      "reason": "完整原文没有功率或能耗，回答证据不足正确。",
+      "coverage_reason": "引用的是迁移XQ58，未引用校内TL46采集边界。",
+      "support_reason": "其他批次未写能耗不能证明校内TL46缺能耗；答案正确与所引来源不足分开记录。",
+      "irrelevant_reason": "该引用用途/批次不是校内TL46，范围冲突。",
+      "run_id": "a2afec5e-377f-48aa-b055-f8e95890904f",
+      "record_path": "基础/runs/formal/round1/run-a2afec5e-377f-48aa-b055-f8e95890904f.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P925403\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P925403"
+      ],
+      "actual_input_ids": [
+        "P925403",
+        "P371242",
+        "P753851",
+        "P452207",
+        "P286497",
+        "P484198",
+        "P876164"
+      ],
+      "elapsed_seconds": 14.699270999990404,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P286497",
+          "source": "模拟记录/T05/页3",
+          "quote": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P452207",
+          "source": "模拟记录/T05/页1",
+          "quote": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P925403",
+          "source": "模拟记录/T05/页4",
+          "quote": "听澜项目R4版本在2026-06的迁移批次XQ58处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整原文没有功率或能耗，回答证据不足正确。",
+        "semantic_consistent": "完整原文没有功率或能耗，回答证据不足正确。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用的是迁移XQ58，未引用校内TL46采集边界。",
+        "support_actual_answer": "其他批次未写能耗不能证明校内TL46缺能耗；答案正确与所引来源不足分开记录。",
+        "irrelevant_citations": "该引用用途/批次不是校内TL46，范围冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T05",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T05.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R2",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P371242"
+      ],
+      "reason": "完整原文没有功率或能耗，回答证据不足正确。",
+      "coverage_reason": "引用的是八并发压力组，未引用校内TL46采集边界。",
+      "support_reason": "其他批次未写能耗不能证明校内TL46缺能耗；答案正确与所引来源不足分开记录。",
+      "irrelevant_reason": "该引用用途/批次不是校内TL46，范围冲突。",
+      "run_id": "a55458a4-d371-4fae-a5ff-79e22eeeab70",
+      "record_path": "基础/runs/formal/round1/run-a55458a4-d371-4fae-a5ff-79e22eeeab70.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P371242\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P371242"
+      ],
+      "actual_input_ids": [
+        "P371242",
+        "P286497",
+        "P753851",
+        "P876164",
+        "P484198",
+        "P452207",
+        "P925403"
+      ],
+      "elapsed_seconds": 14.407302899984643,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P286497",
+          "source": "模拟记录/T05/页3",
+          "quote": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P452207",
+          "source": "模拟记录/T05/页1",
+          "quote": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P371242",
+          "source": "模拟记录/T05/页6",
+          "quote": "听澜项目R4版本在2026-06的压力组使用八并发请求，96项返回成功、4项超时，P50为3.7秒；项目另列压力组汇总。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整原文没有功率或能耗，回答证据不足正确。",
+        "semantic_consistent": "完整原文没有功率或能耗，回答证据不足正确。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用的是八并发压力组，未引用校内TL46采集边界。",
+        "support_actual_answer": "其他批次未写能耗不能证明校内TL46缺能耗；答案正确与所引来源不足分开记录。",
+        "irrelevant_citations": "该引用用途/批次不是校内TL46，范围冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T05",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T05.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "irrelevant_ids": [],
+      "reason": "K只有SY37首次计数及压力组，缺该批次技术失败定义；不能确定是否把格式不合法计入，证据不足成立。",
+      "coverage_reason": "P873502是目标清单的有效检查来源，分别列超时与格式不合法，但没有二者均为技术失败的规则。",
+      "support_reason": "实际K没有P721388，不能用完整资料补口径；引用目标计数可说明现有依据不足。",
+      "irrelevant_reason": "引用目标SY37记录，无无关引用。",
+      "run_id": "61a4df0e-4db5-4d4d-9abe-0eb8bc1ba434",
+      "record_path": "基础/runs/formal/round1/run-61a4df0e-4db5-4d4d-9abe-0eb8bc1ba434.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P873502\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P873502"
+      ],
+      "actual_input_ids": [
+        "P878722",
+        "P873502"
+      ],
+      "elapsed_seconds": 4.709026199998334,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": true,
+      "source_basis": [
+        {
+          "id": "P873502",
+          "source": "模拟记录/T06/页4",
+          "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P721388",
+          "source": "模拟记录/T06/页1",
+          "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+          "visible_in_this_run": false
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "K只有SY37首次计数及压力组，缺该批次技术失败定义；不能确定是否把格式不合法计入，证据不足成立。",
+        "semantic_consistent": "K只有SY37首次计数及压力组，缺该批次技术失败定义；不能确定是否把格式不合法计入，证据不足成立。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P873502是目标清单的有效检查来源，分别列超时与格式不合法，但没有二者均为技术失败的规则。",
+        "support_actual_answer": "实际K没有P721388，不能用完整资料补口径；引用目标计数可说明现有依据不足。",
+        "irrelevant_citations": "引用目标SY37记录，无无关引用。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T06",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T06.json",
+      "support_status": "supported"
+    },
+    {
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "condition": "R0",
+      "variant": "baseline",
+      "irrelevant_ids": [],
+      "reason": "完整输入明确把8超时和7格式不合法计入技术失败，15/60=25%；证据不足错误。",
+      "coverage_reason": "引用P873502计数，但未引P721388的统计定义。",
+      "support_reason": "计数段不含完整技术失败定义，而实际输入另有该定义；不能据部分引用断言整份资料缺证。",
+      "irrelevant_reason": "正确范围首次计数，相关但不充分。",
+      "run_id": "e5dafee4-b21c-4bdf-950a-82b7d68e6509",
+      "record_path": "基础/runs/formal/round1/run-e5dafee4-b21c-4bdf-950a-82b7d68e6509.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P873502\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P873502"
+      ],
+      "actual_input_ids": [
+        "P878722",
+        "P276634",
+        "P151208",
+        "P466322",
+        "P463444",
+        "P873502",
+        "P721388"
+      ],
+      "elapsed_seconds": 16.84978210006375,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P873502",
+          "source": "模拟记录/T06/页4",
+          "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P721388",
+          "source": "模拟记录/T06/页1",
+          "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整输入明确把8超时和7格式不合法计入技术失败，15/60=25%；证据不足错误。",
+        "semantic_consistent": "完整输入明确把8超时和7格式不合法计入技术失败，15/60=25%；证据不足错误。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用P873502计数，但未引P721388的统计定义。",
+        "support_actual_answer": "计数段不含完整技术失败定义，而实际输入另有该定义；不能据部分引用断言整份资料缺证。",
+        "irrelevant_citations": "正确范围首次计数，相关但不充分。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T06",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T06.json",
+      "support_status": "insufficient"
+    },
+    {
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "condition": "R0",
+      "variant": "improved",
+      "irrelevant_ids": [],
+      "reason": "完整输入明确把8超时和7格式不合法计入技术失败，15/60=25%；证据不足错误。",
+      "coverage_reason": "引用P873502计数，但未引P721388的统计定义。",
+      "support_reason": "计数段不含完整技术失败定义，而实际输入另有该定义；不能据部分引用断言整份资料缺证。",
+      "irrelevant_reason": "正确范围首次计数，相关但不充分。",
+      "run_id": "a6eb15f7-afdf-4ace-9216-b105c89e8d07",
+      "record_path": "基础/runs/formal/round1/run-a6eb15f7-afdf-4ace-9216-b105c89e8d07.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P873502\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P873502"
+      ],
+      "actual_input_ids": [
+        "P873502",
+        "P878722",
+        "P276634",
+        "P463444",
+        "P466322",
+        "P721388",
+        "P151208"
+      ],
+      "elapsed_seconds": 14.339958900003694,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P873502",
+          "source": "模拟记录/T06/页4",
+          "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P721388",
+          "source": "模拟记录/T06/页1",
+          "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整输入明确把8超时和7格式不合法计入技术失败，15/60=25%；证据不足错误。",
+        "semantic_consistent": "完整输入明确把8超时和7格式不合法计入技术失败，15/60=25%；证据不足错误。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用P873502计数，但未引P721388的统计定义。",
+        "support_actual_answer": "计数段不含完整技术失败定义，而实际输入另有该定义；不能据部分引用断言整份资料缺证。",
+        "irrelevant_citations": "正确范围首次计数，相关但不充分。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T06",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T06.json",
+      "support_status": "insufficient"
+    },
+    {
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "condition": "R1",
+      "variant": "baseline",
+      "irrelevant_ids": [],
+      "reason": "完整输入明确把8超时和7格式不合法计入技术失败，15/60=25%；证据不足错误。",
+      "coverage_reason": "引用P873502计数，但未引P721388的统计定义。",
+      "support_reason": "计数段不含完整技术失败定义，而实际输入另有该定义；不能据部分引用断言整份资料缺证。",
+      "irrelevant_reason": "正确范围首次计数，相关但不充分。",
+      "run_id": "adcde68d-c64d-44bf-a49b-1862f53fec07",
+      "record_path": "基础/runs/formal/round1/run-adcde68d-c64d-44bf-a49b-1862f53fec07.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P873502\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P873502"
+      ],
+      "actual_input_ids": [
+        "P878722",
+        "P463444",
+        "P721388",
+        "P873502",
+        "P276634",
+        "P151208",
+        "P466322"
+      ],
+      "elapsed_seconds": 14.45712779997848,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P873502",
+          "source": "模拟记录/T06/页4",
+          "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P721388",
+          "source": "模拟记录/T06/页1",
+          "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整输入明确把8超时和7格式不合法计入技术失败，15/60=25%；证据不足错误。",
+        "semantic_consistent": "完整输入明确把8超时和7格式不合法计入技术失败，15/60=25%；证据不足错误。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用P873502计数，但未引P721388的统计定义。",
+        "support_actual_answer": "计数段不含完整技术失败定义，而实际输入另有该定义；不能据部分引用断言整份资料缺证。",
+        "irrelevant_citations": "正确范围首次计数，相关但不充分。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T06",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T06.json",
+      "support_status": "insufficient"
+    },
+    {
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "condition": "R2",
+      "variant": "baseline",
+      "irrelevant_ids": [
+        "P466322"
+      ],
+      "reason": "完整资料可计算25%，R2拒答错误。",
+      "coverage_reason": "P466322旧版支持率不覆盖SY37计数与技术失败口径。",
+      "support_reason": "R2旧版记录不能证明R3首次清单技术失败率无法确定。",
+      "irrelevant_reason": "版本与指标口径冲突。",
+      "run_id": "8b45ca16-9a91-4d0d-8a9f-56d05347ead9",
+      "record_path": "基础/runs/formal/round1/run-8b45ca16-9a91-4d0d-8a9f-56d05347ead9.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P466322\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P466322"
+      ],
+      "actual_input_ids": [
+        "P466322",
+        "P276634",
+        "P873502",
+        "P151208",
+        "P721388",
+        "P463444",
+        "P878722"
+      ],
+      "elapsed_seconds": 15.528800299973227,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P873502",
+          "source": "模拟记录/T06/页4",
+          "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P721388",
+          "source": "模拟记录/T06/页1",
+          "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P466322",
+          "source": "模拟记录/T06/页2",
+          "quote": "松影项目R2版本在2026-07的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整资料可计算25%，R2拒答错误。",
+        "semantic_consistent": "完整资料可计算25%，R2拒答错误。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P466322旧版支持率不覆盖SY37计数与技术失败口径。",
+        "support_actual_answer": "R2旧版记录不能证明R3首次清单技术失败率无法确定。",
+        "irrelevant_citations": "版本与指标口径冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T06",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T06.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "answer_correct": "ambiguous",
+      "semantic_consistent": "ambiguous",
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "K缺双门槛规则，丙虽与全文选择相同但不能仅由当前数据证明正式决策，保留ambiguous。",
+      "coverage_reason": "没有P850395，所引候选数据不能覆盖所问规则。",
+      "support_reason": "支持率、耗时和调用存在取舍，没有规则不能确定应选丙。",
+      "irrelevant_reason": "P313278是正确范围数据，相关但不足。",
+      "run_id": "1993bda9-23fc-4eee-b9ec-68b497e4db0e",
+      "record_path": "基础/runs/formal/round1/run-1993bda9-23fc-4eee-b9ec-68b497e4db0e.json",
+      "raw_content": "{\"answer\":\"丙\",\"citations\":[\"P313278\"]}",
+      "answer": "丙",
+      "citations": [
+        "P313278"
+      ],
+      "actual_input_ids": [
+        "P313278",
+        "P802784"
+      ],
+      "elapsed_seconds": 4.575450900010765,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P313278",
+          "source": "模拟记录/T07/页1",
+          "quote": "知秋项目R5版本在2026-08的记录：资源表ZQ58记录甲完整支持84%、P50为6.1秒、2次调用；乙87%、7.4秒、3次；丙86%、6.8秒、2次。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P850395",
+          "source": "模拟记录/T07/页6",
+          "quote": "批次ZQ58的复核补页：ZQ58决策先要求完整支持率至少85%且P50不高于7秒，再比较平均调用次数和完整耗时。",
+          "visible_in_this_run": false
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "K缺双门槛规则，丙虽与全文选择相同但不能仅由当前数据证明正式决策，保留ambiguous。",
+        "semantic_consistent": "K缺双门槛规则，丙虽与全文选择相同但不能仅由当前数据证明正式决策，保留ambiguous。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "没有P850395，所引候选数据不能覆盖所问规则。",
+        "support_actual_answer": "支持率、耗时和调用存在取舍，没有规则不能确定应选丙。",
+        "irrelevant_citations": "P313278是正确范围数据，相关但不足。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T07",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T07.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P802784"
+      ],
+      "reason": "ZQ58是批次号，不是方案名称；完整资料唯一合格为丙，且额外前缀不合只填名称。",
+      "coverage_reason": "迁移XQ60不覆盖ZQ58候选数据与门槛。",
+      "support_reason": "引用不含所称方案，无法支持批次号当方案。",
+      "irrelevant_reason": "迁移批次范围冲突。",
+      "run_id": "d34b7d1c-0620-4366-b992-50c554388529",
+      "record_path": "基础/runs/formal/round1/run-d34b7d1c-0620-4366-b992-50c554388529.json",
+      "raw_content": "{\"answer\":\"方案名称：ZQ58\",\"citations\":[\"P802784\"]}",
+      "answer": "方案名称：ZQ58",
+      "citations": [
+        "P802784"
+      ],
+      "actual_input_ids": [
+        "P545606",
+        "P694541",
+        "P802784",
+        "P850395",
+        "P304879",
+        "P244387",
+        "P313278"
+      ],
+      "elapsed_seconds": 14.717670900048688,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P313278",
+          "source": "模拟记录/T07/页1",
+          "quote": "知秋项目R5版本在2026-08的记录：资源表ZQ58记录甲完整支持84%、P50为6.1秒、2次调用；乙87%、7.4秒、3次；丙86%、6.8秒、2次。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P850395",
+          "source": "模拟记录/T07/页6",
+          "quote": "批次ZQ58的复核补页：ZQ58决策先要求完整支持率至少85%且P50不高于7秒，再比较平均调用次数和完整耗时。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P802784",
+          "source": "模拟记录/T07/页2",
+          "quote": "知秋项目R5版本在2026-08的迁移批次XQ60处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "ZQ58是批次号，不是方案名称；完整资料唯一合格为丙，且额外前缀不合只填名称。",
+        "semantic_consistent": "ZQ58是批次号，不是方案名称；完整资料唯一合格为丙，且额外前缀不合只填名称。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "迁移XQ60不覆盖ZQ58候选数据与门槛。",
+        "support_actual_answer": "引用不含所称方案，无法支持批次号当方案。",
+        "irrelevant_citations": "迁移批次范围冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T07",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T07.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "improved",
+      "answer_correct": false,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P244387"
+      ],
+      "reason": "丙选择语义正确，但answer为“方案名称：丙”，含额外说明，未仅填写方案名称。",
+      "semantic_reason": "完整资料丙是唯一满足支持率和P50双门槛者。",
+      "coverage_reason": "引用R4旧版，没有覆盖R5资源数据和规则。",
+      "support_reason": "旧版记录没有丙的本期资格，不能支持实际丙结论。",
+      "irrelevant_reason": "P244387版本冲突。",
+      "run_id": "e8803d11-6051-468d-a8e1-8659e3439c8e",
+      "record_path": "基础/runs/formal/round1/run-e8803d11-6051-468d-a8e1-8659e3439c8e.json",
+      "raw_content": "{\"answer\":\"方案名称：丙\",\"citations\":[\"P244387\"]}",
+      "answer": "方案名称：丙",
+      "citations": [
+        "P244387"
+      ],
+      "actual_input_ids": [
+        "P313278",
+        "P545606",
+        "P244387",
+        "P802784",
+        "P304879",
+        "P694541",
+        "P850395"
+      ],
+      "elapsed_seconds": 14.531530700041912,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P313278",
+          "source": "模拟记录/T07/页1",
+          "quote": "知秋项目R5版本在2026-08的记录：资源表ZQ58记录甲完整支持84%、P50为6.1秒、2次调用；乙87%、7.4秒、3次；丙86%、6.8秒、2次。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P850395",
+          "source": "模拟记录/T07/页6",
+          "quote": "批次ZQ58的复核补页：ZQ58决策先要求完整支持率至少85%且P50不高于7秒，再比较平均调用次数和完整耗时。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P244387",
+          "source": "模拟记录/T07/页5",
+          "quote": "知秋项目R4版本在2026-08的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "丙选择语义正确，但answer为“方案名称：丙”，含额外说明，未仅填写方案名称。",
+        "semantic_consistent": "完整资料丙是唯一满足支持率和P50双门槛者。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用R4旧版，没有覆盖R5资源数据和规则。",
+        "support_actual_answer": "旧版记录没有丙的本期资格，不能支持实际丙结论。",
+        "irrelevant_citations": "P244387版本冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T07",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T07.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R1",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P545606"
+      ],
+      "reason": "乙的P50为7.4秒不合≤7秒，且答案带额外前缀；正确方案丙。",
+      "coverage_reason": "上月探索资料没有本期候选数据和决策规则。",
+      "support_reason": "P545606不能推出乙合格，实际完整输入明确乙超P50门槛。",
+      "irrelevant_reason": "2026-07探索，非2026-08资源表。",
+      "run_id": "e53d87cd-807d-4991-bbf9-af0d795f847c",
+      "record_path": "基础/runs/formal/round1/run-e53d87cd-807d-4991-bbf9-af0d795f847c.json",
+      "raw_content": "{\"answer\":\"方案名称：乙\",\"citations\":[\"P545606\"]}",
+      "answer": "方案名称：乙",
+      "citations": [
+        "P545606"
+      ],
+      "actual_input_ids": [
+        "P244387",
+        "P545606",
+        "P802784",
+        "P850395",
+        "P304879",
+        "P694541",
+        "P313278"
+      ],
+      "elapsed_seconds": 14.493395299999975,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P313278",
+          "source": "模拟记录/T07/页1",
+          "quote": "知秋项目R5版本在2026-08的记录：资源表ZQ58记录甲完整支持84%、P50为6.1秒、2次调用；乙87%、7.4秒、3次；丙86%、6.8秒、2次。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P850395",
+          "source": "模拟记录/T07/页6",
+          "quote": "批次ZQ58的复核补页：ZQ58决策先要求完整支持率至少85%且P50不高于7秒，再比较平均调用次数和完整耗时。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P545606",
+          "source": "模拟记录/T07/页4",
+          "quote": "知秋项目R5版本在2026-07的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "乙的P50为7.4秒不合≤7秒，且答案带额外前缀；正确方案丙。",
+        "semantic_consistent": "乙的P50为7.4秒不合≤7秒，且答案带额外前缀；正确方案丙。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "上月探索资料没有本期候选数据和决策规则。",
+        "support_actual_answer": "P545606不能推出乙合格，实际完整输入明确乙超P50门槛。",
+        "irrelevant_citations": "2026-07探索，非2026-08资源表。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T07",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T07.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R2",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "完整资料乙7.4秒违反门槛，应选丙；额外前缀也不符合只填名称。",
+      "coverage_reason": "只引P850395门槛，缺P313278各方案数值。",
+      "support_reason": "规则本身没有乙的成绩，不能证明乙合格；与完整输入结合则乙明确不合格。",
+      "irrelevant_reason": "本批次规则相关，虽错答和缺数据但不是无关引用。",
+      "run_id": "171ce61a-35cf-4f16-aa95-248836b0db43",
+      "record_path": "基础/runs/formal/round1/run-171ce61a-35cf-4f16-aa95-248836b0db43.json",
+      "raw_content": "{\"answer\":\"方案名称：乙\",\"citations\":[\"P850395\"]}",
+      "answer": "方案名称：乙",
+      "citations": [
+        "P850395"
+      ],
+      "actual_input_ids": [
+        "P313278",
+        "P850395",
+        "P802784",
+        "P545606",
+        "P304879",
+        "P244387",
+        "P694541"
+      ],
+      "elapsed_seconds": 17.499364100047387,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P313278",
+          "source": "模拟记录/T07/页1",
+          "quote": "知秋项目R5版本在2026-08的记录：资源表ZQ58记录甲完整支持84%、P50为6.1秒、2次调用；乙87%、7.4秒、3次；丙86%、6.8秒、2次。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P850395",
+          "source": "模拟记录/T07/页6",
+          "quote": "批次ZQ58的复核补页：ZQ58决策先要求完整支持率至少85%且P50不高于7秒，再比较平均调用次数和完整耗时。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整资料乙7.4秒违反门槛，应选丙；额外前缀也不符合只填名称。",
+        "semantic_consistent": "完整资料乙7.4秒违反门槛，应选丙；额外前缀也不符合只填名称。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "只引P850395门槛，缺P313278各方案数值。",
+        "support_actual_answer": "规则本身没有乙的成绩，不能证明乙合格；与完整输入结合则乙明确不合格。",
+        "irrelevant_citations": "本批次规则相关，虽错答和缺数据但不是无关引用。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T07",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T07.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P436140"
+      ],
+      "reason": "K缺GZ69选择规则，不能确定selected_snapshot；S19又属于不同迁移批次，不能作为复核结论。",
+      "coverage_reason": "引用迁移P436140，未覆盖目标复核范围；规则不可见。",
+      "support_reason": "初步定位S19没有说明GZ69三项通过或selected_snapshot。",
+      "irrelevant_reason": "迁移批次与所问正式复核批次冲突。",
+      "run_id": "110bbd97-dd04-4c91-90be-500026ce9a7a",
+      "record_path": "基础/runs/formal/round1/run-110bbd97-dd04-4c91-90be-500026ce9a7a.json",
+      "raw_content": "{\"answer\":\"S19\",\"citations\":[\"P436140\"]}",
+      "answer": "S19",
+      "citations": [
+        "P436140"
+      ],
+      "actual_input_ids": [
+        "P436140",
+        "P183430"
+      ],
+      "elapsed_seconds": 5.039653200074099,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "quote": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P223300",
+          "source": "模拟记录/T08/页7",
+          "quote": "批次GZ69的复核补页：GZ69的selected_snapshot规则要求文本问答、区域定位和会话恢复三项检查全部通过。",
+          "visible_in_this_run": false
+        },
+        {
+          "id": "P436140",
+          "source": "模拟记录/T08/页5",
+          "quote": "归舟项目R6版本在2026-09的迁移批次XQ61处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "K缺GZ69选择规则，不能确定selected_snapshot；S19又属于不同迁移批次，不能作为复核结论。",
+        "semantic_consistent": "K缺GZ69选择规则，不能确定selected_snapshot；S19又属于不同迁移批次，不能作为复核结论。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用迁移P436140，未覆盖目标复核范围；规则不可见。",
+        "support_actual_answer": "初步定位S19没有说明GZ69三项通过或selected_snapshot。",
+        "irrelevant_citations": "迁移批次与所问正式复核批次冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T08",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T08.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P818400"
+      ],
+      "reason": "S31属岫光，归舟GZ69按三项全通过应为K17。",
+      "coverage_reason": "未引GZ69候选检查及规则。",
+      "support_reason": "另一项目S31不能支持本题selected_snapshot。",
+      "irrelevant_reason": "项目冲突。",
+      "run_id": "c9308857-7986-441a-9b95-bea64fa8af30",
+      "record_path": "基础/runs/formal/round1/run-c9308857-7986-441a-9b95-bea64fa8af30.json",
+      "raw_content": "{\"answer\":\"S31\",\"citations\":[\"P818400\"]}",
+      "answer": "S31",
+      "citations": [
+        "P818400"
+      ],
+      "actual_input_ids": [
+        "P818400",
+        "P436140",
+        "P394287",
+        "P672045",
+        "P510683",
+        "P183430",
+        "P223300"
+      ],
+      "elapsed_seconds": 15.394119199947454,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "quote": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P223300",
+          "source": "模拟记录/T08/页7",
+          "quote": "批次GZ69的复核补页：GZ69的selected_snapshot规则要求文本问答、区域定位和会话恢复三项检查全部通过。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P818400",
+          "source": "模拟记录/T08/页2",
+          "quote": "岫光项目R6版本在2026-09登记同名指标和批次XQ61，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "S31属岫光，归舟GZ69按三项全通过应为K17。",
+        "semantic_consistent": "S31属岫光，归舟GZ69按三项全通过应为K17。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "未引GZ69候选检查及规则。",
+        "support_actual_answer": "另一项目S31不能支持本题selected_snapshot。",
+        "irrelevant_citations": "项目冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T08",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T08.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R0",
+      "variant": "improved",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "S19为迁移批次，完整资料推导K17；答案错。",
+      "coverage_reason": "只引P183430检查数据，缺P223300规则。",
+      "support_reason": "P183430列K16/K17/K18，不含S19，不能支持实际answer。",
+      "irrelevant_reason": "目标检查数据相关，但答案不受支持且引用不齐。",
+      "run_id": "a34940e8-1b48-4479-8418-8417d095c723",
+      "record_path": "基础/runs/formal/round1/run-a34940e8-1b48-4479-8418-8417d095c723.json",
+      "raw_content": "{\"answer\":\"S19\",\"citations\":[\"P183430\"]}",
+      "answer": "S19",
+      "citations": [
+        "P183430"
+      ],
+      "actual_input_ids": [
+        "P183430",
+        "P436140",
+        "P672045",
+        "P510683",
+        "P394287",
+        "P818400",
+        "P223300"
+      ],
+      "elapsed_seconds": 15.257400000002235,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "quote": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P223300",
+          "source": "模拟记录/T08/页7",
+          "quote": "批次GZ69的复核补页：GZ69的selected_snapshot规则要求文本问答、区域定位和会话恢复三项检查全部通过。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "S19为迁移批次，完整资料推导K17；答案错。",
+        "semantic_consistent": "S19为迁移批次，完整资料推导K17；答案错。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "只引P183430检查数据，缺P223300规则。",
+        "support_actual_answer": "P183430列K16/K17/K18，不含S19，不能支持实际answer。",
+        "irrelevant_citations": "目标检查数据相关，但答案不受支持且引用不齐。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T08",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T08.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R1",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P436140"
+      ],
+      "reason": "S19是迁移XQ61，非GZ69复核选择，应为K17。",
+      "coverage_reason": "迁移快照不覆盖正式复核检查与资格规则。",
+      "support_reason": "P436140只说迁移初步定位S19，不能支持GZ69三项通过。",
+      "irrelevant_reason": "批次与用途冲突。",
+      "run_id": "e9692b0b-4bd0-44a9-b4cb-6e8486fdb34b",
+      "record_path": "基础/runs/formal/round1/run-e9692b0b-4bd0-44a9-b4cb-6e8486fdb34b.json",
+      "raw_content": "{\"answer\":\"S19\",\"citations\":[\"P436140\"]}",
+      "answer": "S19",
+      "citations": [
+        "P436140"
+      ],
+      "actual_input_ids": [
+        "P394287",
+        "P510683",
+        "P436140",
+        "P183430",
+        "P672045",
+        "P818400",
+        "P223300"
+      ],
+      "elapsed_seconds": 15.372306300094351,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "quote": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P223300",
+          "source": "模拟记录/T08/页7",
+          "quote": "批次GZ69的复核补页：GZ69的selected_snapshot规则要求文本问答、区域定位和会话恢复三项检查全部通过。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P436140",
+          "source": "模拟记录/T08/页5",
+          "quote": "归舟项目R6版本在2026-09的迁移批次XQ61处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "S19是迁移XQ61，非GZ69复核选择，应为K17。",
+        "semantic_consistent": "S19是迁移XQ61，非GZ69复核选择，应为K17。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "迁移快照不覆盖正式复核检查与资格规则。",
+        "support_actual_answer": "P436140只说迁移初步定位S19，不能支持GZ69三项通过。",
+        "irrelevant_citations": "批次与用途冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T08",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T08.json",
+      "support_status": "insufficient"
+    },
+    {
+      "condition": "R2",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P672045"
+      ],
+      "reason": "旧版签署K16不能套用R6；本期K16区域定位偏移，应为K17。",
+      "coverage_reason": "R5旧版没有R6 GZ69所需检查和规则。",
+      "support_reason": "P672045仅支持R5签署K16，不支持本题R6结论。",
+      "irrelevant_reason": "版本冲突。",
+      "run_id": "21731f72-6f77-4c07-943d-9814b3dff700",
+      "record_path": "基础/runs/formal/round1/run-21731f72-6f77-4c07-943d-9814b3dff700.json",
+      "raw_content": "{\"answer\":\"K16\",\"citations\":[\"P672045\"]}",
+      "answer": "K16",
+      "citations": [
+        "P672045"
+      ],
+      "actual_input_ids": [
+        "P672045",
+        "P394287",
+        "P183430",
+        "P223300",
+        "P818400",
+        "P436140",
+        "P510683"
+      ],
+      "elapsed_seconds": 15.764799199998379,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "quote": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P223300",
+          "source": "模拟记录/T08/页7",
+          "quote": "批次GZ69的复核补页：GZ69的selected_snapshot规则要求文本问答、区域定位和会话恢复三项检查全部通过。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P672045",
+          "source": "模拟记录/T08/页1",
+          "quote": "归舟项目R5版本在2026-09的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "旧版签署K16不能套用R6；本期K16区域定位偏移，应为K17。",
+        "semantic_consistent": "旧版签署K16不能套用R6；本期K16区域定位偏移，应为K17。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "R5旧版没有R6 GZ69所需检查和规则。",
+        "support_actual_answer": "P672045仅支持R5签署K16，不支持本题R6结论。",
+        "irrelevant_citations": "版本冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      },
+      "case_id": "T08",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "initial_review_path": "基础/runs/formal_review/round1/review-T08.json",
+      "support_status": "insufficient"
+    }
+  ],
+  "adjustments_applied": "review-adjustments.json",
+  "semantic_label_source": "Codex-assisted source review; not independent human or official gold"
+}

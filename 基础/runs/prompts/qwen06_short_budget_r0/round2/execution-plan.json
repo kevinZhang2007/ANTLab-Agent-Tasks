@@ -1,0 +1,94 @@
+{
+  "source_hashes": {
+    "student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045"
+  },
+  "config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 1024,
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "answer",
+              "citations"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "timeout_seconds": 180
+  },
+  "call_order": [
+    {
+      "index": 1,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "round2"
+    },
+    {
+      "index": 2,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "round2"
+    },
+    {
+      "index": 3,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "round2"
+    },
+    {
+      "index": 4,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "round2"
+    }
+  ],
+  "recorded_at": "2026-10-12T22:46:32.908882+08:00",
+  "purpose": "最后两轮短提示词及推理预算开发比较；不是新的随机重复评测",
+  "thinking": true,
+  "max_tokens": 1024,
+  "prediction": "开启思考与1024预算一起可能让模型完成证据核对，但可能耗尽预算或最终仍答错；不能将差异单独归因于思考开关或预算。",
+  "design_plan": "design-plan.json",
+  "selection_rule": "完整成功数优先，其次答案正确数；与原方案两项相同或更差时保留原方案；候选质量相同优先关闭思考256预算方案。",
+  "evaluation_rules": [
+    "格式、答案、引用ID与语义支持分别判断；D02语义一致与指定答法分开",
+    "不补字段、引用或答案；思考中的正确数字不算最终成功",
+    "公开开发答案只在响应落盘后评价"
+  ],
+  "stop_conditions": [
+    "每轮固定4次，共最多8次；错误不重试",
+    "模板与Schema不兼容时停止第二轮，不换实现",
+    "技术失败保存后停止后续调用",
+    "预算耗尽保留失败，不追加预算或重试",
+    "无论结果如何，不再追加优化调用；结束停止服务"
+  ],
+  "source_validation": "source-validation.json",
+  "capacity_reference": "template-capacity.json",
+  "model_quantization": "Qwen3-0.6B Q8_0"
+}

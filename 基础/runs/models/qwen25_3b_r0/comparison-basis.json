@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-10-12T20:27:41.823720+08:00",
+  "timing_note": "本轮调用已经开始；此条是比较基点说明，不是最初实验前预测。",
+  "closest_history": "基础/runs/format/schema_r0/semantic-review.json",
+  "historical_schema_baselines": [
+    {
+      "case_id": "D04",
+      "run_id": "9d13f87b-671e-4350-bb3b-92a2f1063dd9"
+    },
+    {
+      "case_id": "D01",
+      "run_id": "49b6095c-53da-4e8b-97c6-4e4067d62095"
+    },
+    {
+      "case_id": "D02",
+      "run_id": "dec151cb-59f3-450a-8078-ff9b2f10b25d"
+    },
+    {
+      "case_id": "D03",
+      "run_id": "81f510a3-0dcb-48f7-8500-058cebfef626"
+    }
+  ],
+  "differences": [
+    "模型系列Qwen3变为Qwen2.5",
+    "0.6B变为3B",
+    "Q8_0变为Q4_K_M",
+    "模型自己的聊天模板不同"
+  ],
+  "fixed": [
+    "统一system提示词",
+    "R0全部资料与顺序（baseline）",
+    "同一JSON Schema",
+    "原采样数值参数",
+    "4096上下文及256输出预算"
+  ],
+  "interpretation": "只比较实际配置的开发题表现；不能把差异全部归因于参数量。0.6B第一版排序配对未用Schema，与新improved比较还混有格式约束差异。"
+}

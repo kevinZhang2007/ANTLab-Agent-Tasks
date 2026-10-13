@@ -1,0 +1,41 @@
+{
+  "part": "ALCE指定定义及补充边界",
+  "completed_scope": "核对§3.2正确性、§3.3引用质量及图3、§6人工评价、附录E及F.2/F.3相关定义；不是全文阅读。",
+  "title": "Enabling Large Language Models to Generate Text with Citations",
+  "authors": [
+    "Tianyu Gao",
+    "Howard Yen",
+    "Jiatong Yu",
+    "Danqi Chen"
+  ],
+  "source": "https://aclanthology.org/2023.emnlp-main.398.pdf",
+  "version": "EMNLP 2023官方论文，论文页6465—6488；引用页码以该固定PDF为准",
+  "task_classification": "进阶B必读引用评价定义；§3.2及评价局限为本轮补充依据",
+  "entries": [
+    {
+      "locator": "§3.2，PDF页序3—4，论文页6467—6468",
+      "supports": "正确性按数据集目标另评，不等于有引用。",
+      "impact": "答案与格式、ID和引用支持分开。",
+      "limits": "本题短答案/计算不直接套长文自动指标。"
+    },
+    {
+      "locator": "§3.3及图3，PDF页序4—5，论文页6468—6469",
+      "short_quote": "not require citing a minimal set",
+      "supports": "集合支持与单条无关引用分开；不要求最小集合。",
+      "impact": "跨段数据/规则共同支持，单段未独立蕴含答案不能自动判无关。",
+      "limits": "论文NLI不能自动可靠识别部分支持；本题不复现整套NLI。"
+    },
+    {
+      "locator": "§6，PDF页序8—9，论文页6472—6473；附录E/F，页序15—16，论文页6479—6480",
+      "supports": "人工区分充分、部分及不支持；自动评价有限制。",
+      "impact": "按原文人工复核，保留调整依据；冗余但相关不等于无关。",
+      "limits": "不把本题人工规则叫ALCE官方分数，也不用模型自评作唯一裁判。"
+    }
+  ],
+  "pending": [
+    "全文、作者系统实测及整套自动NLI未开展",
+    "模型额外定位输出仍需原文核对，不能自证真实"
+  ],
+  "recorded_at": "2026-10-13T12:43:04.405493+08:00",
+  "model_calls_this_part": 0
+}

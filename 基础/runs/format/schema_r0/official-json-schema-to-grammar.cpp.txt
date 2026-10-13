@@ -1,0 +1,66 @@
+650:             auto first = true;
+651:             for (const auto & [cpt, child] : node.children) {
+652:                 std::string c = common_unicode_cpt_to_utf8(cpt);
+653:                 rejects += c;
+654:                 if (first) {
+655:                     first = false;
+656:                 } else {
+657:                     out << " | ";
+658:                 }
+659:                 out << "[" << c << "]";
+660:                 if (!trie.nodes[child].children.empty()) {
+661:                     out << " (";
+662:                     visit(child);
+663:                     out << ")";
+664:                 } else {
+665:                     out << " " << char_rule << "+";
+666:                 }
+667:             }
+668:             if (!node.children.empty()) {
+669:                 out << " | [^\"" << rejects << "] " << char_rule << "*";
+670:             }
+671:         };
+672:         visit(0);
+673: 
+674:         out << " )";
+675:         if (trie.nodes[0].pattern < 0) {
+676:             out << "?";
+677:         }
+678:         out << " [\"]";
+679:         return out.str();
+680:     }
+681: 
+682:     std::string _resolve_ref(const common_chat_schema_ref & schema) {
+683:         auto it = schema.ref.find('#');
+684:         std::string ref_fragment = it != std::string::npos ? schema.ref.substr(it + 1) : schema.ref;
+685:         static const std::regex nonalphanumeric_regex(R"([^a-zA-Z0-9-]+)");
+686:         std::string ref_name = "ref" + std::regex_replace(ref_fragment, nonalphanumeric_regex, "-");
+687:         if (_rules.find(ref_name) == _rules.end() && _refs_being_resolved.find(schema.ref) == _refs_being_resolved.end()) {
+688:             if (!schema.target) {
+689:                 _errors.push_back("Unresolved $ref " + schema.ref);
+690:                 return "";
+691:             }
+692:             _refs_being_resolved.insert(schema.ref);
+693:             ref_name = visit(*schema.target, ref_name);
+694:             _refs_being_resolved.erase(schema.ref);
+695:         }
+696:         return ref_name;
+697:     }
+698: 
+699:     std::string _build_object_rule(
+700:         const std::vector<std::pair<std::string, const common_chat_schema *>> & properties,
+701:         const std::unordered_set<std::string> & required,
+702:         const std::string & name,
+703:         const common_chat_schema * additional_properties)
+704:     {
+705:         std::vector<std::string> required_props;
+706:         std::vector<std::string> optional_props;
+707:         std::unordered_map<std::string, std::string> prop_kv_rule_names;
+708:         std::vector<std::string> prop_names;
+709:         for (const auto & kv : properties) {
+710:             const auto &prop_name = kv.first;
+711:             const auto &prop_schema = kv.second;
+712: 
+713:             std::string prop_rule_name = visit(*prop_schema, name + (name.empty() ? "" : "-") + prop_name);
+714:             prop_kv_rule_names[prop_name] = _add_rule(
+715:                 name + (name.empty() ? "" : "-") + prop_name + "-kv",

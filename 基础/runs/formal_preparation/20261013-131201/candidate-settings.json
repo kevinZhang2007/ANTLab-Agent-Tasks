@@ -1,0 +1,126 @@
+{
+  "recorded_at": "2026-10-13T13:12:03.282762+08:00",
+  "status": "待确认配置",
+  "frozen": false,
+  "freeze_time": null,
+  "generation_authorized": false,
+  "source_commit": "58a8655a30c50ac565472081fab88fb70b2308f9",
+  "working_tree_hashes_are_authoritative": true,
+  "request_config": "config.candidate.json",
+  "request_config_sha256": "abec527a6930f8ad9f1ef711919a4169a3cc03fc31343ce65a8bcc7f5c6fbe7c",
+  "code_sha256": {
+    "基础/starter/student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "基础/starter/provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "基础/starter/runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045",
+    "基础/starter/server.py": "fd2174af5fe875ff37b24dba92f298b5602bfdef3859b4b584c2280fa14911d8",
+    "基础/starter/index.html": "7b702ecac7b5dfd8ba7c437697cae3abe50030e33565e0f535177f533342ca45",
+    "基础/tests/check_student.py": "c13c60afdc456c761f2a4883ad834b102e9d655e4bb041fd8aa60cb2d7a431c1",
+    "基础/tests/check_improve.py": "fb3f7a27ca9c0e869c675f006e5a684b536f2d4a72392a25fdaeb24294422a37",
+    "基础/tests/run_improve_pairs.py": "45ae9fa277c3f59d047c8a94f3b2222a81e8be904e5b45819f992245daf37d16",
+    "基础/tests/run_schema_check.py": "dcc2e315ea44fd883f428927e03beab082ecb503675b5ba502ecebb2212fb174",
+    "基础/tests/prepare_formal_capacity.py": "f40ec21db12cf53c42e2d3ec393314d8270bc778c049eb3cac0bfc6938cc95d6"
+  },
+  "data_sha256": {
+    "基础/data/cases.json": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "基础/data/manifest.json": "5ca24620a158ebb3429b6255b3e91f9fc26b749f12e41603245585ed32df8fb8"
+  },
+  "dataset_version": "basic-context-v1.2",
+  "manifest_case_hash_matches": true,
+  "model": {
+    "repository": "Qwen/Qwen3-0.6B-GGUF",
+    "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+    "file": "Qwen3-0.6B-Q8_0.gguf",
+    "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "bytes": 639446688,
+    "actual_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "actual_bytes": 639446688,
+    "external_path": "%LOCALAPPDATA%/ANTLabLocalModel/models/Qwen3-0.6B-Q8_0.gguf"
+  },
+  "llama_cpp": {
+    "build": "b11429",
+    "commit": "d81235049",
+    "version_output": "version: 0.6.0-dev (build 11429, commit d81235049)\nbuilt with Clang 20.1.8 for Windows x86_64\n",
+    "executable_sha256": "7e236243c9b670c6a49410c03186fd575c57a0efe3fd8a21d8727503d571d5b6"
+  },
+  "service_arguments": [
+    "%LOCALAPPDATA%/ANTLabLocalModel\\llama-b11429\\llama-server.exe",
+    "-m",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\models\\Qwen3-0.6B-Q8_0.gguf",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "--alias",
+    "Qwen3-0.6B-Q8_0",
+    "--ctx-size",
+    "4096",
+    "--parallel",
+    "1",
+    "--batch-size",
+    "128",
+    "--ubatch-size",
+    "64",
+    "--threads",
+    "4",
+    "--gpu-layers",
+    "0",
+    "--no-context-shift",
+    "--no-warmup",
+    "--temp",
+    "0.7",
+    "--top-p",
+    "0.8",
+    "--top-k",
+    "20",
+    "--min-p",
+    "0",
+    "--presence-penalty",
+    "1.5",
+    "--repeat-penalty",
+    "1.0",
+    "--reasoning",
+    "off",
+    "--seed",
+    "42",
+    "--predict",
+    "256",
+    "--slot-save-path",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\diagnostic-cache"
+  ],
+  "system_prompt_sha256": "d4c6992d06db54a51faf8114c3e514c35308cdd4b8b67f88aad07915320ef1a4",
+  "schema": {
+    "type": "json_schema",
+    "json_schema": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "answer",
+          "citations"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "service_controls": {
+    "context": 4096,
+    "slots": 1,
+    "cpu_threads": 4,
+    "gpu_layers": 0,
+    "reasoning": "off",
+    "context_shift": false,
+    "warmup": false,
+    "repeat_penalty": 1.0
+  },
+  "execution_readiness": "清单和参数仅待确认；尚无专用40项执行编排、人工逐题标签或正式结果，runner默认limit=1不能当40项全跑。"
+}

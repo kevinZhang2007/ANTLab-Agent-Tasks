@@ -1,0 +1,385 @@
+{
+  "recorded_at": "2026-10-13T12:11:57.831155+08:00",
+  "status": "paused_by_request",
+  "scope": "本次只保存恢复检查点；停止补读、联网搜索及实验。没有冻结或Git写入。",
+  "inventory_before_save": {
+    "reading_directory_existed": false,
+    "checkpoint_existed": false,
+    "dedicated_reading_evidence_index_saved": false,
+    "note": "本次检查前reading目录不存在；此前结果在对话工具输出中，不能把阶段性说明当作完整阅读证明。"
+  },
+  "confirmed_read_materials": [
+    {
+      "material": "任务阅读与正式实验要求",
+      "local_files": [
+        "基础/02_阅读材料.md",
+        "进阶/04_阅读材料与项目背景.md",
+        "基础/01_考核题目.md",
+        "进阶/00_共同规则与接口.md",
+        "进阶/02_B_系统失效诊断.md",
+        "进阶/05_提交与报告格式.md"
+      ],
+      "status": "已读取相关要求；尚未保存逐条正式设计核对"
+    },
+    {
+      "material": "Lost in the Middle: How Language Models Use Long Contexts",
+      "version": "arXiv:2307.03172v3，2023-11-20",
+      "url": "https://arxiv.org/html/2307.03172v3",
+      "confirmed_scope": "已读取第2节实验设置与模型条件、第4节机制检查、第5节更多上下文及第7节结论的相关段落。",
+      "status": "相关段落已读；指定章节是否完整覆盖仍待核对",
+      "unread_or_uncertain": "附录和全部段落没有完整阅读记录。"
+    },
+    {
+      "material": "ALCE / Enabling Large Language Models to Generate Text with Citations",
+      "version": "EMNLP 2023官方论文",
+      "url": "https://aclanthology.org/2023.emnlp-main.398.pdf",
+      "confirmed_scope": "已读取§3.3及图3的引用集合支持与单条无关引用定义；§6、附录E/F相关人工评价与局限段落。",
+      "status": "相关定义已读；尚未形成证据索引或完整系统比较",
+      "unread_or_uncertain": "全文、全部方法细节及作者代码没有完整核对。"
+    },
+    {
+      "material": "ALCE作者仓库",
+      "url": "https://github.com/princeton-nlp/ALCE",
+      "version": "访问时README；未锁定commit",
+      "confirmed_scope": "已读取README代码结构及方法名称等文档片段。",
+      "status": "仅文档读取，未安装或运行，不能写成实测"
+    },
+    {
+      "material": "The Semantic Reader Project",
+      "version": "arXiv:2303.14334v2，2023-04-23",
+      "url": "https://arxiv.org/html/2303.14334v2",
+      "confirmed_scope": "已读取Paper Cards、§2.2 CiteRead定位、§3.1 Scim及图4的相关段落；§5.1仅读到引言部分。",
+      "status": "部分段落已读，文档比较未完成；未亲自运行系统",
+      "unread_or_uncertain": "§5.1后续机制及论文其余部分待核对。"
+    },
+    {
+      "material": "Semantic Reader官方研究平台",
+      "url": "https://openreader.semanticscholar.org/",
+      "version": "访问时官方页面；没有锁定软件版本",
+      "confirmed_scope": "已读取平台及PaperMage/PaperCraft介绍。",
+      "status": "仅文档读取，不能写成当前产品功能实测"
+    },
+    {
+      "material": "P1 / Ten Simple Rules for Reproducible Computational Research",
+      "version": "2013，DOI 10.1371/journal.pcbi.1003285",
+      "local_sources": [
+        "进阶/materials/sources.json",
+        "进阶/materials/papers/P1.pdf",
+        "进阶/materials/papers/P1.xml"
+      ],
+      "confirmed_scope": "已提取规则1/2/5/6/7/9/10；前次输出有截断，不能确认全部逐条读完。恢复后已单独完整读取规则1；规则5/9相关内容可确认已读。",
+      "status": "规则2/6/7/10及指定规则覆盖待核对"
+    },
+    {
+      "material": "P2 / Ten simple rules for writing and sharing computational analyses in Jupyter Notebooks",
+      "version": "2019，DOI 10.1371/journal.pcbi.1007007",
+      "local_sources": [
+        "进阶/materials/sources.json",
+        "进阶/materials/papers/P2.pdf",
+        "进阶/materials/papers/P2.xml"
+      ],
+      "confirmed_scope": "已读取规则2/5/6/7/8/9相关内容及图1说明；规则6/7内容可确认已读。",
+      "status": "引用与定位尚未逐条归档；不声称全文读完"
+    }
+  ],
+  "integrity_check": {
+    "P1_pdf_matches_sources_json": true,
+    "P2_pdf_matches_sources_json": true,
+    "P1_xml_matches_sources_json": false,
+    "P2_xml_matches_sources_json": false,
+    "meaning": "PDF原件校验通过；XML字节校验不一致，原因尚未核实，不能称XML校验通过。"
+  },
+  "pending": [
+    "核对P1未确认规则及P1/P2 XML校验差异，必要时以已校验PDF原件确认引用。",
+    "核对指定章节的覆盖情况；不确定部分保留为待核对，不补造原文或阅读完成时间。",
+    "保存技术证据索引：版本、官方链接、章节/页码、短原文依据、解释、支持与不支持的范围。",
+    "完成Semantic Reader与ALCE的证据组织、原文定位、支持判断比较；明确仅文档比较。",
+    "逐条核对40次正式配对设计、指标、失败分母、重试和取舍规则；尚未冻结。",
+    "保存正式容量检查方案：设置确定后无生成检查32次baseline与8次improved，只输出题号/条件/长度；超限停止，不删段、截断或混跑。当前未执行。"
+  ],
+  "next_step_after_resume": "获得继续指示后，先补未核对部分及完整性问题，再分批归档阅读依据、系统比较、正式设计和容量方案；不重做已成功读取或搜索。",
+  "formal_input_bodies_read_this_step": false,
+  "generation_calls_this_step": 0,
+  "prior_read_timestamps": "没有独立记录的首次读取时间保持未知；本条时间是检查点保存时间，不是全部材料最初阅读时间。",
+  "file_integrity_updates": [
+    {
+      "recorded_at": "2026-10-13T12:26:57.509225+08:00",
+      "scope": "仅本轮文件校验；没有补读论文或核对页码。",
+      "evidence_path": "基础/runs/reading/file-integrity.json",
+      "confirmed": {
+        "P1_P2_PDF_raw_matches": true,
+        "P1_P2_extracted_text_raw_matches": true,
+        "P1_P2_XML_raw_matches": false,
+        "P1_P2_XML_crlf_to_lf_in_memory_matches": true
+      },
+      "original_files_modified": false,
+      "pending": [
+        "页码核对待完成。",
+        "此前未归档的补读内容仍待归档和确认，不能登记为已读完。"
+      ],
+      "previous_checkpoint_backup": "checkpoint-before-integrity-20261013-122657-527712.json"
+    }
+  ],
+  "latest_file_integrity_evidence": "基础/runs/reading/file-integrity.json",
+  "latest_file_integrity_checked_at": "2026-10-13T12:26:57.509225+08:00",
+  "reading_progress_updates": [
+    {
+      "recorded_at": "2026-10-13T12:32:29.298626+08:00",
+      "material": "P1",
+      "evidence_path": "基础/runs/reading/p1-reading-evidence.json",
+      "completed_required_rules": [
+        1,
+        2,
+        5,
+        6,
+        7,
+        9,
+        10
+      ],
+      "remaining_required_rules": [],
+      "scope": "本轮重新核对无完整保存证据的指定条目，逐条保存PDF页序号、要点、设计影响及限制；只声明这些规则完成，不声明P1全文读完。",
+      "verification_limit": "PDF交叉核对标题及每段首尾，未逐字符校对PDF/XML全文；原抽取文本的三栏交错不作为连续段落顺序。",
+      "network_used": false,
+      "model_calls": 0,
+      "experiments_run": false,
+      "original_files_modified": false,
+      "previous_checkpoint_backup": "checkpoint-before-p1-20261013-123229-297970.json",
+      "other_pending_unchanged": "P2归档及其他论文、系统比较、正式设计和容量方案本轮未处理；历史pending保留，P1当前进度以本条为准。"
+    },
+    {
+      "recorded_at": "2026-10-13T12:37:18.192679+08:00",
+      "material": "P2",
+      "evidence_path": "基础/runs/reading/p2-reading-evidence.json",
+      "completed_required_rules": [
+        2,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "completed_required_figures": [
+        1
+      ],
+      "remaining_required_items": [],
+      "scope": "本轮核对指定规则与图1/图注，每项完成后独立保存；只登记此范围，不声称P2全文读完。",
+      "verification_limit": "PDF标题/段落首尾、抽取文本及原PDF图形交叉核对，未对PDF/XML全文逐字符校对。",
+      "network_used": false,
+      "model_calls": 0,
+      "experiments_run": false,
+      "original_files_modified": false,
+      "previous_checkpoint_backup": "checkpoint-before-p2-20261013-123718-192247.json",
+      "other_pending_unchanged": "其他论文、公开系统比较、正式设计和容量方案未处理；历史pending保留，P2当前进度以本条为准。"
+    }
+  ],
+  "current_p1_progress": {
+    "evidence_path": "基础/runs/reading/p1-reading-evidence.json",
+    "completed_rules": [
+      1,
+      2,
+      5,
+      6,
+      7,
+      9,
+      10
+    ],
+    "remaining_rules": [],
+    "updated_at": "2026-10-13T12:32:29.298626+08:00"
+  },
+  "current_p2_progress": {
+    "evidence_path": "基础/runs/reading/p2-reading-evidence.json",
+    "completed_rules": [
+      2,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "completed_figures": [
+      1
+    ],
+    "remaining_items": [],
+    "updated_at": "2026-10-13T12:37:18.192679+08:00"
+  },
+  "reading_and_design_updates": [
+    {
+      "recorded_at": "2026-10-13T12:41:33.217936+08:00",
+      "part": "指定范围与既有证据复用",
+      "evidence_path": "基础/runs/reading/reading-scope.json",
+      "completed_scope": "核对本轮任务指定阅读、系统比较、扩展调用要求；复用P1/P2完整证据及文件校验，不重新读原件。",
+      "still_pending": [
+        "主论文指定章节与ALCE定义的独立归档",
+        "Semantic Reader相关机制及两系统文档比较",
+        "两步规则核查与未执行开发设计"
+      ],
+      "model_calls": 0,
+      "implemented_or_executed_candidate": false,
+      "previous_checkpoint_backup": "checkpoint-before-reading-scope-20261013-124133-273525.json"
+    },
+    {
+      "recorded_at": "2026-10-13T12:42:42.821285+08:00",
+      "part": "主论文指定章节",
+      "evidence_path": "基础/runs/reading/lost-in-middle-evidence.json",
+      "completed_scope": "阅读并核对Lost in the Middle v3第2节（2.1—2.3）、第4节（4.1—4.3）、第5节及第7节结论；不登记全文或全部附录完成。",
+      "still_pending": [
+        "非指定全文和附录未完整阅读；本轮不扩展",
+        "本项目位置机制与两步方案效果尚未验证"
+      ],
+      "model_calls": 0,
+      "implemented_or_executed_candidate": false,
+      "previous_checkpoint_backup": "checkpoint-before-lost-in-middle-evidence-20261013-124242-834861.json"
+    },
+    {
+      "recorded_at": "2026-10-13T12:43:04.405493+08:00",
+      "part": "ALCE指定定义及补充边界",
+      "evidence_path": "基础/runs/reading/alce-reading-evidence.json",
+      "completed_scope": "核对§3.2正确性、§3.3引用质量及图3、§6人工评价、附录E及F.2/F.3相关定义；不是全文阅读。",
+      "still_pending": [
+        "全文、作者系统实测及整套自动NLI未开展",
+        "模型额外定位输出仍需原文核对，不能自证真实"
+      ],
+      "model_calls": 0,
+      "implemented_or_executed_candidate": false,
+      "previous_checkpoint_backup": "checkpoint-before-alce-reading-evidence-20261013-124304-425123.json"
+    },
+    {
+      "recorded_at": "2026-10-13T12:44:09.881943+08:00",
+      "part": "Semantic Reader机制文档",
+      "evidence_path": "基础/runs/reading/semantic-reader-evidence.json",
+      "completed_scope": "核对研究概述v2的Paper Cards、§2.2 CiteRead、§3.1 Scim、§5.1 Threddy及相关图注；仅与比较有关的机制，不登记全文完成。",
+      "still_pending": [
+        "系统实测、论文其余部分及独立原型论文全文未开展"
+      ],
+      "model_calls": 0,
+      "implemented_or_executed_candidate": false,
+      "previous_checkpoint_backup": "checkpoint-before-semantic-reader-evidence-20261013-124409-897384.json"
+    },
+    {
+      "recorded_at": "2026-10-13T12:44:13.024332+08:00",
+      "part": "两个公开系统的文档比较",
+      "evidence_path": "基础/runs/reading/systems-comparison.json",
+      "completed_scope": "按任务明确列出的ALCE与Semantic Reader比较具体机制；仅文献及官方文档比较，未亲自运行。",
+      "still_pending": [
+        "两系统实测和生产故障/延迟数据未核验；本轮不运行它们"
+      ],
+      "model_calls": 0,
+      "implemented_or_executed_candidate": false,
+      "previous_checkpoint_backup": "checkpoint-before-systems-comparison-20261013-124413-041260.json"
+    },
+    {
+      "recorded_at": "2026-10-13T12:46:34.000183+08:00",
+      "part": "两步候选规则核查",
+      "evidence_path": "基础/runs/reading/two-step-rule-check.json",
+      "completed_scope": "核对额外调用、选段、独立结构及40次主结果的边界；只给可审查设计，不声明实现或正式验收完成。",
+      "still_pending": [
+        "候选代码、独立编排与接口整合未实现",
+        "正式方案及记账格式未冻结",
+        "B其余材料仍缺，不能以两步设计替代完成"
+      ],
+      "model_calls": 0,
+      "implemented_or_executed_candidate": false,
+      "previous_checkpoint_backup": "checkpoint-before-two-step-rule-check-20261013-124634-020983.json"
+    },
+    {
+      "recorded_at": "2026-10-13T12:46:37.708453+08:00",
+      "part": "两步候选设计",
+      "evidence_path": "基础/runs/reading/two-step-candidate-design.json",
+      "completed_scope": "固定一个ID选择后读取原段落的候选，仅保存设计；未实现、未生成。",
+      "still_pending": [
+        "实现、输入契约测试、顺序/ID重映射变体及服务兼容容量核对均未执行",
+        "本轮不触碰生产student.py或现有配置"
+      ],
+      "model_calls": 0,
+      "implemented_or_executed_candidate": false,
+      "previous_checkpoint_backup": "checkpoint-before-two-step-candidate-design-20261013-124637-726845.json"
+    },
+    {
+      "recorded_at": "2026-10-13T12:46:40.532577+08:00",
+      "part": "两步最小开发实验计划",
+      "evidence_path": "基础/runs/reading/two-step-dev-plan.json",
+      "completed_scope": "预先给出未来D01—D04 R0的一轮配对、评价、预算和停止规则；本轮没有执行。",
+      "still_pending": [
+        "用户下一轮是否授权实现和最多12次生成尚未确定；本轮授权调用为0",
+        "计划未冻结、未实施，不能声称候选合规交付或有效"
+      ],
+      "model_calls": 0,
+      "implemented_or_executed_candidate": false,
+      "previous_checkpoint_backup": "checkpoint-before-two-step-dev-plan-20261013-124640-549516.json"
+    }
+  ],
+  "current_reading_design_parts": {
+    "指定范围与既有证据复用": {
+      "evidence_path": "基础/runs/reading/reading-scope.json",
+      "completed_scope": "核对本轮任务指定阅读、系统比较、扩展调用要求；复用P1/P2完整证据及文件校验，不重新读原件。",
+      "pending": [
+        "主论文指定章节与ALCE定义的独立归档",
+        "Semantic Reader相关机制及两系统文档比较",
+        "两步规则核查与未执行开发设计"
+      ],
+      "updated_at": "2026-10-13T12:41:33.217936+08:00"
+    },
+    "主论文指定章节": {
+      "evidence_path": "基础/runs/reading/lost-in-middle-evidence.json",
+      "completed_scope": "阅读并核对Lost in the Middle v3第2节（2.1—2.3）、第4节（4.1—4.3）、第5节及第7节结论；不登记全文或全部附录完成。",
+      "pending": [
+        "非指定全文和附录未完整阅读；本轮不扩展",
+        "本项目位置机制与两步方案效果尚未验证"
+      ],
+      "updated_at": "2026-10-13T12:42:42.821285+08:00"
+    },
+    "ALCE指定定义及补充边界": {
+      "evidence_path": "基础/runs/reading/alce-reading-evidence.json",
+      "completed_scope": "核对§3.2正确性、§3.3引用质量及图3、§6人工评价、附录E及F.2/F.3相关定义；不是全文阅读。",
+      "pending": [
+        "全文、作者系统实测及整套自动NLI未开展",
+        "模型额外定位输出仍需原文核对，不能自证真实"
+      ],
+      "updated_at": "2026-10-13T12:43:04.405493+08:00"
+    },
+    "Semantic Reader机制文档": {
+      "evidence_path": "基础/runs/reading/semantic-reader-evidence.json",
+      "completed_scope": "核对研究概述v2的Paper Cards、§2.2 CiteRead、§3.1 Scim、§5.1 Threddy及相关图注；仅与比较有关的机制，不登记全文完成。",
+      "pending": [
+        "系统实测、论文其余部分及独立原型论文全文未开展"
+      ],
+      "updated_at": "2026-10-13T12:44:09.881943+08:00"
+    },
+    "两个公开系统的文档比较": {
+      "evidence_path": "基础/runs/reading/systems-comparison.json",
+      "completed_scope": "按任务明确列出的ALCE与Semantic Reader比较具体机制；仅文献及官方文档比较，未亲自运行。",
+      "pending": [
+        "两系统实测和生产故障/延迟数据未核验；本轮不运行它们"
+      ],
+      "updated_at": "2026-10-13T12:44:13.024332+08:00"
+    },
+    "两步候选规则核查": {
+      "evidence_path": "基础/runs/reading/two-step-rule-check.json",
+      "completed_scope": "核对额外调用、选段、独立结构及40次主结果的边界；只给可审查设计，不声明实现或正式验收完成。",
+      "pending": [
+        "候选代码、独立编排与接口整合未实现",
+        "正式方案及记账格式未冻结",
+        "B其余材料仍缺，不能以两步设计替代完成"
+      ],
+      "updated_at": "2026-10-13T12:46:34.000183+08:00"
+    },
+    "两步候选设计": {
+      "evidence_path": "基础/runs/reading/two-step-candidate-design.json",
+      "completed_scope": "固定一个ID选择后读取原段落的候选，仅保存设计；未实现、未生成。",
+      "pending": [
+        "实现、输入契约测试、顺序/ID重映射变体及服务兼容容量核对均未执行",
+        "本轮不触碰生产student.py或现有配置"
+      ],
+      "updated_at": "2026-10-13T12:46:37.708453+08:00"
+    },
+    "两步最小开发实验计划": {
+      "evidence_path": "基础/runs/reading/two-step-dev-plan.json",
+      "completed_scope": "预先给出未来D01—D04 R0的一轮配对、评价、预算和停止规则；本轮没有执行。",
+      "pending": [
+        "用户下一轮是否授权实现和最多12次生成尚未确定；本轮授权调用为0",
+        "计划未冻结、未实施，不能声称候选合规交付或有效"
+      ],
+      "updated_at": "2026-10-13T12:46:40.532577+08:00"
+    }
+  }
+}

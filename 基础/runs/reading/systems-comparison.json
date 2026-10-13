@@ -1,0 +1,47 @@
+{
+  "part": "两个公开系统的文档比较",
+  "completed_scope": "按任务明确列出的ALCE与Semantic Reader比较具体机制；仅文献及官方文档比较，未亲自运行。",
+  "selection_basis": "进阶/04_阅读材料与项目背景.md：认识现有阅读与查证方法（选两项，基础已读可复用）同时列出两者；进阶/05固定栏目6要求两个相关系统比较。",
+  "systems": [
+    {
+      "name": "ALCE",
+      "kind": "研究基准与作者开源实现，不称商业产品",
+      "sources": [
+        "https://aclanthology.org/2023.emnlp-main.398.pdf",
+        "https://github.com/princeton-nlp/ALCE"
+      ],
+      "versions": "EMNLP 2023固定论文；作者README为本轮访问版本，未锁定仓库commit",
+      "user_task": "有资料依据的问答生成与引用评价。",
+      "evidence_organization": "作者README将检索、生成与评价分开，提供资料、问题和带编号引用的回答；论文§4展示全文、摘要/片段和交互查全文等不同路线。",
+      "location_and_support": "引用回到检索段落；不是PDF坐标定位产品。集合支持与单引文相关性分别判断。",
+      "quality": "正确性与引用质量分开；具体NLI和人工定义见alce-reading-evidence.json，不直接迁移自动评分。",
+      "cost_latency_failure": "作者README说明密集检索索引构建耗资源；全文读取、压缩和多轮交互预算不同。所查材料没有统一端到端延迟/SLA/工程重试规则，未核验。",
+      "transfer": "分离推理与评价，保留来源编号和完整段落；不照搬摘要替代原文、额外裁判模型或多次采样挑最佳。"
+    },
+    {
+      "name": "Semantic Reader",
+      "kind": "阅读系统、研究原型与官方开放平台，不能视作单一引用判分器",
+      "sources": [
+        "https://arxiv.org/html/2303.14334v2",
+        "https://openreader.semanticscholar.org/"
+      ],
+      "versions": "研究概述v2；官方平台按本轮访问日期，当前产品版本未核验",
+      "user_task": "科研文献阅读、发现与多文献整理。",
+      "evidence_organization": "阅读PDF时就地查看引文；剪辑保留来源并组织成线程。官方平台提供PDF处理与交互界面库。",
+      "location_and_support": "段落跳转、引用上下文、摘录回访；这些定位没有通用supported状态保证。",
+      "quality": "原型文献描述用户/实验室研究；本轮没有实测，不能与模型准确率直接比较。",
+      "cost_latency_failure": "平台未给出可用于本任务CPU的成本或端到端延迟。论文描述定位退回章节；工程故障重试、并发与SLA未核验。",
+      "transfer": "借鉴可回访来源与定位边界；不把高亮、可点击或论文关系当答案支持，也不引入题外资料。"
+    }
+  ],
+  "distinctions": [
+    "段落ID存在只是定位检查；集合支持需核对结论。",
+    "部分支持可能是多段组合必需，不以单段无法独立回答判无关；相关冗余不自动判错。",
+    "论文系统结果、文档功能说明与本项目实测分别标注。"
+  ],
+  "pending": [
+    "两系统实测和生产故障/延迟数据未核验；本轮不运行它们"
+  ],
+  "recorded_at": "2026-10-13T12:44:13.024332+08:00",
+  "model_calls_this_part": 0
+}

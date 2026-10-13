@@ -1,0 +1,114 @@
+{
+  "record_kind": "pre_call_paired_development_plan",
+  "recorded_at": "2026-10-12T18:49:19.781098+08:00",
+  "design_reference": "design.json",
+  "purpose": "Evaluate one fixed content-only lexical ordering on four paired development R0 inputs; not formal evaluation or significance testing.",
+  "prediction": "Sorting may help if matching places useful evidence earlier; it may not help or may hurt because related distractors can outrank necessary supplement evidence. No rule changes after outcomes.",
+  "known_before_calls": "Offline rankings and prior development results have already been seen; this is not blind selection or a prediction written before earlier experiments.",
+  "call_limit": 8,
+  "call_order": [
+    {
+      "index": 1,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "baseline"
+    },
+    {
+      "index": 2,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 3,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 4,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "baseline"
+    },
+    {
+      "index": 5,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "baseline"
+    },
+    {
+      "index": 6,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 7,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 8,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "baseline"
+    }
+  ],
+  "config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 256
+    },
+    "timeout_seconds": 180
+  },
+  "runtime": {
+    "model": "Qwen3-0.6B-Q8_0",
+    "llama_cpp": "b11429",
+    "context": 4096,
+    "thinking": "off",
+    "context_shift": "disabled",
+    "threads": 4,
+    "parallel": 1,
+    "batch_size": 128,
+    "ubatch_size": 64,
+    "gpu_layers": 0,
+    "warmup": false,
+    "cache_policy": "Erase slot cache before each call; use external slot-save-path only for cache management"
+  },
+  "source_hashes": {
+    "student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045"
+  },
+  "evaluation_rules": [
+    "Evaluate full answer/citations JSON schema separately from answer correctness.",
+    "Public dev answers used only after model response is saved; not passed to inference or ordering.",
+    "Check answer against public aliases and visible original evidence.",
+    "Check cited IDs against actual input; absent citations are absent, not silently repaired.",
+    "Check semantic sufficiency from quoted source sentences, not ID membership alone.",
+    "Record all wrong answers, missing citations and elapsed time; no answer-based retry."
+  ],
+  "reference_evaluation_logic": {
+    "numeric_and_choice": "Expected necessary evidence IDs must be present; compare original cited text to conclusion, record extras for manual review.",
+    "insufficient": "Require actual inspection sources such as noncollected hardware fields; an empty public evidence list does not justify fabricating or silently adding citations."
+  },
+  "stop_conditions": [
+    "Exactly eight planned calls if service works.",
+    "Any transport, HTTP, provider-JSON or service technical failure is saved and stops the sequence; no retry.",
+    "Malformed model answer or wrong answer is retained and does not trigger retry.",
+    "No ranking/prompt/model/parameter tuning during this fixed sequence.",
+    "No formal cases, download, report edits, staging, commit or push."
+  ],
+  "success_definition": "format complete AND answer correct AND citations exist in actual input AND cited text sufficiently supports answer.",
+  "reporting": "Summarize only four paired cases, including improvements, regressions and no changes; no statistical significance or formal-set claim."
+}

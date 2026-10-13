@@ -1,0 +1,30 @@
+{
+  "record_kind": "pre_call_capacity_validation_plan",
+  "recorded_at_utc": "2026-10-12T10:40:29.200079+00:00",
+  "purpose": "Verify one complete D04 R0 baseline input enters ctx4096 and returns an answer; not an improvement experiment.",
+  "expectation": "2190 input tokens plus 256 output budget need 2446, below actual ctx4096. Expect no context truncation; answer quality remains unverified.",
+  "stop_conditions": [
+    "At most one generation call, no retry even for wrong/incomplete output.",
+    "Keep model, original student prompt, passage order and original generation parameters.",
+    "Stop service after test; do not modify config examples, private config, documents or old records."
+  ],
+  "config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 256
+    },
+    "timeout_seconds": 180
+  },
+  "context": 4096,
+  "input_tokens": 2190,
+  "thinking": "off",
+  "context_shift": "disabled"
+}

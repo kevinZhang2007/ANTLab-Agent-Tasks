@@ -1,0 +1,18 @@
+{
+  "reviewed_at": "2026-10-12T22:54:05.299995+08:00",
+  "rule_source": "基础/01_考核题目.md 第二步、第四步；进阶/00_共同规则与接口.md 最小全栈闭环；基础/runs/prompts/qwen06_abc_r0/design-plan.json evaluation_rules",
+  "task_quotes": [
+    "引用列出支持这种判断的检查来源",
+    "引用ID是否来自实际输入、引用原文是否支持结论",
+    "不要把引用ID存在当成语义支持"
+  ],
+  "preexisting_strict_rule": "空引用或不相关引用不能算成功（ABC轮事前计划，沿用此前开发约定）",
+  "distinction": {
+    "id_exists": "每个引用ID是否属于本次实际输入；空列表不当作引用成功",
+    "necessary_coverage": "是否覆盖当前问题得出结论所需的全部证据；拒答引用对应范围的有效检查来源",
+    "evidence_supports_answer": "引用集合中的有效证据是否足够支持实际最终answer；不因额外无关段落否认已存在的支持子集",
+    "irrelevant_citations": "逐段列出不支持本次结论、范围不符的引用；单独计数"
+  },
+  "strict_complete_success": "格式完整且指定答法正确、非空ID均存在、必要证据足以支持answer、没有无关引用；这是事前开发选择指标，不声称任务原文规定了这一单一合成指标。",
+  "correction": "旧citation_support_sufficient混合了证据是否充分与无关引用；统一拆分，原评价与响应不覆盖。"
+}

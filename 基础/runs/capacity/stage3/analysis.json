@@ -1,0 +1,59 @@
+{
+  "record_kind": "capacity_analysis",
+  "counts_as_generation": false,
+  "recorded_at_utc": "2026-10-12T10:33:39.159100+00:00",
+  "source_commit": "58a8655a30c50ac565472081fab88fb70b2308f9",
+  "generated_calls_before_and_after": 10,
+  "server_launch_flags": "--ctx-size 2048 --parallel 1 --batch-size 128 --ubatch-size 64 --threads 4 --gpu-layers 0 --reasoning off --no-warmup",
+  "overflow_behavior": {
+    "evidence_type": "Same-version official source and installed --help, not tested with generation",
+    "context_shift_default": "disabled",
+    "prompt_at_or_above_context": "returns context size error for text generation; no automatic prompt shortening under this mode",
+    "generation_running_out_of_context": "stops with limit and truncated flag when context shift disabled",
+    "context_shift_if_enabled": "discards a portion of existing context tokens; not used for this check",
+    "source": "https://github.com/ggml-org/llama.cpp/blob/b11429/tools/server/server-context.cpp",
+    "source_lines": [
+      1855,
+      1856,
+      1857,
+      1858,
+      1859,
+      2882,
+      2892,
+      2902,
+      3124,
+      3125,
+      3126,
+      3127,
+      3128,
+      3129
+    ]
+  },
+  "measured_memory": {
+    "before_server_available_kib": 2076656,
+    "after_server_available_kib": 1357876,
+    "server_working_set_bytes": 943312896,
+    "measured_context": 2048,
+    "larger_context_started": false
+  },
+  "candidate_context": 4096,
+  "basis": {
+    "largest_development_input": 2190,
+    "plus_256_output": 2446,
+    "plus_1024_output": 3214,
+    "remaining_at_4096_with_1024": 882,
+    "scope": "Development-only observation; formal input lengths unknown because not read"
+  },
+  "memory_estimate": {
+    "kind": "estimate, not measured",
+    "assumed_k_and_v_type": "F16 runtime defaults",
+    "kv_bytes_per_token": 114688,
+    "kv_mib_at_2048": 224,
+    "kv_mib_at_4096": 448,
+    "kv_mib_at_8192": 896,
+    "kv_increment_mib_2048_to_4096": 224,
+    "rough_server_working_set_gib_at_4096": 1.0972785949707031,
+    "limitations": "Additional graph/buffer allocations, file paging and other programs can change memory; 4096 startup not validated"
+  },
+  "next_step": "Validate ctx4096 startup and actual memory without generation; consider explicit --no-context-shift in a later configuration change to avoid silent context loss; then freeze settings before experiments. No parameter change made in this capacity check."
+}

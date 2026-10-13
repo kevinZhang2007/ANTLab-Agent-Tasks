@@ -1,0 +1,95 @@
+{
+  "recorded_at": "2026-10-13T15:42:31.872546+08:00",
+  "title": "待本人确认：四项原文复核意见",
+  "kind": "post_evaluation_review_opinions",
+  "review_source": "聊天助手原文复核，尚待本人确认",
+  "personal_confirmed": false,
+  "independent_human_scoring": false,
+  "official_score": false,
+  "timing_note": "评测后另存意见，不追溯改写冻结规则，不覆盖旧评价、原始响应或旧澄清。",
+  "evaluation_reference": "基础/runs/formal_review/round1/effective-reviews.json",
+  "evaluation_sha256": "4dd26414acf270a70f0b6dc6a63579de257ce39866f4c27104fb31b1b23f43db",
+  "opinions": [
+    {
+      "case_id": "T05",
+      "scope": "当前可见资料中的校内TL46能耗问题",
+      "opinion": "接受P286497作为目标范围内的有效缺证检查来源。P452207更直接，但不要求固定引用。",
+      "limit": "只说明当前可见资料不能确定能耗，不推断现实中绝对没有能耗采集。",
+      "assessment": "保留improved与K的有效检查来源、引用支持及严格完整成功通过；不因此认可其他条件中的迁移或压力组引用。",
+      "affected_runs": [
+        {
+          "run_id": "604f9bd8-25df-4423-a0db-4466f6594114",
+          "condition": "K",
+          "variant": "baseline"
+        },
+        {
+          "run_id": "adc920d1-e809-444a-ba1e-b6da98222675",
+          "condition": "R0",
+          "variant": "improved"
+        }
+      ]
+    },
+    {
+      "case_id": "T06",
+      "condition": "K",
+      "variant": "baseline",
+      "opinion": "保留证据不足及其引用通过。实际输入缺技术失败分类定义，不能自行选统计口径。",
+      "assessment": {
+        "answer_correct": true,
+        "semantic_consistent": true,
+        "necessary_coverage": true,
+        "support_actual_answer": true,
+        "strict_complete_success": true
+      },
+      "limit": "已知分母与计数不等于已知技术失败分类；不借K不可见规则或通常术语选择口径。",
+      "run_id": "61a4df0e-4db5-4d4d-9abe-0eb8bc1ba434",
+      "record_path": "基础/runs/formal/round1/run-61a4df0e-4db5-4d4d-9abe-0eb8bc1ba434.json",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P873502\"]}"
+    },
+    {
+      "case_id": "T03",
+      "condition": "R2",
+      "variant": "baseline",
+      "opinion": "指定答法不合格、语义正确、必要证据覆盖与集合支持成立；无关引用另记，严格完整成功失败。",
+      "assessment": {
+        "answer_correct": false,
+        "semantic_consistent": true,
+        "necessary_coverage": true,
+        "support_actual_answer": true,
+        "irrelevant_ids": [
+          "P723425",
+          "P275307",
+          "P350359",
+          "P728510"
+        ],
+        "strict_complete_success": false
+      },
+      "limit": "不删除原answer中的单位，不修剪原引用后算成功；有效支持子集与夹带无关引用分别记录。",
+      "run_id": "82b6494c-dc32-4213-8006-0aeff8246df2",
+      "record_path": "基础/runs/formal/round1/run-82b6494c-dc32-4213-8006-0aeff8246df2.json",
+      "raw_content": "{\"answer\":\"2.6秒\",\"citations\":[\"P385105\",\"P362285\",\"P723425\",\"P275307\",\"P350359\",\"P728510\"]}"
+    },
+    {
+      "case_id": "T07",
+      "condition": "R0",
+      "variant": "improved",
+      "opinion": "指定答法不合格、语义正确；旧版引用不支持目标选择，严格完整成功失败。",
+      "assessment": {
+        "answer_correct": false,
+        "semantic_consistent": true,
+        "necessary_coverage": false,
+        "support_actual_answer": false,
+        "irrelevant_ids": [
+          "P244387"
+        ],
+        "strict_complete_success": false
+      },
+      "limit": "不剥离方案名称前缀或替换旧版引用来修正原响应。",
+      "run_id": "e8803d11-6051-468d-a8e1-8659e3439c8e",
+      "record_path": "基础/runs/formal/round1/run-e8803d11-6051-468d-a8e1-8659e3439c8e.json",
+      "raw_content": "{\"answer\":\"方案名称：丙\",\"citations\":[\"P244387\"]}"
+    }
+  ],
+  "new_generation_calls": 0,
+  "cumulative_generation_calls_unchanged": 124
+}

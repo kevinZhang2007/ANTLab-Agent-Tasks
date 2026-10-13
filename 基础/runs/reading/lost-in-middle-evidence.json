@@ -1,0 +1,52 @@
+{
+  "part": "主论文指定章节",
+  "completed_scope": "阅读并核对Lost in the Middle v3第2节（2.1—2.3）、第4节（4.1—4.3）、第5节及第7节结论；不登记全文或全部附录完成。",
+  "title": "Lost in the Middle: How Language Models Use Long Contexts",
+  "authors": [
+    "Nelson F. Liu",
+    "Kevin Lin",
+    "John Hewitt",
+    "Ashwin Paranjape",
+    "Michele Bevilacqua",
+    "Fabio Petroni",
+    "Percy Liang"
+  ],
+  "source": "https://arxiv.org/html/2307.03172v3",
+  "version": "arXiv:2307.03172v3，2023-11-20；本轮读的是v3，不冒充另行核对TACL排版版",
+  "task_classification": "基础指定必读",
+  "local_material_before_reading": "本地仅有检查点描述，未发现独立原文阅读证据；本轮直接核对论文原文HTML。",
+  "entries": [
+    {
+      "locator": "§2.1—2.3，HTML #S2；图2—5和表1相关正文",
+      "short_quote": "exactly one of the documents contains the answer to the question",
+      "supports": "单个含答案文档，操纵位置/文档数量，贪心解码；测试模型有位置敏感性。",
+      "impact": "R0/R1/R2配对核对顺序；K不作纯位置对照。",
+      "limits": "本题有跨段计算和规则组合，0.6B模型、中文资料及采样均不同；不能照搬U形或必然改善结论。"
+    },
+    {
+      "locator": "§4.1—4.3，HTML #S4",
+      "supports": "架构、训练长度、查询位置和指令微调的解释受到各自实验条件限制。",
+      "impact": "位置变化只能检验观察差异，不能仅凭答案变化证明机制。",
+      "limits": "这些是特定模型的有限检查，不是Qwen3机制证明。"
+    },
+    {
+      "locator": "§5，HTML #S5",
+      "supports": "检索召回与阅读答案质量可不同步；增资料存在取舍。",
+      "impact": "同时评价选段覆盖、回答与代价。",
+      "limits": "重排/缩减是后续方向，不是本题已验证收益。"
+    },
+    {
+      "locator": "§7，HTML #S7",
+      "supports": "总结受控位置与长度实验及使用上下文的边界。",
+      "impact": "区分容量够用和证据被正确利用。",
+      "limits": "不保证更长窗口或两步调用必然有效。"
+    }
+  ],
+  "reading_method": "指定章节正文及图表说明的文档阅读；未重跑作者代码，未声称逐图数值复算。",
+  "pending": [
+    "非指定全文和附录未完整阅读；本轮不扩展",
+    "本项目位置机制与两步方案效果尚未验证"
+  ],
+  "recorded_at": "2026-10-13T12:42:42.821285+08:00",
+  "model_calls_this_part": 0
+}

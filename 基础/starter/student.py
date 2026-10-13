@@ -1,5 +1,6 @@
 """组织模型输入；只使用当前问题和可见段落。"""
 import json
+import re
 
 def prepare_messages(question, passages):
     """返回 [{"role":"system|user", "content":"..."}, ...]。
@@ -27,7 +28,21 @@ citations只能使用本次提供的段落id，引用原文必须支持答案。
         {"role": "user", "content": content},
     ]
 
+def text_features(text):
+    text = text.casefold()
+    features = set(re.findall(r'[a-z0-9]+', text))
+    for run in re.findall(r'[一-鿿]+', text):
+        features.update(run[i:i + 2] for i in range(len(run) - 1))
+    return features
+
+def relevance_score(question, passage):
+    query = text_features(question)
+    if not query:
+        return 0.0
+    return len(query & text_features(passage['text'])) / len(query)
+
 def improve(question, passages):
-    """返回重新组织/选择的原段落列表，不能修改id/source/text或使用答案标签。
-    默认恒等映射仅用于联通，不算已完成改进。可自行扩展结构/调用，须披露与记录。"""
-    return passages
+    """按文字匹配覆盖度排序，保留全部原段落；分数不代表语义支持。"""
+    return sorted(passages, key=lambda p: (
+        -relevance_score(question, p), p['source'], p['text'],
+    ))

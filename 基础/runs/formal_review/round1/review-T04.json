@@ -1,0 +1,306 @@
+{
+  "case_id": "T04",
+  "items": [
+    {
+      "condition": "R0",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "完整输入按错误数≤3仅乙合格，流程乙正确且符合名称形式。",
+      "coverage_reason": "只引P758661候选数据，缺P660995资格及优先顺序。",
+      "support_reason": "召回数据本身不能决定为什么选乙，所引证据未给错误数门槛。",
+      "irrelevant_reason": "目标候选数据相关，但缺规则。",
+      "run_id": "308cc600-80fb-4216-b506-8489a6f576ca",
+      "record_path": "基础/runs/formal/round1/run-308cc600-80fb-4216-b506-8489a6f576ca.json",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P758661\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P758661"
+      ],
+      "actual_input_ids": [
+        "P194167",
+        "P758661",
+        "P660995",
+        "P455277",
+        "P208944",
+        "P191263",
+        "P688472"
+      ],
+      "elapsed_seconds": 14.846717400010675,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整输入按错误数≤3仅乙合格，流程乙正确且符合名称形式。",
+        "semantic_consistent": "完整输入按错误数≤3仅乙合格，流程乙正确且符合名称形式。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "只引P758661候选数据，缺P660995资格及优先顺序。",
+        "support_actual_answer": "召回数据本身不能决定为什么选乙，所引证据未给错误数门槛。",
+        "irrelevant_citations": "目标候选数据相关，但缺规则。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      }
+    },
+    {
+      "condition": "R1",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P208944"
+      ],
+      "reason": "答案流程乙与完整资料推导相符，但引用不是正确依据。",
+      "coverage_reason": "另一项目P208944不覆盖NZ95数据和规则。",
+      "support_reason": "岫光平均耗时段不能支持南枝核验流程选择，即使同名流程乙。",
+      "irrelevant_reason": "项目、批次及指标范围冲突。",
+      "run_id": "18e08618-fe14-47ba-be5d-1221642e94da",
+      "record_path": "基础/runs/formal/round1/run-18e08618-fe14-47ba-be5d-1221642e94da.json",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P208944\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P208944"
+      ],
+      "actual_input_ids": [
+        "P758661",
+        "P208944",
+        "P455277",
+        "P688472",
+        "P191263",
+        "P660995",
+        "P194167"
+      ],
+      "elapsed_seconds": 12.493616000050679,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P208944",
+          "source": "模拟记录/T04/页5",
+          "quote": "岫光项目R9版本在2026-05登记同名指标和批次XQ57，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "答案流程乙与完整资料推导相符，但引用不是正确依据。",
+        "semantic_consistent": "答案流程乙与完整资料推导相符，但引用不是正确依据。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "另一项目P208944不覆盖NZ95数据和规则。",
+        "support_actual_answer": "岫光平均耗时段不能支持南枝核验流程选择，即使同名流程乙。",
+        "irrelevant_citations": "项目、批次及指标范围冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      }
+    },
+    {
+      "condition": "R2",
+      "variant": "baseline",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P208944"
+      ],
+      "reason": "完整资料推导流程乙，答案对但依据错误。",
+      "coverage_reason": "未引目标NZ95候选与选择规则。",
+      "support_reason": "P208944的另一项目流程乙不是本题资格判断。",
+      "irrelevant_reason": "同名不同项目，是无关且范围冲突引用。",
+      "run_id": "9cc1d154-cf90-4a90-abc0-47044c5292fb",
+      "record_path": "基础/runs/formal/round1/run-9cc1d154-cf90-4a90-abc0-47044c5292fb.json",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P208944\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P208944"
+      ],
+      "actual_input_ids": [
+        "P194167",
+        "P660995",
+        "P208944",
+        "P758661",
+        "P688472",
+        "P455277",
+        "P191263"
+      ],
+      "elapsed_seconds": 14.86968539992813,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P208944",
+          "source": "模拟记录/T04/页5",
+          "quote": "岫光项目R9版本在2026-05登记同名指标和批次XQ57，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整资料推导流程乙，答案对但依据错误。",
+        "semantic_consistent": "完整资料推导流程乙，答案对但依据错误。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "未引目标NZ95候选与选择规则。",
+        "support_actual_answer": "P208944的另一项目流程乙不是本题资格判断。",
+        "irrelevant_citations": "同名不同项目，是无关且范围冲突引用。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      }
+    },
+    {
+      "condition": "R0",
+      "variant": "improved",
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "完整资料可推出流程乙，指定名称正确。",
+      "coverage_reason": "P758661给数据，P660995规则没有引用。",
+      "support_reason": "缺错误证据≤3及最大化召回规则，单数据段不能证明选乙。",
+      "irrelevant_reason": "相关数据，没有无关引用，但不充分。",
+      "run_id": "1c042090-9ee4-4a47-912e-9290ad1da105",
+      "record_path": "基础/runs/formal/round1/run-1c042090-9ee4-4a47-912e-9290ad1da105.json",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P758661\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P758661"
+      ],
+      "actual_input_ids": [
+        "P758661",
+        "P455277",
+        "P208944",
+        "P194167",
+        "P688472",
+        "P191263",
+        "P660995"
+      ],
+      "elapsed_seconds": 13.016188399982639,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "完整资料可推出流程乙，指定名称正确。",
+        "semantic_consistent": "完整资料可推出流程乙，指定名称正确。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P758661给数据，P660995规则没有引用。",
+        "support_actual_answer": "缺错误证据≤3及最大化召回规则，单数据段不能证明选乙。",
+        "irrelevant_citations": "相关数据，没有无关引用，但不充分。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      }
+    },
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "answer_correct": "ambiguous",
+      "semantic_consistent": "ambiguous",
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "实际K只有候选数据和迁移记录，没有正式选择规则。乙与全文推导名称一致，但不能用K不可见规则确认正确性，保留ambiguous。",
+      "coverage_reason": "K排除了P660995，引用数据不能覆盖题目指定选择规则。",
+      "support_reason": "当前可见数据未给资格门槛或优化次序，不足支持按正式规则选乙。",
+      "irrelevant_reason": "所引P758661为正确范围数据，不因缺规则算无关。",
+      "run_id": "828f35e6-2295-4c3d-b03e-33025c4d619a",
+      "record_path": "基础/runs/formal/round1/run-828f35e6-2295-4c3d-b03e-33025c4d619a.json",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P758661\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P758661"
+      ],
+      "actual_input_ids": [
+        "P758661",
+        "P194167"
+      ],
+      "elapsed_seconds": 5.327344699995592,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+          "visible_in_this_run": false
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "实际K只有候选数据和迁移记录，没有正式选择规则。乙与全文推导名称一致，但不能用K不可见规则确认正确性，保留ambiguous。",
+        "semantic_consistent": "实际K只有候选数据和迁移记录，没有正式选择规则。乙与全文推导名称一致，但不能用K不可见规则确认正确性，保留ambiguous。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "K排除了P660995，引用数据不能覆盖题目指定选择规则。",
+        "support_actual_answer": "当前可见数据未给资格门槛或优化次序，不足支持按正式规则选乙。",
+        "irrelevant_citations": "所引P758661为正确范围数据，不因缺规则算无关。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      }
+    }
+  ],
+  "confirmation_needed": [
+    "K的答案名称与全文推导相同，但当前输入缺规则，答案及语义暂标ambiguous，支持与覆盖明确不足；请确认这一区分。"
+  ],
+  "reviewed_at": "2026-10-13T13:35:51.067143+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。"
+}

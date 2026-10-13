@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-10-12T22:04:16.681328+08:00",
+  "classification": "pre_generation_validation_logic_error",
+  "generation_calls": 0,
+  "cause": "检查脚本将/props中新建默认task_params的max_tokens=-1与单次请求256直接比较，口径错误；/props只将params.sampling复制到临时tparams，不能据此认定单次请求预算失效。",
+  "official_source": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049/tools/server/server-context.cpp",
+  "whole_source_sha256": "7309e8b68c686ba1cf8f3b907d9b79587e2b714e58e37b04b259a781d6469930",
+  "source_excerpts": "official-output-budget-excerpt.txt",
+  "actual_checks": {
+    "temperature": true,
+    "top_p": true,
+    "top_k": true,
+    "min_p": true,
+    "presence_penalty": true,
+    "seed": true,
+    "max_tokens": false,
+    "repeat_penalty": true
+  },
+  "sampling_fields_match": true,
+  "request_budget_256_in_config": true,
+  "request_budget_not_tested_this_round": true,
+  "script_not_repaired_or_rerun": true,
+  "service_stopped": true,
+  "recommendation": "保留旧配置；没有新质量数据，不宣称两套质量相同，也不凭这次检查错误否定候选采样。"
+}

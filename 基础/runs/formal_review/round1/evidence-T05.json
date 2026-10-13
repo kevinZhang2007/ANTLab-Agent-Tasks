@@ -1,0 +1,60 @@
+{
+  "case_id": "T05",
+  "question_scope": "听澜R4，2026-06校内组TL46平均每请求焦耳能耗。没有只填数值的额外限制。",
+  "scope": {
+    "project": "听澜",
+    "version": "R4",
+    "date": "2026-06",
+    "batch": "TL46",
+    "metric": "焦耳/请求，不能用耗时或计费单位替代能耗"
+  },
+  "required_evidence": [
+    {
+      "id": "P286497",
+      "quote": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。",
+      "role": "对应范围及客户端采集边界"
+    },
+    {
+      "id": "P452207",
+      "quote": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。",
+      "role": "明确缺失能耗数据的检查来源"
+    }
+  ],
+  "derivation": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。",
+  "derived_answer": "证据不足",
+  "answer_form": "简短证据不足说明；不限定固定拒答短语",
+  "acceptable_inspection_sources": [
+    "P286497",
+    "P452207"
+  ],
+  "excluded_evidence": [
+    {
+      "id": "P753851",
+      "reason": "岫光项目"
+    },
+    {
+      "id": "P484198",
+      "reason": "上月探索"
+    },
+    {
+      "id": "P371242",
+      "reason": "压力组不提供校内能耗"
+    },
+    {
+      "id": "P876164",
+      "reason": "R3旧版本"
+    },
+    {
+      "id": "P925403",
+      "reason": "迁移XQ58不提供校内能耗"
+    }
+  ],
+  "ambiguities": [],
+  "limits": "引用对应范围的采集边界即可是有效检查来源，不机械要求两个固定ID都引用；不能从32次请求或客户端时长推测功率。",
+  "reviewed_at": "2026-10-13T13:36:14.145753+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+  "source": "基础/data/cases.json",
+  "source_sha256": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+  "derivation_kind": "评测后原文推导，非官方标准答案",
+  "model_answers_read_before_saving": false
+}

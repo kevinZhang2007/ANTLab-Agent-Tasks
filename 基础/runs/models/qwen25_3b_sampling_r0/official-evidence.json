@@ -1,0 +1,97 @@
+{
+  "recorded_at": "2026-10-12T21:58:44.321109+08:00",
+  "official_model_card": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/raw/main/README.md",
+  "official_generation_config": "https://huggingface.co/Qwen/Qwen2.5-3B-Instruct/blob/3ca5f5bff0f44b2b436a9aba99b900ab157c9a27/generation_config.json",
+  "values_record_note": "generation_config值从官方固定版本页面核对后保存，不声称是原始字节下载。",
+  "model_card_parameter_advice": "快速入门未另外指定这些采样值，没有本任务最优建议。",
+  "generation_config_presence_penalty": "absent; not an explicit recommendation of zero",
+  "old_service_defaults": {
+    "temperature": 0.800000011920929,
+    "top_p": 0.949999988079071,
+    "top_k": 40,
+    "presence_penalty": 0.0,
+    "repeat_penalty": 1.0,
+    "repeat_last_n": 64
+  },
+  "old_request": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 1.5,
+    "seed": 42,
+    "max_tokens": 256,
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "answer": {
+              "type": "string"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "answer",
+            "citations"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "candidate": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 0.0,
+    "seed": 42,
+    "max_tokens": 256,
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "answer": {
+              "type": "string"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "answer",
+            "citations"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "repeat_penalty": 1.05
+  },
+  "candidate_rationale": "温度top_p/top_k沿用模型自带值；取消从Qwen3沿用的强presence惩罚，回到服务中性默认0；按模型自带repetition_penalty采用repeat_penalty1.05。不是两个惩罚等价替换，不保证任务改善。",
+  "backend_difference": "llama默认重复惩罚窗口64保持不变，因此不是完全复现Transformers的全历史惩罚。",
+  "source_excerpts": [
+    {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049/common/common.h",
+      "whole_source_sha256": "17645669982bde37d4ce632c7e600c6957e214e1517ed26193253907573f6681",
+      "excerpt": "official-common.h.txt"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049/tools/server/server-task.cpp",
+      "whole_source_sha256": "aa752f0ba1ce4be15c65dbce43b769fdeeb5b0f72286005ef40028eea1f56e95",
+      "excerpt": "official-server-task.cpp.txt"
+    }
+  ]
+}

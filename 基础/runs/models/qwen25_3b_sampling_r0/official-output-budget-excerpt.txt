@@ -1,0 +1,29 @@
+1946:         } else {
+1947:             slot.smpl.reset();
+1948:         }
+1949: 
+1950:         // the per-request limit takes priority over the global one
+1951:         slot.n_predict_max = task.params.n_predict != -1 ? task.params.n_predict : params_base.n_predict;
+1952: 
+1953:         slot.task = std::make_unique<const server_task>(std::move(task));
+1954: 
+1955:         slot.state = slot.task->is_child()
+4955: static json get_res_props(const server_context_meta & meta, const common_params & params, bool is_sleeping) {
+4956:     // note: do NOT use ctx_server here, otherwise it's not possible to use this during sleep
+4957: 
+4958:     task_params tparams;
+4959:     tparams.sampling = params.sampling;
+4960:     json default_generation_settings_for_props = json {
+4961:         { "params", tparams.to_json(true) },
+4962:         { "n_ctx",  meta.slot_n_ctx },
+4963:     };
+4964: 
+4965:     std::string tmpl_default = common_chat_templates_source(meta.chat_params.tmpls.get(), "");
+4966:     std::string tmpl_tools   = common_chat_templates_source(meta.chat_params.tmpls.get(), "tool_use");
+4967: 
+4968:     json props = {
+4969:         { "default_generation_settings", default_generation_settings_for_props },
+4970:         { "total_slots",                 params.n_parallel },
+4971:         { "model_alias",                 meta.model_name },
+4972:         { "model_ftype",                 meta.model_ftype },
+4973:         { "model_path",                  meta.model_path },

@@ -1,0 +1,132 @@
+[
+  {
+    "round": "容量检查",
+    "plans": [
+      "基础/runs/capacity/stage3/analysis.json"
+    ],
+    "results": [
+      "基础/runs/capacity/stage3/summary.csv",
+      "基础/runs/capacity/stage3/inputs.json"
+    ],
+    "selection": []
+  },
+  {
+    "round": "4096真实容量验证",
+    "plans": [
+      "基础/runs/capacity/context4096/plan.json"
+    ],
+    "results": [
+      "基础/runs/capacity/context4096/startup.json",
+      "基础/runs/capacity/context4096/run-03acba93-e483-405c-9e85-627b58f6057e.json"
+    ],
+    "selection": []
+  },
+  {
+    "round": "第一版排序",
+    "plans": [
+      "基础/runs/improve/dev_r0/design.json",
+      "基础/runs/improve/dev_r0/pair-plan.json"
+    ],
+    "results": [
+      "基础/runs/improve/dev_r0/pair-summary.json",
+      "基础/runs/improve/dev_r0/semantic-review.json"
+    ],
+    "selection": [
+      "基础/runs/improve/dev_r0/../linked_r0/selection.json"
+    ]
+  },
+  {
+    "round": "关联排序",
+    "plans": [
+      "基础/runs/improve/linked_r0/design.json",
+      "基础/runs/improve/linked_r0/pair-plan.json"
+    ],
+    "results": [
+      "基础/runs/improve/linked_r0/pair-summary.json",
+      "基础/runs/improve/linked_r0/semantic-review.json"
+    ],
+    "selection": [
+      "基础/runs/improve/linked_r0/selection.json"
+    ]
+  },
+  {
+    "round": "Schema验证",
+    "plans": [
+      "基础/runs/format/schema_r0/plan.json"
+    ],
+    "results": [
+      "基础/runs/format/schema_r0/summary.json",
+      "基础/runs/format/schema_r0/semantic-review.json"
+    ],
+    "selection": []
+  },
+  {
+    "round": "Qwen2.5原采样",
+    "plans": [
+      "基础/runs/models/qwen25_3b_r0/plan.json"
+    ],
+    "results": [
+      "基础/runs/models/qwen25_3b_r0/pair-summary.json",
+      "基础/runs/models/qwen25_3b_r0/semantic-review.json",
+      "基础/runs/models/qwen25_3b_r0/historical-comparison.json"
+    ],
+    "selection": []
+  },
+  {
+    "round": "Qwen2.5候选采样",
+    "plans": [
+      "基础/runs/models/qwen25_3b_sampling_r0/design-plan.json",
+      "基础/runs/models/qwen25_3b_sampling_r0/after_budget_check_verified/execution-plan.json"
+    ],
+    "results": [
+      "基础/runs/models/qwen25_3b_sampling_r0/after_budget_check_verified/summary.json",
+      "基础/runs/models/qwen25_3b_sampling_r0/after_budget_check_verified/old-new-comparison.json",
+      "基础/runs/models/qwen25_3b_sampling_r0/failure-analysis.json",
+      "基础/runs/models/qwen25_3b_sampling_r0/repair-record.json"
+    ],
+    "selection": [
+      "基础/runs/models/qwen25_3b_sampling_r0/after_budget_check_verified/summary.json"
+    ]
+  },
+  {
+    "round": "原提示词及ABC",
+    "plans": [
+      "基础/runs/prompts/qwen06_abc_r0/design-plan.json",
+      "基础/runs/prompts/qwen06_abc_r0/execution-plan.json"
+    ],
+    "results": [
+      "基础/runs/prompts/qwen06_abc_r0/summary.json",
+      "基础/runs/prompts/qwen06_abc_r0/semantic-review.json"
+    ],
+    "selection": [
+      "基础/runs/prompts/qwen06_abc_r0/summary.json"
+    ]
+  },
+  {
+    "round": "短提示词两轮",
+    "plans": [
+      "基础/runs/prompts/qwen06_short_budget_r0/design-plan.json",
+      "基础/runs/prompts/qwen06_short_budget_r0/round1/execution-plan.json",
+      "基础/runs/prompts/qwen06_short_budget_r0/round2/execution-plan.json"
+    ],
+    "results": [
+      "基础/runs/prompts/qwen06_short_budget_r0/summary.json",
+      "基础/runs/prompts/qwen06_short_budget_r0/semantic-review.json"
+    ],
+    "selection": [
+      "基础/runs/prompts/qwen06_short_budget_r0/summary.json"
+    ]
+  },
+  {
+    "round": "统一离线复核",
+    "plans": [
+      "基础/runs/review/stage3/citation-rules.json"
+    ],
+    "results": [
+      "基础/runs/review/stage3/unified-citation-review.json",
+      "基础/runs/review/stage3/affected-records.json",
+      "基础/runs/review/stage3/generation-count.json"
+    ],
+    "selection": []
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-10-13T13:41:11.2579630+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+  "reason": "汇总前统一核查K只依实际可见资料：数值未知不能用全文推导替K强行判错；旧逐题评价保留。",
+  "adjustments": [
+    {
+      "case_id": "T03",
+      "condition": "K",
+      "variant": "baseline",
+      "run_id": "2df3c9f4-f1c6-48b4-9fdc-ec3672d787f6",
+      "old": {
+        "answer_correct": false,
+        "semantic_consistent": false
+      },
+      "new": {
+        "answer_correct": "ambiguous",
+        "semantic_consistent": "ambiguous"
+      },
+      "reason": "K缺WS84候选中位数，不能凭不可见的6.8和全文答案2.6确定0.5的事实正确性；暂标ambiguous。0.5没有当前证据支持、混入迁移引用且必要覆盖不足仍明确失败，不计完整成功。"
+    }
+  ],
+  "evidence_clarifications": [
+    {
+      "case_id": "T01",
+      "affected_runs": "该题五条记录",
+      "issue": "S24未明确逐字写出不存在未关闭定位问题。",
+      "basis": "P555495只写S24完成三项，另写S25有三项未关闭问题；P761989还要求不存在未关闭定位问题。",
+      "conclusion": "原先推导S24是按候选枚举对比的合理读法，但严格字面下无未关闭问题条件未显式陈述，保留待本人确认；不能把未列问题当作已证明不存在。",
+      "impact": "五条实际回答均是段落ID、另一项目S31或迁移S19，均不由目标交付证据推出，现有失败标签和严格完整结果不变；不声称S24是官方唯一答案。"
+    }
+  ],
+  "K_label_policy": "当具体答案无法由K确认且不存在明确范围反证时，答案与语义保留ambiguous；引用不足仍可明确判false。引用明确来自不同项目/批次/版本时，范围错误另列，不用全文隐藏数值补证。"
+}

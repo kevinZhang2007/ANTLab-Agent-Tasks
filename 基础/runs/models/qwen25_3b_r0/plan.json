@@ -1,0 +1,113 @@
+{
+  "source_hashes": {
+    "student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045"
+  },
+  "config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen2.5-3B-Instruct-Q4_K_M",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 256,
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "answer",
+              "citations"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "timeout_seconds": 180
+  },
+  "call_order": [
+    {
+      "index": 1,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "baseline"
+    },
+    {
+      "index": 2,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 3,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 4,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "baseline"
+    },
+    {
+      "index": 5,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "baseline"
+    },
+    {
+      "index": 6,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 7,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 8,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "baseline"
+    }
+  ],
+  "recorded_at": "2026-10-12T20:26:47.922193+08:00",
+  "purpose": "固定配置的四组开发题配对，不预先认定新模型更好",
+  "prediction": "模型和量化方式都改变；可能改善也可能不改善，不能把差异仅归于参数量",
+  "evaluation_rules": [
+    "HTTP、完整JSON、答案正确、引用ID存在、原文支持分开检查",
+    "空引用不算成功；不补字段、引用或答案",
+    "公开开发答案只在原响应落盘后评价",
+    "人工语义复核另存，不覆盖自动判断"
+  ],
+  "stop_conditions": [
+    "固定8次，不因错误重试",
+    "技术错误、内存不足、模板或容量检查失败即停止，不补跑",
+    "不调参、不跑正式题、完成后停止服务"
+  ],
+  "source_validation": "source-validation.json",
+  "capacity_reference": "template-capacity.json",
+  "model_quantization": "Qwen2.5-3B-Instruct Q4_K_M"
+}

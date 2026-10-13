@@ -1,0 +1,163 @@
+{
+  "source_hashes": {
+    "student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045"
+  },
+  "config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 256,
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "answer",
+              "citations"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "timeout_seconds": 180
+  },
+  "call_order": [
+    {
+      "index": 1,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "original"
+    },
+    {
+      "index": 2,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "A"
+    },
+    {
+      "index": 3,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "B"
+    },
+    {
+      "index": 4,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "C"
+    },
+    {
+      "index": 5,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "A"
+    },
+    {
+      "index": 6,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "B"
+    },
+    {
+      "index": 7,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "C"
+    },
+    {
+      "index": 8,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "original"
+    },
+    {
+      "index": 9,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "B"
+    },
+    {
+      "index": 10,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "C"
+    },
+    {
+      "index": 11,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "original"
+    },
+    {
+      "index": 12,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "A"
+    },
+    {
+      "index": 13,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "C"
+    },
+    {
+      "index": 14,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "original"
+    },
+    {
+      "index": 15,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "A"
+    },
+    {
+      "index": 16,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "B"
+    }
+  ],
+  "recorded_at": "2026-10-12T22:34:20.308489+08:00",
+  "purpose": "开发错误后提出的三个固定system后缀与原提示词比较；不是盲测",
+  "design_plan": "design-plan.json",
+  "selection_rule": "先比较四题完整成功数，再比较答案正确数；两项相同保留原提示词；候选之间相同选新增文字更短者。单次耗时不作为取舍依据。",
+  "evaluation_rules": [
+    "HTTP、JSON完整、答案正确、引用ID存在、原文语义支持分开判断",
+    "D02语义一致与指定证据不足答法分开",
+    "空引用或不相关引用不能算成功",
+    "公开开发答案只在原始响应落盘后评价，不加入输入；引用不足不补齐"
+  ],
+  "stop_conditions": [
+    "固定最多16次，不因回答错误重试",
+    "技术错误、内存或模板容量检查失败保存后停止，报告实际完成数",
+    "不叠加候选、不调参、不添加候选或调用",
+    "完成后停止服务"
+  ],
+  "source_validation": "source-validation.json",
+  "capacity_reference": "template-capacity.json",
+  "model_quantization": "Qwen3-0.6B Q8_0"
+}

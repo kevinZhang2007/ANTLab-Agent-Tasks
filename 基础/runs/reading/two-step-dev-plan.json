@@ -1,0 +1,87 @@
+{
+  "part": "两步最小开发实验计划",
+  "completed_scope": "预先给出未来D01—D04 R0的一轮配对、评价、预算和停止规则；本轮没有执行。",
+  "scope": "只用D01—D04开发题R0；不读取正式题正文。不是随机重复评测，不沿用旧回答挑最好。",
+  "hypothesis": "先定位并核验必要段落，再读取完整原段落，可能减少混用范围和漏引必要证据，使严格完整成功数增加。",
+  "competing_explanation": "0.6B可能主要受计算或指令遵循限制；定位会漏证据，第二步仍答错；任何变化也可能来自减少资料及额外调用/预算。",
+  "prediction_and_refutation": "尚未生成：若定位覆盖提升却最终完整成功不增，定位不是当前充分修复；若漏选导致退步，削弱候选；不预写预期分数。",
+  "baseline": "现有原system+第一版improve后的全部R0段落，一次回答调用；与候选第一步相同的完整资料顺序。",
+  "candidate": "two-step-candidate-design.json中的单一ID选择→原段落回答，不迭代提示或参数。",
+  "fixed": {
+    "model": "Qwen3-0.6B-Q8_0",
+    "weight_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "llama_cpp": "b11429/d81235049",
+    "context": 4096,
+    "parallel": 1,
+    "device": "CPU",
+    "threads": 4,
+    "thinking": false,
+    "context_shift": false,
+    "warmup": false,
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 1.5,
+    "repeat_penalty": 1.0,
+    "seed": 42,
+    "max_tokens_per_call": 256,
+    "answer_schema_reference": "基础/runs/prompts/qwen06_abc_r0/config.experiment.json",
+    "selection_schema_reference": "基础/runs/reading/two-step-candidate-design.json#stage1"
+  },
+  "changed_factors": [
+    "调用次数1→2",
+    "定位专用提示词与Schema新增（最终回答设置不变）",
+    "第二步资料选择与数量可能减少"
+  ],
+  "budgets": {
+    "baseline": "4次生成，最大输出4*256=1024 tokens",
+    "candidate": "每题最多2次，共最多8次，最大输出8*256=2048 tokens",
+    "total_generation_cap": 12,
+    "total_output_cap": 3072,
+    "invalid_selection_skip_second_step": "实际调用可能少于12；不补跑。",
+    "additional_judge_or_retry_calls": 0
+  },
+  "execution_order": [
+    "D01原方案",
+    "D01定位",
+    "D01候选回答",
+    "D02定位",
+    "D02候选回答",
+    "D02原方案",
+    "D03原方案",
+    "D03定位",
+    "D03候选回答",
+    "D04定位",
+    "D04候选回答",
+    "D04原方案"
+  ],
+  "preflight": "实现后仅用无生成模板/分词接口检查完整第一步和原方案输入+256预算；最终第二步用实际选择再检查。核对实际HTTP max_tokens，不比较props默认预算；超限、服务或兼容失败立即停止，不删段或换设置混跑。",
+  "metrics": [
+    "最终answer/citations JSON合法完整，定位格式另列",
+    "答案按开发参考与原文评价，D02语义一致/指定答法分别记录",
+    "引用ID在第二步实际输入中；定位ID在第一步输入中",
+    "必要覆盖对原始R0任务所需证据判断，定位和最终引用分别记录",
+    "引用集合支持实际answer，单条充分/部分/不支持另列；相关冗余不自动算无关",
+    "无关或错误范围引用单列；严格完整成功要求答案/格式/有效支持及无无关引用，候选另要求合法定位输出",
+    "首次技术失败、模型格式错和无答案保留；没有填补、改写或模型裁判调用"
+  ],
+  "evaluation_scope": "公开开发答案只在原响应保存后用于评价，不进入选段或生成。正式评测没有标准答案文件，需按原文人工核查；不硬编码ID白名单作为通用支持判定。",
+  "time_and_cost": "基线和候选均从该逻辑任务首次模型请求前到最终响应读取和本地核验结束计端到端时间；候选包含两次请求及本地验证。另列每步provider完整非流式耗时、输出用量和选段数量；不推断服务端prefill/decode或稳态性能。",
+  "attempts_denominator_stop": {
+    "first_attempt": "每题每方案仅第一次，模型错误不重试；无技术失败时4组配对，各方案分母4。",
+    "invalid_selection": "候选该题计失败，不调用第二步、不补答案，继续剩余预定任务。",
+    "technical_failure": "立即保存、停止后续生成，未执行题另列；不静默从已尝试分母去除失败；4组未全部完成不作完整取舍。",
+    "retry": "本轮自动重试0；未来如另获授权，关联原run并另列，不替换主结果。",
+    "stop": "最多12次、固定候选；不根据结果改规则或追加模型。"
+  },
+  "selection": "四组全部完成后，先比严格完整成功数，再比答案正确数。只有候选按此优先序严格优于原方案才考虑采用；相同保留原方案，退步放弃。代价明确披露，不能把单次耗时小差异当质量提升；接受额外成本需另作决定。",
+  "offline_controls_before_generation": "设计为自造样例检查ID重复/不存在/空选择、原文不变及输入未修改；顺序打乱和ID重映射保持内容对应选择核验。尚未实施。",
+  "formal_accounting_reference": "基础/runs/reading/two-step-rule-check.json#proposed_formal_accounting",
+  "pending": [
+    "用户下一轮是否授权实现和最多12次生成尚未确定；本轮授权调用为0",
+    "计划未冻结、未实施，不能声称候选合规交付或有效"
+  ],
+  "recorded_at": "2026-10-13T12:46:40.532577+08:00",
+  "model_calls_this_part": 0
+}

@@ -1,0 +1,1497 @@
+{
+  "frozen_at": "2026-10-13T13:19:11.920418+08:00",
+  "frozen": true,
+  "round": "first_formal_round",
+  "preparation_reference": "基础/runs/formal_preparation/20261013-131201",
+  "research_question": {
+    "recorded_at": "2026-10-13T13:19:07.701440+08:00",
+    "primary_question": "同一资料集合的顺序变化是否改变回答与引用表现；第一版文字排序是否改善R0结果。",
+    "competing_explanation": "变化可能来自模型对范围、计算或证据组合的错误，不能仅凭输出变化认定位置是唯一原因。",
+    "K_limit": "K同时改变资料选择和数量，单独分析，不当纯位置效应。",
+    "design_timing": "这些命题在查看开发结果后制定，不声称是开发实验前预测；尚未查看本轮正式生成结果。",
+    "comparison_unit": "8道题的配对观察，不把40次请求视作40道独立题。",
+    "quality_review": "本轮不核验答案正确、必要覆盖、支持、无关引用；下一轮依据实际原文逐题复核。"
+  },
+  "code_hashes": {
+    "基础/starter/student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "基础/starter/provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "基础/starter/runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045",
+    "基础/starter/server.py": "fd2174af5fe875ff37b24dba92f298b5602bfdef3859b4b584c2280fa14911d8",
+    "基础/starter/index.html": "7b702ecac7b5dfd8ba7c437697cae3abe50030e33565e0f535177f533342ca45",
+    "基础/tests/check_student.py": "c13c60afdc456c761f2a4883ad834b102e9d655e4bb041fd8aa60cb2d7a431c1",
+    "基础/tests/check_improve.py": "fb3f7a27ca9c0e869c675f006e5a684b536f2d4a72392a25fdaeb24294422a37",
+    "基础/tests/run_improve_pairs.py": "45ae9fa277c3f59d047c8a94f3b2222a81e8be904e5b45819f992245daf37d16",
+    "基础/tests/run_schema_check.py": "dcc2e315ea44fd883f428927e03beab082ecb503675b5ba502ecebb2212fb174",
+    "基础/tests/prepare_formal_capacity.py": "f40ec21db12cf53c42e2d3ec393314d8270bc778c049eb3cac0bfc6938cc95d6",
+    "基础/tests/run_formal_round1.py": "df007e0331ca4a69d62983280824abf65c1ca2e45d84fb00acb280bff319c001"
+  },
+  "data_hashes": {
+    "基础/data/cases.json": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "基础/data/manifest.json": "5ca24620a158ebb3429b6255b3e91f9fc26b749f12e41603245585ed32df8fb8"
+  },
+  "dataset_version": "basic-context-v1.2",
+  "model": {
+    "repository": "Qwen/Qwen3-0.6B-GGUF",
+    "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+    "file": "Qwen3-0.6B-Q8_0.gguf",
+    "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "bytes": 639446688,
+    "actual_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "actual_bytes": 639446688,
+    "external_path": "%LOCALAPPDATA%/ANTLabLocalModel/models/Qwen3-0.6B-Q8_0.gguf"
+  },
+  "llama_cpp": {
+    "build": "b11429",
+    "commit": "d81235049",
+    "version_output": "version: 0.6.0-dev (build 11429, commit d81235049)\nbuilt with Clang 20.1.8 for Windows x86_64\n",
+    "executable_sha256": "7e236243c9b670c6a49410c03186fd575c57a0efe3fd8a21d8727503d571d5b6"
+  },
+  "complete_request_config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 256,
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "answer",
+              "citations"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "timeout_seconds": 180
+  },
+  "service_arguments": [
+    "%LOCALAPPDATA%/ANTLabLocalModel\\llama-b11429\\llama-server.exe",
+    "-m",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\models\\Qwen3-0.6B-Q8_0.gguf",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "--alias",
+    "Qwen3-0.6B-Q8_0",
+    "--ctx-size",
+    "4096",
+    "--parallel",
+    "1",
+    "--batch-size",
+    "128",
+    "--ubatch-size",
+    "64",
+    "--threads",
+    "4",
+    "--gpu-layers",
+    "0",
+    "--no-context-shift",
+    "--no-warmup",
+    "--temp",
+    "0.7",
+    "--top-p",
+    "0.8",
+    "--top-k",
+    "20",
+    "--min-p",
+    "0",
+    "--presence-penalty",
+    "1.5",
+    "--repeat-penalty",
+    "1.0",
+    "--reasoning",
+    "off",
+    "--seed",
+    "42",
+    "--predict",
+    "256",
+    "--slot-save-path",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\diagnostic-cache"
+  ],
+  "service_controls": {
+    "context": 4096,
+    "slots": 1,
+    "cpu_threads": 4,
+    "gpu_layers": 0,
+    "reasoning": "off",
+    "context_shift": false,
+    "warmup": false,
+    "repeat_penalty": 1.0
+  },
+  "actual_service_checks": {
+    "build": "b11429-d81235049",
+    "context": 4096,
+    "slots": 1,
+    "sampling_defaults_match": true,
+    "repeat_penalty": 1.0,
+    "reasoning_format": "none",
+    "template_sha256": "57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361"
+  },
+  "run_order": {
+    "created_at": "2026-10-13T13:12:02.087951+08:00",
+    "status": "待确认配置",
+    "frozen": false,
+    "generation_authorized": false,
+    "order_seed": 20261013,
+    "baseline_order": "各条件清单的原顺序；baseline不调用improve。",
+    "improved_order": "仅R0调用当前第一版文字排序，保留全部原段落。",
+    "items": [
+      {
+        "case_id": "T04",
+        "condition": "R1",
+        "variant": "baseline",
+        "sequence": 1
+      },
+      {
+        "case_id": "T01",
+        "condition": "R1",
+        "variant": "baseline",
+        "sequence": 2
+      },
+      {
+        "case_id": "T04",
+        "condition": "R0",
+        "variant": "improved",
+        "sequence": 3
+      },
+      {
+        "case_id": "T04",
+        "condition": "K",
+        "variant": "baseline",
+        "sequence": 4
+      },
+      {
+        "case_id": "T03",
+        "condition": "R0",
+        "variant": "baseline",
+        "sequence": 5
+      },
+      {
+        "case_id": "T05",
+        "condition": "R0",
+        "variant": "baseline",
+        "sequence": 6
+      },
+      {
+        "case_id": "T03",
+        "condition": "R1",
+        "variant": "baseline",
+        "sequence": 7
+      },
+      {
+        "case_id": "T02",
+        "condition": "R1",
+        "variant": "baseline",
+        "sequence": 8
+      },
+      {
+        "case_id": "T03",
+        "condition": "R2",
+        "variant": "baseline",
+        "sequence": 9
+      },
+      {
+        "case_id": "T05",
+        "condition": "K",
+        "variant": "baseline",
+        "sequence": 10
+      },
+      {
+        "case_id": "T06",
+        "condition": "R0",
+        "variant": "improved",
+        "sequence": 11
+      },
+      {
+        "case_id": "T07",
+        "condition": "R0",
+        "variant": "improved",
+        "sequence": 12
+      },
+      {
+        "case_id": "T07",
+        "condition": "R0",
+        "variant": "baseline",
+        "sequence": 13
+      },
+      {
+        "case_id": "T03",
+        "condition": "K",
+        "variant": "baseline",
+        "sequence": 14
+      },
+      {
+        "case_id": "T06",
+        "condition": "R1",
+        "variant": "baseline",
+        "sequence": 15
+      },
+      {
+        "case_id": "T04",
+        "condition": "R2",
+        "variant": "baseline",
+        "sequence": 16
+      },
+      {
+        "case_id": "T02",
+        "condition": "R0",
+        "variant": "improved",
+        "sequence": 17
+      },
+      {
+        "case_id": "T02",
+        "condition": "R0",
+        "variant": "baseline",
+        "sequence": 18
+      },
+      {
+        "case_id": "T06",
+        "condition": "R2",
+        "variant": "baseline",
+        "sequence": 19
+      },
+      {
+        "case_id": "T08",
+        "condition": "K",
+        "variant": "baseline",
+        "sequence": 20
+      },
+      {
+        "case_id": "T05",
+        "condition": "R1",
+        "variant": "baseline",
+        "sequence": 21
+      },
+      {
+        "case_id": "T07",
+        "condition": "R1",
+        "variant": "baseline",
+        "sequence": 22
+      },
+      {
+        "case_id": "T07",
+        "condition": "K",
+        "variant": "baseline",
+        "sequence": 23
+      },
+      {
+        "case_id": "T01",
+        "condition": "R0",
+        "variant": "baseline",
+        "sequence": 24
+      },
+      {
+        "case_id": "T01",
+        "condition": "R2",
+        "variant": "baseline",
+        "sequence": 25
+      },
+      {
+        "case_id": "T05",
+        "condition": "R2",
+        "variant": "baseline",
+        "sequence": 26
+      },
+      {
+        "case_id": "T03",
+        "condition": "R0",
+        "variant": "improved",
+        "sequence": 27
+      },
+      {
+        "case_id": "T02",
+        "condition": "K",
+        "variant": "baseline",
+        "sequence": 28
+      },
+      {
+        "case_id": "T08",
+        "condition": "R0",
+        "variant": "baseline",
+        "sequence": 29
+      },
+      {
+        "case_id": "T06",
+        "condition": "K",
+        "variant": "baseline",
+        "sequence": 30
+      },
+      {
+        "case_id": "T01",
+        "condition": "R0",
+        "variant": "improved",
+        "sequence": 31
+      },
+      {
+        "case_id": "T01",
+        "condition": "K",
+        "variant": "baseline",
+        "sequence": 32
+      },
+      {
+        "case_id": "T07",
+        "condition": "R2",
+        "variant": "baseline",
+        "sequence": 33
+      },
+      {
+        "case_id": "T02",
+        "condition": "R2",
+        "variant": "baseline",
+        "sequence": 34
+      },
+      {
+        "case_id": "T08",
+        "condition": "R2",
+        "variant": "baseline",
+        "sequence": 35
+      },
+      {
+        "case_id": "T06",
+        "condition": "R0",
+        "variant": "baseline",
+        "sequence": 36
+      },
+      {
+        "case_id": "T05",
+        "condition": "R0",
+        "variant": "improved",
+        "sequence": 37
+      },
+      {
+        "case_id": "T04",
+        "condition": "R0",
+        "variant": "baseline",
+        "sequence": 38
+      },
+      {
+        "case_id": "T08",
+        "condition": "R1",
+        "variant": "baseline",
+        "sequence": 39
+      },
+      {
+        "case_id": "T08",
+        "condition": "R0",
+        "variant": "improved",
+        "sequence": 40
+      }
+    ]
+  },
+  "evaluation_rules": {
+    "recorded_at": "2026-10-13T13:12:03.376478+08:00",
+    "status": "待确认评价口径",
+    "sources": [
+      "基础/01_考核题目.md 第四步",
+      "进阶/00_共同规则与接口.md",
+      "基础/runs/reading/alce-reading-evidence.json",
+      "基础/runs/review/stage3/citation-rules.json"
+    ],
+    "metrics": [
+      {
+        "name": "answer_correct",
+        "method": "根据问题指定表达形式、项目/版本/日期/批次/口径/签署状态，核对全部当前可见原文。计算逐项记录分子分母、运算方向单位；选择逐项记录资格及决策规则。证据不足须核查所需事实是否确实缺失。",
+        "unknown": "not_checked，不能编造标准答案"
+      },
+      {
+        "name": "format_complete",
+        "method": "原始content可解析为仅含answer字符串和citations字符串数组的JSON；不补字段、不修正原响应。空数组可以格式合法。"
+      },
+      {
+        "name": "citation_ids_exist",
+        "method": "分别记录空引用、每个ID是否属于该次实际输入、重复引用；ID存在不等于支持。"
+      },
+      {
+        "name": "necessary_evidence_covered",
+        "method": "先按问题和实际输入独立列出所需事实及来源，再检查引用覆盖。可能有等价证据组合，不把某一唯一ID集当金标准。"
+      },
+      {
+        "name": "citation_support",
+        "method": "将实际answer拆成可核验主张，检查引用集合是否足以推出结论；标supported/contradicted/insufficient/not_checked，并摘录原文、计算或规则依据。"
+      },
+      {
+        "name": "irrelevant_citations",
+        "method": "逐条判断是否为任何必要主张提供实质支持；范围错误或完全无关另列。多段共同支持的部分证据不因单段不足而自动算无关；相关冗余不自动算错误。"
+      }
+    ],
+    "strict_complete_success": {
+      "origin": "开发阶段选定的综合指标，不是任务原文唯一评分标准",
+      "definition": "格式完整、指定答法正确、非空且全部ID属于实际输入、必要依据覆盖、引用集合支持实际答案、没有无关引用；技术失败或无答案为不成功。尚未人工核验时为not_checked。"
+    },
+    "manual_review": {
+      "no_public_formal_gold": true,
+      "no_model_only_judge": true,
+      "procedure": [
+        "生成前只做容量检查，不人工分析题目或编造标签。",
+        "获授权完成正式调用后，以每次实际输入为边界逐题保存核对表：问题要求、范围、必要事实、原文定位、推导、原回答与引用、各分项状态。",
+        "题目完整可见资料另查输入是否缺证；实际输入无法推出时记录不足，K遗漏与错误拒答分开解释。",
+        "若有歧义，保存竞争解释并标未核验；人工调整保留旧标签、新标签、理由和时间，不改原响应。",
+        "完成可复核标签后才汇总；同时报告总分母、已核验数量及未知项，不能用已核验子集冒充全部正确率。"
+      ],
+      "reviewer_label": "human，人工评价不是系统输出",
+      "cost": "客户端完整非流式请求耗时；启动、模板检查和人工评价耗时另列。"
+    }
+  },
+  "failure_rules_from_preparation": {
+    "recorded_at": "2026-10-13T13:12:03.377747+08:00",
+    "status": "待确认执行规则",
+    "main_tasks": 40,
+    "independent_paired_units": 8,
+    "first_attempt": "每个清单项attempt=1立即保存；主表保留首次尝试状态。首次技术成功响应是first_valid_attempt，即使格式错、无答案或答错也不得质量重试。",
+    "denominators": {
+      "baseline": 32,
+      "improved": 8,
+      "pairing": "8组R0 baseline/improved；8组R0/R1/R2顺序观察；K另列选择和数量变化。",
+      "not_executed": "如因技术停止，不伪造剩余结果；列实际执行分母和计划40项完成率，未执行不当作模型回答错误。",
+      "technical_success_subset": "另列首次技术成功子集及对应分母，首次失败仍保留在主任务表。"
+    },
+    "technical_failure": "HTTP非成功、超时、服务退出、请求参数失效、内存不足、容量超限或输入与清单不一致；保留请求和错误后立即停止整轮。",
+    "quality_failure": "错误答案、合法证据不足、空引用、错误引用、格式错误或预算耗尽是结果，不自动重试。",
+    "retry_policy": "本轮准备不授权任何生成或重试。正式执行若技术失败须先排查并另获恢复授权；若重试，使用同设置，记录attempt、retry_of及修复，不覆盖首次失败，不挑最佳。设置改变须作为独立探索，不能混入主轮次。",
+    "stop_before_generation": [
+      "全部40项容量已核验且满足4096；超限保存后停止，不删段、不截断、不换设置继续。",
+      "正式执行前需确认配置并单独登记冻结时间、哈希及40项实际输入清单。",
+      "实际模型哈希、代码、数据、参数和服务设置须与确认版本一致。"
+    ],
+    "no_generation_this_round": true,
+    "capacity_only_endpoints": [
+      "health",
+      "props",
+      "apply-template",
+      "tokenize"
+    ],
+    "position_limit": "R0/R1/R2同资料换顺序；K改变选择及数量；小样本不声称统计显著或稳定性能提升。"
+  },
+  "execution_authorization": {
+    "source": "本轮用户明确授权冻结并执行清单40项，不授权技术重试。",
+    "generation_allowed": true,
+    "maximum_main_dispatches": 40,
+    "preparation_only_no_generation_flags_superseded_for_this_round": true
+  },
+  "input_manifest": [
+    {
+      "sequence": 1,
+      "case_id": "T04",
+      "condition": "R1",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P758661",
+        "P208944",
+        "P455277",
+        "P688472",
+        "P191263",
+        "P660995",
+        "P194167"
+      ],
+      "selected_passage_ids": [
+        "P758661",
+        "P208944",
+        "P455277",
+        "P688472",
+        "P191263",
+        "P660995",
+        "P194167"
+      ],
+      "actual_request_sha256": "71cdb0721027cee94bd836b74fa47b2c8ca3a9624bc17dbb473f5eca98bf3d71",
+      "input_tokens": 2178,
+      "output_budget": 256
+    },
+    {
+      "sequence": 2,
+      "case_id": "T01",
+      "condition": "R1",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P761989",
+        "P408739",
+        "P564279",
+        "P555495",
+        "P130348",
+        "P455007",
+        "P306998"
+      ],
+      "selected_passage_ids": [
+        "P761989",
+        "P408739",
+        "P564279",
+        "P555495",
+        "P130348",
+        "P455007",
+        "P306998"
+      ],
+      "actual_request_sha256": "668ec74224f3dffe93a8cc7bef16c246ef126c04764d61f3cf123afc4985f5f8",
+      "input_tokens": 2182,
+      "output_budget": 256
+    },
+    {
+      "sequence": 3,
+      "case_id": "T04",
+      "condition": "R0",
+      "variant": "improved",
+      "original_passage_ids": [
+        "P194167",
+        "P758661",
+        "P660995",
+        "P455277",
+        "P208944",
+        "P191263",
+        "P688472"
+      ],
+      "selected_passage_ids": [
+        "P758661",
+        "P455277",
+        "P208944",
+        "P194167",
+        "P688472",
+        "P191263",
+        "P660995"
+      ],
+      "actual_request_sha256": "658db6f2b05c3f2ad7ed2466fc28e5b72013b734eb7769e7504e23f81d581157",
+      "input_tokens": 2178,
+      "output_budget": 256
+    },
+    {
+      "sequence": 4,
+      "case_id": "T04",
+      "condition": "K",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P758661",
+        "P194167"
+      ],
+      "selected_passage_ids": [
+        "P758661",
+        "P194167"
+      ],
+      "actual_request_sha256": "3e4a999f52cf087c5ed3cf2eb785ccf6c1cfb0613f2cf7ba22c1a9fd83547140",
+      "input_tokens": 840,
+      "output_budget": 256
+    },
+    {
+      "sequence": 5,
+      "case_id": "T03",
+      "condition": "R0",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P275307",
+        "P350359",
+        "P728510",
+        "P482103",
+        "P723425",
+        "P362285",
+        "P385105"
+      ],
+      "selected_passage_ids": [
+        "P275307",
+        "P350359",
+        "P728510",
+        "P482103",
+        "P723425",
+        "P362285",
+        "P385105"
+      ],
+      "actual_request_sha256": "6e48a26fabd2436889749439e39eb0f19874781fce8a4761de2569cff572a025",
+      "input_tokens": 2179,
+      "output_budget": 256
+    },
+    {
+      "sequence": 6,
+      "case_id": "T05",
+      "condition": "R0",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P925403",
+        "P371242",
+        "P452207",
+        "P286497",
+        "P876164",
+        "P484198",
+        "P753851"
+      ],
+      "selected_passage_ids": [
+        "P925403",
+        "P371242",
+        "P452207",
+        "P286497",
+        "P876164",
+        "P484198",
+        "P753851"
+      ],
+      "actual_request_sha256": "a9c90eb129a68beb83f5b10dfe7390080a11aee17dec60f4672e05b56a68a41a",
+      "input_tokens": 2155,
+      "output_budget": 256
+    },
+    {
+      "sequence": 7,
+      "case_id": "T03",
+      "condition": "R1",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P385105",
+        "P275307",
+        "P362285",
+        "P482103",
+        "P350359",
+        "P728510",
+        "P723425"
+      ],
+      "selected_passage_ids": [
+        "P385105",
+        "P275307",
+        "P362285",
+        "P482103",
+        "P350359",
+        "P728510",
+        "P723425"
+      ],
+      "actual_request_sha256": "bd571e9af17920caa7979805af9bd56a87e55a8f135685e66f44fc27b13d5d4c",
+      "input_tokens": 2179,
+      "output_budget": 256
+    },
+    {
+      "sequence": 8,
+      "case_id": "T02",
+      "condition": "R1",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P185211",
+        "P500295",
+        "P505639",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P169676"
+      ],
+      "selected_passage_ids": [
+        "P185211",
+        "P500295",
+        "P505639",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P169676"
+      ],
+      "actual_request_sha256": "f03a5411dc46c2b38a793c276b6093f54bb49afb4d23d861733c7acd0bfa3248",
+      "input_tokens": 2169,
+      "output_budget": 256
+    },
+    {
+      "sequence": 9,
+      "case_id": "T03",
+      "condition": "R2",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P385105",
+        "P362285",
+        "P723425",
+        "P275307",
+        "P350359",
+        "P728510",
+        "P482103"
+      ],
+      "selected_passage_ids": [
+        "P385105",
+        "P362285",
+        "P723425",
+        "P275307",
+        "P350359",
+        "P728510",
+        "P482103"
+      ],
+      "actual_request_sha256": "3836980878d26709b28a7470cf25bb3271d761236752f7fabd37e26ab5fa8cc0",
+      "input_tokens": 2179,
+      "output_budget": 256
+    },
+    {
+      "sequence": 10,
+      "case_id": "T05",
+      "condition": "K",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P286497",
+        "P371242"
+      ],
+      "selected_passage_ids": [
+        "P286497",
+        "P371242"
+      ],
+      "actual_request_sha256": "22253656ac1e19359da4ecad7d1e162f180de67e3d1b725b1e55378b06c24a7e",
+      "input_tokens": 807,
+      "output_budget": 256
+    },
+    {
+      "sequence": 11,
+      "case_id": "T06",
+      "condition": "R0",
+      "variant": "improved",
+      "original_passage_ids": [
+        "P878722",
+        "P276634",
+        "P151208",
+        "P466322",
+        "P463444",
+        "P873502",
+        "P721388"
+      ],
+      "selected_passage_ids": [
+        "P873502",
+        "P878722",
+        "P276634",
+        "P463444",
+        "P466322",
+        "P721388",
+        "P151208"
+      ],
+      "actual_request_sha256": "e5d514a4f3a6bd49573f52fcdc228d20b94371536d3ae259221bd5297b68b76a",
+      "input_tokens": 2169,
+      "output_budget": 256
+    },
+    {
+      "sequence": 12,
+      "case_id": "T07",
+      "condition": "R0",
+      "variant": "improved",
+      "original_passage_ids": [
+        "P545606",
+        "P694541",
+        "P802784",
+        "P850395",
+        "P304879",
+        "P244387",
+        "P313278"
+      ],
+      "selected_passage_ids": [
+        "P313278",
+        "P545606",
+        "P244387",
+        "P802784",
+        "P304879",
+        "P694541",
+        "P850395"
+      ],
+      "actual_request_sha256": "1ab0c14b00c7b400e6a87c50b3a2efd708a575e775177ad72d8d2f678177f077",
+      "input_tokens": 2194,
+      "output_budget": 256
+    },
+    {
+      "sequence": 13,
+      "case_id": "T07",
+      "condition": "R0",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P545606",
+        "P694541",
+        "P802784",
+        "P850395",
+        "P304879",
+        "P244387",
+        "P313278"
+      ],
+      "selected_passage_ids": [
+        "P545606",
+        "P694541",
+        "P802784",
+        "P850395",
+        "P304879",
+        "P244387",
+        "P313278"
+      ],
+      "actual_request_sha256": "27f9acda4747c21a15c4f71bb3195a589355f60ce78241f8386ef3e0a7a97732",
+      "input_tokens": 2194,
+      "output_budget": 256
+    },
+    {
+      "sequence": 14,
+      "case_id": "T03",
+      "condition": "K",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P385105",
+        "P728510"
+      ],
+      "selected_passage_ids": [
+        "P385105",
+        "P728510"
+      ],
+      "actual_request_sha256": "ca399bacec20b836d376dcbda15397de8f9cb1b8a861842db5b2c3d01ce5cf1a",
+      "input_tokens": 836,
+      "output_budget": 256
+    },
+    {
+      "sequence": 15,
+      "case_id": "T06",
+      "condition": "R1",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P878722",
+        "P463444",
+        "P721388",
+        "P873502",
+        "P276634",
+        "P151208",
+        "P466322"
+      ],
+      "selected_passage_ids": [
+        "P878722",
+        "P463444",
+        "P721388",
+        "P873502",
+        "P276634",
+        "P151208",
+        "P466322"
+      ],
+      "actual_request_sha256": "62dd4db82d13b5f4c8c5be1738eeccf46bcad4394592a518883e46c5a137dac2",
+      "input_tokens": 2169,
+      "output_budget": 256
+    },
+    {
+      "sequence": 16,
+      "case_id": "T04",
+      "condition": "R2",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P194167",
+        "P660995",
+        "P208944",
+        "P758661",
+        "P688472",
+        "P455277",
+        "P191263"
+      ],
+      "selected_passage_ids": [
+        "P194167",
+        "P660995",
+        "P208944",
+        "P758661",
+        "P688472",
+        "P455277",
+        "P191263"
+      ],
+      "actual_request_sha256": "0f936b5fc6456a6728f32255e1f1e0a32e03823d7c14e752cc8ba9786a4793fe",
+      "input_tokens": 2178,
+      "output_budget": 256
+    },
+    {
+      "sequence": 17,
+      "case_id": "T02",
+      "condition": "R0",
+      "variant": "improved",
+      "original_passage_ids": [
+        "P505639",
+        "P185211",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P500295",
+        "P169676"
+      ],
+      "selected_passage_ids": [
+        "P552476",
+        "P185211",
+        "P588872",
+        "P500295",
+        "P627886",
+        "P505639",
+        "P169676"
+      ],
+      "actual_request_sha256": "ed3f33960ec74d9cf757e6d92d186225af6de0fd88b6ec2fe378d2386a012f83",
+      "input_tokens": 2169,
+      "output_budget": 256
+    },
+    {
+      "sequence": 18,
+      "case_id": "T02",
+      "condition": "R0",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P505639",
+        "P185211",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P500295",
+        "P169676"
+      ],
+      "selected_passage_ids": [
+        "P505639",
+        "P185211",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P500295",
+        "P169676"
+      ],
+      "actual_request_sha256": "33217d461d9274d6930d42bc41b6d686c4f899b98203832c80385762d11729a5",
+      "input_tokens": 2169,
+      "output_budget": 256
+    },
+    {
+      "sequence": 19,
+      "case_id": "T06",
+      "condition": "R2",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P466322",
+        "P276634",
+        "P873502",
+        "P151208",
+        "P721388",
+        "P463444",
+        "P878722"
+      ],
+      "selected_passage_ids": [
+        "P466322",
+        "P276634",
+        "P873502",
+        "P151208",
+        "P721388",
+        "P463444",
+        "P878722"
+      ],
+      "actual_request_sha256": "f48d6d15b1b500b60a854e81afd3839be84603025e8a5bf5881d7f8f695903ac",
+      "input_tokens": 2169,
+      "output_budget": 256
+    },
+    {
+      "sequence": 20,
+      "case_id": "T08",
+      "condition": "K",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P436140",
+        "P183430"
+      ],
+      "selected_passage_ids": [
+        "P436140",
+        "P183430"
+      ],
+      "actual_request_sha256": "926641e452ecc99c279216239c073437114dc9acc770c0042e6dbe311015ec7e",
+      "input_tokens": 835,
+      "output_budget": 256
+    },
+    {
+      "sequence": 21,
+      "case_id": "T05",
+      "condition": "R1",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P925403",
+        "P371242",
+        "P753851",
+        "P452207",
+        "P286497",
+        "P484198",
+        "P876164"
+      ],
+      "selected_passage_ids": [
+        "P925403",
+        "P371242",
+        "P753851",
+        "P452207",
+        "P286497",
+        "P484198",
+        "P876164"
+      ],
+      "actual_request_sha256": "0619334f7a7b0eaf548a30283a841470a29cd27562c8100e6c741ec76f3fe6a8",
+      "input_tokens": 2155,
+      "output_budget": 256
+    },
+    {
+      "sequence": 22,
+      "case_id": "T07",
+      "condition": "R1",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P244387",
+        "P545606",
+        "P802784",
+        "P850395",
+        "P304879",
+        "P694541",
+        "P313278"
+      ],
+      "selected_passage_ids": [
+        "P244387",
+        "P545606",
+        "P802784",
+        "P850395",
+        "P304879",
+        "P694541",
+        "P313278"
+      ],
+      "actual_request_sha256": "c9c32bc3774340045339faf41f7ee85e78d220f3c2f0cfb90fcbb57112a1bbe6",
+      "input_tokens": 2194,
+      "output_budget": 256
+    },
+    {
+      "sequence": 23,
+      "case_id": "T07",
+      "condition": "K",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P313278",
+        "P802784"
+      ],
+      "selected_passage_ids": [
+        "P313278",
+        "P802784"
+      ],
+      "actual_request_sha256": "66b6c79ca588e59d512652a67a52af55c6a7b9af39d23c8e056b5e8cf94cb8c0",
+      "input_tokens": 839,
+      "output_budget": 256
+    },
+    {
+      "sequence": 24,
+      "case_id": "T01",
+      "condition": "R0",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P761989",
+        "P555495",
+        "P564279",
+        "P130348",
+        "P408739",
+        "P306998",
+        "P455007"
+      ],
+      "selected_passage_ids": [
+        "P761989",
+        "P555495",
+        "P564279",
+        "P130348",
+        "P408739",
+        "P306998",
+        "P455007"
+      ],
+      "actual_request_sha256": "3b72680ea19826db22068c8ebd223a1799e7e945454ce14965d3a09f4297eec2",
+      "input_tokens": 2182,
+      "output_budget": 256
+    },
+    {
+      "sequence": 25,
+      "case_id": "T01",
+      "condition": "R2",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P455007",
+        "P564279",
+        "P555495",
+        "P306998",
+        "P761989",
+        "P408739",
+        "P130348"
+      ],
+      "selected_passage_ids": [
+        "P455007",
+        "P564279",
+        "P555495",
+        "P306998",
+        "P761989",
+        "P408739",
+        "P130348"
+      ],
+      "actual_request_sha256": "ef3f6648dd2f3c4f1ce1c30ecb8f9644e463c65052e946fe41a3cb6bcb73f622",
+      "input_tokens": 2182,
+      "output_budget": 256
+    },
+    {
+      "sequence": 26,
+      "case_id": "T05",
+      "condition": "R2",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P371242",
+        "P286497",
+        "P753851",
+        "P876164",
+        "P484198",
+        "P452207",
+        "P925403"
+      ],
+      "selected_passage_ids": [
+        "P371242",
+        "P286497",
+        "P753851",
+        "P876164",
+        "P484198",
+        "P452207",
+        "P925403"
+      ],
+      "actual_request_sha256": "7b5a11c501867a556ae7b713f41e7d576319e064a683b839faef78b2f6463335",
+      "input_tokens": 2155,
+      "output_budget": 256
+    },
+    {
+      "sequence": 27,
+      "case_id": "T03",
+      "condition": "R0",
+      "variant": "improved",
+      "original_passage_ids": [
+        "P275307",
+        "P350359",
+        "P728510",
+        "P482103",
+        "P723425",
+        "P362285",
+        "P385105"
+      ],
+      "selected_passage_ids": [
+        "P385105",
+        "P728510",
+        "P275307",
+        "P350359",
+        "P482103",
+        "P362285",
+        "P723425"
+      ],
+      "actual_request_sha256": "d8c6d49429c8f137b677c85a8510feaf119b72ad909e5881014f6140e131a235",
+      "input_tokens": 2179,
+      "output_budget": 256
+    },
+    {
+      "sequence": 28,
+      "case_id": "T02",
+      "condition": "K",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P552476",
+        "P500295"
+      ],
+      "selected_passage_ids": [
+        "P552476",
+        "P500295"
+      ],
+      "actual_request_sha256": "7041ad8a9ede614505d68823ab90a10a6b44105f506d896d5be33d1270926dad",
+      "input_tokens": 831,
+      "output_budget": 256
+    },
+    {
+      "sequence": 29,
+      "case_id": "T08",
+      "condition": "R0",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P818400",
+        "P436140",
+        "P394287",
+        "P672045",
+        "P510683",
+        "P183430",
+        "P223300"
+      ],
+      "selected_passage_ids": [
+        "P818400",
+        "P436140",
+        "P394287",
+        "P672045",
+        "P510683",
+        "P183430",
+        "P223300"
+      ],
+      "actual_request_sha256": "ce695474ca0167dd6a8790cdad15fd00a8f7102937d6ada1131697c6b0d2a4c3",
+      "input_tokens": 2168,
+      "output_budget": 256
+    },
+    {
+      "sequence": 30,
+      "case_id": "T06",
+      "condition": "K",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P878722",
+        "P873502"
+      ],
+      "selected_passage_ids": [
+        "P878722",
+        "P873502"
+      ],
+      "actual_request_sha256": "05a51e09491863d64f006aebcb924b36e9c3baaa98e3ef640e9b2d6b53dbc235",
+      "input_tokens": 820,
+      "output_budget": 256
+    },
+    {
+      "sequence": 31,
+      "case_id": "T01",
+      "condition": "R0",
+      "variant": "improved",
+      "original_passage_ids": [
+        "P761989",
+        "P555495",
+        "P564279",
+        "P130348",
+        "P408739",
+        "P306998",
+        "P455007"
+      ],
+      "selected_passage_ids": [
+        "P555495",
+        "P564279",
+        "P130348",
+        "P306998",
+        "P408739",
+        "P455007",
+        "P761989"
+      ],
+      "actual_request_sha256": "44007580f0c1e4da178a3a3567d6d0e09da0f9942ff42d9a94dcc73c69c86245",
+      "input_tokens": 2182,
+      "output_budget": 256
+    },
+    {
+      "sequence": 32,
+      "case_id": "T01",
+      "condition": "K",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P555495",
+        "P130348"
+      ],
+      "selected_passage_ids": [
+        "P555495",
+        "P130348"
+      ],
+      "actual_request_sha256": "7225307ebdc8347f8effbbd3edf2318092b49cde420c598d273f478024cf5d08",
+      "input_tokens": 841,
+      "output_budget": 256
+    },
+    {
+      "sequence": 33,
+      "case_id": "T07",
+      "condition": "R2",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P313278",
+        "P850395",
+        "P802784",
+        "P545606",
+        "P304879",
+        "P244387",
+        "P694541"
+      ],
+      "selected_passage_ids": [
+        "P313278",
+        "P850395",
+        "P802784",
+        "P545606",
+        "P304879",
+        "P244387",
+        "P694541"
+      ],
+      "actual_request_sha256": "8a2d784785b77616b63903bb0e22b84299ec9b999e3350ad9bdf35a04a033894",
+      "input_tokens": 2194,
+      "output_budget": 256
+    },
+    {
+      "sequence": 34,
+      "case_id": "T02",
+      "condition": "R2",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P505639",
+        "P552476",
+        "P169676",
+        "P627886",
+        "P500295",
+        "P588872",
+        "P185211"
+      ],
+      "selected_passage_ids": [
+        "P505639",
+        "P552476",
+        "P169676",
+        "P627886",
+        "P500295",
+        "P588872",
+        "P185211"
+      ],
+      "actual_request_sha256": "8b494f559161c26db60f93ead11181bddfa5c6dccf9de7a79592a4a9d9b9cfe3",
+      "input_tokens": 2169,
+      "output_budget": 256
+    },
+    {
+      "sequence": 35,
+      "case_id": "T08",
+      "condition": "R2",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P672045",
+        "P394287",
+        "P183430",
+        "P223300",
+        "P818400",
+        "P436140",
+        "P510683"
+      ],
+      "selected_passage_ids": [
+        "P672045",
+        "P394287",
+        "P183430",
+        "P223300",
+        "P818400",
+        "P436140",
+        "P510683"
+      ],
+      "actual_request_sha256": "b0237f650144871200a1f88cc7f93b784c096e3c5a8b426099a7b82dd78cf829",
+      "input_tokens": 2168,
+      "output_budget": 256
+    },
+    {
+      "sequence": 36,
+      "case_id": "T06",
+      "condition": "R0",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P878722",
+        "P276634",
+        "P151208",
+        "P466322",
+        "P463444",
+        "P873502",
+        "P721388"
+      ],
+      "selected_passage_ids": [
+        "P878722",
+        "P276634",
+        "P151208",
+        "P466322",
+        "P463444",
+        "P873502",
+        "P721388"
+      ],
+      "actual_request_sha256": "32eb00e1f84003fea4549348ccff961dc724ad1a8842ff631718b2458c9ac6a3",
+      "input_tokens": 2169,
+      "output_budget": 256
+    },
+    {
+      "sequence": 37,
+      "case_id": "T05",
+      "condition": "R0",
+      "variant": "improved",
+      "original_passage_ids": [
+        "P925403",
+        "P371242",
+        "P452207",
+        "P286497",
+        "P876164",
+        "P484198",
+        "P753851"
+      ],
+      "selected_passage_ids": [
+        "P286497",
+        "P876164",
+        "P371242",
+        "P925403",
+        "P753851",
+        "P484198",
+        "P452207"
+      ],
+      "actual_request_sha256": "ca7bed39a8d3b02367a6a994bf658895b9d726344c149e00a71349e274ce388b",
+      "input_tokens": 2155,
+      "output_budget": 256
+    },
+    {
+      "sequence": 38,
+      "case_id": "T04",
+      "condition": "R0",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P194167",
+        "P758661",
+        "P660995",
+        "P455277",
+        "P208944",
+        "P191263",
+        "P688472"
+      ],
+      "selected_passage_ids": [
+        "P194167",
+        "P758661",
+        "P660995",
+        "P455277",
+        "P208944",
+        "P191263",
+        "P688472"
+      ],
+      "actual_request_sha256": "7b51d402680105247a155166ecb75f5b88fd28dd936ca07fb3e171dc445d3719",
+      "input_tokens": 2178,
+      "output_budget": 256
+    },
+    {
+      "sequence": 39,
+      "case_id": "T08",
+      "condition": "R1",
+      "variant": "baseline",
+      "original_passage_ids": [
+        "P394287",
+        "P510683",
+        "P436140",
+        "P183430",
+        "P672045",
+        "P818400",
+        "P223300"
+      ],
+      "selected_passage_ids": [
+        "P394287",
+        "P510683",
+        "P436140",
+        "P183430",
+        "P672045",
+        "P818400",
+        "P223300"
+      ],
+      "actual_request_sha256": "f54a13f228ad363179a2a0cd016ed9232ecd191d28ada81ca1fca991f420d3e1",
+      "input_tokens": 2168,
+      "output_budget": 256
+    },
+    {
+      "sequence": 40,
+      "case_id": "T08",
+      "condition": "R0",
+      "variant": "improved",
+      "original_passage_ids": [
+        "P818400",
+        "P436140",
+        "P394287",
+        "P672045",
+        "P510683",
+        "P183430",
+        "P223300"
+      ],
+      "selected_passage_ids": [
+        "P183430",
+        "P436140",
+        "P672045",
+        "P510683",
+        "P394287",
+        "P818400",
+        "P223300"
+      ],
+      "actual_request_sha256": "508cea0e5193d8ef5e282c1daf30c5989f3d04c1683bb763aa5bb2bfd29ac4cd",
+      "input_tokens": 2168,
+      "output_budget": 256
+    }
+  ],
+  "cache_policy": "每项生成前清空单槽缓存，沿用开发实验冷请求做法；清空结果逐条记录。",
+  "evaluation_this_round": "仅格式、ID存在、用量、结束原因、参数及截断；所有语义评价not_checked。"
+}

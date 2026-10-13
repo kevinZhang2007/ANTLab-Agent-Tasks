@@ -1,0 +1,50 @@
+1178:             out_files.push_back(decoded_data);
+1179:         }
+1180: 
+1181:     } else {
+1182:         // try as raw base64 string
+1183:         auto decoded_data = base64_decode(url);
+1184:         if (decoded_data.empty()) {
+1185:             throw std::runtime_error("Invalid base64 value");
+1186:         }
+1187:         out_files.push_back(decoded_data);
+1188:     }
+1189: }
+1190: 
+1191: // load media files from an OAI content array, then replace each media part with a media marker text part
+1192: static void oaicompat_content_load_media(json & content, const server_chat_params & opt, std::vector<raw_buffer> & out_files) {
+1193:     for (auto & p : content) {
+1194:         std::string type = json_value(p, "type", std::string());
+1195:         if (type == "image_url") {
+1196:             if (!opt.allow_image) {
+1197:                 throw std::runtime_error("image input is not supported - hint: if this is unexpected, you may need to provide the mmproj");
+1198:             }
+1199: 
+1200:             json image_url = json_value(p, "image_url", json::object());
+1201:             std::string url = json_value(image_url, "url", std::string());
+1202:             handle_media(out_files, url, opt.media_path);
+1203: 
+1204:             p["type"] = "media_marker";
+1205:             p["text"] = get_media_marker();
+1206:             p.erase("image_url");
+1207: 
+1208:         } else if (type == "input_audio") {
+1209:             if (!opt.allow_audio) {
+1210:                 throw std::runtime_error("audio input is not supported - hint: if this is unexpected, you may need to provide the mmproj");
+1211:             }
+1212: 
+1213:             // note: don't need to validate "format", it's redundant
+1214:             json input_audio = json_value(p, "input_audio", json::object());
+1215:             std::string url  = json_value(input_audio, "data",
+1216:                                     json_value(input_audio, "url", std::string()));
+1217:             handle_media(out_files, url, opt.media_path);
+1218: 
+1219:             p["type"] = "media_marker";
+1220:             p["text"] = get_media_marker();
+1221:             p.erase("input_audio");
+1222: 
+1223:         } else if (type == "input_video" || type == "video_url") {
+1224:             if (!opt.allow_video) {
+1225:                 throw std::runtime_error("video input is not supported - hint: if this is unexpected, you may need to provide the mmproj");
+1226:             }
+1227: 

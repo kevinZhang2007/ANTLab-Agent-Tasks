@@ -1,0 +1,346 @@
+{
+  "material": "P1 / Ten Simple Rules for Reproducible Computational Research",
+  "version": "2013，DOI 10.1371/journal.pcbi.1003285",
+  "task_scope": {
+    "general": "进阶/04_阅读材料与项目背景.md：规则1/2/5/6/7/9/10",
+    "B_focus": "进阶/02_B_系统失效诊断.md：规则1/5/9"
+  },
+  "required_rules": [
+    1,
+    2,
+    5,
+    6,
+    7,
+    9,
+    10
+  ],
+  "scope_reason": "检查点仅有描述，目录无逐条完整证据；此次只核对指定范围，不依据聊天记忆登记完成。",
+  "source_files": [
+    "进阶/materials/papers/P1.pdf",
+    "进阶/materials/papers/P1.xml",
+    "进阶/materials/papers/P1_extracted.txt"
+  ],
+  "integrity_reference": "基础/runs/reading/file-integrity.json",
+  "entries": [
+    {
+      "rule_number": 1,
+      "chapter_name": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+      "checked_at": "2026-10-13T12:30:29.842435+08:00",
+      "pdf_page_numbers_1_based": [
+        2
+      ],
+      "paragraph_count": 3,
+      "summary": "结果来自整条分析流程，需记录各步骤的程序版本、参数、输入及手工操作，最好用可执行流程保存。",
+      "impact_on_current_design": "让每个正式结果关联实际请求、代码和配置版本，保存可复算入口。",
+      "limits": "保存流程不等于结果正确；仅记seed或最终答案不能替代完整执行依据。",
+      "verification": {
+        "xml_paragraphs_read_this_round": true,
+        "pdf_paragraph_boundary_locations": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              2
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              2
+            ]
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              2
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              2
+            ]
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              2
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              2
+            ]
+          }
+        ],
+        "pdf_heading_pages": [
+          2
+        ],
+        "extracted_text_note": "原抽取文本已通过文件校验；P1三栏会把相邻栏穿插到阅读顺序，连续段落阅读采用XML并与原PDF分栏交叉定位。",
+        "comparison_limit": "定位检查核对标题及每段首尾，不声称逐字符校对全部PDF与XML。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "rule_number": 2,
+      "chapter_name": "Rule 2: Avoid Manual Data Manipulation Steps",
+      "checked_at": "2026-10-13T12:30:43.231706+08:00",
+      "pdf_page_numbers_1_based": [
+        2
+      ],
+      "paragraph_count": 1,
+      "summary": "尽量用可复跑的程序转换数据；不可避免的手工移动或修改也应记录对象和原因。",
+      "impact_on_current_design": "正式输入和汇总由固定脚本组织，不手工改模型回答或删掉失败。",
+      "limits": "手工操作不是绝对禁止，关键是可追踪；本题仍须保留人工语义核查及判断依据。",
+      "verification": {
+        "xml_paragraphs_read_this_round": true,
+        "pdf_paragraph_boundary_locations": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              2
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              2
+            ]
+          }
+        ],
+        "pdf_heading_pages": [
+          2
+        ],
+        "extracted_text_note": "原抽取文本已通过文件校验；P1三栏会把相邻栏穿插到阅读顺序，连续段落阅读采用XML并与原PDF分栏交叉定位。",
+        "comparison_limit": "定位检查核对标题及每段首尾，不声称逐字符校对全部PDF与XML。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "rule_number": 5,
+      "chapter_name": "Rule 5: Record All Intermediate Results, When Possible in Standardized Formats",
+      "checked_at": "2026-10-13T12:30:57.445490+08:00",
+      "pdf_page_numbers_1_based": [
+        2
+      ],
+      "paragraph_count": 1,
+      "summary": "保留中间结果便于定位错误、比较参数影响和在缺少部分运行环境时检查流程。",
+      "impact_on_current_design": "保留完整输入、原始响应、状态与评价分层记录，评价修正另存。",
+      "limits": "原文允许考虑存储负担，不要求无条件保存所有临时缓存；多份记录本身不能证明有效。",
+      "verification": {
+        "xml_paragraphs_read_this_round": true,
+        "pdf_paragraph_boundary_locations": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              2
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              2
+            ]
+          }
+        ],
+        "pdf_heading_pages": [
+          2
+        ],
+        "extracted_text_note": "原抽取文本已通过文件校验；P1三栏会把相邻栏穿插到阅读顺序，连续段落阅读采用XML并与原PDF分栏交叉定位。",
+        "comparison_limit": "定位检查核对标题及每段首尾，不声称逐字符校对全部PDF与XML。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "rule_number": 6,
+      "chapter_name": "Rule 6: For Analyses That Include Randomness, Note Underlying Random Seeds",
+      "checked_at": "2026-10-13T12:31:11.987493+08:00",
+      "pdf_page_numbers_1_based": [
+        2,
+        3
+      ],
+      "paragraph_count": 1,
+      "summary": "含随机过程的分析应记录随机种子及随机步骤，便于解释精确或近似复现。",
+      "impact_on_current_design": "固定并记录seed=42和采样参数，同时登记运行环境及非确定性边界。",
+      "limits": "同seed不能保证跨模型、软件版本、硬件或实现的输出完全相同，也不表示多个请求独立。",
+      "verification": {
+        "xml_paragraphs_read_this_round": true,
+        "pdf_paragraph_boundary_locations": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              2
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ]
+          }
+        ],
+        "pdf_heading_pages": [
+          2
+        ],
+        "extracted_text_note": "原抽取文本已通过文件校验；P1三栏会把相邻栏穿插到阅读顺序，连续段落阅读采用XML并与原PDF分栏交叉定位。",
+        "comparison_limit": "定位检查核对标题及每段首尾，不声称逐字符校对全部PDF与XML。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "rule_number": 7,
+      "chapter_name": "Rule 7: Always Store Raw Data behind Plots",
+      "checked_at": "2026-10-13T12:31:28.936199+08:00",
+      "pdf_page_numbers_1_based": [
+        3
+      ],
+      "paragraph_count": 1,
+      "summary": "保留绘图背后的原始数值、处理后的值及绘图程序，使数值和图形可以重新核对。",
+      "impact_on_current_design": "结果表保存逐题run ID、分母、汇总来源和脚本，避免只交汇总图。",
+      "limits": "原文直接讨论绘图；对本题表格的应用是类比，保存数值并不验证引用语义。",
+      "verification": {
+        "xml_paragraphs_read_this_round": true,
+        "pdf_paragraph_boundary_locations": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ]
+          }
+        ],
+        "pdf_heading_pages": [
+          3
+        ],
+        "extracted_text_note": "原抽取文本已通过文件校验；P1三栏会把相邻栏穿插到阅读顺序，连续段落阅读采用XML并与原PDF分栏交叉定位。",
+        "comparison_limit": "定位检查核对标题及每段首尾，不声称逐字符校对全部PDF与XML。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "rule_number": 9,
+      "chapter_name": "Rule 9: Connect Textual Statements to Underlying Results",
+      "checked_at": "2026-10-13T12:31:44.637189+08:00",
+      "pdf_page_numbers_1_based": [
+        3
+      ],
+      "paragraph_count": 4,
+      "summary": "解释和结论应在形成时连接到确切底层结果，避免后来从多版本实验中猜测依据。",
+      "impact_on_current_design": "每项实验结论链接对应run ID、配置和原文检查；明确事前预期与事后解释。",
+      "limits": "链接可定位不代表结论获支持，仍需检查推断及适用范围。",
+      "verification": {
+        "xml_paragraphs_read_this_round": true,
+        "pdf_paragraph_boundary_locations": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ]
+          }
+        ],
+        "pdf_heading_pages": [
+          3
+        ],
+        "extracted_text_note": "原抽取文本已通过文件校验；P1三栏会把相邻栏穿插到阅读顺序，连续段落阅读采用XML并与原PDF分栏交叉定位。",
+        "comparison_limit": "定位检查核对标题及每段首尾，不声称逐字符校对全部PDF与XML。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "rule_number": 10,
+      "chapter_name": "Rule 10: Provide Public Access to Scripts, Runs, and Results",
+      "checked_at": "2026-10-13T12:32:25.549595+08:00",
+      "pdf_page_numbers_1_based": [
+        3
+      ],
+      "paragraph_count": 2,
+      "summary": "让数据、脚本、版本、参数及结果可供他人取得和检查，至少提供主要数据和源码。",
+      "impact_on_current_design": "公开可复跑配置与日志索引，保留失败和诊断资料；模型来源另行锁定。",
+      "limits": "共享仍受隐私和许可约束；不能因此上传密钥、私人配置或受限制权重，也不要求现在提交。",
+      "verification": {
+        "xml_paragraphs_read_this_round": true,
+        "pdf_paragraph_boundary_locations": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              3
+            ]
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ]
+          }
+        ],
+        "pdf_heading_pages": [
+          3
+        ],
+        "extracted_text_note": "原抽取文本已通过文件校验；P1三栏会把相邻栏穿插到阅读顺序，连续段落阅读采用XML并与原PDF分栏交叉定位。",
+        "comparison_limit": "定位检查核对标题及每段首尾，不声称逐字符校对全部PDF与XML。",
+        "original_files_modified": false
+      }
+    }
+  ],
+  "last_updated_at": "2026-10-13T12:32:25.549595+08:00",
+  "remaining_required_rules": []
+}

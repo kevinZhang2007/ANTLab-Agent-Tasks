@@ -1,0 +1,66 @@
+{
+  "recorded_at": "2026-10-12T19:22:59.356715+08:00",
+  "new_generations": 8,
+  "total_generations": 27,
+  "technical_failures": 0,
+  "retries": 0,
+  "checks": {
+    "eight_successful_requests": true,
+    "http_bodies_match": true,
+    "effective_generation_parameters_match": true,
+    "all_passages_preserved": true,
+    "frozen_student_used": true,
+    "first_candidate_restored_exactly": true,
+    "same_original_generation_config": true,
+    "no_budget_exhaustion": true,
+    "service_stopped": true,
+    "no_truncation": true,
+    "confirmed_documents_have_no_diff": true,
+    "nothing_staged": true,
+    "prompt_token_counts_match": true
+  },
+  "ordinary_diff_check": {
+    "exit_code": 2,
+    "output": "基础/starter/student.py:3: trailing whitespace.\n+import re\n基础/starter/student.py:31: trailing whitespace.\n+def text_features(text):\n基础/starter/student.py:32: trailing whitespace.\n+    text = text.casefold()\n基础/starter/student.py:33: trailing whitespace.\n+    features = set(re.findall(r'[a-z0-9]+', text))\n基础/starter/student.py:34: trailing whitespace.\n+    for run in re.findall(r'[一-鿿]+', text):\n基础/starter/student.py:35: trailing whitespace.\n+        features.update(run[i:i + 2] for i in range(len(run) - 1))\n基础/starter/student.py:36: trailing whitespace.\n+    return features\n基础/starter/student.py:37: trailing whitespace.\n+\n基础/starter/student.py:38: trailing whitespace.\n+def relevance_score(question, passage):\n基础/starter/student.py:39: trailing whitespace.\n+    query = text_features(question)\n基础/starter/student.py:40: trailing whitespace.\n+    if not query:\n基础/starter/student.py:41: trailing whitespace.\n+        return 0.0\n基础/starter/student.py:42: trailing whitespace.\n+    return len(query & text_features(passage['text'])) / len(query)\n基础/starter/student.py:43: trailing whitespace.\n+\n基础/starter/student.py:45: trailing whitespace.\n+    \"\"\"按文字匹配覆盖度排序，保留全部原段落；分数不代表语义支持。\"\"\"\n基础/starter/student.py:46: trailing whitespace.\n+    return sorted(passages, key=lambda p: (\n基础/starter/student.py:47: trailing whitespace.\n+        -relevance_score(question, p), p['source'], p['text'],\n基础/starter/student.py:48: trailing whitespace.\n+    ))\n"
+  },
+  "cr_at_eol_diff_check": {
+    "exit_code": 0,
+    "output": ""
+  },
+  "file_list": [
+    "design.json",
+    "final-audit.json",
+    "offline-check-final.json",
+    "offline-check-initial.json",
+    "offline-check.json",
+    "offline-fix.json",
+    "pair-plan.json",
+    "pair-summary.json",
+    "results.json",
+    "run-27dcecc0-3235-4058-9e0a-a678bdb1f033.json",
+    "run-37643799-a6fb-4116-8923-17bb197fc345.json",
+    "run-3cef75ab-b6ba-4c07-af75-1a1106284250.json",
+    "run-6149f8b5-71ef-4467-90de-ca19cd3ae82e.json",
+    "run-8140af73-e482-44cc-958a-31c4db63acab.json",
+    "run-b3ee2b67-10bb-4399-9e3a-81fc6001d751.json",
+    "run-cd9d7220-3a15-417a-a1f4-675a829713a2.json",
+    "run-da77c5f4-c227-4d1c-a825-8dfbb6c7f397.json",
+    "runtime.json",
+    "selection.json",
+    "semantic-review.json",
+    "server-log.txt",
+    "student-v1.py",
+    "student-v2.py"
+  ],
+  "server_truncated_flags": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "audit_correction": "slot接口未提供truncated字段，初次审计无法据此确认。此处改用服务日志中8次释放记录的truncated=0和完整输入token计数核对；初次审计文件保留。"
+}

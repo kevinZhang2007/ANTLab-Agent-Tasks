@@ -29,7 +29,10 @@ for supplied in (passages, []):
     assert '证据不足' in messages[0]['content']
     assert 'answer' not in payload
 assert passages == before
-assert student.improve(question, passages) is passages
+improved = student.improve(question, passages)
+assert len(improved) == len(passages)
+assert all(improved.count(p) == passages.count(p) for p in passages)
+assert passages == before
 print('PASS custom samples: Chinese, quotes, newline, backslash, empty text, empty list, no input mutation')
 command = [sys.executable, '-X', 'utf8', '-B', 'starter/runner.py', '--case', 'D01', '--condition', 'E', '--dry-run', '--config', 'config.example.json']
 result = subprocess.run(command, cwd=base, capture_output=True, text=True, encoding='utf-8')

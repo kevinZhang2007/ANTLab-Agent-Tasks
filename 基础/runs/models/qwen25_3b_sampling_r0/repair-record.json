@@ -1,0 +1,20 @@
+{
+  "recorded_at": "2026-10-12T22:12:00.693470+08:00",
+  "existing_generations_confirmed": 0,
+  "original_design_recorded_at": "2026-10-12T21:58:44.322185+08:00",
+  "original_design_sha256": "4da55491db71f7228352eb15d1ca41ee6fc33e9a7447ee135f51ffb42473cd09",
+  "issue": "检查脚本错误地把/props默认任务预算当成单次请求预算；不是模型或请求预算失效。",
+  "fix": "/props仅核对采样默认；发送前检查序列化实际HTTP正文max_tokens=256；请求后检查slots可回显任务参数，未回显字段标明未回显。用量、finish_reason与截断日志分开保存，stop不是预算回显。",
+  "unchanged": [
+    "候选采样参数",
+    "提示词",
+    "JSON Schema",
+    "第一版排序",
+    "模型权重",
+    "运行设置",
+    "原预测和交错顺序"
+  ],
+  "before_script": "script-before-budget-check-fix.py",
+  "output_folder": "after_budget_check_fix",
+  "no_failed_record_overwritten": true
+}

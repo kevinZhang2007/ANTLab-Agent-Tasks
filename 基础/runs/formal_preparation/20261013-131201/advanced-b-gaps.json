@@ -1,0 +1,75 @@
+{
+  "recorded_at": "2026-10-13T13:12:03.378835+08:00",
+  "status": "计划，未实施",
+  "sources": [
+    "进阶/02_B_系统失效诊断.md",
+    "进阶/00_共同规则与接口.md",
+    "进阶/challenge_b/spec.md",
+    "进阶/challenge_b/challenge.py"
+  ],
+  "existing": [
+    "B行为契约、原样机源码及页面；本轮只源码核查，没有执行样机。",
+    "P1/P2指定规则与ALCE阅读证据已归档。",
+    "基础开发失败、竞争解释和干预记录已有，但不自动替代完整B交付。"
+  ],
+  "proposed_route": "题包challenge_b离线重放，避免追加模型调用；待确认，不读取或编辑合成draft来凑结果。",
+  "main_fault": "同query切换doc_ids/snapshot后结果不符合当前资料范围（旧证据或遗漏）。这是待复现故障，不宣称已实测。",
+  "code_confirmed": [
+    "cache键仅query.strip().lower()，未包含范围或draft；命中缓存后仅更新request等元信息。",
+    "先全corpus排序和截取k，再按doc_ids/snapshot过滤；与spec要求的scope内排序不一致。",
+    "引用ID有效直接标supported，没有独立语义核验。"
+  ],
+  "competing_explanations": [
+    {
+      "cause": "缓存混淆范围",
+      "prediction": "同query先旧快照后新快照可复用旧evidence；仅换成新Engine/关闭缓存应消除旧来源复用。"
+    },
+    {
+      "cause": "范围过滤晚于全局top-k",
+      "prediction": "即使新Engine冷启动，scope外高分条目仍可挤掉scope内证据；只改变scope外干扰条目的排名或先过滤范围可改变遗漏。"
+    }
+  ],
+  "minimal_work": [
+    {
+      "item": "原始复现",
+      "missing": true,
+      "plan": "按原样机记录同query/不同范围的请求顺序、实际evidence、cache_hit、状态和日志，定位最早错误边界。"
+    },
+    {
+      "item": "区分性干预",
+      "missing": true,
+      "plan": "干预前保存预测；分别只重置缓存与只去除scope外排序干扰。保留原始输入/draft，区分共同作用；另查低延迟是否来自错误旧缓存。"
+    },
+    {
+      "item": "最小修复",
+      "missing": true,
+      "plan": "若缓存归因成立，优先评估禁用缓存的最小修复；舍弃扩大缓存键作为本轮替代，并说明性能取舍。若仅排序归因成立则先scope过滤再top-k；不预先承诺同时修两项。"
+    },
+    {
+      "item": "两个正常回归",
+      "missing": true,
+      "plan": "同一有效scope冷请求；相同输入重复请求。按spec核对证据/状态/唯一request_id，不只看200或抄函数输出。"
+    },
+    {
+      "item": "两个等价变体",
+      "missing": true,
+      "plan": "同步重映射文档/证据ID及请求/draft引用；打乱corpus顺序而保持语义、范围、tags和稳定并列规则。保留可逆映射与预期。"
+    },
+    {
+      "item": "一个自造边界",
+      "missing": true,
+      "plan": "未知snapshot或doc_id应明确invalid_scope，不回退旧快照；记录剩余局限。"
+    },
+    {
+      "item": "页面到日志闭环",
+      "missing": true,
+      "plan": "展示当前请求、实际来源快照、证据原文、locator/support/judgment来源、修复前后差异与request_id；支持回溯同请求日志。尚未语义核验须显示not_checked。"
+    },
+    {
+      "item": "另外两个症状及决定",
+      "missing": true,
+      "plan": "登记scope外排序挤掉证据和ID有效伪装supported的风险；补至少三项关键决定、被舍弃方案、AI影响和剩余边界。"
+    }
+  ],
+  "limits": "源码检查能确认实现与契约不符，但本轮没有复现、因果干预、修复或页面验证；不把已有基础优化当作B已完成。"
+}

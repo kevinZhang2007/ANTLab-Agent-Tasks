@@ -1,0 +1,56 @@
+{
+  "case_id": "T03",
+  "question_scope": "望舒R8，2026-04同机顺序WS84，候选比基础少多少秒；只输出数值。",
+  "scope": {
+    "project": "望舒",
+    "version": "R8",
+    "date": "2026-04",
+    "batch": "WS84",
+    "metric": "客户端完整响应耗时中位数差；同36题、顺序和输出上限"
+  },
+  "required_evidence": [
+    {
+      "id": "P385105",
+      "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+      "role": "基础链路中位数及范围"
+    },
+    {
+      "id": "P362285",
+      "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+      "role": "候选中位数及可比条件"
+    }
+  ],
+  "derivation": "少多少=基础9.4-候选6.8=2.6秒；answer只填2.6，不能采用迁移5.9或另一项目平均4.2。",
+  "derived_answer": "2.6",
+  "answer_form": "仅数值，不附秒或计算式",
+  "excluded_evidence": [
+    {
+      "id": "P275307",
+      "reason": "2026-03探索组"
+    },
+    {
+      "id": "P723425",
+      "reason": "R7旧版本"
+    },
+    {
+      "id": "P728510",
+      "reason": "迁移XQ56，不是同机WS84"
+    },
+    {
+      "id": "P350359",
+      "reason": "岫光项目且平均数非目标中位数"
+    },
+    {
+      "id": "P482103",
+      "reason": "八并发压力组P50，不是同机顺序批次"
+    }
+  ],
+  "ambiguities": [],
+  "limits": "只判断这两次明确同条件中位数差，不外推服务端延迟或稳定性能。",
+  "reviewed_at": "2026-10-13T13:34:38.427130+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+  "source": "基础/data/cases.json",
+  "source_sha256": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+  "derivation_kind": "评测后原文推导，非官方标准答案",
+  "model_answers_read_before_saving": false
+}

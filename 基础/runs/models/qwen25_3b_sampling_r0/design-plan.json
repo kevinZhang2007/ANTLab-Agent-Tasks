@@ -1,0 +1,86 @@
+{
+  "recorded_at": "2026-10-12T21:58:44.322185+08:00",
+  "candidate_config": "config.candidate.json",
+  "candidate_count": 1,
+  "changed_parameters": {
+    "presence_penalty": [
+      1.5,
+      0.0
+    ],
+    "repeat_penalty": [
+      1.0,
+      1.05
+    ]
+  },
+  "reason": "温度top_p/top_k沿用模型自带值；取消从Qwen3沿用的强presence惩罚，回到服务中性默认0；按模型自带repetition_penalty采用repeat_penalty1.05。不是两个惩罚等价替换，不保证任务改善。",
+  "prediction": "去掉强presence惩罚并使用较轻的重复惩罚，可能更贴近原模型默认；也可能无改善或退步。两项一起改变，只评价整体配置。",
+  "known_before_experiment": "上一轮八次开发结果已经可见，不是盲测。",
+  "call_order": [
+    {
+      "index": 1,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "baseline"
+    },
+    {
+      "index": 2,
+      "case_id": "D01",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 3,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 4,
+      "case_id": "D02",
+      "condition": "R0",
+      "variant": "baseline"
+    },
+    {
+      "index": 5,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "baseline"
+    },
+    {
+      "index": 6,
+      "case_id": "D03",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 7,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "improved"
+    },
+    {
+      "index": 8,
+      "case_id": "D04",
+      "condition": "R0",
+      "variant": "baseline"
+    }
+  ],
+  "evaluation_rules": [
+    "JSON格式、答案、ID存在、引用充分性分开判断",
+    "D02语义一致与指定证据不足答法分开",
+    "模型原回答不修正、不补引用",
+    "配对比较同模型同Schema同输入顺序上一轮；完整成功优先，答案正确其次，相同质量保留已有配置",
+    "单次耗时仅描述，不称稳定提升"
+  ],
+  "stop_conditions": [
+    "只有这一套候选，固定8次，无错误重试",
+    "加载、内存、模板容量、参数检查或请求技术失败保存后停止",
+    "禁止根据结果调参或追加实验",
+    "完成后停止服务"
+  ],
+  "source_hashes": {
+    "student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045"
+  }
+}

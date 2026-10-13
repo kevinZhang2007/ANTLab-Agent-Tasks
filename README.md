@@ -1,18 +1,20 @@
-## 当前进度（第二阶段）
+## 当前进度（第三阶段）
 
-我已经完成环境准备、输入组织和本地模型接入，共保留10次开发与诊断调用。请求链可以运行，但仍有答案错误和引用遗漏；目前没有证据证明提示词变体有效。正式评测、实际输入改进和进阶B还没完成。
+我已完成本地模型接入、开发对照、指定阅读归档，以及第一轮正式实验：32项baseline和8项R0 improved，共40次请求，无技术失败或重试。
 
-唯一整合报告：[report.md](report.md)。原始运行记录位于基础/runs，实际辅助过程见基础/开发记录.md及报告。
+累计生成124次。正式结果的JSON格式和引用ID检查均通过；原文评价仍为暂判，不能把结构合格当作回答正确。进阶B尚未实施。
 
-从仓库根目录执行 `python -X utf8 -B 基础/tests/check_student.py` 可以检查输入组织，不调用模型，但会新增dry-run记录。本地真实调用需要先启动模型服务，再按report.md中的命令运行。
+整合报告见[report.md](report.md)。
 
-源码上游：https://github.com/Shiina413/ANTLab-Agent-Tasks
+主要记录：
+- [首次正式冻结](基础/runs/formal/round1/freeze.json)
+- [原始结果索引](基础/runs/formal/round1/result-index.json)
+- [评价汇总](基础/runs/formal_review/round1/summary.json)
+- [阅读证据索引](基础/runs/reading/technical-evidence-index.json)
 
-我的Fork：https://github.com/kevinZhang2007/ANTLab-Agent-Tasks
+已执行入口为基础/tests/run_formal_round1.py，有已有目录保护，不应直接重跑覆盖首次结果。模型权重位于仓库外，私人配置不提交。
 
-原始源码基点：`b028d90f43f44585cf085a3f607516a94f485e88`
-
-第一阶段提交：`b39d2cf53c99fd29edd1717b482976761161df3c`。最终考核版本会在完成后登记。
+下一步完成进阶B的故障诊断、最小修复及回归检查。
 
 # ANTLab Agent Tasks
 

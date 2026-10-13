@@ -1,0 +1,424 @@
+{
+  "material": "P2 / Ten simple rules for writing and sharing computational analyses in Jupyter Notebooks",
+  "version": "2019，DOI 10.1371/journal.pcbi.1007007",
+  "task_scope": {
+    "general": "进阶/04_阅读材料与项目背景.md：规则2/5/6/7/8/9及图1",
+    "B_focus": "进阶/02_B_系统失效诊断.md：规则6/7"
+  },
+  "required_rules": [
+    2,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "required_figures": [
+    1
+  ],
+  "source_files": [
+    "进阶/materials/papers/P2.pdf",
+    "进阶/materials/papers/P2.xml",
+    "进阶/materials/papers/P2_extracted.txt"
+  ],
+  "integrity_reference": "基础/runs/reading/file-integrity.json",
+  "scope_reason": "目录中没有P2完整证据，不依据此前聊天描述登记完成；本轮只处理指定条目。",
+  "entries": [
+    {
+      "item_key": "2",
+      "chapter_name": "Rule 2: Document the process, not just the results",
+      "rule_number": 2,
+      "figure_number": null,
+      "checked_at": "2026-10-13T12:34:53.328531+08:00",
+      "pdf_page_numbers_1_based": [
+        3
+      ],
+      "paragraph_count": 3,
+      "summary": "及时记录探索过程及走不通的路线，代码保留不等于保留了选择理由；不要等有好结果后再补记。",
+      "impact_on_current_design": "正式实验计划、停止条件提前保存；失败与负面结果保留，事后解释另标。",
+      "limits": "原文针对Notebook记录习惯；留痕不能证明预测正确，也不能把现在整理写成过去已记录。",
+      "verification": {
+        "pdf_and_extracted_text_boundary_checks": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              3
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              3
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              3
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              3
+            ],
+            "in_extracted_text": true
+          }
+        ],
+        "xml_text_read_this_round": true,
+        "figure_and_caption_checked": false,
+        "comparison_limit": "标题/段落首尾和图形关系核对，不声称PDF与XML全文逐字校对。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "item_key": "5",
+      "chapter_name": "Rule 5: Record dependencies",
+      "rule_number": 5,
+      "figure_number": null,
+      "checked_at": "2026-10-13T12:35:07.787176+08:00",
+      "pdf_page_numbers_1_based": [
+        4
+      ],
+      "paragraph_count": 2,
+      "summary": "注明关键依赖及版本，并用声明的环境复跑，避免隐藏依赖使结果无法重现。",
+      "impact_on_current_design": "记录Python、llama.cpp构建、模型版本和权重哈希，区分服务参数与请求参数。",
+      "limits": "锁版本有助复现，但不保证跨硬件完全相同，也不意味着必须使用容器或安装新依赖。",
+      "verification": {
+        "pdf_and_extracted_text_boundary_checks": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              4
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              4
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              4
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              4
+            ],
+            "in_extracted_text": true
+          }
+        ],
+        "xml_text_read_this_round": true,
+        "figure_and_caption_checked": false,
+        "comparison_limit": "标题/段落首尾和图形关系核对，不声称PDF与XML全文逐字校对。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "item_key": "6",
+      "chapter_name": "Rule 6: Use version control",
+      "rule_number": 6,
+      "figure_number": null,
+      "checked_at": "2026-10-13T12:35:24.004923+08:00",
+      "pdf_page_numbers_1_based": [
+        4,
+        5
+      ],
+      "paragraph_count": 2,
+      "summary": "版本控制能追踪代码及错误的引入、修复和影响；Notebook的JSON差异有时需专用工具解释。",
+      "impact_on_current_design": "保存第一版与候选快照、修复前后记录；正式冻结时登记代码版本并检查diff。",
+      "limits": "Git历史不证明答案正确；本项目是Python脚本，不能直接套用Notebook差异工具，也不要求本轮提交。",
+      "verification": {
+        "pdf_and_extracted_text_boundary_checks": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              4
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              4
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              5
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              5
+            ],
+            "in_extracted_text": true
+          }
+        ],
+        "xml_text_read_this_round": true,
+        "figure_and_caption_checked": false,
+        "comparison_limit": "标题/段落首尾和图形关系核对，不声称PDF与XML全文逐字校对。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "item_key": "7",
+      "chapter_name": "Rule 7: Build a pipeline",
+      "rule_number": 7,
+      "figure_number": null,
+      "checked_at": "2026-10-13T12:35:44.508948+08:00",
+      "pdf_page_numbers_1_based": [
+        5
+      ],
+      "paragraph_count": 3,
+      "summary": "稳定方法应做成可参数化、可重跑的流程，减少手工干预，保存关键中间结果并检查完整执行链。",
+      "impact_on_current_design": "将完整输入检查、运行记录和离线汇总做成有明确入口的流程，防止漏步或依赖隐含状态。",
+      "limits": "Notebook重启、运行所有cell的细节不能直接照搬；本项目需用自身脚本检查，本文不是这些检查已经通过的证明。",
+      "verification": {
+        "pdf_and_extracted_text_boundary_checks": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              5
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              5
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              5
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              5
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              5
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              5
+            ],
+            "in_extracted_text": true
+          }
+        ],
+        "xml_text_read_this_round": true,
+        "figure_and_caption_checked": false,
+        "comparison_limit": "标题/段落首尾和图形关系核对，不声称PDF与XML全文逐字校对。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "item_key": "8",
+      "chapter_name": "Rule 8: Share and explain your data",
+      "rule_number": 8,
+      "figure_number": null,
+      "checked_at": "2026-10-13T12:36:04.443946+08:00",
+      "pdf_page_numbers_1_based": [
+        5,
+        6
+      ],
+      "paragraph_count": 2,
+      "summary": "共享可解释的数据及上游处理信息；数据太大或敏感时可分层提供并说明限制。",
+      "impact_on_current_design": "公开模拟资料版本、输入与结果索引，权重用来源和哈希定位，私人配置不上传。",
+      "limits": "原文鼓励可复核共享，不豁免隐私和许可；不能为分享上传密钥或声称未共享部分可复核。",
+      "verification": {
+        "pdf_and_extracted_text_boundary_checks": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              5
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              5
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              6
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              6
+            ],
+            "in_extracted_text": true
+          }
+        ],
+        "xml_text_read_this_round": true,
+        "figure_and_caption_checked": false,
+        "comparison_limit": "标题/段落首尾和图形关系核对，不声称PDF与XML全文逐字校对。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "item_key": "9",
+      "chapter_name": "Rule 9: Design your notebooks to be read, run, and explored",
+      "rule_number": 9,
+      "figure_number": null,
+      "checked_at": "2026-10-13T12:36:25.376436+08:00",
+      "pdf_page_numbers_1_based": [
+        6
+      ],
+      "paragraph_count": 4,
+      "summary": "交付应同时方便阅读、运行和探索：可读归档、执行环境与可复用步骤各有作用。",
+      "impact_on_current_design": "提供逐题证据链接、离线复算入口和明确参数，区分查看旧结果与真实生成。",
+      "limits": "静态页面只便于阅读，不能证明运行链完成；Binder、Docker和交互控件是选项，不是本任务必需。",
+      "verification": {
+        "pdf_and_extracted_text_boundary_checks": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              6
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              6
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              6
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              6
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              6
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              6
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "start",
+            "pdf_pages": [
+              6
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              6
+            ],
+            "in_extracted_text": true
+          }
+        ],
+        "xml_text_read_this_round": true,
+        "figure_and_caption_checked": false,
+        "comparison_limit": "标题/段落首尾和图形关系核对，不声称PDF与XML全文逐字校对。",
+        "original_files_modified": false
+      }
+    },
+    {
+      "item_key": "figure1",
+      "chapter_name": "Figure 1",
+      "rule_number": null,
+      "figure_number": 1,
+      "checked_at": "2026-10-13T12:37:12.865665+08:00",
+      "pdf_page_numbers_1_based": [
+        2
+      ],
+      "paragraph_count": 1,
+      "summary": "图1用循环连接组织与记录、代码工作、设计共享与解释三个重叠阶段；图注分别对应规则1—3、4—7、8—10。图中包括版本控制、构建流程、公开数据和Read/Run/Explore等活动。",
+      "impact_on_current_design": "记录、实现和解释应相互校验，整理结果时回查代码与底层记录，不只保留最终表。",
+      "limits": "这是Notebook工作流示意，不是本任务效果对照、因果证据或必须照搬的执行顺序。",
+      "verification": {
+        "pdf_and_extracted_text_boundary_checks": [
+          {
+            "part": "start",
+            "pdf_pages": [
+              2
+            ],
+            "in_extracted_text": true
+          },
+          {
+            "part": "end",
+            "pdf_pages": [
+              2
+            ],
+            "in_extracted_text": true
+          }
+        ],
+        "xml_text_read_this_round": true,
+        "figure_and_caption_checked": true,
+        "comparison_limit": "标题/段落首尾和图形关系核对，不声称PDF与XML全文逐字校对。",
+        "original_files_modified": false
+      }
+    }
+  ],
+  "last_updated_at": "2026-10-13T12:37:12.865665+08:00",
+  "remaining_required_items": []
+}

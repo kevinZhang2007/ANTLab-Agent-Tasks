@@ -1,0 +1,16 @@
+1425:     // for safety, we check the result again
+1426:     if (res < 0 || (size_t) res > buf.size()) {
+1427:         throw std::runtime_error("failed to apply chat template, try using --jinja");
+1428:     }
+1429: 
+1430:     common_chat_params params;
+1431:     params.prompt = std::string(buf.data(), res);
+1432:     if (!inputs.json_schema.empty()) {
+1433:         params.grammar = json_schema_to_grammar(json::parse(inputs.json_schema));
+1434:     } else {
+1435:         params.grammar = inputs.grammar;
+1436:     }
+1437:     return params;
+1438: }
+1439: 
+1440: common_chat_params common_chat_templates_apply(const struct common_chat_templates *        tmpls,

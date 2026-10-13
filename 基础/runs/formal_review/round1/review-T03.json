@@ -1,0 +1,339 @@
+{
+  "case_id": "T03",
+  "items": [
+    {
+      "condition": "R0",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P275307"
+      ],
+      "reason": "0.3秒与WS84的9.4-6.8=2.6不符，且附单位不符合只输出数值。",
+      "coverage_reason": "引用2026-03探索组，未覆盖WS84两项中位数。",
+      "support_reason": "P275307仅给探索组6.0秒，不能支持本次中位数差0.3秒。",
+      "irrelevant_reason": "P275307时间及实验批次与问题冲突。",
+      "run_id": "27ea49f0-a543-418e-91c0-bec2e024eb76",
+      "record_path": "基础/runs/formal/round1/run-27ea49f0-a543-418e-91c0-bec2e024eb76.json",
+      "raw_content": "{\"answer\":\"0.3秒\",\"citations\":[\"P275307\"]}",
+      "answer": "0.3秒",
+      "citations": [
+        "P275307"
+      ],
+      "actual_input_ids": [
+        "P275307",
+        "P350359",
+        "P728510",
+        "P482103",
+        "P723425",
+        "P362285",
+        "P385105"
+      ],
+      "elapsed_seconds": 14.789220100035891,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P385105",
+          "source": "模拟记录/T03/页4",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P362285",
+          "source": "模拟记录/T03/页7",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P275307",
+          "source": "模拟记录/T03/页6",
+          "quote": "望舒项目R8版本在2026-03的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "0.3秒与WS84的9.4-6.8=2.6不符，且附单位不符合只输出数值。",
+        "semantic_consistent": "0.3秒与WS84的9.4-6.8=2.6不符，且附单位不符合只输出数值。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "引用2026-03探索组，未覆盖WS84两项中位数。",
+        "support_actual_answer": "P275307仅给探索组6.0秒，不能支持本次中位数差0.3秒。",
+        "irrelevant_citations": "P275307时间及实验批次与问题冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      }
+    },
+    {
+      "condition": "R1",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "0.4秒错误，正确差为2.6，且应不带秒。",
+      "coverage_reason": "P385105提供基础9.4，缺候选6.8及可比条件。",
+      "support_reason": "基础段没有0.4秒差值，单一运算量不能推出该answer。",
+      "irrelevant_reason": "P385105为目标基础数据，相关但不充分。",
+      "run_id": "2796de89-3abb-4abe-be17-afaea0ca84d8",
+      "record_path": "基础/runs/formal/round1/run-2796de89-3abb-4abe-be17-afaea0ca84d8.json",
+      "raw_content": "{\"answer\":\"0.4秒\",\"citations\":[\"P385105\"]}",
+      "answer": "0.4秒",
+      "citations": [
+        "P385105"
+      ],
+      "actual_input_ids": [
+        "P385105",
+        "P275307",
+        "P362285",
+        "P482103",
+        "P350359",
+        "P728510",
+        "P723425"
+      ],
+      "elapsed_seconds": 13.88519120006822,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P385105",
+          "source": "模拟记录/T03/页4",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P362285",
+          "source": "模拟记录/T03/页7",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "0.4秒错误，正确差为2.6，且应不带秒。",
+        "semantic_consistent": "0.4秒错误，正确差为2.6，且应不带秒。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P385105提供基础9.4，缺候选6.8及可比条件。",
+        "support_actual_answer": "基础段没有0.4秒差值，单一运算量不能推出该answer。",
+        "irrelevant_citations": "P385105为目标基础数据，相关但不充分。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      }
+    },
+    {
+      "condition": "R2",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "irrelevant_ids": [
+        "P723425",
+        "P275307",
+        "P350359",
+        "P728510"
+      ],
+      "reason": "2.6秒数值和单位语义正确，但问题要求只输出数值，因此指定答法不符。",
+      "semantic_reason": "目标两段明确9.4和6.8，差为2.6秒，语义一致。",
+      "coverage_reason": "P385105和P362285覆盖两个运算量及同条件。",
+      "support_reason": "有效子集可推出实际2.6秒；额外无关引用不否认已存在的集合支持。",
+      "irrelevant_reason": "另外四段分别是旧版、上月探索、另一项目平均、迁移批次；不能支持WS84差值。",
+      "run_id": "82b6494c-dc32-4213-8006-0aeff8246df2",
+      "record_path": "基础/runs/formal/round1/run-82b6494c-dc32-4213-8006-0aeff8246df2.json",
+      "raw_content": "{\"answer\":\"2.6秒\",\"citations\":[\"P385105\",\"P362285\",\"P723425\",\"P275307\",\"P350359\",\"P728510\"]}",
+      "answer": "2.6秒",
+      "citations": [
+        "P385105",
+        "P362285",
+        "P723425",
+        "P275307",
+        "P350359",
+        "P728510"
+      ],
+      "actual_input_ids": [
+        "P385105",
+        "P362285",
+        "P723425",
+        "P275307",
+        "P350359",
+        "P728510",
+        "P482103"
+      ],
+      "elapsed_seconds": 15.945386599982157,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P385105",
+          "source": "模拟记录/T03/页4",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P362285",
+          "source": "模拟记录/T03/页7",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P723425",
+          "source": "模拟记录/T03/页3",
+          "quote": "望舒项目R7版本在2026-04的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P275307",
+          "source": "模拟记录/T03/页6",
+          "quote": "望舒项目R8版本在2026-03的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P350359",
+          "source": "模拟记录/T03/页1",
+          "quote": "岫光项目R8版本在2026-04登记同名指标和批次XQ56，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P728510",
+          "source": "模拟记录/T03/页5",
+          "quote": "望舒项目R8版本在2026-04的迁移批次XQ56处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "2.6秒数值和单位语义正确，但问题要求只输出数值，因此指定答法不符。",
+        "semantic_consistent": "目标两段明确9.4和6.8，差为2.6秒，语义一致。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P385105和P362285覆盖两个运算量及同条件。",
+        "support_actual_answer": "有效子集可推出实际2.6秒；额外无关引用不否认已存在的集合支持。",
+        "irrelevant_citations": "另外四段分别是旧版、上月探索、另一项目平均、迁移批次；不能支持WS84差值。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      }
+    },
+    {
+      "condition": "R0",
+      "variant": "improved",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "reason": "0.5秒不符合2.6及只填数值要求。",
+      "coverage_reason": "只引目标基础段，缺候选中位数。",
+      "support_reason": "P385105只有9.4，不能推出0.5。",
+      "irrelevant_reason": "目标基础记录是相关部分证据，不因错答算无关。",
+      "run_id": "0c450520-87ac-4d98-8bb4-4b0681976633",
+      "record_path": "基础/runs/formal/round1/run-0c450520-87ac-4d98-8bb4-4b0681976633.json",
+      "raw_content": "{\"answer\":\"0.5秒\",\"citations\":[\"P385105\"]}",
+      "answer": "0.5秒",
+      "citations": [
+        "P385105"
+      ],
+      "actual_input_ids": [
+        "P385105",
+        "P728510",
+        "P275307",
+        "P350359",
+        "P482103",
+        "P362285",
+        "P723425"
+      ],
+      "elapsed_seconds": 14.340805100044236,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P385105",
+          "source": "模拟记录/T03/页4",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P362285",
+          "source": "模拟记录/T03/页7",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "0.5秒不符合2.6及只填数值要求。",
+        "semantic_consistent": "0.5秒不符合2.6及只填数值要求。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "只引目标基础段，缺候选中位数。",
+        "support_actual_answer": "P385105只有9.4，不能推出0.5。",
+        "irrelevant_citations": "目标基础记录是相关部分证据，不因错答算无关。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      }
+    },
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P728510"
+      ],
+      "reason": "K未提供同机WS84候选中位数，只能判缺证，不能给0.5。",
+      "coverage_reason": "P385105是目标基础；P728510是迁移批次，不能补目标候选。",
+      "support_reason": "当前K不能计算目标差，且即便错误混用9.4与5.9也不是0.5。",
+      "irrelevant_reason": "P728510批次和实验用途冲突。",
+      "run_id": "2df3c9f4-f1c6-48b4-9fdc-ec3672d787f6",
+      "record_path": "基础/runs/formal/round1/run-2df3c9f4-f1c6-48b4-9fdc-ec3672d787f6.json",
+      "raw_content": "{\"answer\":\"0.5\",\"citations\":[\"P385105\",\"P728510\"]}",
+      "answer": "0.5",
+      "citations": [
+        "P385105",
+        "P728510"
+      ],
+      "actual_input_ids": [
+        "P385105",
+        "P728510"
+      ],
+      "elapsed_seconds": 5.397614900022745,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "strict_complete_success": false,
+      "source_basis": [
+        {
+          "id": "P385105",
+          "source": "模拟记录/T03/页4",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "visible_in_this_run": true
+        },
+        {
+          "id": "P362285",
+          "source": "模拟记录/T03/页7",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "visible_in_this_run": false
+        },
+        {
+          "id": "P728510",
+          "source": "模拟记录/T03/页5",
+          "quote": "望舒项目R8版本在2026-04的迁移批次XQ56处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。",
+          "visible_in_this_run": true
+        }
+      ],
+      "judgment_reasons": {
+        "answer_correct": "K未提供同机WS84候选中位数，只能判缺证，不能给0.5。",
+        "semantic_consistent": "K未提供同机WS84候选中位数，只能判缺证，不能给0.5。",
+        "format_complete": "检查原始content：answer字符串、citations字符串数组，且只有这两个字段；未补字段。",
+        "citation_ids_exist": "逐ID与actual_input_ids核对；存在性不代表内容支持。",
+        "necessary_coverage": "P385105是目标基础；P728510是迁移批次，不能补目标候选。",
+        "support_actual_answer": "当前K不能计算目标差，且即便错误混用9.4与5.9也不是0.5。",
+        "irrelevant_citations": "P728510批次和实验用途冲突。",
+        "strict_complete_success": "开发选定综合指标，独立检查答案、格式、ID、覆盖、支持及无关引用；不冒充任务原文唯一评分。"
+      }
+    }
+  ],
+  "reviewed_at": "2026-10-13T13:35:02.168066+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。"
+}

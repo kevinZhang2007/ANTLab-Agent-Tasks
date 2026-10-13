@@ -1,0 +1,210 @@
+{
+  "recorded_at": "2026-10-13T14:34:02.606879+08:00",
+  "title": "待本人确认：评测后评价口径澄清",
+  "kind": "post_evaluation_criteria_clarification",
+  "review_source": "聊天助手依据已展示原文复核，尚待本人确认",
+  "personal_confirmed": false,
+  "timing_note": "依据已展示原文的评测后澄清，非冻结前规则；不追溯改写冻结文件。",
+  "existing_evaluation_reference": "基础/runs/formal_review/round1/effective-reviews.json",
+  "existing_evaluation_sha256": "4dd26414acf270a70f0b6dc6a63579de257ce39866f4c27104fb31b1b23f43db",
+  "frozen_rule_reference": "基础/runs/formal/round1/freeze.json",
+  "frozen_record_sha256": "4cbe425b80b3a6692cc8595c57554b25233bd1f7a99f57a99373a5d700ddf6b9",
+  "distinctions": [
+    "事实正确性和语义在可见证据不足时保留无法核验。",
+    "缺证应答合规独立记录：未知时仍给确定答案违反现有提示词。",
+    "不借K不可见全文推导判其事实正确性，不合并事实未知与应答不合规。",
+    "每条件分母仍8题，三条K不删除，未知数量单列。"
+  ],
+  "T01": {
+    "conditional_derivation": "从同一QY71候选枚举可有条件推导S24；并非官方唯一答案。",
+    "literal_boundary": "原文只明示S24完成三项，没有明示未关闭问题为0；严格字面下该条件仍需确认。",
+    "support_failure_unchanged": true,
+    "affected_runs": [
+      {
+        "run_id": "255742bf-ae31-4e89-b8a7-a0ac3003cae4",
+        "condition": "K",
+        "variant": "baseline",
+        "evidence_support": false
+      },
+      {
+        "run_id": "866f1bb0-ec99-4f2d-83ec-2cf8a989cbea",
+        "condition": "R0",
+        "variant": "baseline",
+        "evidence_support": false
+      },
+      {
+        "run_id": "b2de837c-5943-4ea7-8bd8-19360752653c",
+        "condition": "R0",
+        "variant": "improved",
+        "evidence_support": false
+      },
+      {
+        "run_id": "b145c38d-370f-407b-82ab-93efc9c043d5",
+        "condition": "R1",
+        "variant": "baseline",
+        "evidence_support": false
+      },
+      {
+        "run_id": "eda9ad1a-b67a-44df-84b4-7d37ef696e18",
+        "condition": "R2",
+        "variant": "baseline",
+        "evidence_support": false
+      }
+    ]
+  },
+  "K_items": [
+    {
+      "case_id": "T03",
+      "condition": "K",
+      "variant": "baseline",
+      "run_id": "2df3c9f4-f1c6-48b4-9fdc-ec3672d787f6",
+      "actual_record_path": "基础/runs/formal/round1/run-2df3c9f4-f1c6-48b4-9fdc-ec3672d787f6.json",
+      "actual_input_ids": [
+        "P385105",
+        "P728510"
+      ],
+      "raw_content": "{\"answer\":\"0.5\",\"citations\":[\"P385105\",\"P728510\"]}",
+      "fact_correctness": "ambiguous",
+      "semantic_consistency": "ambiguous",
+      "unverifiable_reason": "实际K缺WS84候选中位数及可比条件；迁移XQ56不能补证。",
+      "necessary_evidence_coverage": false,
+      "citations_support_actual_answer": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": false,
+      "new_metric_reason": "资料无法确定时仍给出确定结果，未按已存在的提示词回答证据不足；这是应答合规失败，不等于事实已证伪。",
+      "existing_system_prompt_quote": "证据不足或资料为空时，answer填写“证据不足”，不编造事实。",
+      "judgment_source": "聊天助手依据已展示原文复核，尚待本人确认",
+      "personal_confirmation": "pending"
+    },
+    {
+      "case_id": "T04",
+      "condition": "K",
+      "variant": "baseline",
+      "run_id": "828f35e6-2295-4c3d-b03e-33025c4d619a",
+      "actual_record_path": "基础/runs/formal/round1/run-828f35e6-2295-4c3d-b03e-33025c4d619a.json",
+      "actual_input_ids": [
+        "P758661",
+        "P194167"
+      ],
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P758661\"]}",
+      "fact_correctness": "ambiguous",
+      "semantic_consistency": "ambiguous",
+      "unverifiable_reason": "实际K缺NZ95错误证据资格门槛及正式选择次序。",
+      "necessary_evidence_coverage": false,
+      "citations_support_actual_answer": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": false,
+      "new_metric_reason": "资料无法确定时仍给出确定结果，未按已存在的提示词回答证据不足；这是应答合规失败，不等于事实已证伪。",
+      "existing_system_prompt_quote": "证据不足或资料为空时，answer填写“证据不足”，不编造事实。",
+      "judgment_source": "聊天助手依据已展示原文复核，尚待本人确认",
+      "personal_confirmation": "pending"
+    },
+    {
+      "case_id": "T07",
+      "condition": "K",
+      "variant": "baseline",
+      "run_id": "1993bda9-23fc-4eee-b9ec-68b497e4db0e",
+      "actual_record_path": "基础/runs/formal/round1/run-1993bda9-23fc-4eee-b9ec-68b497e4db0e.json",
+      "actual_input_ids": [
+        "P313278",
+        "P802784"
+      ],
+      "raw_content": "{\"answer\":\"丙\",\"citations\":[\"P313278\"]}",
+      "fact_correctness": "ambiguous",
+      "semantic_consistency": "ambiguous",
+      "unverifiable_reason": "实际K缺ZQ58支持率/P50双门槛及正式代价比较次序。",
+      "necessary_evidence_coverage": false,
+      "citations_support_actual_answer": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": false,
+      "new_metric_reason": "资料无法确定时仍给出确定结果，未按已存在的提示词回答证据不足；这是应答合规失败，不等于事实已证伪。",
+      "existing_system_prompt_quote": "证据不足或资料为空时，answer填写“证据不足”，不编造事实。",
+      "judgment_source": "聊天助手依据已展示原文复核，尚待本人确认",
+      "personal_confirmation": "pending"
+    }
+  ],
+  "condition_summary": [
+    {
+      "condition": "R0",
+      "variant": "baseline",
+      "denominator": 8,
+      "fact_correctness_true": 2,
+      "fact_correctness_false": 6,
+      "fact_correctness_unverifiable": 0,
+      "semantic_unverifiable": 0,
+      "new_compliance_metric": {
+        "true": 0,
+        "false": 0,
+        "not_checked": 8,
+        "denominator": 8,
+        "scope": "本次只对指定三条K增加合规标签，其余未复核，不推定合规。"
+      }
+    },
+    {
+      "condition": "R1",
+      "variant": "baseline",
+      "denominator": 8,
+      "fact_correctness_true": 2,
+      "fact_correctness_false": 6,
+      "fact_correctness_unverifiable": 0,
+      "semantic_unverifiable": 0,
+      "new_compliance_metric": {
+        "true": 0,
+        "false": 0,
+        "not_checked": 8,
+        "denominator": 8,
+        "scope": "本次只对指定三条K增加合规标签，其余未复核，不推定合规。"
+      }
+    },
+    {
+      "condition": "R2",
+      "variant": "baseline",
+      "denominator": 8,
+      "fact_correctness_true": 2,
+      "fact_correctness_false": 6,
+      "fact_correctness_unverifiable": 0,
+      "semantic_unverifiable": 0,
+      "new_compliance_metric": {
+        "true": 0,
+        "false": 0,
+        "not_checked": 8,
+        "denominator": 8,
+        "scope": "本次只对指定三条K增加合规标签，其余未复核，不推定合规。"
+      }
+    },
+    {
+      "condition": "K",
+      "variant": "baseline",
+      "denominator": 8,
+      "fact_correctness_true": 3,
+      "fact_correctness_false": 2,
+      "fact_correctness_unverifiable": 3,
+      "semantic_unverifiable": 3,
+      "new_compliance_metric": {
+        "true": 0,
+        "false": 3,
+        "not_checked": 5,
+        "denominator": 8,
+        "scope": "本次只对指定三条K增加合规标签，其余未复核，不推定合规。"
+      }
+    },
+    {
+      "condition": "R0",
+      "variant": "improved",
+      "denominator": 8,
+      "fact_correctness_true": 2,
+      "fact_correctness_false": 6,
+      "fact_correctness_unverifiable": 0,
+      "semantic_unverifiable": 0,
+      "new_compliance_metric": {
+        "true": 0,
+        "false": 0,
+        "not_checked": 8,
+        "denominator": 8,
+        "scope": "本次只对指定三条K增加合规标签，其余未复核，不推定合规。"
+      }
+    }
+  ],
+  "generation_calls_this_round": 0,
+  "cumulative_generation_calls_unchanged": 124
+}
