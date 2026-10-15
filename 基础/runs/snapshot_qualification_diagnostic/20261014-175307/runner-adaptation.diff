@@ -1,0 +1,104 @@
+--- 基础/tests/run_citation_review.py
++++ 基础/runs/snapshot_qualification_diagnostic/20261014-175307/run_qualification_diagnostic.py
+@@ -1,13 +1,16 @@
+ """历史答案复用；8次独立引用复核，派生结果不是原始响应。"""
+ from pathlib import Path
++import sys
++sys.path.insert(0,str(Path(__file__).resolve().parents[4]/"基础/tests"))
++sys.path.insert(0,str(Path(__file__).resolve().parents[4]/"基础/starter"))
+ import copy,ctypes,hashlib,json,math,os,re,socket,subprocess,sys,threading,time,uuid
+ import urllib.request,urllib.error
+ import general_candidate as generic
+-import citation_review_candidate as reviewer
++import qualification_candidate as reviewer
+ from run_formal_round2 import now,load,sha
+ import provider
+ 
+-repo=Path(__file__).resolve().parents[2]
++repo=Path(__file__).resolve().parents[4]
+ base=repo/'基础'
+ folder=Path(sys.argv[1]).resolve()
+ assert not list(folder.glob('run-*.json')) and not (folder/'runtime.json').exists(),'禁止自动重复或续发'
+@@ -21,16 +24,17 @@
+ recomputed=load(folder/'source-inputs.json')
+ inputs={r['case_id']:r for r in recomputed['items']}
+ freeze=load(base/'runs/formal/round2-20261014-133000/freeze.json')
+-config=load(folder/'config.review.json')
++config=load(folder/'config.diagnostic.json')
+ assert config['parameters']['response_format']['json_schema']['schema']==reviewer.REVIEW_SCHEMA
+-assert (folder/'system.review.txt').read_text(encoding='utf-8')==reviewer.REVIEW_PROMPT
++assert (folder/'system.diagnostic.txt').read_text(encoding='utf-8')==reviewer.REVIEW_PROMPT
+ root=Path(os.environ['LOCALAPPDATA'])/'ANTLabLocalModel'
+ args=[a.replace('%LOCALAPPDATA%/ANTLabLocalModel',str(root)) for a in freeze['service_arguments']]
+ source_names=['基础/tests/citation_review_candidate.py','基础/tests/check_citation_review.py',
+     '基础/tests/run_citation_review.py','基础/tests/run_formal_round2.py' ,'基础/tests/general_candidate.py','基础/tests/answer_form_candidate.py',
+     '基础/tests/two_step_linked_candidate.py','基础/tests/two_step_candidate.py','基础/runs/improve/linked_r0/student-v2.py',
+     '基础/starter/student.py','基础/starter/provider.py']
+-source_names += [(folder/n).relative_to(repo).as_posix() for n in ['source-inputs.json','config.review.json','schema.review.json','system.review.txt']]
++source_names += [(folder/n).relative_to(repo).as_posix() for n in ['source-inputs.json','config.diagnostic.json','schema.diagnostic.json','system.diagnostic.txt','qualification_candidate.py','run_qualification_diagnostic.py']]
++(folder/'code-snapshot').mkdir(parents=True,exist_ok=True)
+ source_hashes={n:sha(repo/n) for n in source_names}
+ for name in source_names:
+     dest=folder/'code-snapshot'/Path(name).name
+@@ -86,21 +90,21 @@
+     assert math.isclose(params['repeat_penalty'],1.0)
+     for job in plan['order']:
+         row=inputs[job['case_id']];used=row['passages']
+-        messages=reviewer.prepare_review_messages(row['question'],used,row['original_response'])
+-        conf=copy.deepcopy(config);rule={'kind':'citation_review','answer_not_generated':True}
+-        assert json.loads(messages[1]['content'])=={'question':row['question'],'passages':used,'original_response':row['original_response']}
++        messages=reviewer.prepare_qualification_messages(row['question'],used,row['candidates'])
++        conf=copy.deepcopy(config);rule={'kind':'qualification_diagnostic','answer_not_generated':True}
++        assert json.loads(messages[1]['content'])=={'question':row['question'],'passages':used,'snapshot_candidates':row['candidates']}
+         body={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']}
+         raw=service('apply-template',body);prompt=raw['prompt']
+         tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
+         item={**job,'messages':messages,'config':conf,'schema_rule':rule,'body':body,'used_passages':used,
+-              'template_response':raw,'input_tokens':len(tokens),'budget':256,'total':len(tokens)+256}
++              'template_response':raw,'input_tokens':len(tokens),'budget':512,'total':len(tokens)+512}
+         jobs.append(item);write('capacity-check.json',{'checked_at':now(),'rows':jobs,'counts_as_generation':False},True)
+         assert all(m['content'] in prompt for m in messages) and prompt.endswith('<think>\n\n</think>\n\n')
+         assert item['total']<=4096,'完整输入超限'
+-    assert len(jobs)==8 and len({j['case_id'] for j in jobs})==8
++    assert len(jobs)==2 and len({j['case_id'] for j in jobs})==2
+     for row in inputs.values():
+         assert sha(repo/row['source_path'])==row['source_sha256']
+-    write('freeze.json',{'saved_at':now(),'generation_calls_so_far':0,'frozen':True,'experiment_kind':'citation_only_postprocessing','design':design,'execution_plan':plan,'order':plan['order'],'review_prompt':reviewer.REVIEW_PROMPT,'review_schema':reviewer.REVIEW_SCHEMA,
++    write('freeze.json',{'saved_at':now(),'generation_calls_so_far':0,'frozen':True,'experiment_kind':'qualification_diagnostic_without_final_answer','design':design,'execution_plan':plan,'order':plan['order'],'review_prompt':reviewer.REVIEW_PROMPT,'review_schema':reviewer.REVIEW_SCHEMA,
+         'config':config,'service_arguments':freeze['service_arguments'],'code_hashes':source_hashes,
+         'data_hashes':freeze['data_hashes'],'model':freeze['model'],'llama_cpp':freeze['llama_cpp'],
+         'actual_schemas':[{'case_id':j['case_id'],'variant':j['variant'],'response_format':j['body']['response_format']} for j in jobs],
+@@ -128,8 +132,8 @@
+         class Capture:
+             def __init__(self,inner):self.inner=inner
+             def open(self,request,*a,**kw):
+-                actual=json.loads(request.data);assert actual==job['body'] and actual['max_tokens']==256
+-                assert runtime['generation_dispatches']<8
++                actual=json.loads(request.data);assert actual==job['body'] and actual['max_tokens']==512
++                assert runtime['generation_dispatches']<2
+                 record.update(actual_http_request_body=actual,raw_http_request_body=request.data.decode(),generation_dispatched=True)
+                 runtime['generation_dispatches']+=1;write(name,record,True)
+                 try:return self.inner.open(request,*a,**kw)
+@@ -144,8 +148,8 @@
+         choice=record['response']['choices'][0]
+         record.update(raw_content=choice.get('message',{}).get('content',''),finish_reason=choice.get('finish_reason'),
+             budget_exhausted=choice.get('finish_reason')=='length',raw_reasoning=choice.get('message',{}).get('reasoning_content'))
+-        record['postprocessing']=reviewer.derive_candidate(row['original_response'],record['raw_content'],row['passages'])
+-        assert record['postprocessing']['candidate_response']['answer']==row['original_response']['answer']
++        record['id_validation']=reviewer.check_ids(record['raw_content'],row['passages'])
++        record['snapshot_candidates']=row['candidates']
+         write(name,record,True)
+         slots=service('slots');record['slot_after']=slots;echo=slots[0]['params']
+         record['parameter_checks']={k:math.isclose(echo[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric.items() if k in echo}
+@@ -173,9 +177,9 @@
+     runtime.update(ended_at=now(),service_stopped=process is None or process.poll() is not None,memory_after_stop=memory())
+     write('runtime.json',runtime)
+     confirmed=[r for r in records if (r.get('usage') or {}).get('completion_tokens',0)>0]
+-    summary={'completed_answers':len(confirmed),'generation_dispatches':runtime['generation_dispatches'],
++    summary={'completed_diagnostic_responses':len(confirmed),'generation_dispatches':runtime['generation_dispatches'],
+         'technical_stop':runtime['technical_stop'],'service_stopped':runtime['service_stopped'],
+-        'previous_cumulative':276,'cumulative_confirmed':276+len(confirmed),'initial_answer_generation_calls':0,
++        'previous_cumulative':296,'cumulative_confirmed':296+len(confirmed),'initial_answer_generation_calls':0,
+         'unique_run_ids':[r['run_id'] for r in confirmed],'budget_exhausted':sum(r.get('budget_exhausted',False) for r in records),
+         'truncation_true':sum(r.get('truncated') is True for r in records),'truncation_unverified':sum(r.get('truncated')=='not_verified' for r in records)}
+     write('execution-summary.json',summary)

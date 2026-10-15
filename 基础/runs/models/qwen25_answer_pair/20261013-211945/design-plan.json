@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-10-13T21:19:45.223445+08:00",
+  "kind": "评测后开发探索；历史选择重放，只比较回答阶段",
+  "source": "基础/runs/two_step_linked_form/20261013-202853/task-Dxx.json 的question与used_passages",
+  "hypothesis": "3B可能改善计算或引用，但不预先认定；模板、训练与量化同时不同，不能仅归因于参数量。",
+  "call_order": [
+    {
+      "case_id": "D01",
+      "model": "0.6B"
+    },
+    {
+      "case_id": "D01",
+      "model": "3B"
+    },
+    {
+      "case_id": "D02",
+      "model": "3B"
+    },
+    {
+      "case_id": "D02",
+      "model": "0.6B"
+    },
+    {
+      "case_id": "D03",
+      "model": "0.6B"
+    },
+    {
+      "case_id": "D03",
+      "model": "3B"
+    },
+    {
+      "case_id": "D04",
+      "model": "3B"
+    },
+    {
+      "case_id": "D04",
+      "model": "0.6B"
+    }
+  ],
+  "generation_limit": 8,
+  "fixed": "相同原最终提示词、完整资料、答案形式Schema；temperature0.7/top_p0.8/top_k20/min_p0/presence_penalty1.5/seed42/max_tokens256/repeat_penalty1.0；4096/CPU单槽4线程/batch128/ubatch64/关闭上下文移位与预热。",
+  "template": "Qwen3关闭思考；Qwen2.5使用自己的ChatML，不传Qwen3思考开关。",
+  "resource_rule": "复用原3B规则：每2秒采样，连续3次低于1GiB停止自有服务；加载后或发请求前若低于1GiB不生成。分配失败与服务崩溃停止。",
+  "resource_reference": "基础/runs/models/qwen25_3b_r0/runtime.json low_memory_rule",
+  "preflight": "首先无生成加载3B核对模板及四题容量，再加载0.6B核对容量；之后严格按固定顺序单模型驻留。",
+  "schema_proof": "使用同包原生Schema转换器及3B词表grammar sampler检查数值、百分数、证据不足与反例；结合同版本ChatML服务路径及实际请求证明，不凭字段或无告警。",
+  "stop_rule": "技术、资源、模板、Schema、容量错误保存停止，不补跑；质量错误不重试。",
+  "evaluation": "全部调用结束才读开发答案，分别评价答法、语义、必要引用覆盖、引用支持、无关引用、严格成功。",
+  "adoption": "严格成功优先，其次答案正确；同分保留资源成本更低0.6B。不替换生产或追加调用。",
+  "timing": "仅完整非流式回答HTTP时间；加载、容量和校验另列，不冒充定位完整流程。",
+  "prior_unique_generation_count": 162
+}

@@ -1,0 +1,9 @@
+{
+  "recorded_at": "2026-10-15T17:44:56.693369+08:00",
+  "stage": "离线核对完成后的停止请求写入",
+  "error": "AttributeError: type object datetime.datetime has no attribute datetime",
+  "cause": "辅助命令已导入datetime类，却在最后停止记录中误用模块式datetime.datetime；页面及证据核对均已完成",
+  "fix": "用实际datetime.now写入停止请求；不重发页面或模型请求",
+  "additional_generations": 0,
+  "prior_audit_preserved": true
+}

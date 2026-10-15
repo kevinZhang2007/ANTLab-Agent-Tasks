@@ -1,0 +1,468 @@
+{
+  "reviewed_at": "2026-10-14T13:24:21.896863+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+  "basis": {
+    "case_id": "T05",
+    "question_scope": "听澜R4，2026-06校内组TL46平均每请求焦耳能耗。没有只填数值的额外限制。",
+    "scope": {
+      "project": "听澜",
+      "version": "R4",
+      "date": "2026-06",
+      "batch": "TL46",
+      "metric": "焦耳/请求，不能用耗时或计费单位替代能耗"
+    },
+    "required_evidence": [
+      {
+        "id": "P286497",
+        "quote": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。",
+        "role": "对应范围及客户端采集边界"
+      },
+      {
+        "id": "P452207",
+        "quote": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。",
+        "role": "明确缺失能耗数据的检查来源"
+      }
+    ],
+    "derivation": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。",
+    "derived_answer": "证据不足",
+    "answer_form": "简短证据不足说明；不限定固定拒答短语",
+    "acceptable_inspection_sources": [
+      "P286497",
+      "P452207"
+    ],
+    "excluded_evidence": [
+      {
+        "id": "P753851",
+        "reason": "岫光项目"
+      },
+      {
+        "id": "P484198",
+        "reason": "上月探索"
+      },
+      {
+        "id": "P371242",
+        "reason": "压力组不提供校内能耗"
+      },
+      {
+        "id": "P876164",
+        "reason": "R3旧版本"
+      },
+      {
+        "id": "P925403",
+        "reason": "迁移XQ58不提供校内能耗"
+      }
+    ],
+    "ambiguities": [],
+    "limits": "引用对应范围的采集边界即可是有效检查来源，不机械要求两个固定ID都引用；不能从32次请求或客户端时长推测功率。",
+    "reviewed_at": "2026-10-13T13:36:14.145753+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+    "source": "基础/data/cases.json",
+    "source_sha256": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "derivation_kind": "评测后原文推导，非官方标准答案",
+    "model_answers_read_before_saving": false
+  },
+  "items": [
+    {
+      "case_id": "T05",
+      "condition": "R0",
+      "variant": "baseline",
+      "sequence": 6,
+      "main_task_id": "79039a5f-5c5a-4fd5-97ad-a45236ac9aad",
+      "end_to_end_seconds": 13.202091100043617,
+      "reviewed_at": "2026-10-14T13:24:21.896714+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P925403\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P925403"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P925403"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P925403",
+        "P371242",
+        "P452207",
+        "P286497",
+        "P876164",
+        "P484198",
+        "P753851"
+      ],
+      "final_input_ids": [
+        "P925403",
+        "P371242",
+        "P452207",
+        "P286497",
+        "P876164",
+        "P484198",
+        "P753851"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P286497",
+          "source": "模拟记录/T05/页3",
+          "text": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P452207",
+          "source": "模拟记录/T05/页1",
+          "text": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P925403",
+          "source": "模拟记录/T05/页4",
+          "text": "听澜项目R4版本在2026-06的迁移批次XQ58处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "072492cc-4b30-49d8-ae49-1d3e2b7a1812"
+      ],
+      "reasons": {
+        "answer_correct": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "校内TL46采集边界或明确未采集能耗段可作检查来源；不要求固定单一ID。",
+        "support_actual_answer": "目标检查来源支持当前资料无法推导焦耳；迁移或压力批次不能代替校内组，不推断现实中绝对没有能耗采集。",
+        "irrelevant_citations": [
+          {
+            "id": "P925403",
+            "reason": "迁移XQ58不提供校内能耗"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T05",
+      "condition": "K",
+      "variant": "baseline",
+      "sequence": 10,
+      "main_task_id": "642b27f8-a86d-4178-b77c-a990992b9217",
+      "end_to_end_seconds": 4.405670700012706,
+      "reviewed_at": "2026-10-14T13:24:21.896763+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P286497\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P286497"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": true,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P286497",
+        "P371242"
+      ],
+      "final_input_ids": [
+        "P286497",
+        "P371242"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": true,
+      "source_basis": [
+        {
+          "id": "P286497",
+          "source": "模拟记录/T05/页3",
+          "text": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "d78c179a-8be4-4e57-bb4a-92a3c1890981"
+      ],
+      "reasons": {
+        "answer_correct": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "校内TL46采集边界或明确未采集能耗段可作检查来源；不要求固定单一ID。",
+        "support_actual_answer": "目标检查来源支持当前资料无法推导焦耳；迁移或压力批次不能代替校内组，不推断现实中绝对没有能耗采集。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T05",
+      "condition": "R1",
+      "variant": "baseline",
+      "sequence": 21,
+      "main_task_id": "5050c3ed-ae12-4d68-a446-615983e48fcc",
+      "end_to_end_seconds": 13.721941400086507,
+      "reviewed_at": "2026-10-14T13:24:21.896796+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P925403\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P925403"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P925403"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P925403",
+        "P371242",
+        "P753851",
+        "P452207",
+        "P286497",
+        "P484198",
+        "P876164"
+      ],
+      "final_input_ids": [
+        "P925403",
+        "P371242",
+        "P753851",
+        "P452207",
+        "P286497",
+        "P484198",
+        "P876164"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P286497",
+          "source": "模拟记录/T05/页3",
+          "text": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P452207",
+          "source": "模拟记录/T05/页1",
+          "text": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P925403",
+          "source": "模拟记录/T05/页4",
+          "text": "听澜项目R4版本在2026-06的迁移批次XQ58处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "27ccc62a-3986-4aed-94a7-c4dc0b82f030"
+      ],
+      "reasons": {
+        "answer_correct": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "校内TL46采集边界或明确未采集能耗段可作检查来源；不要求固定单一ID。",
+        "support_actual_answer": "目标检查来源支持当前资料无法推导焦耳；迁移或压力批次不能代替校内组，不推断现实中绝对没有能耗采集。",
+        "irrelevant_citations": [
+          {
+            "id": "P925403",
+            "reason": "迁移XQ58不提供校内能耗"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T05",
+      "condition": "R2",
+      "variant": "baseline",
+      "sequence": 26,
+      "main_task_id": "5c3ed4b3-dc56-4c1c-9336-cd2c95cd5d08",
+      "end_to_end_seconds": 13.691444399999455,
+      "reviewed_at": "2026-10-14T13:24:21.896825+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P371242\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P371242"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P371242"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P371242",
+        "P286497",
+        "P753851",
+        "P876164",
+        "P484198",
+        "P452207",
+        "P925403"
+      ],
+      "final_input_ids": [
+        "P371242",
+        "P286497",
+        "P753851",
+        "P876164",
+        "P484198",
+        "P452207",
+        "P925403"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P286497",
+          "source": "模拟记录/T05/页3",
+          "text": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P452207",
+          "source": "模拟记录/T05/页1",
+          "text": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P371242",
+          "source": "模拟记录/T05/页6",
+          "text": "听澜项目R4版本在2026-06的压力组使用八并发请求，96项返回成功、4项超时，P50为3.7秒；项目另列压力组汇总。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "a28ae8df-c104-4352-9fc0-34cd35a10514"
+      ],
+      "reasons": {
+        "answer_correct": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "校内TL46采集边界或明确未采集能耗段可作检查来源；不要求固定单一ID。",
+        "support_actual_answer": "目标检查来源支持当前资料无法推导焦耳；迁移或压力批次不能代替校内组，不推断现实中绝对没有能耗采集。",
+        "irrelevant_citations": [
+          {
+            "id": "P371242",
+            "reason": "压力组不提供校内能耗"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T05",
+      "condition": "R0",
+      "variant": "improved",
+      "sequence": 37,
+      "main_task_id": "cbf106e8-7334-49d3-a4e3-bee5d1d9c4f2",
+      "end_to_end_seconds": 16.33621259999927,
+      "reviewed_at": "2026-10-14T13:24:21.896852+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P286497\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P286497"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": true,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P925403",
+        "P371242",
+        "P452207",
+        "P286497",
+        "P876164",
+        "P484198",
+        "P753851"
+      ],
+      "final_input_ids": [
+        "P286497"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": true,
+      "source_basis": [
+        {
+          "id": "P286497",
+          "source": "模拟记录/T05/页3",
+          "text": "听澜项目R4版本在2026-06的记录：校内组TL46经共享网关完成32次问答，客户端记录请求耗时、响应状态和模型显示名称。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        },
+        {
+          "id": "P452207",
+          "source": "模拟记录/T05/页1",
+          "text": "批次TL46的复核补页：TL46的服务响应保留输入与输出计费单位，未采集功率、能耗、节点配置或服务端并发。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": false,
+          "actually_cited": false
+        }
+      ],
+      "run_ids": [
+        "71f8d9ef-ca0d-40e6-8174-1e5294fb99b6",
+        "4332bc93-8e79-494c-b857-42fc2b985f7a"
+      ],
+      "reasons": {
+        "answer_correct": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "未采集功率或能耗，耗时和输入输出计费单位不能换算焦耳；无法计算每请求能耗，应回答证据不足或等义缺证说明。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "校内TL46采集边界或明确未采集能耗段可作检查来源；不要求固定单一ID。",
+        "support_actual_answer": "目标检查来源支持当前资料无法推导焦耳；迁移或压力批次不能代替校内组，不推断现实中绝对没有能耗采集。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "variant": "fixed",
+  "sequence": 6,
+  "request_id": "15e2a4ff-51cc-40f0-98e1-af9870b87d67",
+  "submitted": {
+    "case_id": "R07",
+    "reset": true,
+    "request": {
+      "query": "metadata",
+      "doc_ids": [
+        "missing"
+      ],
+      "snapshot": "v1",
+      "k": 2,
+      "mode": "offline_replay"
+    }
+  },
+  "response": {
+    "request_id": "15e2a4ff-51cc-40f0-98e1-af9870b87d67",
+    "request": {
+      "query": "metadata",
+      "doc_ids": [
+        "missing"
+      ],
+      "snapshot": "v1",
+      "k": 2,
+      "mode": "offline_replay"
+    },
+    "answer": "这个文档存在。",
+    "citations": [
+      "b05"
+    ],
+    "evidence": [],
+    "actual_scopes": [],
+    "locator_status": "invalid",
+    "support_status": "not_checked",
+    "judgment_source": "unverified",
+    "elapsed_ms": 0.11090002954006195,
+    "run_kind": "offline_replay",
+    "scope_status": "invalid_scope",
+    "evidence_in_scope": true,
+    "citation_status": "missing_or_outside_evidence",
+    "engine_response": {
+      "answer": "这个文档存在。",
+      "citations": [
+        "b05"
+      ],
+      "evidence": [],
+      "locator_status": "invalid",
+      "support_status": "not_checked",
+      "judgment_source": "rule",
+      "status": "ok",
+      "request_id": "15e2a4ff-51cc-40f0-98e1-af9870b87d67",
+      "request": {
+        "query": "metadata",
+        "doc_ids": [
+          "missing"
+        ],
+        "snapshot": "v1",
+        "k": 2,
+        "mode": "offline_replay"
+      },
+      "cache_hit": false,
+      "elapsed_ms": 0.11090002954006195,
+      "run_kind": "offline_replay"
+    },
+    "service": {
+      "version": "b-http-review-v1",
+      "engine": "no_cache_engine:Engine",
+      "default_engine": "challenge:Engine",
+      "host": "127.0.0.1",
+      "port": 8877,
+      "run_kind": "offline_replay",
+      "engine_sha256": "ab5852c20284e4f17097a1a9d7ac5343cf9dfea107e0f430c5ccda253f38d87a"
+    },
+    "state_mapping": {
+      "locator_status": "展示层检查引用ID、实际证据及请求范围；不替换Engine原值。",
+      "support_status": "not_checked：Engine只按ID产生状态，未做语义检查。",
+      "judgment_source": "unverified：没有语义判分器。",
+      "scope_status": "只核对输入范围存在性，不修复Engine检索或改变其响应。"
+    }
+  },
+  "summary": {
+    "http_status": 200,
+    "request_id": "15e2a4ff-51cc-40f0-98e1-af9870b87d67",
+    "engine": "no_cache_engine:Engine",
+    "request": {
+      "query": "metadata",
+      "doc_ids": [
+        "missing"
+      ],
+      "snapshot": "v1",
+      "k": 2,
+      "mode": "offline_replay"
+    },
+    "scope_status": "invalid_scope",
+    "answer": "这个文档存在。",
+    "citations": [
+      "b05"
+    ],
+    "actual_scopes": [],
+    "locator_status": "invalid",
+    "citation_status": "missing_or_outside_evidence",
+    "cache_hit": false,
+    "elapsed_ms": 0.11090002954006195,
+    "run_kind": "offline_replay"
+  },
+  "dom_snapshot": "- heading \"进阶B：范围与证据核对\" [level=1]\n- paragraph: 固定合成draft离线重放（offline_replay）；没有模型请求。\n- paragraph: 服务 b-http-review-v1 | Engine no_cache_engine:Engine | 默认 challenge:Engine\n- text: 案例\n- combobox \"案例\":\n  - option \"R01 · alpha/v1\"\n  - option \"R02 · alpha/v2\"\n  - option \"R03 · beta/v1\"\n  - option \"R04 · alpha/v2\"\n  - option \"R05 · beta/v1\"\n  - option \"R06 · alpha/v2\"\n  - option \"R07 · missing/v1\" [selected]\n- checkbox \"运行前清空状态\" [checked]\n- text: 运行前清空状态\n- text: query\n- textbox \"query\": metadata\n- text: doc_ids（逗号分隔）\n- textbox \"doc_ids（逗号分隔）\": missing\n- text: snapshot\n- textbox \"snapshot\": v1\n- text: k\n- spinbutton \"k\": \"2\"\n- button \"提交请求\"\n- generic \"本次提交内容\"\n- heading \"当前请求与结果\" [level=2]\n- generic: \"{ \\\"http_status\\\": 200, \\\"request_id\\\": \\\"15e2a4ff-51cc-40f0-98e1-af9870b87d67\\\", \\\"engine\\\": \\\"no_cache_engine:Engine\\\", \\\"request\\\": { \\\"query\\\": \\\"metadata\\\", \\\"doc_ids\\\": [ \\\"missing\\\" ], \\\"snapshot\\\": \\\"v1\\\", \\\"k\\\": 2, \\\"mode\\\": \\\"offline_replay\\\" }, \\\"scope_status\\\": \\\"invalid_scope\\\", \\\"answer\\\": \\\"这个文档存在。\\\", \\\"citations\\\": [ \\\"b05\\\" ], \\\"actual_scopes\\\": [], \\\"locator_status\\\": \\\"invalid\\\", \\\"citation_status\\\": \\\"missing_or_outside_evidence\\\", \\\"cache_hit\\\": false, \\\"elapsed_ms\\\": 0.11090002954006195, \\\"run_kind\\\": \\\"offline_replay\\\" }\"\n- paragraph: 展示支持状态：not_checked；判断来源：unverified。Engine原始支持状态：not_checked（rule）。ID规则产生的状态，语义未核验；待检查主张：这个文档存在。\n- heading \"实际证据与原文定位\" [level=2]\n- generic: 实际证据为空，不能视为成功查证。\n- generic \"完整HTTP响应（含未改写的Engine响应）\"",
+  "screenshot": "page-fixed-6.jpg"
+}

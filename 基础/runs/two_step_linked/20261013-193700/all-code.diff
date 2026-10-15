@@ -1,0 +1,524 @@
+--- /dev/null
++++ 基础/tests/two_step_linked_candidate.py
+@@ -0,0 +1,35 @@
++"""独立开发候选：原定位结果加唯一直接补页，不修改生产排序。"""
++import copy
++import importlib.util
++from pathlib import Path
++import two_step_candidate as selection
++
++LINKED_SOURCE = Path(__file__).resolve().parents[1] / 'runs/improve/linked_r0/student-v2.py'
++spec = importlib.util.spec_from_file_location('saved_linked_candidate', LINKED_SOURCE)
++linked = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(linked)
++
++def complete_passages(question, passages, validation):
++    # 复用原合法性检查；非法选择不能修补或回退。
++    original_selected = selection.select_original_passages(passages, validation)
++    seed_ids = {p['id'] for p in original_selected}
++    _, decisions = linked.organize_passages(question, passages)
++    included = set(seed_ids)
++    trace = []
++    for decision in decisions:
++        row = copy.deepcopy(decision)
++        row['added'] = False
++        if row['target_id'] in seed_ids and row['supplement_id'] not in seed_ids:
++            included.add(row['supplement_id'])
++            row['added'] = True
++            row['completion_reason'] = '唯一直接主段属于原定位选择，补入完整补页。'
++        elif row['target_id'] is None:
++            row['completion_reason'] = row['reason']
++        elif row['supplement_id'] in seed_ids:
++            row['completion_reason'] = '已被定位选择，不重复补入。'
++        else:
++            row['completion_reason'] = '直接主段不在原定位选择；不从新补入段继续扩展。'
++        trace.append(row)
++    # included只用于成员判断；顺序始终来自当前完整输入。
++    result = [copy.deepcopy(p) for p in passages if p['id'] in included]
++    return result, trace
+--- /dev/null
++++ 基础/tests/check_two_step_linked.py
+@@ -0,0 +1,65 @@
++"""自造资料的离线补页检查；不读答案，不调用模型。"""
++import ast
++import copy
++import hashlib
++import json
++import random
++import sys
++from pathlib import Path
++from datetime import datetime
++import two_step_candidate as selection
++import two_step_linked_candidate as candidate
++
++folder = Path(sys.argv[1])
++def sample(texts, chosen=0):
++    rows = [{'id': f'item-{i}', 'source': f'同目录/{i}', 'text': t} for i,t in enumerate(texts)]
++    raw = json.dumps({'selected_ids': [rows[chosen]['id']]}, ensure_ascii=False)
++    return rows, selection.validate_selection(raw,rows)
++
++cases = [
++ ('直接补页', ['甲项目R2版本2026-07批次AB12记录。','批次AB12的复核补页：计数。'], 1),
++ ('编号复用', ['甲项目R2版本批次AB12记录。','乙项目R2版本批次AB12记录。','批次AB12的复核补页。'], 0),
++ ('版本冲突', ['甲项目R2版本批次AB12记录。','甲项目R3版本批次AB12的复核补页。'], 0),
++ ('项目冲突', ['甲项目批次AB12记录。','乙项目批次AB12的复核补页。'], 0),
++ ('日期冲突', ['2026-07批次AB12记录。','2026-08批次AB12的复核补页。'], 0),
++ ('目标不唯一', ['批次AB12记录一。','批次AB12记录二。','批次AB12的复核补页。'], 0),
++ ('禁止多跳', ['批次AB12记录。','批次AB12的复核补页提及批次CD34。','批次CD34的复核补页。'], 1),
++ ('同source目录不关联', ['批次AB12记录。','没有明确指称的补页。'], 0),
++ ('英文数字无语境', ['设备AB12。','AB12补页。'], 0),
++ ('缺失范围仍未知', ['甲项目R2版本2026-07批次AB12记录。','批次AB12的复核补页。'], 1),
++ ('没有直接补充指称', ['批次AB12记录。','批次AB12记录旧结果，另一文档补页。'], 0),
++]
++records=[]
++for name,texts,expected in cases:
++    passages,validation=sample(texts)
++    before=copy.deepcopy(passages)
++    result,trace=candidate.complete_passages('资料计数',passages,validation)
++    assert passages==before and len(result)==1+expected and len({p['id'] for p in result})==len(result)
++    assert result==[p for p in passages if p['id'] in {r['id'] for r in result}]
++    selected_content={(p['source'],p['text']) for p in result}
++    for seed in range(10):
++        shuffled=copy.deepcopy(passages);random.Random(seed).shuffle(shuffled)
++        other,_=candidate.complete_passages('资料计数',shuffled,validation)
++        assert {(p['source'],p['text']) for p in other}==selected_content
++        assert other==[p for p in shuffled if p['id'] in {r['id'] for r in other}]
++        mapping={p['id']:f'remapped-{seed}-{i}' for i,p in enumerate(shuffled)}
++        mapped=[dict(p,id=mapping[p['id']]) for p in shuffled]
++        changed={'valid':True,'selected_ids':[mapping[i] for i in validation['selected_ids']]}
++        mapped_result,_=candidate.complete_passages('资料计数',mapped,changed)
++        assert {(p['source'],p['text']) for p in mapped_result}==selected_content
++    if name=='缺失范围仍未知':assert trace[0]['unknown_scope_fields']==['project','version','date']
++    records.append({'sample':name,'passages':passages,'selection':validation,'result':result,'trace':trace,'shuffle_and_remap_trials':10})
++rows,valid=sample(['批次AB12记录。','批次AB12的复核补页。'])
++for raw,status in [('not json','invalid_json'),('{"selected_ids":["missing"]}','unknown_id'),('{"selected_ids":["item-0","item-0"]}','duplicate_id')]:
++    invalid=selection.validate_selection(raw,rows);assert invalid['status']==status
++    try:candidate.complete_passages('问题',rows,invalid)
++    except ValueError:pass
++    else:raise AssertionError('非法定位发生回退')
++assert candidate.complete_passages('问题',[],{'valid':True,'selected_ids':[]})[0]==[]
++assert candidate.complete_passages('问题',rows,{'valid':True,'selected_ids':[]})[0]==[]
++tree=ast.parse(Path(candidate.__file__).read_text(encoding='utf-8'))
++function=next(n for n in tree.body if isinstance(n,ast.FunctionDef))
++assert not any(isinstance(n,ast.Name) and n.id in ['open','Path','case_id','condition','gold','answers'] for n in ast.walk(function))
++record={'checked_at':datetime.now().astimezone().isoformat(),'counts_as_generation':False,'passed':True,'fixtures':'仅自造资料；未读取开发答案或正式题','samples':records,'invalid_selection_cases':3,'empty_checks':2,'input_preserved':True,'ordering_rule':'每次输出遵循该次完整输入相对顺序；打乱后按内容的选择集合一致。','semantic_support_verified':False,'hashes':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(candidate.__file__),Path(selection.__file__),candidate.LINKED_SOURCE]}}
++path=folder/'offline-check.json';assert not path.exists();path.write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++print('PASS 11 synthetic cases, 110 shuffles/remaps, empty/invalid checks; no model calls')
+--- 基础/tests/run_two_step_pairs.py
++++ 基础/tests/run_two_step_linked_pairs.py
+@@ -1,4 +1,4 @@
+-"""Qwen3-0.6B固定提示词变体、模板容量检查及最多十二次两步开发调用；技术失败立即停止，不重试。"""
++"""复用旧两步服务/内存守护；每题共享定位，旧选择与直接补页分别回答。"""
+ from pathlib import Path
+ from datetime import datetime, timezone
+ import copy
+@@ -17,7 +17,7 @@
+ 
+ repo=Path(__file__).resolve().parents[2]
+ base=repo/'基础'
+-experiment=base/'runs/two_step/dev_r0'
++experiment=Path(sys.argv[1])
+ folder=experiment
+ assert not list(folder.glob('run-*.json')), '已有配对记录，禁止重复调用'
+ config_fixed=json.loads((experiment/'config.answer.json').read_text(encoding='utf-8'))
+@@ -54,7 +54,7 @@
+ parents={}
+ start_times={}
+ skipped=[]
+-startup={'record_kind':'two_step_development_runtime','recorded_at_utc':datetime.now(timezone.utc).isoformat(),
++startup={'record_kind':'post_formal_two_step_linked_runtime','recorded_at_utc':datetime.now(timezone.utc).isoformat(),
+          'runtime_reference':'基础/runs/setup/62a41e78-da75-48ca-b9a3-d0ec29127825_runtime.json','context':4096,
+          'generation_attempts':0,'stopped_on_technical_failure':False}
+ args=[str(root/'llama-b11429/llama-server.exe'),'-m',str(root/'models/Qwen3-0.6B-Q8_0.gguf'),
+@@ -91,177 +91,161 @@
+             return
+         memory_stop.wait(2)
+ 
++
++import socket
++import two_step_linked_candidate as completion
++
++def write(name, value):
++    (folder/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++
++def preserved():
++    protected=json.loads((folder/'protected-hashes.json').read_text(encoding='utf-8'))
++    assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in protected.items())
++    hashes=json.loads((folder/'pre-generation-code-hashes.json').read_text(encoding='utf-8'))
++    assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in hashes.items())
++
++def call_stage(cid,stage,question,used,original,config):
++    record={'run_id':str(uuid.uuid4()),'recorded_at':datetime.now().astimezone().isoformat(),
++        'case_id':cid,'condition':'R0','split':'dev','stage':stage,'run_kind':'live_api',
++        'experiment_role':'post_formal_development_shared_selection','config':copy.deepcopy(config),
++        'weight_sha256':provenance['sha256'],'model_revision':provenance['revision'],
++        'original_passages':original,'used_passages':copy.deepcopy(used),'source_hashes':source_hashes,
++        'status':'preparing','context':4096,'driver_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
++    path=folder/('run-'+record['run_id']+'.json');assert not path.exists()
++    save=lambda:path.write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++    record['messages']=(candidate.prepare_selection_messages(question,used) if stage=='shared_selection' else student.prepare_messages(question,used))
++    body={'model':config['model'],'messages':record['messages'],'stream':False,**config['parameters']}
++    prompt=service('apply-template',body)['prompt']
++    assert all(m['content'] in prompt for m in record['messages'])
++    assert prompt.endswith('<think>\n\n</think>\n\n')
++    tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
++    record.update(rendered_prompt=prompt,input_tokens=len(tokens),total_capacity=len(tokens)+256)
++    save();assert len(tokens)+256<4096,'实际完整输入超限，不删段'
++    assert not memory_abort.is_set();preserved()
++    record['cache_erase']=service('slots/0?action=erase',{})
++    build_opener=urllib.request.build_opener
++    class CaptureOpener:
++        def __init__(self,inner):self.inner=inner
++        def open(self,request,*args,**kwargs):
++            record['actual_http_request_body']=json.loads(request.data)
++            record['raw_http_request_body']=request.data.decode('utf-8')
++            assert record['actual_http_request_body']==body and body['max_tokens']==256
++            record['request_verified_before_send']=True;save()
++            try:return self.inner.open(request,*args,**kwargs)
++            except urllib.error.HTTPError as e:
++                record['raw_http_error_body']=e.read().decode('utf-8',errors='replace');raise
++    urllib.request.build_opener=lambda *a,**kw:CaptureOpener(build_opener(*a,**kw))
++    try:
++        assert startup['generation_attempts']<12
++        startup['generation_attempts']+=1
++        record.update(provider.call_model(record['messages'],config))
++    except Exception as e:
++        record.update(status='driver_exception',error=repr(e),response=None)
++    finally:
++        urllib.request.build_opener=build_opener;save()
++    if record['status']!='ok' or not isinstance(record.get('response'),dict) or not record['response'].get('choices'):
++        raise RuntimeError('技术请求失败:'+record['run_id'])
++    record['slot_after']=service('slots')
++    params=record['slot_after'][0]['params']
++    record['parameter_checks']={k:math.isclose(params[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric_parameters.items() if k in params and k!='max_tokens'}
++    record['parameters_not_echoed']=[k for k in numeric_parameters if k not in params]+['response_format','effective_n_predict_max']
++    record['request_budget_observation']={'actual_body_max_tokens':body['max_tokens'],'finish_reason_is_not_budget_echo':True}
++    save();assert all(record['parameter_checks'].values()),'请求参数不符'
++    print(json.dumps({'case_id':cid,'stage':stage,'run_id':record['run_id'],'content':record['response']['choices'][0]['message'].get('content'),'elapsed_seconds':record['elapsed_seconds']},ensure_ascii=False),flush=True)
++    return record
++
++tasks=[]
+ try:
+-    # 权重再次核对；不下载、不改变已选代码。
++    with socket.socket() as sock:
++        sock.settimeout(1);assert sock.connect_ex(('127.0.0.1',8080))!=0,'已有8080服务，不停止他人服务'
++    preserved()
+     with (root/'models/Qwen3-0.6B-Q8_0.gguf').open('rb') as stream:
+         assert hashlib.file_digest(stream,'sha256').hexdigest()==provenance['sha256']
+-    startup['before_load']=memory_sample()
+-    assert startup['before_load']['available_bytes']>=2*1024**3, '可用内存不足2 GiB，停止本轮加载'
++    startup['weight_provenance']=provenance
++    startup['server_binary_sha256']=hashlib.sha256((root/'llama-b11429/llama-server.exe').read_bytes()).hexdigest()
++    startup['before_load']=memory_sample();assert startup['before_load']['available_bytes']>=2*1024**3,'可用内存不足2 GiB'
+     with stdout_path.open('wb') as stdout,stderr_path.open('wb') as stderr:
+         process=subprocess.Popen(args,stdout=stdout,stderr=stderr,creationflags=subprocess.CREATE_NO_WINDOW)
+-    started=time.monotonic()
+-    memory_thread=threading.Thread(target=monitor_memory,daemon=True);memory_thread.start()
++    started=time.monotonic();memory_thread=threading.Thread(target=monitor_memory,daemon=True);memory_thread.start()
+     while True:
+-        if memory_abort.is_set():raise RuntimeError('可用内存持续低于1 GiB，停止')
+-        if process.poll() is not None: raise RuntimeError('服务加载失败')
++        if memory_abort.is_set() or process.poll() is not None:raise RuntimeError('服务加载或内存失败')
+         try:
+-            if service('health').get('status')=='ok': break
+-        except (urllib.error.URLError,TimeoutError): pass
+-        if time.monotonic()-started>120: raise TimeoutError('启动超时')
++            if service('health').get('status')=='ok':break
++        except (urllib.error.URLError,TimeoutError):pass
++        if time.monotonic()-started>120:raise TimeoutError('加载超过120秒')
+         time.sleep(.5)
+-    props=service('props')
+-    assert props['default_generation_settings']['n_ctx']==4096
++    props=service('props');assert props['default_generation_settings']['n_ctx']==4096
++    assert props['model_alias']==config_fixed['model']
++    defaults=props['default_generation_settings']['params']
++    assert all(math.isclose(defaults[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric_parameters.items() if k!='max_tokens')
+     props['model_path']='%LOCALAPPDATA%/ANTLabLocalModel/models/Qwen3-0.6B-Q8_0.gguf'
+-    startup['props']=props
+-    startup['candidate_default_parameter_checks']={key:math.isclose(props['default_generation_settings']['params'][key],value,rel_tol=1e-6,abs_tol=1e-6) for key,value in numeric_parameters.items() if key!='max_tokens'}
+-    startup['default_check_scope']='sampling defaults only; request budget checked in serialized body'
+-    assert all(startup['candidate_default_parameter_checks'].values()), '生成前候选参数未生效'
+-    assert startup['after_load']['available_bytes']>=1024**3 if 'after_load' in startup else True
+-    startup['load_seconds']=time.monotonic()-started
+-    startup['after_load']=memory_sample()
+-    template=props.get('chat_template')
+-    assert isinstance(template,str) and '<|im_start|>' in template and '<|im_end|>' in template, '未识别模型自己的ChatML模板'
+-    assert 'enable_thinking' in template or '<think>' in template, '未识别Qwen3自己的思考模板'
+-    assert props.get('model_alias')==config_fixed['model'], '模型别名不一致'
+-    preflight=[]
+-    inputs={}
+-    for cid in ('D01','D02','D03','D04'):
++    startup.update(props=props,load_seconds=time.monotonic()-started,after_load=memory_sample())
++    assert startup['after_load']['available_bytes']>=1024**3
++    preflight=[];inputs={}
++    for cid in ['D01','D02','D03','D04']:
+         row=next(r for r in capacity['rows'] if r['case_id']==cid and r['condition']=='R0')
+         payload=json.loads(row['messages'][1]['content'])
+         ordered=student.improve(payload['question'],copy.deepcopy(payload['passages']))
+         inputs[cid]={'question':payload['question'],'original':payload['passages'],'ordered':ordered}
+-        for label,messages,config in [
+-            ('answer_full',student.prepare_messages(payload['question'],ordered),config_fixed),
+-            ('selection_full',candidate.prepare_selection_messages(payload['question'],ordered),config_selection),
+-            ('answer_empty',student.prepare_messages(payload['question'],[]),config_fixed)]:
+-            request_body={'model':config['model'],'messages':messages,'stream':False,**config['parameters']}
+-            prompt=service('apply-template',request_body)['prompt']
+-            assert all(m['content'] in prompt for m in messages)
+-            assert prompt.endswith('<think>\n\n</think>\n\n')
++        for label,messages,conf in [('selection_full',candidate.prepare_selection_messages(payload['question'],ordered),config_selection),('answer_full',student.prepare_messages(payload['question'],ordered),config_fixed),('answer_empty',student.prepare_messages(payload['question'],[]),config_fixed)]:
++            body={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']}
++            prompt=service('apply-template',body)['prompt']
++            assert all(m['content'] in prompt for m in messages) and prompt.endswith('<think>\n\n</think>\n\n')
+             tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
+-            preflight.append({'case_id':cid,'input_kind':label,'input_tokens':len(tokens),'with_budget':len(tokens)+256,'messages':messages,'rendered_prompt':prompt})
++            preflight.append({'case_id':cid,'kind':label,'messages':messages,'rendered_prompt':prompt,'input_tokens':len(tokens),'output_budget':256,'total':len(tokens)+256})
+             assert len(tokens)+256<4096
+-    (folder/'preflight.json').write_text(json.dumps({'checked_at':datetime.now().astimezone().isoformat(),'counts_as_generation':False,'schema_unique_items_checked_locally':True,'actual_stage2_checked_again_before_send':True,'rows':preflight},ensure_ascii=False,indent=2),encoding='utf-8')
+-    plan.update(recorded_at=datetime.now().astimezone().isoformat(),stage1_config=config_selection,service_arguments=startup['arguments'],generation_limit=12,evaluation='No answer file read until driver has ended all scheduled calls',order=call_order)
+-    (folder/'precall-plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2),encoding='utf-8')
+-    (folder/'runtime-before-generation.json').write_text(json.dumps(startup,ensure_ascii=False,indent=2),encoding='utf-8')
+-    print('PREFLIGHT PASS',[(p['case_id'],p['input_kind'],p['input_tokens']) for p in preflight],flush=True)
+-
+-    def save_parent(parent):
+-        path=folder/('task-'+parent['parent_request_id']+'.json')
+-        path.write_text(json.dumps(parent,ensure_ascii=False,indent=2),encoding='utf-8')
+-
+-    def finish_parent(key,parent,status):
+-        parent['status']=status
+-        parent['ended_at']=datetime.now().astimezone().isoformat()
+-        parent['end_to_end_seconds']=time.perf_counter()-start_times[key]
+-        save_parent(parent)
+-        (folder/'task-results.json').write_text(json.dumps(list(parents.values()),ensure_ascii=False,indent=2),encoding='utf-8')
+-
+-    def validate_answer(content,passages):
+-        try:parsed=json.loads(content,object_pairs_hook=candidate.unique_fields)
+-        except (ValueError,TypeError):parsed=None
+-        valid=isinstance(parsed,dict) and set(parsed)=={'answer','citations'} and isinstance(parsed.get('answer'),str) and isinstance(parsed.get('citations'),list) and all(isinstance(c,str) for c in parsed['citations'])
+-        citations=parsed['citations'] if valid else []
+-        return {'format_complete':valid,'citation_ids_exist':bool(citations) and all(c in {p['id'] for p in passages} for c in citations),'parsed':parsed}
+-
++    write('preflight.json',{'checked_at':datetime.now().astimezone().isoformat(),'counts_as_generation':False,'rows':preflight,'actual_branch_checked_before_each_send':True})
++    write('precall-plan.json',{'recorded_at':datetime.now().astimezone().isoformat(),'design_reference':'design-plan.json','actual_order':call_order,'generation_limit':12,'selection_config':config_selection,'answer_config':config_fixed,'arguments':startup['arguments'],'offline_checks':json.loads((folder/'offline-check.json').read_text(encoding='utf-8'))['passed'],'source_hashes':source_hashes,'evaluation_after_completion_only':True})
++    write('runtime-before-generation.json',startup)
++    print('PREFLIGHT PASS',[(r['case_id'],r['kind'],r['input_tokens']) for r in preflight],flush=True)
+     for item in call_order:
+-        key=(item['case_id'],item['variant'])
+-        data=inputs[item['case_id']]
+-        if item['stage']=='answer' and item['variant']=='candidate' and not parents[key]['selection_validation']['valid']:
+-            skipped.append({**item,'reason':'定位输出非法；不执行第二步、不回退'})
+-            continue
+-        assert startup['generation_attempts']<12
+-        if memory_abort.is_set():raise RuntimeError('内存不足，停止')
+-        for name,digest in source_hashes.items():assert hashlib.sha256((base/'starter'/name).read_bytes()).hexdigest()==digest
+-        assert hashlib.sha256((base/'tests/two_step_candidate.py').read_bytes()).hexdigest()==json.loads((folder/'offline-check.json').read_text(encoding='utf-8'))['module_sha256']
+-        used=(candidate.select_original_passages(data['ordered'],parents[key]['selection_validation']) if item['variant']=='candidate' and item['stage']=='answer' else copy.deepcopy(data['ordered']))
+-        assert all(p in data['ordered'] for p in used)
+-        messages=(candidate.prepare_selection_messages(data['question'],used) if item['stage']=='selection' else student.prepare_messages(data['question'],used))
+-        assert json.loads(messages[1]['content'])=={'question':data['question'],'passages':used}
+-        config=copy.deepcopy(config_selection if item['stage']=='selection' else config_fixed)
+-        body={'model':config['model'],'messages':messages,'stream':False,**config['parameters']}
+-        prompt=service('apply-template',body)['prompt']
+-        assert all(m['content'] in prompt for m in messages)
+-        tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
+-        assert len(tokens)+256<4096,'本次完整输入超限；不删段或改配置'
+-        erase=service('slots/0?action=erase',{})
+-        if key not in parents:
+-            parents[key]={'parent_request_id':str(uuid.uuid4()),'case_id':item['case_id'],'condition':'R0','variant':item['variant'],'started_at':datetime.now().astimezone().isoformat(),'original_passages':data['original'],'ordered_passages':data['ordered'],'question':data['question'],'stage_run_ids':[],'status':'pending'}
+-        parent=parents[key]
+-        record={'schema_version':1,'run_id':str(uuid.uuid4()),'parent_request_id':parent['parent_request_id'],'utc':datetime.now(timezone.utc).isoformat(),'case_id':item['case_id'],'split':'dev','condition':'R0','variant':item['variant'],'stage':item['stage'],'execution_index':item['index'],'mode':'local','run_kind':'live_api','experiment_role':'two_step_development','config':config,'context':4096,'messages':messages,'original_passages':data['original'],'used_passages':used,'original_passage_ids':[p['id'] for p in data['original']],'selected_passage_ids':[p['id'] for p in used],'rendered_prompt':prompt,'rendered_prompt_tokens':len(tokens),'weight_sha256':provenance['sha256'],'model_revision':provenance['revision'],'source_hashes':source_hashes,'driver_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'cache_erase':erase,'status':'request_pending'}
+-        path=folder/f"run-{record['run_id']}.json"
+-        assert not path.exists()
+-        def save():path.write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
+-        save()
+-        parent['stage_run_ids'].append(record['run_id']);save_parent(parent)
+-        build_opener=urllib.request.build_opener
+-        class CaptureOpener:
+-            def __init__(self,inner):self.inner=inner
+-            def open(self,request,*args,**kwargs):
+-                record['actual_http_request_body']=json.loads(request.data)
+-                record['raw_http_request_body']=request.data.decode('utf-8')
+-                assert record['actual_http_request_body']==body and record['actual_http_request_body']['max_tokens']==256
+-                record['request_verified_before_send']=True
+-                try:return self.inner.open(request,*args,**kwargs)
+-                except urllib.error.HTTPError as error:
+-                    record['raw_http_error_body']=error.read().decode('utf-8',errors='replace');raise
+-        urllib.request.build_opener=lambda *args,**kwargs:CaptureOpener(build_opener(*args,**kwargs))
+-        if key not in start_times:start_times[key]=time.perf_counter()
+-        try:
+-            startup['generation_attempts']+=1
+-            record.update(provider.call_model(messages,config))
+-        except Exception as error:
+-            record.update(status='driver_exception',error=type(error).__name__,error_detail=str(error),response=None,usage=None)
+-        finally:
+-            urllib.request.build_opener=build_opener;save()
+-        technical=record['status']!='ok' or not isinstance(record.get('response'),dict) or not record['response'].get('choices')
+-        if technical:
+-            startup['stopped_on_technical_failure']=True
+-            finish_parent(key,parent,'technical_failure')
+-            print('TECHNICAL FAILURE',record['run_id'],record['status'],flush=True)
+-            break
+-        record['server_slot_after_request']=service('slots')
+-        params=record['server_slot_after_request'][0]['params']
+-        record['parameter_checks']={k:math.isclose(params[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric_parameters.items() if k in params}
+-        record['parameters_not_echoed']=[k for k in numeric_parameters if k not in params]+['response_format','effective_n_predict_max']
+-        record['request_budget_observation']={'actual_body_max_tokens':record['actual_http_request_body']['max_tokens'],'task_max_tokens_echo':params.get('max_tokens'),'task_n_predict_echo':params.get('n_predict'),'finish_reason_is_not_budget_echo':True}
+-        save();assert all(record['parameter_checks'].values()),'请求参数未生效，停止'
+-        message=record['response']['choices'][0]['message'];content=message.get('content','')
+-        if item['stage']=='selection':
+-            validation=candidate.validate_selection(content,used)
+-            record['selection_validation']=validation;parent['selection_validation']=validation
+-            parent['raw_selection_content']=content
+-            if not validation['valid']:finish_parent(key,parent,'selection_output_failure')
+-            else:save_parent(parent)
++        cid=item['case_id'];data=inputs[cid];begin=time.perf_counter()
++        parent={'case_id':cid,'condition':'R0','question':data['question'],'original_passages':data['original'],'ordered_passages':data['ordered'],'started_at':datetime.now().astimezone().isoformat(),'branches':{},'status':'pending'}
++        taskpath='task-'+cid+'.json';write(taskpath,parent)
++        shared=call_stage(cid,'shared_selection',data['question'],data['ordered'],data['original'],config_selection)
++        content=shared['response']['choices'][0]['message'].get('content','')
++        validation=candidate.validate_selection(content,data['ordered'])
++        shared_time=time.perf_counter()-begin
++        parent.update(selection_run_id=shared['run_id'],raw_selection=content,selection_validation=validation,shared_selection_pipeline_seconds=shared_time)
++        write(taskpath,parent)
++        if not validation['valid']:
++            parent['status']='selection_output_failure'
++            for stage in item['stages'][1:]:parent['branches'][stage]={'status':'not_executed_invalid_selection','strict_denominator_included':True}
+         else:
+-            validation=validate_answer(content,used)
+-            record['answer_validation']=validation;parent['answer_validation']=validation
+-            parent['raw_final_content']=content;parent['final_used_passages']=used
+-            finish_parent(key,parent,'completed')
+-        save()
+-        summary.append({'run_id':record['run_id'],**item,'status':record['status'],'content':content,'elapsed_seconds':record['elapsed_seconds']})
+-        (folder/'stage-results.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
+-        print(json.dumps(summary[-1],ensure_ascii=False),flush=True)
+-    startup['completed_tasks']=sum(p['status'] in ['completed','selection_output_failure'] for p in parents.values())
+-    startup['planned_tasks']=8
+-    startup['skipped_calls']=skipped
+-    startup['all_planned_tasks_finished']=startup['completed_tasks']==8 and not startup['stopped_on_technical_failure']
+-except Exception as error:
+-    startup.update(stopped_on_technical_failure=True,error=type(error).__name__,error_detail=str(error))
+-    print('STOPPED:',type(error).__name__,str(error),flush=True)
++            for stage in item['stages'][1:]:
++                organizing=time.perf_counter()
++                if stage=='old_answer':used=candidate.select_original_passages(data['ordered'],validation);trace=[]
++                else:used,trace=completion.complete_passages(data['question'],data['ordered'],validation)
++                organizing_seconds=time.perf_counter()-organizing
++                assert used==[p for p in data['ordered'] if p['id'] in {q['id'] for q in used}]
++                parent['branches'][stage]={'status':'request_pending','used_passages':used,'association_trace':trace,'organization_seconds':organizing_seconds}
++                write(taskpath,parent)
++                branch_begin=time.perf_counter()
++                result=call_stage(cid,stage,data['question'],used,data['original'],config_fixed)
++                branch_seconds=time.perf_counter()-branch_begin
++                parent['branches'][stage].update(status='completed',run_id=result['run_id'],raw_content=result['response']['choices'][0]['message'].get('content',''),answer_pipeline_seconds=branch_seconds,
++                    end_to_end_shared_accounting_seconds=shared_time+organizing_seconds+branch_seconds,
++                    wall_clock_from_shared_start_seconds=time.perf_counter()-begin,
++                    timing_limit='共享定位成本在两条流程分别计入，但生成调用只计一次；壁钟跨度可能包含另一分支等待，不用于公平耗时比较。')
++                write(taskpath,parent)
++            parent['status']='completed'
++        parent['ended_at']=datetime.now().astimezone().isoformat();write(taskpath,parent)
++        tasks.append(parent);write('task-results.json',tasks)
++    startup['all_tasks_finished']=len(tasks)==4
++except Exception as e:
++    startup.update(stopped_on_technical_failure=True,error=type(e).__name__,error_detail=str(e))
++    print('STOPPED:',repr(e),flush=True)
+ finally:
+     memory_stop.set()
+     if memory_thread is not None:memory_thread.join(timeout=5)
+-    startup['memory_abort']=memory_abort.is_set()
+     if process is not None and process.poll() is None:
+         process.terminate()
+-        try: process.wait(timeout=10)
+-        except subprocess.TimeoutExpired: process.kill(); process.wait()
++        try:process.wait(timeout=10)
++        except subprocess.TimeoutExpired:process.kill();process.wait()
+     startup['server_stopped']=process is not None and process.poll() is not None
+-    startup['after_stop']=memory_sample()
++    startup['memory_abort']=memory_abort.is_set();startup['after_stop']=memory_sample()
+     log=stderr_path.read_text(encoding='utf-8',errors='replace') if stderr_path.exists() else ''
++    write('runtime.json',startup)
+     (folder/'server-log.txt').write_text(log.replace(str(root),'%LOCALAPPDATA%\\ANTLabLocalModel'),encoding='utf-8')
+-    (folder/'runtime.json').write_text(json.dumps(startup,ensure_ascii=False,indent=2),encoding='utf-8')
+-    (folder/'stage-results.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
+-    print('FINAL ATTEMPTS:',startup['generation_attempts'],'SERVICE STOPPED:',startup['server_stopped'],flush=True)
++    if stdout_path.exists():(folder/'server-stdout.txt').write_text(stdout_path.read_text(encoding='utf-8',errors='replace').replace(str(root),'%LOCALAPPDATA%\\ANTLabLocalModel'),encoding='utf-8')
++    print('FINAL ATTEMPTS:',startup['generation_attempts'],'STOPPED:',startup['server_stopped'],flush=True)
+--- /dev/null
++++ 基础/tests/review_two_step_linked.py
+@@ -0,0 +1,78 @@
++"""整轮停止后评价开发结果；答案文件不进入定位或补页代码。"""
++from pathlib import Path
++from datetime import datetime
++import json,hashlib,re,sys
++import two_step_candidate as selection
++folder=Path(sys.argv[1]);repo=Path(__file__).resolve().parents[2];base=repo/'基础'
++load=lambda p:json.loads(p.read_text(encoding='utf-8'))
++runtime=load(folder/'runtime.json');assert runtime['server_stopped']
++assert runtime.get('all_tasks_finished') and not runtime['stopped_on_technical_failure'],'技术停止时不伪造完整配对评价'
++# 只在生成驱动全部结束后读取公开开发答案。
++gold={g['id']:g for g in load(base/'data/dev_answers.json')}
++tasks=load(folder/'task-results.json');records={r['run_id']:r for r in [load(p) for p in folder.glob('run-*.json')]}
++rows=[]
++for task in tasks:
++    cid=task['case_id'];g=gold[cid];original=task['ordered_passages'];by_id={p['id']:p for p in original}
++    required=set(g['evidence_ids'])
++    if cid=='D02':
++        required={p['id'] for p in original if ('夜间组代号' in p['text'] and '只收到HTTP响应和模型显示名' in p['text']) or ('资产、设备遥测与推理节点字段均未被采集' in p['text'])}
++    def coverage(ids):return bool(set(ids)&required) if cid=='D02' else required.issubset(ids)
++    seed=task['selection_validation'];seed_ids=seed['selected_ids'] if seed['valid'] else []
++    for variant in ['old_answer','linked_answer']:
++        branch=task['branches'][variant];used=branch.get('used_passages',[]);used_ids={p['id'] for p in used}
++        content=branch.get('raw_content')
++        try:value=json.loads(content,object_pairs_hook=selection.unique_fields)
++        except (ValueError,TypeError):value=None
++        valid=isinstance(value,dict) and set(value)=={'answer','citations'} and isinstance(value.get('answer'),str) and isinstance(value.get('citations'),list) and all(isinstance(i,str) for i in value['citations'])
++        answer=value['answer'] if valid else None;citations=value['citations'] if valid else []
++        correct=isinstance(answer,str) and answer.strip() in g['aliases']
++        semantic=correct or (cid=='D02' and answer in ['服务端GPU型号未知','未提及具体型号'])
++        ids_exist=all(i in used_ids for i in citations) if valid else False
++        citations_nonempty=bool(citations)
++        necessary=coverage(citations)
++        support=bool(semantic and ids_exist and citations_nonempty and necessary)
++        irrelevant=[i for i in citations if i in by_id and i not in required]
++        full=bool(valid and correct and ids_exist and support and not irrelevant and seed['valid'])
++        input_coverage=coverage(used_ids);selection_coverage=coverage(seed_ids)
++        reasons=[]
++        if not valid:reasons.append('最终格式失败或定位非法未执行回答')
++        if not input_coverage:reasons.append('选取/补全后仍缺必要依据')
++        if input_coverage and not correct:reasons.append('输入证据已覆盖但答案错误：回答阶段问题；D02语义一致与指定答法另列')
++        elif not correct:reasons.append('答案不符合公开开发答案指定答法，不能全部归因定位')
++        if not necessary:reasons.append('引用没有覆盖必要依据')
++        if irrelevant:reasons.append('含无关或范围冲突引用')
++        record=records.get(branch.get('run_id'))
++        rows.append({'case_id':cid,'variant':variant,'selection_run_id':task['selection_run_id'],'selected_ids':seed_ids,
++                     'selection_valid':seed['valid'],'selection_necessary_coverage':selection_coverage,
++                     'added_passages':[p for p in used if p['id'] not in seed_ids],'association_trace':branch.get('association_trace',[]),
++                     'used_ids':[p['id'] for p in used],'input_necessary_evidence_coverage':input_coverage,
++                     'raw_content':content,'answer':answer,'citations':citations,'format_complete':valid,
++                     'answer_correct_specified_form':correct,'semantic_consistent':semantic,
++                     'D02_semantic_consistent':semantic if cid=='D02' else None,'D02_specified_form':correct if cid=='D02' else None,
++                     'citation_ids_exist':ids_exist,'citations_nonempty':citations_nonempty,'necessary_evidence_covered':necessary,
++                     'evidence_supports_actual_answer':support,'irrelevant_citations':irrelevant,'strict_complete_success':full,
++                     'failure_reasons':reasons,'public_answer_reason':g['reason'],
++                     'source_basis':[{'id':p['id'],'source':p['source'],'quote':p['text']} for p in original if p['id'] in required],
++                     'shared_selection_pipeline_seconds':task['shared_selection_pipeline_seconds'],
++                     'organization_seconds':branch.get('organization_seconds'),'answer_pipeline_seconds':branch.get('answer_pipeline_seconds'),
++                     'end_to_end_seconds':branch.get('end_to_end_shared_accounting_seconds'),
++                     'wall_clock_from_shared_start_seconds':branch.get('wall_clock_from_shared_start_seconds'),
++                     'answer_http_seconds':record['elapsed_seconds'] if record else None,
++                     'usage':record.get('usage') if record else None,'finish_reason':record['response']['choices'][0]['finish_reason'] if record else None,
++                     'answer_record_path':str((folder/('run-'+record['run_id']+'.json')).relative_to(repo)).replace('\\','/') if record else None})
++table=[]
++for variant in ['old_answer','linked_answer']:
++    group=[r for r in rows if r['variant']==variant]
++    table.append({'variant':variant,'denominator':4,'format_complete':sum(r['format_complete'] for r in group),'answer_correct':sum(r['answer_correct_specified_form'] for r in group),'strict_complete_success':sum(r['strict_complete_success'] for r in group),'total_end_to_end_seconds':sum(r['end_to_end_seconds'] or 0 for r in group)})
++selected='linked_answer' if (table[1]['strict_complete_success'],table[1]['answer_correct'])>(table[0]['strict_complete_success'],table[0]['answer_correct']) else 'old_answer'
++truncation=re.findall(r'truncated\s*=\s*(\d+)',(folder/'server-log.txt').read_text(encoding='utf-8'))
++assert len(truncation)==runtime['generation_attempts']==len(records) and set(truncation)=={'0'}
++assert len({r['run_id'] for r in records.values()})==len(records)<=12
++assert all(r['request_verified_before_send'] and r['actual_http_request_body']['max_tokens']==256 and all(r['parameter_checks'].values()) and r['total_capacity']<4096 for r in records.values())
++protected=load(folder/'protected-hashes.json');assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in protected.items())
++history=load(base/'runs/two_step/dev_r0/summary.json')
++summary={'reviewed_at':datetime.now().astimezone().isoformat(),'review_source':'Codex辅助开发原文评价，未登记本人逐项核验','table':table,'selected':selected,'selection_rule':'严格完整成功优先，其次指定答法答案正确；同分保留更简单旧两步。','generation_calls':len(records),'cumulative_generation_calls':124+len(records),'shared_selection_calls':sum(r['stage']=='shared_selection' for r in records.values()),'answer_calls':sum(r['stage']!='shared_selection' for r in records.values()),'truncation_flags':truncation,'protected_files_unchanged':len(protected),'service_stopped':runtime['server_stopped'],'history_single_step_comparison':{'source':'基础/runs/two_step/dev_r0/summary.json','row':history['table'][0],'limit':'原单步方案仅引用历史结果，非本轮同步对照；不能直接归因补页。'},'post_formal_development':True,'no_follow_up_search_or_calls':True,'timing_limit':'每条流程分别计入共享定位成本，不把共享定位算两次生成；流程时间是分支归属成本，另列实际壁钟跨度。'}
++for name,value in [('semantic-review.json',rows),('summary.json',summary)]:
++    p=folder/name;assert not p.exists();p.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++print(json.dumps(summary,ensure_ascii=False,indent=2))
++for r in rows:print(json.dumps({k:r[k] for k in ['case_id','variant','selected_ids','used_ids','answer','citations','strict_complete_success','input_necessary_evidence_coverage','failure_reasons','end_to_end_seconds']},ensure_ascii=False))

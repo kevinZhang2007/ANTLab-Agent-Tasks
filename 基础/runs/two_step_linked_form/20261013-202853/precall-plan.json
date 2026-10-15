@@ -1,0 +1,162 @@
+{
+  "recorded_at": "2026-10-13T20:30:24.308227+08:00",
+  "design_reference": "design-plan.json",
+  "actual_order": [
+    {
+      "case_id": "D01",
+      "stages": [
+        "selection",
+        "answer"
+      ]
+    },
+    {
+      "case_id": "D02",
+      "stages": [
+        "selection",
+        "answer"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "stages": [
+        "selection",
+        "answer"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "stages": [
+        "selection",
+        "answer"
+      ]
+    }
+  ],
+  "generation_limit": 8,
+  "selection_config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 256,
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "selected_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "selected_ids"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "timeout_seconds": 180
+  },
+  "answer_config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 256,
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "answer",
+              "citations"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "timeout_seconds": 180
+  },
+  "arguments": [
+    "%LOCALAPPDATA%/ANTLabLocalModel\\llama-b11429\\llama-server.exe",
+    "-m",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\models\\Qwen3-0.6B-Q8_0.gguf",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "--alias",
+    "Qwen3-0.6B-Q8_0",
+    "--ctx-size",
+    "4096",
+    "--parallel",
+    "1",
+    "--batch-size",
+    "128",
+    "--ubatch-size",
+    "64",
+    "--threads",
+    "4",
+    "--gpu-layers",
+    "0",
+    "--no-context-shift",
+    "--no-warmup",
+    "--temp",
+    "0.7",
+    "--top-p",
+    "0.8",
+    "--top-k",
+    "20",
+    "--min-p",
+    "0",
+    "--presence-penalty",
+    "1.5",
+    "--repeat-penalty",
+    "1.0",
+    "--reasoning",
+    "off",
+    "--seed",
+    "42",
+    "--predict",
+    "256",
+    "--slot-save-path",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\diagnostic-cache"
+  ],
+  "offline_checks": true,
+  "source_hashes": {
+    "student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045"
+  },
+  "evaluation_after_completion_only": true
+}

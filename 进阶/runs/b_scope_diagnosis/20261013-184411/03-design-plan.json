@@ -1,0 +1,109 @@
+{
+  "planned_at": "2026-10-13T18:44:20.448750+08:00",
+  "code_base_commit": "78b97898e713a3b8ec2cdffeec8c6758c4bcbbc9",
+  "primary_hypothesis": "缓存键遗漏范围/快照，暖缓存同query变更范围时复用旧答案和证据。",
+  "competing_mechanism": "范围外排序与top-k先截取可能在切换文档后漏掉范围内匹配；即使清缓存仍有错误。",
+  "source_based_limit": "检索分支随后按snapshot/doc_ids过滤，不能单独产生越界旧证据；不把已被源码排除的旧证据解释拿来凑数。第二机制是同类范围不一致中的漏证来源，可能与缓存问题共同作用。",
+  "predictions": [
+    {
+      "cause": "cache_scope_omission",
+      "before_intervention_prediction": "R01→R02命中同query缓存，可能出现新请求v2但旧v1证据及30秒答案；清缓存或新Engine保留R02全部其他输入，应得到v2证据及固定12秒draft。"
+    },
+    {
+      "cause": "global_rank_before_scope",
+      "before_intervention_prediction": "R03 beta/v1/k=1冷请求时全库alpha高分先占一名，过滤后可能为空；清缓存不能解决漏证。R02 k=2全库前两名含v2目标，冷请求不应漏掉它。"
+    },
+    {
+      "control": "same_scope_repeat",
+      "prediction": "R01同输入重复命中缓存可保持相同内容与范围，但仍应有不同request_id；cache_hit本身不等于故障。"
+    }
+  ],
+  "interventions": "只清空Engine.cache或新建原Engine；请求、完整corpus及draft逐项保持一致，不改Engine或排序逻辑。",
+  "interface_basis": "Engine.evaluate(request,corpus,draft)；Engine.cache实例状态；server.py reset执行cache.clear。",
+  "scope_policy": "R01→R02沿用原CLI重放顺序；R01→R03暖序列是显式构造诊断，未按R03的reset_before=true重置，不能冒充原CLI默认序列。HTTP页面不勾reset时可形成这种状态，但本轮未运行页面。",
+  "oracle": "按spec先scope过滤，再按query/tags交集分数与id排序，只保留正分，返回最多k；这是独立契约核对，不修复生产Engine。",
+  "execution_order": [
+    {
+      "order": 1,
+      "engine": "A",
+      "case": "R01",
+      "action": "new",
+      "role": "snapshot_baseline_seed"
+    },
+    {
+      "order": 2,
+      "engine": "A",
+      "case": "R02",
+      "action": "keep",
+      "role": "snapshot_baseline_changed"
+    },
+    {
+      "order": 3,
+      "engine": "A",
+      "case": "R02",
+      "action": "clear",
+      "role": "snapshot_clear_cache_intervention"
+    },
+    {
+      "order": 4,
+      "engine": "B",
+      "case": "R02",
+      "action": "new",
+      "role": "snapshot_new_engine_control"
+    },
+    {
+      "order": 5,
+      "engine": "C",
+      "case": "R01",
+      "action": "new",
+      "role": "document_diagnostic_seed"
+    },
+    {
+      "order": 6,
+      "engine": "C",
+      "case": "R03",
+      "action": "keep",
+      "role": "document_diagnostic_changed"
+    },
+    {
+      "order": 7,
+      "engine": "C",
+      "case": "R03",
+      "action": "clear",
+      "role": "document_clear_cache_intervention"
+    },
+    {
+      "order": 8,
+      "engine": "D",
+      "case": "R03",
+      "action": "new",
+      "role": "document_new_engine_control"
+    },
+    {
+      "order": 9,
+      "engine": "E",
+      "case": "R01",
+      "action": "new",
+      "role": "unchanged_scope_control_first"
+    },
+    {
+      "order": 10,
+      "engine": "E",
+      "case": "R01",
+      "action": "keep",
+      "role": "unchanged_scope_control_repeat"
+    }
+  ],
+  "planned_offline_replays": 10,
+  "model_generations": 0,
+  "denominator": "全部10次离线观察保留；区分种子、诊断、状态干预与同输入控制，不能当10个独立用户问题。",
+  "stop_rule": "任何执行异常或输入/代码哈希变化保存后停止；不自动重试，不按结果追加干预。",
+  "timing_limit": "原Engine的elapsed_ms及函数端到端时间仅为离线样机时间，不代表LLM，单次值不用于性能结论。",
+  "not_this_round": [
+    "修复",
+    "修复后两个正常回归与两个等价变体",
+    "自造边界验证",
+    "实际HTTP/UI闭环",
+    "模型API调用"
+  ]
+}

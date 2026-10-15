@@ -1,0 +1,40 @@
+{
+  "provider": "llama.cpp",
+  "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+  "model": "Qwen3-0.6B-Q8_0",
+  "parameters": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 1.5,
+    "seed": 42,
+    "max_tokens": 256,
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "answer": {
+              "type": "string",
+              "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?%|证据不足)$"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "answer",
+            "citations"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "timeout_seconds": 180
+}

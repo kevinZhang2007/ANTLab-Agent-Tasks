@@ -1,0 +1,23 @@
+{
+  "saved_at": "2026-10-15T13:34:04.921598+08:00",
+  "kind": "post_evaluation_independent_offline_ratio_proposal",
+  "source_complete_round": "基础/runs/general_proof_full_r0/20261015-131742",
+  "generation_calls": 0,
+  "services_started": false,
+  "denominator": 8,
+  "rules": [
+    "先按问题识别指标，要求只计/列为的原文分类定义，再读同范围唯一并列计数和明确分母。",
+    "分子只按明确类别计数相加；不由合法返回数反推技术失败，不将部分支持默认为完全支持。",
+    "仅支持同计数单位、分类不嵌套、无明示重复交叉且总和等于分母的单次并列结果。列为不是穷尽定义，其他类别还须明示正常结果。",
+    "首次必须有只计初次等范围证据；任何无法归属的额外计数/重试计数拒绝。",
+    "Decimal计算百分比；精确有限十进制无须舍入，无限小数需明确四舍五入位数，未解析舍入要求拒绝。"
+  ],
+  "proposal": "单独proposed_response，记录answer_changed；模型raw_response、已有proof/derived_response/最终输出都另存不改。",
+  "material_policy": "事实与引文仅最终模型输入；其他原始可见资料只供范围、实体和唯一性审计。",
+  "limits": [
+    "有限句式与明示正常状态检查不是通用语义分类。",
+    "并列分类及计数闭合不能保证没有未写出的隐含交叉；最终需独立原文复核。"
+  ],
+  "gate": "比例正反例及130/83/14旧证明检查全部通过才冻结，并离线处理全8条；无模型调用。",
+  "prior_cumulative": 372
+}

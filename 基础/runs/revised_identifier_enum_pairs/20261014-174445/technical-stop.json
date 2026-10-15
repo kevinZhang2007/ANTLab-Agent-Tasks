@@ -1,0 +1,41 @@
+{
+  "recorded_at": "2026-10-14T17:45:40.781987+08:00",
+  "phase": "offline_preparation_consistency_check",
+  "error_type": "AssertionError",
+  "source": "prepare_revised_enum_run.py:30",
+  "cause": "检查脚本直接比较Python tuple与JSON保存后恢复的list，误判角色记录不一致；规范JSON序列化后完全一致，Schema也一致。不是规则或模型配置变化。",
+  "checks": [
+    {
+      "case_id": "T01",
+      "schema_equal": true,
+      "raw_python_comparison_equal": false,
+      "after_json_serialization_equal": true,
+      "python_target_role_type": "tuple",
+      "saved_json_target_role_type": "list",
+      "candidate_values": [
+        "S23",
+        "S24",
+        "S25"
+      ]
+    },
+    {
+      "case_id": "T08",
+      "schema_equal": true,
+      "raw_python_comparison_equal": false,
+      "after_json_serialization_equal": true,
+      "python_target_role_type": "tuple",
+      "saved_json_target_role_type": "list",
+      "candidate_values": [
+        "K16",
+        "K17",
+        "K18"
+      ]
+    }
+  ],
+  "generation_calls": 0,
+  "service_started": false,
+  "model_loaded": false,
+  "native_validation_run_this_round": false,
+  "capacity_checked": false,
+  "no_automatic_patch_or_retry": true
+}

@@ -1,0 +1,4754 @@
+{
+  "checked_at": "2026-10-14T23:18:54.432818+08:00",
+  "passed": true,
+  "returncode": 0,
+  "checker_sha256": "f0579281d7fbace6414b02148d9e26466a2e87dad348fa89057f258d0c8b5214",
+  "tests": [
+    {
+      "name": "required_failure",
+      "passed": true,
+      "audit": {
+        "answer_form": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "type_enum": {
+          "enabled": true,
+          "values": [
+            "Snap11"
+          ],
+          "occurrences": [
+            {
+              "passage_index": 0,
+              "value": "V2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 0,
+              "value": "BX37",
+              "start": 23,
+              "end": 27
+            },
+            {
+              "passage_index": 0,
+              "value": "Snap11",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "position_unit": "Python Unicode字符，start含/end不含",
+          "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+          "old_values": [
+            "V2",
+            "BX37",
+            "Snap11"
+          ],
+          "decisions": [
+            {
+              "value": "V2",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V2",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 0,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V2版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "BX37",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "table",
+                  "passage_index": 0,
+                  "start": 23,
+                  "end": 27,
+                  "recognition_text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                  "recognition_start": 0,
+                  "recognition_end": 44,
+                  "extractor_evidence": {
+                    "object_type": "table",
+                    "object_name": "复核表",
+                    "raw_label": "复核表",
+                    "code": "BX37",
+                    "start": 20,
+                    "end": 27,
+                    "code_start": 23,
+                    "code_end": 27,
+                    "statement": {
+                      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                      "start": 0,
+                      "end": 44
+                    },
+                    "reliable_declaration": true,
+                    "direct_supplement_reference": false,
+                    "mere_reference": false,
+                    "declaration_predicate": {
+                      "text": "显示",
+                      "start": 27,
+                      "end": 29
+                    }
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                },
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "batch",
+                  "passage_index": 1,
+                  "start": 2,
+                  "end": 6,
+                  "recognition_text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                  "recognition_start": 0,
+                  "recognition_end": 34,
+                  "extractor_evidence": {
+                    "object_type": "batch",
+                    "object_name": "批次",
+                    "raw_label": "批次",
+                    "code": "BX37",
+                    "start": 0,
+                    "end": 6,
+                    "code_start": 2,
+                    "code_end": 6,
+                    "statement": {
+                      "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                      "start": 0,
+                      "end": 34
+                    },
+                    "reliable_declaration": false,
+                    "direct_supplement_reference": true,
+                    "mere_reference": false,
+                    "declaration_predicate": null
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "Snap11",
+              "excluded": false,
+              "reason": "unknown_role_keep",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [],
+              "semantic_conflicts": []
+            }
+          ],
+          "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+          "target_role": [
+            "other",
+            "快照"
+          ]
+        },
+        "qualification_enabled": true,
+        "qualification_status": "exclusions_applied",
+        "no_remaining_candidate_qualification": true,
+        "rule_audit": {
+          "original_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "answer_enum": [
+            "证据不足"
+          ],
+          "changed": true,
+          "decisions": [
+            {
+              "candidate": "Snap11",
+              "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+              "passage_id": "data",
+              "start": 0,
+              "end": 44,
+              "excluded": true,
+              "eligibility": "explicit_violation_of_identified_requirement",
+              "relations": [
+                {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                        "start": 0,
+                        "end": 44
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                }
+              ],
+              "rule_evidence": [
+                {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求区域定位检查全部通过",
+                  "required_pass_items": [
+                    "区域定位"
+                  ],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": false,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                }
+              ],
+              "matches": [
+                {
+                  "event": {
+                    "status": "explicit_defect",
+                    "expression_class": "positive_presence",
+                    "rule": "local_nonzero_quantity",
+                    "trigger": "失败",
+                    "trigger_start": 41,
+                    "trigger_end": 43,
+                    "description_quote": "区域定位2项失败",
+                    "description_start": 35,
+                    "description_end": 43,
+                    "negation_scope": null,
+                    "quantity_scope": [
+                      {
+                        "start": 39,
+                        "end": 41,
+                        "quote": "2项",
+                        "number_start": 39,
+                        "number_end": 40,
+                        "raw": "2",
+                        "value": 2,
+                        "ownership": "current_check_item",
+                        "quantity_kind": "defect_count",
+                        "item_scope": {
+                          "start": 35,
+                          "end": 43,
+                          "quote": "区域定位2项失败"
+                        }
+                      }
+                    ],
+                    "unparsed_quantity_scope": null,
+                    "quantity_text": "2",
+                    "quantity": 2,
+                    "pass_scope": null,
+                    "overall_eligibility_not_inferred": true,
+                    "condition_context_not_semantically_parsed": true,
+                    "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                    "start": 0,
+                    "end": 44
+                  },
+                  "derived_check_name": "区域定位",
+                  "rule": {
+                    "passage_id": "rule",
+                    "start": 19,
+                    "end": 33,
+                    "quote": "规则要求区域定位检查全部通过",
+                    "required_pass_items": [
+                      "区域定位"
+                    ],
+                    "forbidden_literals": [],
+                    "unresolved_required_checks": false,
+                    "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                  },
+                  "scope_basis": "全输入唯一可靠主声明与完整编号直接补页指称；明示范围冲突由原关联器拒绝。缺失字段仍登记unknown，不当作相等。",
+                  "relation": {
+                    "supplement_id": "rule",
+                    "target_id": "data",
+                    "added": true,
+                    "reference_evidence": [
+                      {
+                        "object_type": "batch",
+                        "object_name": "批次",
+                        "raw_label": "批次",
+                        "code": "BX37",
+                        "start": 0,
+                        "end": 6,
+                        "code_start": 2,
+                        "code_end": 6,
+                        "statement": {
+                          "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                          "start": 0,
+                          "end": 34
+                        },
+                        "reliable_declaration": false,
+                        "direct_supplement_reference": true,
+                        "mere_reference": false,
+                        "declaration_predicate": null
+                      }
+                    ],
+                    "candidate_target_ids": [
+                      "data"
+                    ],
+                    "unknown_scope_fields": [
+                      "project",
+                      "version",
+                      "date",
+                      "namespace"
+                    ],
+                    "semantic_support_verified": false,
+                    "target_declarations": [
+                      {
+                        "object_type": "table",
+                        "object_name": "复核表",
+                        "raw_label": "复核表",
+                        "code": "BX37",
+                        "start": 20,
+                        "end": 27,
+                        "code_start": 23,
+                        "code_end": 27,
+                        "statement": {
+                          "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                          "start": 0,
+                          "end": 44
+                        },
+                        "reliable_declaration": true,
+                        "direct_supplement_reference": false,
+                        "mere_reference": false,
+                        "declaration_predicate": {
+                          "text": "显示",
+                          "start": 27,
+                          "end": 29
+                        }
+                      }
+                    ],
+                    "reason": "unique_reliable_direct_reference",
+                    "object_labels_equal": false,
+                    "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                  },
+                  "matching_basis": "exact_check_name",
+                  "reason": "该项明确缺陷与同范围发布规则明示必检项/禁止缺陷逐字对应。"
+                }
+              ],
+              "unmatched_defects": [],
+              "remaining_does_not_mean_eligible": true,
+              "reason": "reliably_identified_required_check_violation"
+            }
+          ],
+          "unresolved_rules": [],
+          "needs_manual_correspondence": false,
+          "no_automatic_qualification_or_citation": true
+        },
+        "explicit_states": [
+          {
+            "snapshot": "Snap11",
+            "passage_index": 0,
+            "passage_id": "data",
+            "candidate_start": 29,
+            "candidate_end": 35,
+            "start": 0,
+            "end": 44,
+            "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+            "events": [
+              {
+                "status": "explicit_defect",
+                "expression_class": "positive_presence",
+                "rule": "local_nonzero_quantity",
+                "trigger": "失败",
+                "trigger_start": 41,
+                "trigger_end": 43,
+                "description_quote": "区域定位2项失败",
+                "description_start": 35,
+                "description_end": 43,
+                "negation_scope": null,
+                "quantity_scope": [
+                  {
+                    "start": 39,
+                    "end": 41,
+                    "quote": "2项",
+                    "number_start": 39,
+                    "number_end": 40,
+                    "raw": "2",
+                    "value": 2,
+                    "ownership": "current_check_item",
+                    "quantity_kind": "defect_count",
+                    "item_scope": {
+                      "start": 35,
+                      "end": 43,
+                      "quote": "区域定位2项失败"
+                    }
+                  }
+                ],
+                "unparsed_quantity_scope": null,
+                "quantity_text": "2",
+                "quantity": 2,
+                "pass_scope": null,
+                "overall_eligibility_not_inferred": true,
+                "condition_context_not_semantically_parsed": true,
+                "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                "start": 0,
+                "end": 44
+              }
+            ],
+            "unparsed_content": [],
+            "qualification_not_checked": true,
+            "unclosed_count_not_defaulted_to_zero": true,
+            "observed_state": "explicit_defect"
+          }
+        ],
+        "qualification_reason": "only_reliable_current_visible_rule_matches",
+        "excluded": [
+          {
+            "candidate": "Snap11",
+            "matches": [
+              {
+                "event": {
+                  "status": "explicit_defect",
+                  "expression_class": "positive_presence",
+                  "rule": "local_nonzero_quantity",
+                  "trigger": "失败",
+                  "trigger_start": 41,
+                  "trigger_end": 43,
+                  "description_quote": "区域定位2项失败",
+                  "description_start": 35,
+                  "description_end": 43,
+                  "negation_scope": null,
+                  "quantity_scope": [
+                    {
+                      "start": 39,
+                      "end": 41,
+                      "quote": "2项",
+                      "number_start": 39,
+                      "number_end": 40,
+                      "raw": "2",
+                      "value": 2,
+                      "ownership": "current_check_item",
+                      "quantity_kind": "defect_count",
+                      "item_scope": {
+                        "start": 35,
+                        "end": 43,
+                        "quote": "区域定位2项失败"
+                      }
+                    }
+                  ],
+                  "unparsed_quantity_scope": null,
+                  "quantity_text": "2",
+                  "quantity": 2,
+                  "pass_scope": null,
+                  "overall_eligibility_not_inferred": true,
+                  "condition_context_not_semantically_parsed": true,
+                  "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                  "start": 0,
+                  "end": 44
+                },
+                "derived_check_name": "区域定位",
+                "rule": {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求区域定位检查全部通过",
+                  "required_pass_items": [
+                    "区域定位"
+                  ],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": false,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                },
+                "scope_basis": "全输入唯一可靠主声明与完整编号直接补页指称；明示范围冲突由原关联器拒绝。缺失字段仍登记unknown，不当作相等。",
+                "relation": {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                        "start": 0,
+                        "end": 44
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                },
+                "matching_basis": "exact_check_name",
+                "reason": "该项明确缺陷与同范围发布规则明示必检项/禁止缺陷逐字对应。"
+              }
+            ],
+            "question_scope": {
+              "project": [],
+              "version": [],
+              "date": [
+                "2026-01"
+              ],
+              "namespace": []
+            },
+            "source_scope": {
+              "project": [],
+              "version": [],
+              "date": [
+                "2026-01"
+              ],
+              "namespace": []
+            }
+          }
+        ],
+        "kept_unknown": [],
+        "original_enum": [
+          "Snap11",
+          "证据不足"
+        ],
+        "final_enum": [
+          "证据不足"
+        ]
+      },
+      "enum": [
+        "证据不足"
+      ]
+    },
+    {
+      "name": "unrelated_failure",
+      "passed": true,
+      "audit": {
+        "answer_form": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "type_enum": {
+          "enabled": true,
+          "values": [
+            "Snap11"
+          ],
+          "occurrences": [
+            {
+              "passage_index": 0,
+              "value": "V2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 0,
+              "value": "BX37",
+              "start": 23,
+              "end": 27
+            },
+            {
+              "passage_index": 0,
+              "value": "Snap11",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "position_unit": "Python Unicode字符，start含/end不含",
+          "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+          "old_values": [
+            "V2",
+            "BX37",
+            "Snap11"
+          ],
+          "decisions": [
+            {
+              "value": "V2",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V2",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 0,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V2版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "BX37",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "table",
+                  "passage_index": 0,
+                  "start": 23,
+                  "end": 27,
+                  "recognition_text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出2项失败。",
+                  "recognition_start": 0,
+                  "recognition_end": 42,
+                  "extractor_evidence": {
+                    "object_type": "table",
+                    "object_name": "复核表",
+                    "raw_label": "复核表",
+                    "code": "BX37",
+                    "start": 20,
+                    "end": 27,
+                    "code_start": 23,
+                    "code_end": 27,
+                    "statement": {
+                      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出2项失败。",
+                      "start": 0,
+                      "end": 42
+                    },
+                    "reliable_declaration": true,
+                    "direct_supplement_reference": false,
+                    "mere_reference": false,
+                    "declaration_predicate": {
+                      "text": "显示",
+                      "start": 27,
+                      "end": 29
+                    }
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                },
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "batch",
+                  "passage_index": 1,
+                  "start": 2,
+                  "end": 6,
+                  "recognition_text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                  "recognition_start": 0,
+                  "recognition_end": 34,
+                  "extractor_evidence": {
+                    "object_type": "batch",
+                    "object_name": "批次",
+                    "raw_label": "批次",
+                    "code": "BX37",
+                    "start": 0,
+                    "end": 6,
+                    "code_start": 2,
+                    "code_end": 6,
+                    "statement": {
+                      "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                      "start": 0,
+                      "end": 34
+                    },
+                    "reliable_declaration": false,
+                    "direct_supplement_reference": true,
+                    "mere_reference": false,
+                    "declaration_predicate": null
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "Snap11",
+              "excluded": false,
+              "reason": "unknown_role_keep",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [],
+              "semantic_conflicts": []
+            }
+          ],
+          "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+          "target_role": [
+            "other",
+            "快照"
+          ]
+        },
+        "qualification_enabled": false,
+        "qualification_status": "unknown_keep_original",
+        "no_remaining_candidate_qualification": true,
+        "rule_audit": {
+          "original_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "answer_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "changed": false,
+          "decisions": [
+            {
+              "candidate": "Snap11",
+              "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出2项失败。",
+              "passage_id": "data",
+              "start": 0,
+              "end": 42,
+              "excluded": false,
+              "eligibility": "unknown",
+              "relations": [
+                {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出2项失败。",
+                        "start": 0,
+                        "end": 42
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                }
+              ],
+              "rule_evidence": [
+                {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求区域定位检查全部通过",
+                  "required_pass_items": [
+                    "区域定位"
+                  ],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": false,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                }
+              ],
+              "matches": [],
+              "unmatched_defects": [
+                {
+                  "event": {
+                    "status": "explicit_defect",
+                    "expression_class": "positive_presence",
+                    "rule": "local_nonzero_quantity",
+                    "trigger": "失败",
+                    "trigger_start": 39,
+                    "trigger_end": 41,
+                    "description_quote": "导出2项失败",
+                    "description_start": 35,
+                    "description_end": 41,
+                    "negation_scope": null,
+                    "quantity_scope": [
+                      {
+                        "start": 37,
+                        "end": 39,
+                        "quote": "2项",
+                        "number_start": 37,
+                        "number_end": 38,
+                        "raw": "2",
+                        "value": 2,
+                        "ownership": "current_check_item",
+                        "quantity_kind": "defect_count",
+                        "item_scope": {
+                          "start": 35,
+                          "end": 41,
+                          "quote": "导出2项失败"
+                        }
+                      }
+                    ],
+                    "unparsed_quantity_scope": null,
+                    "quantity_text": "2",
+                    "quantity": 2,
+                    "pass_scope": null,
+                    "overall_eligibility_not_inferred": true,
+                    "condition_context_not_semantically_parsed": true,
+                    "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出2项失败。",
+                    "start": 0,
+                    "end": 42
+                  },
+                  "derived_check_name": "导出",
+                  "rule": {
+                    "passage_id": "rule",
+                    "start": 19,
+                    "end": 33,
+                    "quote": "规则要求区域定位检查全部通过",
+                    "required_pass_items": [
+                      "区域定位"
+                    ],
+                    "forbidden_literals": [],
+                    "unresolved_required_checks": false,
+                    "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                  },
+                  "scope_basis": "全输入唯一可靠主声明与完整编号直接补页指称；明示范围冲突由原关联器拒绝。缺失字段仍登记unknown，不当作相等。",
+                  "relation": {
+                    "supplement_id": "rule",
+                    "target_id": "data",
+                    "added": true,
+                    "reference_evidence": [
+                      {
+                        "object_type": "batch",
+                        "object_name": "批次",
+                        "raw_label": "批次",
+                        "code": "BX37",
+                        "start": 0,
+                        "end": 6,
+                        "code_start": 2,
+                        "code_end": 6,
+                        "statement": {
+                          "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                          "start": 0,
+                          "end": 34
+                        },
+                        "reliable_declaration": false,
+                        "direct_supplement_reference": true,
+                        "mere_reference": false,
+                        "declaration_predicate": null
+                      }
+                    ],
+                    "candidate_target_ids": [
+                      "data"
+                    ],
+                    "unknown_scope_fields": [
+                      "project",
+                      "version",
+                      "date",
+                      "namespace"
+                    ],
+                    "semantic_support_verified": false,
+                    "target_declarations": [
+                      {
+                        "object_type": "table",
+                        "object_name": "复核表",
+                        "raw_label": "复核表",
+                        "code": "BX37",
+                        "start": 20,
+                        "end": 27,
+                        "code_start": 23,
+                        "code_end": 27,
+                        "statement": {
+                          "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出2项失败。",
+                          "start": 0,
+                          "end": 42
+                        },
+                        "reliable_declaration": true,
+                        "direct_supplement_reference": false,
+                        "mere_reference": false,
+                        "declaration_predicate": {
+                          "text": "显示",
+                          "start": 27,
+                          "end": 29
+                        }
+                      }
+                    ],
+                    "reason": "unique_reliable_direct_reference",
+                    "object_labels_equal": false,
+                    "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                  },
+                  "reason": "检查名称或禁止缺陷未能逐字对应；不添加同义关系。"
+                }
+              ],
+              "remaining_does_not_mean_eligible": true,
+              "reason": "unknown_keep_no_reliable_violation_match"
+            }
+          ],
+          "unresolved_rules": [],
+          "needs_manual_correspondence": false,
+          "no_automatic_qualification_or_citation": true
+        },
+        "explicit_states": [
+          {
+            "snapshot": "Snap11",
+            "passage_index": 0,
+            "passage_id": "data",
+            "candidate_start": 29,
+            "candidate_end": 35,
+            "start": 0,
+            "end": 42,
+            "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出2项失败。",
+            "events": [
+              {
+                "status": "explicit_defect",
+                "expression_class": "positive_presence",
+                "rule": "local_nonzero_quantity",
+                "trigger": "失败",
+                "trigger_start": 39,
+                "trigger_end": 41,
+                "description_quote": "导出2项失败",
+                "description_start": 35,
+                "description_end": 41,
+                "negation_scope": null,
+                "quantity_scope": [
+                  {
+                    "start": 37,
+                    "end": 39,
+                    "quote": "2项",
+                    "number_start": 37,
+                    "number_end": 38,
+                    "raw": "2",
+                    "value": 2,
+                    "ownership": "current_check_item",
+                    "quantity_kind": "defect_count",
+                    "item_scope": {
+                      "start": 35,
+                      "end": 41,
+                      "quote": "导出2项失败"
+                    }
+                  }
+                ],
+                "unparsed_quantity_scope": null,
+                "quantity_text": "2",
+                "quantity": 2,
+                "pass_scope": null,
+                "overall_eligibility_not_inferred": true,
+                "condition_context_not_semantically_parsed": true,
+                "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出2项失败。",
+                "start": 0,
+                "end": 42
+              }
+            ],
+            "unparsed_content": [],
+            "qualification_not_checked": true,
+            "unclosed_count_not_defaulted_to_zero": true,
+            "observed_state": "explicit_defect"
+          }
+        ],
+        "qualification_reason": "only_reliable_current_visible_rule_matches",
+        "excluded": [],
+        "kept_unknown": [
+          {
+            "candidate": "Snap11",
+            "reason": "unknown_keep_no_reliable_violation_match"
+          }
+        ],
+        "original_enum": [
+          "Snap11",
+          "证据不足"
+        ],
+        "final_enum": [
+          "Snap11",
+          "证据不足"
+        ]
+      },
+      "enum": [
+        "Snap11",
+        "证据不足"
+      ]
+    },
+    {
+      "name": "negative",
+      "passed": true,
+      "audit": {
+        "answer_form": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "type_enum": {
+          "enabled": true,
+          "values": [
+            "Snap11"
+          ],
+          "occurrences": [
+            {
+              "passage_index": 0,
+              "value": "V2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 0,
+              "value": "BX37",
+              "start": 23,
+              "end": 27
+            },
+            {
+              "passage_index": 0,
+              "value": "Snap11",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "position_unit": "Python Unicode字符，start含/end不含",
+          "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+          "old_values": [
+            "V2",
+            "BX37",
+            "Snap11"
+          ],
+          "decisions": [
+            {
+              "value": "V2",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V2",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 0,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V2版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "BX37",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "table",
+                  "passage_index": 0,
+                  "start": 23,
+                  "end": 27,
+                  "recognition_text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11不存在区域定位失败。",
+                  "recognition_start": 0,
+                  "recognition_end": 45,
+                  "extractor_evidence": {
+                    "object_type": "table",
+                    "object_name": "复核表",
+                    "raw_label": "复核表",
+                    "code": "BX37",
+                    "start": 20,
+                    "end": 27,
+                    "code_start": 23,
+                    "code_end": 27,
+                    "statement": {
+                      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11不存在区域定位失败。",
+                      "start": 0,
+                      "end": 45
+                    },
+                    "reliable_declaration": true,
+                    "direct_supplement_reference": false,
+                    "mere_reference": false,
+                    "declaration_predicate": {
+                      "text": "显示",
+                      "start": 27,
+                      "end": 29
+                    }
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                },
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "batch",
+                  "passage_index": 1,
+                  "start": 2,
+                  "end": 6,
+                  "recognition_text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                  "recognition_start": 0,
+                  "recognition_end": 34,
+                  "extractor_evidence": {
+                    "object_type": "batch",
+                    "object_name": "批次",
+                    "raw_label": "批次",
+                    "code": "BX37",
+                    "start": 0,
+                    "end": 6,
+                    "code_start": 2,
+                    "code_end": 6,
+                    "statement": {
+                      "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                      "start": 0,
+                      "end": 34
+                    },
+                    "reliable_declaration": false,
+                    "direct_supplement_reference": true,
+                    "mere_reference": false,
+                    "declaration_predicate": null
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "Snap11",
+              "excluded": false,
+              "reason": "unknown_role_keep",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [],
+              "semantic_conflicts": []
+            }
+          ],
+          "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+          "target_role": [
+            "other",
+            "快照"
+          ]
+        },
+        "qualification_enabled": false,
+        "qualification_status": "unknown_keep_original",
+        "no_remaining_candidate_qualification": true,
+        "rule_audit": {
+          "original_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "answer_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "changed": false,
+          "decisions": [
+            {
+              "candidate": "Snap11",
+              "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11不存在区域定位失败。",
+              "passage_id": "data",
+              "start": 0,
+              "end": 45,
+              "excluded": false,
+              "eligibility": "unknown",
+              "relations": [
+                {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11不存在区域定位失败。",
+                        "start": 0,
+                        "end": 45
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                }
+              ],
+              "rule_evidence": [
+                {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求区域定位检查全部通过",
+                  "required_pass_items": [
+                    "区域定位"
+                  ],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": false,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                }
+              ],
+              "matches": [],
+              "unmatched_defects": [],
+              "remaining_does_not_mean_eligible": true,
+              "reason": "unknown_keep_no_reliable_violation_match"
+            }
+          ],
+          "unresolved_rules": [],
+          "needs_manual_correspondence": false,
+          "no_automatic_qualification_or_citation": true
+        },
+        "explicit_states": [
+          {
+            "snapshot": "Snap11",
+            "passage_index": 0,
+            "passage_id": "data",
+            "candidate_start": 29,
+            "candidate_end": 35,
+            "start": 0,
+            "end": 45,
+            "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11不存在区域定位失败。",
+            "events": [
+              {
+                "status": "explicit_absence",
+                "expression_class": "explicit_negation",
+                "rule": "local_explicit_negation",
+                "trigger": "失败",
+                "trigger_start": 42,
+                "trigger_end": 44,
+                "description_quote": "不存在区域定位失败",
+                "description_start": 35,
+                "description_end": 44,
+                "negation_scope": {
+                  "start": 35,
+                  "end": 44,
+                  "quote": "不存在区域定位失败",
+                  "markers": [
+                    {
+                      "start": 35,
+                      "end": 38,
+                      "quote": "不存在"
+                    }
+                  ]
+                },
+                "quantity_scope": [],
+                "unparsed_quantity_scope": null,
+                "quantity_text": null,
+                "quantity": null,
+                "pass_scope": null,
+                "overall_eligibility_not_inferred": true,
+                "condition_context_not_semantically_parsed": true,
+                "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11不存在区域定位失败。",
+                "start": 0,
+                "end": 45
+              }
+            ],
+            "unparsed_content": [],
+            "qualification_not_checked": true,
+            "unclosed_count_not_defaulted_to_zero": true,
+            "observed_state": "explicit_absence_only"
+          }
+        ],
+        "qualification_reason": "only_reliable_current_visible_rule_matches",
+        "excluded": [],
+        "kept_unknown": [
+          {
+            "candidate": "Snap11",
+            "reason": "unknown_keep_no_reliable_violation_match"
+          }
+        ],
+        "original_enum": [
+          "Snap11",
+          "证据不足"
+        ],
+        "final_enum": [
+          "Snap11",
+          "证据不足"
+        ]
+      },
+      "enum": [
+        "Snap11",
+        "证据不足"
+      ]
+    },
+    {
+      "name": "zero",
+      "passed": true,
+      "audit": {
+        "answer_form": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "type_enum": {
+          "enabled": true,
+          "values": [
+            "Snap11"
+          ],
+          "occurrences": [
+            {
+              "passage_index": 0,
+              "value": "V2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 0,
+              "value": "BX37",
+              "start": 23,
+              "end": 27
+            },
+            {
+              "passage_index": 0,
+              "value": "Snap11",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "position_unit": "Python Unicode字符，start含/end不含",
+          "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+          "old_values": [
+            "V2",
+            "BX37",
+            "Snap11"
+          ],
+          "decisions": [
+            {
+              "value": "V2",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V2",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 0,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V2版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "BX37",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "table",
+                  "passage_index": 0,
+                  "start": 23,
+                  "end": 27,
+                  "recognition_text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。",
+                  "recognition_start": 0,
+                  "recognition_end": 44,
+                  "extractor_evidence": {
+                    "object_type": "table",
+                    "object_name": "复核表",
+                    "raw_label": "复核表",
+                    "code": "BX37",
+                    "start": 20,
+                    "end": 27,
+                    "code_start": 23,
+                    "code_end": 27,
+                    "statement": {
+                      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。",
+                      "start": 0,
+                      "end": 44
+                    },
+                    "reliable_declaration": true,
+                    "direct_supplement_reference": false,
+                    "mere_reference": false,
+                    "declaration_predicate": {
+                      "text": "显示",
+                      "start": 27,
+                      "end": 29
+                    }
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                },
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "batch",
+                  "passage_index": 1,
+                  "start": 2,
+                  "end": 6,
+                  "recognition_text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                  "recognition_start": 0,
+                  "recognition_end": 34,
+                  "extractor_evidence": {
+                    "object_type": "batch",
+                    "object_name": "批次",
+                    "raw_label": "批次",
+                    "code": "BX37",
+                    "start": 0,
+                    "end": 6,
+                    "code_start": 2,
+                    "code_end": 6,
+                    "statement": {
+                      "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                      "start": 0,
+                      "end": 34
+                    },
+                    "reliable_declaration": false,
+                    "direct_supplement_reference": true,
+                    "mere_reference": false,
+                    "declaration_predicate": null
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "Snap11",
+              "excluded": false,
+              "reason": "unknown_role_keep",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [],
+              "semantic_conflicts": []
+            }
+          ],
+          "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+          "target_role": [
+            "other",
+            "快照"
+          ]
+        },
+        "qualification_enabled": false,
+        "qualification_status": "unknown_keep_original",
+        "no_remaining_candidate_qualification": true,
+        "rule_audit": {
+          "original_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "answer_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "changed": false,
+          "decisions": [
+            {
+              "candidate": "Snap11",
+              "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。",
+              "passage_id": "data",
+              "start": 0,
+              "end": 44,
+              "excluded": false,
+              "eligibility": "unknown",
+              "relations": [
+                {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。",
+                        "start": 0,
+                        "end": 44
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                }
+              ],
+              "rule_evidence": [
+                {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求区域定位检查全部通过",
+                  "required_pass_items": [
+                    "区域定位"
+                  ],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": false,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                }
+              ],
+              "matches": [],
+              "unmatched_defects": [],
+              "remaining_does_not_mean_eligible": true,
+              "reason": "unknown_keep_no_reliable_violation_match"
+            }
+          ],
+          "unresolved_rules": [],
+          "needs_manual_correspondence": false,
+          "no_automatic_qualification_or_citation": true
+        },
+        "explicit_states": [
+          {
+            "snapshot": "Snap11",
+            "passage_index": 0,
+            "passage_id": "data",
+            "candidate_start": 29,
+            "candidate_end": 35,
+            "start": 0,
+            "end": 44,
+            "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。",
+            "events": [
+              {
+                "status": "explicit_absence",
+                "expression_class": "explicit_zero_quantity",
+                "rule": "local_explicit_zero",
+                "trigger": "偏移",
+                "trigger_start": 41,
+                "trigger_end": 43,
+                "description_quote": "区域定位0项偏移",
+                "description_start": 35,
+                "description_end": 43,
+                "negation_scope": null,
+                "quantity_scope": [
+                  {
+                    "start": 39,
+                    "end": 41,
+                    "quote": "0项",
+                    "number_start": 39,
+                    "number_end": 40,
+                    "raw": "0",
+                    "value": 0,
+                    "ownership": "current_check_item",
+                    "quantity_kind": "defect_count",
+                    "item_scope": {
+                      "start": 35,
+                      "end": 43,
+                      "quote": "区域定位0项偏移"
+                    }
+                  }
+                ],
+                "unparsed_quantity_scope": null,
+                "quantity_text": "0",
+                "quantity": 0,
+                "pass_scope": null,
+                "overall_eligibility_not_inferred": true,
+                "condition_context_not_semantically_parsed": true,
+                "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。",
+                "start": 0,
+                "end": 44
+              }
+            ],
+            "unparsed_content": [],
+            "qualification_not_checked": true,
+            "unclosed_count_not_defaulted_to_zero": true,
+            "observed_state": "explicit_absence_only"
+          }
+        ],
+        "qualification_reason": "only_reliable_current_visible_rule_matches",
+        "excluded": [],
+        "kept_unknown": [
+          {
+            "candidate": "Snap11",
+            "reason": "unknown_keep_no_reliable_violation_match"
+          }
+        ],
+        "original_enum": [
+          "Snap11",
+          "证据不足"
+        ],
+        "final_enum": [
+          "Snap11",
+          "证据不足"
+        ]
+      },
+      "enum": [
+        "Snap11",
+        "证据不足"
+      ]
+    },
+    {
+      "name": "incomplete_rule",
+      "passed": true,
+      "audit": {
+        "answer_form": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "type_enum": {
+          "enabled": true,
+          "values": [
+            "Snap11"
+          ],
+          "occurrences": [
+            {
+              "passage_index": 0,
+              "value": "V2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 0,
+              "value": "BX37",
+              "start": 23,
+              "end": 27
+            },
+            {
+              "passage_index": 0,
+              "value": "Snap11",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "position_unit": "Python Unicode字符，start含/end不含",
+          "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+          "old_values": [
+            "V2",
+            "BX37",
+            "Snap11"
+          ],
+          "decisions": [
+            {
+              "value": "V2",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V2",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 0,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V2版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "BX37",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "table",
+                  "passage_index": 0,
+                  "start": 23,
+                  "end": 27,
+                  "recognition_text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                  "recognition_start": 0,
+                  "recognition_end": 44,
+                  "extractor_evidence": {
+                    "object_type": "table",
+                    "object_name": "复核表",
+                    "raw_label": "复核表",
+                    "code": "BX37",
+                    "start": 20,
+                    "end": 27,
+                    "code_start": 23,
+                    "code_end": 27,
+                    "statement": {
+                      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                      "start": 0,
+                      "end": 44
+                    },
+                    "reliable_declaration": true,
+                    "direct_supplement_reference": false,
+                    "mere_reference": false,
+                    "declaration_predicate": {
+                      "text": "显示",
+                      "start": 27,
+                      "end": 29
+                    }
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                },
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "batch",
+                  "passage_index": 1,
+                  "start": 2,
+                  "end": 6,
+                  "recognition_text": "批次BX37的复核补页：BX37的发布规则要求上述两项检查全部通过。",
+                  "recognition_start": 0,
+                  "recognition_end": 34,
+                  "extractor_evidence": {
+                    "object_type": "batch",
+                    "object_name": "批次",
+                    "raw_label": "批次",
+                    "code": "BX37",
+                    "start": 0,
+                    "end": 6,
+                    "code_start": 2,
+                    "code_end": 6,
+                    "statement": {
+                      "text": "批次BX37的复核补页：BX37的发布规则要求上述两项检查全部通过。",
+                      "start": 0,
+                      "end": 34
+                    },
+                    "reliable_declaration": false,
+                    "direct_supplement_reference": true,
+                    "mere_reference": false,
+                    "declaration_predicate": null
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "Snap11",
+              "excluded": false,
+              "reason": "unknown_role_keep",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [],
+              "semantic_conflicts": []
+            }
+          ],
+          "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+          "target_role": [
+            "other",
+            "快照"
+          ]
+        },
+        "qualification_enabled": false,
+        "qualification_status": "unknown_keep_original",
+        "no_remaining_candidate_qualification": true,
+        "rule_audit": {
+          "original_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "answer_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "changed": false,
+          "decisions": [
+            {
+              "candidate": "Snap11",
+              "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+              "passage_id": "data",
+              "start": 0,
+              "end": 44,
+              "excluded": false,
+              "eligibility": "unknown",
+              "relations": [
+                {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求上述两项检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                        "start": 0,
+                        "end": 44
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                }
+              ],
+              "rule_evidence": [
+                {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求上述两项检查全部通过",
+                  "required_pass_items": [],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": true,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                }
+              ],
+              "matches": [],
+              "unmatched_defects": [
+                {
+                  "event": {
+                    "status": "explicit_defect",
+                    "expression_class": "positive_presence",
+                    "rule": "local_nonzero_quantity",
+                    "trigger": "失败",
+                    "trigger_start": 41,
+                    "trigger_end": 43,
+                    "description_quote": "区域定位2项失败",
+                    "description_start": 35,
+                    "description_end": 43,
+                    "negation_scope": null,
+                    "quantity_scope": [
+                      {
+                        "start": 39,
+                        "end": 41,
+                        "quote": "2项",
+                        "number_start": 39,
+                        "number_end": 40,
+                        "raw": "2",
+                        "value": 2,
+                        "ownership": "current_check_item",
+                        "quantity_kind": "defect_count",
+                        "item_scope": {
+                          "start": 35,
+                          "end": 43,
+                          "quote": "区域定位2项失败"
+                        }
+                      }
+                    ],
+                    "unparsed_quantity_scope": null,
+                    "quantity_text": "2",
+                    "quantity": 2,
+                    "pass_scope": null,
+                    "overall_eligibility_not_inferred": true,
+                    "condition_context_not_semantically_parsed": true,
+                    "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                    "start": 0,
+                    "end": 44
+                  },
+                  "derived_check_name": "区域定位",
+                  "rule": {
+                    "passage_id": "rule",
+                    "start": 19,
+                    "end": 33,
+                    "quote": "规则要求上述两项检查全部通过",
+                    "required_pass_items": [],
+                    "forbidden_literals": [],
+                    "unresolved_required_checks": true,
+                    "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                  },
+                  "scope_basis": "全输入唯一可靠主声明与完整编号直接补页指称；明示范围冲突由原关联器拒绝。缺失字段仍登记unknown，不当作相等。",
+                  "relation": {
+                    "supplement_id": "rule",
+                    "target_id": "data",
+                    "added": true,
+                    "reference_evidence": [
+                      {
+                        "object_type": "batch",
+                        "object_name": "批次",
+                        "raw_label": "批次",
+                        "code": "BX37",
+                        "start": 0,
+                        "end": 6,
+                        "code_start": 2,
+                        "code_end": 6,
+                        "statement": {
+                          "text": "批次BX37的复核补页：BX37的发布规则要求上述两项检查全部通过。",
+                          "start": 0,
+                          "end": 34
+                        },
+                        "reliable_declaration": false,
+                        "direct_supplement_reference": true,
+                        "mere_reference": false,
+                        "declaration_predicate": null
+                      }
+                    ],
+                    "candidate_target_ids": [
+                      "data"
+                    ],
+                    "unknown_scope_fields": [
+                      "project",
+                      "version",
+                      "date",
+                      "namespace"
+                    ],
+                    "semantic_support_verified": false,
+                    "target_declarations": [
+                      {
+                        "object_type": "table",
+                        "object_name": "复核表",
+                        "raw_label": "复核表",
+                        "code": "BX37",
+                        "start": 20,
+                        "end": 27,
+                        "code_start": 23,
+                        "code_end": 27,
+                        "statement": {
+                          "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                          "start": 0,
+                          "end": 44
+                        },
+                        "reliable_declaration": true,
+                        "direct_supplement_reference": false,
+                        "mere_reference": false,
+                        "declaration_predicate": {
+                          "text": "显示",
+                          "start": 27,
+                          "end": 29
+                        }
+                      }
+                    ],
+                    "reason": "unique_reliable_direct_reference",
+                    "object_labels_equal": false,
+                    "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                  },
+                  "reason": "检查名称或禁止缺陷未能逐字对应；不添加同义关系。"
+                }
+              ],
+              "remaining_does_not_mean_eligible": true,
+              "reason": "unknown_keep_no_reliable_violation_match"
+            }
+          ],
+          "unresolved_rules": [
+            {
+              "candidate": "Snap11",
+              "reason": "required_checks_not_explicitly_enumerated",
+              "rule": {
+                "passage_id": "rule",
+                "start": 19,
+                "end": 33,
+                "quote": "规则要求上述两项检查全部通过",
+                "required_pass_items": [],
+                "forbidden_literals": [],
+                "unresolved_required_checks": true,
+                "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+              }
+            }
+          ],
+          "needs_manual_correspondence": true,
+          "no_automatic_qualification_or_citation": true
+        },
+        "explicit_states": [
+          {
+            "snapshot": "Snap11",
+            "passage_index": 0,
+            "passage_id": "data",
+            "candidate_start": 29,
+            "candidate_end": 35,
+            "start": 0,
+            "end": 44,
+            "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+            "events": [
+              {
+                "status": "explicit_defect",
+                "expression_class": "positive_presence",
+                "rule": "local_nonzero_quantity",
+                "trigger": "失败",
+                "trigger_start": 41,
+                "trigger_end": 43,
+                "description_quote": "区域定位2项失败",
+                "description_start": 35,
+                "description_end": 43,
+                "negation_scope": null,
+                "quantity_scope": [
+                  {
+                    "start": 39,
+                    "end": 41,
+                    "quote": "2项",
+                    "number_start": 39,
+                    "number_end": 40,
+                    "raw": "2",
+                    "value": 2,
+                    "ownership": "current_check_item",
+                    "quantity_kind": "defect_count",
+                    "item_scope": {
+                      "start": 35,
+                      "end": 43,
+                      "quote": "区域定位2项失败"
+                    }
+                  }
+                ],
+                "unparsed_quantity_scope": null,
+                "quantity_text": "2",
+                "quantity": 2,
+                "pass_scope": null,
+                "overall_eligibility_not_inferred": true,
+                "condition_context_not_semantically_parsed": true,
+                "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                "start": 0,
+                "end": 44
+              }
+            ],
+            "unparsed_content": [],
+            "qualification_not_checked": true,
+            "unclosed_count_not_defaulted_to_zero": true,
+            "observed_state": "explicit_defect"
+          }
+        ],
+        "qualification_reason": "unresolved_rule_correspondence"
+      },
+      "enum": [
+        "Snap11",
+        "证据不足"
+      ]
+    },
+    {
+      "name": "scope_conflict",
+      "passed": true,
+      "audit": {
+        "answer_form": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "type_enum": {
+          "enabled": true,
+          "values": [
+            "Snap11"
+          ],
+          "occurrences": [
+            {
+              "passage_index": 0,
+              "value": "V2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 0,
+              "value": "BX37",
+              "start": 23,
+              "end": 27
+            },
+            {
+              "passage_index": 0,
+              "value": "Snap11",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "passage_index": 1,
+              "value": "V3",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 19,
+              "end": 23
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 29,
+              "end": 33
+            }
+          ],
+          "position_unit": "Python Unicode字符，start含/end不含",
+          "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+          "old_values": [
+            "V2",
+            "BX37",
+            "Snap11",
+            "V3"
+          ],
+          "decisions": [
+            {
+              "value": "V2",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V2",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 0,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V2版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "BX37",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "table",
+                  "passage_index": 0,
+                  "start": 23,
+                  "end": 27,
+                  "recognition_text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                  "recognition_start": 0,
+                  "recognition_end": 44,
+                  "extractor_evidence": {
+                    "object_type": "table",
+                    "object_name": "复核表",
+                    "raw_label": "复核表",
+                    "code": "BX37",
+                    "start": 20,
+                    "end": 27,
+                    "code_start": 23,
+                    "code_end": 27,
+                    "statement": {
+                      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                      "start": 0,
+                      "end": 44
+                    },
+                    "reliable_declaration": true,
+                    "direct_supplement_reference": false,
+                    "mere_reference": false,
+                    "declaration_predicate": {
+                      "text": "显示",
+                      "start": 27,
+                      "end": 29
+                    }
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                },
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "batch",
+                  "passage_index": 1,
+                  "start": 19,
+                  "end": 23,
+                  "recognition_text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                  "recognition_start": 17,
+                  "recognition_end": 51,
+                  "extractor_evidence": {
+                    "object_type": "batch",
+                    "object_name": "批次",
+                    "raw_label": "批次",
+                    "code": "BX37",
+                    "start": 17,
+                    "end": 23,
+                    "code_start": 19,
+                    "code_end": 23,
+                    "statement": {
+                      "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                      "start": 17,
+                      "end": 51
+                    },
+                    "reliable_declaration": false,
+                    "direct_supplement_reference": true,
+                    "mere_reference": false,
+                    "declaration_predicate": null
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "Snap11",
+              "excluded": false,
+              "reason": "unknown_role_keep",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "V3",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V3",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 1,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V3版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            }
+          ],
+          "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+          "target_role": [
+            "other",
+            "快照"
+          ]
+        },
+        "qualification_enabled": false,
+        "qualification_status": "unknown_keep_original",
+        "no_remaining_candidate_qualification": true,
+        "rule_audit": {
+          "original_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "answer_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "changed": false,
+          "decisions": [
+            {
+              "candidate": "Snap11",
+              "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+              "passage_id": "data",
+              "start": 0,
+              "end": 44,
+              "excluded": false,
+              "eligibility": "unknown",
+              "relations": [],
+              "rule_evidence": [],
+              "matches": [],
+              "unmatched_defects": [],
+              "remaining_does_not_mean_eligible": true,
+              "reason": "unknown_keep_no_reliable_rule_link"
+            }
+          ],
+          "unresolved_rules": [],
+          "needs_manual_correspondence": false,
+          "no_automatic_qualification_or_citation": true
+        },
+        "explicit_states": [
+          {
+            "snapshot": "Snap11",
+            "passage_index": 0,
+            "passage_id": "data",
+            "candidate_start": 29,
+            "candidate_end": 35,
+            "start": 0,
+            "end": 44,
+            "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+            "events": [
+              {
+                "status": "explicit_defect",
+                "expression_class": "positive_presence",
+                "rule": "local_nonzero_quantity",
+                "trigger": "失败",
+                "trigger_start": 41,
+                "trigger_end": 43,
+                "description_quote": "区域定位2项失败",
+                "description_start": 35,
+                "description_end": 43,
+                "negation_scope": null,
+                "quantity_scope": [
+                  {
+                    "start": 39,
+                    "end": 41,
+                    "quote": "2项",
+                    "number_start": 39,
+                    "number_end": 40,
+                    "raw": "2",
+                    "value": 2,
+                    "ownership": "current_check_item",
+                    "quantity_kind": "defect_count",
+                    "item_scope": {
+                      "start": 35,
+                      "end": 43,
+                      "quote": "区域定位2项失败"
+                    }
+                  }
+                ],
+                "unparsed_quantity_scope": null,
+                "quantity_text": "2",
+                "quantity": 2,
+                "pass_scope": null,
+                "overall_eligibility_not_inferred": true,
+                "condition_context_not_semantically_parsed": true,
+                "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                "start": 0,
+                "end": 44
+              }
+            ],
+            "unparsed_content": [],
+            "qualification_not_checked": true,
+            "unclosed_count_not_defaulted_to_zero": true,
+            "observed_state": "explicit_defect"
+          }
+        ],
+        "qualification_reason": "only_reliable_current_visible_rule_matches",
+        "excluded": [],
+        "kept_unknown": [
+          {
+            "candidate": "Snap11",
+            "reason": "unknown_keep_no_reliable_rule_link"
+          }
+        ],
+        "original_enum": [
+          "Snap11",
+          "证据不足"
+        ],
+        "final_enum": [
+          "Snap11",
+          "证据不足"
+        ]
+      },
+      "enum": [
+        "Snap11",
+        "证据不足"
+      ]
+    },
+    {
+      "name": "all_excluded",
+      "passed": true,
+      "audit": {
+        "answer_form": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "type_enum": {
+          "enabled": true,
+          "values": [
+            "Snap11"
+          ],
+          "occurrences": [
+            {
+              "passage_index": 0,
+              "value": "V2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 0,
+              "value": "BX37",
+              "start": 23,
+              "end": 27
+            },
+            {
+              "passage_index": 0,
+              "value": "Snap11",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "position_unit": "Python Unicode字符，start含/end不含",
+          "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+          "old_values": [
+            "V2",
+            "BX37",
+            "Snap11"
+          ],
+          "decisions": [
+            {
+              "value": "V2",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V2",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 0,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V2版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "BX37",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "table",
+                  "passage_index": 0,
+                  "start": 23,
+                  "end": 27,
+                  "recognition_text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                  "recognition_start": 0,
+                  "recognition_end": 44,
+                  "extractor_evidence": {
+                    "object_type": "table",
+                    "object_name": "复核表",
+                    "raw_label": "复核表",
+                    "code": "BX37",
+                    "start": 20,
+                    "end": 27,
+                    "code_start": 23,
+                    "code_end": 27,
+                    "statement": {
+                      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                      "start": 0,
+                      "end": 44
+                    },
+                    "reliable_declaration": true,
+                    "direct_supplement_reference": false,
+                    "mere_reference": false,
+                    "declaration_predicate": {
+                      "text": "显示",
+                      "start": 27,
+                      "end": 29
+                    }
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                },
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "batch",
+                  "passage_index": 1,
+                  "start": 2,
+                  "end": 6,
+                  "recognition_text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                  "recognition_start": 0,
+                  "recognition_end": 34,
+                  "extractor_evidence": {
+                    "object_type": "batch",
+                    "object_name": "批次",
+                    "raw_label": "批次",
+                    "code": "BX37",
+                    "start": 0,
+                    "end": 6,
+                    "code_start": 2,
+                    "code_end": 6,
+                    "statement": {
+                      "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                      "start": 0,
+                      "end": 34
+                    },
+                    "reliable_declaration": false,
+                    "direct_supplement_reference": true,
+                    "mere_reference": false,
+                    "declaration_predicate": null
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "Snap11",
+              "excluded": false,
+              "reason": "unknown_role_keep",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [],
+              "semantic_conflicts": []
+            }
+          ],
+          "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+          "target_role": [
+            "other",
+            "快照"
+          ]
+        },
+        "qualification_enabled": true,
+        "qualification_status": "exclusions_applied",
+        "no_remaining_candidate_qualification": true,
+        "rule_audit": {
+          "original_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "answer_enum": [
+            "证据不足"
+          ],
+          "changed": true,
+          "decisions": [
+            {
+              "candidate": "Snap11",
+              "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+              "passage_id": "data",
+              "start": 0,
+              "end": 44,
+              "excluded": true,
+              "eligibility": "explicit_violation_of_identified_requirement",
+              "relations": [
+                {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                        "start": 0,
+                        "end": 44
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                }
+              ],
+              "rule_evidence": [
+                {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求区域定位检查全部通过",
+                  "required_pass_items": [
+                    "区域定位"
+                  ],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": false,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                }
+              ],
+              "matches": [
+                {
+                  "event": {
+                    "status": "explicit_defect",
+                    "expression_class": "positive_presence",
+                    "rule": "local_nonzero_quantity",
+                    "trigger": "失败",
+                    "trigger_start": 41,
+                    "trigger_end": 43,
+                    "description_quote": "区域定位2项失败",
+                    "description_start": 35,
+                    "description_end": 43,
+                    "negation_scope": null,
+                    "quantity_scope": [
+                      {
+                        "start": 39,
+                        "end": 41,
+                        "quote": "2项",
+                        "number_start": 39,
+                        "number_end": 40,
+                        "raw": "2",
+                        "value": 2,
+                        "ownership": "current_check_item",
+                        "quantity_kind": "defect_count",
+                        "item_scope": {
+                          "start": 35,
+                          "end": 43,
+                          "quote": "区域定位2项失败"
+                        }
+                      }
+                    ],
+                    "unparsed_quantity_scope": null,
+                    "quantity_text": "2",
+                    "quantity": 2,
+                    "pass_scope": null,
+                    "overall_eligibility_not_inferred": true,
+                    "condition_context_not_semantically_parsed": true,
+                    "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                    "start": 0,
+                    "end": 44
+                  },
+                  "derived_check_name": "区域定位",
+                  "rule": {
+                    "passage_id": "rule",
+                    "start": 19,
+                    "end": 33,
+                    "quote": "规则要求区域定位检查全部通过",
+                    "required_pass_items": [
+                      "区域定位"
+                    ],
+                    "forbidden_literals": [],
+                    "unresolved_required_checks": false,
+                    "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                  },
+                  "scope_basis": "全输入唯一可靠主声明与完整编号直接补页指称；明示范围冲突由原关联器拒绝。缺失字段仍登记unknown，不当作相等。",
+                  "relation": {
+                    "supplement_id": "rule",
+                    "target_id": "data",
+                    "added": true,
+                    "reference_evidence": [
+                      {
+                        "object_type": "batch",
+                        "object_name": "批次",
+                        "raw_label": "批次",
+                        "code": "BX37",
+                        "start": 0,
+                        "end": 6,
+                        "code_start": 2,
+                        "code_end": 6,
+                        "statement": {
+                          "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                          "start": 0,
+                          "end": 34
+                        },
+                        "reliable_declaration": false,
+                        "direct_supplement_reference": true,
+                        "mere_reference": false,
+                        "declaration_predicate": null
+                      }
+                    ],
+                    "candidate_target_ids": [
+                      "data"
+                    ],
+                    "unknown_scope_fields": [
+                      "project",
+                      "version",
+                      "date",
+                      "namespace"
+                    ],
+                    "semantic_support_verified": false,
+                    "target_declarations": [
+                      {
+                        "object_type": "table",
+                        "object_name": "复核表",
+                        "raw_label": "复核表",
+                        "code": "BX37",
+                        "start": 20,
+                        "end": 27,
+                        "code_start": 23,
+                        "code_end": 27,
+                        "statement": {
+                          "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                          "start": 0,
+                          "end": 44
+                        },
+                        "reliable_declaration": true,
+                        "direct_supplement_reference": false,
+                        "mere_reference": false,
+                        "declaration_predicate": {
+                          "text": "显示",
+                          "start": 27,
+                          "end": 29
+                        }
+                      }
+                    ],
+                    "reason": "unique_reliable_direct_reference",
+                    "object_labels_equal": false,
+                    "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                  },
+                  "matching_basis": "exact_check_name",
+                  "reason": "该项明确缺陷与同范围发布规则明示必检项/禁止缺陷逐字对应。"
+                }
+              ],
+              "unmatched_defects": [],
+              "remaining_does_not_mean_eligible": true,
+              "reason": "reliably_identified_required_check_violation"
+            }
+          ],
+          "unresolved_rules": [],
+          "needs_manual_correspondence": false,
+          "no_automatic_qualification_or_citation": true
+        },
+        "explicit_states": [
+          {
+            "snapshot": "Snap11",
+            "passage_index": 0,
+            "passage_id": "data",
+            "candidate_start": 29,
+            "candidate_end": 35,
+            "start": 0,
+            "end": 44,
+            "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+            "events": [
+              {
+                "status": "explicit_defect",
+                "expression_class": "positive_presence",
+                "rule": "local_nonzero_quantity",
+                "trigger": "失败",
+                "trigger_start": 41,
+                "trigger_end": 43,
+                "description_quote": "区域定位2项失败",
+                "description_start": 35,
+                "description_end": 43,
+                "negation_scope": null,
+                "quantity_scope": [
+                  {
+                    "start": 39,
+                    "end": 41,
+                    "quote": "2项",
+                    "number_start": 39,
+                    "number_end": 40,
+                    "raw": "2",
+                    "value": 2,
+                    "ownership": "current_check_item",
+                    "quantity_kind": "defect_count",
+                    "item_scope": {
+                      "start": 35,
+                      "end": 43,
+                      "quote": "区域定位2项失败"
+                    }
+                  }
+                ],
+                "unparsed_quantity_scope": null,
+                "quantity_text": "2",
+                "quantity": 2,
+                "pass_scope": null,
+                "overall_eligibility_not_inferred": true,
+                "condition_context_not_semantically_parsed": true,
+                "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                "start": 0,
+                "end": 44
+              }
+            ],
+            "unparsed_content": [],
+            "qualification_not_checked": true,
+            "unclosed_count_not_defaulted_to_zero": true,
+            "observed_state": "explicit_defect"
+          }
+        ],
+        "qualification_reason": "only_reliable_current_visible_rule_matches",
+        "excluded": [
+          {
+            "candidate": "Snap11",
+            "matches": [
+              {
+                "event": {
+                  "status": "explicit_defect",
+                  "expression_class": "positive_presence",
+                  "rule": "local_nonzero_quantity",
+                  "trigger": "失败",
+                  "trigger_start": 41,
+                  "trigger_end": 43,
+                  "description_quote": "区域定位2项失败",
+                  "description_start": 35,
+                  "description_end": 43,
+                  "negation_scope": null,
+                  "quantity_scope": [
+                    {
+                      "start": 39,
+                      "end": 41,
+                      "quote": "2项",
+                      "number_start": 39,
+                      "number_end": 40,
+                      "raw": "2",
+                      "value": 2,
+                      "ownership": "current_check_item",
+                      "quantity_kind": "defect_count",
+                      "item_scope": {
+                        "start": 35,
+                        "end": 43,
+                        "quote": "区域定位2项失败"
+                      }
+                    }
+                  ],
+                  "unparsed_quantity_scope": null,
+                  "quantity_text": "2",
+                  "quantity": 2,
+                  "pass_scope": null,
+                  "overall_eligibility_not_inferred": true,
+                  "condition_context_not_semantically_parsed": true,
+                  "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                  "start": 0,
+                  "end": 44
+                },
+                "derived_check_name": "区域定位",
+                "rule": {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求区域定位检查全部通过",
+                  "required_pass_items": [
+                    "区域定位"
+                  ],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": false,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                },
+                "scope_basis": "全输入唯一可靠主声明与完整编号直接补页指称；明示范围冲突由原关联器拒绝。缺失字段仍登记unknown，不当作相等。",
+                "relation": {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位2项失败。",
+                        "start": 0,
+                        "end": 44
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                },
+                "matching_basis": "exact_check_name",
+                "reason": "该项明确缺陷与同范围发布规则明示必检项/禁止缺陷逐字对应。"
+              }
+            ],
+            "question_scope": {
+              "project": [],
+              "version": [],
+              "date": [
+                "2026-01"
+              ],
+              "namespace": []
+            },
+            "source_scope": {
+              "project": [],
+              "version": [],
+              "date": [
+                "2026-01"
+              ],
+              "namespace": []
+            }
+          }
+        ],
+        "kept_unknown": [],
+        "original_enum": [
+          "Snap11",
+          "证据不足"
+        ],
+        "final_enum": [
+          "证据不足"
+        ]
+      },
+      "enum": [
+        "证据不足"
+      ]
+    },
+    {
+      "name": "unknown_candidate",
+      "passed": true,
+      "audit": {
+        "answer_form": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "type_enum": {
+          "enabled": true,
+          "values": [
+            "Snap11"
+          ],
+          "occurrences": [
+            {
+              "passage_index": 0,
+              "value": "V2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 0,
+              "value": "BX37",
+              "start": 23,
+              "end": 27
+            },
+            {
+              "passage_index": 0,
+              "value": "Snap11",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "position_unit": "Python Unicode字符，start含/end不含",
+          "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+          "old_values": [
+            "V2",
+            "BX37",
+            "Snap11"
+          ],
+          "decisions": [
+            {
+              "value": "V2",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V2",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 0,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V2版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "BX37",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "table",
+                  "passage_index": 0,
+                  "start": 23,
+                  "end": 27,
+                  "recognition_text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位数量未说明。",
+                  "recognition_start": 0,
+                  "recognition_end": 45,
+                  "extractor_evidence": {
+                    "object_type": "table",
+                    "object_name": "复核表",
+                    "raw_label": "复核表",
+                    "code": "BX37",
+                    "start": 20,
+                    "end": 27,
+                    "code_start": 23,
+                    "code_end": 27,
+                    "statement": {
+                      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位数量未说明。",
+                      "start": 0,
+                      "end": 45
+                    },
+                    "reliable_declaration": true,
+                    "direct_supplement_reference": false,
+                    "mere_reference": false,
+                    "declaration_predicate": {
+                      "text": "显示",
+                      "start": 27,
+                      "end": 29
+                    }
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                },
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "batch",
+                  "passage_index": 1,
+                  "start": 2,
+                  "end": 6,
+                  "recognition_text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                  "recognition_start": 0,
+                  "recognition_end": 34,
+                  "extractor_evidence": {
+                    "object_type": "batch",
+                    "object_name": "批次",
+                    "raw_label": "批次",
+                    "code": "BX37",
+                    "start": 0,
+                    "end": 6,
+                    "code_start": 2,
+                    "code_end": 6,
+                    "statement": {
+                      "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                      "start": 0,
+                      "end": 34
+                    },
+                    "reliable_declaration": false,
+                    "direct_supplement_reference": true,
+                    "mere_reference": false,
+                    "declaration_predicate": null
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "Snap11",
+              "excluded": false,
+              "reason": "unknown_role_keep",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [],
+              "semantic_conflicts": []
+            }
+          ],
+          "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+          "target_role": [
+            "other",
+            "快照"
+          ]
+        },
+        "qualification_enabled": false,
+        "qualification_status": "unknown_keep_original",
+        "no_remaining_candidate_qualification": true,
+        "rule_audit": {
+          "original_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "answer_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "changed": false,
+          "decisions": [
+            {
+              "candidate": "Snap11",
+              "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位数量未说明。",
+              "passage_id": "data",
+              "start": 0,
+              "end": 45,
+              "excluded": false,
+              "eligibility": "unknown",
+              "relations": [
+                {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位数量未说明。",
+                        "start": 0,
+                        "end": 45
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                }
+              ],
+              "rule_evidence": [
+                {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求区域定位检查全部通过",
+                  "required_pass_items": [
+                    "区域定位"
+                  ],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": false,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                }
+              ],
+              "matches": [],
+              "unmatched_defects": [],
+              "remaining_does_not_mean_eligible": true,
+              "reason": "unknown_keep_no_reliable_violation_match"
+            }
+          ],
+          "unresolved_rules": [],
+          "needs_manual_correspondence": false,
+          "no_automatic_qualification_or_citation": true
+        },
+        "explicit_states": [
+          {
+            "snapshot": "Snap11",
+            "passage_index": 0,
+            "passage_id": "data",
+            "candidate_start": 29,
+            "candidate_end": 35,
+            "start": 0,
+            "end": 45,
+            "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位数量未说明。",
+            "events": [],
+            "unparsed_content": [
+              {
+                "start": 35,
+                "end": 44,
+                "quote": "区域定位数量未说明",
+                "reason": "没有可靠明示状态或作用范围不确定"
+              }
+            ],
+            "qualification_not_checked": true,
+            "unclosed_count_not_defaulted_to_zero": true,
+            "observed_state": "unknown"
+          }
+        ],
+        "qualification_reason": "only_reliable_current_visible_rule_matches",
+        "excluded": [],
+        "kept_unknown": [
+          {
+            "candidate": "Snap11",
+            "reason": "unknown_keep_no_reliable_violation_match"
+          }
+        ],
+        "original_enum": [
+          "Snap11",
+          "证据不足"
+        ],
+        "final_enum": [
+          "Snap11",
+          "证据不足"
+        ]
+      },
+      "enum": [
+        "Snap11",
+        "证据不足"
+      ]
+    },
+    {
+      "name": "pass_not_general_qualification",
+      "passed": true,
+      "audit": {
+        "answer_form": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "type_enum": {
+          "enabled": true,
+          "values": [
+            "Snap11"
+          ],
+          "occurrences": [
+            {
+              "passage_index": 0,
+              "value": "V2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 0,
+              "value": "BX37",
+              "start": 23,
+              "end": 27
+            },
+            {
+              "passage_index": 0,
+              "value": "Snap11",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "position_unit": "Python Unicode字符，start含/end不含",
+          "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+          "old_values": [
+            "V2",
+            "BX37",
+            "Snap11"
+          ],
+          "decisions": [
+            {
+              "value": "V2",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V2",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 0,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V2版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "BX37",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "table",
+                  "passage_index": 0,
+                  "start": 23,
+                  "end": 27,
+                  "recognition_text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位通过。",
+                  "recognition_start": 0,
+                  "recognition_end": 42,
+                  "extractor_evidence": {
+                    "object_type": "table",
+                    "object_name": "复核表",
+                    "raw_label": "复核表",
+                    "code": "BX37",
+                    "start": 20,
+                    "end": 27,
+                    "code_start": 23,
+                    "code_end": 27,
+                    "statement": {
+                      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位通过。",
+                      "start": 0,
+                      "end": 42
+                    },
+                    "reliable_declaration": true,
+                    "direct_supplement_reference": false,
+                    "mere_reference": false,
+                    "declaration_predicate": {
+                      "text": "显示",
+                      "start": 27,
+                      "end": 29
+                    }
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                },
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "batch",
+                  "passage_index": 1,
+                  "start": 2,
+                  "end": 6,
+                  "recognition_text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                  "recognition_start": 0,
+                  "recognition_end": 34,
+                  "extractor_evidence": {
+                    "object_type": "batch",
+                    "object_name": "批次",
+                    "raw_label": "批次",
+                    "code": "BX37",
+                    "start": 0,
+                    "end": 6,
+                    "code_start": 2,
+                    "code_end": 6,
+                    "statement": {
+                      "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                      "start": 0,
+                      "end": 34
+                    },
+                    "reliable_declaration": false,
+                    "direct_supplement_reference": true,
+                    "mere_reference": false,
+                    "declaration_predicate": null
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "Snap11",
+              "excluded": false,
+              "reason": "unknown_role_keep",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [],
+              "semantic_conflicts": []
+            }
+          ],
+          "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+          "target_role": [
+            "other",
+            "快照"
+          ]
+        },
+        "qualification_enabled": false,
+        "qualification_status": "unknown_keep_original",
+        "no_remaining_candidate_qualification": true,
+        "rule_audit": {
+          "original_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "answer_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "changed": false,
+          "decisions": [
+            {
+              "candidate": "Snap11",
+              "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位通过。",
+              "passage_id": "data",
+              "start": 0,
+              "end": 42,
+              "excluded": false,
+              "eligibility": "unknown",
+              "relations": [
+                {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位通过。",
+                        "start": 0,
+                        "end": 42
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                }
+              ],
+              "rule_evidence": [
+                {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求区域定位检查全部通过",
+                  "required_pass_items": [
+                    "区域定位"
+                  ],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": false,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                }
+              ],
+              "matches": [],
+              "unmatched_defects": [],
+              "remaining_does_not_mean_eligible": true,
+              "reason": "unknown_keep_no_reliable_violation_match"
+            }
+          ],
+          "unresolved_rules": [],
+          "needs_manual_correspondence": false,
+          "no_automatic_qualification_or_citation": true
+        },
+        "explicit_states": [
+          {
+            "snapshot": "Snap11",
+            "passage_index": 0,
+            "passage_id": "data",
+            "candidate_start": 29,
+            "candidate_end": 35,
+            "start": 0,
+            "end": 42,
+            "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位通过。",
+            "events": [
+              {
+                "status": "explicit_pass",
+                "expression_class": "positive_presence",
+                "rule": "literal_pass_only",
+                "trigger": "通过",
+                "trigger_start": 39,
+                "trigger_end": 41,
+                "description_quote": "区域定位通过",
+                "description_start": 35,
+                "description_end": 41,
+                "negation_scope": null,
+                "quantity_scope": [],
+                "unparsed_quantity_scope": null,
+                "quantity_text": null,
+                "quantity": null,
+                "pass_scope": "stated_local_checks_only",
+                "overall_eligibility_not_inferred": true,
+                "condition_context_not_semantically_parsed": true,
+                "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位通过。",
+                "start": 0,
+                "end": 42
+              }
+            ],
+            "unparsed_content": [],
+            "qualification_not_checked": true,
+            "unclosed_count_not_defaulted_to_zero": true,
+            "observed_state": "explicit_pass_only"
+          }
+        ],
+        "qualification_reason": "only_reliable_current_visible_rule_matches",
+        "excluded": [],
+        "kept_unknown": [
+          {
+            "candidate": "Snap11",
+            "reason": "unknown_keep_no_reliable_violation_match"
+          }
+        ],
+        "original_enum": [
+          "Snap11",
+          "证据不足"
+        ],
+        "final_enum": [
+          "Snap11",
+          "证据不足"
+        ]
+      },
+      "enum": [
+        "Snap11",
+        "证据不足"
+      ]
+    },
+    {
+      "name": "check_name_overlap_not_same",
+      "passed": true,
+      "audit": {
+        "answer_form": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "type_enum": {
+          "enabled": true,
+          "values": [
+            "Snap11"
+          ],
+          "occurrences": [
+            {
+              "passage_index": 0,
+              "value": "V2",
+              "start": 4,
+              "end": 6
+            },
+            {
+              "passage_index": 0,
+              "value": "BX37",
+              "start": 23,
+              "end": 27
+            },
+            {
+              "passage_index": 0,
+              "value": "Snap11",
+              "start": 29,
+              "end": 35
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 2,
+              "end": 6
+            },
+            {
+              "passage_index": 1,
+              "value": "BX37",
+              "start": 12,
+              "end": 16
+            }
+          ],
+          "position_unit": "Python Unicode字符，start含/end不含",
+          "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+          "old_values": [
+            "V2",
+            "BX37",
+            "Snap11"
+          ],
+          "decisions": [
+            {
+              "value": "V2",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "V2",
+                  "category": "version",
+                  "object_type": "version",
+                  "passage_index": 0,
+                  "start": 4,
+                  "end": 6,
+                  "recognition_text": "V2版本",
+                  "recognition_start": 4,
+                  "recognition_end": 8,
+                  "basis": "正文明确版本标签，不依据编号前缀。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "BX37",
+              "excluded": true,
+              "reason": "all_reliable_roles_explicitly_non_target",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "table",
+                  "passage_index": 0,
+                  "start": 23,
+                  "end": 27,
+                  "recognition_text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出区域定位2项失败。",
+                  "recognition_start": 0,
+                  "recognition_end": 46,
+                  "extractor_evidence": {
+                    "object_type": "table",
+                    "object_name": "复核表",
+                    "raw_label": "复核表",
+                    "code": "BX37",
+                    "start": 20,
+                    "end": 27,
+                    "code_start": 23,
+                    "code_end": 27,
+                    "statement": {
+                      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出区域定位2项失败。",
+                      "start": 0,
+                      "end": 46
+                    },
+                    "reliable_declaration": true,
+                    "direct_supplement_reference": false,
+                    "mere_reference": false,
+                    "declaration_predicate": {
+                      "text": "显示",
+                      "start": 27,
+                      "end": 29
+                    }
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                },
+                {
+                  "value": "BX37",
+                  "category": "business",
+                  "object_type": "batch",
+                  "passage_index": 1,
+                  "start": 2,
+                  "end": 6,
+                  "recognition_text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                  "recognition_start": 0,
+                  "recognition_end": 34,
+                  "extractor_evidence": {
+                    "object_type": "batch",
+                    "object_name": "批次",
+                    "raw_label": "批次",
+                    "code": "BX37",
+                    "start": 0,
+                    "end": 6,
+                    "code_start": 2,
+                    "code_end": 6,
+                    "statement": {
+                      "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                      "start": 0,
+                      "end": 34
+                    },
+                    "reliable_declaration": false,
+                    "direct_supplement_reference": true,
+                    "mere_reference": false,
+                    "declaration_predicate": null
+                  },
+                  "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                }
+              ],
+              "semantic_conflicts": []
+            },
+            {
+              "value": "Snap11",
+              "excluded": false,
+              "reason": "unknown_role_keep",
+              "target_role": [
+                "other",
+                "快照"
+              ],
+              "roles": [],
+              "semantic_conflicts": []
+            }
+          ],
+          "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+          "target_role": [
+            "other",
+            "快照"
+          ]
+        },
+        "qualification_enabled": false,
+        "qualification_status": "unknown_keep_original",
+        "no_remaining_candidate_qualification": true,
+        "rule_audit": {
+          "original_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "answer_enum": [
+            "Snap11",
+            "证据不足"
+          ],
+          "changed": false,
+          "decisions": [
+            {
+              "candidate": "Snap11",
+              "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出区域定位2项失败。",
+              "passage_id": "data",
+              "start": 0,
+              "end": 46,
+              "excluded": false,
+              "eligibility": "unknown",
+              "relations": [
+                {
+                  "supplement_id": "rule",
+                  "target_id": "data",
+                  "added": true,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "BX37",
+                      "start": 0,
+                      "end": 6,
+                      "code_start": 2,
+                      "code_end": 6,
+                      "statement": {
+                        "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                        "start": 0,
+                        "end": 34
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "data"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "table",
+                      "object_name": "复核表",
+                      "raw_label": "复核表",
+                      "code": "BX37",
+                      "start": 20,
+                      "end": 27,
+                      "code_start": 23,
+                      "code_end": 27,
+                      "statement": {
+                        "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出区域定位2项失败。",
+                        "start": 0,
+                        "end": 46
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "显示",
+                        "start": 27,
+                        "end": 29
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": false,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                }
+              ],
+              "rule_evidence": [
+                {
+                  "passage_id": "rule",
+                  "start": 19,
+                  "end": 33,
+                  "quote": "规则要求区域定位检查全部通过",
+                  "required_pass_items": [
+                    "区域定位"
+                  ],
+                  "forbidden_literals": [],
+                  "unresolved_required_checks": false,
+                  "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                }
+              ],
+              "matches": [],
+              "unmatched_defects": [
+                {
+                  "event": {
+                    "status": "explicit_defect",
+                    "expression_class": "positive_presence",
+                    "rule": "local_nonzero_quantity",
+                    "trigger": "失败",
+                    "trigger_start": 43,
+                    "trigger_end": 45,
+                    "description_quote": "导出区域定位2项失败",
+                    "description_start": 35,
+                    "description_end": 45,
+                    "negation_scope": null,
+                    "quantity_scope": [
+                      {
+                        "start": 41,
+                        "end": 43,
+                        "quote": "2项",
+                        "number_start": 41,
+                        "number_end": 42,
+                        "raw": "2",
+                        "value": 2,
+                        "ownership": "current_check_item",
+                        "quantity_kind": "defect_count",
+                        "item_scope": {
+                          "start": 35,
+                          "end": 45,
+                          "quote": "导出区域定位2项失败"
+                        }
+                      }
+                    ],
+                    "unparsed_quantity_scope": null,
+                    "quantity_text": "2",
+                    "quantity": 2,
+                    "pass_scope": null,
+                    "overall_eligibility_not_inferred": true,
+                    "condition_context_not_semantically_parsed": true,
+                    "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出区域定位2项失败。",
+                    "start": 0,
+                    "end": 46
+                  },
+                  "derived_check_name": "导出区域定位",
+                  "rule": {
+                    "passage_id": "rule",
+                    "start": 19,
+                    "end": 33,
+                    "quote": "规则要求区域定位检查全部通过",
+                    "required_pass_items": [
+                      "区域定位"
+                    ],
+                    "forbidden_literals": [],
+                    "unresolved_required_checks": false,
+                    "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+                  },
+                  "scope_basis": "全输入唯一可靠主声明与完整编号直接补页指称；明示范围冲突由原关联器拒绝。缺失字段仍登记unknown，不当作相等。",
+                  "relation": {
+                    "supplement_id": "rule",
+                    "target_id": "data",
+                    "added": true,
+                    "reference_evidence": [
+                      {
+                        "object_type": "batch",
+                        "object_name": "批次",
+                        "raw_label": "批次",
+                        "code": "BX37",
+                        "start": 0,
+                        "end": 6,
+                        "code_start": 2,
+                        "code_end": 6,
+                        "statement": {
+                          "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                          "start": 0,
+                          "end": 34
+                        },
+                        "reliable_declaration": false,
+                        "direct_supplement_reference": true,
+                        "mere_reference": false,
+                        "declaration_predicate": null
+                      }
+                    ],
+                    "candidate_target_ids": [
+                      "data"
+                    ],
+                    "unknown_scope_fields": [
+                      "project",
+                      "version",
+                      "date",
+                      "namespace"
+                    ],
+                    "semantic_support_verified": false,
+                    "target_declarations": [
+                      {
+                        "object_type": "table",
+                        "object_name": "复核表",
+                        "raw_label": "复核表",
+                        "code": "BX37",
+                        "start": 20,
+                        "end": 27,
+                        "code_start": 23,
+                        "code_end": 27,
+                        "statement": {
+                          "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出区域定位2项失败。",
+                          "start": 0,
+                          "end": 46
+                        },
+                        "reliable_declaration": true,
+                        "direct_supplement_reference": false,
+                        "mere_reference": false,
+                        "declaration_predicate": {
+                          "text": "显示",
+                          "start": 27,
+                          "end": 29
+                        }
+                      }
+                    ],
+                    "reason": "unique_reliable_direct_reference",
+                    "object_labels_equal": false,
+                    "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+                  },
+                  "reason": "检查名称或禁止缺陷未能逐字对应；不添加同义关系。"
+                }
+              ],
+              "remaining_does_not_mean_eligible": true,
+              "reason": "unknown_keep_no_reliable_violation_match"
+            }
+          ],
+          "unresolved_rules": [],
+          "needs_manual_correspondence": false,
+          "no_automatic_qualification_or_citation": true
+        },
+        "explicit_states": [
+          {
+            "snapshot": "Snap11",
+            "passage_index": 0,
+            "passage_id": "data",
+            "candidate_start": 29,
+            "candidate_end": 35,
+            "start": 0,
+            "end": 46,
+            "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出区域定位2项失败。",
+            "events": [
+              {
+                "status": "explicit_defect",
+                "expression_class": "positive_presence",
+                "rule": "local_nonzero_quantity",
+                "trigger": "失败",
+                "trigger_start": 43,
+                "trigger_end": 45,
+                "description_quote": "导出区域定位2项失败",
+                "description_start": 35,
+                "description_end": 45,
+                "negation_scope": null,
+                "quantity_scope": [
+                  {
+                    "start": 41,
+                    "end": 43,
+                    "quote": "2项",
+                    "number_start": 41,
+                    "number_end": 42,
+                    "raw": "2",
+                    "value": 2,
+                    "ownership": "current_check_item",
+                    "quantity_kind": "defect_count",
+                    "item_scope": {
+                      "start": 35,
+                      "end": 45,
+                      "quote": "导出区域定位2项失败"
+                    }
+                  }
+                ],
+                "unparsed_quantity_scope": null,
+                "quantity_text": "2",
+                "quantity": 2,
+                "pass_scope": null,
+                "overall_eligibility_not_inferred": true,
+                "condition_context_not_semantically_parsed": true,
+                "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11导出区域定位2项失败。",
+                "start": 0,
+                "end": 46
+              }
+            ],
+            "unparsed_content": [],
+            "qualification_not_checked": true,
+            "unclosed_count_not_defaulted_to_zero": true,
+            "observed_state": "explicit_defect"
+          }
+        ],
+        "qualification_reason": "only_reliable_current_visible_rule_matches",
+        "excluded": [],
+        "kept_unknown": [
+          {
+            "candidate": "Snap11",
+            "reason": "unknown_keep_no_reliable_violation_match"
+          }
+        ],
+        "original_enum": [
+          "Snap11",
+          "证据不足"
+        ],
+        "final_enum": [
+          "Snap11",
+          "证据不足"
+        ]
+      },
+      "enum": [
+        "Snap11",
+        "证据不足"
+      ]
+    },
+    {
+      "name": "empty_input",
+      "passed": true,
+      "calls_are_synthetic_only": true,
+      "output": {
+        "variant": "improved",
+        "question": "这份资料说明什么？",
+        "original_passages": [],
+        "stages": [
+          {
+            "run_kind": "offline_stub_not_model",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "run_kind": "offline_stub_not_model",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"offline_fixture\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [],
+        "raw_selection": "{\"selected_ids\":[]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "empty_selection",
+          "selected_ids": []
+        },
+        "association_trace": [],
+        "added_ids": [],
+        "used_passages": [],
+        "answer_form_rule": {
+          "answer_form": {
+            "kind": null,
+            "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "eligibility_rule_audit": {
+          "answer_form": {
+            "kind": null,
+            "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "processing_status": "completed_with_explicit_unknown_fallback",
+        "raw_answer": "{\"answer\":\"offline_fixture\",\"citations\":[]}",
+        "end_to_end_seconds": 0.00021309999283403158
+      }
+    },
+    {
+      "name": "invalid_selection",
+      "passed": true,
+      "calls_are_synthetic_only": true,
+      "output": {
+        "variant": "improved",
+        "question": "这份资料说明什么？",
+        "original_passages": [
+          {
+            "id": "one",
+            "source": "self",
+            "text": "无快照编号。"
+          }
+        ],
+        "stages": [
+          {
+            "run_kind": "offline_stub_not_model",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"unknown\"]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "selection_output_failure",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "one",
+            "source": "self",
+            "text": "无快照编号。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"unknown\"]}",
+        "selection_validation": {
+          "valid": false,
+          "status": "unknown_id",
+          "selected_ids": [
+            "unknown"
+          ]
+        },
+        "answer_not_executed": true,
+        "end_to_end_seconds": 0.002602500026114285
+      }
+    },
+    {
+      "name": "ordinary_input",
+      "passed": true,
+      "calls_are_synthetic_only": true,
+      "output": {
+        "variant": "improved",
+        "question": "这份资料说明什么？",
+        "original_passages": [
+          {
+            "id": "renamed-id",
+            "source": "self",
+            "text": "只有普通资料。"
+          }
+        ],
+        "stages": [
+          {
+            "run_kind": "offline_stub_not_model",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"renamed-id\"]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "run_kind": "offline_stub_not_model",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"offline_fixture\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "renamed-id",
+            "source": "self",
+            "text": "只有普通资料。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"renamed-id\"]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "valid_selection",
+          "selected_ids": [
+            "renamed-id"
+          ]
+        },
+        "association_trace": [],
+        "added_ids": [],
+        "used_passages": [
+          {
+            "id": "renamed-id",
+            "source": "self",
+            "text": "只有普通资料。"
+          }
+        ],
+        "answer_form_rule": {
+          "answer_form": {
+            "kind": null,
+            "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "eligibility_rule_audit": {
+          "answer_form": {
+            "kind": null,
+            "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "processing_status": "completed_with_explicit_unknown_fallback",
+        "raw_answer": "{\"answer\":\"offline_fixture\",\"citations\":[]}",
+        "end_to_end_seconds": 0.00035440002102404833
+      }
+    }
+  ],
+  "total": 13,
+  "failed_cases": [],
+  "no_identifier_or_question_branches": true
+}

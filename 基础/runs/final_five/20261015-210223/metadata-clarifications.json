@@ -1,0 +1,25 @@
+{
+  "saved_at": "2026-10-15T21:15:39.516475+08:00",
+  "records_unchanged": true,
+  "clarifications": [
+    {
+      "files": [
+        "round1/freeze.json",
+        "round2/freeze.json",
+        "round3/freeze.json"
+      ],
+      "field": "failure_rules.denominator",
+      "issue": "复用完整运行器的这条说明文字仍写开发4题再评测8题、最多24次，未反映前三轮回答阶段对照。",
+      "effective_rule": "前三轮各4个开发题×两侧=8条回答；每轮8次新生成，历史定位不计新增生成。实际以同一冻结文件order、main_task_limit、generation_limit、execution-plan.prepared.json及实际请求记录为准。",
+      "runtime_effect": "只是一条说明文字，未控制循环或请求上限；真实循环8项、上限8，未运行T题。"
+    },
+    {
+      "files": [
+        "prepare_final_five.py",
+        "run_bounded_round.py"
+      ],
+      "issue": "继承文件的模块首行说明仍描述较早完整运行；具体轮次以已落盘计划、冻结order及实际记录为准。",
+      "runtime_effect": "不改变模型输入或执行次数。"
+    }
+  ]
+}

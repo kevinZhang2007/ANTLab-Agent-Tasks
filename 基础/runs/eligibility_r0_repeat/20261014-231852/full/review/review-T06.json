@@ -1,0 +1,273 @@
+{
+  "basis": {
+    "case_id": "T06",
+    "question_scope": "松影R3，2026-07首次执行SY37技术失败率；只输出百分数。",
+    "scope": {
+      "project": "松影",
+      "version": "R3",
+      "date": "2026-07",
+      "batch": "SY37",
+      "metric": "按该批次自有口径，超时和格式不合法均为技术失败，全部60项初次结果为分母"
+    },
+    "required_evidence": [
+      {
+        "id": "P873502",
+        "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+        "role": "首次任务数量与两类失败计数"
+      },
+      {
+        "id": "P721388",
+        "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+        "role": "题内技术失败定义及分母"
+      }
+    ],
+    "derivation": "(8超时+7格式不合法)/60×100%=25%。不剔除失败，不用重试；该题的统计定义与本轮请求技术/质量失败分类不是同一口径。",
+    "derived_answer": "25%",
+    "answer_form": "仅百分数",
+    "excluded_evidence": [
+      {
+        "id": "P466322",
+        "reason": "R2旧版"
+      },
+      {
+        "id": "P463444",
+        "reason": "迁移XQ59"
+      },
+      {
+        "id": "P276634",
+        "reason": "上月探索"
+      },
+      {
+        "id": "P878722",
+        "reason": "压力组并非SY37初次清单"
+      },
+      {
+        "id": "P151208",
+        "reason": "岫光项目"
+      }
+    ],
+    "ambiguities": [],
+    "limits": "K若缺P721388，技术失败是否包含格式不合法无法按本批次明确核对；不要从常见术语含义擅自替代该题口径。",
+    "reviewed_at": "2026-10-13T13:36:54.735007+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+    "source": "基础/data/cases.json",
+    "source_sha256": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "derivation_kind": "评测后原文推导，非官方标准答案",
+    "model_answers_read_before_saving": false
+  },
+  "row": {
+    "reviewed_at": "2026-10-14T23:24:44.735528+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认；非官方成绩或独立人工判分。",
+    "status": "provisional_not_personally_confirmed",
+    "case_id": "T06",
+    "main_task_id": "52571fbf-91fa-4d7f-bc6e-5dd16f46d72b",
+    "run_ids": [
+      "3ce152d0-dab8-4758-8076-51e37442d54f",
+      "ccb7538f-ffd9-40a0-a293-003bb0505956"
+    ],
+    "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P873502\"]}",
+    "answer": "证据不足",
+    "citations": [
+      "P873502"
+    ],
+    "pipeline_status": "completed",
+    "answer_correct": false,
+    "semantic_consistent": false,
+    "format_complete": true,
+    "citation_ids_exist": true,
+    "necessary_input_coverage": true,
+    "necessary_coverage": false,
+    "support_actual_answer": false,
+    "irrelevant_ids": [],
+    "has_unrelated_references": false,
+    "strict_complete_success": false,
+    "end_to_end_seconds": 19.614925500005484,
+    "initial_input_ids": [
+      "P878722",
+      "P276634",
+      "P151208",
+      "P466322",
+      "P463444",
+      "P873502",
+      "P721388"
+    ],
+    "final_input_ids": [
+      "P873502",
+      "P721388"
+    ],
+    "qualification_rule": {
+      "answer_form": {
+        "kind": "百分数",
+        "reason": "问题末尾明确只输出百分数",
+        "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?%|证据不足)$"
+      },
+      "type_enum": {
+        "enabled": false,
+        "values": [
+          "R3",
+          "SY37"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "R3",
+            "start": 4,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "SY37",
+            "start": 26,
+            "end": 30
+          },
+          {
+            "passage_index": 1,
+            "value": "SY37",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 1,
+            "value": "SY37",
+            "start": 12,
+            "end": 16
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "R3",
+          "SY37"
+        ],
+        "decisions": [
+          {
+            "value": "R3",
+            "excluded": false,
+            "reason": "unknown_role_keep",
+            "target_role": null,
+            "roles": [
+              {
+                "value": "R3",
+                "category": "version",
+                "object_type": "version",
+                "passage_index": 0,
+                "start": 4,
+                "end": 6,
+                "recognition_text": "R3版本",
+                "recognition_start": 4,
+                "recognition_end": 8,
+                "basis": "正文明确版本标签，不依据编号前缀。"
+              }
+            ],
+            "semantic_conflicts": []
+          },
+          {
+            "value": "SY37",
+            "excluded": false,
+            "reason": "unknown_role_keep",
+            "target_role": null,
+            "roles": [
+              {
+                "value": "SY37",
+                "category": "business",
+                "object_type": "list",
+                "passage_index": 0,
+                "start": 26,
+                "end": 30,
+                "recognition_text": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；",
+                "recognition_start": 0,
+                "recognition_end": 37,
+                "extractor_evidence": {
+                  "object_type": "list",
+                  "object_name": "首次执行清单",
+                  "raw_label": "首次执行清单",
+                  "code": "SY37",
+                  "start": 20,
+                  "end": 30,
+                  "code_start": 26,
+                  "code_end": 30,
+                  "statement": {
+                    "text": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；",
+                    "start": 0,
+                    "end": 37
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "有",
+                    "start": 30,
+                    "end": 31
+                  }
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              },
+              {
+                "value": "SY37",
+                "category": "business",
+                "object_type": "batch",
+                "passage_index": 1,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；",
+                "recognition_start": 0,
+                "recognition_end": 46,
+                "extractor_evidence": {
+                  "object_type": "batch",
+                  "object_name": "批次",
+                  "raw_label": "批次",
+                  "code": "SY37",
+                  "start": 0,
+                  "end": 6,
+                  "code_start": 2,
+                  "code_end": 6,
+                  "statement": {
+                    "text": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；",
+                    "start": 0,
+                    "end": 46
+                  },
+                  "reliable_declaration": false,
+                  "direct_supplement_reference": true,
+                  "mere_reference": false,
+                  "declaration_predicate": null
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              }
+            ],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": null
+      },
+      "qualification_enabled": false,
+      "qualification_status": "not_applicable",
+      "no_remaining_candidate_qualification": true,
+      "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+    },
+    "ambiguity": null,
+    "reasons": {
+      "answer": "(8超时+7格式不合法)/60×100%=25%。不剔除失败，不用重试；该题的统计定义与本轮请求技术/质量失败分类不是同一口径。 实际answer='证据不足'；不改写原回答。 主任务完整R0资料可推导；最终漏选或拒答不能计端到端成功。",
+      "coverage": "必要来源=P721388,P873502；实际引用=P873502",
+      "support": "引用集合必须支持实际答案；数据与选择/发布规则分别核对，ID存在不等于支持。",
+      "unrelated": []
+    },
+    "basis_path": "基础/runs/formal_review/round1/evidence-T06.json",
+    "source_evidence": [
+      {
+        "id": "P873502",
+        "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+        "text": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+        "cited": true,
+        "visible": true
+      },
+      {
+        "id": "P721388",
+        "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+        "text": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+        "cited": false,
+        "visible": true
+      }
+    ]
+  }
+}

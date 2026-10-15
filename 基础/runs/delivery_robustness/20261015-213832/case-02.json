@@ -1,0 +1,77 @@
+{
+  "name": "difference_scope_conflict",
+  "branch": "calculation",
+  "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+  "passages": [
+    {
+      "id": "custom-data",
+      "source": "独立自造资料",
+      "text": "绀羽项目Edition584版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+    },
+    {
+      "id": "custom-extra",
+      "source": "独立自造资料",
+      "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+    }
+  ],
+  "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+  "expected_derived_answer": null,
+  "expected_basis": "版本冲突，不能派生。",
+  "audit_universe": null,
+  "actual": {
+    "run_kind": "offline_difference_calculation_proposal",
+    "judgment_source": "local_rule",
+    "applicable": true,
+    "status": "refused",
+    "proof_established": false,
+    "trace": [
+      {
+        "stage": "question_project_boundary",
+        "audit": {
+          "status": "unknown",
+          "question_candidates": [
+            {
+              "entity": "绀羽项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                16
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "绀羽项目",
+              "version": "Edition584版本",
+              "date": "2025-11",
+              "passage_id": "custom-data",
+              "source": "独立自造资料",
+              "start": 0,
+              "end": 28,
+              "quote": "绀羽项目Edition584版本在2025-11的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+          "reason": "entity_declaration_version_or_date_not_confirmed",
+          "missing_fields_not_assumed_equal": true
+        }
+      }
+    ],
+    "proposed_response": null,
+    "answer_changed": false,
+    "not_original_model_response": true,
+    "reason": "question_project_entity_unknown"
+  },
+  "derived_response": null,
+  "final_response": {
+    "answer": "原始保留",
+    "citations": []
+  },
+  "passed": true,
+  "raw_response_preserved": true,
+  "checked_at": "2026-10-15T21:38:37.031389+08:00"
+}

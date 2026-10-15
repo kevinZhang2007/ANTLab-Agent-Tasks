@@ -1,0 +1,48 @@
+{
+  "recorded_at": "2026-10-13T19:52:37.249546+08:00",
+  "status": "designed_before_implementation_and_generation",
+  "binary_version": "version: 0.6.0-dev (build 11429, commit d81235049)\nbuilt with Clang 20.1.8 for Windows x86_64\n",
+  "role": "评测后独立开发探索，首次正式结果及冻结方案保持。",
+  "hypothesis": "仅从明确输出要求派生answer pattern可能避免单位/说明导致的指定答法失败。",
+  "competing_explanation": "形式约束不能补计算、拒答或必要引用；也可能只将错误答案变为合规格式。",
+  "input_source": "基础/runs/two_step_linked/20261013-193700/task-D01.json至task-D04.json中的linked_answer.used_passages，按完整原段落历史重放；不重新定位或补页，不称完整两步重跑。",
+  "settings": "Qwen3-0.6B-Q8_0，llama.cpp b11429，4096/单槽/CPU4线程，关闭思考、上下文移位和预热，旧采样数值参数/seed42/max_tokens256及统一提示词不改。",
+  "pattern_rules": "只识别question末尾明确的只输出数值或只输出百分数；冲突或不可靠则沿用原Schema。允许正负整数、小数、科学记数；百分数加%符号。保留证据不足分支，不限制正确数值或引用。",
+  "support_preflight": "核对同commit官方转换源码；用两种自造Schema作本机零输出预算编译检查并保留日志；自造合法/非法字符串核对。若有不支持pattern或fallback告警则停止，不能当生效。",
+  "native_string_validation": "若能用本机grammar sampler离线核验自造JSON则保存结果；不额外生成自造答案。不能完成可靠支持核验时停止开发生成。",
+  "call_order": [
+    {
+      "case_id": "D01",
+      "variants": [
+        "original_schema",
+        "answer_form_schema"
+      ]
+    },
+    {
+      "case_id": "D02",
+      "variants": [
+        "answer_form_schema",
+        "original_schema"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "variants": [
+        "original_schema",
+        "answer_form_schema"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "variants": [
+        "answer_form_schema",
+        "original_schema"
+      ]
+    }
+  ],
+  "generation_limit": 8,
+  "evaluation": "全部调用结束后才评价，分别指定答法、语义、引用支持和严格成功；不得处理原回答。",
+  "timing": "仅本轮回答阶段客户端完整请求耗时，不和共享定位完整流程比较。",
+  "stop": "不支持/回退、容量或参数不符、技术失败保存后停止；质量错误不重试；结束关闭自有服务。",
+  "previous_generation_count": 136
+}

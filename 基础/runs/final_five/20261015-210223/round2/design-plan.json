@@ -1,0 +1,172 @@
+{
+  "saved_at": "2026-10-15T21:05:40.521672+08:00",
+  "research": {
+    "saved_at": "2026-10-15T21:05:26.786335+08:00",
+    "round": 2,
+    "hypothesis_and_competition": "贪心可能提高可重复性，也可能稳定保留错误；不是训练或能力提升。",
+    "selection_rule": "先系统最终严格成功数，再系统最终正确数；同分保留当前已验证方案，原始模型指标单列。",
+    "control_policy": {},
+    "candidate_policy": {
+      "temperature": 0
+    },
+    "short_prompt": null,
+    "failure": "质量不重试；技术停止，先核查是否发出；不得自动重发。",
+    "scope": "D01定义不足不补映射；T01资格歧义不放宽。",
+    "replay": true,
+    "cost": "前三轮仅回答及规则，定位历史重放不计入新耗时或新生成；第五轮真实端到端。",
+    "exposure": "前四轮只开发题和自造；第五轮为评测后重复测试。"
+  },
+  "order": [
+    {
+      "sequence": 1,
+      "case_id": "D01",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-01.json"
+    },
+    {
+      "sequence": 2,
+      "case_id": "D01",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "temperature": 0
+      },
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-01.json"
+    },
+    {
+      "sequence": 3,
+      "case_id": "D02",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "temperature": 0
+      },
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-02.json"
+    },
+    {
+      "sequence": 4,
+      "case_id": "D02",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-02.json"
+    },
+    {
+      "sequence": 5,
+      "case_id": "D03",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-03.json"
+    },
+    {
+      "sequence": 6,
+      "case_id": "D03",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "temperature": 0
+      },
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-03.json"
+    },
+    {
+      "sequence": 7,
+      "case_id": "D04",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "temperature": 0
+      },
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-04.json"
+    },
+    {
+      "sequence": 8,
+      "case_id": "D04",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-04.json"
+    }
+  ],
+  "failure_rules": {
+    "technical": "HTTP/超时/服务错误、容量超限、参数或哈希不符立即保存并停止；无自动重试。",
+    "quality": "错误答案、非法定位、漏选、空选择、格式错误、预算耗尽均保留，不重试。",
+    "selection_failure": "主任务保留分母，不执行第二步，不回退。",
+    "memory": "加载前至少2 GiB；请求前至少1 GiB；连续3个2秒样本低于1 GiB停止自有服务。",
+    "denominator": "先开发4题再评测8题R0，分母分别4/8；最多24次生成；质量错误不重试。"
+  },
+  "evaluation": {
+    "recorded_at": "2026-10-13T13:12:03.376478+08:00",
+    "status": "待确认评价口径",
+    "sources": [
+      "基础/01_考核题目.md 第四步",
+      "进阶/00_共同规则与接口.md",
+      "基础/runs/reading/alce-reading-evidence.json",
+      "基础/runs/review/stage3/citation-rules.json"
+    ],
+    "metrics": [
+      {
+        "name": "answer_correct",
+        "method": "根据问题指定表达形式、项目/版本/日期/批次/口径/签署状态，核对全部当前可见原文。计算逐项记录分子分母、运算方向单位；选择逐项记录资格及决策规则。证据不足须核查所需事实是否确实缺失。",
+        "unknown": "not_checked，不能编造标准答案"
+      },
+      {
+        "name": "format_complete",
+        "method": "原始content可解析为仅含answer字符串和citations字符串数组的JSON；不补字段、不修正原响应。空数组可以格式合法。"
+      },
+      {
+        "name": "citation_ids_exist",
+        "method": "分别记录空引用、每个ID是否属于该次实际输入、重复引用；ID存在不等于支持。"
+      },
+      {
+        "name": "necessary_evidence_covered",
+        "method": "先按问题和实际输入独立列出所需事实及来源，再检查引用覆盖。可能有等价证据组合，不把某一唯一ID集当金标准。"
+      },
+      {
+        "name": "citation_support",
+        "method": "将实际answer拆成可核验主张，检查引用集合是否足以推出结论；标supported/contradicted/insufficient/not_checked，并摘录原文、计算或规则依据。"
+      },
+      {
+        "name": "irrelevant_citations",
+        "method": "逐条判断是否为任何必要主张提供实质支持；范围错误或完全无关另列。多段共同支持的部分证据不因单段不足而自动算无关；相关冗余不自动算错误。"
+      }
+    ],
+    "strict_complete_success": {
+      "origin": "开发阶段选定的综合指标，不是任务原文唯一评分标准",
+      "definition": "格式完整、指定答法正确、非空且全部ID属于实际输入、必要依据覆盖、引用集合支持实际答案、没有无关引用；技术失败或无答案为不成功。尚未人工核验时为not_checked。"
+    },
+    "manual_review": {
+      "no_public_formal_gold": true,
+      "no_model_only_judge": true,
+      "procedure": [
+        "生成前只做容量检查，不人工分析题目或编造标签。",
+        "获授权完成正式调用后，以每次实际输入为边界逐题保存核对表：问题要求、范围、必要事实、原文定位、推导、原回答与引用、各分项状态。",
+        "题目完整可见资料另查输入是否缺证；实际输入无法推出时记录不足，K遗漏与错误拒答分开解释。",
+        "若有歧义，保存竞争解释并标未核验；人工调整保留旧标签、新标签、理由和时间，不改原响应。",
+        "完成可复核标签后才汇总；同时报告总分母、已核验数量及未知项，不能用已核验子集冒充全部正确率。"
+      ],
+      "reviewer_label": "human，人工评价不是系统输出",
+      "cost": "客户端完整非流式请求耗时；启动、模板检查和人工评价耗时另列。"
+    }
+  },
+  "maximum_generation_calls": 8,
+  "evaluation_after_all_calls": true
+}

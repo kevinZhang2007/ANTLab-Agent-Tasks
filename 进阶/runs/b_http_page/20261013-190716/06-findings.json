@@ -1,0 +1,20 @@
+{
+  "recorded_at": "2026-10-13T19:11:29.513154+08:00",
+  "observed": [
+    "原版暖v2仍返回v1/b01，原Engine valid/supported保留，展示层invalid/not_checked。",
+    "修复版暖v2返回v2/b02，定位valid，语义not_checked。",
+    "修复版beta返回当前5秒draft，evidence=[]、locator invalid；不是成功查证。",
+    "原/修复冷R05和重复R05内容一致；修复版始终无缓存命中。",
+    "未知文档和未知快照冷请求均证据为空，不回退范围；展示invalid_scope。"
+  ],
+  "unresolved": [
+    "top-k先截取后范围过滤，beta仍漏证。",
+    "Engine ID有效即supported，语义判断未修；对外另列not_checked/unverified。",
+    "未知范围Engine仍返回status=ok和固定draft；展示标注不等于修复Engine。",
+    "本轮未知范围测试是清空状态后的边界，不证明原Engine暖缓存边界安全。",
+    "页面请求等待期间上一响应仍可见，响应区request_id及request用于区别；未做异步交互压力测试。",
+    "没有验证多用户、并发、生产安全；不存在真实模型服务请求。"
+  ],
+  "automation_issue": "选择label精确匹配失败发生在提交前，未新增HTTP调用；使用已观察的combobox角色完成。",
+  "stopping": "完成后用Ctrl+C停止两个本轮服务，端口均不再监听；进程退出1是中断，不是请求失败。"
+}

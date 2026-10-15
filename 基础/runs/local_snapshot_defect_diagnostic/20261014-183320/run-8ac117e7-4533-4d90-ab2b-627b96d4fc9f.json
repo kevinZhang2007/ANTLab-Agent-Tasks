@@ -1,0 +1,256 @@
+{
+  "sequence": 1,
+  "case_id": "T01",
+  "variant": "first_clause_reading",
+  "messages": [
+    {
+      "role": "system",
+      "content": "只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。"
+    },
+    {
+      "role": "user",
+      "content": "{\"snapshot\": \"S23\", \"passage_id\": \"P555495\", \"start\": 0, \"end\": 46, \"text\": \"栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；\"}"
+    }
+  ],
+  "config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 128
+    },
+    "timeout_seconds": 180
+  },
+  "used_passages": [
+    {
+      "id": "P555495",
+      "source": "模拟记录/T01/页3",
+      "text": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；"
+    }
+  ],
+  "input_tokens": 155,
+  "schema_rule": {
+    "kind": "explicit_defect_diagnostic",
+    "answer_not_generated": true
+  },
+  "run_id": "8ac117e7-4533-4d90-ab2b-627b96d4fc9f",
+  "started_at": "2026-10-14T18:33:44.731996+08:00",
+  "run_kind": "live_api",
+  "mode": "local",
+  "condition": "R0",
+  "review_stage_only": true,
+  "original_answer_provenance": "historical_replay",
+  "original_passages": [
+    {
+      "id": "P555495",
+      "source": "模拟记录/T01/页3",
+      "text": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；"
+    }
+  ],
+  "question": null,
+  "original_response": {},
+  "original_raw_content": "",
+  "source_path": "基础/runs/snapshot_qualification_diagnostic/20261014-175307/source-inputs.json",
+  "source_sha256": "19d9a76c9bb4da552f9b1787437c025a477edbb1bd9ddea9044a2606f89ee2d0",
+  "source_run_id": "historical_character_positions_only",
+  "memory_before": {
+    "time": "2026-10-14T18:33:44.732117+08:00",
+    "available_bytes": 1962463232,
+    "total_bytes": 16785268736
+  },
+  "status": "ok",
+  "generation_dispatched": true,
+  "model_revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "weight_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "attempt": 1,
+  "retry_of": null,
+  "cache_erase": {
+    "id_slot": 0,
+    "n_erased": 0
+  },
+  "actual_http_request_body": {
+    "model": "Qwen3-0.6B-Q8_0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。"
+      },
+      {
+        "role": "user",
+        "content": "{\"snapshot\": \"S23\", \"passage_id\": \"P555495\", \"start\": 0, \"end\": 46, \"text\": \"栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；\"}"
+      }
+    ],
+    "stream": false,
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 1.5,
+    "seed": 42,
+    "max_tokens": 128
+  },
+  "raw_http_request_body": "{\"model\": \"Qwen3-0.6B-Q8_0\", \"messages\": [{\"role\": \"system\", \"content\": \"只看下面的原文，该候选是否明确存在检查缺陷？\\n返回JSON：\\n{\\\"has_explicit_defect\\\":true或false,\\n \\\"quote\\\":\\\"对应连续原文；没有则为空字符串\\\"}。\\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。\"}, {\"role\": \"user\", \"content\": \"{\\\"snapshot\\\": \\\"S23\\\", \\\"passage_id\\\": \\\"P555495\\\", \\\"start\\\": 0, \\\"end\\\": 46, \\\"text\\\": \\\"栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；\\\"}\"}], \"stream\": false, \"temperature\": 0.7, \"top_p\": 0.8, \"top_k\": 20, \"min_p\": 0, \"presence_penalty\": 1.5, \"seed\": 42, \"max_tokens\": 128}",
+  "elapsed_seconds": 2.2255399000132456,
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"has_explicit_defect\": true, \"quote\": \"栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；\"}"
+        }
+      }
+    ],
+    "created": 1791974027,
+    "model": "Qwen3-0.6B-Q8_0",
+    "system_fingerprint": "b11429-d81235049",
+    "object": "chat.completion",
+    "usage": {
+      "completion_tokens": 53,
+      "prompt_tokens": 155,
+      "total_tokens": 208,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "id": "chatcmpl-K2gqvrRxkMPW6gcSgBNpPIX5zSQY4hRJ",
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 155,
+      "prompt_ms": 886.277,
+      "prompt_per_token_ms": 5.717916129032258,
+      "prompt_per_second": 174.88888913962563,
+      "predicted_n": 53,
+      "predicted_ms": 1289.269,
+      "predicted_per_token_ms": 24.793634615384615,
+      "predicted_per_second": 40.3329328479937
+    }
+  },
+  "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"has_explicit_defect\\\": true, \\\"quote\\\": \\\"栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；\\\"}\"}}],\"created\":1791974027,\"model\":\"Qwen3-0.6B-Q8_0\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":53,\"prompt_tokens\":155,\"total_tokens\":208,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-K2gqvrRxkMPW6gcSgBNpPIX5zSQY4hRJ\",\"timings\":{\"cache_n\":0,\"prompt_n\":155,\"prompt_ms\":886.277,\"prompt_per_token_ms\":5.717916129032258,\"prompt_per_second\":174.88888913962563,\"predicted_n\":53,\"predicted_ms\":1289.269,\"predicted_per_token_ms\":24.793634615384615,\"predicted_per_second\":40.3329328479937}}",
+  "usage": {
+    "completion_tokens": 53,
+    "prompt_tokens": 155,
+    "total_tokens": 208,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "http_status": 200,
+  "memory_after": {
+    "time": "2026-10-14T18:33:47.015062+08:00",
+    "available_bytes": 1956823040,
+    "total_bytes": 16785268736
+  },
+  "returned_at": "2026-10-14T18:33:47.015212+08:00",
+  "raw_content": "{\"has_explicit_defect\": true, \"quote\": \"栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；\"}",
+  "finish_reason": "stop",
+  "budget_exhausted": false,
+  "raw_reasoning": null,
+  "id_validation": {
+    "json_object_complete": true,
+    "nonempty_quote_continuous": true,
+    "quote_empty": false,
+    "defect_truth_verified": false
+  },
+  "snapshot_candidates": [
+    {
+      "snapshot": "S23",
+      "sources": []
+    }
+  ],
+  "slot_after": [
+    {
+      "id": 0,
+      "n_ctx": 4096,
+      "speculative": false,
+      "is_processing": false,
+      "id_task": 1,
+      "n_prompt_tokens": 207,
+      "n_prompt_tokens_processed": 0,
+      "n_prompt_tokens_cache": 0,
+      "params": {
+        "seed": 42,
+        "temperature": 0.699999988079071,
+        "dynatemp_range": 0.0,
+        "dynatemp_exponent": 1.0,
+        "top_k": 20,
+        "top_p": 0.800000011920929,
+        "min_p": 0.0,
+        "top_n_sigma": -1.0,
+        "xtc_probability": 0.0,
+        "xtc_threshold": 0.10000000149011612,
+        "typical_p": 1.0,
+        "repeat_last_n": 64,
+        "repeat_penalty": 1.0,
+        "presence_penalty": 1.5,
+        "frequency_penalty": 0.0,
+        "dry_multiplier": 0.0,
+        "dry_base": 1.75,
+        "dry_allowed_length": 2,
+        "dry_penalty_last_n": 64,
+        "mirostat": 0,
+        "mirostat_tau": 5.0,
+        "mirostat_eta": 0.10000000149011612,
+        "adaptive_target": -1.0,
+        "adaptive_decay": 0.8999999761581421,
+        "max_tokens": 128,
+        "n_predict": 128,
+        "n_keep": 0,
+        "n_discard": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "n_probs": 0,
+        "min_keep": 0,
+        "chat_format": "peg-native",
+        "reasoning_format": "deepseek",
+        "reasoning_in_content": false,
+        "generation_prompt": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+        "samplers": [
+          "penalties",
+          "dry",
+          "top_n_sigma",
+          "top_k",
+          "typ_p",
+          "top_p",
+          "min_p",
+          "xtc",
+          "temperature"
+        ],
+        "speculative.types": "none",
+        "timings_per_token": false,
+        "post_sampling_probs": false,
+        "backend_sampling": false,
+        "lora": []
+      },
+      "next_token": [
+        {
+          "has_next_token": false,
+          "has_new_line": false,
+          "n_remain": -1,
+          "n_decoded": 0
+        }
+      ]
+    }
+  ],
+  "parameter_checks": {
+    "temperature": true,
+    "top_p": true,
+    "top_k": true,
+    "min_p": true,
+    "presence_penalty": true,
+    "seed": true
+  },
+  "parameters_not_echoed": [
+    "response_format",
+    "effective_max_tokens"
+  ],
+  "server_log_segment": "0.02.226.174 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1\r\n0.02.226.274 I slot launch_slot_: id  0 | task 1 | processing task, is_child = 0\r\n0.04.401.865 I slot print_timing: id  0 | task 1 | prompt eval time =     886.28 ms /   155 tokens (    5.72 ms per token,   174.89 tokens per second)\r\n0.04.401.874 I slot print_timing: id  0 | task 1 |        eval time =    1289.27 ms /    53 tokens (   24.79 ms per token,    40.33 tokens per second)\r\n0.04.401.875 I slot print_timing: id  0 | task 1 |       total time =    2175.55 ms /   208 tokens\r\n0.04.401.877 I slot print_timing: id  0 | task 1 |    graphs reused =         52\r\n0.04.401.919 I slot      release: id  0 | task 1 | stop processing: n_tokens = 207, truncated = 0\r\n",
+  "truncated": false
+}

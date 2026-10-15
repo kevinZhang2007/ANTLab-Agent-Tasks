@@ -1,0 +1,254 @@
+{
+  "checked_at": "2026-10-14T12:35:07.786795+08:00",
+  "passed": true,
+  "counts_as_generation": false,
+  "self_examples_only": true,
+  "input_unchanged": true,
+  "projection_never_repairs": true,
+  "checks": [
+    {
+      "name": "合法连续摘录",
+      "raw_fixture": {
+        "evidence": [
+          {
+            "passage_id": "self-a",
+            "quote": "记录\n保留。"
+          }
+        ],
+        "answer": "-2.5",
+        "citations": [
+          "self-a"
+        ]
+      },
+      "inspection": {
+        "json_complete": true,
+        "evidence_valid": true,
+        "evidence_items": [
+          {
+            "raw_item": {
+              "passage_id": "self-a",
+              "quote": "记录\n保留。"
+            },
+            "valid": true,
+            "id_exists": true,
+            "continuous_quote": true
+          }
+        ],
+        "errors": [],
+        "projection": {
+          "answer": "-2.5",
+          "citations": [
+            "self-a"
+          ]
+        },
+        "projection_kind": "仅提取answer/citations，不是原始响应",
+        "field_order": [
+          "evidence",
+          "answer",
+          "citations"
+        ],
+        "evidence_empty": false,
+        "semantic_support_verified": false
+      }
+    },
+    {
+      "name": "未知ID",
+      "raw_fixture": {
+        "evidence": [
+          {
+            "passage_id": "unknown",
+            "quote": "记录"
+          }
+        ],
+        "answer": "-2.5",
+        "citations": [
+          "self-a"
+        ]
+      },
+      "inspection": {
+        "json_complete": true,
+        "evidence_valid": false,
+        "evidence_items": [
+          {
+            "raw_item": {
+              "passage_id": "unknown",
+              "quote": "记录"
+            },
+            "valid": false,
+            "id_exists": false,
+            "continuous_quote": false
+          }
+        ],
+        "errors": [
+          "至少一项ID或连续原文摘录核验失败"
+        ],
+        "projection": {
+          "answer": "-2.5",
+          "citations": [
+            "self-a"
+          ]
+        },
+        "projection_kind": "仅提取answer/citations，不是原始响应",
+        "field_order": [
+          "evidence",
+          "answer",
+          "citations"
+        ],
+        "evidence_empty": false,
+        "semantic_support_verified": false
+      }
+    },
+    {
+      "name": "伪造摘录",
+      "raw_fixture": {
+        "evidence": [
+          {
+            "passage_id": "self-a",
+            "quote": "记录被改写"
+          }
+        ],
+        "answer": "-2.5",
+        "citations": [
+          "self-a"
+        ]
+      },
+      "inspection": {
+        "json_complete": true,
+        "evidence_valid": false,
+        "evidence_items": [
+          {
+            "raw_item": {
+              "passage_id": "self-a",
+              "quote": "记录被改写"
+            },
+            "valid": false,
+            "id_exists": true,
+            "continuous_quote": false
+          }
+        ],
+        "errors": [
+          "至少一项ID或连续原文摘录核验失败"
+        ],
+        "projection": {
+          "answer": "-2.5",
+          "citations": [
+            "self-a"
+          ]
+        },
+        "projection_kind": "仅提取answer/citations，不是原始响应",
+        "field_order": [
+          "evidence",
+          "answer",
+          "citations"
+        ],
+        "evidence_empty": false,
+        "semantic_support_verified": false
+      }
+    },
+    {
+      "name": "空摘录",
+      "raw_fixture": {
+        "evidence": [
+          {
+            "passage_id": "self-a",
+            "quote": ""
+          }
+        ],
+        "answer": "-2.5",
+        "citations": [
+          "self-a"
+        ]
+      },
+      "inspection": {
+        "json_complete": true,
+        "evidence_valid": false,
+        "evidence_items": [
+          {
+            "raw_item": {
+              "passage_id": "self-a",
+              "quote": ""
+            },
+            "valid": false,
+            "id_exists": true,
+            "continuous_quote": false
+          }
+        ],
+        "errors": [
+          "至少一项ID或连续原文摘录核验失败"
+        ],
+        "projection": {
+          "answer": "-2.5",
+          "citations": [
+            "self-a"
+          ]
+        },
+        "projection_kind": "仅提取answer/citations，不是原始响应",
+        "field_order": [
+          "evidence",
+          "answer",
+          "citations"
+        ],
+        "evidence_empty": false,
+        "semantic_support_verified": false
+      }
+    },
+    {
+      "name": "缺失evidence",
+      "raw_fixture": {
+        "answer": "原回答",
+        "citations": [
+          "self-a"
+        ]
+      },
+      "inspection": {
+        "json_complete": false,
+        "evidence_valid": false,
+        "evidence_items": [],
+        "errors": [
+          "字段缺失、额外字段或类型不合法"
+        ],
+        "projection": {
+          "answer": "原回答",
+          "citations": [
+            "self-a"
+          ]
+        },
+        "projection_kind": "仅提取answer/citations，不是原始响应",
+        "field_order": [
+          "answer",
+          "citations"
+        ]
+      }
+    },
+    {
+      "name": "空evidence",
+      "raw_fixture": {
+        "evidence": [],
+        "answer": "-2.5",
+        "citations": [
+          "self-a"
+        ]
+      },
+      "inspection": {
+        "json_complete": true,
+        "evidence_valid": true,
+        "evidence_items": [],
+        "errors": [],
+        "projection": {
+          "answer": "-2.5",
+          "citations": [
+            "self-a"
+          ]
+        },
+        "projection_kind": "仅提取answer/citations，不是原始响应",
+        "field_order": [
+          "evidence",
+          "answer",
+          "citations"
+        ],
+        "evidence_empty": true,
+        "semantic_support_verified": false
+      }
+    }
+  ]
+}

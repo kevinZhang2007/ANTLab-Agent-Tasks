@@ -1,0 +1,995 @@
+{
+  "saved_at": "2026-10-14T19:08:40.963371+08:00",
+  "status": "offline_only",
+  "original_implementation": "基础/runs/explicit_state_checker/20261014-185340",
+  "prior_revisions_preserved": [
+    "基础/runs/explicit_state_checker_revision/20261014-190728/results.json"
+  ],
+  "revision_reason": "补查未归属的前置数量及无法解析的否定，unknown不默认为存在或不存在缺陷。此前检查记录保留。",
+  "protected_hashes": {
+    "基础/runs/explicit_state_checker/20261014-185340/additional-negation-zero-boundary-audit.json": "7ef3176f9fac77e5ee50500a4ca48abd82ef17243d45b037e3ab24af61b9fc28",
+    "基础/runs/explicit_state_checker/20261014-185340/explicit_state_checker.py": "8cc027ce69aa730781d6b93d0eca350bc34ca0dd776209ddb2216074d5d4a4a6",
+    "基础/runs/explicit_state_checker/20261014-185340/final-audit.json": "c044ebe597e56f7d24e936cf34d649dbae6041c6dd798d089ee15f7ddb9a280e",
+    "基础/runs/explicit_state_checker/20261014-185340/offline-gate-check.json": "c96f66b171b40474a366df7721973755cf8e18a1711687c7a73c98f2849fd5fd",
+    "基础/runs/explicit_state_checker/20261014-185340/offline_gate.py": "27a39e0e9a295c69b98136a5351cfdfc01e0d534f3c592d1aa3b1c67b092844c",
+    "基础/runs/explicit_state_checker/20261014-185340/protected-hashes.json": "5341158583466813c79e33ac7f1a297d3a23b617a34c9d116fd33d7a3db4f3c2",
+    "基础/runs/explicit_state_checker/20261014-185340/ready-to-run.json": "8085614dee05432a78374ee1190dfbb89a96a497fbad2fdb81d6247661e1ba97",
+    "基础/runs/explicit_state_checker/20261014-185340/scheduler-incident-and-gate.json": "3705bd0661464852395b4a8fe499d37ae209ec037c1272010bab7fc84eebae06",
+    "基础/runs/explicit_state_checker/20261014-185340/scope-and-risk.json": "c58946e951c8043f04c6e17880edbe62ea5451dc1de62fec43920df76b400992",
+    "基础/runs/explicit_state_checker/20261014-185340/six-clause-review.json": "d64cac74a73ddc9c81b8d892f28a66b412833ce21cf4674adaae6b9d41f0213f",
+    "基础/runs/explicit_state_checker/20261014-185340/six-clause-states.json": "00839ddc14c17233b54f5f42efdc10231e8730c3048012837648713ace7c8306",
+    "基础/runs/explicit_state_checker/20261014-185340/synthetic-check.json": "ac992a4ca4e26268fd010756e1c166a995cbb53b49a4050182b1a289d6aa0520",
+    "基础/runs/explicit_state_checker/20261014-185340/test-progress.json": "1385d0da8034dbe6af53a6bb8a98ae21d1d94f8b74c680c1be317597a31fe461",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-01.json": "f80f4df4dbd21d4fc4b0fad94e1fe34e77368a96e89cc96501c4795399832c01",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-02.json": "fb6d193eb4933d71f0b3adfb40f95d041c8c6058eaac3d3ad2e22afc9f59cc21",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-03.json": "9cfd8af01d8764565956f82359ffe08bce7f0e6b6dc0929240ac625246460cfe",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-04.json": "5713ea018a7e60e854663a62255930d6d516870998e3b2e2185c945b6b0d7773",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-05.json": "3b04c99006b404ed61da346933afde1a0e64a5bc641efe64dbbe192564e89288",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-06.json": "f689b5dcfa10b84b23f445fb6b608192b9ed1731176099ff60fc4c6ff9d1d5d7",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-07.json": "7b2bb131c96d1190b6ebf63f78d10c0f9cf0eaf56602b6f9fd5f7fa7f3df30d4",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-08.json": "1f00e782b2fd0a07b9ead85aa19d92e0a8ab438e0e388fde6dfab66956c152a7",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-09.json": "26adf44d58b800b181ca1318fe071e28ee975b3620c70667c75843db826b6d4f",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-10.json": "a71e02bda663ae50508d8031f2b0ab9a804d2268713029f2bb5ef21bfe23159b",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-11.json": "f0b4a5d8af9216730eab2fcab73121dcbe53a006620dafe177570f546107f39f",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-12.json": "c1063a260dd72548c3d23946db937202575f8166436eef4048f3010203767c67",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-13.json": "c4444c039c308da58f3e6d65c438a49ba1e290b994be8cfd9afa37a777b67924",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-14.json": "fc8628e7adf112487e59c6bf1d1f3a67e64e85053485f03846b480df05b1eed8",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-15.json": "b455b257272cd276ebffae1bda2ecc7014c53f88074234d55b62e515c46a8725",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-16.json": "8261090c064da27e13cf34d34d489f6af60d077a4b648e4cf08c0bcf3a767f03",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-17.json": "cb399f18618f014e899d243972efe49693e9ad0aaee96504e75ddf49d4316714",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-18.json": "54208d29734030a062c76972aa11926914088df87461d070d57d35b158454e41",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-19.json": "b10498d811ddbc14fc1018116933305ed2389a9875fe96fee9f64757195be7d3",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-20.json": "593d512576e398f9cf89604f9e1ddc2e8250c961b33a1375aa17567ca67935a1",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-21.json": "d292c7bc8c5687f36c971eba09f7b5bc304767ddd90ef6d9d4af1786bd28833a",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-22.json": "8c61c028021497ccae284fbee4498e73ad9e0e190432a7bc4f7d60c026378a88",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-23.json": "a0385cf64860dff7a1891a85a5c50e5744a4cec4d2d033d954f610a328aab6ad",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-24.json": "1aeb7c86172adefc3723385e5678ac65c9a4a1af22074942c9c807f131880138",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-25.json": "11d1c3c017b37aeec6f73bd1271e087ed7fb0a41bf0bac124fc8b33c5e3bf773",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-26.json": "7e8be85d9bb005878ce54c79f05f5f412c9f8ab067b7fe85c6b4446305433838",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-27.json": "d99a5f181d9f480d16702ba8c9c628975919c02cc68498647651d5ef128fc79b",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-28.json": "14319d5a9487ca379722e446e48d3c15995dc18bb9701f20660cce9729c00e65",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-29.json": "d3d1516255e8e57c511621b90328c3b1a07d0d04333270591c86a50e925feaaa",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-30.json": "dc2f84ee71955e608618d9e892708c8d9ef422a8a7217edb48d9d5ecb9d434ee",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-31.json": "0388be62f14107d39484a73e05557e66fec68581d389d9fe98632cb6e4b8ba61",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-32.json": "0e2384c3074aed37c0dd194ed8097c4fb123545fc3c16d537c982ac807e9361c",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-33.json": "5a98a5b27a470fdf4ff9591b6bc75ac67928c708f80d207e6ac881b1b840d132",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-34.json": "86b77889af51db8ad3636a3d9750033ba579bbcc2d589d9c1d1893eaba0f3e91",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-35.json": "c312049902888f8bb8b23b6590daa0be0128005ac6d4a9bdba7fbf00515e47e6",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-36.json": "20cec1b4063b062d8ffe81d6595e8f5a247c135ab46f3d2281a05a3c505be7a8",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-37.json": "a4cc1162bba346ea4956640a35d68b499bfe79bee5733d06c34a270be7a11a29",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-38.json": "3b4d83f743030541192c500d842751bf7119fe7416fae5a5d54cebf058868e7e",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-39.json": "e7c0a7de877b45e830199191f9461bfc998700e45974b4bffbab7c4791369ff5",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-40.json": "2c1bc4344b58080fb9fa84679e3edae524371b73555c8705d8532703d018c6c8",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-41.json": "ac7e90c23fdbc52a0b2fe59e36f8d8c42ff96abf10e2ba40896441281aeccd9a",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-42.json": "776fd216a90ef80521d53ac234419cd44c1cc21d64fccc7e084372bd72d75516",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-43.json": "fc669e876393314d90a21a9258fd911fa1e4fc4078bc52ee9a772ae5d29c9092",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-44.json": "68a0a6f5920823fb06e552f8eed06567d50aaaa1a374276d65a5783b6bb8fe84",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-45.json": "0bd99240c202957cce33dd81ab44d05075fe1d1cdeb4767cf71a5693adea6472",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-46.json": "0ec5f36206017c39449a83c5aeddee730e4f65e0961d669ad5f6693a54988028",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-47.json": "46b1c83dc592545466f75b6e8d4f54dfe7ee816410c362ee818e2ed651afcb5d",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-48.json": "f318b6441609c4c4b47d1e724db2a2048f0b4ca14388953ea4f493f8ba694ad8",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-49.json": "2fd6276bfc92594ff4041cb24941d864c12ab858d4192e13ca0b61b6b662d473",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-50.json": "4a65f81ddca6db057158148dcb432de0b82abd37ba523c2f907a0e3882a700ae",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-51.json": "c26c1709e78bd163ad6f96ae993c125948b3f8b15d22536ace629e95e0b6febe",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-52.json": "d7642eda97beaac4ff9dc90283af841f5b0377f73e4428710be75f694ebfc271",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-53.json": "02950ba9b709615737532fb51c45034c1d7dfcaa2724645052e39f3c9738bad8",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-54.json": "ca1815145dfaf68e1939c5235ad5d6db2feb88904ef49c5a0a7b03b9485978ce",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-55.json": "b176d1698e3bb77fa464eb923797e31760c3bf0a826a27fe12aa0383a936b3ed",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-56.json": "057a409d2d97ff95f238a285275a8af3d62073f8ec211e33ec468a44c5182e5a",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-57.json": "ca180f04407f488a2de7fde52abce268986f85b48e383257899bbd0daa41294e",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-58.json": "aaceaae28f824a79f73fbb316dae546cd34be8e8ff6d5fb00af49dd4a5003560",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-59.json": "19aeec1dec3eb9491558f66bb05f78f1182a45459fc3b873f2c6b6fb3af9a84c",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-60.json": "c965f8ee3d1a2069402c5c5d801f4cc146f9868a5a324337c683449cb55268a6",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-61.json": "ac8f85eda45c864161ec6f8b83511d54a77e432340c7ebc6bbc6136932716f5a",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-62.json": "dd7b9dc55679071ad16e7681b4b62462e3c5789e85d518f81f78e766262bddcb",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-63.json": "edab5c562e5179a14ed6960641deca210c2ef8d5bfa6f4e982db224b3214e83e",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-64.json": "61fde30dbae109eab07baa78d4a52dd06406d0e85973799e9e2576f210b56b0a",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-65.json": "c89f53106722b06603e629e347c0ac0f852be6a2b89f5fdd095b6445e4c3e8e2",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/case-66.json": "9e3f75fec6c00dea61bd50ab9679c6ca053fc0f24a415cdab6789b10c3ba2aa4",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/check_revision.py": "97aab6e1f30d5a4eecb7ffcdb2f81fd172eaa5bea92254d4087642969fbc3f63",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/code-hashes.json": "d7d390e2d99a63bfd732f710cc994db45127f88cc8b9daab35aa09944d569564",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/code.diff": "526ee6284f4e3a2d46e5acce52af69808e7decf6680cc13ee9d70ba14e1a51a4",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/design-plan.json": "4e21648623733fa51ae48ebfa78a22fed9a5149cb12e8f66dd117b54c992948f",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/explicit_state_checker.py": "0fd4fff0d5bc8fcb207a699dd8c2d09a81540187604351bca40f2bca2e0cfb53",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/gate-check.json": "d9e67c963f1c065c3ba626048cf577fe0aa7f49bff6ea8b8efc5d156af0e8fdb",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/offline_gate.py": "27a39e0e9a295c69b98136a5351cfdfc01e0d534f3c592d1aa3b1c67b092844c",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/original-state-checker.py": "8cc027ce69aa730781d6b93d0eca350bc34ca0dd776209ddb2216074d5d4a4a6",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/ready-to-run.json": "56a7bddbdadd588f079fc0c54a0f254ca92776f5aaf828519aec9e5fb95d4aee",
+    "基础/runs/explicit_state_checker_revision/20261014-190728/results.json": "16648c3e42241a292890872f341b7e2e3d71a4d519d93e4fac147fca1ff948c2",
+    "report.md": "d48c56a00f2c56976781387e7e9999a3d32a399ad452d41952937fecc19c575f",
+    "README.md": "ecfee72108503299305d3e01fc14f457988dd93c47391f74352942e4ac2ffbb0",
+    "基础/开发记录.md": "da6b6d2d384664b35f99cbdc6451c83368290aa7fe0746edddc6c44981bd4ac7",
+    "基础/starter/student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678"
+  },
+  "classes": [
+    "positive_presence",
+    "explicit_negation",
+    "explicit_zero_quantity",
+    "unparsed"
+  ],
+  "mechanism": "先按标点及并列/转折边界分检查项，再解析前后否定及前后计数。作用范围限于本项。复合谓词、精确数量否定、条件或数量无法可靠归属时unknown。",
+  "limits": [
+    "有限语法，不是通用语义判断",
+    "多个候选同句仍unknown",
+    "不推断整体资格、不选择编号",
+    "局部通过或无缺陷不代表合格"
+  ],
+  "samples": [
+    {
+      "name": "missing",
+      "text": "AA11缺少坐标。",
+      "values": [
+        "AA11"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "failure",
+      "text": "BB22检查失败。",
+      "values": [
+        "BB22"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "offset",
+      "text": "CC33存在4项偏移。",
+      "values": [
+        "CC33"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "unclosed",
+      "text": "DD44留三项未关闭问题。",
+      "values": [
+        "DD44"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "pass",
+      "text": "EE55文本问答通过。",
+      "values": [
+        "EE55"
+      ],
+      "expected": [
+        "explicit_pass_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "negated_failure",
+      "text": "FF66不存在失败。",
+      "values": [
+        "FF66"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "zero_offset",
+      "text": "GG77有0项偏移。",
+      "values": [
+        "GG77"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "zero_unclosed",
+      "text": "HH88留零项未关闭问题。",
+      "values": [
+        "HH88"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "negated_missing",
+      "text": "II99不缺少映射。",
+      "values": [
+        "II99"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "not_pass",
+      "text": "JJ11未通过检查。",
+      "values": [
+        "JJ11"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "unknown_offset",
+      "text": "KK22偏移数量未说明。",
+      "values": [
+        "KK22"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "conditional",
+      "text": "LL33如果检查失败则复核。",
+      "values": [
+        "LL33"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "uncertain",
+      "text": "MM44是否失败无法确认。",
+      "values": [
+        "MM44"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "unknown_unclosed",
+      "text": "NN55未关闭问题。",
+      "values": [
+        "NN55"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "completion_not_pass",
+      "text": "OO66完成三项检查。",
+      "values": [
+        "OO66"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "metric_not_event",
+      "text": "PP77失败率下降。",
+      "values": [
+        "PP77"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "nested_negation",
+      "text": "QQ88不一定不存在失败。",
+      "values": [
+        "QQ88"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "other_owner",
+      "text": "RR99其他候选检查失败。",
+      "values": [
+        "RR99"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "separate_owners",
+      "text": "SS11通过；TT22会话恢复2项失败。",
+      "values": [
+        "SS11",
+        "TT22"
+      ],
+      "expected": [
+        "explicit_pass_only",
+        "explicit_defect"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "same_clause_owners",
+      "text": "UU33通过，VV44失败。",
+      "values": [
+        "UU33",
+        "VV44"
+      ],
+      "expected": [
+        "unknown",
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "negated_zero",
+      "text": "WX11不是0项偏移。",
+      "values": [
+        "WX11"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "decimal_unknown",
+      "text": "YZ22存在0.5项偏移。",
+      "values": [
+        "YZ22"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "only_pass",
+      "text": "AB12检查通过。",
+      "values": [
+        "AB12"
+      ],
+      "expected": [
+        "explicit_pass_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "unknown_record",
+      "text": "CD34记录已归档。",
+      "values": [
+        "CD34"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "old_boundary_1",
+      "text": "AA11并非失败。",
+      "values": [
+        "AA11"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": false,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "old_boundary_2",
+      "text": "BB22失败次数为0。",
+      "values": [
+        "BB22"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": false,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "old_boundary_3",
+      "text": "CC33失败不存在。",
+      "values": [
+        "CC33"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": false,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "old_boundary_4",
+      "text": "DD44缺失数量为零。",
+      "values": [
+        "DD44"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": false,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "old_boundary_5",
+      "text": "EE55偏移数量为0。",
+      "values": [
+        "EE55"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": true,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "old_boundary_6",
+      "text": "FF66没有失败。",
+      "values": [
+        "FF66"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": true,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "front_negation_with_subject",
+      "text": "Z91并非解析失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "post_negative_with_subject",
+      "text": "Z91恢复失败不存在。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "post_negative_context",
+      "text": "Z91解析失败情况未发生。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "front_absence_with_subject",
+      "text": "Z91不存在定位偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "arabic_post_count",
+      "text": "Z91恢复失败2项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "chinese_post_zero",
+      "text": "Z91恢复失败次数为零。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "ideographic_post_zero",
+      "text": "Z91缺失数量为〇。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "chinese_pre_zero",
+      "text": "Z91有零项偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "colon_quantity",
+      "text": "Z91定位偏移：0。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "equal_quantity",
+      "text": "Z91定位偏移=0。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "spaces_quantity",
+      "text": "Z91恢复失败次数 为 0 次。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "bare_count",
+      "text": "Z91失败0项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "comma_mixed_negation",
+      "text": "Z91并非解析失败，但恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "comma_mixed_zero",
+      "text": "Z91定位偏移为0，恢复失败2项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "contrast_no_comma",
+      "text": "Z91并非解析失败但恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "ascii_comma_mixed",
+      "text": "Z91恢复失败不存在,定位4项偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "zero_and_true_missing",
+      "text": "Z91定位偏移为零、缺少坐标。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "pass_and_fail",
+      "text": "Z91问答通过，但恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_pass",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "separate_uncertainty",
+      "text": "Z91无法确认解析是否失败，但恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "unknown",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "zero_multiple_items",
+      "text": "Z91定位偏移为0，恢复失败次数为零。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_absence"
+      ]
+    },
+    {
+      "name": "mixed_negated_count",
+      "text": "Z91不是0项偏移，但恢复失败2项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "unknown",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "no_count_offset",
+      "text": "Z91定位偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "unclosed_unknown",
+      "text": "Z91未关闭问题数量不明。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "approximate_zero",
+      "text": "Z91恢复失败次数约为0。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "unsupported_unit",
+      "text": "Z91恢复失败3秒。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "bare_unknown_number",
+      "text": "Z91恢复失败2。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "fraction_count",
+      "text": "Z91恢复失败数量为0.5项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "negative_count",
+      "text": "Z91恢复负2项失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "percentage_not_count",
+      "text": "Z91失败数量为1%。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "metric_zero",
+      "text": "Z91失败率为0。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "nested_negation",
+      "text": "Z91并非没有失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "negated_positive_count",
+      "text": "Z91没有2项偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "range_count",
+      "text": "Z91失败数量为0-2项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "multi_predicate_no_boundary",
+      "text": "Z91没有解析失败和定位偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "chinese_positive",
+      "text": "Z91恢复失败次数为三。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "post_zero_unclosed",
+      "text": "Z91未关闭问题数量为零。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "unowned_pre_zero",
+      "text": "Z910项恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "unowned_pre_positive",
+      "text": "Z912项检查后恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "epistemic_negation",
+      "text": "Z91不能排除解析失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "epistemic_nonimplication",
+      "text": "Z91不代表恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "unparsed_post_negation",
+      "text": "Z91恢复失败并非不存在。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "unparsed_front_negation",
+      "text": "Z91不考虑恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "post_negation_with_zero_other_item",
+      "text": "Z91解析失败未发现，定位偏移为0。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_absence"
+      ]
+    },
+    {
+      "name": "uncertain_and_true_failure",
+      "text": "Z91不能排除解析失败，但恢复失败2项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "unknown",
+        "explicit_defect"
+      ]
+    }
+  ],
+  "stop_rule": "任何检查失败，ready-to-run=false；禁止进入运行器。本轮无服务或生成。",
+  "generation_calls": 0
+}

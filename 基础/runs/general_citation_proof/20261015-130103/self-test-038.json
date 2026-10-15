@@ -1,0 +1,253 @@
+{
+  "name": "difference_direction_reversed_correct_signed_answer_ids",
+  "question": "竹岭项目V4版本在2026-04同机实验中，新链路的完整响应耗时中位数比旧链路多多少秒？只输出数值。",
+  "passages": [
+    {
+      "id": "Remapped901",
+      "source": "自造资料/1",
+      "text": "竹岭项目V4版本在2026-04的记录：同机顺序批次Trace82的旧链路处理40个固定问题，客户端完整响应耗时中位数为12.5秒。"
+    },
+    {
+      "id": "Remapped902",
+      "source": "自造资料/2",
+      "text": "批次Trace82的复核补页：Trace82新链路处理同样40个问题，中位数为8.2秒；两次保持输入顺序。"
+    }
+  ],
+  "raw": "{\"answer\": \"-4.3\", \"citations\": []}",
+  "expected": true,
+  "actual": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": true,
+    "proof_status": "established",
+    "proof_kind": "difference",
+    "trace": [
+      {
+        "stage": "direct_relation_audit",
+        "links": [
+          {
+            "supplement_id": "Remapped902",
+            "target_id": "Remapped901",
+            "added": false,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "Trace82",
+                "start": 0,
+                "end": 9,
+                "code_start": 2,
+                "code_end": 9,
+                "statement": {
+                  "text": "批次Trace82的复核补页：Trace82新链路处理同样40个问题，中位数为8.2秒；",
+                  "start": 0,
+                  "end": 44
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [
+              "Remapped901"
+            ],
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date",
+              "namespace"
+            ],
+            "semantic_support_verified": false,
+            "target_declarations": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "同机顺序批次",
+                "code": "Trace82",
+                "start": 20,
+                "end": 33,
+                "code_start": 26,
+                "code_end": 33,
+                "statement": {
+                  "text": "竹岭项目V4版本在2026-04的记录：同机顺序批次Trace82的旧链路处理40个固定问题，客户端完整响应耗时中位数为12.5秒。",
+                  "start": 0,
+                  "end": 66
+                },
+                "reliable_declaration": true,
+                "direct_supplement_reference": false,
+                "mere_reference": false,
+                "declaration_predicate": {
+                  "text": "的旧链路处理",
+                  "start": 33,
+                  "end": 39
+                }
+              }
+            ],
+            "reason": "unique_reliable_direct_reference",
+            "object_labels_equal": true,
+            "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+            "completion_reason": "already_selected"
+          }
+        ]
+      },
+      {
+        "stage": "pair_scope",
+        "main": "Remapped901",
+        "supplement": "Remapped902",
+        "main_status": "matched",
+        "supplement_status": "unknown",
+        "main_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [
+              "竹岭项目"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "version",
+            "question": [
+              "V4版本"
+            ],
+            "source": [
+              "V4版本"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [
+              "2026-04"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ],
+        "supplement_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "version",
+            "question": [
+              "V4版本"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ]
+      },
+      {
+        "stage": "difference_proof",
+        "question_parse": {
+          "left": "新链路",
+          "metric": "完整响应耗时中位数",
+          "right": "旧链路",
+          "direction": "多",
+          "unit": "秒"
+        },
+        "left": {
+          "object": "新链路",
+          "metric": "完整响应耗时中位数",
+          "statistic": "中位数",
+          "value": "8.2",
+          "unit": "秒",
+          "source": {
+            "passage_id": "Remapped902",
+            "source": "自造资料/2",
+            "start": 35,
+            "end": 43,
+            "quote": "中位数为8.2秒",
+            "role": "比较操作数原文"
+          },
+          "object_source": {
+            "passage_id": "Remapped902",
+            "source": "自造资料/2",
+            "start": 22,
+            "end": 25,
+            "quote": "新链路",
+            "role": "问题比较对象"
+          }
+        },
+        "right": {
+          "object": "旧链路",
+          "metric": "完整响应耗时中位数",
+          "statistic": "中位数",
+          "value": "12.5",
+          "unit": "秒",
+          "source": {
+            "passage_id": "Remapped901",
+            "source": "自造资料/1",
+            "start": 50,
+            "end": 65,
+            "quote": "完整响应耗时中位数为12.5秒",
+            "role": "比较操作数原文"
+          },
+          "object_source": {
+            "passage_id": "Remapped901",
+            "source": "自造资料/1",
+            "start": 34,
+            "end": 37,
+            "quote": "旧链路",
+            "role": "问题比较对象"
+          }
+        },
+        "comparability": {
+          "passage_id": "Remapped902",
+          "source": "自造资料/2",
+          "start": 27,
+          "end": 32,
+          "quote": "同样40个",
+          "role": "同一比较集合明示依据"
+        },
+        "operation": "left_minus_right",
+        "result": "-4.3",
+        "operands_chosen_without_answer": true
+      }
+    ],
+    "derived_response": {
+      "answer": "-4.3",
+      "citations": [
+        "Remapped901",
+        "Remapped902"
+      ]
+    },
+    "requires_independent_original_text_review": true,
+    "reason": "unique_same_scope_metric_unit_direction_and_decimal_result_confirmed",
+    "derived_response_kind": "local_rule_citation_assembly_not_original_model_response"
+  },
+  "passed": true,
+  "checked_at": "2026-10-15T13:01:06.497096+08:00"
+}

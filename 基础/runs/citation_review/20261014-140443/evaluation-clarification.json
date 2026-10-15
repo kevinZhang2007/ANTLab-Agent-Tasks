@@ -1,0 +1,89 @@
+{
+  "recorded_at": "2026-10-14T14:13:41.100271+08:00",
+  "kind": "post_review_metric_name_clarification",
+  "original_evaluation_preserved": true,
+  "original_summary_sha256": "6ec53395b188fc34050c3cca3bdd08b47485c1685434ee528bff9bfa1f85cab6",
+  "reason": "原supported_false_positives按返回引用集合是否支持计算，不能将所有6条等同于答案支持verdict错误。当前完整资料能支持T03/T04/T07的正确答案，但模型返回引用不足。",
+  "answer_support_verdict_false_positives": 3,
+  "cases": [
+    "T01",
+    "T06",
+    "T08"
+  ],
+  "citation_set_support_failures_among_supported": 6,
+  "correct_answers_with_incomplete_review_citations": 3,
+  "correct_incomplete_cases": [
+    "T03",
+    "T04",
+    "T07"
+  ],
+  "score_changes": false,
+  "model_calls": 0,
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+  "items": [
+    {
+      "case_id": "T01",
+      "model_verdict": "supported",
+      "answer_support_verdict_false_positive": true,
+      "citation_set_support_failure_among_supported": true,
+      "correct_answer_incomplete_citation": false,
+      "reason": "P761989是段落ID，原文没有把它列为release_snapshot；该段是发布规则，不能支持把自身ID作为快照。T01的S24有条件推导及字面边界保留，不影响此ID错答。"
+    },
+    {
+      "case_id": "T02",
+      "model_verdict": "contradicted",
+      "answer_support_verdict_false_positive": false,
+      "citation_set_support_failure_among_supported": false,
+      "correct_answer_incomplete_citation": false,
+      "reason": "分母100在P552476，完全支持76及定义在P169676，可推导76%。contradicted识别了原拒答错误，但reason称无法确认具体数值不符合完整输入。"
+    },
+    {
+      "case_id": "T03",
+      "model_verdict": "supported",
+      "answer_support_verdict_false_positive": false,
+      "citation_set_support_failure_among_supported": true,
+      "correct_answer_incomplete_citation": true,
+      "reason": "2.6可由9.4-6.8推出；P385105只给基础9.4，候选6.8和可比条件在P362285。reason错把两个操作数都归给P385105，引用仍缺候选来源。"
+    },
+    {
+      "case_id": "T04",
+      "model_verdict": "supported",
+      "answer_support_verdict_false_positive": false,
+      "citation_set_support_failure_among_supported": true,
+      "correct_answer_incomplete_citation": true,
+      "reason": "P660995只给资格门槛和选择次序，不明确宣布流程乙已选；甲/乙/丙的实际计数在P758661。reason添加了该段明确选乙的说法，引用仍缺数据。"
+    },
+    {
+      "case_id": "T05",
+      "model_verdict": "insufficient",
+      "answer_support_verdict_false_positive": false,
+      "citation_set_support_failure_among_supported": false,
+      "correct_answer_incomplete_citation": false,
+      "reason": "P452207明示未采集功率与能耗，P286497是目标校内组采集边界。原证据不足及检查来源有效。insufficient可能指无法计算焦耳，reason与缺证事实一致；不能把标签歧义判成确定事实误报。"
+    },
+    {
+      "case_id": "T06",
+      "model_verdict": "supported",
+      "answer_support_verdict_false_positive": true,
+      "citation_set_support_failure_among_supported": true,
+      "correct_answer_incomplete_citation": false,
+      "reason": "P873502给45合法、8超时、7格式异常，P721388定义后两类为技术失败；实际可算(8+7)/60=25%。原证据不足错误，reason把45/60=75%的合法结果率说成技术失败率，与原答案也不一致。未将其写回答案。"
+    },
+    {
+      "case_id": "T07",
+      "model_verdict": "supported",
+      "answer_support_verdict_false_positive": false,
+      "citation_set_support_failure_among_supported": true,
+      "correct_answer_incomplete_citation": true,
+      "reason": "P313278给候选数据，P850395给支持率≥85%且P50≤7秒的双门槛；丙正确，但数据段没有完整决策规则或已选结论，仍缺规则引用。"
+    },
+    {
+      "case_id": "T08",
+      "model_verdict": "supported",
+      "answer_support_verdict_false_positive": true,
+      "citation_set_support_failure_among_supported": true,
+      "correct_answer_incomplete_citation": false,
+      "reason": "P183430是段落ID，检查结果是K16/K17/K18，配合P223300规则可选K17。把段落ID判为符合快照信息属于错误支持。"
+    }
+  ]
+}

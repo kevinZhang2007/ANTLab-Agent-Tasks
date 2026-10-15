@@ -1,0 +1,27 @@
+{
+  "recorded_at": "2026-10-13T19:58:01.473180+08:00",
+  "official_commit": "d81235049",
+  "source_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049/common/json-schema-to-grammar.cpp",
+  "sections": [
+    {
+      "lines": [
+        362,
+        381
+      ],
+      "text": "        int i = 0;\n        while (_rules.find(esc_name + std::to_string(i)) != _rules.end() && _rules[esc_name + std::to_string(i)] != rule) {\n            i++;\n        }\n        std::string key = esc_name + std::to_string(i);\n        _rules[key] = rule;\n        return key;\n    }\n\n    std::string _generate_union_rule(const std::string & name, const std::vector<common_chat_schema_ptr> & alt_schemas) {\n        std::vector<std::string> rules;\n        rules.reserve(alt_schemas.size());\n        for (size_t i = 0; i < alt_schemas.size(); i++) {\n            rules.push_back(visit(*alt_schemas[i], name + (name.empty() ? \"alternative-\" : \"-\") + std::to_string(i)));\n        }\n        return string_join(rules, \" | \");\n    }\n\n    // thrown when the pattern is a valid regex with no grammar equivalent\n    struct unsupported_pattern : public std::runtime_error {"
+    },
+    {
+      "lines": [
+        881,
+        891
+      ],
+      "text": "        switch (schema.kind()) {\n            case common_chat_schema::KIND_REF:\n                return _add_rule(rule_name, _resolve_ref(as<common_chat_schema_ref>(schema)));\n            case common_chat_schema::KIND_ANY_OF:\n                return _add_rule(rule_name, _generate_union_rule(name, as<common_chat_schema_any_of>(schema).children));\n            case common_chat_schema::KIND_ALL_OF:\n                return _visit_all_of(as<common_chat_schema_all_of>(schema), name, rule_name);\n            case common_chat_schema::KIND_CONST:\n                return _add_rule(rule_name, _generate_constant_rule(as<common_chat_schema_const>(schema).value));\n            case common_chat_schema::KIND_ENUM: {\n                std::vector<std::string> enum_values;"
+    }
+  ],
+  "source_supports": "string.pattern进入转换器；首尾须锚定；不支持的表达式会告警并回退任意字符串。",
+  "local_binary_version": "0.6.0-dev build 11429 commit d81235049",
+  "native_compile_result": "相同Schema字节的ASCII副本零输出编译返回0，无pattern fallback告警。",
+  "local_regex_result": "28个自造识别/字符串测试通过，仅为本地规则检查。",
+  "unverified": "原生grammar对自造正/反例的实际接受与拒绝未完成；未以HTTP成功或CLI返回0假装完整约束生效。",
+  "generation_result": "本轮0次生成，8次开发对照未执行。"
+}

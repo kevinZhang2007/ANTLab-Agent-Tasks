@@ -1,0 +1,12 @@
+{
+  "saved_at": "2026-10-14T18:05:24.939661+08:00",
+  "kind": "historical_control_schema_removal_defect_diagnostic",
+  "hypothesis": "移除服务端格式约束可能改变缺陷识别输出，不能预设会改善。",
+  "competing_explanation": "即使格式改变，模型仍可能漏缺陷、错配快照或伪造摘录。",
+  "sole_change": "actual request only drops response_format; messages/model/sampling/256 budget/order unchanged",
+  "evaluation": "全部两次完成后人工查看完整原始内容，JSON合规、缺陷识别、快照对应、摘录真实分开；格式失败不自动等于未识别，空列表不算成功。",
+  "previous_unique_generations": 300,
+  "max_calls": 2,
+  "historical_comparison_not_synchronous": true,
+  "stop": "复用0.6B启动与监测规则；技术失败保存停止，质量错误不重试。"
+}

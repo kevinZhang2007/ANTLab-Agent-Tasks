@@ -1,0 +1,71 @@
+{
+  "reviewed_at": "2026-10-13T18:44:20.432698+08:00",
+  "code_base_commit": "78b97898e713a3b8ec2cdffeec8c6758c4bcbbc9",
+  "source_sha256": {
+    "challenge.py": "b84a035957ac457fb803c82f141c8684ccb5dbe9ff34c45bbb199ff613094ad1",
+    "data.json": "f3ba571d72e2836221ed3026ac764d8e0da569fc5b8bd895f702cbd2896296a4",
+    "index.html": "a7de999ef4aa6f3f2729f82f59f7accb9ad015015144c1def7456834d2445475",
+    "run_cases.py": "4ec45de9be156112f86ac8fdc38ca7f8c9c2be00e7c44f924671329dc1e16dac",
+    "server.py": "8386dc4319538c45abe1686961f0b562f4f41325c8d92bfc50297bb66c81f4c4",
+    "spec.md": "4722ed79ac1646ca240428a49c64ef16158d3464c690dc3145ab22d79acce9db"
+  },
+  "main_problem": "同query切换doc_ids或snapshot后，结果不属于本次范围；优先定位旧缓存复用。",
+  "code_facts": [
+    {
+      "path": "进阶/challenge_b/challenge.py",
+      "lines": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "fact": "缓存键只含规范化query，命中时直接复制旧结果，不重新核对doc_ids/snapshot/k/corpus/draft。"
+    },
+    {
+      "path": "进阶/challenge_b/challenge.py",
+      "lines": [
+        18,
+        19,
+        20
+      ],
+      "fact": "先全corpus排序截取k，再按请求文档及快照过滤；范围外条目可能占用名额。"
+    },
+    {
+      "path": "进阶/challenge_b/challenge.py",
+      "lines": [
+        22,
+        25
+      ],
+      "fact": "引用存在且属于evidence就标supported，未独立判断answer语义。"
+    },
+    {
+      "path": "进阶/challenge_b/challenge.py",
+      "lines": [
+        28,
+        29
+      ],
+      "fact": "命中后更新本次request/request_id/cache_hit，但保留缓存中的answer/evidence/status，可能新请求外壳配旧来源。"
+    },
+    {
+      "path": "进阶/challenge_b/server.py",
+      "lines": [
+        25,
+        26,
+        27
+      ],
+      "fact": "HTTP按case_id读取固定request/draft，reset=true清空共享Engine.cache；可用这个状态干预，但本轮只测Engine函数路径。"
+    }
+  ],
+  "other_risks": [
+    "全库top-k后过滤造成范围内漏证。",
+    "定位有效伪装语义supported。",
+    "未知doc/snapshot没有invalid_scope前置返回，status仍可能ok。"
+  ],
+  "reading_reuse": [
+    "基础/runs/reading/alce-reading-evidence.json",
+    "基础/runs/reading/p1-reading-evidence.json",
+    "基础/runs/reading/p2-reading-evidence.json"
+  ],
+  "learning_application": "快照匹配、引用可定位和语义支持是独立含义；旧答案配新请求会让定位标签误导用户。已有阅读仅复用，不重新声明全文阅读。",
+  "not_yet_proven": "以上是源码事实及风险；尚未将其登记为本轮实测因果结果。"
+}

@@ -1,0 +1,36 @@
+{
+  "scenario": "switch_snapshot",
+  "original_target_order": 2,
+  "fixed_target_order": 5,
+  "original_answer": "请求超时阈值为30秒。",
+  "fixed_answer": "请求超时阈值为12秒。",
+  "original_cache_hit": true,
+  "fixed_cache_hit": false,
+  "original_evidence_ids": [
+    "b01"
+  ],
+  "fixed_evidence_ids": [
+    "b02"
+  ],
+  "original_retrieval_success": false,
+  "fixed_retrieval_success": true,
+  "fixed_checks": {
+    "response_structure": true,
+    "evidence_in_scope": true,
+    "evidence_retrieval_success": true,
+    "expected_evidence_ids": [
+      "b02"
+    ],
+    "current_draft_used": true,
+    "evidence_matches_current_corpus": true,
+    "locator_consistent_with_actual_evidence": true,
+    "locator_valid": true,
+    "request_echo_matches": true,
+    "fixed_cache_disabled": true,
+    "semantic_support_independently_checked": false
+  },
+  "prediction": "修复后目标结果与冷R02一致，不复用v1；原Engine可能返回旧缓存。",
+  "cache_pollution_eliminated": true,
+  "original_history_independent": false,
+  "full_answer_verified": "not_checked_semantically"
+}

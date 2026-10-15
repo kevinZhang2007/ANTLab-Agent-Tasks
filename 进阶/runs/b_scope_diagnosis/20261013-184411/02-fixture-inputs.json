@@ -1,0 +1,140 @@
+{
+  "recorded_at": "2026-10-13T18:44:20.443615+08:00",
+  "code_base_commit": "78b97898e713a3b8ec2cdffeec8c6758c4bcbbc9",
+  "data_sha256": "f3ba571d72e2836221ed3026ac764d8e0da569fc5b8bd895f702cbd2896296a4",
+  "corpus": [
+    {
+      "id": "b01",
+      "doc_id": "alpha",
+      "snapshot": "v1",
+      "page": 1,
+      "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+      "tags": [
+        "timeout",
+        "request",
+        "threshold",
+        "30"
+      ]
+    },
+    {
+      "id": "b02",
+      "doc_id": "alpha",
+      "snapshot": "v2",
+      "page": 1,
+      "text": "实验A timeout request threshold 改为12秒；此版本未测量GPU执行取消。",
+      "tags": [
+        "timeout",
+        "request",
+        "threshold",
+        "12"
+      ]
+    },
+    {
+      "id": "b03",
+      "doc_id": "beta",
+      "snapshot": "v1",
+      "page": 2,
+      "text": "实验B timeout 为5秒，与实验A无关。",
+      "tags": [
+        "timeout",
+        "5"
+      ]
+    },
+    {
+      "id": "b04",
+      "doc_id": "alpha",
+      "snapshot": "v2",
+      "page": 2,
+      "text": "客户端取消仅停止本地结果展示；本文没有测量服务端是否释放GPU计算资源。",
+      "tags": [
+        "cancel",
+        "gpu",
+        "resource"
+      ]
+    },
+    {
+      "id": "b05",
+      "doc_id": "beta",
+      "snapshot": "v1",
+      "page": 3,
+      "text": "本页说明数据文档编号为beta，可使用本页定位元数据。",
+      "tags": [
+        "metadata",
+        "beta"
+      ]
+    },
+    {
+      "id": "b06",
+      "doc_id": "alpha",
+      "snapshot": "v2",
+      "page": 3,
+      "text": "本文仅讨论单进程演示，没有对多worker环境做性能测试。",
+      "tags": [
+        "worker",
+        "single",
+        "process"
+      ]
+    }
+  ],
+  "selected_original_cases": [
+    {
+      "id": "R01",
+      "reset_before": true,
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v1",
+        "k": 2
+      },
+      "draft": {
+        "answer": "请求超时阈值为30秒。",
+        "citations": [
+          "b01"
+        ],
+        "origin": "synthetic_fixture"
+      }
+    },
+    {
+      "id": "R02",
+      "reset_before": false,
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v2",
+        "k": 2
+      },
+      "draft": {
+        "answer": "请求超时阈值为12秒。",
+        "citations": [
+          "b02"
+        ],
+        "origin": "synthetic_fixture"
+      }
+    },
+    {
+      "id": "R03",
+      "reset_before": true,
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "beta"
+        ],
+        "snapshot": "v1",
+        "k": 1
+      },
+      "draft": {
+        "answer": "实验B超时为5秒。",
+        "citations": [
+          "b03"
+        ],
+        "origin": "synthetic_fixture"
+      }
+    }
+  ],
+  "no_fixture_modified": true,
+  "scope": "题包合成资料与固定draft，offline_replay；不是基础题模型生成，不改draft。"
+}

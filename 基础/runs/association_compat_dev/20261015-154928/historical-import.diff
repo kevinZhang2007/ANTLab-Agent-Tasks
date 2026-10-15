@@ -1,0 +1,11 @@
+--- unchanged_historical_snapshot
++++ new_import_adapter
+@@ -4,7 +4,7 @@
+ from pathlib import Path
+ import two_step_candidate as selection
+ 
+-LINKED_SOURCE = Path(__file__).resolve().parents[1] / 'runs/improve/linked_r0/student-v2.py'
++LINKED_SOURCE = Path(EXPLICIT_LINKED_SOURCE)
+ spec = importlib.util.spec_from_file_location('saved_linked_candidate', LINKED_SOURCE)
+ linked = importlib.util.module_from_spec(spec)
+ spec.loader.exec_module(linked)

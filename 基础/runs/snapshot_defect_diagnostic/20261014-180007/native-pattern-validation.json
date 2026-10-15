@@ -1,0 +1,85 @@
+{
+  "checked_at": "2026-10-14T18:00:26.660037+08:00",
+  "passed": true,
+  "tests": [
+    {
+      "kind": "defects",
+      "json_value": {
+        "defects": []
+      },
+      "expected_accept": true,
+      "native_accept": true,
+      "rejected_token": null
+    },
+    {
+      "kind": "defects",
+      "json_value": {
+        "defects": [
+          {
+            "snapshot": "AB12",
+            "passage_id": "self-id",
+            "quote": "快照AB12存在2项偏移。"
+          }
+        ]
+      },
+      "expected_accept": true,
+      "native_accept": true,
+      "rejected_token": null
+    },
+    {
+      "kind": "defects",
+      "json_value": {
+        "defects": [
+          {
+            "snapshot": "AB12",
+            "passage_id": "self-id"
+          }
+        ]
+      },
+      "expected_accept": false,
+      "native_accept": false,
+      "rejected_token": 9207
+    },
+    {
+      "kind": "defects",
+      "json_value": {
+        "defects": [],
+        "eligibility": "eligible"
+      },
+      "expected_accept": false,
+      "native_accept": false,
+      "rejected_token": 28503
+    },
+    {
+      "kind": "defects",
+      "json_value": {
+        "defects": [
+          {
+            "snapshot": 1,
+            "passage_id": "self-id",
+            "quote": "text"
+          }
+        ]
+      },
+      "expected_accept": false,
+      "native_accept": false,
+      "rejected_token": 16
+    }
+  ],
+  "native_converter_exports": {
+    "parse": "?parse@common_json@@SA?AV1@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+    "convert": "?json_schema_to_grammar@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBVcommon_json@@_N@Z",
+    "destroy_json": "??1common_json@@QEAA@XZ"
+  },
+  "dll_sha256": {
+    "llama-common.dll": "cb5011455243a8b6a91fed00fbb33d93fdb53fa7c417fc59f27a004af85d7d9b",
+    "llama.dll": "48d2b52f4d6b2d7db2ca4698edbb95ecb4511b792396c566e1340668b6415a71"
+  },
+  "model_load": "vocab_only，不加载权重张量；不创建推理context，不调用encode/decode",
+  "generation_requests": 0,
+  "generated_tokens": 0,
+  "owned_service_pids": [],
+  "cleanup_empty_and_not_owned_tests_passed": true,
+  "proof": "实际装机C++ JSON Schema转换结果，由同包原生grammar sampler检查人工token串及EOS；不是Python正则。",
+  "abi_limit": "导出C++函数桥接仅针对本次已核对的Windows x64/MSVC布局及本包；不称跨平台SDK。"
+}

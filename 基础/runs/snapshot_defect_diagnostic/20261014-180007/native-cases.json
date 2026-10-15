@@ -1,0 +1,91 @@
+{
+  "schemas": {
+    "defects": {
+      "type": "object",
+      "properties": {
+        "defects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "snapshot": {
+                "type": "string"
+              },
+              "passage_id": {
+                "type": "string"
+              },
+              "quote": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "snapshot",
+              "passage_id",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "defects"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "cases": [
+    [
+      "defects",
+      {
+        "defects": []
+      },
+      true
+    ],
+    [
+      "defects",
+      {
+        "defects": [
+          {
+            "snapshot": "AB12",
+            "passage_id": "self-id",
+            "quote": "快照AB12存在2项偏移。"
+          }
+        ]
+      },
+      true
+    ],
+    [
+      "defects",
+      {
+        "defects": [
+          {
+            "snapshot": "AB12",
+            "passage_id": "self-id"
+          }
+        ]
+      },
+      false
+    ],
+    [
+      "defects",
+      {
+        "defects": [],
+        "eligibility": "eligible"
+      },
+      false
+    ],
+    [
+      "defects",
+      {
+        "defects": [
+          {
+            "snapshot": 1,
+            "passage_id": "self-id",
+            "quote": "text"
+          }
+        ]
+      },
+      false
+    ]
+  ]
+}

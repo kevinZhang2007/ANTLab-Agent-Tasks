@@ -1,0 +1,112 @@
+{
+  "saved_at": "2026-10-14T14:06:55.370814+08:00",
+  "fixtures": [
+    [
+      "supported合法",
+      "{\"verdict\":\"supported\",\"citations\":[\"alpha\",\"beta\"],\"reason\":\"自造检查\"}",
+      true,
+      [
+        "alpha",
+        "beta"
+      ]
+    ],
+    [
+      "未知ID",
+      "{\"verdict\":\"supported\",\"citations\":[\"unknown\"],\"reason\":\"自造检查\"}",
+      false,
+      [
+        "alpha"
+      ]
+    ],
+    [
+      "重复ID",
+      "{\"verdict\":\"supported\",\"citations\":[\"alpha\",\"alpha\"],\"reason\":\"自造检查\"}",
+      false,
+      [
+        "alpha"
+      ]
+    ],
+    [
+      "非法verdict",
+      "{\"verdict\":\"correct\",\"citations\":[\"alpha\"],\"reason\":\"自造检查\"}",
+      false,
+      [
+        "alpha"
+      ]
+    ],
+    [
+      "空引用supported",
+      "{\"verdict\":\"supported\",\"citations\":[],\"reason\":\"自造检查\"}",
+      true,
+      []
+    ],
+    [
+      "contradicted保留原回答",
+      "{\"verdict\":\"contradicted\",\"citations\":[\"beta\"],\"reason\":\"自造检查\"}",
+      false,
+      [
+        "alpha"
+      ]
+    ],
+    [
+      "insufficient保留原回答",
+      "{\"verdict\":\"insufficient\",\"citations\":[],\"reason\":\"自造检查\"}",
+      false,
+      [
+        "alpha"
+      ]
+    ],
+    [
+      "不得另写答案",
+      "{\"verdict\":\"supported\",\"citations\":[\"beta\"],\"reason\":\"自造检查\",\"answer\":\"改写\"}",
+      false,
+      [
+        "alpha"
+      ]
+    ],
+    [
+      "非法JSON",
+      "bad json",
+      false,
+      [
+        "alpha"
+      ]
+    ],
+    [
+      "重复JSON字段",
+      "{\"verdict\":\"supported\",\"verdict\":\"insufficient\",\"citations\":[],\"reason\":\"自造检查\"}",
+      false,
+      [
+        "alpha"
+      ]
+    ],
+    [
+      "空理由",
+      "{\"verdict\":\"supported\",\"citations\":[\"beta\"],\"reason\":\"\"}",
+      false,
+      [
+        "alpha"
+      ]
+    ]
+  ],
+  "original_response": {
+    "answer": "保留 \"引号\"\n中文、空格  ",
+    "citations": [
+      "alpha"
+    ]
+  },
+  "passages": [
+    {
+      "id": "alpha",
+      "source": "自造来源",
+      "text": "中文“引号”\n换行。"
+    },
+    {
+      "id": "beta",
+      "source": "另一自造来源",
+      "text": "补充资料。"
+    }
+  ],
+  "generation_calls": 0,
+  "fixtures_are_not_model_responses": true
+}

@@ -1,0 +1,341 @@
+{
+  "name": "first_definition_missing_ids",
+  "question": "竹岭项目V4版本在2026-04首次执行清单的技术失败率是多少？只输出百分数。",
+  "passages": [
+    {
+      "id": "Remapdoc-1",
+      "source": "自造比例资料",
+      "text": "竹岭项目V4版本在2026-04的记录：首次执行清单Batch73有80项任务；61项返回合法结果、11项超时、8项格式不合法。"
+    },
+    {
+      "id": "Remapdoc-2",
+      "source": "自造比例资料",
+      "text": "批次Batch73的复核补页：Batch73质量口径把超时和格式不合法均列为技术失败，分母为全部80项；人工重试另列。"
+    }
+  ],
+  "raw": "{\"answer\": \"证据不足\", \"citations\": []}",
+  "expected_answer": null,
+  "actual": {
+    "run_kind": "offline_ratio_calculation_proposal",
+    "judgment_source": "local_rule",
+    "applicable": true,
+    "proof_established": false,
+    "status": "refused",
+    "trace": [
+      {
+        "stage": "question_project_boundary",
+        "audit": {
+          "status": "resolved",
+          "question_candidates": [
+            {
+              "entity": "竹岭项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                8
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "V4版本",
+              "date": "2026-04",
+              "passage_id": "Remapdoc-1",
+              "source": "自造比例资料",
+              "start": 0,
+              "end": 20,
+              "quote": "竹岭项目V4版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "竹岭项目V4版本在2026-04首次执行清单的技术失败率是多少？只输出百分数。",
+          "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+          "missing_fields_not_assumed_equal": true,
+          "chosen": {
+            "entity": "竹岭项目",
+            "interpretation": "literal_entity_no_char_removed",
+            "start": 0,
+            "end": 4,
+            "version_position": [
+              4,
+              8
+            ]
+          },
+          "supporting_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "V4版本",
+              "date": "2026-04",
+              "passage_id": "Remapdoc-1",
+              "source": "自造比例资料",
+              "start": 0,
+              "end": 20,
+              "quote": "竹岭项目V4版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ]
+        }
+      },
+      {
+        "stage": "direct_relation_audit",
+        "links": [
+          {
+            "supplement_id": "Remapdoc-2",
+            "target_id": "Remapdoc-1",
+            "added": false,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "Batch73",
+                "start": 0,
+                "end": 9,
+                "code_start": 2,
+                "code_end": 9,
+                "statement": {
+                  "text": "批次Batch73的复核补页：Batch73质量口径把超时和格式不合法均列为技术失败，分母为全部80项；",
+                  "start": 0,
+                  "end": 52
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [
+              "Remapdoc-1"
+            ],
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date",
+              "namespace"
+            ],
+            "semantic_support_verified": false,
+            "target_declarations": [
+              {
+                "object_type": "list",
+                "object_name": "首次执行清单",
+                "raw_label": "首次执行清单",
+                "code": "Batch73",
+                "start": 20,
+                "end": 33,
+                "code_start": 26,
+                "code_end": 33,
+                "statement": {
+                  "text": "竹岭项目V4版本在2026-04的记录：首次执行清单Batch73有80项任务；",
+                  "start": 0,
+                  "end": 40
+                },
+                "reliable_declaration": true,
+                "direct_supplement_reference": false,
+                "mere_reference": false,
+                "declaration_predicate": {
+                  "text": "有",
+                  "start": 33,
+                  "end": 34
+                }
+              }
+            ],
+            "reason": "unique_reliable_direct_reference",
+            "object_labels_equal": false,
+            "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+            "completion_reason": "already_selected"
+          }
+        ]
+      },
+      {
+        "stage": "pair_scope",
+        "main": "Remapdoc-1",
+        "supplement": "Remapdoc-2",
+        "main_status": "matched",
+        "supplement_status": "unknown",
+        "main_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [
+              "竹岭项目"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "version",
+            "question": [
+              "V4版本"
+            ],
+            "source": [
+              "V4版本"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [
+              "2026-04"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ],
+        "supplement_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "version",
+            "question": [
+              "V4版本"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ]
+      }
+    ],
+    "proposed_response": null,
+    "answer_changed": false,
+    "not_original_model_response": true,
+    "requested_metric": "技术失败率",
+    "definition": {
+      "included": [
+        "超时",
+        "格式不合法"
+      ],
+      "closed_definition": false,
+      "definition_form": "enumerated_assignment",
+      "source": {
+        "passage_id": "Remapdoc-2",
+        "source": "自造比例资料",
+        "start": 26,
+        "end": 42,
+        "quote": "把超时和格式不合法均列为技术失败",
+        "role": "指标分子分类定义"
+      }
+    },
+    "denominator": {
+      "value": "80",
+      "unit": "项",
+      "sources": [
+        {
+          "value": "80",
+          "unit": "项",
+          "population": "",
+          "source": {
+            "passage_id": "Remapdoc-2",
+            "source": "自造比例资料",
+            "start": 43,
+            "end": 51,
+            "quote": "分母为全部80项",
+            "role": "明确分母"
+          },
+          "quantity_span": [
+            48,
+            51
+          ]
+        }
+      ]
+    },
+    "category_counts": {
+      "rows": [
+        {
+          "category": "返回合法结果",
+          "value": "61",
+          "unit": "项",
+          "quantity_span": [
+            40,
+            43
+          ],
+          "source": {
+            "passage_id": "Remapdoc-1",
+            "source": "自造比例资料",
+            "start": 40,
+            "end": 49,
+            "quote": "61项返回合法结果",
+            "role": "并列分类计数"
+          }
+        },
+        {
+          "category": "超时",
+          "value": "11",
+          "unit": "项",
+          "quantity_span": [
+            50,
+            53
+          ],
+          "source": {
+            "passage_id": "Remapdoc-1",
+            "source": "自造比例资料",
+            "start": 50,
+            "end": 55,
+            "quote": "11项超时",
+            "role": "并列分类计数"
+          }
+        },
+        {
+          "category": "格式不合法",
+          "value": "8",
+          "unit": "项",
+          "quantity_span": [
+            56,
+            58
+          ],
+          "source": {
+            "passage_id": "Remapdoc-1",
+            "source": "自造比例资料",
+            "start": 56,
+            "end": 63,
+            "quote": "8项格式不合法",
+            "role": "并列分类计数"
+          }
+        }
+      ],
+      "source": {
+        "passage_id": "Remapdoc-1",
+        "source": "自造比例资料",
+        "start": 40,
+        "end": 63,
+        "quote": "61项返回合法结果、11项超时、8项格式不合法",
+        "role": "同批并列分类原文"
+      }
+    },
+    "reason": "first_attempt_scope_not_explicit"
+  },
+  "passed": true
+}

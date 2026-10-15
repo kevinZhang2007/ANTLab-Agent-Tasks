@@ -1,0 +1,158 @@
+--- verified/proof_pipeline_candidate.py
++++ current/proof_pipeline_candidate.py
+@@ -1,4 +1,4 @@
+-"""仅快照题的独立完整入口；证明通过才派生引用，保留原始响应。"""
++"""独立完整入口；仅快照分支证明通过才派生引用，其他输入保留原始响应。"""
+ import copy
+ import hashlib
+ import inspect
+@@ -34,8 +34,6 @@
+ 
+ 
+ def execute(question, passages, variant, answer_config, selection_config, dispatch=None, save=None):
+-    if target_role(question) != ('other', '快照'):
+-        raise ValueError('snapshot_qualification_branch_only_no_generation')
+     start = time.perf_counter()
+     save = save or (lambda value: None)
+     events = []
+@@ -66,6 +64,7 @@
+                 events.append({'judgment_source': 'local_rule', 'operation': label,
+                     'rule_version': version, 'elapsed_seconds': time.perf_counter()-begin,
+                     'status': status, 'original_text_positions': position_records(output),
++                    'relative_start_seconds': begin-start, 'relative_end_seconds': time.perf_counter()-start,
+                     'position_note': '无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。',
+                     'timers_may_include_nested_operations': True})
+         setattr(owner, name, wrapped)
+@@ -94,8 +93,13 @@
+         result['derived_response'] = None
+         if result['status'] == 'completed':
+             result['raw_response'] = copy.deepcopy(result['stages'][-1]['response'])
+-            result['proof_record'] = proof.prove_answer(question, result['used_passages'], result['raw_answer'], universe=result['original_passages'])
+-            result['derived_response'] = copy.deepcopy(result['proof_record']['final_response'])
++            if target_role(question) == ('other', '快照'):
++                result['proof_record'] = proof.prove_answer(question, result['used_passages'], result['raw_answer'], universe=result['original_passages'])
++                result['derived_response'] = copy.deepcopy(result['proof_record']['final_response'])
++            else:
++                result['proof_record'] = {'proof_established': False, 'proof_status': 'not_applicable',
++                    'reason': 'question_not_supported_snapshot_branch', 'final_response': None}
++                result['proof_not_run_reason'] = 'question_not_supported_snapshot_branch'
+             result['derived_response_kind'] = ('local_rule_citation_assembly_not_model_output'
+                 if result['derived_response'] is not None else 'not_derived_original_result_preserved')
+             if result['derived_response'] is not None:
+@@ -106,6 +110,26 @@
+         result['local_rule_input_positions'] = inputs
+         result['end_to_end_seconds'] = time.perf_counter()-start
+         result['raw_response_preserved'] = True
++        intervals = sorted((e['relative_start_seconds'], e['relative_end_seconds']) for e in events)
++        merged = []
++        for left, right in intervals:
++            if merged and left <= merged[-1][1]:
++                merged[-1][1] = max(merged[-1][1], right)
++            else:
++                merged.append([left, right])
++        result['timing_summary'] = {
++            'selection_seconds': sum(s.get('elapsed_seconds', 0) for s in result['stages'] if s['stage']=='selection'),
++            'answer_seconds': sum(s.get('elapsed_seconds', 0) for s in result['stages'] if s['stage']=='answer'),
++            'tracked_local_rule_wall_seconds': sum(right-left for left,right in merged),
++            'rule_timing_note': '已跟踪规则调用区间取并集，嵌套不重复相加；端到端另含模板容量、日志和其他处理。',
++            'end_to_end_seconds': result['end_to_end_seconds']}
++        try:
++            raw_parsed = json.loads(result.get('raw_answer', ''))
++        except (ValueError, TypeError):
++            raw_parsed = None
++        result['actual_final_output'] = copy.deepcopy(result['derived_response'] if result['derived_response'] is not None else raw_parsed)
++        result['actual_final_raw_content'] = result.get('raw_answer') if result['derived_response'] is None else None
++        result['actual_final_output_source'] = 'local_rule_citation_assembly' if result['derived_response'] is not None else 'raw_model_response'
+         save(copy.deepcopy(result))
+         return result
+     finally:
+--- verified/run_proof_pipeline.py
++++ current/run_proof_full_repeat.py
+@@ -1,4 +1,4 @@
+-"""评测后资格证明完整流程：单题新定位与回答，最多2次生成，证明与引用组装离线。"""
++"""评测后资格证明完整流程：八题新定位与回答，最多16次生成，证明与引用组装离线。"""
+ from pathlib import Path
+ from datetime import datetime
+ import copy, ctypes, hashlib, json, math, os, re, socket, subprocess, sys, threading, time, uuid
+@@ -29,8 +29,8 @@
+     answer = load(folder/'answer.prepared.json')
+     selection = load(folder/'selection.prepared.json')
+     jobs = load(folder/'execution-plan.prepared.json')['items']
+-    assert len(jobs)==1 and all(j['condition']=='R0' and j['variant']=='improved' for j in jobs)
+-    assert len({(j['case_id'],j['condition'],j['variant']) for j in jobs})==1
++    assert len(jobs)==8 and all(j['condition']=='R0' and j['variant']=='improved' for j in jobs)
++    assert len({(j['case_id'],j['condition'],j['variant']) for j in jobs})==8
+     root = Path(os.environ['LOCALAPPDATA'])/'ANTLabLocalModel'
+     args = [a.replace('%LOCALAPPDATA%/ANTLabLocalModel',str(root)) for a in settings['service_arguments']]
+     sources = ['基础/tests/general_candidate.py','基础/tests/check_general_candidate.py',
+@@ -39,7 +39,7 @@
+                '基础/runs/improve/linked_r0/student-v2.py',
+                '基础/starter/student.py','基础/starter/provider.py','基础/starter/runner.py']
+     sources += ['基础/tests/direct_reference_candidate.py','基础/tests/association_repair_candidate.py']
+-    sources += [(folder/name).relative_to(repo).as_posix() for name in ['run_proof_pipeline.py','scope_candidate.py','explicit_state_checker.py','eligibility_exclusion_candidate.py','typed_enum_role_revision.py','typed_identifier_enum_candidate.py','body_identifier_enum_candidate.py','offline_gate.py','settings.prepared.json','answer.prepared.json','selection.prepared.json','execution-plan.prepared.json','scope_candidate.py','scope_first_occurrences.py','eligibility_proof_checker.py','proof_pipeline_candidate.py']]
++    sources += [(folder/name).relative_to(repo).as_posix() for name in ['run_proof_full_repeat.py','scope_candidate.py','explicit_state_checker.py','eligibility_exclusion_candidate.py','typed_enum_role_revision.py','typed_identifier_enum_candidate.py','body_identifier_enum_candidate.py','offline_gate.py','settings.prepared.json','answer.prepared.json','selection.prepared.json','execution-plan.prepared.json','scope_candidate.py','scope_first_occurrences.py','eligibility_proof_checker.py','proof_pipeline_candidate.py']]
+     code_hashes = {p:sha(repo/p) for p in sources}
+     data_hashes = {p:sha(repo/p) for p in settings['data_sha256']}
+     old = {p.relative_to(repo).as_posix():sha(p) for p in (base/'runs').rglob('*') if p.is_file() and folder not in p.parents}
+@@ -50,9 +50,9 @@
+                'quality':'错误答案、非法定位、漏选、空选择、格式错误、预算耗尽均保留，不重试。',
+                'selection_failure':'主任务保留分母，不执行第二步，不回退。',
+                'memory':'加载前至少2 GiB；请求前至少1 GiB；连续3个2秒样本低于1 GiB停止自有服务。',
+-               'denominator':'仅T08完整流程1项，最多2次生成；原始成功与系统派生成功分别评价。'}
++               'denominator':'T01—T08 R0 improved共8项；规则未适用、unknown、定位失败均保留在8题分母，最多16次生成。'}
+     evaluation = load(first/'evaluation-rules.json')
+-    research = {'recorded_at':now(),'main_question':'仅快照资格分支的完整流程能否保留原答并在正向证明成立时独立派生引用。',
++    research = {'recorded_at':now(),'main_question':'当前独立完整候选在已接触的八题上，原始严格成功与仅快照分支正向证明派生后的系统严格成功如何。',
+                 'competing_explanations':['第一步可能漏选或选错范围，补页关系识别也可能失败。',
+                     '资料缩减、顺序、额外调用和答案形式Schema共同变化；覆盖齐全后仍可能计算或回答错误。'],
+                 'timing':'开发和首轮评测结果已接触；这是评测后重复评测，不是独立盲测或泛化验证。',
+@@ -62,7 +62,7 @@
+                     '额外定位请求、最终资料选择和调用总量变化；模型/最终提示词/采样/256预算/服务设置不变。'],
+                 'development_lineage':'复用已验证组件；为遵守本轮原输入相对顺序契约，最终展示顺序不沿用历史开发的排序后顺序。'}
+     write('design-plan.json',{'saved_at':now(),'research':research,'order':jobs,'failure_rules':failure,
+-          'evaluation':evaluation,'maximum_generation_calls':2,'evaluation_after_all_calls':True})
++          'evaluation':evaluation,'maximum_generation_calls':16,'evaluation_after_all_calls':True})
+     write('config.answer.json',answer); write('config.selection.json',selection)
+     assert load(folder/'offline-check.json')['passed']
+     assert load(folder/'operation-logging-check.json')['passed']
+@@ -135,7 +135,7 @@
+             def open(self,request,*a,**kw):
+                 actual=json.loads(request.data)
+                 assert actual==rendered['request'] and actual['max_tokens']==256
+-                assert runtime['generation_dispatches']<2
++                assert runtime['generation_dispatches']<16
+                 record.update(actual_http_request_body=actual,raw_http_request_body=request.data.decode(),generation_dispatched=True)
+                 runtime['generation_dispatches']+=1;write(path,record,True)
+                 try:return self.inner.open(request,*a,**kw)
+@@ -196,17 +196,17 @@
+                 render(candidate.selection.prepare_selection_messages(case['question'],ordered),selection,{**job,'kind':'selection_full_sorted'})
+                 messages,conf,_=candidate.answer_request(case['question'],[],answer)
+                 render(messages,conf,{**job,'kind':'answer_empty'})
+-        write('capacity-summary.json',{'checked_at':now(),'all_fit':True,'main_tasks':1,'template_checks':len(templates),
++        write('capacity-summary.json',{'checked_at':now(),'all_fit':True,'main_tasks':8,'template_checks':len(templates),
+               'maximum_input_tokens':max(r['input_tokens'] for r in templates),'maximum_total':max(r['total'] for r in templates),
+               'context':4096,'output_budget':256,'actual_selected_branch_checked_before_each_request':True})
+-        write('freeze.json',{'frozen_at':now(),'frozen':True,'round':'post_evaluation_eligibility_r0_repeat','research':research,
++        write('freeze.json',{'frozen_at':now(),'frozen':True,'round':'post_evaluation_proof_full_r0_repeat','research':research,
+               'source_commit':subprocess.check_output([str(Path(os.environ['LOCALAPPDATA'])/'Programs/Git/cmd/git.exe'),'rev-parse','HEAD'],cwd=repo,text=True).strip(),
+               'code_hashes':code_hashes,'data_hashes':data_hashes,'model':settings['model'],'llama_cpp':settings['llama_cpp'],
+               'answer_config':answer,'selection_config':selection,'service_arguments':settings['service_arguments'],
+               'selection_prompt':candidate.selection.SELECTION_PROMPT,'selection_schema':candidate.selection.SELECTION_SCHEMA,
+               'answer_prompt':candidate.student.prepare_messages('',[])[0]['content'],
+               'answer_form_patterns':candidate.constrain_schema.__globals__['PATTERNS'],
+-              'order':jobs,'evaluation_rules':evaluation,'failure_rules':failure,'main_task_limit':1,'generation_limit':2,
++              'order':jobs,'evaluation_rules':evaluation,'failure_rules':failure,'main_task_limit':8,'generation_limit':16,
+               'final_order':'最终所选完整原段落按当前原输入相对顺序',
+               'capacity_reference':'capacity-summary.json','cache_policy':'每阶段清空单槽缓存',
+               'review_note':'所有生成结束后再复用已有原文依据与澄清；有争议保留，所有标签辅助暂判。'})
+@@ -243,8 +243,8 @@
+         ids=[r['run_id'] for r in confirmed];assert len(ids)==len(set(ids))
+         summary={'completed_main_tasks':sum(t.get('status') in ('completed','selection_output_failure') for t in tasks),
+                  'selection_output_failures':sum(t.get('status')=='selection_output_failure' for t in tasks),
+-                 'planned_main_tasks':1,'generation_dispatches':runtime['generation_dispatches'],'confirmed_generation_calls':len(ids),
+-                 'previous_cumulative':338,'cumulative_confirmed':338+len(ids),'unique_run_ids':ids,
++                 'planned_main_tasks':8,'generation_dispatches':runtime['generation_dispatches'],'confirmed_generation_calls':len(ids),
++                 'previous_cumulative':340,'cumulative_confirmed':340+len(ids),'unique_run_ids':ids,
+                  'technical_stop':runtime['technical_stop'],'service_stopped':runtime['service_stopped'],
+                  'budget_exhausted':sum(r.get('budget_exhausted',False) for r in calls),
+                  'truncated':sum(r.get('truncated') is True for r in calls),'truncation_unverified':sum(r.get('truncated')=='not_verified' for r in calls)}

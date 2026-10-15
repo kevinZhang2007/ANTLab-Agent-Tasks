@@ -1,0 +1,147 @@
+{
+  "order": 11,
+  "recorded_at": "2026-10-13T18:56:09.784015+08:00",
+  "scenario": "switch_document",
+  "variant": "fixed",
+  "role": "frame_2",
+  "run_kind": "offline_replay",
+  "model_generated": false,
+  "code_base_commit": "78b97898e713a3b8ec2cdffeec8c6758c4bcbbc9",
+  "engine_sha256": "ab5852c20284e4f17097a1a9d7ac5343cf9dfea107e0f430c5ccda253f38d87a",
+  "input": {
+    "fixture_case": "R03",
+    "request": {
+      "query": "timeout request threshold",
+      "doc_ids": [
+        "beta"
+      ],
+      "snapshot": "v1",
+      "k": 1
+    },
+    "corpus": [
+      {
+        "id": "b01",
+        "doc_id": "alpha",
+        "snapshot": "v1",
+        "page": 1,
+        "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+        "tags": [
+          "timeout",
+          "request",
+          "threshold",
+          "30"
+        ]
+      },
+      {
+        "id": "b02",
+        "doc_id": "alpha",
+        "snapshot": "v2",
+        "page": 1,
+        "text": "实验A timeout request threshold 改为12秒；此版本未测量GPU执行取消。",
+        "tags": [
+          "timeout",
+          "request",
+          "threshold",
+          "12"
+        ]
+      },
+      {
+        "id": "b03",
+        "doc_id": "beta",
+        "snapshot": "v1",
+        "page": 2,
+        "text": "实验B timeout 为5秒，与实验A无关。",
+        "tags": [
+          "timeout",
+          "5"
+        ]
+      },
+      {
+        "id": "b04",
+        "doc_id": "alpha",
+        "snapshot": "v2",
+        "page": 2,
+        "text": "客户端取消仅停止本地结果展示；本文没有测量服务端是否释放GPU计算资源。",
+        "tags": [
+          "cancel",
+          "gpu",
+          "resource"
+        ]
+      },
+      {
+        "id": "b05",
+        "doc_id": "beta",
+        "snapshot": "v1",
+        "page": 3,
+        "text": "本页说明数据文档编号为beta，可使用本页定位元数据。",
+        "tags": [
+          "metadata",
+          "beta"
+        ]
+      },
+      {
+        "id": "b06",
+        "doc_id": "alpha",
+        "snapshot": "v2",
+        "page": 3,
+        "text": "本文仅讨论单进程演示，没有对多worker环境做性能测试。",
+        "tags": [
+          "worker",
+          "single",
+          "process"
+        ]
+      }
+    ],
+    "draft": {
+      "answer": "实验B超时为5秒。",
+      "citations": [
+        "b03"
+      ],
+      "origin": "synthetic_fixture"
+    },
+    "draft_origin": "original_synthetic_fixture"
+  },
+  "input_sha256": "1fbd731f92ab6763347b6698561cc6df39e5fc3f6b065b5c56024058fc50cf0c",
+  "cache_before": {},
+  "response": {
+    "answer": "实验B超时为5秒。",
+    "citations": [
+      "b03"
+    ],
+    "evidence": [],
+    "locator_status": "invalid",
+    "support_status": "not_checked",
+    "judgment_source": "rule",
+    "status": "ok",
+    "request_id": "25eaf97f-6be5-4e33-aef3-3ccbcc4758a5",
+    "request": {
+      "query": "timeout request threshold",
+      "doc_ids": [
+        "beta"
+      ],
+      "snapshot": "v1",
+      "k": 1
+    },
+    "cache_hit": false,
+    "elapsed_ms": 0.0464998884126544,
+    "run_kind": "offline_replay"
+  },
+  "client_function_elapsed_ms": 0.052699935622513294,
+  "cache_after": {},
+  "status": "completed",
+  "checks": {
+    "response_structure": true,
+    "evidence_in_scope": true,
+    "evidence_retrieval_success": false,
+    "expected_evidence_ids": [
+      "b03"
+    ],
+    "current_draft_used": true,
+    "evidence_matches_current_corpus": true,
+    "locator_consistent_with_actual_evidence": true,
+    "locator_valid": false,
+    "request_echo_matches": true,
+    "fixed_cache_disabled": true,
+    "semantic_support_independently_checked": false
+  }
+}

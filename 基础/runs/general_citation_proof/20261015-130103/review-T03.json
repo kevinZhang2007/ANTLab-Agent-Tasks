@@ -1,0 +1,154 @@
+{
+  "basis": {
+    "case_id": "T03",
+    "question_scope": "望舒R8，2026-04同机顺序WS84，候选比基础少多少秒；只输出数值。",
+    "scope": {
+      "project": "望舒",
+      "version": "R8",
+      "date": "2026-04",
+      "batch": "WS84",
+      "metric": "客户端完整响应耗时中位数差；同36题、顺序和输出上限"
+    },
+    "required_evidence": [
+      {
+        "id": "P385105",
+        "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+        "role": "基础链路中位数及范围"
+      },
+      {
+        "id": "P362285",
+        "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+        "role": "候选中位数及可比条件"
+      }
+    ],
+    "derivation": "少多少=基础9.4-候选6.8=2.6秒；answer只填2.6，不能采用迁移5.9或另一项目平均4.2。",
+    "derived_answer": "2.6",
+    "answer_form": "仅数值，不附秒或计算式",
+    "excluded_evidence": [
+      {
+        "id": "P275307",
+        "reason": "2026-03探索组"
+      },
+      {
+        "id": "P723425",
+        "reason": "R7旧版本"
+      },
+      {
+        "id": "P728510",
+        "reason": "迁移XQ56，不是同机WS84"
+      },
+      {
+        "id": "P350359",
+        "reason": "岫光项目且平均数非目标中位数"
+      },
+      {
+        "id": "P482103",
+        "reason": "八并发压力组P50，不是同机顺序批次"
+      }
+    ],
+    "ambiguities": [],
+    "limits": "只判断这两次明确同条件中位数差，不外推服务端延迟或稳定性能。",
+    "reviewed_at": "2026-10-13T13:34:38.427130+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+    "source": "基础/data/cases.json",
+    "source_sha256": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "derivation_kind": "评测后原文推导，非官方标准答案",
+    "model_answers_read_before_saving": false
+  },
+  "review": {
+    "reviewed_at": "2026-10-15T13:02:36.086164+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。非官方成绩；仅离线派生，未重新运行模型。",
+    "case_id": "T03",
+    "raw_review": {
+      "answer": "2.6",
+      "citations": [
+        "P385105"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_input_coverage": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "has_unrelated_references": false,
+      "irrelevant_ids": [],
+      "strict_complete_success": false,
+      "ambiguity": null,
+      "reasons": {
+        "answer": "少多少=基础9.4-候选6.8=2.6秒；answer只填2.6，不能采用迁移5.9或另一项目平均4.2。 实际answer='2.6'，不改写。",
+        "coverage": "必要原文来源=P362285,P385105；实际引用=P385105",
+        "support": "原文数据与必要计算/选择/发布条件需共同覆盖；不是仅看ID有效或系统proof标记。",
+        "unrelated": []
+      },
+      "source_evidence": [
+        {
+          "id": "P385105",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "full_original_text": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        },
+        {
+          "id": "P362285",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "full_original_text": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": false
+        }
+      ]
+    },
+    "final_review": {
+      "answer": "2.6",
+      "citations": [
+        "P362285",
+        "P385105"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_input_coverage": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "has_unrelated_references": false,
+      "irrelevant_ids": [],
+      "strict_complete_success": true,
+      "ambiguity": null,
+      "reasons": {
+        "answer": "少多少=基础9.4-候选6.8=2.6秒；answer只填2.6，不能采用迁移5.9或另一项目平均4.2。 实际answer='2.6'，不改写。",
+        "coverage": "必要原文来源=P362285,P385105；实际引用=P362285,P385105",
+        "support": "原文数据与必要计算/选择/发布条件需共同覆盖；不是仅看ID有效或系统proof标记。",
+        "unrelated": []
+      },
+      "source_evidence": [
+        {
+          "id": "P385105",
+          "quote": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。",
+          "full_original_text": "望舒项目R8版本在2026-04的记录：同机顺序批次WS84的基础链路处理36个固定问题，客户端完整响应耗时中位数为9.4秒。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        },
+        {
+          "id": "P362285",
+          "quote": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。",
+          "full_original_text": "批次WS84的复核补页：WS84候选链路处理同样36个问题，中位数为6.8秒；两次运行固定输入顺序和输出上限。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        }
+      ]
+    },
+    "applicable": true,
+    "proof_kind": "difference",
+    "proof_status": "established",
+    "reason": "unique_same_scope_metric_unit_direction_and_decimal_result_confirmed",
+    "derived": true,
+    "refused": false,
+    "erroneous_derivation": false,
+    "raw_answer_unchanged": true,
+    "basis_path": "基础/runs/formal_review/round1/evidence-T03.json",
+    "basis_sha256": "50851b2009ec8774d2ffef7bd8cd4037d5db201a360743ccd990eebc6ef83817",
+    "source_check": "当前问题和资料原文来源未变，必要摘录逐条核对；评分未依赖程序证明标志。",
+    "local_rule_seconds": 0.003603799967095256
+  }
+}

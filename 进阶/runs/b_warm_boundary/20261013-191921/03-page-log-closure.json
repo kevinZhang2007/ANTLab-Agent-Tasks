@@ -1,0 +1,862 @@
+[
+  {
+    "variant": "fixed",
+    "sequence": 1,
+    "role": "preheat_unknown_document",
+    "request_id": "e8ac7f1a-f055-4b59-98bd-90c449d5619d",
+    "page_record": "page/page-fixed-1.json",
+    "screenshot": "page/page-fixed-1.jpg",
+    "backend_log": "fixed-service/events.jsonl",
+    "backend_line": 6,
+    "http_page_log_equal": true,
+    "response": {
+      "request_id": "e8ac7f1a-f055-4b59-98bd-90c449d5619d",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v1",
+        "k": 2,
+        "mode": "offline_replay"
+      },
+      "answer": "请求超时阈值为30秒。",
+      "citations": [
+        "b01"
+      ],
+      "evidence": [
+        {
+          "id": "b01",
+          "doc_id": "alpha",
+          "snapshot": "v1",
+          "page": 1,
+          "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+          "tags": [
+            "timeout",
+            "request",
+            "threshold",
+            "30"
+          ],
+          "block_id": "b01"
+        }
+      ],
+      "actual_scopes": [
+        [
+          "alpha",
+          "v1"
+        ]
+      ],
+      "locator_status": "valid",
+      "support_status": "not_checked",
+      "judgment_source": "unverified",
+      "elapsed_ms": 0.09519990999251604,
+      "run_kind": "offline_replay",
+      "scope_status": "known",
+      "evidence_in_scope": true,
+      "citation_status": "present",
+      "engine_response": {
+        "answer": "请求超时阈值为30秒。",
+        "citations": [
+          "b01"
+        ],
+        "evidence": [
+          {
+            "id": "b01",
+            "doc_id": "alpha",
+            "snapshot": "v1",
+            "page": 1,
+            "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+            "tags": [
+              "timeout",
+              "request",
+              "threshold",
+              "30"
+            ]
+          }
+        ],
+        "locator_status": "valid",
+        "support_status": "supported",
+        "judgment_source": "rule",
+        "status": "ok",
+        "request_id": "e8ac7f1a-f055-4b59-98bd-90c449d5619d",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v1",
+          "k": 2,
+          "mode": "offline_replay"
+        },
+        "cache_hit": false,
+        "elapsed_ms": 0.09519990999251604,
+        "run_kind": "offline_replay"
+      },
+      "service": {
+        "version": "b-http-review-v1",
+        "engine": "no_cache_engine:Engine",
+        "default_engine": "challenge:Engine",
+        "host": "127.0.0.1",
+        "port": 8877,
+        "run_kind": "offline_replay",
+        "engine_sha256": "ab5852c20284e4f17097a1a9d7ac5343cf9dfea107e0f430c5ccda253f38d87a"
+      },
+      "state_mapping": {
+        "locator_status": "展示层检查引用ID、实际证据及请求范围；不替换Engine原值。",
+        "support_status": "not_checked：Engine只按ID产生状态，未做语义检查。",
+        "judgment_source": "unverified：没有语义判分器。",
+        "scope_status": "只核对输入范围存在性，不修复Engine检索或改变其响应。"
+      }
+    },
+    "evaluation": {
+      "unknown_scope_display_correct": null,
+      "semantic_not_verified": true,
+      "cache_pollution_eliminated": null,
+      "engine_unknown_scope_contract_met": null
+    }
+  },
+  {
+    "variant": "fixed",
+    "sequence": 2,
+    "role": "unknown_document",
+    "request_id": "f24f43fc-eabf-4507-9414-3866ac23c945",
+    "page_record": "page/page-fixed-2.json",
+    "screenshot": "page/page-fixed-2.jpg",
+    "backend_log": "fixed-service/events.jsonl",
+    "backend_line": 7,
+    "http_page_log_equal": true,
+    "response": {
+      "request_id": "f24f43fc-eabf-4507-9414-3866ac23c945",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "missing"
+        ],
+        "snapshot": "v1",
+        "k": 2,
+        "mode": "offline_replay"
+      },
+      "answer": "请求超时阈值为30秒。",
+      "citations": [
+        "b01"
+      ],
+      "evidence": [],
+      "actual_scopes": [],
+      "locator_status": "invalid",
+      "support_status": "not_checked",
+      "judgment_source": "unverified",
+      "elapsed_ms": 0.06580003537237644,
+      "run_kind": "offline_replay",
+      "scope_status": "invalid_scope",
+      "evidence_in_scope": true,
+      "citation_status": "missing_or_outside_evidence",
+      "engine_response": {
+        "answer": "请求超时阈值为30秒。",
+        "citations": [
+          "b01"
+        ],
+        "evidence": [],
+        "locator_status": "invalid",
+        "support_status": "not_checked",
+        "judgment_source": "rule",
+        "status": "ok",
+        "request_id": "f24f43fc-eabf-4507-9414-3866ac23c945",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "missing"
+          ],
+          "snapshot": "v1",
+          "k": 2,
+          "mode": "offline_replay"
+        },
+        "cache_hit": false,
+        "elapsed_ms": 0.06580003537237644,
+        "run_kind": "offline_replay"
+      },
+      "service": {
+        "version": "b-http-review-v1",
+        "engine": "no_cache_engine:Engine",
+        "default_engine": "challenge:Engine",
+        "host": "127.0.0.1",
+        "port": 8877,
+        "run_kind": "offline_replay",
+        "engine_sha256": "ab5852c20284e4f17097a1a9d7ac5343cf9dfea107e0f430c5ccda253f38d87a"
+      },
+      "state_mapping": {
+        "locator_status": "展示层检查引用ID、实际证据及请求范围；不替换Engine原值。",
+        "support_status": "not_checked：Engine只按ID产生状态，未做语义检查。",
+        "judgment_source": "unverified：没有语义判分器。",
+        "scope_status": "只核对输入范围存在性，不修复Engine检索或改变其响应。"
+      }
+    },
+    "evaluation": {
+      "unknown_scope_display_correct": true,
+      "semantic_not_verified": true,
+      "cache_pollution_eliminated": true,
+      "engine_unknown_scope_contract_met": false
+    }
+  },
+  {
+    "variant": "fixed",
+    "sequence": 3,
+    "role": "independent_preheat_unknown_snapshot",
+    "request_id": "dea8cdf9-1bb2-4235-af20-6f8fbf251c10",
+    "page_record": "page/page-fixed-3.json",
+    "screenshot": "page/page-fixed-3.jpg",
+    "backend_log": "fixed-service/events.jsonl",
+    "backend_line": 8,
+    "http_page_log_equal": true,
+    "response": {
+      "request_id": "dea8cdf9-1bb2-4235-af20-6f8fbf251c10",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v1",
+        "k": 2,
+        "mode": "offline_replay"
+      },
+      "answer": "请求超时阈值为30秒。",
+      "citations": [
+        "b01"
+      ],
+      "evidence": [
+        {
+          "id": "b01",
+          "doc_id": "alpha",
+          "snapshot": "v1",
+          "page": 1,
+          "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+          "tags": [
+            "timeout",
+            "request",
+            "threshold",
+            "30"
+          ],
+          "block_id": "b01"
+        }
+      ],
+      "actual_scopes": [
+        [
+          "alpha",
+          "v1"
+        ]
+      ],
+      "locator_status": "valid",
+      "support_status": "not_checked",
+      "judgment_source": "unverified",
+      "elapsed_ms": 0.08880009409040213,
+      "run_kind": "offline_replay",
+      "scope_status": "known",
+      "evidence_in_scope": true,
+      "citation_status": "present",
+      "engine_response": {
+        "answer": "请求超时阈值为30秒。",
+        "citations": [
+          "b01"
+        ],
+        "evidence": [
+          {
+            "id": "b01",
+            "doc_id": "alpha",
+            "snapshot": "v1",
+            "page": 1,
+            "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+            "tags": [
+              "timeout",
+              "request",
+              "threshold",
+              "30"
+            ]
+          }
+        ],
+        "locator_status": "valid",
+        "support_status": "supported",
+        "judgment_source": "rule",
+        "status": "ok",
+        "request_id": "dea8cdf9-1bb2-4235-af20-6f8fbf251c10",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v1",
+          "k": 2,
+          "mode": "offline_replay"
+        },
+        "cache_hit": false,
+        "elapsed_ms": 0.08880009409040213,
+        "run_kind": "offline_replay"
+      },
+      "service": {
+        "version": "b-http-review-v1",
+        "engine": "no_cache_engine:Engine",
+        "default_engine": "challenge:Engine",
+        "host": "127.0.0.1",
+        "port": 8877,
+        "run_kind": "offline_replay",
+        "engine_sha256": "ab5852c20284e4f17097a1a9d7ac5343cf9dfea107e0f430c5ccda253f38d87a"
+      },
+      "state_mapping": {
+        "locator_status": "展示层检查引用ID、实际证据及请求范围；不替换Engine原值。",
+        "support_status": "not_checked：Engine只按ID产生状态，未做语义检查。",
+        "judgment_source": "unverified：没有语义判分器。",
+        "scope_status": "只核对输入范围存在性，不修复Engine检索或改变其响应。"
+      }
+    },
+    "evaluation": {
+      "unknown_scope_display_correct": null,
+      "semantic_not_verified": true,
+      "cache_pollution_eliminated": null,
+      "engine_unknown_scope_contract_met": null
+    }
+  },
+  {
+    "variant": "fixed",
+    "sequence": 4,
+    "role": "unknown_snapshot",
+    "request_id": "ca2091cd-fcd3-4406-b278-ce08601d12f6",
+    "page_record": "page/page-fixed-4.json",
+    "screenshot": "page/page-fixed-4.jpg",
+    "backend_log": "fixed-service/events.jsonl",
+    "backend_line": 9,
+    "http_page_log_equal": true,
+    "response": {
+      "request_id": "ca2091cd-fcd3-4406-b278-ce08601d12f6",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "missing",
+        "k": 2,
+        "mode": "offline_replay"
+      },
+      "answer": "请求超时阈值为30秒。",
+      "citations": [
+        "b01"
+      ],
+      "evidence": [],
+      "actual_scopes": [],
+      "locator_status": "invalid",
+      "support_status": "not_checked",
+      "judgment_source": "unverified",
+      "elapsed_ms": 0.08110003545880318,
+      "run_kind": "offline_replay",
+      "scope_status": "invalid_scope",
+      "evidence_in_scope": true,
+      "citation_status": "missing_or_outside_evidence",
+      "engine_response": {
+        "answer": "请求超时阈值为30秒。",
+        "citations": [
+          "b01"
+        ],
+        "evidence": [],
+        "locator_status": "invalid",
+        "support_status": "not_checked",
+        "judgment_source": "rule",
+        "status": "ok",
+        "request_id": "ca2091cd-fcd3-4406-b278-ce08601d12f6",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "missing",
+          "k": 2,
+          "mode": "offline_replay"
+        },
+        "cache_hit": false,
+        "elapsed_ms": 0.08110003545880318,
+        "run_kind": "offline_replay"
+      },
+      "service": {
+        "version": "b-http-review-v1",
+        "engine": "no_cache_engine:Engine",
+        "default_engine": "challenge:Engine",
+        "host": "127.0.0.1",
+        "port": 8877,
+        "run_kind": "offline_replay",
+        "engine_sha256": "ab5852c20284e4f17097a1a9d7ac5343cf9dfea107e0f430c5ccda253f38d87a"
+      },
+      "state_mapping": {
+        "locator_status": "展示层检查引用ID、实际证据及请求范围；不替换Engine原值。",
+        "support_status": "not_checked：Engine只按ID产生状态，未做语义检查。",
+        "judgment_source": "unverified：没有语义判分器。",
+        "scope_status": "只核对输入范围存在性，不修复Engine检索或改变其响应。"
+      }
+    },
+    "evaluation": {
+      "unknown_scope_display_correct": true,
+      "semantic_not_verified": true,
+      "cache_pollution_eliminated": true,
+      "engine_unknown_scope_contract_met": false
+    }
+  },
+  {
+    "variant": "original",
+    "sequence": 1,
+    "role": "preheat_unknown_document",
+    "request_id": "9f3854d0-66d9-491a-ab15-db33c61f488a",
+    "page_record": "page/page-original-1.json",
+    "screenshot": "page/page-original-1.jpg",
+    "backend_log": "original-service/events.jsonl",
+    "backend_line": 6,
+    "http_page_log_equal": true,
+    "response": {
+      "request_id": "9f3854d0-66d9-491a-ab15-db33c61f488a",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v1",
+        "k": 2,
+        "mode": "offline_replay"
+      },
+      "answer": "请求超时阈值为30秒。",
+      "citations": [
+        "b01"
+      ],
+      "evidence": [
+        {
+          "id": "b01",
+          "doc_id": "alpha",
+          "snapshot": "v1",
+          "page": 1,
+          "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+          "tags": [
+            "timeout",
+            "request",
+            "threshold",
+            "30"
+          ],
+          "block_id": "b01"
+        }
+      ],
+      "actual_scopes": [
+        [
+          "alpha",
+          "v1"
+        ]
+      ],
+      "locator_status": "valid",
+      "support_status": "not_checked",
+      "judgment_source": "unverified",
+      "elapsed_ms": 0.166199984960258,
+      "run_kind": "offline_replay",
+      "scope_status": "known",
+      "evidence_in_scope": true,
+      "citation_status": "present",
+      "engine_response": {
+        "answer": "请求超时阈值为30秒。",
+        "citations": [
+          "b01"
+        ],
+        "evidence": [
+          {
+            "id": "b01",
+            "doc_id": "alpha",
+            "snapshot": "v1",
+            "page": 1,
+            "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+            "tags": [
+              "timeout",
+              "request",
+              "threshold",
+              "30"
+            ]
+          }
+        ],
+        "locator_status": "valid",
+        "support_status": "supported",
+        "judgment_source": "rule",
+        "status": "ok",
+        "request_id": "9f3854d0-66d9-491a-ab15-db33c61f488a",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v1",
+          "k": 2,
+          "mode": "offline_replay"
+        },
+        "cache_hit": false,
+        "elapsed_ms": 0.166199984960258,
+        "run_kind": "offline_replay"
+      },
+      "service": {
+        "version": "b-http-review-v1",
+        "engine": "challenge:Engine",
+        "default_engine": "challenge:Engine",
+        "host": "127.0.0.1",
+        "port": 8876,
+        "run_kind": "offline_replay",
+        "engine_sha256": "b84a035957ac457fb803c82f141c8684ccb5dbe9ff34c45bbb199ff613094ad1"
+      },
+      "state_mapping": {
+        "locator_status": "展示层检查引用ID、实际证据及请求范围；不替换Engine原值。",
+        "support_status": "not_checked：Engine只按ID产生状态，未做语义检查。",
+        "judgment_source": "unverified：没有语义判分器。",
+        "scope_status": "只核对输入范围存在性，不修复Engine检索或改变其响应。"
+      }
+    },
+    "evaluation": {
+      "unknown_scope_display_correct": null,
+      "semantic_not_verified": true,
+      "cache_pollution_eliminated": null,
+      "engine_unknown_scope_contract_met": null
+    }
+  },
+  {
+    "variant": "original",
+    "sequence": 2,
+    "role": "unknown_document",
+    "request_id": "5600754a-b4da-4402-802b-963e82f70a16",
+    "page_record": "page/page-original-2.json",
+    "screenshot": "page/page-original-2.jpg",
+    "backend_log": "original-service/events.jsonl",
+    "backend_line": 7,
+    "http_page_log_equal": true,
+    "response": {
+      "request_id": "5600754a-b4da-4402-802b-963e82f70a16",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "missing"
+        ],
+        "snapshot": "v1",
+        "k": 2,
+        "mode": "offline_replay"
+      },
+      "answer": "请求超时阈值为30秒。",
+      "citations": [
+        "b01"
+      ],
+      "evidence": [
+        {
+          "id": "b01",
+          "doc_id": "alpha",
+          "snapshot": "v1",
+          "page": 1,
+          "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+          "tags": [
+            "timeout",
+            "request",
+            "threshold",
+            "30"
+          ],
+          "block_id": "b01"
+        }
+      ],
+      "actual_scopes": [
+        [
+          "alpha",
+          "v1"
+        ]
+      ],
+      "locator_status": "invalid",
+      "support_status": "not_checked",
+      "judgment_source": "unverified",
+      "elapsed_ms": 0.10710000060498714,
+      "run_kind": "offline_replay",
+      "scope_status": "invalid_scope",
+      "evidence_in_scope": false,
+      "citation_status": "present",
+      "engine_response": {
+        "answer": "请求超时阈值为30秒。",
+        "citations": [
+          "b01"
+        ],
+        "evidence": [
+          {
+            "id": "b01",
+            "doc_id": "alpha",
+            "snapshot": "v1",
+            "page": 1,
+            "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+            "tags": [
+              "timeout",
+              "request",
+              "threshold",
+              "30"
+            ]
+          }
+        ],
+        "locator_status": "valid",
+        "support_status": "supported",
+        "judgment_source": "rule",
+        "status": "ok",
+        "request_id": "5600754a-b4da-4402-802b-963e82f70a16",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "missing"
+          ],
+          "snapshot": "v1",
+          "k": 2,
+          "mode": "offline_replay"
+        },
+        "cache_hit": true,
+        "elapsed_ms": 0.10710000060498714,
+        "run_kind": "offline_replay"
+      },
+      "service": {
+        "version": "b-http-review-v1",
+        "engine": "challenge:Engine",
+        "default_engine": "challenge:Engine",
+        "host": "127.0.0.1",
+        "port": 8876,
+        "run_kind": "offline_replay",
+        "engine_sha256": "b84a035957ac457fb803c82f141c8684ccb5dbe9ff34c45bbb199ff613094ad1"
+      },
+      "state_mapping": {
+        "locator_status": "展示层检查引用ID、实际证据及请求范围；不替换Engine原值。",
+        "support_status": "not_checked：Engine只按ID产生状态，未做语义检查。",
+        "judgment_source": "unverified：没有语义判分器。",
+        "scope_status": "只核对输入范围存在性，不修复Engine检索或改变其响应。"
+      }
+    },
+    "evaluation": {
+      "unknown_scope_display_correct": true,
+      "semantic_not_verified": true,
+      "cache_pollution_eliminated": null,
+      "engine_unknown_scope_contract_met": false
+    }
+  },
+  {
+    "variant": "original",
+    "sequence": 3,
+    "role": "independent_preheat_unknown_snapshot",
+    "request_id": "abae48e6-aa1c-4623-a187-006505e26783",
+    "page_record": "page/page-original-3.json",
+    "screenshot": "page/page-original-3.jpg",
+    "backend_log": "original-service/events.jsonl",
+    "backend_line": 8,
+    "http_page_log_equal": true,
+    "response": {
+      "request_id": "abae48e6-aa1c-4623-a187-006505e26783",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v1",
+        "k": 2,
+        "mode": "offline_replay"
+      },
+      "answer": "请求超时阈值为30秒。",
+      "citations": [
+        "b01"
+      ],
+      "evidence": [
+        {
+          "id": "b01",
+          "doc_id": "alpha",
+          "snapshot": "v1",
+          "page": 1,
+          "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+          "tags": [
+            "timeout",
+            "request",
+            "threshold",
+            "30"
+          ],
+          "block_id": "b01"
+        }
+      ],
+      "actual_scopes": [
+        [
+          "alpha",
+          "v1"
+        ]
+      ],
+      "locator_status": "valid",
+      "support_status": "not_checked",
+      "judgment_source": "unverified",
+      "elapsed_ms": 0.09040010627359152,
+      "run_kind": "offline_replay",
+      "scope_status": "known",
+      "evidence_in_scope": true,
+      "citation_status": "present",
+      "engine_response": {
+        "answer": "请求超时阈值为30秒。",
+        "citations": [
+          "b01"
+        ],
+        "evidence": [
+          {
+            "id": "b01",
+            "doc_id": "alpha",
+            "snapshot": "v1",
+            "page": 1,
+            "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+            "tags": [
+              "timeout",
+              "request",
+              "threshold",
+              "30"
+            ]
+          }
+        ],
+        "locator_status": "valid",
+        "support_status": "supported",
+        "judgment_source": "rule",
+        "status": "ok",
+        "request_id": "abae48e6-aa1c-4623-a187-006505e26783",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "v1",
+          "k": 2,
+          "mode": "offline_replay"
+        },
+        "cache_hit": false,
+        "elapsed_ms": 0.09040010627359152,
+        "run_kind": "offline_replay"
+      },
+      "service": {
+        "version": "b-http-review-v1",
+        "engine": "challenge:Engine",
+        "default_engine": "challenge:Engine",
+        "host": "127.0.0.1",
+        "port": 8876,
+        "run_kind": "offline_replay",
+        "engine_sha256": "b84a035957ac457fb803c82f141c8684ccb5dbe9ff34c45bbb199ff613094ad1"
+      },
+      "state_mapping": {
+        "locator_status": "展示层检查引用ID、实际证据及请求范围；不替换Engine原值。",
+        "support_status": "not_checked：Engine只按ID产生状态，未做语义检查。",
+        "judgment_source": "unverified：没有语义判分器。",
+        "scope_status": "只核对输入范围存在性，不修复Engine检索或改变其响应。"
+      }
+    },
+    "evaluation": {
+      "unknown_scope_display_correct": null,
+      "semantic_not_verified": true,
+      "cache_pollution_eliminated": null,
+      "engine_unknown_scope_contract_met": null
+    }
+  },
+  {
+    "variant": "original",
+    "sequence": 4,
+    "role": "unknown_snapshot",
+    "request_id": "3318ac86-d901-4493-86bf-67749773f802",
+    "page_record": "page/page-original-4.json",
+    "screenshot": "page/page-original-4.jpg",
+    "backend_log": "original-service/events.jsonl",
+    "backend_line": 9,
+    "http_page_log_equal": true,
+    "response": {
+      "request_id": "3318ac86-d901-4493-86bf-67749773f802",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "missing",
+        "k": 2,
+        "mode": "offline_replay"
+      },
+      "answer": "请求超时阈值为30秒。",
+      "citations": [
+        "b01"
+      ],
+      "evidence": [
+        {
+          "id": "b01",
+          "doc_id": "alpha",
+          "snapshot": "v1",
+          "page": 1,
+          "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+          "tags": [
+            "timeout",
+            "request",
+            "threshold",
+            "30"
+          ],
+          "block_id": "b01"
+        }
+      ],
+      "actual_scopes": [
+        [
+          "alpha",
+          "v1"
+        ]
+      ],
+      "locator_status": "invalid",
+      "support_status": "not_checked",
+      "judgment_source": "unverified",
+      "elapsed_ms": 0.07720000576227903,
+      "run_kind": "offline_replay",
+      "scope_status": "invalid_scope",
+      "evidence_in_scope": false,
+      "citation_status": "present",
+      "engine_response": {
+        "answer": "请求超时阈值为30秒。",
+        "citations": [
+          "b01"
+        ],
+        "evidence": [
+          {
+            "id": "b01",
+            "doc_id": "alpha",
+            "snapshot": "v1",
+            "page": 1,
+            "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+            "tags": [
+              "timeout",
+              "request",
+              "threshold",
+              "30"
+            ]
+          }
+        ],
+        "locator_status": "valid",
+        "support_status": "supported",
+        "judgment_source": "rule",
+        "status": "ok",
+        "request_id": "3318ac86-d901-4493-86bf-67749773f802",
+        "request": {
+          "query": "timeout request threshold",
+          "doc_ids": [
+            "alpha"
+          ],
+          "snapshot": "missing",
+          "k": 2,
+          "mode": "offline_replay"
+        },
+        "cache_hit": true,
+        "elapsed_ms": 0.07720000576227903,
+        "run_kind": "offline_replay"
+      },
+      "service": {
+        "version": "b-http-review-v1",
+        "engine": "challenge:Engine",
+        "default_engine": "challenge:Engine",
+        "host": "127.0.0.1",
+        "port": 8876,
+        "run_kind": "offline_replay",
+        "engine_sha256": "b84a035957ac457fb803c82f141c8684ccb5dbe9ff34c45bbb199ff613094ad1"
+      },
+      "state_mapping": {
+        "locator_status": "展示层检查引用ID、实际证据及请求范围；不替换Engine原值。",
+        "support_status": "not_checked：Engine只按ID产生状态，未做语义检查。",
+        "judgment_source": "unverified：没有语义判分器。",
+        "scope_status": "只核对输入范围存在性，不修复Engine检索或改变其响应。"
+      }
+    },
+    "evaluation": {
+      "unknown_scope_display_correct": true,
+      "semantic_not_verified": true,
+      "cache_pollution_eliminated": null,
+      "engine_unknown_scope_contract_met": false
+    }
+  }
+]

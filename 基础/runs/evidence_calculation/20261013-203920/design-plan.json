@@ -1,0 +1,58 @@
+{
+  "recorded_at": "2026-10-13T20:39:20.320511+08:00",
+  "phase": "评测后独立开发探索，调用前设计",
+  "input_source": "基础/runs/two_step_linked_form/20261013-202853/task-Dxx.json 的question及used_passages",
+  "input_kind": "历史证据选择重放，不重新定位",
+  "hypothesis": "将原文摘录、带来源操作数与受限计算显式交给最终回答，可能改善计算与证据引用。",
+  "competing_explanations": [
+    "整理阶段仍可能误选范围、口径或运算；来源真实不代表结论正确。",
+    "额外请求和输出预算也可能影响表现，不能单独归因于提示词或推理能力。"
+  ],
+  "scope": "D01—D04 R0；每题同步当前回答一次、证据整理一次、验证通过后候选回答一次；最多12次。",
+  "call_order": [
+    {
+      "case_id": "D01",
+      "stages": [
+        "control",
+        "evidence",
+        "candidate_answer"
+      ]
+    },
+    {
+      "case_id": "D02",
+      "stages": [
+        "evidence",
+        "candidate_answer",
+        "control"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "stages": [
+        "control",
+        "evidence",
+        "candidate_answer"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "stages": [
+        "evidence",
+        "candidate_answer",
+        "control"
+      ]
+    }
+  ],
+  "budgets": {
+    "control": 256,
+    "evidence": 512,
+    "candidate_answer": 256
+  },
+  "fixed": "原模型、采样数值、seed42、4096上下文、CPU单槽4线程、关闭思考及上下文移位；答案形式Schema沿用已验证派生规则。",
+  "validation": "ID、连续摘录、操作数在同ID摘录中；仅两操作数Decimal加减乘除，拒绝除零；不判定范围、口径或操作语义。",
+  "adoption_rule": "严格完整成功优先，再比较指定答法正确；同分保留当前更简单的候选。不自动替换生产，不追加搜索。",
+  "evaluation": "全部调用结束后才读取公开开发答案；分别评价摘录来源、范围口径、运算、工具执行、答法、语义、引用支持、无关引用、严格成功。",
+  "denominator": 4,
+  "stop_rule": "HTTP/超时/服务/实现/容量技术错误保存后停止；非法中间输出为候选质量失败，不回答、不补标准答案，仍入分母；回答错误不重试。",
+  "time_scope": "候选包含整理请求、核验计算与最终请求及容量核查；对照只回答，不用仅最后回答耗时作成本比较。"
+}

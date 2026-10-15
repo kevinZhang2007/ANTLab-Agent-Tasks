@@ -1,0 +1,10 @@
+char ::= [^"\\\x7F\x00-\x1F] | [\\] (["\\bfnrt] | "u" [0-9a-fA-F]{4})
+defects ::= "[" space (defects-item ("," space defects-item)*)? space "]"
+defects-item ::= "{" space defects-item-snapshot-kv "," space defects-item-passage-id-kv "," space defects-item-quote-kv space "}"
+defects-item-passage-id-kv ::= "\"passage_id\"" space ":" space string
+defects-item-quote-kv ::= "\"quote\"" space ":" space string
+defects-item-snapshot-kv ::= "\"snapshot\"" space ":" space string
+defects-kv ::= "\"defects\"" space ":" space defects
+root ::= "{" space defects-kv space "}"
+space ::= | " " | "\n"{1,2} [ \t]{0,20}
+string ::= "\"" char* "\""

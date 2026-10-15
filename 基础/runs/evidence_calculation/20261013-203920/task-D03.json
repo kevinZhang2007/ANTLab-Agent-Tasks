@@ -1,0 +1,75 @@
+{
+  "case_id": "D03",
+  "question": "白榆项目R5版本在2026-05单并发主测中，方案乙的完整响应耗时中位数比方案甲少多少秒？只输出数值。",
+  "used_passages": [
+    {
+      "id": "P695887",
+      "source": "模拟记录/D03/页1",
+      "text": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。"
+    },
+    {
+      "id": "P419087",
+      "source": "模拟记录/D03/页3",
+      "text": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。"
+    }
+  ],
+  "input_kind": "historical_evidence_selection_replay",
+  "source_path": "基础/runs/two_step_linked_form/20261013-202853/task-D03.json",
+  "source_sha256": "93e9ce67015b6b5567cb8ce95309d80ca2a04d06aa7550435f0d420352c544c0",
+  "stages": {
+    "control": {
+      "run_id": "1f287775-376f-4862-9725-6b2002be1722",
+      "raw_content": "{\"answer\":\"1.8\",\"citations\":[\"P695887\",\"P419087\"]}",
+      "http_seconds": 4.711937899934128
+    },
+    "evidence": {
+      "run_id": "9185c20c-a66a-4810-90d2-f0753aefbbee",
+      "raw_content": "{\n  \"target_scope\": \"数值\",\n  \"evidence\": [\n    {\n      \"passage_id\": \"P695887\",\n      \"quote\": \"方案乙的完整响应耗时中位数为5.8秒。\",\n      \"role\": \"data\"\n    }\n  ],\n  \"calculation\": {\n    \"operation\": \"subtract\",\n    \"operands\": [\n      { \"value\": \"7.6\", \"passage_id\": \"P695887\", \"meaning\": \"方案甲的中位数耗时\",\n        \"unit\": \"秒\" },\n      { \"value\": \"5.8\", \"passage_id\": \"P419087\", \"meaning\": \"方案乙的中位数耗时\",\n        \"unit\": \"秒\" }\n    ]\n  }\n}",
+      "http_seconds": 9.710449400008656
+    },
+    "candidate_answer": {
+      "status": "not_executed_invalid_evidence",
+      "included_in_denominator": true
+    }
+  },
+  "status": "candidate_evidence_failure",
+  "validation": {
+    "valid": false,
+    "source_verified": false,
+    "errors": [
+      "摘录不是对应原文的非空连续片段"
+    ],
+    "tool_status": "not_executed",
+    "tool_result": null,
+    "scope_and_operation_semantics_verified": false,
+    "raw_structured_evidence": {
+      "target_scope": "数值",
+      "evidence": [
+        {
+          "passage_id": "P695887",
+          "quote": "方案乙的完整响应耗时中位数为5.8秒。",
+          "role": "data"
+        }
+      ],
+      "calculation": {
+        "operation": "subtract",
+        "operands": [
+          {
+            "value": "7.6",
+            "passage_id": "P695887",
+            "meaning": "方案甲的中位数耗时",
+            "unit": "秒"
+          },
+          {
+            "value": "5.8",
+            "passage_id": "P419087",
+            "meaning": "方案乙的中位数耗时",
+            "unit": "秒"
+          }
+        ]
+      }
+    }
+  },
+  "validation_seconds": 8.699996396899223e-05,
+  "candidate_end_to_end_seconds": 9.874610099941492
+}

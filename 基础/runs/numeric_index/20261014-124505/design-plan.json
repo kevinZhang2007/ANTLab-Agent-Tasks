@@ -1,0 +1,58 @@
+{
+  "recorded_at": "2026-10-14T12:45:05.181691+08:00",
+  "scope": "首次正式评测后独立开发探索，历史选择重放，仅D01—D04 R0",
+  "hypothesis": "自动数字位置索引可避免模型重抄摘录，受限计算可能减少算术错误。",
+  "competing_explanations": [
+    "日期、版本、批次等数字也会入目录；真实数字不代表范围或操作数正确。",
+    "公式、操作方向及最终引用仍可能错误；额外调用和预算改变使结果属于整体配置比较。"
+  ],
+  "catalog": "按当前输入顺序及正文数字出现顺序n1起编号，保存原始串、Python字符半开区间与前后24字符上下文；保留版本、日期、批次与重复值。符号仅在前一个字符不是数字时并入数字，日期连字符不当负号。",
+  "expression": "有限树结构，目录引用或唯一通用常量100，二元加减乘除，1至4个运算节点，最多4层；Decimal精度50，记录舍入标志。",
+  "call_order": [
+    {
+      "case_id": "D01",
+      "stages": [
+        "control",
+        "plan",
+        "candidate_answer"
+      ]
+    },
+    {
+      "case_id": "D02",
+      "stages": [
+        "plan",
+        "candidate_answer",
+        "control"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "stages": [
+        "control",
+        "plan",
+        "candidate_answer"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "stages": [
+        "plan",
+        "candidate_answer",
+        "control"
+      ]
+    }
+  ],
+  "generation_limit": 12,
+  "budgets": {
+    "control": 256,
+    "plan": 256,
+    "candidate_answer": 256
+  },
+  "fixed": "Qwen3-0.6B-Q8_0/llama.cpp b11429/4096/CPU单槽4线程/batch128/ubatch64/关闭思考、上下文移位、预热；原采样和答案形式Schema派生不变。",
+  "stop_rule": "技术、资源、容量错误保存停止；非法或不可解析计划为质量失败，不执行最终回答，不修补，不从4题分母删除；质量错误不重试。",
+  "strict_rule": "最终JSON完整、指定答法正确、引用ID存在非空、必要覆盖与语义支持、无无关引用；候选另要求计算计划合法。操作数和公式语义分开评价，不由程序自动认定。",
+  "adoption": "严格成功优先，其次答案正确；同分保留当前简单方案，不自动替换生产或追加优化。",
+  "evaluation": "全部调用结束后才读公开开发答案，操作数、公式、工具执行、答法、语义、引用、无关引用分别记录。",
+  "time_scope": "对照只有回答；候选端到端包含计划请求、验证及计算、最终回答和中间处理，另列各HTTP阶段。",
+  "prior_generation_count": 178
+}

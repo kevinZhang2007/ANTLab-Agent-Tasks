@@ -1,0 +1,85 @@
+{
+  "reviewed_at": "2026-10-14T12:49:41.016736+08:00",
+  "source": "全部调用结束后Codex辅助公开开发答案与原文复核，尚未经本人逐项确认",
+  "items": [
+    {
+      "case_id": "D01",
+      "mode_appropriate": false,
+      "operand_selection": "not_selected",
+      "formula_selection": "not_proposed",
+      "tool_execution_correct": "not_executed",
+      "reason": "原文85个有效问题为分母、68个获完整支持为分子，可计算68/85并转百分数。计划却选择no_calculation；工具未运行，最终错误拒答。来源目录准确不表示模型正确选择了计算模式。",
+      "raw_plan": "{\n  \"mode\": \"no_calculation\",\n  \"expression\": null\n}",
+      "source_positions_verified": true,
+      "actual_tool_status": "not_required",
+      "actual_tool_result": null,
+      "actual_used_numbers": [],
+      "public_answer_reason": "68/85=80%。"
+    },
+    {
+      "case_id": "D02",
+      "mode_appropriate": true,
+      "operand_selection": "not_applicable",
+      "formula_selection": "not_applicable",
+      "tool_execution_correct": "not_required",
+      "reason": "问题问服务端GPU型号，原文仅HTTP与模型显示名、补页缺资产及设备遥测。无须算术，使用完整原文判证据不足合适；计划没有显式选insufficient，但no_calculation不妨碍最后缺证回答。",
+      "raw_plan": "{\n  \"mode\": \"no_calculation\",\n  \"expression\": null\n}",
+      "source_positions_verified": true,
+      "actual_tool_status": "not_required",
+      "actual_tool_result": null,
+      "actual_used_numbers": [],
+      "public_answer_reason": "所给范围没有具体GPU型号；区域或耗时不足以推定。"
+    },
+    {
+      "case_id": "D03",
+      "mode_appropriate": true,
+      "operand_selection": false,
+      "formula_selection": false,
+      "operator_type_appropriate": true,
+      "tool_execution_correct": true,
+      "reason": "n5来自主段的40个问题，是样本数量；n6是甲7.6秒。工具正确执行40-7.6=32.4，但数量不能与耗时相减，且没有选乙5.8秒。正确目标是同批次可比条件下甲7.6减乙5.8=1.8；最终32.4错误且只引主段，遗漏乙来源。",
+      "raw_plan": "{\n  \"mode\": \"calculate\",\n  \"expression\": {\n    \"op\": \"subtract\",\n    \"args\": [\n      {\"number_ref\": \"n5\"},\n      {\"number_ref\": \"n6\"}\n    ]\n  }\n}",
+      "source_positions_verified": true,
+      "actual_tool_status": "executed",
+      "actual_tool_result": "32.4",
+      "actual_used_numbers": [
+        {
+          "number_ref": "n5",
+          "passage_id": "P695887",
+          "raw_number": "40",
+          "start": 36,
+          "end": 38,
+          "context_start": 12,
+          "context_end": 62,
+          "context": "6-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7"
+        },
+        {
+          "number_ref": "n6",
+          "passage_id": "P695887",
+          "raw_number": "7.6",
+          "start": 61,
+          "end": 64,
+          "context_start": 37,
+          "context_end": 88,
+          "context": "0个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。 执行环境登记客户端运行时、接口模式与日志保"
+        }
+      ],
+      "public_answer_reason": "7.6-5.8=1.8秒。"
+    },
+    {
+      "case_id": "D04",
+      "mode_appropriate": true,
+      "operand_selection": "not_applicable",
+      "formula_selection": "not_applicable",
+      "tool_execution_correct": "not_required",
+      "reason": "规则选择可以不调用算术工具。原文乙与丙满足覆盖率及失败次数资格，丙预算更低，应选丙。最终答案丙且引用数据与规则两段，严格成功；未编写配置选择专用算法。",
+      "raw_plan": "{\n  \"mode\": \"no_calculation\",\n  \"expression\": null\n}",
+      "source_positions_verified": true,
+      "actual_tool_status": "not_required",
+      "actual_tool_result": null,
+      "actual_used_numbers": [],
+      "public_answer_reason": "乙与丙合格，丙预算更低。"
+    }
+  ],
+  "source_validation_does_not_prove_operand_or_formula": true
+}

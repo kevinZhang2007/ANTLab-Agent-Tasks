@@ -1,0 +1,21 @@
+--- preserved_first_offline_failure/general_citation_proof.py
++++ frozen/general_citation_proof.py
+@@ -5,6 +5,7 @@
+ from decimal import Decimal, localcontext
+ import direct_reference_candidate as relation
+ from scope_first_occurrences import explicit_scope, scope_status
++from project_scope_resolution import resolve_question_scope
+ from typed_enum_role_revision import target_role
+ import eligibility_proof_checker as snapshot
+ 
+@@ -31,7 +32,9 @@
+ def linked_pairs(question,passages,universe,trace):
+     visible={p['id']:p for p in passages}
+     require(len(visible)==len(passages),'duplicate_input_ids')
+-    expected=explicit_scope(question)
++    expected,project_audit=resolve_question_scope(question,universe,explicit_scope(question))
++    trace.append({'stage':'question_project_boundary','audit':project_audit})
++    require(project_audit['status']=='resolved','question_project_entity_unknown')
+     require(any(expected.values()) and all(len(v)<=1 for v in expected.values()),'question_scope_missing_or_multiple')
+     _,links=relation.complete_passages(question,universe,{'valid':True,'selected_ids':list(visible)})
+     trace.append({'stage':'direct_relation_audit','links':links})

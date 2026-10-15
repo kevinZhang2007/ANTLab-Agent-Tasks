@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "properties": {
+    "qualifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "snapshot": {
+            "type": "string"
+          },
+          "data_source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rule_source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "passed_conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "failed_conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "unspecified_conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "eligibility": {
+            "type": "string",
+            "enum": [
+              "eligible",
+              "ineligible",
+              "unknown"
+            ]
+          }
+        },
+        "required": [
+          "snapshot",
+          "data_source_ids",
+          "rule_source_ids",
+          "passed_conditions",
+          "failed_conditions",
+          "unspecified_conditions",
+          "eligibility"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "qualifications"
+  ],
+  "additionalProperties": false
+}

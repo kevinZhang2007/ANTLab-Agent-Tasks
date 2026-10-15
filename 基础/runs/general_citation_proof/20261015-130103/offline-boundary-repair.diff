@@ -1,0 +1,13 @@
+--- preserved_first_offline_failure/general_citation_proof.py
++++ frozen/general_citation_proof.py
+@@ -155,7 +155,9 @@
+                     if hits:
+                         alias=max(hits,key=len);name=prefix[:-len(alias)].strip();prefix=alias
+                     else:name=prefix;prefix=''
+-                require(bool(re.fullmatch(r'(?:[一-鿿]{1,16}|[A-Za-z][A-Za-z0-9_-]*)',name)),'candidate_name_not_reliably_parsed')
++                # 连写表格只支持单字中文标签或完整ASCII标识；不把未知汉字字段吞进名称。
++                short_name=name.removeprefix(kind)
++                require(bool(re.fullmatch(r'(?:[一-鿿]|[A-Za-z][A-Za-z0-9_-]*)',short_name)),'candidate_name_boundary_not_reliably_parsed')
+             if row_index==0:
+                 labels=[normalized(s,value['unit']) for s in [prefix,suffix] if s]
+                 require(labels,'first_row_metric_label_missing')

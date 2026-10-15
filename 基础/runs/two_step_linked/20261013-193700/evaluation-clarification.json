@@ -1,0 +1,38 @@
+{
+  "recorded_at": "2026-10-13T19:44:23.946483+08:00",
+  "source": "Codex依据本轮开发原文复核，尚未经本人逐项确认",
+  "kind": "post_generation_evaluation_clarification",
+  "affected_record": "基础/runs/two_step_linked/20261013-193700/run-4de57f50-3ad6-4fd3-acd2-e9ee28d89db6.json",
+  "automatic_review_limit": "预先保存的自动评价仅对D02区分语义一致与指定答法，D03带单位的正确数值被一并判成语义和支持失败。这是评价检查的不足，不是模型响应修复。",
+  "question": "白榆项目R5版本在2026-05单并发主测中，方案乙的完整响应耗时中位数比方案甲少多少秒？只输出数值。",
+  "original_quotes": [
+    {
+      "id": "P695887",
+      "quote": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。"
+    },
+    {
+      "id": "P419087",
+      "quote": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。"
+    }
+  ],
+  "calculation": "7.6-5.8=1.8秒",
+  "changes": {
+    "semantic_consistent": {
+      "before": false,
+      "after": true
+    },
+    "evidence_supports_actual_answer": {
+      "before": false,
+      "after": true
+    }
+  },
+  "unchanged": {
+    "specified_answer_correct": false,
+    "strict_complete_success": false,
+    "necessary_coverage": true,
+    "irrelevant_citations": []
+  },
+  "selection_rule_unchanged": true,
+  "adoption_unchanged": "old_answer",
+  "original_review_preserved": "semantic-review.json"
+}

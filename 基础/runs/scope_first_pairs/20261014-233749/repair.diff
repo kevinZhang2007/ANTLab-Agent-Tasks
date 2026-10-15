@@ -1,0 +1,32 @@
+--- old/eligibility_general_candidate.py
++++ new/eligibility_general_candidate.py
+@@ -8,6 +8,7 @@
+ from typed_enum_role_revision import constrain_revised_roles, target_role
+ import explicit_state_checker as checker
+ import eligibility_exclusion_candidate as exclusion
++from scope_first_occurrences import audit_occurrences
+ 
+ student = previous.student
+ constrain_schema = previous.constrain_schema
+@@ -24,6 +25,9 @@
+         record['qualification_reason'] = 'question_does_not_explicitly_request_snapshot_identifier'
+         return messages, conf, record
+     full = copy.deepcopy(passages if universe is None else universe)
++    original_universe = copy.deepcopy(full)
++    full, occurrence_audit, scope_audit = audit_occurrences(question, full, schema['properties']['answer']['enum'], {p['id'] for p in passages})
++    record.update(scope_audit=scope_audit, occurrence_audit=occurrence_audit, original_universe=original_universe)
+     candidates = []
+     occurrences = {}
+     for value in schema['properties']['answer']['enum']:
+@@ -53,8 +57,9 @@
+         if not decision['excluded']:
+             skipped.append({'candidate': value, 'reason': decision['reason']})
+             continue
+-        if len(occurrences[value]) != 1:
+-            skipped.append({'candidate': value, 'reason': 'multiple_occurrences_or_scopes_unknown'})
++        identity_audit = occurrence_audit[value]
++        if not identity_audit['eligible_for_exclusion_check']:
++            skipped.append({'candidate': value, 'reason': identity_audit['reason'], 'scope_and_identity_audit': identity_audit})
+             continue
+         source = next(p for p in full if p['id'] == decision['passage_id'])
+         source_scope = completion.describe(source['text'])['scope']

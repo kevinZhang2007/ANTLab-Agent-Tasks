@@ -1,0 +1,260 @@
+{
+  "checked_at": "2026-10-14T18:00:08.024264+08:00",
+  "passed": true,
+  "tests": [
+    {
+      "name": "true_source",
+      "value": {
+        "defects": [
+          {
+            "snapshot": "AB12",
+            "passage_id": "self-id",
+            "quote": "快照AB12存在2项偏移。"
+          }
+        ]
+      },
+      "expected_source_valid": true,
+      "actual": {
+        "json_complete": true,
+        "items": [
+          {
+            "snapshot": "AB12",
+            "snapshot_in_candidates": true,
+            "id_exists": true,
+            "quote_is_nonempty_continuous_original": true,
+            "source_valid": true
+          }
+        ],
+        "all_sources_valid": true,
+        "defect_truth_and_snapshot_assignment_verified": false
+      },
+      "passed": true
+    },
+    {
+      "name": "zero_quote_source_only",
+      "value": {
+        "defects": [
+          {
+            "snapshot": "CD34",
+            "passage_id": "self-id",
+            "quote": "快照CD34未关闭问题数量为0。"
+          }
+        ]
+      },
+      "expected_source_valid": true,
+      "actual": {
+        "json_complete": true,
+        "items": [
+          {
+            "snapshot": "CD34",
+            "snapshot_in_candidates": true,
+            "id_exists": true,
+            "quote_is_nonempty_continuous_original": true,
+            "source_valid": true
+          }
+        ],
+        "all_sources_valid": true,
+        "defect_truth_and_snapshot_assignment_verified": false
+      },
+      "passed": true
+    },
+    {
+      "name": "negated_quote_source_only",
+      "value": {
+        "defects": [
+          {
+            "snapshot": "EF56",
+            "passage_id": "self-id",
+            "quote": "快照EF56不存在失败。"
+          }
+        ]
+      },
+      "expected_source_valid": true,
+      "actual": {
+        "json_complete": true,
+        "items": [
+          {
+            "snapshot": "EF56",
+            "snapshot_in_candidates": true,
+            "id_exists": true,
+            "quote_is_nonempty_continuous_original": true,
+            "source_valid": true
+          }
+        ],
+        "all_sources_valid": true,
+        "defect_truth_and_snapshot_assignment_verified": false
+      },
+      "passed": true
+    },
+    {
+      "name": "unknown_id",
+      "value": {
+        "defects": [
+          {
+            "snapshot": "AB12",
+            "passage_id": "not-input",
+            "quote": "快照AB12存在2项偏移。"
+          }
+        ]
+      },
+      "expected_source_valid": false,
+      "actual": {
+        "json_complete": true,
+        "items": [
+          {
+            "snapshot": "AB12",
+            "snapshot_in_candidates": true,
+            "id_exists": false,
+            "quote_is_nonempty_continuous_original": false,
+            "source_valid": false
+          }
+        ],
+        "all_sources_valid": false,
+        "defect_truth_and_snapshot_assignment_verified": false
+      },
+      "passed": true
+    },
+    {
+      "name": "unknown_snapshot",
+      "value": {
+        "defects": [
+          {
+            "snapshot": "ZZ99",
+            "passage_id": "self-id",
+            "quote": "快照AB12存在2项偏移。"
+          }
+        ]
+      },
+      "expected_source_valid": false,
+      "actual": {
+        "json_complete": true,
+        "items": [
+          {
+            "snapshot": "ZZ99",
+            "snapshot_in_candidates": false,
+            "id_exists": true,
+            "quote_is_nonempty_continuous_original": true,
+            "source_valid": false
+          }
+        ],
+        "all_sources_valid": false,
+        "defect_truth_and_snapshot_assignment_verified": false
+      },
+      "passed": true
+    },
+    {
+      "name": "rewritten_quote",
+      "value": {
+        "defects": [
+          {
+            "snapshot": "AB12",
+            "passage_id": "self-id",
+            "quote": "AB12有2项错误。"
+          }
+        ]
+      },
+      "expected_source_valid": false,
+      "actual": {
+        "json_complete": true,
+        "items": [
+          {
+            "snapshot": "AB12",
+            "snapshot_in_candidates": true,
+            "id_exists": true,
+            "quote_is_nonempty_continuous_original": false,
+            "source_valid": false
+          }
+        ],
+        "all_sources_valid": false,
+        "defect_truth_and_snapshot_assignment_verified": false
+      },
+      "passed": true
+    },
+    {
+      "name": "noncontinuous_quote",
+      "value": {
+        "defects": [
+          {
+            "snapshot": "AB12",
+            "passage_id": "self-id",
+            "quote": "快照AB12偏移。"
+          }
+        ]
+      },
+      "expected_source_valid": false,
+      "actual": {
+        "json_complete": true,
+        "items": [
+          {
+            "snapshot": "AB12",
+            "snapshot_in_candidates": true,
+            "id_exists": true,
+            "quote_is_nonempty_continuous_original": false,
+            "source_valid": false
+          }
+        ],
+        "all_sources_valid": false,
+        "defect_truth_and_snapshot_assignment_verified": false
+      },
+      "passed": true
+    },
+    {
+      "name": "empty_quote",
+      "value": {
+        "defects": [
+          {
+            "snapshot": "AB12",
+            "passage_id": "self-id",
+            "quote": ""
+          }
+        ]
+      },
+      "expected_source_valid": false,
+      "actual": {
+        "json_complete": true,
+        "items": [
+          {
+            "snapshot": "AB12",
+            "snapshot_in_candidates": true,
+            "id_exists": true,
+            "quote_is_nonempty_continuous_original": false,
+            "source_valid": false
+          }
+        ],
+        "all_sources_valid": false,
+        "defect_truth_and_snapshot_assignment_verified": false
+      },
+      "passed": true
+    },
+    {
+      "name": "empty_defects",
+      "value": {
+        "defects": []
+      },
+      "expected_source_valid": true,
+      "actual": {
+        "json_complete": true,
+        "items": [],
+        "all_sources_valid": true,
+        "defect_truth_and_snapshot_assignment_verified": false
+      },
+      "passed": true
+    },
+    {
+      "name": "qualification_not_allowed",
+      "value": {
+        "defects": [],
+        "eligibility": "eligible"
+      },
+      "expected_source_valid": false,
+      "actual": {
+        "json_complete": false,
+        "error": "缺失或多余字段",
+        "defect_truth_and_snapshot_assignment_verified": false
+      },
+      "passed": true
+    }
+  ],
+  "source_check_reused": "基础/tests/evidence_first_candidate.py:inspect_output",
+  "semantic_limit": "数量零或否定句摘录也可能通过来源检查，不据此判存在缺陷；全部调用后另行原文复核。"
+}

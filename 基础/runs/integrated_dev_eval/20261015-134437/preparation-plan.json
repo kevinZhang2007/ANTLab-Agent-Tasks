@@ -1,0 +1,24 @@
+{
+  "saved_at": "2026-10-15T13:44:37.535122+08:00",
+  "kind": "post_evaluation_full_R0_repeat_not_blind",
+  "main_tasks": 12,
+  "maximum_generations": 24,
+  "previous_cumulative": 372,
+  "cancelled_unexecuted_experiment": "取消恢复首次版本、比较呈现方式；本轮清单不包含该实验，旧文件不删改。",
+  "cohorts": "D01—D04 R0完整流程后，若无技术故障继续T01—T08 R0，单一冻结、同一配置，不因开发质量调参。",
+  "plan": "重新定位、验证ID、直接关联、原输入相对顺序回答；引用证明不改答案；比例计算建议可改答，单独保存且优先级固定。",
+  "hypothesis": "完整新定位链下，有限证明能否改善完整引用，且不为错误或未知答案派生成功。",
+  "competing_explanations": [
+    "定位/关联漏证会阻断证明。",
+    "证据齐全仍可能算错或拒答；系统引用组装不等于模型推理改善。"
+  ],
+  "isolation": "生成链保留原scope_first_occurrences；证明器通过仅导入名不同的proof_scope_occurrences/proof_snapshot_checker隔离，验证非导入AST完全一致。",
+  "material_policy": "事实及派生引用只来自最终回答模型输入；其余完整原始可见资料只做实体、范围、唯一性审计，分开保存。",
+  "prediction": "失败/unknown/不适用保留原结果；引用证明不改answer，只有比例证明成立才允许单独计算新答；不预设两组成功数。",
+  "stop": "离线失败阻断加载；新技术错误立即保存停止；质量失败不重试；每题最多2次生成，共24次。",
+  "evaluate_after_all_requests": true,
+  "denominators": {
+    "development": 4,
+    "evaluation_repeat": 8
+  }
+}

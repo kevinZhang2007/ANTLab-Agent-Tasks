@@ -1,0 +1,1996 @@
+{
+  "checked_at": "2026-10-14T13:52:00.273563+08:00",
+  "passed": true,
+  "items": [
+    {
+      "sample": "同类型直接指称",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "甲项目R2版本批次AB12记录数据。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的复核补页：规则。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": "sample-0",
+          "added": true,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的复核补页：规则。",
+                "start": 0,
+                "end": 15
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "版本批次",
+              "code": "AB12",
+              "start": 5,
+              "end": 13,
+              "code_start": 9,
+              "code_end": 13,
+              "statement": {
+                "text": "甲项目R2版本批次AB12记录数据。",
+                "start": 0,
+                "end": 18
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 13,
+                "end": 15
+              }
+            }
+          ],
+          "reason": "unique_reliable_direct_reference",
+          "object_labels_equal": true,
+          "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+        }
+      ],
+      "expected_ids": [
+        "sample-0",
+        "sample-1"
+      ],
+      "actual_ids": [
+        "sample-0",
+        "sample-1"
+      ]
+    },
+    {
+      "sample": "类型不同但唯一直接指称",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "甲项目R2版本核验表AB12记录数据。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的复核补页：规则。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": "sample-0",
+          "added": true,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的复核补页：规则。",
+                "start": 0,
+                "end": 15
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "版本核验表",
+              "code": "AB12",
+              "start": 5,
+              "end": 14,
+              "code_start": 10,
+              "code_end": 14,
+              "statement": {
+                "text": "甲项目R2版本核验表AB12记录数据。",
+                "start": 0,
+                "end": 19
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 14,
+                "end": 16
+              }
+            }
+          ],
+          "reason": "unique_reliable_direct_reference",
+          "object_labels_equal": false,
+          "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+        }
+      ],
+      "expected_ids": [
+        "sample-0",
+        "sample-1"
+      ],
+      "actual_ids": [
+        "sample-0",
+        "sample-1"
+      ]
+    },
+    {
+      "sample": "通用其他业务对象",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "甲项目R2版本预算审计表ZX19记录数据。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "巡检组ZX19的补充说明：规则。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": "sample-0",
+          "added": true,
+          "reference_evidence": [
+            {
+              "object_type": "group",
+              "object_name": "巡检组",
+              "raw_label": "巡检组",
+              "code": "ZX19",
+              "start": 0,
+              "end": 7,
+              "code_start": 3,
+              "code_end": 7,
+              "statement": {
+                "text": "巡检组ZX19的补充说明：规则。",
+                "start": 0,
+                "end": 16
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "预算审计表",
+              "raw_label": "版本预算审计表",
+              "code": "ZX19",
+              "start": 5,
+              "end": 16,
+              "code_start": 12,
+              "code_end": 16,
+              "statement": {
+                "text": "甲项目R2版本预算审计表ZX19记录数据。",
+                "start": 0,
+                "end": 21
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 16,
+                "end": 18
+              }
+            }
+          ],
+          "reason": "unique_reliable_direct_reference",
+          "object_labels_equal": false,
+          "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+        }
+      ],
+      "expected_ids": [
+        "sample-0",
+        "sample-1"
+      ],
+      "actual_ids": [
+        "sample-0",
+        "sample-1"
+      ]
+    },
+    {
+      "sample": "完整带后缀编号",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "甲项目R2版本预算表ZX19-2记录数据。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次ZX19-2的补页：规则。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": "sample-0",
+          "added": true,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "ZX19-2",
+              "start": 0,
+              "end": 8,
+              "code_start": 2,
+              "code_end": 8,
+              "statement": {
+                "text": "批次ZX19-2的补页：规则。",
+                "start": 0,
+                "end": 15
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "预算表",
+              "raw_label": "版本预算表",
+              "code": "ZX19-2",
+              "start": 5,
+              "end": 16,
+              "code_start": 10,
+              "code_end": 16,
+              "statement": {
+                "text": "甲项目R2版本预算表ZX19-2记录数据。",
+                "start": 0,
+                "end": 21
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 16,
+                "end": 18
+              }
+            }
+          ],
+          "reason": "unique_reliable_direct_reference",
+          "object_labels_equal": false,
+          "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+        }
+      ],
+      "expected_ids": [
+        "sample-0",
+        "sample-1"
+      ],
+      "actual_ids": [
+        "sample-0",
+        "sample-1"
+      ]
+    },
+    {
+      "sample": "编号前缀不同",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录数据。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB120的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB120",
+              "start": 0,
+              "end": 7,
+              "code_start": 2,
+              "code_end": 7,
+              "statement": {
+                "text": "批次AB120的补页。",
+                "start": 0,
+                "end": 11
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "zero_reliable_targets"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "编号后缀不同",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12-1记录数据。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12-2的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12-2",
+              "start": 0,
+              "end": 8,
+              "code_start": 2,
+              "code_end": 8,
+              "statement": {
+                "text": "批次AB12-2的补页。",
+                "start": 0,
+                "end": 12
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "zero_reliable_targets"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "同编号不同对象",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录数据。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "资源表AB12记录另一份数据。"
+        },
+        {
+          "id": "sample-2",
+          "source": "same/2",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-2",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0",
+            "sample-1"
+          ],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "multiple_reliable_targets"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "同段多个对象",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录数据；资源表AB12记录另一份数据。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "核验表",
+              "code": "AB12",
+              "start": 0,
+              "end": 7,
+              "code_start": 3,
+              "code_end": 7,
+              "statement": {
+                "text": "核验表AB12记录数据；",
+                "start": 0,
+                "end": 12
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 7,
+                "end": 9
+              }
+            },
+            {
+              "object_type": "table",
+              "object_name": "资源表",
+              "raw_label": "资源表",
+              "code": "AB12",
+              "start": 12,
+              "end": 19,
+              "code_start": 15,
+              "code_end": 19,
+              "statement": {
+                "text": "资源表AB12记录另一份数据。",
+                "start": 12,
+                "end": 27
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 19,
+                "end": 21
+              }
+            }
+          ],
+          "reason": "multiple_main_objects"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "跨项目复用",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "甲项目R2版本核验表AB12记录。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "乙项目R2版本核验表AB12记录。"
+        },
+        {
+          "id": "sample-2",
+          "source": "same/2",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-2",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0",
+            "sample-1"
+          ],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "multiple_reliable_targets"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "多个相同范围主段",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "甲项目R2版本批次AB12记录一。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "甲项目R2版本批次AB12记录二。"
+        },
+        {
+          "id": "sample-2",
+          "source": "same/2",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-2",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0",
+            "sample-1"
+          ],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "multiple_reliable_targets"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "普通设备型号",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "设备型号AB12记录温度。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "zero_reliable_targets"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "普通编号提及",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "这里提到AB12，没有业务对象声明。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "zero_reliable_targets"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "引用不是主声明",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "本段参考核验表AB12记录的数据。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "zero_reliable_targets"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "对象提及缺声明谓词",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "本段仅提及核验表AB12。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "zero_reliable_targets"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "版本冲突",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "甲项目R2版本核验表AB12记录。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "甲项目R3版本批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "版本批次",
+              "code": "AB12",
+              "start": 5,
+              "end": 13,
+              "code_start": 9,
+              "code_end": 13,
+              "statement": {
+                "text": "甲项目R3版本批次AB12的补页。",
+                "start": 0,
+                "end": 17
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "版本核验表",
+              "code": "AB12",
+              "start": 5,
+              "end": 14,
+              "code_start": 10,
+              "code_end": 14,
+              "statement": {
+                "text": "甲项目R2版本核验表AB12记录。",
+                "start": 0,
+                "end": 17
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 14,
+                "end": 16
+              }
+            }
+          ],
+          "reason": "scope_or_namespace_conflict"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "项目冲突",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "甲项目R2版本核验表AB12记录。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "乙项目R2版本批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "版本批次",
+              "code": "AB12",
+              "start": 5,
+              "end": 13,
+              "code_start": 9,
+              "code_end": 13,
+              "statement": {
+                "text": "乙项目R2版本批次AB12的补页。",
+                "start": 0,
+                "end": 17
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "版本核验表",
+              "code": "AB12",
+              "start": 5,
+              "end": 14,
+              "code_start": 10,
+              "code_end": 14,
+              "statement": {
+                "text": "甲项目R2版本核验表AB12记录。",
+                "start": 0,
+                "end": 17
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 14,
+                "end": 16
+              }
+            }
+          ],
+          "reason": "scope_or_namespace_conflict"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "日期冲突",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "2027-01核验表AB12记录。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "2027-02批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 7,
+              "end": 13,
+              "code_start": 9,
+              "code_end": 13,
+              "statement": {
+                "text": "2027-02批次AB12的补页。",
+                "start": 0,
+                "end": 17
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "核验表",
+              "code": "AB12",
+              "start": 7,
+              "end": 14,
+              "code_start": 10,
+              "code_end": 14,
+              "statement": {
+                "text": "2027-01核验表AB12记录。",
+                "start": 0,
+                "end": 17
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 14,
+                "end": 16
+              }
+            }
+          ],
+          "reason": "scope_or_namespace_conflict"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "命名空间冲突",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录。命名空间：业务。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页。命名空间：设备。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "核验表",
+              "code": "AB12",
+              "start": 0,
+              "end": 7,
+              "code_start": 3,
+              "code_end": 7,
+              "statement": {
+                "text": "核验表AB12记录。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 7,
+                "end": 9
+              }
+            }
+          ],
+          "reason": "scope_or_namespace_conflict"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "命名空间一致",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录。编号域：业务。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页。编号域：业务。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": "sample-0",
+          "added": true,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "核验表",
+              "code": "AB12",
+              "start": 0,
+              "end": 7,
+              "code_start": 3,
+              "code_end": 7,
+              "statement": {
+                "text": "核验表AB12记录。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 7,
+                "end": 9
+              }
+            }
+          ],
+          "reason": "unique_reliable_direct_reference",
+          "object_labels_equal": false,
+          "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+        }
+      ],
+      "expected_ids": [
+        "sample-0",
+        "sample-1"
+      ],
+      "actual_ids": [
+        "sample-0",
+        "sample-1"
+      ]
+    },
+    {
+      "sample": "命名空间有多个值",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录。命名空间：业务。命名空间：设备。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "核验表",
+              "code": "AB12",
+              "start": 0,
+              "end": 7,
+              "code_start": 3,
+              "code_end": 7,
+              "statement": {
+                "text": "核验表AB12记录。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 7,
+                "end": 9
+              }
+            }
+          ],
+          "reason": "multiple_scopes_or_namespaces"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "明确不是同一对象",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页：该编号是另一业务对象。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页：该编号是另一业务对象。",
+                "start": 0,
+                "end": 21
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "explicit_relation_conflict",
+          "conflict_evidence": [
+            "另一业务对象"
+          ]
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "明确不对应主对象",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页：不是该主对象。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页：不是该主对象。",
+                "start": 0,
+                "end": 17
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "explicit_relation_conflict",
+          "conflict_evidence": [
+            "不是该主对象"
+          ]
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "无直接补充指称",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "补充说明：仅提及批次AB12。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "no_direct_business_reference"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "多个补充对象",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页与批次CD34的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页与批次CD34的补页。",
+                "start": 0,
+                "end": 20
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            },
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "的补页与批次",
+              "code": "CD34",
+              "start": 6,
+              "end": 16,
+              "code_start": 12,
+              "code_end": 16,
+              "statement": {
+                "text": "批次AB12的补页与批次CD34的补页。",
+                "start": 0,
+                "end": 20
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "multiple_reference_objects"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "多个主范围",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "甲项目R2版本核验表AB12记录，另列R3版本。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "版本核验表",
+              "code": "AB12",
+              "start": 5,
+              "end": 14,
+              "code_start": 10,
+              "code_end": 14,
+              "statement": {
+                "text": "甲项目R2版本核验表AB12记录，另列R3版本。",
+                "start": 0,
+                "end": 24
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 14,
+                "end": 16
+              }
+            }
+          ],
+          "reason": "multiple_scopes_or_namespaces"
+        }
+      ],
+      "expected_ids": [
+        "sample-0"
+      ],
+      "actual_ids": [
+        "sample-0"
+      ]
+    },
+    {
+      "sample": "字段缺失仍未知",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "甲项目R2版本2027-01核验表AB12记录。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": "sample-0",
+          "added": true,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "核验表",
+              "code": "AB12",
+              "start": 14,
+              "end": 21,
+              "code_start": 17,
+              "code_end": 21,
+              "statement": {
+                "text": "甲项目R2版本2027-01核验表AB12记录。",
+                "start": 0,
+                "end": 24
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 21,
+                "end": 23
+              }
+            }
+          ],
+          "reason": "unique_reliable_direct_reference",
+          "object_labels_equal": false,
+          "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+        }
+      ],
+      "expected_ids": [
+        "sample-0",
+        "sample-1"
+      ],
+      "actual_ids": [
+        "sample-0",
+        "sample-1"
+      ]
+    },
+    {
+      "sample": "禁止多跳",
+      "passages": [
+        {
+          "id": "sample-0",
+          "source": "same/0",
+          "text": "核验表AB12记录。"
+        },
+        {
+          "id": "sample-1",
+          "source": "same/1",
+          "text": "批次AB12的补页，另提到CD34。"
+        },
+        {
+          "id": "sample-2",
+          "source": "same/2",
+          "text": "批次CD34的补页。"
+        }
+      ],
+      "trace": [
+        {
+          "supplement_id": "sample-1",
+          "target_id": "sample-0",
+          "added": true,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "AB12",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次AB12的补页，另提到CD34。",
+                "start": 0,
+                "end": 18
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "sample-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "核验表",
+              "raw_label": "核验表",
+              "code": "AB12",
+              "start": 0,
+              "end": 7,
+              "code_start": 3,
+              "code_end": 7,
+              "statement": {
+                "text": "核验表AB12记录。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "记录",
+                "start": 7,
+                "end": 9
+              }
+            }
+          ],
+          "reason": "unique_reliable_direct_reference",
+          "object_labels_equal": false,
+          "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+        },
+        {
+          "supplement_id": "sample-2",
+          "target_id": null,
+          "added": false,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "CD34",
+              "start": 0,
+              "end": 6,
+              "code_start": 2,
+              "code_end": 6,
+              "statement": {
+                "text": "批次CD34的补页。",
+                "start": 0,
+                "end": 10
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [],
+          "unknown_scope_fields": [],
+          "semantic_support_verified": false,
+          "reason": "zero_reliable_targets"
+        }
+      ],
+      "expected_ids": [
+        "sample-0",
+        "sample-1"
+      ],
+      "actual_ids": [
+        "sample-0",
+        "sample-1"
+      ]
+    }
+  ],
+  "shuffle_remap_trials": 108,
+  "generation_calls": 0,
+  "misassociation_found": false
+}

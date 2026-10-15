@@ -1,0 +1,109 @@
+{
+  "recorded_at": "2026-10-14T13:35:36.888806+08:00",
+  "status": "designed_before_implementation_and_generation",
+  "post_evaluation_mechanism_comparison": true,
+  "source": "基础/runs/formal_diagnosis/round2/20261014-133019/association-audit.json",
+  "hypothesis": "增加具有声明语境的业务对象标识提取，能消除主段编号未被发现的机制缺口；只有可验证桥接才补跨类型资料。",
+  "competing_explanations": [
+    "更多标识不等于同一对象，类型或编号命名空间复用可能制造误关联。",
+    "定位选择、回答计算或引用遗漏仍可能导致失败，输入覆盖提高不等于严格成功。"
+  ],
+  "declaration_rule": "只识别通用业务对象后缀：表、清单、集、评审、组，以及原批次/主测/组代号语境；记录对象类型、label、编号、声明句及字符位置。需要正文中的记录/显示/固定/列明等声明谓词，不将任意英数词当对象。",
+  "cross_type_rule": "编号相同不是类型等同。补页必须有明确复核/补充指称；跨类型还须同句明确对应目标对象声明，例如对应核验表AB12，或明确称为目标对象的补页。没有可核验桥接则拒绝。",
+  "safety": [
+    "在全部当前输入查找潜在主段，多个主段拒绝，不只检查选中段。",
+    "多范围、多对象、明示范围冲突拒绝；缺失字段保留unknown。",
+    "仅以原始定位种子补直接页，不多跳、不用source目录，不修改原段落。"
+  ],
+  "prediction": "提取器预计能识别先前漏掉的业务编号；本轮原文七组均为批次补页跨其他对象类型，若无明确类型桥接，预计仍保留放弃，旧新最终输入可能相同。不同结果不倒推修改规则。",
+  "source_selection": "第二轮八条improved实际选择，只重放已有选择；不重新定位。",
+  "generation_limit": 16,
+  "model": "Qwen3-0.6B-Q8_0",
+  "context": 4096,
+  "answer_budget": 256,
+  "order": [
+    {
+      "sequence": 1,
+      "case_id": "T01",
+      "variant": "old"
+    },
+    {
+      "sequence": 2,
+      "case_id": "T01",
+      "variant": "new"
+    },
+    {
+      "sequence": 3,
+      "case_id": "T02",
+      "variant": "new"
+    },
+    {
+      "sequence": 4,
+      "case_id": "T02",
+      "variant": "old"
+    },
+    {
+      "sequence": 5,
+      "case_id": "T03",
+      "variant": "old"
+    },
+    {
+      "sequence": 6,
+      "case_id": "T03",
+      "variant": "new"
+    },
+    {
+      "sequence": 7,
+      "case_id": "T04",
+      "variant": "new"
+    },
+    {
+      "sequence": 8,
+      "case_id": "T04",
+      "variant": "old"
+    },
+    {
+      "sequence": 9,
+      "case_id": "T05",
+      "variant": "old"
+    },
+    {
+      "sequence": 10,
+      "case_id": "T05",
+      "variant": "new"
+    },
+    {
+      "sequence": 11,
+      "case_id": "T06",
+      "variant": "new"
+    },
+    {
+      "sequence": 12,
+      "case_id": "T06",
+      "variant": "old"
+    },
+    {
+      "sequence": 13,
+      "case_id": "T07",
+      "variant": "old"
+    },
+    {
+      "sequence": 14,
+      "case_id": "T07",
+      "variant": "new"
+    },
+    {
+      "sequence": 15,
+      "case_id": "T08",
+      "variant": "new"
+    },
+    {
+      "sequence": 16,
+      "case_id": "T08",
+      "variant": "old"
+    }
+  ],
+  "evaluation": "生成全部结束后沿用第二轮评价口径。主任务答案依据完整原输入；引用核对最终实际输入；格式、输入必要覆盖、答案、语义、支持、无关引用、严格成功分别记录。",
+  "selection_rule": "严格成功优先，其次指定答法正确；同分保留旧方案。",
+  "stop": "离线发现误关联或无法解释变化、容量超限、HTTP/超时/服务或参数错误保存后停止；质量错误不重试。加载前2 GiB，请求前1 GiB，连续3个2秒样本低于1 GiB停止自有服务。"
+}

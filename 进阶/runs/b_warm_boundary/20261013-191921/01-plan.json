@@ -1,0 +1,80 @@
+{
+  "planned_at": "2026-10-13T19:19:21.316239+08:00",
+  "code_base_commit": "78b97898e713a3b8ec2cdffeec8c6758c4bcbbc9",
+  "run_kind": "offline_replay",
+  "new_model_calls": 0,
+  "services": {
+    "original": {
+      "engine": "challenge:Engine",
+      "port": 8876
+    },
+    "fixed": {
+      "engine": "no_cache_engine:Engine",
+      "port": 8877
+    }
+  },
+  "sequence": [
+    {
+      "case_id": "R01",
+      "reset": true,
+      "override": {},
+      "role": "preheat_unknown_document"
+    },
+    {
+      "case_id": "R01",
+      "reset": false,
+      "override": {
+        "doc_ids": [
+          "missing"
+        ]
+      },
+      "role": "unknown_document"
+    },
+    {
+      "case_id": "R01",
+      "reset": true,
+      "override": {},
+      "role": "independent_preheat_unknown_snapshot"
+    },
+    {
+      "case_id": "R01",
+      "reset": false,
+      "override": {
+        "snapshot": "missing"
+      },
+      "role": "unknown_snapshot"
+    }
+  ],
+  "predictions": [
+    "原版query缓存忽略scope；两项暖未知范围预计返回alpha/v1的旧b01，原定位valid和supported也可能沿用。",
+    "修复版重新检索，未知范围预计证据为空；仍返回固定draft及ok，不把它称为合格未知范围处理。",
+    "展示层scope_status应为invalid_scope、locator_status=invalid、support_status=not_checked；原版旧证据应明确显示范围冲突。"
+  ],
+  "pass_criteria": [
+    "原Engine原始响应保留且与同request_id日志一致。",
+    "修复版未知范围不复用旧证据。",
+    "页面不将旧范围证据标为有效、不暗示语义已支持。",
+    "页面截图、提交正文、响应及日志request_id能闭环。"
+  ],
+  "execution": [
+    "直接HTTP各4次，共8次；页面同序列各4次，共8次。两组分别重置预热。",
+    "原/修复同query、corpus、固定R01 draft；只改变doc_ids或snapshot。",
+    "第二项边界前独立reset=true，不能沿用第一项缓存作为预热。"
+  ],
+  "stop_rules": [
+    "技术请求失败保存后停止；质量缺陷不重试、不改逻辑。",
+    "结束停止本轮服务。"
+  ],
+  "limits": [
+    "不做检索、语义及Engine未知范围处理修复。",
+    "HTTP、页面均是offline_replay；页面请求也是HTTP请求，计数不重复相加。",
+    "不修改三个说明文档或基础冻结材料。"
+  ],
+  "code_hashes": {
+    "challenge.py": "b84a035957ac457fb803c82f141c8684ccb5dbe9ff34c45bbb199ff613094ad1",
+    "no_cache_engine.py": "ab5852c20284e4f17097a1a9d7ac5343cf9dfea107e0f430c5ccda253f38d87a",
+    "server_review.py": "ee1a5bc3d573c3279075d479b88fb4d348b5b788c8e9a0482bd8d78eee33075b",
+    "review.html": "28a6dca89755ccb2a5f003ac793b199394b2dda9a811733299251ba980bd2459",
+    "data.json": "f3ba571d72e2836221ed3026ac764d8e0da569fc5b8bd895f702cbd2896296a4"
+  }
+}

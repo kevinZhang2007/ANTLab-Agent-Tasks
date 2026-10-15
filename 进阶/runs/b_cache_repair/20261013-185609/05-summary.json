@@ -1,0 +1,292 @@
+{
+  "completed_at": "2026-10-13T18:56:09.940952+08:00",
+  "planned_evaluations": 34,
+  "executed_evaluations": 34,
+  "stopped_on_error": false,
+  "unique_request_ids": 34,
+  "scenarios": [
+    {
+      "scenario": "switch_snapshot",
+      "original_target_order": 2,
+      "fixed_target_order": 5,
+      "original_answer": "请求超时阈值为30秒。",
+      "fixed_answer": "请求超时阈值为12秒。",
+      "original_cache_hit": true,
+      "fixed_cache_hit": false,
+      "original_evidence_ids": [
+        "b01"
+      ],
+      "fixed_evidence_ids": [
+        "b02"
+      ],
+      "original_retrieval_success": false,
+      "fixed_retrieval_success": true,
+      "fixed_checks": {
+        "response_structure": true,
+        "evidence_in_scope": true,
+        "evidence_retrieval_success": true,
+        "expected_evidence_ids": [
+          "b02"
+        ],
+        "current_draft_used": true,
+        "evidence_matches_current_corpus": true,
+        "locator_consistent_with_actual_evidence": true,
+        "locator_valid": true,
+        "request_echo_matches": true,
+        "fixed_cache_disabled": true,
+        "semantic_support_independently_checked": false
+      },
+      "prediction": "修复后目标结果与冷R02一致，不复用v1；原Engine可能返回旧缓存。",
+      "cache_pollution_eliminated": true,
+      "original_history_independent": false,
+      "full_answer_verified": "not_checked_semantically"
+    },
+    {
+      "scenario": "switch_document",
+      "original_target_order": 8,
+      "fixed_target_order": 11,
+      "original_answer": "请求超时阈值为30秒。",
+      "fixed_answer": "实验B超时为5秒。",
+      "original_cache_hit": true,
+      "fixed_cache_hit": false,
+      "original_evidence_ids": [
+        "b01"
+      ],
+      "fixed_evidence_ids": [],
+      "original_retrieval_success": false,
+      "fixed_retrieval_success": false,
+      "fixed_checks": {
+        "response_structure": true,
+        "evidence_in_scope": true,
+        "evidence_retrieval_success": false,
+        "expected_evidence_ids": [
+          "b03"
+        ],
+        "current_draft_used": true,
+        "evidence_matches_current_corpus": true,
+        "locator_consistent_with_actual_evidence": true,
+        "locator_valid": false,
+        "request_echo_matches": true,
+        "fixed_cache_disabled": true,
+        "semantic_support_independently_checked": false
+      },
+      "prediction": "修复后不返回alpha旧缓存且与冷beta一致；beta冷漏证预计仍存在，不能算完整正确。",
+      "cache_pollution_eliminated": true,
+      "original_history_independent": false,
+      "full_answer_verified": false
+    },
+    {
+      "scenario": "normal_cold",
+      "original_target_order": 13,
+      "fixed_target_order": 14,
+      "original_answer": "文档编号为beta。",
+      "fixed_answer": "文档编号为beta。",
+      "original_cache_hit": false,
+      "fixed_cache_hit": false,
+      "original_evidence_ids": [
+        "b05"
+      ],
+      "fixed_evidence_ids": [
+        "b05"
+      ],
+      "original_retrieval_success": true,
+      "fixed_retrieval_success": true,
+      "fixed_checks": {
+        "response_structure": true,
+        "evidence_in_scope": true,
+        "evidence_retrieval_success": true,
+        "expected_evidence_ids": [
+          "b05"
+        ],
+        "current_draft_used": true,
+        "evidence_matches_current_corpus": true,
+        "locator_consistent_with_actual_evidence": true,
+        "locator_valid": true,
+        "request_echo_matches": true,
+        "fixed_cache_disabled": true,
+        "semantic_support_independently_checked": false
+      },
+      "prediction": "原/修复冷请求内容、范围、定位与结构相同，期望取到范围内元数据证据。",
+      "regression_passed": true
+    },
+    {
+      "scenario": "normal_repeat",
+      "original_target_order": 16,
+      "fixed_target_order": 18,
+      "original_answer": "请求超时阈值为30秒。",
+      "fixed_answer": "请求超时阈值为30秒。",
+      "original_cache_hit": true,
+      "fixed_cache_hit": false,
+      "original_evidence_ids": [
+        "b01"
+      ],
+      "fixed_evidence_ids": [
+        "b01"
+      ],
+      "original_retrieval_success": true,
+      "fixed_retrieval_success": true,
+      "fixed_checks": {
+        "response_structure": true,
+        "evidence_in_scope": true,
+        "evidence_retrieval_success": true,
+        "expected_evidence_ids": [
+          "b01"
+        ],
+        "current_draft_used": true,
+        "evidence_matches_current_corpus": true,
+        "locator_consistent_with_actual_evidence": true,
+        "locator_valid": true,
+        "request_echo_matches": true,
+        "fixed_cache_disabled": true,
+        "semantic_support_independently_checked": false
+      },
+      "prediction": "同范围重复内容保持一致；修复每次cache_hit=false，不能称缓存命中。request_id唯一。",
+      "regression_passed": true
+    },
+    {
+      "scenario": "equivalent_corpus_order",
+      "original_target_order": 20,
+      "fixed_target_order": 22,
+      "original_answer": "请求超时阈值为30秒。",
+      "fixed_answer": "请求超时阈值为12秒。",
+      "original_cache_hit": true,
+      "fixed_cache_hit": false,
+      "original_evidence_ids": [
+        "b01"
+      ],
+      "fixed_evidence_ids": [
+        "b02"
+      ],
+      "original_retrieval_success": false,
+      "fixed_retrieval_success": true,
+      "fixed_checks": {
+        "response_structure": true,
+        "evidence_in_scope": true,
+        "evidence_retrieval_success": true,
+        "expected_evidence_ids": [
+          "b02"
+        ],
+        "current_draft_used": true,
+        "evidence_matches_current_corpus": true,
+        "locator_consistent_with_actual_evidence": true,
+        "locator_valid": true,
+        "request_echo_matches": true,
+        "fixed_cache_disabled": true,
+        "semantic_support_independently_checked": false
+      },
+      "prediction": "只打乱corpus顺序，固定id并列规则；修复目标内容等价于原始顺序的修复R02。",
+      "equivalent_passed": true
+    },
+    {
+      "scenario": "equivalent_block_ids",
+      "original_target_order": 24,
+      "fixed_target_order": 26,
+      "original_answer": "请求超时阈值为30秒。",
+      "fixed_answer": "请求超时阈值为12秒。",
+      "original_cache_hit": true,
+      "fixed_cache_hit": false,
+      "original_evidence_ids": [
+        "block101"
+      ],
+      "fixed_evidence_ids": [
+        "block102"
+      ],
+      "original_retrieval_success": false,
+      "fixed_retrieval_success": true,
+      "fixed_checks": {
+        "response_structure": true,
+        "evidence_in_scope": true,
+        "evidence_retrieval_success": true,
+        "expected_evidence_ids": [
+          "block102"
+        ],
+        "current_draft_used": true,
+        "evidence_matches_current_corpus": true,
+        "locator_consistent_with_actual_evidence": true,
+        "locator_valid": true,
+        "request_echo_matches": true,
+        "fixed_cache_disabled": true,
+        "semantic_support_independently_checked": false
+      },
+      "prediction": "同步改块ID及draft引用；保留字典序以免改变并列规则，逆映射后修复结果与原ID修复R02一致。",
+      "equivalent_passed": true
+    },
+    {
+      "scenario": "boundary_draft_changed",
+      "original_target_order": 28,
+      "fixed_target_order": 30,
+      "original_answer": "请求超时阈值为30秒。",
+      "fixed_answer": "第一版客户端请求超时阈值为30秒。",
+      "original_cache_hit": true,
+      "fixed_cache_hit": false,
+      "original_evidence_ids": [
+        "b01"
+      ],
+      "fixed_evidence_ids": [
+        "b01"
+      ],
+      "original_retrieval_success": true,
+      "fixed_retrieval_success": true,
+      "fixed_checks": {
+        "response_structure": true,
+        "evidence_in_scope": true,
+        "evidence_retrieval_success": true,
+        "expected_evidence_ids": [
+          "b01"
+        ],
+        "current_draft_used": true,
+        "evidence_matches_current_corpus": true,
+        "locator_consistent_with_actual_evidence": true,
+        "locator_valid": true,
+        "request_echo_matches": true,
+        "fixed_cache_disabled": true,
+        "semantic_support_independently_checked": false
+      },
+      "prediction": "只变同scope固定draft的答案表述；修复使用新draft，原Engine可能复用旧响应。不是替换主故障draft凑通过。",
+      "boundary_passed": true
+    },
+    {
+      "scenario": "boundary_corpus_changed",
+      "original_target_order": 32,
+      "fixed_target_order": 34,
+      "original_answer": "请求超时阈值为30秒。",
+      "fixed_answer": "请求超时阈值为30秒。",
+      "original_cache_hit": true,
+      "fixed_cache_hit": false,
+      "original_evidence_ids": [
+        "b01"
+      ],
+      "fixed_evidence_ids": [
+        "b01"
+      ],
+      "original_retrieval_success": false,
+      "fixed_retrieval_success": true,
+      "fixed_checks": {
+        "response_structure": true,
+        "evidence_in_scope": true,
+        "evidence_retrieval_success": true,
+        "expected_evidence_ids": [
+          "b01"
+        ],
+        "current_draft_used": true,
+        "evidence_matches_current_corpus": true,
+        "locator_consistent_with_actual_evidence": true,
+        "locator_valid": true,
+        "request_echo_matches": true,
+        "fixed_cache_disabled": true,
+        "semantic_support_independently_checked": false
+      },
+      "prediction": "只更新同query/scope的证据正文；修复返回新原文，原Engine可能返回旧证据正文。draft不变。",
+      "boundary_passed": true
+    }
+  ],
+  "cache_fix_scope": "只移除缓存；保留空cache属性兼容reset，每个请求重新执行原逻辑。",
+  "remaining_failures": [
+    "beta冷请求仍漏证；与冷请求一致不是完整回答成功。",
+    "ID有效仍被原逻辑标supported，语义未修。",
+    "未知范围和页面闭环本轮未实现。"
+  ],
+  "timing_limit": "只记录原Engine和修复Engine的离线函数时间，不与基础模型比较；移除缓存可能增加重复请求开销，不声称保留缓存性能。",
+  "model_generations": 0,
+  "base_generation_count_unchanged": 124
+}

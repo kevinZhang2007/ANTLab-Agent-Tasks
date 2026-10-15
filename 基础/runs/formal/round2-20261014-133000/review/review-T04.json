@@ -1,0 +1,449 @@
+{
+  "reviewed_at": "2026-10-14T13:24:21.895302+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+  "basis": {
+    "case_id": "T04",
+    "question_scope": "南枝R9，2026-05核验表NZ95，按正式规则选流程；只输出流程名称。",
+    "scope": {
+      "project": "南枝",
+      "version": "R9",
+      "date": "2026-05",
+      "batch": "NZ95",
+      "metric": "先错误证据≤3，再在合格流程中最大化召回"
+    },
+    "required_evidence": [
+      {
+        "id": "P758661",
+        "quote": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。",
+        "role": "三个候选召回与错误数"
+      },
+      {
+        "id": "P660995",
+        "quote": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。",
+        "role": "资格约束及优化次序"
+      }
+    ],
+    "derivation": "甲错误6、丙错误5均超过3；乙错误2符合，只有乙进入召回比较，选择流程乙。",
+    "derived_answer": "流程乙",
+    "answer_form": "仅流程名称",
+    "excluded_evidence": [
+      {
+        "id": "P191263",
+        "reason": "上月探索"
+      },
+      {
+        "id": "P194167",
+        "reason": "迁移XQ57"
+      },
+      {
+        "id": "P688472",
+        "reason": "压力组"
+      },
+      {
+        "id": "P455277",
+        "reason": "R8旧版"
+      },
+      {
+        "id": "P208944",
+        "reason": "岫光项目同名流程"
+      }
+    ],
+    "ambiguities": [],
+    "limits": "流程乙可简写乙但是否指定名称完整需透明记录；K若缺规则不能仅凭召回最大或错误最少代替正式决策。",
+    "reviewed_at": "2026-10-13T13:35:19.917972+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+    "source": "基础/data/cases.json",
+    "source_sha256": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "derivation_kind": "评测后原文推导，非官方标准答案",
+    "model_answers_read_before_saving": false
+  },
+  "items": [
+    {
+      "case_id": "T04",
+      "condition": "R1",
+      "variant": "baseline",
+      "sequence": 1,
+      "main_task_id": "832f9705-0cc2-47b3-ba8f-86b4ad837bb0",
+      "end_to_end_seconds": 13.35838039999362,
+      "reviewed_at": "2026-10-14T13:24:21.895167+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P208944\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P208944"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P208944"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P758661",
+        "P208944",
+        "P455277",
+        "P688472",
+        "P191263",
+        "P660995",
+        "P194167"
+      ],
+      "final_input_ids": [
+        "P758661",
+        "P208944",
+        "P455277",
+        "P688472",
+        "P191263",
+        "P660995",
+        "P194167"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "text": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "text": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P208944",
+          "source": "模拟记录/T04/页5",
+          "text": "岫光项目R9版本在2026-05登记同名指标和批次XQ57，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "90fdec8c-2fe2-422f-9449-7c11c12c7cdf"
+      ],
+      "reasons": {
+        "answer_correct": "甲错误6、丙错误5均超过3；乙错误2符合，只有乙进入召回比较，选择流程乙。 原始answer='流程乙'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "甲错误6、丙错误5均超过3；乙错误2符合，只有乙进入召回比较，选择流程乙。 原始answer='流程乙'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P660995,P758661提供的数据或规则；本次引用P208944。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [
+          {
+            "id": "P208944",
+            "reason": "岫光项目同名流程"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T04",
+      "condition": "R0",
+      "variant": "improved",
+      "sequence": 3,
+      "main_task_id": "7c7fd094-4865-4405-8248-5b465ef809a4",
+      "end_to_end_seconds": 15.736382499919273,
+      "reviewed_at": "2026-10-14T13:24:21.895212+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P758661\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P758661"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P194167",
+        "P758661",
+        "P660995",
+        "P455277",
+        "P208944",
+        "P191263",
+        "P688472"
+      ],
+      "final_input_ids": [
+        "P758661"
+      ],
+      "necessary_input_coverage": false,
+      "final_stage_local_missing_evidence": true,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "text": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "text": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": false,
+          "actually_cited": false
+        }
+      ],
+      "run_ids": [
+        "2fafe963-c6bd-45f3-92e6-6b0613cf6a34",
+        "d4e0906b-2750-4f46-b028-f27db5436915"
+      ],
+      "reasons": {
+        "answer_correct": "甲错误6、丙错误5均超过3；乙错误2符合，只有乙进入召回比较，选择流程乙。 原始answer='流程乙'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "甲错误6、丙错误5均超过3；乙错误2符合，只有乙进入召回比较，选择流程乙。 原始answer='流程乙'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P660995,P758661提供的数据或规则；本次引用P758661。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T04",
+      "condition": "K",
+      "variant": "baseline",
+      "sequence": 4,
+      "main_task_id": "69312b7b-b098-4a1f-8782-c958a0977db2",
+      "end_to_end_seconds": 4.824557299958542,
+      "reviewed_at": "2026-10-14T13:24:21.895240+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P758661\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P758661"
+      ],
+      "answer_correct": "ambiguous",
+      "semantic_consistent": "ambiguous",
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": false,
+      "main_input_ids": [
+        "P758661",
+        "P194167"
+      ],
+      "final_input_ids": [
+        "P758661",
+        "P194167"
+      ],
+      "necessary_input_coverage": false,
+      "final_stage_local_missing_evidence": true,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "text": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "f6d16b0c-ca00-40b7-aab7-19c152127c04"
+      ],
+      "reasons": {
+        "answer_correct": "K缺NZ95资格门槛及正式选择次序。确定结果的事实与语义无法核验，不拿全文答案判K。",
+        "semantic_consistent": "K缺NZ95资格门槛及正式选择次序。确定结果的事实与语义无法核验，不拿全文答案判K。",
+        "necessary_coverage": "当前K缺关键来源，不以其他范围段落替代。",
+        "support_actual_answer": "可见引用不能推出确定answer；缺证应答合规另列，不与事实正确性合并。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T04",
+      "condition": "R2",
+      "variant": "baseline",
+      "sequence": 16,
+      "main_task_id": "9177d51a-997c-4e46-a666-fdd5c3a72215",
+      "end_to_end_seconds": 14.419632100034505,
+      "reviewed_at": "2026-10-14T13:24:21.895267+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P208944\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P208944"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P208944"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P194167",
+        "P660995",
+        "P208944",
+        "P758661",
+        "P688472",
+        "P455277",
+        "P191263"
+      ],
+      "final_input_ids": [
+        "P194167",
+        "P660995",
+        "P208944",
+        "P758661",
+        "P688472",
+        "P455277",
+        "P191263"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "text": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "text": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P208944",
+          "source": "模拟记录/T04/页5",
+          "text": "岫光项目R9版本在2026-05登记同名指标和批次XQ57，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "e10d16db-3d02-4a33-b346-1f3141ab84df"
+      ],
+      "reasons": {
+        "answer_correct": "甲错误6、丙错误5均超过3；乙错误2符合，只有乙进入召回比较，选择流程乙。 原始answer='流程乙'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "甲错误6、丙错误5均超过3；乙错误2符合，只有乙进入召回比较，选择流程乙。 原始answer='流程乙'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P660995,P758661提供的数据或规则；本次引用P208944。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [
+          {
+            "id": "P208944",
+            "reason": "岫光项目同名流程"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T04",
+      "condition": "R0",
+      "variant": "baseline",
+      "sequence": 38,
+      "main_task_id": "6cdd92f8-7d83-4282-beb0-6006ea879767",
+      "end_to_end_seconds": 14.30129269999452,
+      "reviewed_at": "2026-10-14T13:24:21.895292+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"流程乙\",\"citations\":[\"P758661\"]}",
+      "answer": "流程乙",
+      "citations": [
+        "P758661"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P194167",
+        "P758661",
+        "P660995",
+        "P455277",
+        "P208944",
+        "P191263",
+        "P688472"
+      ],
+      "final_input_ids": [
+        "P194167",
+        "P758661",
+        "P660995",
+        "P455277",
+        "P208944",
+        "P191263",
+        "P688472"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P758661",
+          "source": "模拟记录/T04/页3",
+          "text": "南枝项目R9版本在2026-05的记录：核验表NZ95记录流程甲召回17条证据、引入6条错误证据；流程乙召回16条、错误2条；流程丙召回19条、错误5条。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        },
+        {
+          "id": "P660995",
+          "source": "模拟记录/T04/页4",
+          "text": "批次NZ95的复核补页：NZ95的正式规则先要求错误证据不超过3条，再最大化召回；流程名称和调用次数不参与第一轮筛选。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        }
+      ],
+      "run_ids": [
+        "4aed2a8d-8fa2-42e3-b890-2fb3a0e22e70"
+      ],
+      "reasons": {
+        "answer_correct": "甲错误6、丙错误5均超过3；乙错误2符合，只有乙进入召回比较，选择流程乙。 原始answer='流程乙'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "甲错误6、丙错误5均超过3；乙错误2符合，只有乙进入召回比较，选择流程乙。 原始answer='流程乙'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P660995,P758661提供的数据或规则；本次引用P758661。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    }
+  ]
+}

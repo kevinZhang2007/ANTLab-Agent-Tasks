@@ -1,0 +1,29 @@
+--- 基础/runs/typed_identifier_enum_pairs/20261014-173249/run_typed_enum_pair.py
++++ 基础/runs/revised_identifier_enum_pairs/20261014-174818/run_revised_enum_pair.py
+@@ -32,7 +32,7 @@
+     '基础/tests/run_direct_reference_pairs.py','基础/tests/association_repair_candidate.py','基础/tests/run_formal_round2.py','基础/tests/general_candidate.py','基础/tests/answer_form_candidate.py',
+     '基础/tests/two_step_linked_candidate.py','基础/tests/two_step_candidate.py','基础/runs/improve/linked_r0/student-v2.py',
+     '基础/starter/student.py','基础/starter/provider.py']
+-source_names += [(folder/n).relative_to(repo).as_posix() for n in ['run_typed_enum_pair.py','typed_identifier_enum_candidate.py','body_identifier_enum_candidate.py','config.answer.json','eight-case-association-recompute.json']]
++source_names += [(folder/n).relative_to(repo).as_posix() for n in ['run_revised_enum_pair.py','typed_enum_role_revision.py','typed_identifier_enum_candidate.py','body_identifier_enum_candidate.py','config.answer.json','eight-case-association-recompute.json']]
+ source_hashes={n:sha(repo/n) for n in source_names}
+ (folder/'code-snapshot').mkdir(parents=True,exist_ok=True)
+ for name in source_names:
+@@ -91,7 +91,7 @@
+         row=inputs[job['case_id']];used=row[job['variant']+'_used_passages']
+         messages,conf,rule=generic.answer_request(row['question'],used,config)
+         if job['variant']=='new':
+-            from typed_identifier_enum_candidate import constrain_typed_identifiers as constrain
++            from typed_enum_role_revision import constrain_revised_roles as constrain
+         else:
+             from body_identifier_enum_candidate import constrain_body_identifiers as constrain
+         schema,rule=constrain(row['question'],used,conf['parameters']['response_format']['json_schema']['schema'])
+@@ -114,7 +114,7 @@
+             assert not pair,'相同请求不得重新生成'
+     for item in reused['items']:
+         assert sha(repo/item['record_path'])==item['record_sha256']
+-    write('freeze.json',{'saved_at':now(),'generation_calls_so_far':0,'frozen':True,'experiment_kind':'post_evaluation_typed_identifier_enum_pairs','design':design,'execution_plan':plan,'reused_results':reused,'order':plan['order'],
++    write('freeze.json',{'saved_at':now(),'generation_calls_so_far':0,'frozen':True,'experiment_kind':'post_evaluation_revised_typed_identifier_enum_pairs','design':design,'execution_plan':plan,'reused_results':reused,'order':plan['order'],
+         'config':config,'service_arguments':freeze['service_arguments'],'code_hashes':source_hashes,
+         'data_hashes':freeze['data_hashes'],'model':freeze['model'],'llama_cpp':freeze['llama_cpp'],
+         'actual_schemas':[{'case_id':j['case_id'],'variant':j['variant'],'response_format':j['body']['response_format']} for j in jobs],

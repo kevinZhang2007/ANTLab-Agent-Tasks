@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "properties": {
+    "verdict": {
+      "type": "string",
+      "enum": [
+        "supported",
+        "contradicted",
+        "insufficient"
+      ]
+    },
+    "citations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "verdict",
+    "citations",
+    "reason"
+  ],
+  "additionalProperties": false
+}

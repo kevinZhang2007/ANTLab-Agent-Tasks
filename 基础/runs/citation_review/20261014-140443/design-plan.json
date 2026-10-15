@@ -1,0 +1,53 @@
+{
+  "recorded_at": "2026-10-14T14:04:43.830621+08:00",
+  "status": "design_before_implementation_and_generation",
+  "kind": "post_evaluation_citation_only_postprocessing",
+  "source": "基础/runs/direct_reference_pairs/20261014-134901/",
+  "main_hypothesis": "在答案保持逐字不变时，独立引用复核可能补齐正确答案的必要来源并减少引用遗漏。",
+  "competing_explanations": [
+    "模型可能默认已有答案正确，给错误答案误报supported或用相关但不充分引用包装错答。",
+    "引用补齐不能修复答案的计算、范围、拒答或表达形式错误；理由也是模型输出，不是独立核验。"
+  ],
+  "generation_limit": 8,
+  "order": [
+    {
+      "sequence": 1,
+      "case_id": "T01"
+    },
+    {
+      "sequence": 2,
+      "case_id": "T02"
+    },
+    {
+      "sequence": 3,
+      "case_id": "T03"
+    },
+    {
+      "sequence": 4,
+      "case_id": "T04"
+    },
+    {
+      "sequence": 5,
+      "case_id": "T05"
+    },
+    {
+      "sequence": 6,
+      "case_id": "T06"
+    },
+    {
+      "sequence": 7,
+      "case_id": "T07"
+    },
+    {
+      "sequence": 8,
+      "case_id": "T08"
+    }
+  ],
+  "sampling": "当前0.6B、关闭思考、4096上下文、沿用全部采样及256预算。独立verdict/citations/reason Schema，不施加答案形式pattern。",
+  "prediction": "正确答案可能受益于引用补齐；错误答案仍应保留失败。出现supported误报单列，不能据此通过语义评价。",
+  "program_rule": "仅supported且结构与引用ID合法、不重复时替换citations；其他情况保留原answer/citations，另记未支持。supported空数组可结构合法，但不能算引用成功。答案绝不改写。",
+  "comparison": "旧侧历史复用，不是同步生成对照；不重新定位、关联或生成初始回答。",
+  "evaluation": "全部调用结束后按实际原文评价答案不变、必要引用覆盖、支持、无关引用、复核误报与严格成功；严格优先，同分保留原方案。",
+  "stop": "技术失败、容量超限或参数/哈希不符保存后停止；质量错误不重试。加载前2 GiB，请求前1 GiB，连续3个2秒样本低于1 GiB停止自有服务。",
+  "previous_cumulative": 276
+}

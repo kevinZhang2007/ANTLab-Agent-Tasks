@@ -1,0 +1,819 @@
+{
+  "saved_at": "2026-10-14T19:07:29.044133+08:00",
+  "status": "offline_only",
+  "original_implementation": "基础/runs/explicit_state_checker/20261014-185340",
+  "protected_hashes": {
+    "基础/runs/explicit_state_checker/20261014-185340/additional-negation-zero-boundary-audit.json": "7ef3176f9fac77e5ee50500a4ca48abd82ef17243d45b037e3ab24af61b9fc28",
+    "基础/runs/explicit_state_checker/20261014-185340/explicit_state_checker.py": "8cc027ce69aa730781d6b93d0eca350bc34ca0dd776209ddb2216074d5d4a4a6",
+    "基础/runs/explicit_state_checker/20261014-185340/final-audit.json": "c044ebe597e56f7d24e936cf34d649dbae6041c6dd798d089ee15f7ddb9a280e",
+    "基础/runs/explicit_state_checker/20261014-185340/offline-gate-check.json": "c96f66b171b40474a366df7721973755cf8e18a1711687c7a73c98f2849fd5fd",
+    "基础/runs/explicit_state_checker/20261014-185340/offline_gate.py": "27a39e0e9a295c69b98136a5351cfdfc01e0d534f3c592d1aa3b1c67b092844c",
+    "基础/runs/explicit_state_checker/20261014-185340/protected-hashes.json": "5341158583466813c79e33ac7f1a297d3a23b617a34c9d116fd33d7a3db4f3c2",
+    "基础/runs/explicit_state_checker/20261014-185340/ready-to-run.json": "8085614dee05432a78374ee1190dfbb89a96a497fbad2fdb81d6247661e1ba97",
+    "基础/runs/explicit_state_checker/20261014-185340/scheduler-incident-and-gate.json": "3705bd0661464852395b4a8fe499d37ae209ec037c1272010bab7fc84eebae06",
+    "基础/runs/explicit_state_checker/20261014-185340/scope-and-risk.json": "c58946e951c8043f04c6e17880edbe62ea5451dc1de62fec43920df76b400992",
+    "基础/runs/explicit_state_checker/20261014-185340/six-clause-review.json": "d64cac74a73ddc9c81b8d892f28a66b412833ce21cf4674adaae6b9d41f0213f",
+    "基础/runs/explicit_state_checker/20261014-185340/six-clause-states.json": "00839ddc14c17233b54f5f42efdc10231e8730c3048012837648713ace7c8306",
+    "基础/runs/explicit_state_checker/20261014-185340/synthetic-check.json": "ac992a4ca4e26268fd010756e1c166a995cbb53b49a4050182b1a289d6aa0520",
+    "基础/runs/explicit_state_checker/20261014-185340/test-progress.json": "1385d0da8034dbe6af53a6bb8a98ae21d1d94f8b74c680c1be317597a31fe461",
+    "report.md": "d48c56a00f2c56976781387e7e9999a3d32a399ad452d41952937fecc19c575f",
+    "README.md": "ecfee72108503299305d3e01fc14f457988dd93c47391f74352942e4ac2ffbb0",
+    "基础/开发记录.md": "da6b6d2d384664b35f99cbdc6451c83368290aa7fe0746edddc6c44981bd4ac7",
+    "基础/starter/student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678"
+  },
+  "classes": [
+    "positive_presence",
+    "explicit_negation",
+    "explicit_zero_quantity",
+    "unparsed"
+  ],
+  "mechanism": "先按标点及并列/转折边界分检查项，再解析前后否定及前后计数。作用范围限于本项。复合谓词、精确数量否定、条件或数量无法可靠归属时unknown。",
+  "limits": [
+    "有限语法，不是通用语义判断",
+    "多个候选同句仍unknown",
+    "不推断整体资格、不选择编号",
+    "局部通过或无缺陷不代表合格"
+  ],
+  "samples": [
+    {
+      "name": "missing",
+      "text": "AA11缺少坐标。",
+      "values": [
+        "AA11"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "failure",
+      "text": "BB22检查失败。",
+      "values": [
+        "BB22"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "offset",
+      "text": "CC33存在4项偏移。",
+      "values": [
+        "CC33"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "unclosed",
+      "text": "DD44留三项未关闭问题。",
+      "values": [
+        "DD44"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "pass",
+      "text": "EE55文本问答通过。",
+      "values": [
+        "EE55"
+      ],
+      "expected": [
+        "explicit_pass_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "negated_failure",
+      "text": "FF66不存在失败。",
+      "values": [
+        "FF66"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "zero_offset",
+      "text": "GG77有0项偏移。",
+      "values": [
+        "GG77"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "zero_unclosed",
+      "text": "HH88留零项未关闭问题。",
+      "values": [
+        "HH88"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "negated_missing",
+      "text": "II99不缺少映射。",
+      "values": [
+        "II99"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "not_pass",
+      "text": "JJ11未通过检查。",
+      "values": [
+        "JJ11"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "unknown_offset",
+      "text": "KK22偏移数量未说明。",
+      "values": [
+        "KK22"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "conditional",
+      "text": "LL33如果检查失败则复核。",
+      "values": [
+        "LL33"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "uncertain",
+      "text": "MM44是否失败无法确认。",
+      "values": [
+        "MM44"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "unknown_unclosed",
+      "text": "NN55未关闭问题。",
+      "values": [
+        "NN55"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "completion_not_pass",
+      "text": "OO66完成三项检查。",
+      "values": [
+        "OO66"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "metric_not_event",
+      "text": "PP77失败率下降。",
+      "values": [
+        "PP77"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "nested_negation",
+      "text": "QQ88不一定不存在失败。",
+      "values": [
+        "QQ88"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "other_owner",
+      "text": "RR99其他候选检查失败。",
+      "values": [
+        "RR99"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "separate_owners",
+      "text": "SS11通过；TT22会话恢复2项失败。",
+      "values": [
+        "SS11",
+        "TT22"
+      ],
+      "expected": [
+        "explicit_pass_only",
+        "explicit_defect"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "same_clause_owners",
+      "text": "UU33通过，VV44失败。",
+      "values": [
+        "UU33",
+        "VV44"
+      ],
+      "expected": [
+        "unknown",
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "negated_zero",
+      "text": "WX11不是0项偏移。",
+      "values": [
+        "WX11"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "decimal_unknown",
+      "text": "YZ22存在0.5项偏移。",
+      "values": [
+        "YZ22"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "only_pass",
+      "text": "AB12检查通过。",
+      "values": [
+        "AB12"
+      ],
+      "expected": [
+        "explicit_pass_only"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "unknown_record",
+      "text": "CD34记录已归档。",
+      "values": [
+        "CD34"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "original_24"
+    },
+    {
+      "name": "old_boundary_1",
+      "text": "AA11并非失败。",
+      "values": [
+        "AA11"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": false,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "old_boundary_2",
+      "text": "BB22失败次数为0。",
+      "values": [
+        "BB22"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": false,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "old_boundary_3",
+      "text": "CC33失败不存在。",
+      "values": [
+        "CC33"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": false,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "old_boundary_4",
+      "text": "DD44缺失数量为零。",
+      "values": [
+        "DD44"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": false,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "old_boundary_5",
+      "text": "EE55偏移数量为0。",
+      "values": [
+        "EE55"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": true,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "old_boundary_6",
+      "text": "FF66没有失败。",
+      "values": [
+        "FF66"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "previous_expectation": "不能判存在明示缺陷；无法解析可unknown",
+      "previous_passed": true,
+      "source": "original_extra_6"
+    },
+    {
+      "name": "front_negation_with_subject",
+      "text": "Z91并非解析失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "post_negative_with_subject",
+      "text": "Z91恢复失败不存在。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "post_negative_context",
+      "text": "Z91解析失败情况未发生。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "front_absence_with_subject",
+      "text": "Z91不存在定位偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "arabic_post_count",
+      "text": "Z91恢复失败2项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "chinese_post_zero",
+      "text": "Z91恢复失败次数为零。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "ideographic_post_zero",
+      "text": "Z91缺失数量为〇。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "chinese_pre_zero",
+      "text": "Z91有零项偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "colon_quantity",
+      "text": "Z91定位偏移：0。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "equal_quantity",
+      "text": "Z91定位偏移=0。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "spaces_quantity",
+      "text": "Z91恢复失败次数 为 0 次。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "bare_count",
+      "text": "Z91失败0项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "comma_mixed_negation",
+      "text": "Z91并非解析失败，但恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "comma_mixed_zero",
+      "text": "Z91定位偏移为0，恢复失败2项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "contrast_no_comma",
+      "text": "Z91并非解析失败但恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "ascii_comma_mixed",
+      "text": "Z91恢复失败不存在,定位4项偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "zero_and_true_missing",
+      "text": "Z91定位偏移为零、缺少坐标。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "pass_and_fail",
+      "text": "Z91问答通过，但恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_pass",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "separate_uncertainty",
+      "text": "Z91无法确认解析是否失败，但恢复失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "unknown",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "zero_multiple_items",
+      "text": "Z91定位偏移为0，恢复失败次数为零。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "explicit_absence",
+        "explicit_absence"
+      ]
+    },
+    {
+      "name": "mixed_negated_count",
+      "text": "Z91不是0项偏移，但恢复失败2项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant",
+      "event_statuses": [
+        "unknown",
+        "explicit_defect"
+      ]
+    },
+    {
+      "name": "no_count_offset",
+      "text": "Z91定位偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "unclosed_unknown",
+      "text": "Z91未关闭问题数量不明。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "approximate_zero",
+      "text": "Z91恢复失败次数约为0。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "unsupported_unit",
+      "text": "Z91恢复失败3秒。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "bare_unknown_number",
+      "text": "Z91恢复失败2。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "fraction_count",
+      "text": "Z91恢复失败数量为0.5项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "negative_count",
+      "text": "Z91恢复负2项失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "percentage_not_count",
+      "text": "Z91失败数量为1%。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "metric_zero",
+      "text": "Z91失败率为0。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "nested_negation",
+      "text": "Z91并非没有失败。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "negated_positive_count",
+      "text": "Z91没有2项偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "range_count",
+      "text": "Z91失败数量为0-2项。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "multi_predicate_no_boundary",
+      "text": "Z91没有解析失败和定位偏移。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "unknown"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "chinese_positive",
+      "text": "Z91恢复失败次数为三。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_defect"
+      ],
+      "source": "new_variant"
+    },
+    {
+      "name": "post_zero_unclosed",
+      "text": "Z91未关闭问题数量为零。",
+      "values": [
+        "Z91"
+      ],
+      "expected": [
+        "explicit_absence_only"
+      ],
+      "source": "new_variant"
+    }
+  ],
+  "stop_rule": "任何检查失败，ready-to-run=false；禁止进入运行器。本轮无服务或生成。",
+  "generation_calls": 0
+}

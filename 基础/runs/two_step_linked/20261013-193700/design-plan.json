@@ -1,0 +1,96 @@
+{
+  "recorded_at": "2026-10-13T19:37:00.565718+08:00",
+  "status": "designed_before_implementation_and_this_round_generation",
+  "code_base_commit": "78b97898e713a3b8ec2cdffeec8c6758c4bcbbc9",
+  "assessment_contact": "已查看首次正式40条结果及原文评价后提出的开发探索；不是盲测或开发前设计。首次正式冻结版本不修改；将来同题重跑须标为评测后重复评测。",
+  "reuse_review": {
+    "selection": "基础/tests/two_step_candidate.py：原提示词、Schema、合法/空/非法ID验证与原文选择接口可复用。",
+    "linking": "基础/runs/improve/linked_r0/student-v2.py：复用organize_passages返回的直接关系；丢弃它的排序结果，不修改快照。",
+    "request": "基础/starter/provider.py：复用本机请求与原始响应记录，不复制请求实现。"
+  },
+  "hypothesis": "补入与定位已选主段唯一直接关联的补页，可能减轻第一步漏掉组合依据的问题。",
+  "competing_explanations": [
+    "关联只能证明指称，不证明证据有效；补页可能仍属干扰。",
+    "即便补齐资料，模型仍可能范围识别、计算或引用失败。"
+  ],
+  "rules": [
+    "第一步提示词/Schema/参数完全复用旧两步。",
+    "仅当前问题及当前原段落；不读取答案、题号或条件决定选取。",
+    "唯一直接补充指称与语境编号、无明确范围冲突才能补入；未知范围不视为相等，只按原关联规则记录未知。",
+    "目标唯一性在全部可见段落判定；不按共同source目录建立关系。",
+    "只补直接挂到原始selected_ids的补页；新补入段落不能继续触发补全，不补主段，不多跳。",
+    "只按当前完整输入相对顺序返回，id/source/text不改。",
+    "第一步输入与旧两步相同：第一版improve后的完整R0。另保留未排序R0；不声称最终保留未排序R0的次序。",
+    "合法空选择仍两次真实回答空资料；非法选择两个分支均记录失败，不补选、不回答。"
+  ],
+  "fixed_settings": {
+    "model": "Qwen3-0.6B-Q8_0",
+    "llama_cpp": "b11429",
+    "context": 4096,
+    "cpu_threads": 4,
+    "parallel": 1,
+    "thinking": false,
+    "context_shift": false,
+    "warmup": false,
+    "max_tokens_each_call": 256,
+    "answer_config_source": "基础/runs/two_step/dev_r0/config.answer.json",
+    "selection_config_source": "基础/runs/two_step/dev_r0/config.selection.json"
+  },
+  "call_order": [
+    {
+      "case_id": "D01",
+      "stages": [
+        "shared_selection",
+        "old_answer",
+        "linked_answer"
+      ]
+    },
+    {
+      "case_id": "D02",
+      "stages": [
+        "shared_selection",
+        "linked_answer",
+        "old_answer"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "stages": [
+        "shared_selection",
+        "old_answer",
+        "linked_answer"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "stages": [
+        "shared_selection",
+        "linked_answer",
+        "old_answer"
+      ]
+    }
+  ],
+  "generation_limit": 12,
+  "evaluation_only_after_all_calls": "仅整轮停止后独立评价脚本读公开开发答案，定位和补全模块及驱动不读取答案。",
+  "selection_rule": "比较新候选与本轮旧两步：严格完整成功优先，其次指定答法答案正确；同分保留更简单旧两步。无改善不追加搜索。原单步方案只能引用历史结果，不是本轮同步对照。",
+  "timing": "共享定位只实际调用一次。每条完整流程计时=共享定位阶段完整客户端时间+本分支验证/原文组织时间+本分支回答阶段完整客户端时间；不把另一分支等待计入。另存从定位开始到该分支结束的实际壁钟跨度，注明其中可能含另一分支等待。",
+  "stop": [
+    "技术失败、参数/哈希不符、容量超限或持续资源不足保存后停止，不重试、不删段。",
+    "格式、选取、关联不足、答案及引用错误保留，不作技术重试。",
+    "整轮结束停止本次自有模型服务。"
+  ],
+  "evaluation": [
+    "第一步选择与漏选",
+    "补入清单/理由/放弃原因",
+    "输入必要证据覆盖",
+    "答案指定形式及D02语义一致",
+    "格式",
+    "引用ID存在",
+    "引用必要覆盖",
+    "引用支持实际答案",
+    "无关/冲突引用",
+    "严格完整成功",
+    "证据齐全但答错单列回答阶段问题"
+  ],
+  "previous_generation_count": 124
+}

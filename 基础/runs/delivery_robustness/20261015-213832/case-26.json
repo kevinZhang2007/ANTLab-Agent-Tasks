@@ -1,0 +1,336 @@
+{
+  "name": "citation_positive",
+  "branch": "citations",
+  "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+  "passages": [
+    {
+      "id": "custom-data",
+      "source": "独立自造资料",
+      "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+    },
+    {
+      "id": "custom-extra",
+      "source": "独立自造资料",
+      "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+    }
+  ],
+  "raw_response": "{\"answer\": \"14.625\", \"citations\": []}",
+  "expected_derived_answer": "14.625",
+  "expected_basis": "只为原正确答案组装两个实际来源。",
+  "audit_universe": null,
+  "actual": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": true,
+    "proof_status": "established",
+    "proof_kind": "difference",
+    "trace": [
+      {
+        "stage": "question_project_boundary",
+        "audit": {
+          "status": "resolved",
+          "question_candidates": [
+            {
+              "entity": "绀羽项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                16
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "绀羽项目",
+              "version": "Edition583版本",
+              "date": "2025-11",
+              "passage_id": "custom-data",
+              "source": "独立自造资料",
+              "start": 0,
+              "end": 28,
+              "quote": "绀羽项目Edition583版本在2025-11的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+          "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+          "missing_fields_not_assumed_equal": true,
+          "chosen": {
+            "entity": "绀羽项目",
+            "interpretation": "literal_entity_no_char_removed",
+            "start": 0,
+            "end": 4,
+            "version_position": [
+              4,
+              16
+            ]
+          },
+          "supporting_declarations": [
+            {
+              "entity": "绀羽项目",
+              "version": "Edition583版本",
+              "date": "2025-11",
+              "passage_id": "custom-data",
+              "source": "独立自造资料",
+              "start": 0,
+              "end": 28,
+              "quote": "绀羽项目Edition583版本在2025-11的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ]
+        }
+      },
+      {
+        "stage": "direct_relation_audit",
+        "links": [
+          {
+            "supplement_id": "custom-extra",
+            "target_id": "custom-data",
+            "added": false,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "Ledger647",
+                "start": 0,
+                "end": 11,
+                "code_start": 2,
+                "code_end": 11,
+                "statement": {
+                  "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；",
+                  "start": 0,
+                  "end": 51
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [
+              "custom-data"
+            ],
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date",
+              "namespace"
+            ],
+            "semantic_support_verified": false,
+            "target_declarations": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "顺序批次",
+                "code": "Ledger647",
+                "start": 28,
+                "end": 41,
+                "code_start": 32,
+                "code_end": 41,
+                "statement": {
+                  "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。",
+                  "start": 0,
+                  "end": 75
+                },
+                "reliable_declaration": true,
+                "direct_supplement_reference": false,
+                "mere_reference": false,
+                "declaration_predicate": {
+                  "text": "的旧链路处理",
+                  "start": 41,
+                  "end": 47
+                }
+              }
+            ],
+            "reason": "unique_reliable_direct_reference",
+            "object_labels_equal": true,
+            "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+            "completion_reason": "already_selected"
+          }
+        ]
+      },
+      {
+        "stage": "pair_scope",
+        "main": "custom-data",
+        "supplement": "custom-extra",
+        "main_status": "matched",
+        "supplement_status": "unknown",
+        "main_fields": [
+          {
+            "field": "project",
+            "question": [
+              "绀羽项目"
+            ],
+            "source": [
+              "绀羽项目"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "version",
+            "question": [
+              "Edition583版本"
+            ],
+            "source": [
+              "Edition583版本"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2025-11"
+            ],
+            "source": [
+              "2025-11"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ],
+        "supplement_fields": [
+          {
+            "field": "project",
+            "question": [
+              "绀羽项目"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "version",
+            "question": [
+              "Edition583版本"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2025-11"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ]
+      },
+      {
+        "stage": "difference_operand_attempt_refused",
+        "left_source_id": "custom-data",
+        "right_source_id": "custom-extra",
+        "reason": "object_not_unique_in_operand_source"
+      },
+      {
+        "stage": "difference_proof",
+        "question_parse": {
+          "left": "新链路",
+          "metric": "完整响应耗时中位数",
+          "right": "旧链路",
+          "direction": "少",
+          "unit": "秒"
+        },
+        "left": {
+          "object": "新链路",
+          "metric": "完整响应耗时中位数",
+          "statistic": "中位数",
+          "value": "29.125",
+          "unit": "秒",
+          "source": {
+            "passage_id": "custom-extra",
+            "source": "独立自造资料",
+            "start": 39,
+            "end": 50,
+            "quote": "中位数为29.125秒",
+            "role": "比较操作数原文"
+          },
+          "object_source": {
+            "passage_id": "custom-extra",
+            "source": "独立自造资料",
+            "start": 26,
+            "end": 29,
+            "quote": "新链路",
+            "role": "问题比较对象"
+          }
+        },
+        "right": {
+          "object": "旧链路",
+          "metric": "完整响应耗时中位数",
+          "statistic": "中位数",
+          "value": "43.75",
+          "unit": "秒",
+          "source": {
+            "passage_id": "custom-data",
+            "source": "独立自造资料",
+            "start": 58,
+            "end": 74,
+            "quote": "完整响应耗时中位数为43.75秒",
+            "role": "比较操作数原文"
+          },
+          "object_source": {
+            "passage_id": "custom-data",
+            "source": "独立自造资料",
+            "start": 42,
+            "end": 45,
+            "quote": "旧链路",
+            "role": "问题比较对象"
+          }
+        },
+        "comparability": {
+          "passage_id": "custom-extra",
+          "source": "独立自造资料",
+          "start": 31,
+          "end": 36,
+          "quote": "同样57个",
+          "role": "同一比较集合明示依据"
+        },
+        "operation": "right_minus_left",
+        "result": "14.625",
+        "operands_chosen_without_answer": true
+      }
+    ],
+    "derived_response": {
+      "answer": "14.625",
+      "citations": [
+        "custom-data",
+        "custom-extra"
+      ]
+    },
+    "requires_independent_original_text_review": true,
+    "reason": "unique_same_scope_metric_unit_direction_and_decimal_result_confirmed",
+    "derived_response_kind": "local_rule_citation_assembly_not_original_model_response"
+  },
+  "derived_response": {
+    "answer": "14.625",
+    "citations": [
+      "custom-data",
+      "custom-extra"
+    ]
+  },
+  "final_response": {
+    "answer": "14.625",
+    "citations": [
+      "custom-data",
+      "custom-extra"
+    ]
+  },
+  "passed": true,
+  "raw_response_preserved": true,
+  "checked_at": "2026-10-15T21:38:37.080597+08:00"
+}

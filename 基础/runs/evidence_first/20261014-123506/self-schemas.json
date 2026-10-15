@@ -1,0 +1,121 @@
+{
+  "original": {
+    "type": "object",
+    "properties": {
+      "evidence": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "passage_id": {
+              "type": "string"
+            },
+            "quote": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "passage_id",
+            "quote"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "answer": {
+        "type": "string"
+      },
+      "citations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "evidence",
+      "answer",
+      "citations"
+    ],
+    "additionalProperties": false
+  },
+  "number": {
+    "type": "object",
+    "properties": {
+      "evidence": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "passage_id": {
+              "type": "string"
+            },
+            "quote": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "passage_id",
+            "quote"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "answer": {
+        "type": "string",
+        "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+      },
+      "citations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "evidence",
+      "answer",
+      "citations"
+    ],
+    "additionalProperties": false
+  },
+  "percent": {
+    "type": "object",
+    "properties": {
+      "evidence": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "passage_id": {
+              "type": "string"
+            },
+            "quote": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "passage_id",
+            "quote"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "answer": {
+        "type": "string",
+        "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?%|证据不足)$"
+      },
+      "citations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": [
+      "evidence",
+      "answer",
+      "citations"
+    ],
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>进阶B · 范围与证据核对</title>
+<style>body{max-width:1050px;margin:24px auto;font:15px system-ui;padding:0 16px}label{display:inline-block;margin:5px}input,select,button{padding:6px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f3f3f3;padding:12px}article{border:1px solid #777;padding:10px;margin:10px 0}.warning{border:2px solid #777;padding:10px}</style>
+<h1>进阶B：范围与证据核对</h1>
+<p>固定合成draft离线重放（offline_replay）；没有模型请求。</p>
+<p id="service">读取服务信息</p>
+<label>案例 <select id="cases"></select></label>
+<label><input type="checkbox" id="reset">运行前清空状态</label><br>
+<label>query <input id="query" size="32"></label>
+<label>doc_ids（逗号分隔） <input id="docs" size="12"></label>
+<label>snapshot <input id="snapshot" size="8"></label>
+<label>k <input id="k" type="number" min="1" max="100" value="2" size="4"></label>
+<button id="run">提交请求</button>
+<details><summary>本次提交内容</summary><pre id="submitted">尚未提交</pre></details>
+<h2>当前请求与结果</h2><pre id="summary">等待执行</pre>
+<p class="warning" id="support">语义未核验。Engine的supported仅由ID规则产生，不表示原文支持答案。</p>
+<h2>实际证据与原文定位</h2><div id="evidence">等待执行</div>
+<details><summary>完整HTTP响应（含未改写的Engine响应）</summary><pre id="raw"></pre></details>
+<script>
+const $=id=>document.getElementById(id); let cases=[];
+function loadCase(){const c=cases.find(c=>c.id===$('cases').value);$('query').value=c.request.query;$('docs').value=c.request.doc_ids.join(',');$('snapshot').value=c.request.snapshot;$('k').value=c.request.k;}
+fetch('/api/cases').then(r=>r.json()).then(d=>{cases=d.cases;$('service').textContent='服务 '+d.service.version+' | Engine '+d.service.engine+' | 默认 '+d.service.default_engine;for(const c of cases){const o=document.createElement('option');o.value=c.id;o.textContent=c.id+' · '+c.request.doc_ids.join(',')+'/'+c.request.snapshot;$('cases').append(o);}loadCase();}).catch(e=>$('summary').textContent=String(e));
+$('cases').onchange=loadCase;
+$('run').onclick=async()=>{const body={case_id:$('cases').value,reset:$('reset').checked,request:{query:$('query').value,doc_ids:$('docs').value.split(',').map(s=>s.trim()).filter(Boolean),snapshot:$('snapshot').value,k:Number($('k').value),mode:'offline_replay'}};$('submitted').textContent=JSON.stringify(body,null,2);$('run').disabled=true;try{const response=await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const r=await response.json();$('raw').textContent=JSON.stringify(r,null,2);$('summary').textContent=JSON.stringify({http_status:response.status,request_id:r.request_id,engine:r.service.engine,request:r.request,scope_status:r.scope_status,answer:r.answer,citations:r.citations,actual_scopes:r.actual_scopes,locator_status:r.locator_status,citation_status:r.citation_status,cache_hit:r.engine_response?.cache_hit,elapsed_ms:r.elapsed_ms,run_kind:r.run_kind},null,2);$('support').textContent='展示支持状态：'+r.support_status+'；判断来源：'+r.judgment_source+'。Engine原始支持状态：'+r.engine_response?.support_status+'（'+r.engine_response?.judgment_source+'）。ID规则产生的状态，语义未核验；待检查主张：'+r.answer;$('evidence').replaceChildren();if(!r.evidence?.length){$('evidence').textContent='实际证据为空，不能视为成功查证。';}else{for(const b of r.evidence){const a=document.createElement('article');const label=document.createElement('p');label.textContent=b.doc_id+' / '+b.snapshot+' · 块 '+b.block_id+' · 页 '+b.page+' | '+(r.request.doc_ids.includes(b.doc_id)&&b.snapshot===r.request.snapshot?'属于请求范围':'范围冲突：不是当前请求资料');const text=document.createElement('p');text.textContent=b.text;a.append(label,text);$('evidence').append(a);}}}catch(e){$('summary').textContent=String(e);}finally{$('run').disabled=false;}};
+</script></html>

@@ -1,0 +1,178 @@
+--- previous/run_repeat_integrated.py
++++ new/run_bounded_round.py
+@@ -5,7 +5,8 @@
+ import urllib.request, urllib.error
+ sys.path.insert(0,str(next(p for p in Path(__file__).resolve().parents if (p/'基础/starter/provider.py').is_file())/'基础/tests'))
+ sys.path.insert(0,str(Path(__file__).resolve().parent))
+-import proof_pipeline_candidate as candidate
++import bounded_candidate as candidate
++CODE=Path(__file__).resolve().parent
+ 
+ repo = next(p for p in Path(__file__).resolve().parents if (p/'基础/starter/provider.py').is_file())
+ base = repo/'基础'
+@@ -30,9 +31,10 @@
+     answer = load(folder/'answer.prepared.json')
+     selection = load(folder/'selection.prepared.json')
+     jobs = load(folder/'execution-plan.prepared.json')['items']
+-    assert len(jobs)==12 and all(j['condition']=='R0' and j['variant']=='improved' for j in jobs)
+-    assert len({(j['case_id'],j['condition'],j['variant']) for j in jobs})==12
+-    assert [j['case_id'] for j in jobs]==[f'D{i:02d}' for i in range(1,5)]+[f'T{i:02d}' for i in range(1,9)]
++    plan=load(folder/'execution-plan.prepared.json')
++    assert len(jobs) in (8,12) and all(j['condition']=='R0' for j in jobs)
++    limit=plan['generation_limit']
++    if plan['round']<5:assert all(j['case_id'].startswith('D') and j.get('historical_task') for j in jobs)
+     parent_folder = repo/'基础/runs/calculation_full_dev/20261015-160956'
+     parent_contract=load(parent_folder/'freeze.json')
+     assert sha(parent_folder/'freeze.json')==load(folder/'parent-freeze-verification.json')['parent_freeze_sha256']
+@@ -45,11 +47,12 @@
+                '基础/runs/improve/linked_r0/student-v2.py',
+                '基础/starter/student.py','基础/starter/provider.py','基础/starter/runner.py']
+     sources += ['基础/tests/direct_reference_candidate.py','基础/tests/association_repair_candidate.py']
+-    sources += [(folder/name).relative_to(repo).as_posix() for name in ['run_repeat_integrated.py','scope_candidate.py','explicit_state_checker.py','eligibility_exclusion_candidate.py','typed_enum_role_revision.py','typed_identifier_enum_candidate.py','body_identifier_enum_candidate.py','offline_gate.py','settings.prepared.json','answer.prepared.json','selection.prepared.json','execution-plan.prepared.json','fixture-index.json','preflight.json','scope_candidate.py','scope_first_occurrences.py','eligibility_proof_checker.py','proof_pipeline_candidate.py']]
+-    sources += [(folder/name).relative_to(repo).as_posix() for name in ['general_citation_proof.py','proof_scope_occurrences.py','proof_snapshot_checker.py','project_scope_resolution.py','proof-rules-index.json','check_general_citation_proof.py','check_project_scope_resolution.py','prepare_repeat_integrated.py','ratio_calculation_proof.py','check_ratio_calculation_proof.py','direct_reference_candidate.py','check_association_compat.py','difference_calculation_proposal.py','check_calculation_compat.py']]
++    sources += [(CODE/name).relative_to(repo).as_posix() for name in load(CODE/'baseline-verification.json')['modules']]
++    sources += [(CODE/name).relative_to(repo).as_posix() for name in ['bounded_candidate.py','run_bounded_round.py','prepare_final_five.py']]
++    sources += [(folder/name).relative_to(repo).as_posix() for name in ['execution-plan.prepared.json','settings.prepared.json','answer.prepared.json','selection.prepared.json']]
+     code_hashes = {p:sha(repo/p) for p in sources}
+     data_hashes = {p:sha(repo/p) for p in settings['data_sha256']}
+-    old = {p.relative_to(repo).as_posix():sha(p) for p in (base/'runs').rglob('*') if p.is_file() and folder not in p.parents}
++    old = {p.relative_to(repo).as_posix():sha(p) for p in (base/'runs').rglob('*') if p.is_file() and CODE not in p.parents}
+     for name in ['report.md','README.md','基础/开发记录.md','基础/config.local.json',*sources]:
+         if (repo/name).exists(): old[name]=sha(repo/name)
+     old.update({p.relative_to(repo).as_posix():sha(p) for p in (repo/'results').rglob('*') if p.is_file()})
+@@ -69,16 +72,10 @@
+                     '当前完整流程为新定位、直接补页、原输入相对顺序回答、通用答案形式及类型enum；可靠资格规则自动核查通过才排除。',
+                     '额外定位请求、最终资料选择和调用总量变化；模型/最终提示词/采样/256预算/服务设置不变。'],
+                 'development_lineage':'复用已验证组件；为遵守本轮原输入相对顺序契约，最终展示顺序不沿用历史开发的排序后顺序。'}
+-    write('design-plan.json',{'saved_at':now(),'research':research,'order':jobs,'failure_rules':failure,
+-          'evaluation':evaluation,'maximum_generation_calls':24,'evaluation_after_all_calls':True})
++    write('design-plan.json',{'saved_at':now(),'research':plan['design'],'order':jobs,'failure_rules':failure,
++          'evaluation':evaluation,'maximum_generation_calls':limit,'evaluation_after_all_calls':True})
+     write('config.answer.json',answer); write('config.selection.json',selection)
+-    assert load(folder/'preflight.json')['passed'] and load(folder/'preflight.json')['returncode']==0
+-    assert load(folder/'offline-check.json')['passed']
+-    assert load(folder/'operation-logging-check.json')['passed']
+-    assert sha(folder/'proof_pipeline_candidate.py')==load(folder/'operation-logging-check.json')['code_sha256']
+-    assert load(folder/'additional-existing-tests.json')['passed']
+-    assert load(folder/'entry-gate-verification.json')['passed']
+-    assert load(folder/'runner-gate-integration.json')['passed']
++    assert load(folder/'execution-offline-check.json')['passed']
+     differences=[]
+     for name, expected in {**settings['data_sha256'],**{n:v for n,v in settings['code_sha256'].items() if n.startswith('基础/starter/')}}.items():
+         if sha(repo/name)!=expected: differences.append(name)
+@@ -126,6 +123,12 @@
+     log=folder/'server-log.txt'
+     freeze_hash=None; current=None
+     def dispatch(stage,messages,conf,used):
++        if stage=='selection' and current.get('historical_task'):
++            historical=load(repo/current['historical_task']);stored=historical['stages'][0]
++            assert messages==stored['messages'] and conf==stored['config']
++            return {'response':copy.deepcopy(stored['response']),'status':'ok','elapsed_seconds':0,
++                    'run_kind':'offline_replay','historical_generation_not_new':True,
++                    'reused_run_id':stored['run_id'],'source_path':current['historical_task']}
+         assert freeze_hash and sha(folder/'freeze.json')==freeze_hash
+         assert all(sha(repo/p)==h for p,h in {**parent_contract['code_hashes'],**parent_contract['data_hashes']}.items())
+         assert all(sha(repo/n)==v for n,v in {**code_hashes,**data_hashes}.items())
+@@ -145,7 +148,7 @@
+             def open(self,request,*a,**kw):
+                 actual=json.loads(request.data)
+                 assert actual==rendered['request'] and actual['max_tokens']==256
+-                assert runtime['generation_dispatches']<24
++                assert runtime['generation_dispatches']<limit
+                 record.update(actual_http_request_body=actual,raw_http_request_body=request.data.decode(),generation_dispatched=True)
+                 runtime['generation_dispatches']+=1;write(path,record,True)
+                 try:return self.inner.open(request,*a,**kw)
+@@ -161,8 +164,9 @@
+         record.update(finish_reason=choice.get('finish_reason'),budget_exhausted=choice.get('finish_reason')=='length',
+                       raw_content=choice.get('message',{}).get('content',''),raw_reasoning=choice.get('message',{}).get('reasoning_content'))
+         slots=service('slots');params=slots[0]['params'];record['slot_after']=slots
+-        record['parameter_checks']={k:math.isclose(params[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric.items() if k in params}
+-        record['parameters_not_echoed']=[k for k in numeric if k not in params]+['response_format','effective_max_tokens']
++        effective_numeric={k:v for k,v in conf['parameters'].items() if isinstance(v,(int,float)) and k!='max_tokens'}
++        record['parameter_checks']={k:math.isclose(params[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in effective_numeric.items() if k in params}
++        record['parameters_not_echoed']=[k for k in effective_numeric if k not in params]+['response_format','effective_max_tokens']
+         record['budget_verification']='发送正文max_tokens=256；finish_reason不是请求预算回显。'
+         with log.open('rb') as stream:stream.seek(offset);segment=stream.read().decode(errors='replace')
+         record['server_log_segment']=segment.replace(str(root),'%LOCALAPPDATA%/ANTLabLocalModel')
+@@ -199,7 +203,10 @@
+         phase='template_capacity_preflight'
+         inputs={}
+         for job in jobs:
+-            case,original,_,_=runner.prepare(job['case_id'],job['condition'],'baseline')
++            candidate.POLICY=job['policy']
++            if job.get('historical_task'):
++                hist=load(repo/job['historical_task']);case={'question':hist['question']};original=hist['original_passages']
++            else:case,original,_,_=runner.prepare(job['case_id'],job['condition'],'baseline')
+             inputs[job['sequence']]=(case['question'],original)
+             engine=candidate
+             messages,conf,_=engine.answer_request(case['question'],original,answer)
+@@ -209,24 +216,24 @@
+                 render(candidate.selection.prepare_selection_messages(case['question'],ordered),selection,{**job,'kind':'selection_full_sorted'})
+                 messages,conf,_=candidate.answer_request(case['question'],[],answer)
+                 render(messages,conf,{**job,'kind':'answer_empty'})
+-        write('capacity-summary.json',{'checked_at':now(),'all_fit':True,'main_tasks':12,'template_checks':len(templates),
++        write('capacity-summary.json',{'checked_at':now(),'all_fit':True,'main_tasks':len(jobs),'template_checks':len(templates),
+               'maximum_input_tokens':max(r['input_tokens'] for r in templates),'maximum_total':max(r['total'] for r in templates),
+               'context':4096,'output_budget':256,'actual_selected_branch_checked_before_each_request':True})
+-        write('freeze.json',{'frozen_at':now(),'frozen':True,'round':'post_evaluation_repeat_D4_T8_same_calculation_candidate','research':research,
++        write('freeze.json',{'frozen_at':now(),'frozen':True,'round':plan['round'],'bounded_five_round_design':plan,'research':plan['design'],
+               'source_commit':subprocess.check_output([str(Path(os.environ['LOCALAPPDATA'])/'Programs/Git/cmd/git.exe'),'rev-parse','HEAD'],cwd=repo,text=True).strip(),
+               'code_hashes':code_hashes,'data_hashes':data_hashes,'model':settings['model'],'llama_cpp':settings['llama_cpp'],
+               'answer_config':answer,'selection_config':selection,'service_arguments':settings['service_arguments'],
+               'selection_prompt':candidate.selection.SELECTION_PROMPT,'selection_schema':candidate.selection.SELECTION_SCHEMA,
+               'answer_prompt':candidate.student.prepare_messages('',[])[0]['content'],
+               'answer_form_patterns':candidate.constrain_schema.__globals__['PATTERNS'],
+-              'order':jobs,'evaluation_rules':evaluation,'failure_rules':failure,'main_task_limit':12,'generation_limit':24,
++              'order':jobs,'evaluation_rules':evaluation,'failure_rules':failure,'main_task_limit':len(jobs),'generation_limit':limit,
+               'final_order':'最终所选完整原段落按当前原输入相对顺序',
+               'proof_material_policy':'证明事实与派生引用仅最终回答输入；额外原始可见段落仅范围、实体、唯一性审计，独立字段保存。',
+-              'proof_rule_lineage':load(folder/'proof-rules-index.json'),
+-              'ratio_rule_source':{'source':'基础/runs/ratio_calculation_proof/20261015-133404/ratio_calculation_proof.py','sha256':sha(folder/'ratio_calculation_proof.py')},
++              'proof_rule_lineage':load(CODE/'proof-rules-index.json'),
++              'ratio_rule_source':{'source':'基础/runs/ratio_calculation_proof/20261015-133404/ratio_calculation_proof.py','sha256':sha(CODE/'ratio_calculation_proof.py')},
+               'output_policy':'独立差值或比例计算建议优先；否则引用证明；否则原始回答。计算与引用组装独立保存。',
+-              'difference_rule_sha256':sha(folder/'difference_calculation_proposal.py'),
+-              'retained_regressions':load(folder/'retained-regressions.json'),
++              'difference_rule_sha256':sha(CODE/'difference_calculation_proposal.py'),
++              'retained_regressions':load(CODE/'retained-regressions.json'),
+               'parent_contract':{'path':str((parent_folder/'freeze.json').relative_to(repo)),'sha256':sha(parent_folder/'freeze.json'),'candidate_and_configuration_identical':True},
+               'recent_successful_parent':load(folder/'version-verification.json'),
+               'capacity_reference':'capacity-summary.json','cache_policy':'每阶段清空单槽缓存',
+@@ -234,6 +241,7 @@
+         freeze_hash=sha(folder/'freeze.json');print('FREEZE',folder.relative_to(repo),now(),flush=True)
+         phase='generation'
+         for job in jobs:
++            candidate.POLICY=job['policy']
+             phase=job['dataset']+'_generation'
+             current={**job,'main_task_id':str(uuid.uuid4()),'started_at':now(),'status':'pending'}
+             tasks.append(current);path='task-'+str(job['sequence']).zfill(2)+'.json'
+@@ -242,12 +250,16 @@
+             question,original=inputs[job['sequence']]
+             engine=candidate
+             save(engine.execute(question,original,job['variant'],answer,selection,dispatch,save))
++            current['selection_is_fresh']=not bool(job.get('historical_task'))
++            current['cost_scope']='answer_and_local_rules_only_historical_selection_replay' if job.get('historical_task') else 'complete_fresh_two_stage_pipeline'
++            if job.get('historical_task'):
++                assert current['used_passages']==load(repo/job['historical_task'])['used_passages'],'历史完整原文输入发生变化'
+             current['completed_at']=now();write(path,current,True)
+             write('result-index.json',{'items':[{'sequence':t['sequence'],'case_id':t['case_id'],'condition':t['condition'],
+                   'variant':t['variant'],'main_task_id':t['main_task_id'],'status':t['status'],
+                   'path':(folder/('task-'+str(t['sequence']).zfill(2)+'.json')).relative_to(repo).as_posix(),
+-                  'run_ids':[s['run_id'] for s in t.get('stages',[])],'end_to_end_seconds':t.get('end_to_end_seconds')} for t in tasks]},True)
+-            if job['sequence']==4:
++                  'run_ids':[s['run_id'] for s in t.get('stages',[]) if s.get('run_id')],'end_to_end_seconds':t.get('end_to_end_seconds')} for t in tasks]},True)
++            if plan['round']==5 and job['sequence']==4:
+                 assert all(sha(repo/p)==h for p,h in {**code_hashes,**data_hashes}.items())
+                 write('development-stage-complete.json',{'completed_at':now(),'completed_tasks':4,'freeze_sha256':freeze_hash,'no_configuration_changes':True,'no_answers_read_before_evaluation_stage':True})
+             print('TASK',job['sequence'],job['case_id'],job['condition'],job['variant'],current['status'],flush=True)
+@@ -271,8 +283,8 @@
+                  'completed_development_tasks':sum(t.get('dataset')=='development' and t.get('status') in ('completed','selection_output_failure') for t in tasks),
+                  'completed_evaluation_tasks':sum(t.get('dataset')=='evaluation_repeat' and t.get('status') in ('completed','selection_output_failure') for t in tasks),
+                  'selection_output_failures':sum(t.get('status')=='selection_output_failure' for t in tasks),
+-                 'planned_main_tasks':12,'generation_dispatches':runtime['generation_dispatches'],'confirmed_generation_calls':len(ids),
+-                 'previous_cumulative':454,'cumulative_confirmed':454+len(ids),'unique_run_ids':ids,
++                 'planned_main_tasks':len(jobs),'generation_dispatches':runtime['generation_dispatches'],'confirmed_generation_calls':len(ids),
++                 'previous_cumulative':plan['previous_cumulative'],'cumulative_confirmed':plan['previous_cumulative']+len(ids),'unique_run_ids':ids,
+                  'technical_stop':runtime['technical_stop'],'service_stopped':runtime['service_stopped'],
+                  'budget_exhausted':sum(r.get('budget_exhausted',False) for r in calls),
+                  'truncated':sum(r.get('truncated') is True for r in calls),'truncation_unverified':sum(r.get('truncated')=='not_verified' for r in calls)}

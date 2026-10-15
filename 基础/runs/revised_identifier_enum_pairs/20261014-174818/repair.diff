@@ -1,0 +1,24 @@
+--- before/prepare.py
++++ after/prepare.py
+@@ -12,7 +12,7 @@
+ def save(n,v):
+     p=folder/n;assert not p.exists();p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+ save('protected-hashes.json',{p.relative_to(repo).as_posix():sha(p) for p in repo.rglob('*') if p.is_file() and '.git' not in p.parts and '__pycache__' not in p.parts and p.name!='config.local.json' and folder not in p.parents})
+-save('initial-memory-check.json',{'measured_at':'2026-10-14T17:43:43.801524+08:00','available_bytes':2235219968,'available_gib':2.0817108154296875,'threshold_gib':2,'meets_gate':True,'source':'本轮GlobalMemoryStatusEx实际测量；启动前运行器还将重新测量，不降低门槛。'})
++save('initial-memory-check.json',{'measured_at':'2026-10-14T17:47:50.567151+08:00','available_bytes':2383523840,'available_gib':2.219829559326172,'threshold_gib':2,'meets_gate':True,'source':'修复验证后GlobalMemoryStatusEx实际测量；启动前运行器还将重新测量，不降低门槛。'})
+ assert load(revision/'synthetic-check.json')['passed']
+ for name in ['typed_enum_role_revision.py','body_identifier_enum_candidate.py','typed_identifier_enum_candidate.py']:(folder/name).write_bytes((revision/name).read_bytes())
+ for name in ['config.answer.json','system.original.txt','execution-plan.json','reused-results.json']:(folder/name).write_bytes((previous/name).read_bytes())
+@@ -27,7 +27,11 @@
+     messages,conf,form=answer_request(row['question'],row['old_used_passages'],config)
+     old,oldrule=control.constrain_body_identifiers(row['question'],row['old_used_passages'],plain)
+     new,newrule=constrain_revised_roles(row['question'],row['old_used_passages'],plain)
+-    assert new==verified[row['case_id']]['schema'] and newrule['decisions']==verified[row['case_id']]['decisions']
++    actual_roles=json.loads(json.dumps(newrule['decisions'],ensure_ascii=False))
++    reference_roles=json.loads(json.dumps(verified[row['case_id']]['decisions'],ensure_ascii=False))
++    assert new==verified[row['case_id']]['schema']
++    assert actual_roles==reference_roles
++    assert json.dumps(actual_roles,ensure_ascii=False)==json.dumps(reference_roles,ensure_ascii=False)
+     a={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']};a=copy.deepcopy(a);a['response_format']['json_schema']['schema']=old
+     b=copy.deepcopy(a);b['response_format']['json_schema']['schema']=new
+     assert a['messages']==b['messages'] and a!=b

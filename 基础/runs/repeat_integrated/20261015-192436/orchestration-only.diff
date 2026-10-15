@@ -1,0 +1,19 @@
+--- previous/run_repeat_integrated.py
++++ current/run_repeat_integrated.py
+@@ -228,6 +228,7 @@
+               'difference_rule_sha256':sha(folder/'difference_calculation_proposal.py'),
+               'retained_regressions':load(folder/'retained-regressions.json'),
+               'parent_contract':{'path':str((parent_folder/'freeze.json').relative_to(repo)),'sha256':sha(parent_folder/'freeze.json'),'candidate_and_configuration_identical':True},
++              'recent_successful_parent':load(folder/'version-verification.json'),
+               'capacity_reference':'capacity-summary.json','cache_policy':'每阶段清空单槽缓存',
+               'review_note':'所有生成结束后再复用已有原文依据与澄清；有争议保留，所有标签辅助暂判。'})
+         freeze_hash=sha(folder/'freeze.json');print('FREEZE',folder.relative_to(repo),now(),flush=True)
+@@ -271,7 +272,7 @@
+                  'completed_evaluation_tasks':sum(t.get('dataset')=='evaluation_repeat' and t.get('status') in ('completed','selection_output_failure') for t in tasks),
+                  'selection_output_failures':sum(t.get('status')=='selection_output_failure' for t in tasks),
+                  'planned_main_tasks':12,'generation_dispatches':runtime['generation_dispatches'],'confirmed_generation_calls':len(ids),
+-                 'previous_cumulative':428,'cumulative_confirmed':428+len(ids),'unique_run_ids':ids,
++                 'previous_cumulative':454,'cumulative_confirmed':454+len(ids),'unique_run_ids':ids,
+                  'technical_stop':runtime['technical_stop'],'service_stopped':runtime['service_stopped'],
+                  'budget_exhausted':sum(r.get('budget_exhausted',False) for r in calls),
+                  'truncated':sum(r.get('truncated') is True for r in calls),'truncation_unverified':sum(r.get('truncated')=='not_verified' for r in calls)}

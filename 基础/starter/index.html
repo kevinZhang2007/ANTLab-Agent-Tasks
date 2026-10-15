@@ -1,13 +1,53 @@
 <!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>上下文实验起始台</title>
 <style>body{font:16px system-ui;max-width:1000px;margin:35px auto;padding:20px;color:#182330}select,button{padding:10px;margin:5px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f4f7;padding:20px}small{color:#546273}</style>
-<h1>上下文实验起始台</h1><p>这是骨架，不是完成的作业。先实现 student.py。预览不调用模型；模拟结果不能作实验证据。</p>
+<h1>上下文实验起始台</h1><p>原入口保留。探索入口使用冻结的整合方案；预览和模拟不能作真实模型证据。</p>
+<label>入口<select id="entry"><option value="original">原入口</option><option value="integrated" disabled>评测后系统探索</option></select></label><p id="version-note">正在使用：原入口</p>
 <label>样例<select id="case"></select></label><label>条件<select id="condition"><option>R0</option><option>R1</option><option>R2</option><option>K</option><option>E</option></select></label>
 <label>版本<select id="variant"><option value="baseline">基线</option><option value="improved">改进</option></select></label>
-<label>模式<select id="mode"><option value="dry">仅预览</option><option value="mock">模拟联通</option><option value="paid">自费API</option></select></label>
-<button id="run">执行一次</button><p id="status" role="status"></p><pre id="result">等待输入。请自行补充对照结果呈现与分析。</pre>
+<label>模式<select id="mode"><option value="dry">仅预览</option><option value="mock">模拟联通</option><option value="paid">自费API</option><option value="local" disabled>本地真实模型（免费）</option></select></label>
+<button id="run">执行一次</button><p id="status" role="status"></p><details><summary>提交问题、完整可见资料与配置预览</summary><pre id="preview">原入口预览由原后端处理。</pre></details><section id="closure"></section><details><summary>实际HTTP返回完整内容</summary><pre id="result">等待输入。</pre></details>
 <script>
 const $=id=>document.getElementById(id);
-fetch('/api/cases').then(r=>r.json()).then(xs=>xs.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.id+' '+c.question;$('case').append(o)}));
-$('run').onclick=async()=>{if($('mode').value==='paid'&&!confirm('本次将发起一次自费API请求，是否继续？'))return;
-$('run').disabled=true;$('status').textContent='处理中…';try{const r=await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json','X-Assessment-Session':'__SESSION_TOKEN__'},body:JSON.stringify({case_id:$('case').value,condition:$('condition').value,variant:$('variant').value,mode:$('mode').value})});const data=await r.json();$('result').textContent=JSON.stringify(data,null,2);$('status').textContent=r.ok?'结果已保存，是否正确仍需核验':'执行未完成';}catch(e){$('status').textContent=String(e)}finally{$('run').disabled=false}};
+let preview=null, integratedAvailable=false;
+function block(parent,title,value){const h=document.createElement('h3');h.textContent=title;parent.append(h);const p=document.createElement('pre');p.textContent=JSON.stringify(value,null,2);parent.append(p);}
+async function refreshInput(){
+  preview=null;
+  if(!integratedAvailable)return;
+  const response=await fetch('/api/input?case_id='+encodeURIComponent($('case').value)+'&condition='+encodeURIComponent($('condition').value));
+  const data=await response.json();if(!response.ok)throw Error(data.error);
+  preview=data;$('preview').textContent=JSON.stringify(data,null,2);
+}
+function render(data){
+  $('result').textContent=JSON.stringify(data,null,2);$('closure').replaceChildren();
+  if(!data.main_task_id)return;
+  block($('closure'),'本次入口与请求', {entry:data.entry,configuration_ref:data.configuration_ref,main_task_id:data.main_task_id,request_id:data.request_id,question:data.query});
+  block($('closure'),'模型原始回答（live_api）',data.model_raw_response);
+  block($('closure'),'系统最终输出（派生来源单列，不是主评分）',{value:data.final_output,source:data.final_output_source,run_kind:data.final_display.run_kind,judgment_source:data.final_display.judgment_source,locator_status:data.final_display.locator_status,support_status:data.final_display.support_status});
+  block($('closure'),'阶段ID与耗时', {stages:data.stages.map(s=>({stage:s.stage,run_id:s.run_id,elapsed_seconds:s.elapsed_seconds,run_kind:s.run_kind})),server_elapsed_ms:data.elapsed_ms,pipeline_timing:data.pipeline_timing,client_elapsed_ms:data.client_elapsed_ms});
+  const detail=document.createElement('details');detail.id='actual-inputs';const title=document.createElement('summary');title.textContent='实际最终输入、原文定位与规则证明';detail.append(title);
+  block(detail,'实际最终输入段落',data.actual_input_passages);block(detail,'最终证据与原文位置',data.evidence);block(detail,'规则处理（local_rule；保留原记录字段）',{proofs:data.rule_processing,operations:data.rule_operations});block(detail,'计算改答与引用组装',{calculation_proposed_response:data.calculation_proposed_response,reference_derived_response:data.reference_derived_response});$('closure').append(detail);
+}
+async function initialize(){
+  const cases=await(await fetch('/api/cases')).json();cases.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=c.id+' '+c.question;$('case').append(o);});
+  try{const response=await fetch('/api/versions');if(response.ok){const info=await response.json();integratedAvailable=true;$('version-note').textContent=info.original+'；'+info.integrated+'；冻结：'+info.configuration_ref;}}catch(error){$('status').textContent=String(error);}
+  $('entry').querySelector('option[value="integrated"]').disabled=!integratedAvailable;
+  await refreshInput();
+}
+$('entry').onchange=async()=>{const integrated=$('entry').value==='integrated';$('mode').querySelector('option[value="local"]').disabled=!integrated;$('mode').value=integrated?'local':'dry';if(integrated)$('variant').value='improved';$('version-note').textContent=integrated?'正在使用：评测后系统探索；模型原始输出与local_rule分开；语义未核验。':'正在使用：原入口；首次40项记录不变。';try{await refreshInput();}catch(error){$('status').textContent=String(error);}};
+$('case').onchange=$('condition').onchange=async()=>{try{await refreshInput();}catch(error){$('status').textContent=String(error);}};
+$('run').onclick=async()=>{
+  if($('mode').value==='paid'&&!confirm('本次将发起一次自费API请求，是否继续？'))return;
+  const integrated=$('entry').value==='integrated';
+  if(integrated&&(!preview||$('mode').value!=='local')){$('status').textContent='需要当前资料预览及本地真实调用模式';return;}
+  $('run').disabled=true;$('status').textContent='处理中；不自动重试…';
+  const body={entry:$('entry').value,case_id:$('case').value,condition:$('condition').value,variant:$('variant').value,mode:$('mode').value,...(integrated?preview:{})};
+  const start=performance.now();
+  try{
+    const response=await fetch('/api/run',{method:'POST',headers:{'Content-Type':'application/json','X-Assessment-Session':'__SESSION_TOKEN__'},body:JSON.stringify(body)});const data=await response.json();
+    const elapsed=performance.now()-start;render({...data,client_elapsed_ms:elapsed});$('status').textContent=response.ok?'结果已保存；语义支持为not_checked，不代表回答正确。':'执行未完成；不自动重发';
+    if(integrated&&data.request_id){await fetch('/api/page-observation',{method:'POST',headers:{'Content-Type':'application/json','X-Assessment-Session':'__SESSION_TOKEN__'},body:JSON.stringify({request_id:data.request_id,main_task_id:data.main_task_id,client_elapsed_ms:elapsed,http_status:response.status,actual_request:body,actual_response:data,displayed_text:$('closure').textContent})});}
+  }catch(error){$('status').textContent=String(error)+'；不自动重发';}finally{$('run').disabled=integrated;}
+};
+initialize().catch(error=>{$('status').textContent=String(error);});
+
 </script></html>

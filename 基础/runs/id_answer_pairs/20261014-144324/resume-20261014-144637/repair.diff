@@ -1,0 +1,10 @@
+--- before/run_id_answer_pair.py
++++ after/run_id_answer_pair.py
+@@ -33,6 +33,7 @@
+     '基础/starter/student.py','基础/starter/provider.py']
+ source_names += [(folder/n).relative_to(repo).as_posix() for n in ['run_id_answer_pair.py','system-addition.json','config.answer.json','eight-case-association-recompute.json']]
+ source_hashes={n:sha(repo/n) for n in source_names}
++(folder/'code-snapshot').mkdir(parents=True,exist_ok=True)
+ for name in source_names:
+     dest=folder/'code-snapshot'/Path(name).name
+     if dest.exists():assert sha(dest)==source_hashes[name]

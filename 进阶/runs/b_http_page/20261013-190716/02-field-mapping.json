@@ -1,0 +1,14 @@
+{
+  "raw_response": "engine_response完整保留",
+  "mode": "request.mode=offline_replay",
+  "support_status": "外层not_checked，原值保留于engine_response.support_status",
+  "judgment_source": "外层unverified，原值保留",
+  "locator_status": "非空引用+证据ID存在+实际证据属于请求范围；无引用absent，否则invalid",
+  "block_id": "由固定资料id逐项映射，不改原始块ID",
+  "scope_status": "范围存在性核对；invalid_scope是展示层值，不声称Engine已修复范围契约",
+  "actual_scopes": "实际返回evidence中的doc_id/snapshot去重",
+  "elapsed_ms": "Engine真实本地函数耗时",
+  "run_kind": "HTTP传输仍为offline_replay",
+  "draft": "使用data.json中case对应固定draft；边界只改请求范围",
+  "log": "events.jsonl记录startup及每次完整HTTP正文、Engine输入、corpus、draft、缓存前后及响应"
+}

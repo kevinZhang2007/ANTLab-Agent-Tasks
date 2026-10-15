@@ -1,0 +1,633 @@
+--- check_native_pattern.py
++++ check-native-pattern-v2.py
+@@ -1,79 +1,179 @@
+-"""从本机服务取得实际编译GBNF，再用原生grammar sampler检查自造JSON；不decode或生成。"""
++"""直接调用装机C++ Schema转换器与原生grammar sampler；不启动服务、不decode。"""
+ from pathlib import Path
+ from datetime import datetime
+ import ctypes as c
+-import json,math,os,socket,subprocess,time,urllib.request
+-work=Path(__file__).parent;folder=Path((work/'answer_form_folder.txt').read_text(encoding='utf-8'))
+-root=Path(r'C:\Users\86186\AppData\Local\ANTLabLocalModel');binary=root/'llama-b11429'
+-opener=urllib.request.build_opener(urllib.request.ProxyHandler({}))
+-def get(route):
+- with opener.open('http://127.0.0.1:8088/'+route,timeout=5) as r:return json.loads(r.read())
+-grammars={};probes=[]
+-with socket.socket() as s:s.settimeout(1);assert s.connect_ex(('127.0.0.1',8088))!=0
+-for kind in ['number','percent']:
+- args=[str(binary/'llama-server.exe'),'-m',str(root/'models/Qwen3-0.6B-Q8_0.gguf'),'--host','127.0.0.1','--port','8088','--ctx-size','512','--parallel','1','--threads','4','--gpu-layers','0','--no-warmup','--no-context-shift','--json-schema-file',str(work/('schema-probe-'+kind+'.json'))]
+- with (folder/('probe-'+kind+'.stdout.txt')).open('wb') as stdout,(folder/('probe-'+kind+'.stderr.txt')).open('wb') as stderr:
+-  process=subprocess.Popen(args,stdout=stdout,stderr=stderr,creationflags=subprocess.CREATE_NO_WINDOW)
+- try:
+-  start=time.monotonic()
+-  while True:
+-   assert process.poll() is None,'原生pattern检查服务启动失败'
+-   try:
+-    if get('health').get('status')=='ok':break
+-   except (OSError,TimeoutError):pass
+-   assert time.monotonic()-start<60;time.sleep(.25)
+-  props=get('props');grammar=props['default_generation_settings']['params']['grammar']
+-  assert isinstance(grammar,str) and grammar and '证据不足' in grammar
+-  grammars[kind]=grammar;(folder/('native-'+kind+'.gbnf')).write_text(grammar,encoding='utf-8')
+-  props['model_path']='%LOCALAPPDATA%/ANTLabLocalModel/models/Qwen3-0.6B-Q8_0.gguf'
+-  probes.append({'kind':kind,'arguments':[a.replace(str(root),'%LOCALAPPDATA%/ANTLabLocalModel').replace(str(work),'WORKSPACE/work') for a in args],'props':props,'http_routes':['health','props'],'generation_requests':0})
+- finally:
+-  if process.poll() is None:process.terminate();process.wait(timeout=10)
+-  probes[-1]['service_stopped']=process.poll() is not None if probes and probes[-1]['kind']==kind else False
+-  (folder/'native-pattern-probes.json').write_text(json.dumps(probes,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+- log=(folder/('probe-'+kind+'.stderr.txt')).read_text(encoding='utf-8',errors='replace')
+- assert 'accepting any string' not in log and 'is not supported' not in log,'pattern回退，停止'
++import hashlib
++import json
++import math
++import os
++import struct
++import sys
++
++folder = Path(sys.argv[1])
++old = folder.parent
++binary = Path(r'C:\Users\86186\AppData\Local\ANTLabLocalModel\llama-b11429')
++root = binary.parent
++
++def save(name, value):
++    path = folder / name
++    assert not path.exists()
++    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
++
++def stop_owned(process, owned):
++    # 空状态可清理；只处理本工具登记且对象相同的Popen，不按端口杀进程。
++    if process is None:
++        return 'no_process'
++    if owned.get(process.pid) is not process:
++        return 'not_owned_not_stopped'
++    if process.poll() is None:
++        process.terminate()
++        process.wait(timeout=10)
++    return 'owned_stopped'
++
++assert stop_owned(None, {}) == 'no_process'
++class NotOwned:
++    pid = -1
++assert stop_owned(NotOwned(), {}) == 'not_owned_not_stopped'
++
++def exports(path):
++    raw = path.read_bytes()
++    pe = struct.unpack_from('<I', raw, 60)[0]
++    count = struct.unpack_from('<H', raw, pe + 6)[0]
++    optional = struct.unpack_from('<H', raw, pe + 20)[0]
++    start = pe + 24 + optional
++    sections = [struct.unpack_from('<IIII', raw, start + i * 40 + 8) for i in range(count)]
++    def offset(rva):
++        return next(ptr + rva - va for vs, va, size, ptr in sections if va <= rva < va + max(vs, size))
++    export = offset(struct.unpack_from('<I', raw, pe + 24 + 112)[0])
++    n = struct.unpack_from('<I', raw, export + 24)[0]
++    names = offset(struct.unpack_from('<I', raw, export + 32)[0])
++    result = []
++    for i in range(n):
++        p = offset(struct.unpack_from('<I', raw, names + i * 4)[0])
++        result.append(raw[p:raw.index(b'\0', p)].decode('ascii'))
++    return result
++
++handles = os.add_dll_directory(str(binary))
++common = c.CDLL(str(binary / 'llama-common.dll'))
++lib = c.CDLL(str(binary / 'llama.dll'))
++names = exports(binary / 'llama-common.dll')
++parse_name = next(n for n in names if n.startswith('?parse@common_json@@'))
++convert_name = next(n for n in names if n.startswith('?json_schema_to_grammar@@') and 'AEBVcommon_json@@_N' in n)
++destroy_name = '??1common_json@@QEAA@XZ'
++parse = getattr(common, parse_name)
++parse.argtypes = [c.c_void_p, c.c_void_p]
++parse.restype = c.c_void_p
++convert = getattr(common, convert_name)
++convert.argtypes = [c.c_void_p, c.c_void_p, c.c_bool]
++convert.restype = c.c_void_p
++destroy_json = getattr(common, destroy_name)
++destroy_json.argtypes = [c.c_void_p]
++destroy_json.restype = None
++
++class NativeString(c.Structure):
++    # 本包Windows x64/MSVC std::string：16字节union，随后size与capacity。
++    _fields_ = [('storage', c.c_ubyte * 16), ('size', c.c_size_t), ('capacity', c.c_size_t)]
++
++assert c.sizeof(NativeString) == 32 and c.sizeof(c.c_void_p) == 8
++grammar_storage = []
++def native_convert(schema):
++    data = json.dumps(schema, ensure_ascii=False).encode('utf-8')
++    assert len(data) > 15
++    backing = c.create_string_buffer(data)
++    string = NativeString()
++    c.c_void_p.from_buffer(string).value = c.addressof(backing)
++    string.size = len(data)
++    string.capacity = len(data)
++    # 同版本json.h明确common_json含alignas(8) storage[32]。
++    parsed = (c.c_uint64 * 4)()
++    result = NativeString()
++    parsed_ok = False
++    try:
++        assert parse(c.byref(parsed), c.byref(string)) == c.addressof(parsed)
++        parsed_ok = True
++        assert convert(c.byref(result), c.byref(parsed), True) == c.addressof(result)
++        assert 0 < result.size < 1048576 and result.capacity >= result.size
++        ptr = c.c_void_p.from_buffer(result).value if result.capacity > 15 else c.addressof(result)
++        grammar = c.string_at(ptr, result.size).decode('utf-8')
++        assert 'root ::=' in grammar
++        # 保留两份小字符串到短生命周期检查进程退出，不跨CRT猜测释放函数。
++        grammar_storage.append(result)
++        return grammar
++    finally:
++        if parsed_ok:
++            destroy_json(c.byref(parsed))
++
++grammars = {}
++for kind in ['number', 'percent']:
++    schema = json.loads((old / ('schema-self-' + kind + '.json')).read_text(encoding='utf-8'))
++    grammar = native_convert(schema)
++    grammars[kind] = grammar
++    (folder / ('native-' + kind + '.gbnf')).write_text(grammar, encoding='utf-8')
++original = json.loads((old / 'config-D02-original.json').read_text(encoding='utf-8'))
++grammars['original'] = native_convert(original['parameters']['response_format']['json_schema']['schema'])
++(folder / 'native-original.gbnf').write_text(grammars['original'], encoding='utf-8')
+ 
+ class ModelParams(c.Structure):
+- _fields_=[('devices',c.c_void_p),('tensor_buft_overrides',c.c_void_p),('n_gpu_layers',c.c_int32),('split_mode',c.c_int),('load_mode',c.c_int),('lazy_mode',c.c_int),('main_gpu',c.c_int32),('tensor_split',c.c_void_p),('progress_callback',c.c_void_p),('progress_callback_user_data',c.c_void_p),('kv_overrides',c.c_void_p),('vocab_only',c.c_bool),('check_tensors',c.c_bool),('use_extra_bufts',c.c_bool),('no_host',c.c_bool),('no_alloc',c.c_bool),('load_mtp',c.c_bool)]
+-class Token(c.Structure):_fields_=[('id',c.c_int32),('logit',c.c_float),('p',c.c_float)]
+-class Tokens(c.Structure):_fields_=[('data',c.POINTER(Token)),('size',c.c_size_t),('selected',c.c_int64),('sorted',c.c_bool)]
+-dll_dir=os.add_dll_directory(str(binary));lib=c.CDLL(str(binary/'llama.dll'))
+-def signature(name,args,ret):
+- fn=getattr(lib,name);fn.argtypes=args;fn.restype=ret;return fn
+-signature('llama_backend_init',[],None)()
+-default=signature('llama_model_default_params',[],ModelParams)
+-load=signature('llama_model_load_from_file',[c.c_char_p,ModelParams],c.c_void_p)
+-free_model=signature('llama_model_free',[c.c_void_p],None)
+-vocab_of=signature('llama_model_get_vocab',[c.c_void_p],c.c_void_p)
+-tokenize=signature('llama_tokenize',[c.c_void_p,c.c_char_p,c.c_int32,c.POINTER(c.c_int32),c.c_int32,c.c_bool,c.c_bool],c.c_int32)
+-eos_of=signature('llama_vocab_eos',[c.c_void_p],c.c_int32)
+-grammar_init=signature('llama_sampler_init_grammar',[c.c_void_p,c.c_char_p,c.c_char_p],c.c_void_p)
+-apply=signature('llama_sampler_apply',[c.c_void_p,c.POINTER(Tokens)],None)
+-accept=signature('llama_sampler_accept',[c.c_void_p,c.c_int32],None)
+-free_sampler=signature('llama_sampler_free',[c.c_void_p],None)
+-params=default();params.vocab_only=True;params.n_gpu_layers=0
+-model=load(str(root/'models/Qwen3-0.6B-Q8_0.gguf').encode(),params);assert model
+-rows=[]
++    _fields_ = [('devices', c.c_void_p), ('tensor_buft_overrides', c.c_void_p), ('n_gpu_layers', c.c_int32), ('split_mode', c.c_int), ('load_mode', c.c_int), ('lazy_mode', c.c_int), ('main_gpu', c.c_int32), ('tensor_split', c.c_void_p), ('progress_callback', c.c_void_p), ('progress_callback_user_data', c.c_void_p), ('kv_overrides', c.c_void_p), ('vocab_only', c.c_bool), ('check_tensors', c.c_bool), ('use_extra_bufts', c.c_bool), ('no_host', c.c_bool), ('no_alloc', c.c_bool), ('load_mtp', c.c_bool)]
++class Token(c.Structure):
++    _fields_ = [('id', c.c_int32), ('logit', c.c_float), ('p', c.c_float)]
++class Tokens(c.Structure):
++    _fields_ = [('data', c.POINTER(Token)), ('size', c.c_size_t), ('selected', c.c_int64), ('sorted', c.c_bool)]
++def signature(name, args, ret):
++    fn = getattr(lib, name)
++    fn.argtypes = args
++    fn.restype = ret
++    return fn
++signature('llama_backend_init', [], None)()
++default = signature('llama_model_default_params', [], ModelParams)
++load = signature('llama_model_load_from_file', [c.c_char_p, ModelParams], c.c_void_p)
++free_model = signature('llama_model_free', [c.c_void_p], None)
++vocab_of = signature('llama_model_get_vocab', [c.c_void_p], c.c_void_p)
++tokenize = signature('llama_tokenize', [c.c_void_p, c.c_char_p, c.c_int32, c.POINTER(c.c_int32), c.c_int32, c.c_bool, c.c_bool], c.c_int32)
++eos_of = signature('llama_vocab_eos', [c.c_void_p], c.c_int32)
++grammar_init = signature('llama_sampler_init_grammar', [c.c_void_p, c.c_char_p, c.c_char_p], c.c_void_p)
++apply = signature('llama_sampler_apply', [c.c_void_p, c.POINTER(Tokens)], None)
++accept = signature('llama_sampler_accept', [c.c_void_p, c.c_int32], None)
++free_sampler = signature('llama_sampler_free', [c.c_void_p], None)
++params = default()
++params.vocab_only = True
++params.n_gpu_layers = 0
++model = load(str(root / 'models/Qwen3-0.6B-Q8_0.gguf').encode(), params)
++assert model
++rows = []
+ try:
+- vocab=vocab_of(model);eos=eos_of(vocab)
+- for test in json.loads((folder/'offline-regex-check.json').read_text(encoding='utf-8'))['tests']:
+-  if test['rule']['kind'] is None:continue
+-  kind='number' if test['rule']['kind']=='数值' else 'percent'
+-  value={'answer':test['answer'],'citations':[]};text=json.dumps(value,ensure_ascii=False,separators=(',',':')).encode()
+-  output=(c.c_int32*2048)();n=tokenize(vocab,text,len(text),output,len(output),False,False);assert 0<n<=len(output)
+-  sampler=grammar_init(vocab,grammars[kind].encode(),b'root');assert sampler
+-  valid=True;failed_token=None
+-  try:
+-   for token in list(output[:n])+[eos]:
+-    data=(Token*1)(Token(token,0.0,0.0));array=Tokens(data,1,-1,False);apply(sampler,c.byref(array))
+-    if not math.isfinite(data[0].logit):valid=False;failed_token=token;break
+-    accept(sampler,token)
+-  finally:free_sampler(sampler)
+-  rows.append({'kind':kind,'json_text':text.decode(),'expected_accept':test['expected_accept'],'native_accept':valid,'first_rejected_token':failed_token})
+-  assert valid==test['expected_accept'],'原生grammar与预期不符：'+text.decode()
++    vocab = vocab_of(model)
++    eos = eos_of(vocab)
++    def native_accepts(kind, value):
++        text = json.dumps(value, ensure_ascii=False, separators=(',', ':')).encode()
++        output = (c.c_int32 * 2048)()
++        n = tokenize(vocab, text, len(text), output, len(output), False, False)
++        assert 0 < n <= len(output)
++        sampler = grammar_init(vocab, grammars[kind].encode(), b'root')
++        assert sampler
++        try:
++            for token in list(output[:n]) + [eos]:
++                data = (Token * 1)(Token(token, 0.0, 0.0))
++                array = Tokens(data, 1, -1, False)
++                apply(sampler, c.byref(array))
++                if not math.isfinite(data[0].logit):
++                    return False, token
++                accept(sampler, token)
++            return True, None
++        finally:
++            free_sampler(sampler)
++    tests = json.loads((old / 'offline-regex-check.json').read_text(encoding='utf-8'))['tests']
++    cases = [('number' if t['rule']['kind'] == '数值' else 'percent', {'answer': t['answer'], 'citations': []}, t['expected_accept']) for t in tests if t['rule']['kind'] is not None]
++    cases += [(k, v, expected) for k in ['number', 'percent', 'original'] for v, expected in [({'answer': '证据不足', 'citations': ['self-id']}, True), ({'answer': '证据不足'}, False), ({'citations': []}, False), ({'answer': 1, 'citations': []}, False), ({'answer': '证据不足', 'citations': [1]}, False), ({'answer': '证据不足', 'citations': [], 'extra': True}, False)]]
++    for kind, value, expected in cases:
++        actual, failed = native_accepts(kind, value)
++        rows.append({'kind': kind, 'json_value': value, 'expected_accept': expected, 'native_accept': actual, 'rejected_token': failed})
++        save_progress = {'recorded_at': datetime.now().astimezone().isoformat(), 'passed_so_far': all(r['expected_accept'] == r['native_accept'] for r in rows), 'tests': rows, 'generated_tokens': 0}
++        (folder / 'native-check-progress.json').write_text(json.dumps(save_progress, ensure_ascii=False, indent=2), encoding='utf-8')
++        assert actual == expected, '原生语法正反例与预期不符'
+ finally:
+- free_model(model);signature('llama_backend_free',[],None)();dll_dir.close()
+-record={'checked_at':datetime.now().astimezone().isoformat(),'supported':True,'native_tests':rows,'method':'本机server从Schema编译的GBNF；同包llama.dll仅vocab_only加载，以grammar sampler检查人工构造token串和EOS，不调用encode/decode，不生成token。','generated_tokens':0,'counts_as_generation':False,'api_source':'official-llama.h：llama_model_params、token_data_array、llama_sampler_init_grammar/apply/accept','fallback_seen':False,'probe_services_stopped':True}
+-(folder/'native-pattern-validation.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+-print('PASS native grammar',len(rows),'synthetic JSON acceptance/rejection cases; zero generated tokens')
++    free_model(model)
++    signature('llama_backend_free', [], None)()
++    handles.close()
++save('native-pattern-validation.json', {'checked_at': datetime.now().astimezone().isoformat(), 'passed': True, 'tests': rows, 'native_converter_exports': {'parse': parse_name, 'convert': convert_name, 'destroy_json': destroy_name}, 'dll_sha256': {n: hashlib.sha256((binary / n).read_bytes()).hexdigest() for n in ['llama-common.dll', 'llama.dll']}, 'model_load': 'vocab_only，不加载权重张量；不创建推理context，不调用encode/decode', 'generation_requests': 0, 'generated_tokens': 0, 'owned_service_pids': [], 'cleanup_empty_and_not_owned_tests_passed': True, 'proof': '实际装机C++ JSON Schema转换结果，由同包原生grammar sampler检查人工token串及EOS；不是Python正则。', 'abi_limit': '导出C++函数桥接仅针对本次已核对的Windows x64/MSVC布局及本包；不称跨平台SDK。'})
++print('PASS', len(rows), 'native grammar acceptance/rejection cases; zero generation calls')
+--- 基础/tests/run_two_step_pairs.py
++++ 基础/tests/run_answer_form_pairs.py
+@@ -17,7 +17,7 @@
+ 
+ repo=Path(__file__).resolve().parents[2]
+ base=repo/'基础'
+-experiment=base/'runs/two_step/dev_r0'
++experiment=Path(sys.argv[1])
+ folder=experiment
+ assert not list(folder.glob('run-*.json')), '已有配对记录，禁止重复调用'
+ config_fixed=json.loads((experiment/'config.answer.json').read_text(encoding='utf-8'))
+@@ -27,21 +27,16 @@
+ assert source_hashes==json.loads((folder/'student-source-hashes.json').read_text(encoding='utf-8'))
+ assert (base/'starter/student.py').read_bytes()==(base/'runs/improve/linked_r0/student-v1.py').read_bytes()
+ call_order=design['call_order']
+-import two_step_candidate as candidate
+-config_selection=json.loads((folder/'config.selection.json').read_text(encoding='utf-8'))
+-assert candidate.SELECTION_PROMPT==(folder/'system.selection.txt').read_text(encoding='utf-8')
+-assert candidate.SELECTION_SCHEMA==json.loads((folder/'schema.selection.json').read_text(encoding='utf-8'))
+-assert json.loads((folder/'offline-check.json').read_text(encoding='utf-8'))['passed']
++assert json.loads((folder/'native-pattern-validation.json').read_text(encoding='utf-8'))['passed']
+ plan={'source_hashes':source_hashes,'config':config_fixed,'call_order':call_order}
+ numeric_parameters={k:v for k,v in config_fixed['parameters'].items() if k!='response_format'}
+ sys.path.insert(0,str(base/'starter'))
+ import student
+ import provider
+-capacity=json.loads((base/'runs/capacity/stage3/inputs.json').read_text(encoding='utf-8'))
+ root=Path(os.environ['LOCALAPPDATA'])/'ANTLabLocalModel'
+ log_id=str(uuid.uuid4())
+-stdout_path=root/f'logs/two-step-{log_id}.stdout.log'
+-stderr_path=root/f'logs/two-step-{log_id}.stderr.log'
++stdout_path=root/f'logs/answer-form-{log_id}.stdout.log'
++stderr_path=root/f'logs/answer-form-{log_id}.stderr.log'
+ opener=urllib.request.build_opener(urllib.request.ProxyHandler({}))
+ def service(route,body=None):
+     assert route in {'health','props','slots','apply-template','tokenize','slots/0?action=erase'}
+@@ -54,7 +49,7 @@
+ parents={}
+ start_times={}
+ skipped=[]
+-startup={'record_kind':'two_step_development_runtime','recorded_at_utc':datetime.now(timezone.utc).isoformat(),
++startup={'record_kind':'historical_replay_answer_form_runtime','recorded_at_utc':datetime.now(timezone.utc).isoformat(),
+          'runtime_reference':'基础/runs/setup/62a41e78-da75-48ca-b9a3-d0ec29127825_runtime.json','context':4096,
+          'generation_attempts':0,'stopped_on_technical_failure':False}
+ args=[str(root/'llama-b11429/llama-server.exe'),'-m',str(root/'models/Qwen3-0.6B-Q8_0.gguf'),
+@@ -91,177 +86,106 @@
+             return
+         memory_stop.wait(2)
+ 
++
++import socket
++
++owned_processes={}
++records=[]
++def write(name,value):
++    (folder/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++def check_old():
++    hashes=json.loads((folder/'protected-hashes.json').read_text(encoding='utf-8'))
++    assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in hashes.items())
++    assert Path(__file__).read_bytes()==(folder/'snapshot-run_answer_form_pairs.py').read_bytes()
++    assert (base/'tests/answer_form_candidate.py').read_bytes()==(folder.parent/'snapshot-answer_form_candidate.py').read_bytes()
++def stop_owned(process):
++    if process is None:return 'no_process'
++    assert owned_processes.get(process.pid) is process,'不停止非本轮进程'
++    if process.poll() is None:
++        process.terminate()
++        try:process.wait(timeout=10)
++        except subprocess.TimeoutExpired:process.kill();process.wait()
++    return 'owned_stopped'
++assert stop_owned(None)=='no_process'
+ try:
+-    # 权重再次核对；不下载、不改变已选代码。
+-    with (root/'models/Qwen3-0.6B-Q8_0.gguf').open('rb') as stream:
+-        assert hashlib.file_digest(stream,'sha256').hexdigest()==provenance['sha256']
+-    startup['before_load']=memory_sample()
+-    assert startup['before_load']['available_bytes']>=2*1024**3, '可用内存不足2 GiB，停止本轮加载'
+-    with stdout_path.open('wb') as stdout,stderr_path.open('wb') as stderr:
+-        process=subprocess.Popen(args,stdout=stdout,stderr=stderr,creationflags=subprocess.CREATE_NO_WINDOW)
+-    started=time.monotonic()
+-    memory_thread=threading.Thread(target=monitor_memory,daemon=True);memory_thread.start()
++    with socket.socket() as s:s.settimeout(1);assert s.connect_ex(('127.0.0.1',8080))!=0,'8080已占用，不接管他人服务'
++    check_old()
++    with (root/'models/Qwen3-0.6B-Q8_0.gguf').open('rb') as stream:assert hashlib.file_digest(stream,'sha256').hexdigest()==provenance['sha256']
++    startup['weight_provenance']=provenance
++    startup['before_load']=memory_sample();assert startup['before_load']['available_bytes']>=2*1024**3
++    with stdout_path.open('wb') as stdout,stderr_path.open('wb') as stderr:process=subprocess.Popen(args,stdout=stdout,stderr=stderr,creationflags=subprocess.CREATE_NO_WINDOW)
++    owned_processes[process.pid]=process;startup['owned_service_pid']=process.pid
++    started=time.monotonic();memory_thread=threading.Thread(target=monitor_memory,daemon=True);memory_thread.start()
+     while True:
+-        if memory_abort.is_set():raise RuntimeError('可用内存持续低于1 GiB，停止')
+-        if process.poll() is not None: raise RuntimeError('服务加载失败')
++        assert process.poll() is None and not memory_abort.is_set(),'加载/内存失败'
+         try:
+-            if service('health').get('status')=='ok': break
+-        except (urllib.error.URLError,TimeoutError): pass
+-        if time.monotonic()-started>120: raise TimeoutError('启动超时')
++            if service('health').get('status')=='ok':break
++        except (urllib.error.URLError,TimeoutError):pass
++        if time.monotonic()-started>120:raise TimeoutError('加载超过120秒')
+         time.sleep(.5)
+-    props=service('props')
+-    assert props['default_generation_settings']['n_ctx']==4096
++    props=service('props');assert props['default_generation_settings']['n_ctx']==4096 and props['model_alias']==config_fixed['model']
++    assert '11429' in props['build_info'] and 'd81235049' in props['build_info']
++    assert all(math.isclose(props['default_generation_settings']['params'][k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric_parameters.items() if k!='max_tokens')
+     props['model_path']='%LOCALAPPDATA%/ANTLabLocalModel/models/Qwen3-0.6B-Q8_0.gguf'
+-    startup['props']=props
+-    startup['candidate_default_parameter_checks']={key:math.isclose(props['default_generation_settings']['params'][key],value,rel_tol=1e-6,abs_tol=1e-6) for key,value in numeric_parameters.items() if key!='max_tokens'}
+-    startup['default_check_scope']='sampling defaults only; request budget checked in serialized body'
+-    assert all(startup['candidate_default_parameter_checks'].values()), '生成前候选参数未生效'
+-    assert startup['after_load']['available_bytes']>=1024**3 if 'after_load' in startup else True
+-    startup['load_seconds']=time.monotonic()-started
+-    startup['after_load']=memory_sample()
+-    template=props.get('chat_template')
+-    assert isinstance(template,str) and '<|im_start|>' in template and '<|im_end|>' in template, '未识别模型自己的ChatML模板'
+-    assert 'enable_thinking' in template or '<think>' in template, '未识别Qwen3自己的思考模板'
+-    assert props.get('model_alias')==config_fixed['model'], '模型别名不一致'
+-    preflight=[]
+-    inputs={}
+-    for cid in ('D01','D02','D03','D04'):
+-        row=next(r for r in capacity['rows'] if r['case_id']==cid and r['condition']=='R0')
+-        payload=json.loads(row['messages'][1]['content'])
+-        ordered=student.improve(payload['question'],copy.deepcopy(payload['passages']))
+-        inputs[cid]={'question':payload['question'],'original':payload['passages'],'ordered':ordered}
+-        for label,messages,config in [
+-            ('answer_full',student.prepare_messages(payload['question'],ordered),config_fixed),
+-            ('selection_full',candidate.prepare_selection_messages(payload['question'],ordered),config_selection),
+-            ('answer_empty',student.prepare_messages(payload['question'],[]),config_fixed)]:
+-            request_body={'model':config['model'],'messages':messages,'stream':False,**config['parameters']}
+-            prompt=service('apply-template',request_body)['prompt']
+-            assert all(m['content'] in prompt for m in messages)
+-            assert prompt.endswith('<think>\n\n</think>\n\n')
++    startup.update(props=props,load_seconds=time.monotonic()-started,after_load=memory_sample())
++    assert startup['after_load']['available_bytes']>=1024**3
++    inputs=json.loads((folder.parent/'historical-replay-inputs-and-schemas.json').read_text(encoding='utf-8'))
++    prepared=[]
++    for item in call_order:
++        data=next(r for r in inputs if r['case_id']==item['case_id'])
++        for variant in item['variants']:
++            config=json.loads((folder.parent/('config-'+item['case_id']+('-original.json' if variant=='original_schema' else '-constrained.json'))).read_text(encoding='utf-8'))
++            messages=student.prepare_messages(data['question'],data['passages'])
++            body={'model':config['model'],'messages':messages,'stream':False,**config['parameters']}
++            prompt=service('apply-template',body)['prompt']
++            assert all(m['content'] in prompt for m in messages) and prompt.endswith('<think>\n\n</think>\n\n')
+             tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
+-            preflight.append({'case_id':cid,'input_kind':label,'input_tokens':len(tokens),'with_budget':len(tokens)+256,'messages':messages,'rendered_prompt':prompt})
+             assert len(tokens)+256<4096
+-    (folder/'preflight.json').write_text(json.dumps({'checked_at':datetime.now().astimezone().isoformat(),'counts_as_generation':False,'schema_unique_items_checked_locally':True,'actual_stage2_checked_again_before_send':True,'rows':preflight},ensure_ascii=False,indent=2),encoding='utf-8')
+-    plan.update(recorded_at=datetime.now().astimezone().isoformat(),stage1_config=config_selection,service_arguments=startup['arguments'],generation_limit=12,evaluation='No answer file read until driver has ended all scheduled calls',order=call_order)
+-    (folder/'precall-plan.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2),encoding='utf-8')
+-    (folder/'runtime-before-generation.json').write_text(json.dumps(startup,ensure_ascii=False,indent=2),encoding='utf-8')
+-    print('PREFLIGHT PASS',[(p['case_id'],p['input_kind'],p['input_tokens']) for p in preflight],flush=True)
+-
+-    def save_parent(parent):
+-        path=folder/('task-'+parent['parent_request_id']+'.json')
+-        path.write_text(json.dumps(parent,ensure_ascii=False,indent=2),encoding='utf-8')
+-
+-    def finish_parent(key,parent,status):
+-        parent['status']=status
+-        parent['ended_at']=datetime.now().astimezone().isoformat()
+-        parent['end_to_end_seconds']=time.perf_counter()-start_times[key]
+-        save_parent(parent)
+-        (folder/'task-results.json').write_text(json.dumps(list(parents.values()),ensure_ascii=False,indent=2),encoding='utf-8')
+-
+-    def validate_answer(content,passages):
+-        try:parsed=json.loads(content,object_pairs_hook=candidate.unique_fields)
+-        except (ValueError,TypeError):parsed=None
+-        valid=isinstance(parsed,dict) and set(parsed)=={'answer','citations'} and isinstance(parsed.get('answer'),str) and isinstance(parsed.get('citations'),list) and all(isinstance(c,str) for c in parsed['citations'])
+-        citations=parsed['citations'] if valid else []
+-        return {'format_complete':valid,'citation_ids_exist':bool(citations) and all(c in {p['id'] for p in passages} for c in citations),'parsed':parsed}
+-
+-    for item in call_order:
+-        key=(item['case_id'],item['variant'])
+-        data=inputs[item['case_id']]
+-        if item['stage']=='answer' and item['variant']=='candidate' and not parents[key]['selection_validation']['valid']:
+-            skipped.append({**item,'reason':'定位输出非法；不执行第二步、不回退'})
+-            continue
+-        assert startup['generation_attempts']<12
+-        if memory_abort.is_set():raise RuntimeError('内存不足，停止')
+-        for name,digest in source_hashes.items():assert hashlib.sha256((base/'starter'/name).read_bytes()).hexdigest()==digest
+-        assert hashlib.sha256((base/'tests/two_step_candidate.py').read_bytes()).hexdigest()==json.loads((folder/'offline-check.json').read_text(encoding='utf-8'))['module_sha256']
+-        used=(candidate.select_original_passages(data['ordered'],parents[key]['selection_validation']) if item['variant']=='candidate' and item['stage']=='answer' else copy.deepcopy(data['ordered']))
+-        assert all(p in data['ordered'] for p in used)
+-        messages=(candidate.prepare_selection_messages(data['question'],used) if item['stage']=='selection' else student.prepare_messages(data['question'],used))
+-        assert json.loads(messages[1]['content'])=={'question':data['question'],'passages':used}
+-        config=copy.deepcopy(config_selection if item['stage']=='selection' else config_fixed)
+-        body={'model':config['model'],'messages':messages,'stream':False,**config['parameters']}
+-        prompt=service('apply-template',body)['prompt']
+-        assert all(m['content'] in prompt for m in messages)
+-        tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
+-        assert len(tokens)+256<4096,'本次完整输入超限；不删段或改配置'
+-        erase=service('slots/0?action=erase',{})
+-        if key not in parents:
+-            parents[key]={'parent_request_id':str(uuid.uuid4()),'case_id':item['case_id'],'condition':'R0','variant':item['variant'],'started_at':datetime.now().astimezone().isoformat(),'original_passages':data['original'],'ordered_passages':data['ordered'],'question':data['question'],'stage_run_ids':[],'status':'pending'}
+-        parent=parents[key]
+-        record={'schema_version':1,'run_id':str(uuid.uuid4()),'parent_request_id':parent['parent_request_id'],'utc':datetime.now(timezone.utc).isoformat(),'case_id':item['case_id'],'split':'dev','condition':'R0','variant':item['variant'],'stage':item['stage'],'execution_index':item['index'],'mode':'local','run_kind':'live_api','experiment_role':'two_step_development','config':config,'context':4096,'messages':messages,'original_passages':data['original'],'used_passages':used,'original_passage_ids':[p['id'] for p in data['original']],'selected_passage_ids':[p['id'] for p in used],'rendered_prompt':prompt,'rendered_prompt_tokens':len(tokens),'weight_sha256':provenance['sha256'],'model_revision':provenance['revision'],'source_hashes':source_hashes,'driver_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'cache_erase':erase,'status':'request_pending'}
+-        path=folder/f"run-{record['run_id']}.json"
+-        assert not path.exists()
+-        def save():path.write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
+-        save()
+-        parent['stage_run_ids'].append(record['run_id']);save_parent(parent)
++            assert {k:v for k,v in config['parameters'].items() if k!='response_format'}==numeric_parameters
++            prepared.append({'case_id':item['case_id'],'variant':variant,'config':config,'messages':messages,'passages':data['passages'],'question':data['question'],'historical_selection_run_id':data['historical_selection_run_id'],'rule':data['rule'],'rendered_prompt':prompt,'input_tokens':len(tokens),'output_budget':256})
++    write('preflight.json',{'checked_at':datetime.now().astimezone().isoformat(),'generation_calls':0,'items':prepared})
++    write('precall-plan.json',{'recorded_at':datetime.now().astimezone().isoformat(),'original_plan':'../design-plan.json','call_order':call_order,'max_generations':8,'source_hashes':source_hashes,'service_arguments':startup['arguments'],'owned_pid':process.pid,'input_role':'历史重放原段落，只执行回答，不是完整两步流程','native_validation':'native-pattern-validation.json','evaluate_after_all_calls':True})
++    write('runtime-before-generation.json',startup)
++    print('PREFLIGHT PASS',[(r['case_id'],r['variant'],r['input_tokens']) for r in prepared],flush=True)
++    for item in prepared:
++        check_old();assert not memory_abort.is_set()
++        record={'run_id':str(uuid.uuid4()),'recorded_at':datetime.now().astimezone().isoformat(),'case_id':item['case_id'],'split':'dev','condition':'R0','variant':item['variant'],'run_kind':'live_api','experiment_role':'post_formal_historical_input_answer_form_control','selection_role':'historical_replay_not_reexecuted','historical_selection_run_id':item['historical_selection_run_id'],'config':item['config'],'messages':item['messages'],'used_passages':item['passages'],'original_passage_ids':[p['id'] for p in item['passages']],'input_tokens':item['input_tokens'],'rendered_prompt':item['rendered_prompt'],'total_capacity':item['input_tokens']+256,'source_hashes':source_hashes,'weight_provenance':provenance,'status':'request_pending'}
++        path=folder/('run-'+record['run_id']+'.json');assert not path.exists()
++        save=lambda:path.write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++        record['cache_erase']=service('slots/0?action=erase',{});save()
++        body={'model':item['config']['model'],'messages':item['messages'],'stream':False,**item['config']['parameters']}
+         build_opener=urllib.request.build_opener
+-        class CaptureOpener:
++        class Capture:
+             def __init__(self,inner):self.inner=inner
+-            def open(self,request,*args,**kwargs):
+-                record['actual_http_request_body']=json.loads(request.data)
+-                record['raw_http_request_body']=request.data.decode('utf-8')
+-                assert record['actual_http_request_body']==body and record['actual_http_request_body']['max_tokens']==256
+-                record['request_verified_before_send']=True
+-                try:return self.inner.open(request,*args,**kwargs)
+-                except urllib.error.HTTPError as error:
+-                    record['raw_http_error_body']=error.read().decode('utf-8',errors='replace');raise
+-        urllib.request.build_opener=lambda *args,**kwargs:CaptureOpener(build_opener(*args,**kwargs))
+-        if key not in start_times:start_times[key]=time.perf_counter()
++            def open(self,request,*a,**kw):
++                record['actual_http_request_body']=json.loads(request.data);record['raw_http_request_body']=request.data.decode()
++                assert record['actual_http_request_body']==body and body['max_tokens']==256
++                record['request_verified_before_send']=True;save()
++                try:return self.inner.open(request,*a,**kw)
++                except urllib.error.HTTPError as e:record['raw_http_error_body']=e.read().decode('utf-8',errors='replace');raise
++        urllib.request.build_opener=lambda *a,**kw:Capture(build_opener(*a,**kw))
+         try:
+-            startup['generation_attempts']+=1
+-            record.update(provider.call_model(messages,config))
+-        except Exception as error:
+-            record.update(status='driver_exception',error=type(error).__name__,error_detail=str(error),response=None,usage=None)
+-        finally:
+-            urllib.request.build_opener=build_opener;save()
+-        technical=record['status']!='ok' or not isinstance(record.get('response'),dict) or not record['response'].get('choices')
+-        if technical:
+-            startup['stopped_on_technical_failure']=True
+-            finish_parent(key,parent,'technical_failure')
+-            print('TECHNICAL FAILURE',record['run_id'],record['status'],flush=True)
+-            break
+-        record['server_slot_after_request']=service('slots')
+-        params=record['server_slot_after_request'][0]['params']
+-        record['parameter_checks']={k:math.isclose(params[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric_parameters.items() if k in params}
++            assert startup['generation_attempts']<8;startup['generation_attempts']+=1
++            record.update(provider.call_model(item['messages'],item['config']))
++        except Exception as e:record.update(status='driver_exception',error=repr(e),response=None)
++        finally:urllib.request.build_opener=build_opener;save()
++        if record['status']!='ok' or not isinstance(record.get('response'),dict) or not record['response'].get('choices'):raise RuntimeError('技术请求失败:'+record['run_id'])
++        record['slot_after']=service('slots');params=record['slot_after'][0]['params']
++        record['parameter_checks']={k:math.isclose(params[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric_parameters.items() if k in params and k!='max_tokens'}
+         record['parameters_not_echoed']=[k for k in numeric_parameters if k not in params]+['response_format','effective_n_predict_max']
+-        record['request_budget_observation']={'actual_body_max_tokens':record['actual_http_request_body']['max_tokens'],'task_max_tokens_echo':params.get('max_tokens'),'task_n_predict_echo':params.get('n_predict'),'finish_reason_is_not_budget_echo':True}
+-        save();assert all(record['parameter_checks'].values()),'请求参数未生效，停止'
+-        message=record['response']['choices'][0]['message'];content=message.get('content','')
+-        if item['stage']=='selection':
+-            validation=candidate.validate_selection(content,used)
+-            record['selection_validation']=validation;parent['selection_validation']=validation
+-            parent['raw_selection_content']=content
+-            if not validation['valid']:finish_parent(key,parent,'selection_output_failure')
+-            else:save_parent(parent)
+-        else:
+-            validation=validate_answer(content,used)
+-            record['answer_validation']=validation;parent['answer_validation']=validation
+-            parent['raw_final_content']=content;parent['final_used_passages']=used
+-            finish_parent(key,parent,'completed')
+-        save()
+-        summary.append({'run_id':record['run_id'],**item,'status':record['status'],'content':content,'elapsed_seconds':record['elapsed_seconds']})
+-        (folder/'stage-results.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
+-        print(json.dumps(summary[-1],ensure_ascii=False),flush=True)
+-    startup['completed_tasks']=sum(p['status'] in ['completed','selection_output_failure'] for p in parents.values())
+-    startup['planned_tasks']=8
+-    startup['skipped_calls']=skipped
+-    startup['all_planned_tasks_finished']=startup['completed_tasks']==8 and not startup['stopped_on_technical_failure']
+-except Exception as error:
+-    startup.update(stopped_on_technical_failure=True,error=type(error).__name__,error_detail=str(error))
+-    print('STOPPED:',type(error).__name__,str(error),flush=True)
++        record['request_budget_note']='序列化请求max_tokens=256；finish_reason不当预算回显。'
++        save();assert all(record['parameter_checks'].values())
++        records.append({'case_id':item['case_id'],'variant':item['variant'],'run_id':record['run_id'],'content':record['response']['choices'][0]['message'].get('content',''),'elapsed_seconds':record['elapsed_seconds'],'finish_reason':record['response']['choices'][0]['finish_reason']})
++        write('result-index.json',records);print(json.dumps(records[-1],ensure_ascii=False),flush=True)
++    startup['all_calls_completed']=len(records)==8
++except Exception as e:
++    startup.update(stopped_on_technical_failure=True,error=type(e).__name__,error_detail=str(e));print('STOPPED',repr(e),flush=True)
+ finally:
+     memory_stop.set()
+     if memory_thread is not None:memory_thread.join(timeout=5)
+-    startup['memory_abort']=memory_abort.is_set()
+-    if process is not None and process.poll() is None:
+-        process.terminate()
+-        try: process.wait(timeout=10)
+-        except subprocess.TimeoutExpired: process.kill(); process.wait()
++    startup['cleanup_result']=stop_owned(process)
+     startup['server_stopped']=process is not None and process.poll() is not None
+-    startup['after_stop']=memory_sample()
+-    log=stderr_path.read_text(encoding='utf-8',errors='replace') if stderr_path.exists() else ''
+-    (folder/'server-log.txt').write_text(log.replace(str(root),'%LOCALAPPDATA%\\ANTLabLocalModel'),encoding='utf-8')
+-    (folder/'runtime.json').write_text(json.dumps(startup,ensure_ascii=False,indent=2),encoding='utf-8')
+-    (folder/'stage-results.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
+-    print('FINAL ATTEMPTS:',startup['generation_attempts'],'SERVICE STOPPED:',startup['server_stopped'],flush=True)
++    startup['memory_abort']=memory_abort.is_set();startup['after_stop']=memory_sample();write('runtime.json',startup)
++    for source,name in [(stderr_path,'server-log.txt'),(stdout_path,'server-stdout.txt')]:
++        if source.exists():(folder/name).write_text(source.read_text(encoding='utf-8',errors='replace').replace(str(root),'%LOCALAPPDATA%\\ANTLabLocalModel'),encoding='utf-8')
++    print('FINAL',startup['generation_attempts'],'SERVICE STOPPED',startup['server_stopped'],flush=True)
+--- /dev/null
++++ 基础/tests/review_answer_form_pairs.py
+@@ -0,0 +1,65 @@
++"""调用全部结束后评价历史输入回答对照；判读不改写原响应。"""
++from pathlib import Path
++from datetime import datetime
++from decimal import Decimal, InvalidOperation
++import json,re,hashlib,sys
++folder=Path(sys.argv[1]);repo=Path(__file__).resolve().parents[2];base=repo/'基础'
++read=lambda p:json.loads(p.read_text(encoding='utf-8'))
++runtime=read(folder/'runtime.json');assert runtime['server_stopped'] and runtime.get('all_calls_completed') and not runtime['stopped_on_technical_failure']
++# 到这里才读取公开答案；本文件不参与生成、Schema识别或原文选择。
++gold={g['id']:g for g in read(base/'data/dev_answers.json')}
++basis=read(base/'runs/two_step_linked/20261013-193700/effective-semantic-review.json')
++number=r'[-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?'
++def equal_decimal(a,b):
++    try:return Decimal(a)==Decimal(b)
++    except (InvalidOperation,ValueError):return False
++def parse_pairs(pairs):
++    value={}
++    for k,v in pairs:
++        if k in value:raise ValueError('duplicate_field')
++        value[k]=v
++    return value
++rows=[]
++for item in read(folder/'result-index.json'):
++    r=read(folder/('run-'+item['run_id']+'.json'));g=gold[r['case_id']]
++    source=next(x for x in basis if x['case_id']==r['case_id'] and x['variant']=='linked_answer')
++    content=r['response']['choices'][0]['message'].get('content','')
++    try:parsed=json.loads(content,object_pairs_hook=parse_pairs)
++    except (ValueError,TypeError):parsed=None
++    valid=isinstance(parsed,dict) and set(parsed)=={'answer','citations'} and isinstance(parsed.get('answer'),str) and isinstance(parsed.get('citations'),list) and all(isinstance(x,str) for x in parsed['citations'])
++    answer=parsed['answer'] if valid else None;citations=parsed['citations'] if valid else []
++    correct=isinstance(answer,str) and answer.strip() in g['aliases'];semantic=correct
++    if isinstance(answer,str) and g['task_kind']=='difference':
++        correct=bool(re.fullmatch(number,answer) and equal_decimal(answer,g['answer']))
++        with_unit=re.fullmatch('('+number+r')\s*秒',answer)
++        semantic=correct or bool(with_unit and equal_decimal(with_unit.group(1),g['answer']))
++    elif isinstance(answer,str) and g['task_kind']=='percent':
++        correct=bool(answer.endswith('%') and re.fullmatch(number,answer[:-1]) and equal_decimal(answer[:-1],g['answer'].rstrip('%')))
++        semantic=correct
++    elif isinstance(answer,str) and g['task_kind']=='insufficient':
++        semantic=correct or answer in ['服务端GPU型号未知','未提及具体型号']
++    used=r['used_passages'];ids={p['id'] for p in used};required={p['id'] for p in source['source_basis']}
++    coverage=(bool(set(citations)&required) if g['task_kind']=='insufficient' else required.issubset(citations))
++    exists=valid and all(x in ids for x in citations);nonempty=bool(citations)
++    support=bool(semantic and exists and nonempty and coverage)
++    irrelevant=[x for x in citations if x in ids and x not in required]
++    strict=bool(correct and valid and exists and nonempty and support and not irrelevant)
++    reason=[]
++    if not valid:reason.append('JSON字段或类型不完整')
++    if not correct:reason.append('指定答法或答案值不合要求')
++    if semantic and not correct:reason.append('语义一致但附带单位/其他形式不符合题目要求')
++    if not coverage:reason.append('引用未覆盖必要依据')
++    if not support:reason.append('引用集合未支持实际answer')
++    if irrelevant:reason.append('含无关/范围冲突引用')
++    rows.append({'case_id':r['case_id'],'variant':r['variant'],'run_id':r['run_id'],'raw_content':content,'answer':answer,'citations':citations,'format_complete':valid,'answer_correct_specified_form':correct,'semantic_consistent':semantic,'citation_ids_exist':exists,'citations_nonempty':nonempty,'necessary_evidence_covered':coverage,'evidence_supports_actual_answer':support,'irrelevant_citations':irrelevant,'strict_complete_success':strict,'client_answer_seconds':r['elapsed_seconds'],'usage':r.get('usage'),'finish_reason':r['response']['choices'][0]['finish_reason'],'actual_schema':r['config']['parameters']['response_format']['json_schema']['schema'],'public_answer_reason':g['reason'],'source_basis':source['source_basis'],'question':json.loads(r['messages'][1]['content'])['question'],'failure_reasons':reason,'evaluation_limit':'数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。'})
++table=[]
++for v in ['original_schema','answer_form_schema']:
++    group=[r for r in rows if r['variant']==v]
++    table.append({'variant':v,'denominator':4,'format_complete':sum(r['format_complete'] for r in group),'specified_answer_correct':sum(r['answer_correct_specified_form'] for r in group),'semantic_consistent':sum(r['semantic_consistent'] for r in group),'citation_support':sum(r['evidence_supports_actual_answer'] for r in group),'strict_complete_success':sum(r['strict_complete_success'] for r in group),'total_answer_http_seconds':sum(r['client_answer_seconds'] for r in group)})
++summary={'reviewed_at':datetime.now().astimezone().isoformat(),'source':'Codex辅助公开开发答案与原文评价，尚未经本人逐项确认','table':table,'generation_calls':8,'cumulative_generation_calls':144,'historical_selection_not_reexecuted':True,'timing_scope':'仅本轮回答阶段完整非流式HTTP请求，不与两步流程耗时直接比较','limit':'小开发对照，只检查答案形式约束；不能据此声称解决计算、拒答或引用遗漏。','truncation_flags':re.findall(r'truncated\s*=\s*(\d+)',(folder/'server-log.txt').read_text(encoding='utf-8'))}
++assert len(summary['truncation_flags'])==8 and set(summary['truncation_flags'])=={'0'}
++protected=read(folder/'protected-hashes.json');assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in protected.items())
++for name,value in [('semantic-review.json',rows),('summary.json',summary)]:
++    p=folder/name;assert not p.exists();p.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++print(json.dumps(summary,ensure_ascii=False,indent=2))
++for r in rows:print(json.dumps({k:r[k] for k in ['case_id','variant','raw_content','answer_correct_specified_form','semantic_consistent','evidence_supports_actual_answer','strict_complete_success','client_answer_seconds']},ensure_ascii=False))

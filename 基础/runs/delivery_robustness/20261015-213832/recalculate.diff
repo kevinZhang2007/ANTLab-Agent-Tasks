@@ -1,0 +1,28 @@
+--- old/results/scoring/recalculate.py
++++ new/results/scoring/recalculate.py
+@@ -116,6 +116,8 @@
+     if csv_text(rows) != actual_csv:
+         raise ValueError("CSV与明确配置及归档标签不一致")
+     generation_ids = [row["run_id"] for row in rows if row["count_as_generation"] == "true"]
++    if "expected_generation_ids" in manifest and sorted(generation_ids) != manifest["expected_generation_ids"]:
++        raise ValueError("生成ID集合不符，不能只比较总数")
+     b_keys = [row["row_id"] for row in rows if row["count_as_b_replay"] == "true"]
+     if len(set(generation_ids)) != len(generation_ids):
+         raise ValueError("生成run ID重复")
+@@ -156,6 +158,16 @@
+         expected = {"numerator": pointer(saved, check["numerator_pointer"]), "denominator": pointer(saved, check["denominator_pointer"])}
+         actual = {"numerator": sum(row[check["metric"]] == "true" for row in members), "denominator": len(members)}
+         comparisons.append({**check, "saved": expected, "recomputed": actual, "equal": expected == actual})
++    by_id = {row["row_id"]: row for row in rows}
++    if len(by_id) != len(rows):
++        raise ValueError("导出row_id重复")
++    for check in manifest.get("new_group_summary_checks", []):
++        group = pointer(read_json(safe_path(root, check["summary_path"])), check["summary_pointer"])
++        selected = [by_id[rid] for rid in check["row_ids"]]
++        metric = check["metric"]
++        expected = {"numerator": group[check["saved_numerator_field"]], "denominator": group[check["saved_denominator_field"]]}
++        computed = {"numerator": sum(row[metric] == "true" for row in selected), "denominator": len(selected)}
++        comparisons.append({**check, "saved": expected, "recomputed": computed, "equal": expected == computed})
+     return {"purpose": "仅复算归档评价，不重新证明语义正确；各view不可相加为一轮成绩。", "counts": counts, "b_same_request_log_links": len(manifest.get("b_log_links", [])), "csv_rows": len(rows), "row_kinds": dict(Counter(r["row_kind"] for r in rows)), "groups": grouped, "summary_comparisons": comparisons, "all_compared_summaries_equal": all(c["equal"] for c in comparisons), "scanned_source_files": len(manifest["source_hashes"])}
+ 
+ 

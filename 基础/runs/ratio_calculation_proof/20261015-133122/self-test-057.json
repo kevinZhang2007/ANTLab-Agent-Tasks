@@ -1,0 +1,238 @@
+{
+  "name": "difference_short_metric_wrong_modifier_identifiers",
+  "question": "竹岭项目Edition705版本在2026-04同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+  "passages": [
+    {
+      "id": "source-1",
+      "source": "自造资料/1",
+      "text": "竹岭项目Edition705版本在2026-04的记录：同机顺序批次Code701的旧链路处理40个固定问题，客户端完整响应耗时中位数为12.5秒。"
+    },
+    {
+      "id": "source-2",
+      "source": "自造资料/2",
+      "text": "批次Code701的复核补页：Code701新链路处理同样40个问题，另一个指标中位数为8.2秒；两次保持输入顺序。"
+    }
+  ],
+  "raw": "{\"answer\": \"4.3\", \"citations\": []}",
+  "expected": false,
+  "actual": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": false,
+    "proof_status": "refused",
+    "proof_kind": "difference",
+    "trace": [
+      {
+        "stage": "question_project_boundary",
+        "audit": {
+          "status": "resolved",
+          "question_candidates": [
+            {
+              "entity": "竹岭项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                16
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "Edition705版本",
+              "date": "2026-04",
+              "passage_id": "source-1",
+              "source": "自造资料/1",
+              "start": 0,
+              "end": 28,
+              "quote": "竹岭项目Edition705版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "竹岭项目Edition705版本在2026-04同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+          "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+          "missing_fields_not_assumed_equal": true,
+          "chosen": {
+            "entity": "竹岭项目",
+            "interpretation": "literal_entity_no_char_removed",
+            "start": 0,
+            "end": 4,
+            "version_position": [
+              4,
+              16
+            ]
+          },
+          "supporting_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "Edition705版本",
+              "date": "2026-04",
+              "passage_id": "source-1",
+              "source": "自造资料/1",
+              "start": 0,
+              "end": 28,
+              "quote": "竹岭项目Edition705版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ]
+        }
+      },
+      {
+        "stage": "direct_relation_audit",
+        "links": [
+          {
+            "supplement_id": "source-2",
+            "target_id": "source-1",
+            "added": false,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "Code701",
+                "start": 0,
+                "end": 9,
+                "code_start": 2,
+                "code_end": 9,
+                "statement": {
+                  "text": "批次Code701的复核补页：Code701新链路处理同样40个问题，另一个指标中位数为8.2秒；",
+                  "start": 0,
+                  "end": 49
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [
+              "source-1"
+            ],
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date",
+              "namespace"
+            ],
+            "semantic_support_verified": false,
+            "target_declarations": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "同机顺序批次",
+                "code": "Code701",
+                "start": 28,
+                "end": 41,
+                "code_start": 34,
+                "code_end": 41,
+                "statement": {
+                  "text": "竹岭项目Edition705版本在2026-04的记录：同机顺序批次Code701的旧链路处理40个固定问题，客户端完整响应耗时中位数为12.5秒。",
+                  "start": 0,
+                  "end": 74
+                },
+                "reliable_declaration": true,
+                "direct_supplement_reference": false,
+                "mere_reference": false,
+                "declaration_predicate": {
+                  "text": "的旧链路处理",
+                  "start": 41,
+                  "end": 47
+                }
+              }
+            ],
+            "reason": "unique_reliable_direct_reference",
+            "object_labels_equal": true,
+            "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+            "completion_reason": "already_selected"
+          }
+        ]
+      },
+      {
+        "stage": "pair_scope",
+        "main": "source-1",
+        "supplement": "source-2",
+        "main_status": "matched",
+        "supplement_status": "unknown",
+        "main_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [
+              "竹岭项目"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "version",
+            "question": [
+              "Edition705版本"
+            ],
+            "source": [
+              "Edition705版本"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [
+              "2026-04"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ],
+        "supplement_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "version",
+            "question": [
+              "Edition705版本"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ]
+      }
+    ],
+    "derived_response": null,
+    "requires_independent_original_text_review": true,
+    "reason": "zero_or_multiple_reliable_operand_assignments"
+  },
+  "passed": true,
+  "checked_at": "2026-10-15T13:31:23.709597+08:00"
+}

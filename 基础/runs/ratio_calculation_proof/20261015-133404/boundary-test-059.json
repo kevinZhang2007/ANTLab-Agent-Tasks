@@ -1,0 +1,69 @@
+{
+  "name": "question_body_version_conflict_identifier_remap",
+  "question": "按竹岭项目Edition91版本2026-04核验表应选择哪条流程？只输出流程名称。",
+  "passages": [
+    {
+      "id": "main",
+      "source": "自造边界材料",
+      "text": "竹岭项目Edition92版本在2026-04的记录：核验表Object85记录流程春召回13条证据、引入4条错误证据；流程夏召回11条、错误1条。"
+    }
+  ],
+  "expected_status": "unknown",
+  "expected_entity": null,
+  "scope": {
+    "project": [
+      "按竹岭项目"
+    ],
+    "version": [
+      "Edition91版本"
+    ],
+    "date": [
+      "2026-04"
+    ],
+    "namespace": []
+  },
+  "audit": {
+    "status": "unknown",
+    "question_candidates": [
+      {
+        "entity": "按竹岭项目",
+        "interpretation": "literal_entity_no_char_removed",
+        "start": 0,
+        "end": 5,
+        "version_position": [
+          5,
+          16
+        ]
+      },
+      {
+        "entity": "竹岭项目",
+        "interpretation": "leading_question_guide",
+        "guide": "按",
+        "start": 1,
+        "end": 5,
+        "version_position": [
+          5,
+          16
+        ]
+      }
+    ],
+    "body_declarations": [
+      {
+        "entity": "竹岭项目",
+        "version": "Edition92版本",
+        "date": "2026-04",
+        "passage_id": "main",
+        "source": "自造边界材料",
+        "start": 0,
+        "end": 27,
+        "quote": "竹岭项目Edition92版本在2026-04的记录：",
+        "entity_start": 0,
+        "entity_end": 4
+      }
+    ],
+    "question_original": "按竹岭项目Edition91版本2026-04核验表应选择哪条流程？只输出流程名称。",
+    "reason": "entity_declaration_version_or_date_not_confirmed",
+    "missing_fields_not_assumed_equal": true
+  },
+  "passed": true
+}

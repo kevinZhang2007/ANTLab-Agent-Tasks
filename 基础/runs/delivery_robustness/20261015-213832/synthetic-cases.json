@@ -1,0 +1,649 @@
+{
+  "saved_before_execution_at": "2026-10-15T21:38:37.019695+08:00",
+  "cases": [
+    {
+      "name": "difference_positive",
+      "branch": "calculation",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"证据不足\", \"citations\": []}",
+      "expected_derived_answer": "14.625",
+      "expected_basis": "同范围、同单位、同统计量，43.75-29.125=14.625。",
+      "audit_universe": null
+    },
+    {
+      "name": "difference_scope_conflict",
+      "branch": "calculation",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition584版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "版本冲突，不能派生。",
+      "audit_universe": null
+    },
+    {
+      "name": "difference_unit_conflict",
+      "branch": "calculation",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125毫秒；两次保持输入顺序。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "量纲单位不一致，不作默认换算。",
+      "audit_universe": null
+    },
+    {
+      "name": "difference_metric_missing",
+      "branch": "calculation",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，未定义指标中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "主文缺问题指定完整指标。",
+      "audit_universe": null
+    },
+    {
+      "name": "difference_evidence_missing",
+      "branch": "calculation",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "最终输入缺补充操作数，审计池有也不能补事实。",
+      "audit_universe": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        }
+      ]
+    },
+    {
+      "name": "difference_direction_reversed",
+      "branch": "calculation",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路多多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"14.625\", \"citations\": []}",
+      "expected_derived_answer": "-14.625",
+      "expected_basis": "改变明确运算方向，允许独立建议负差值，但旧正值不应获得引用证明。",
+      "audit_universe": null
+    },
+    {
+      "name": "difference_direction_unknown",
+      "branch": "calculation",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路相差多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "方向不受支持，拒绝而不猜正负。",
+      "audit_universe": null
+    },
+    {
+      "name": "ratio_positive",
+      "branch": "ratio",
+      "question": "绀羽项目Edition583版本在2025-11冻结清单的完整支持率是多少？只输出百分数。",
+      "passages": [
+        {
+          "id": "ratio-count",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：冻结清单Register953固定125条主张为分母，后续复跑不能剔除无引用和格式异常主张。"
+        },
+        {
+          "id": "ratio-definition",
+          "source": "独立自造资料",
+          "text": "批次Register953的复核补页：Register953人工复核显示45条完全支持、35条部分支持、30条矛盾、15条无引用；完整支持只计完全支持。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"证据不足\", \"citations\": []}",
+      "expected_derived_answer": "36%",
+      "expected_basis": "明确分类、分母125，45/125*100=36%。",
+      "audit_universe": null
+    },
+    {
+      "name": "ratio_definition_missing",
+      "branch": "ratio",
+      "question": "绀羽项目Edition583版本在2025-11冻结清单的完整支持率是多少？只输出百分数。",
+      "passages": [
+        {
+          "id": "ratio-count",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：冻结清单Register953固定125条主张为分母，后续复跑不能剔除无引用和格式异常主张。"
+        },
+        {
+          "id": "ratio-definition",
+          "source": "独立自造资料",
+          "text": "批次Register953的复核补页：Register953人工复核显示45条完全支持、35条部分支持、30条矛盾、15条无引用。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "没有指标到分类定义，不能补业务常识。",
+      "audit_universe": null
+    },
+    {
+      "name": "ratio_class_overlap",
+      "branch": "ratio",
+      "question": "绀羽项目Edition583版本在2025-11冻结清单的完整支持率是多少？只输出百分数。",
+      "passages": [
+        {
+          "id": "ratio-count",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：冻结清单Register953固定125条主张为分母，后续复跑不能剔除无引用和格式异常主张。"
+        },
+        {
+          "id": "ratio-definition",
+          "source": "独立自造资料",
+          "text": "批次Register953的复核补页：Register953人工复核显示45条完全支持、35条部分支持、30条矛盾、15条无引用；部分支持与完全支持可同时属于同一主张；完整支持只计完全支持。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "明确分类交叉，不能当互斥计数。",
+      "audit_universe": null
+    },
+    {
+      "name": "ratio_conflicting_unit",
+      "branch": "ratio",
+      "question": "绀羽项目Edition583版本在2025-11冻结清单的完整支持率是多少？只输出百分数。",
+      "passages": [
+        {
+          "id": "ratio-count",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：冻结清单Register953固定125条主张为分母，后续复跑不能剔除无引用和格式异常主张。"
+        },
+        {
+          "id": "ratio-definition",
+          "source": "独立自造资料",
+          "text": "批次Register953的复核补页：Register953人工复核显示45条完全支持、35次部分支持、30条矛盾、15条无引用；完整支持只计完全支持。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "计数单位不同。",
+      "audit_universe": null
+    },
+    {
+      "name": "ratio_wrong_scope",
+      "branch": "ratio",
+      "question": "绀羽项目Edition583版本在2025-11冻结清单的完整支持率是多少？只输出百分数。",
+      "passages": [
+        {
+          "id": "ratio-count",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：冻结清单Register953固定125条主张为分母，后续复跑不能剔除无引用和格式异常主张。"
+        },
+        {
+          "id": "ratio-definition",
+          "source": "独立自造资料",
+          "text": "批次Register954的复核补页：Register954人工复核显示45条完全支持、35条部分支持、30条矛盾、15条无引用；完整支持只计完全支持。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "批次不同，无唯一直接关联。",
+      "audit_universe": null
+    },
+    {
+      "name": "ratio_zero_denominator",
+      "branch": "ratio",
+      "question": "绀羽项目Edition583版本在2025-11冻结清单的完整支持率是多少？只输出百分数。",
+      "passages": [
+        {
+          "id": "ratio-count",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：冻结清单Register953固定0条主张为分母，后续复跑不能剔除无引用和格式异常主张。"
+        },
+        {
+          "id": "ratio-definition",
+          "source": "独立自造资料",
+          "text": "批次Register953的复核补页：Register953人工复核显示45条完全支持、35条部分支持、30条矛盾、15条无引用；完整支持只计完全支持。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "零分母拒绝。",
+      "audit_universe": null
+    },
+    {
+      "name": "ratio_incomplete_input",
+      "branch": "ratio",
+      "question": "绀羽项目Edition583版本在2025-11冻结清单的完整支持率是多少？只输出百分数。",
+      "passages": [
+        {
+          "id": "ratio-count",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：冻结清单Register953固定125条主张为分母，后续复跑不能剔除无引用和格式异常主张。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "定义在最终模型输入外，只可审计不可用作事实。",
+      "audit_universe": [
+        {
+          "id": "ratio-count",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：冻结清单Register953固定125条主张为分母，后续复跑不能剔除无引用和格式异常主张。"
+        },
+        {
+          "id": "ratio-definition",
+          "source": "独立自造资料",
+          "text": "批次Register953的复核补页：Register953人工复核显示45条完全支持、35条部分支持、30条矛盾、15条无引用；完整支持只计完全支持。"
+        }
+      ]
+    },
+    {
+      "name": "ratio_duplicate_categories",
+      "branch": "ratio",
+      "question": "绀羽项目Edition583版本在2025-11冻结清单的完整支持率是多少？只输出百分数。",
+      "passages": [
+        {
+          "id": "ratio-count",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：冻结清单Register953固定125条主张为分母，后续复跑不能剔除无引用和格式异常主张。"
+        },
+        {
+          "id": "ratio-definition",
+          "source": "独立自造资料",
+          "text": "批次Register953的复核补页：Register953人工复核显示45条完全支持、35条完全支持、30条矛盾、15条无引用；完整支持只计完全支持。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "同一分类重复计数，不选一项凑结果。",
+      "audit_universe": null
+    },
+    {
+      "name": "snapshot_positive",
+      "branch": "qualification",
+      "question": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+      "passages": [
+        {
+          "id": "snapshot-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：复核表Document862显示Cap875签章核验通过、箱体定位通过、重放恢复通过；Cap982箱体定位9项偏移。"
+        },
+        {
+          "id": "snapshot-rule",
+          "source": "独立自造资料",
+          "text": "批次Document862的复核补页：Document862的发布规则要求签章核验、箱体定位和重放恢复三项检查全部通过。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"Cap875\", \"citations\": []}",
+      "expected_derived_answer": "Cap875",
+      "expected_basis": "所有指定检查分别明示通过，引用数据与规则。",
+      "audit_universe": null
+    },
+    {
+      "name": "snapshot_unknown_condition",
+      "branch": "qualification",
+      "question": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+      "passages": [
+        {
+          "id": "snapshot-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：复核表Document862显示Cap875签章核验通过、箱体定位通过；Cap982箱体定位9项偏移。"
+        },
+        {
+          "id": "snapshot-rule",
+          "source": "独立自造资料",
+          "text": "批次Document862的复核补页：Document862的发布规则要求签章核验、箱体定位和重放恢复三项检查全部通过。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"Cap875\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "缺一个必要条件，不把未知当通过。",
+      "audit_universe": null
+    },
+    {
+      "name": "snapshot_failed_condition",
+      "branch": "qualification",
+      "question": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+      "passages": [
+        {
+          "id": "snapshot-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：复核表Document862显示Cap875签章核验通过、箱体定位通过、重放恢复失败；Cap982箱体定位9项偏移。"
+        },
+        {
+          "id": "snapshot-rule",
+          "source": "独立自造资料",
+          "text": "批次Document862的复核补页：Document862的发布规则要求签章核验、箱体定位和重放恢复三项检查全部通过。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"Cap875\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "获选对象必要检查明确失败。",
+      "audit_universe": null
+    },
+    {
+      "name": "snapshot_missing_rule",
+      "branch": "qualification",
+      "question": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+      "passages": [
+        {
+          "id": "snapshot-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：复核表Document862显示Cap875签章核验通过、箱体定位通过、重放恢复通过；Cap982箱体定位9项偏移。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"Cap875\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "缺发布规则不能出正向资格证明。",
+      "audit_universe": null
+    },
+    {
+      "name": "snapshot_scope_conflict",
+      "branch": "qualification",
+      "question": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+      "passages": [
+        {
+          "id": "snapshot-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition584版本在2025-11的记录：复核表Document862显示Cap875签章核验通过、箱体定位通过、重放恢复通过；Cap982箱体定位9项偏移。"
+        },
+        {
+          "id": "snapshot-rule",
+          "source": "独立自造资料",
+          "text": "批次Document862的复核补页：Document862的发布规则要求签章核验、箱体定位和重放恢复三项检查全部通过。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"Cap875\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "项目版本范围冲突。",
+      "audit_universe": null
+    },
+    {
+      "name": "snapshot_no_positive_evidence",
+      "branch": "qualification",
+      "question": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+      "passages": [
+        {
+          "id": "snapshot-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：复核表Document862显示Cap875只登记创建时间；Cap982箱体定位9项偏移。"
+        },
+        {
+          "id": "snapshot-rule",
+          "source": "独立自造资料",
+          "text": "批次Document862的复核补页：Document862的发布规则要求签章核验、箱体定位和重放恢复三项检查全部通过。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"Cap875\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "其他对象失败不证明获选对象通过。",
+      "audit_universe": null
+    },
+    {
+      "name": "citation_wrong_direction",
+      "branch": "citations",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路多多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"14.625\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "原answer方向错误，不能只拼齐引用掩盖。",
+      "audit_universe": null
+    },
+    {
+      "name": "citation_wrong_result",
+      "branch": "citations",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"14.626\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "结果不符不派生引用，不纠正原answer。",
+      "audit_universe": null
+    },
+    {
+      "name": "citation_unit_conflict",
+      "branch": "citations",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125分钟；两次保持输入顺序。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"14.625\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "来源真实但单位冲突仍拒绝。",
+      "audit_universe": null
+    },
+    {
+      "name": "citation_incomplete_sources",
+      "branch": "citations",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"14.625\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "不能从审计池补入模型未见的引用。",
+      "audit_universe": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        }
+      ]
+    },
+    {
+      "name": "citation_positive",
+      "branch": "citations",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "custom-data",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Ledger647的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        },
+        {
+          "id": "custom-extra",
+          "source": "独立自造资料",
+          "text": "批次Ledger647的复核补页：Ledger647新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"14.625\", \"citations\": []}",
+      "expected_derived_answer": "14.625",
+      "expected_basis": "只为原正确答案组装两个实际来源。",
+      "audit_universe": null
+    },
+    {
+      "name": "difference_unit_conflict_remapped",
+      "branch": "calculation",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "new-id-1",
+          "source": "独立自造资料",
+          "text": "批次Archive731的复核补页：Archive731新链路处理同样57个问题，中位数为29.125毫秒；两次保持输入顺序。"
+        },
+        {
+          "id": "new-id-0",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Archive731的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "量纲单位不一致，不作默认换算。",
+      "audit_universe": null
+    },
+    {
+      "name": "ratio_definition_missing_remapped",
+      "branch": "ratio",
+      "question": "绀羽项目Edition583版本在2025-11冻结清单的完整支持率是多少？只输出百分数。",
+      "passages": [
+        {
+          "id": "new-id-1",
+          "source": "独立自造资料",
+          "text": "批次Archive832的复核补页：Archive832人工复核显示45条完全支持、35条部分支持、30条矛盾、15条无引用。"
+        },
+        {
+          "id": "new-id-0",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：冻结清单Archive832固定125条主张为分母，后续复跑不能剔除无引用和格式异常主张。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"原始保留\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "没有指标到分类定义，不能补业务常识。",
+      "audit_universe": null
+    },
+    {
+      "name": "snapshot_unknown_condition_remapped",
+      "branch": "qualification",
+      "question": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+      "passages": [
+        {
+          "id": "new-id-1",
+          "source": "独立自造资料",
+          "text": "批次Archive934的复核补页：Archive934的发布规则要求签章核验、箱体定位和重放恢复三项检查全部通过。"
+        },
+        {
+          "id": "new-id-0",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；View719箱体定位9项偏移。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"View613\", \"citations\": []}",
+      "expected_derived_answer": null,
+      "expected_basis": "缺一个必要条件，不把未知当通过。",
+      "audit_universe": null
+    },
+    {
+      "name": "citation_positive_remapped",
+      "branch": "citations",
+      "question": "绀羽项目Edition583版本在2025-11同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+      "passages": [
+        {
+          "id": "new-id-1",
+          "source": "独立自造资料",
+          "text": "批次Archive731的复核补页：Archive731新链路处理同样57个问题，中位数为29.125秒；两次保持输入顺序。"
+        },
+        {
+          "id": "new-id-0",
+          "source": "独立自造资料",
+          "text": "绀羽项目Edition583版本在2025-11的记录：顺序批次Archive731的旧链路处理57个固定问题，客户端完整响应耗时中位数为43.75秒。"
+        }
+      ],
+      "raw_response": "{\"answer\": \"14.625\", \"citations\": []}",
+      "expected_derived_answer": "14.625",
+      "expected_basis": "只为原正确答案组装两个实际来源。",
+      "audit_universe": null
+    }
+  ],
+  "source": "独立自造，未使用D/T材料或答案。"
+}

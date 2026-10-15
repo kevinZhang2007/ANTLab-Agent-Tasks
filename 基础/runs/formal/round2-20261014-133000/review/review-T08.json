@@ -1,0 +1,479 @@
+{
+  "reviewed_at": "2026-10-14T13:24:21.901529+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+  "basis": {
+    "case_id": "T08",
+    "question_scope": "归舟R6，2026-09复核表GZ69的selected_snapshot；只输出快照编号。",
+    "scope": {
+      "project": "归舟",
+      "version": "R6",
+      "date": "2026-09",
+      "batch": "GZ69",
+      "metric": "文本问答、区域定位、会话恢复三项全部通过"
+    },
+    "required_evidence": [
+      {
+        "id": "P183430",
+        "quote": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。",
+        "role": "候选快照检查情况"
+      },
+      {
+        "id": "P223300",
+        "quote": "批次GZ69的复核补页：GZ69的selected_snapshot规则要求文本问答、区域定位和会话恢复三项检查全部通过。",
+        "role": "selected_snapshot资格规则"
+      }
+    ],
+    "derivation": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。",
+    "derived_answer": "K17",
+    "answer_form": "仅快照编号",
+    "excluded_evidence": [
+      {
+        "id": "P436140",
+        "reason": "迁移XQ61快照S19"
+      },
+      {
+        "id": "P510683",
+        "reason": "压力组"
+      },
+      {
+        "id": "P394287",
+        "reason": "2026-08探索"
+      },
+      {
+        "id": "P818400",
+        "reason": "岫光项目S31"
+      },
+      {
+        "id": "P672045",
+        "reason": "R5旧版K16"
+      }
+    ],
+    "ambiguities": [],
+    "limits": "必须区分快照检查结果和正式选择规则；K未含规则时不能从全文给它补资格。",
+    "reviewed_at": "2026-10-13T13:38:22.518943+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+    "source": "基础/data/cases.json",
+    "source_sha256": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "derivation_kind": "评测后原文推导，非官方标准答案",
+    "model_answers_read_before_saving": false
+  },
+  "items": [
+    {
+      "case_id": "T08",
+      "condition": "K",
+      "variant": "baseline",
+      "sequence": 20,
+      "main_task_id": "f1c2b09d-c7f9-45aa-a60c-2e5f084cf5c5",
+      "end_to_end_seconds": 4.718162700068206,
+      "reviewed_at": "2026-10-14T13:24:21.901397+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"S19\",\"citations\":[\"P436140\"]}",
+      "answer": "S19",
+      "citations": [
+        "P436140"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P436140"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P436140",
+        "P183430"
+      ],
+      "final_input_ids": [
+        "P436140",
+        "P183430"
+      ],
+      "necessary_input_coverage": false,
+      "final_stage_local_missing_evidence": true,
+      "source_basis": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "text": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P436140",
+          "source": "模拟记录/T08/页5",
+          "text": "归舟项目R6版本在2026-09的迁移批次XQ61处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "a328ede0-2571-41a1-a5e1-b8fed5f377c3"
+      ],
+      "reasons": {
+        "answer_correct": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。 原始answer='S19'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。 原始answer='S19'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P183430,P223300提供的数据或规则；本次引用P436140。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [
+          {
+            "id": "P436140",
+            "reason": "迁移XQ61快照S19"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T08",
+      "condition": "R0",
+      "variant": "baseline",
+      "sequence": 29,
+      "main_task_id": "b9d4124c-4cd5-4de3-ba4c-fe148aac7622",
+      "end_to_end_seconds": 15.327775600017048,
+      "reviewed_at": "2026-10-14T13:24:21.901443+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"S31\",\"citations\":[\"P818400\"]}",
+      "answer": "S31",
+      "citations": [
+        "P818400"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P818400"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P818400",
+        "P436140",
+        "P394287",
+        "P672045",
+        "P510683",
+        "P183430",
+        "P223300"
+      ],
+      "final_input_ids": [
+        "P818400",
+        "P436140",
+        "P394287",
+        "P672045",
+        "P510683",
+        "P183430",
+        "P223300"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "text": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P223300",
+          "source": "模拟记录/T08/页7",
+          "text": "批次GZ69的复核补页：GZ69的selected_snapshot规则要求文本问答、区域定位和会话恢复三项检查全部通过。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P818400",
+          "source": "模拟记录/T08/页2",
+          "text": "岫光项目R6版本在2026-09登记同名指标和批次XQ61，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "9cfb6830-7c0b-430e-8fce-2acef313de1e"
+      ],
+      "reasons": {
+        "answer_correct": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。 原始answer='S31'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。 原始answer='S31'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P183430,P223300提供的数据或规则；本次引用P818400。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [
+          {
+            "id": "P818400",
+            "reason": "岫光项目S31"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T08",
+      "condition": "R2",
+      "variant": "baseline",
+      "sequence": 35,
+      "main_task_id": "33d1a4bd-be2d-4252-a51d-d0a7ade02683",
+      "end_to_end_seconds": 14.71958400006406,
+      "reviewed_at": "2026-10-14T13:24:21.901472+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"K16\",\"citations\":[\"P672045\"]}",
+      "answer": "K16",
+      "citations": [
+        "P672045"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P672045"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P672045",
+        "P394287",
+        "P183430",
+        "P223300",
+        "P818400",
+        "P436140",
+        "P510683"
+      ],
+      "final_input_ids": [
+        "P672045",
+        "P394287",
+        "P183430",
+        "P223300",
+        "P818400",
+        "P436140",
+        "P510683"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "text": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P223300",
+          "source": "模拟记录/T08/页7",
+          "text": "批次GZ69的复核补页：GZ69的selected_snapshot规则要求文本问答、区域定位和会话恢复三项检查全部通过。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P672045",
+          "source": "模拟记录/T08/页1",
+          "text": "归舟项目R5版本在2026-09的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "0b2543e2-031c-4270-a652-376ce9b8e00d"
+      ],
+      "reasons": {
+        "answer_correct": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。 原始answer='K16'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。 原始answer='K16'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P183430,P223300提供的数据或规则；本次引用P672045。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [
+          {
+            "id": "P672045",
+            "reason": "R5旧版K16"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T08",
+      "condition": "R1",
+      "variant": "baseline",
+      "sequence": 39,
+      "main_task_id": "e2c62a88-4717-4cfa-bb76-ebdf9e8a3470",
+      "end_to_end_seconds": 15.285105800023302,
+      "reviewed_at": "2026-10-14T13:24:21.901496+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"S19\",\"citations\":[\"P436140\"]}",
+      "answer": "S19",
+      "citations": [
+        "P436140"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P436140"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P394287",
+        "P510683",
+        "P436140",
+        "P183430",
+        "P672045",
+        "P818400",
+        "P223300"
+      ],
+      "final_input_ids": [
+        "P394287",
+        "P510683",
+        "P436140",
+        "P183430",
+        "P672045",
+        "P818400",
+        "P223300"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "text": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P223300",
+          "source": "模拟记录/T08/页7",
+          "text": "批次GZ69的复核补页：GZ69的selected_snapshot规则要求文本问答、区域定位和会话恢复三项检查全部通过。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P436140",
+          "source": "模拟记录/T08/页5",
+          "text": "归舟项目R6版本在2026-09的迁移批次XQ61处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "0a1f6dc1-944d-4edd-a678-663af4f272f7"
+      ],
+      "reasons": {
+        "answer_correct": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。 原始answer='S19'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。 原始answer='S19'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P183430,P223300提供的数据或规则；本次引用P436140。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [
+          {
+            "id": "P436140",
+            "reason": "迁移XQ61快照S19"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T08",
+      "condition": "R0",
+      "variant": "improved",
+      "sequence": 40,
+      "main_task_id": "6045a29c-db2b-4152-8969-6f228931574a",
+      "end_to_end_seconds": 19.571116799954325,
+      "reviewed_at": "2026-10-14T13:24:21.901520+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"P183430\",\"citations\":[\"P183430\"]}",
+      "answer": "P183430",
+      "citations": [
+        "P183430"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P818400",
+        "P436140",
+        "P394287",
+        "P672045",
+        "P510683",
+        "P183430",
+        "P223300"
+      ],
+      "final_input_ids": [
+        "P183430"
+      ],
+      "necessary_input_coverage": false,
+      "final_stage_local_missing_evidence": true,
+      "source_basis": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "text": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；K17三项检查通过；K18解析较快但会话恢复2项失败。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        },
+        {
+          "id": "P223300",
+          "source": "模拟记录/T08/页7",
+          "text": "批次GZ69的复核补页：GZ69的selected_snapshot规则要求文本问答、区域定位和会话恢复三项检查全部通过。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": false,
+          "actually_cited": false
+        }
+      ],
+      "run_ids": [
+        "c6ed5e29-a5ac-4584-b0db-e28216b05e4f",
+        "c0b31b8e-cc31-4581-b963-927db52e3be2"
+      ],
+      "reasons": {
+        "answer_correct": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。 原始answer='P183430'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "K16区域定位不通过，K18会话恢复不通过，只有K17三项全通过；selected_snapshot=K17。速度快不替代资格。 原始answer='P183430'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P183430,P223300提供的数据或规则；本次引用P183430。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    }
+  ]
+}

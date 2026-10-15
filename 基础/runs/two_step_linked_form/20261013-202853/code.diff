@@ -1,0 +1,327 @@
+--- /dev/null
++++ b/基础/tests/run_two_step_linked_form_full.py
+@@ -0,0 +1,249 @@
++"""完整开发流程：每题重新定位、直接补页、派生形式Schema并回答。"""
++from pathlib import Path
++from datetime import datetime, timezone
++import copy
++import ctypes
++import threading
++import hashlib
++import json
++import math
++import os
++import subprocess
++import sys
++import time
++import urllib.error
++import urllib.request
++import uuid
++
++repo=Path(__file__).resolve().parents[2]
++base=repo/'基础'
++experiment=Path(sys.argv[1])
++folder=experiment
++assert not list(folder.glob('run-*.json')), '已有配对记录，禁止重复调用'
++config_fixed=json.loads((experiment/'config.answer.json').read_text(encoding='utf-8'))
++design=json.loads((experiment/'execution-details.json').read_text(encoding='utf-8'))
++provenance=json.loads((base/'runs/prompts/qwen06_abc_r0/source-validation.json').read_text(encoding='utf-8'))
++source_hashes={name:hashlib.sha256((base/'starter'/name).read_bytes()).hexdigest() for name in ('student.py','provider.py','runner.py')}
++assert source_hashes==json.loads((folder/'student-source-hashes.json').read_text(encoding='utf-8'))
++assert (base/'starter/student.py').read_bytes()==(base/'runs/improve/linked_r0/student-v1.py').read_bytes()
++call_order=design['call_order']
++import two_step_candidate as candidate
++config_selection=json.loads((folder/'config.selection.json').read_text(encoding='utf-8'))
++assert candidate.SELECTION_PROMPT==(folder/'system.selection.txt').read_text(encoding='utf-8')
++assert candidate.SELECTION_SCHEMA==json.loads((folder/'schema.selection.json').read_text(encoding='utf-8'))
++assert json.loads((folder/'offline-check.json').read_text(encoding='utf-8'))['passed']
++plan={'source_hashes':source_hashes,'config':config_fixed,'call_order':call_order}
++numeric_parameters={k:v for k,v in config_fixed['parameters'].items() if k!='response_format'}
++sys.path.insert(0,str(base/'starter'))
++import student
++import provider
++capacity=json.loads((base/'runs/capacity/stage3/inputs.json').read_text(encoding='utf-8'))
++root=Path(os.environ['LOCALAPPDATA'])/'ANTLabLocalModel'
++log_id=str(uuid.uuid4())
++stdout_path=root/f'logs/two-step-{log_id}.stdout.log'
++stderr_path=root/f'logs/two-step-{log_id}.stderr.log'
++opener=urllib.request.build_opener(urllib.request.ProxyHandler({}))
++def service(route,body=None):
++    assert route in {'health','props','slots','apply-template','tokenize','slots/0?action=erase'}
++    data=None if body is None else json.dumps(body,ensure_ascii=False).encode()
++    request=urllib.request.Request('http://127.0.0.1:8080/'+route,data=data,headers={'Content-Type':'application/json'})
++    with opener.open(request,timeout=15) as response: return json.loads(response.read())
++
++process=None
++summary=[]
++parents={}
++start_times={}
++skipped=[]
++startup={'record_kind':'post_formal_two_step_linked_form_runtime','recorded_at_utc':datetime.now(timezone.utc).isoformat(),
++         'runtime_reference':'基础/runs/setup/62a41e78-da75-48ca-b9a3-d0ec29127825_runtime.json','context':4096,
++         'generation_attempts':0,'stopped_on_technical_failure':False}
++args=[str(root/'llama-b11429/llama-server.exe'),'-m',str(root/'models/Qwen3-0.6B-Q8_0.gguf'),
++      '--host','127.0.0.1','--port','8080','--alias','Qwen3-0.6B-Q8_0','--ctx-size','4096',
++      '--parallel','1','--batch-size','128','--ubatch-size','64','--threads','4','--gpu-layers','0',
++      '--no-context-shift','--no-warmup','--temp','0.7','--top-p','0.8','--top-k','20','--min-p','0','--presence-penalty','1.5','--repeat-penalty','1.0','--reasoning','off','--seed','42','--predict','256','--slot-save-path',str(root/'diagnostic-cache')]
++startup['arguments']=[a.replace(str(root),'%LOCALAPPDATA%/ANTLabLocalModel') for a in args]
++class MemoryStatus(ctypes.Structure):
++    _fields_=[('length',ctypes.c_ulong),('load',ctypes.c_ulong)]+[(name,ctypes.c_ulonglong) for name in
++        ('total_phys','available_phys','total_page','available_page','total_virtual','available_virtual','extended')]
++class ProcessMemory(ctypes.Structure):
++    _fields_=[('cb',ctypes.c_ulong),('faults',ctypes.c_ulong)]+[(name,ctypes.c_size_t) for name in
++        ('peak_working','working','peak_paged','paged','peak_nonpaged','nonpaged','pagefile','peak_pagefile','private')]
++def memory_sample():
++    status=MemoryStatus();status.length=ctypes.sizeof(status)
++    assert ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(status))
++    result={'time':datetime.now().astimezone().isoformat(),'available_bytes':status.available_phys,'total_bytes':status.total_phys}
++    if process is not None and process.poll() is None:
++        counters=ProcessMemory();counters.cb=ctypes.sizeof(counters)
++        if ctypes.windll.psapi.GetProcessMemoryInfo(ctypes.c_void_p(int(process._handle)),ctypes.byref(counters),counters.cb):
++            result.update(working_set_bytes=counters.working,private_bytes=counters.private)
++    return result
++memory_stop=threading.Event();memory_abort=threading.Event();memory_thread=None
++startup['before_load']=memory_sample();startup['memory_samples']=[]
++startup['low_memory_rule']='3 consecutive 2-second samples below 1 GiB; terminate only this model service'
++def monitor_memory():
++    low=0
++    while not memory_stop.is_set():
++        sample=memory_sample();startup['memory_samples'].append(sample)
++        low=low+1 if sample['available_bytes']<1024**3 else 0
++        if low>=3:
++            memory_abort.set()
++            if process is not None and process.poll() is None:process.terminate()
++            return
++        memory_stop.wait(2)
++
++
++import socket
++import two_step_linked_candidate as completion
++
++def write(name, value):
++    (folder/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++
++def preserved():
++    protected=json.loads((folder/'protected-hashes.json').read_text(encoding='utf-8'))
++    assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in protected.items())
++    hashes=json.loads((folder/'pre-generation-code-hashes.json').read_text(encoding='utf-8'))
++    assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in hashes.items())
++
++def call_stage(cid,stage,question,used,original,config):
++    record={'run_id':str(uuid.uuid4()),'recorded_at':datetime.now().astimezone().isoformat(),
++        'case_id':cid,'condition':'R0','split':'dev','stage':stage,'run_kind':'live_api',
++        'experiment_role':'post_formal_development_fresh_full_flow','config':copy.deepcopy(config),
++        'weight_sha256':provenance['sha256'],'model_revision':provenance['revision'],
++        'original_passages':original,'used_passages':copy.deepcopy(used),'source_hashes':source_hashes,
++        'status':'preparing','context':4096,'driver_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
++    path=folder/('run-'+record['run_id']+'.json');assert not path.exists()
++    save=lambda:path.write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++    record['messages']=(candidate.prepare_selection_messages(question,used) if stage=='selection' else student.prepare_messages(question,used))
++    body={'model':config['model'],'messages':record['messages'],'stream':False,**config['parameters']}
++    prompt=service('apply-template',body)['prompt']
++    assert all(m['content'] in prompt for m in record['messages'])
++    assert prompt.endswith('<think>\n\n</think>\n\n')
++    tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
++    record.update(rendered_prompt=prompt,input_tokens=len(tokens),total_capacity=len(tokens)+256)
++    save();assert len(tokens)+256<4096,'实际完整输入超限，不删段'
++    assert not memory_abort.is_set();preserved()
++    record['cache_erase']=service('slots/0?action=erase',{})
++    build_opener=urllib.request.build_opener
++    class CaptureOpener:
++        def __init__(self,inner):self.inner=inner
++        def open(self,request,*args,**kwargs):
++            record['actual_http_request_body']=json.loads(request.data)
++            record['raw_http_request_body']=request.data.decode('utf-8')
++            assert record['actual_http_request_body']==body and body['max_tokens']==256
++            record['request_verified_before_send']=True;save()
++            try:return self.inner.open(request,*args,**kwargs)
++            except urllib.error.HTTPError as e:
++                record['raw_http_error_body']=e.read().decode('utf-8',errors='replace');raise
++    urllib.request.build_opener=lambda *a,**kw:CaptureOpener(build_opener(*a,**kw))
++    try:
++        assert startup['generation_attempts']<8
++        startup['generation_attempts']+=1
++        record.update(provider.call_model(record['messages'],config))
++    except Exception as e:
++        record.update(status='driver_exception',error=repr(e),response=None)
++    finally:
++        urllib.request.build_opener=build_opener;save()
++    if record['status']!='ok' or not isinstance(record.get('response'),dict) or not record['response'].get('choices'):
++        raise RuntimeError('技术请求失败:'+record['run_id'])
++    record['slot_after']=service('slots')
++    params=record['slot_after'][0]['params']
++    record['parameter_checks']={k:math.isclose(params[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric_parameters.items() if k in params and k!='max_tokens'}
++    record['parameters_not_echoed']=[k for k in numeric_parameters if k not in params]+['response_format','effective_n_predict_max']
++    record['request_budget_observation']={'actual_body_max_tokens':body['max_tokens'],'finish_reason_is_not_budget_echo':True}
++    save();assert all(record['parameter_checks'].values()),'请求参数不符'
++    print(json.dumps({'case_id':cid,'stage':stage,'run_id':record['run_id'],'content':record['response']['choices'][0]['message'].get('content'),'elapsed_seconds':record['elapsed_seconds']},ensure_ascii=False),flush=True)
++    return record
++
++
++import answer_form_candidate as form
++tasks=[]
++try:
++    with socket.socket() as sock:
++        sock.settimeout(1);assert sock.connect_ex(('127.0.0.1',8080))!=0,'已有8080服务，不停止他人服务'
++    preserved()
++    with (root/'models/Qwen3-0.6B-Q8_0.gguf').open('rb') as stream:
++        assert hashlib.file_digest(stream,'sha256').hexdigest()==provenance['sha256']
++    startup['weight_provenance']=provenance
++    startup['server_binary_sha256']=hashlib.sha256((root/'llama-b11429/llama-server.exe').read_bytes()).hexdigest()
++    startup['before_load']=memory_sample();assert startup['before_load']['available_bytes']>=2*1024**3,'可用内存不足2 GiB'
++    with stdout_path.open('wb') as stdout,stderr_path.open('wb') as stderr:
++        process=subprocess.Popen(args,stdout=stdout,stderr=stderr,creationflags=subprocess.CREATE_NO_WINDOW)
++    startup['owned_pid']=process.pid;write('owned-service.json',{'pid':process.pid,'started_at':datetime.now().astimezone().isoformat(),'arguments':startup['arguments']})
++    started=time.monotonic();memory_thread=threading.Thread(target=monitor_memory,daemon=True);memory_thread.start()
++    while True:
++        if memory_abort.is_set() or process.poll() is not None:raise RuntimeError('服务加载或内存失败')
++        try:
++            if service('health').get('status')=='ok':break
++        except (urllib.error.URLError,TimeoutError):pass
++        if time.monotonic()-started>120:raise TimeoutError('加载超过120秒')
++        time.sleep(.5)
++    props=service('props');assert props['default_generation_settings']['n_ctx']==4096
++    assert props['model_alias']==config_fixed['model']
++    assert '11429' in props.get('build_info','') and 'd81235049' in props.get('build_info',''), '同版本服务核对失败'
++    defaults=props['default_generation_settings']['params']
++    assert all(math.isclose(defaults[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric_parameters.items() if k!='max_tokens')
++    props['model_path']='%LOCALAPPDATA%/ANTLabLocalModel/models/Qwen3-0.6B-Q8_0.gguf'
++    startup.update(props=props,load_seconds=time.monotonic()-started,after_load=memory_sample())
++    assert startup['after_load']['available_bytes']>=1024**3
++    preflight=[];inputs={}
++    for cid in ['D01','D02','D03','D04']:
++        row=next(r for r in capacity['rows'] if r['case_id']==cid and r['condition']=='R0')
++        payload=json.loads(row['messages'][1]['content'])
++        ordered=student.improve(payload['question'],copy.deepcopy(payload['passages']))
++        inputs[cid]={'question':payload['question'],'original':payload['passages'],'ordered':ordered}
++        for label,messages,conf in [('selection_full',candidate.prepare_selection_messages(payload['question'],ordered),config_selection),('answer_full',student.prepare_messages(payload['question'],ordered),config_fixed),('answer_empty',student.prepare_messages(payload['question'],[]),config_fixed)]:
++            body={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']}
++            prompt=service('apply-template',body)['prompt']
++            assert all(m['content'] in prompt for m in messages) and prompt.endswith('<think>\n\n</think>\n\n')
++            tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
++            preflight.append({'case_id':cid,'kind':label,'messages':messages,'rendered_prompt':prompt,'input_tokens':len(tokens),'output_budget':256,'total':len(tokens)+256})
++            assert len(tokens)+256<4096
++    write('preflight.json',{'checked_at':datetime.now().astimezone().isoformat(),'counts_as_generation':False,'rows':preflight,'actual_branch_checked_before_each_send':True})
++    write('precall-plan.json',{'recorded_at':datetime.now().astimezone().isoformat(),'design_reference':'design-plan.json','actual_order':call_order,'generation_limit':8,'selection_config':config_selection,'answer_config':config_fixed,'arguments':startup['arguments'],'offline_checks':json.loads((folder/'offline-check.json').read_text(encoding='utf-8'))['passed'],'source_hashes':source_hashes,'evaluation_after_completion_only':True})
++    write('runtime-before-generation.json',startup)
++    print('PREFLIGHT PASS',[(r['case_id'],r['kind'],r['input_tokens']) for r in preflight],flush=True)
++    index=[]
++    for item in call_order:
++        cid=item['case_id'];data=inputs[cid];begin=time.perf_counter()
++        parent={'case_id':cid,'condition':'R0','question':data['question'],'original_passages':data['original'],'ordered_passages':data['ordered'],'started_at':datetime.now().astimezone().isoformat(),'status':'pending','selection_is_fresh':True}
++        taskpath='task-'+cid+'.json';write(taskpath,parent)
++        selected=call_stage(cid,'selection',data['question'],data['ordered'],data['original'],config_selection)
++        content=selected['response']['choices'][0]['message'].get('content','')
++        validation=candidate.validate_selection(content,data['ordered'])
++        parent.update(selection_run_id=selected['run_id'],raw_selection=content,selection_validation=validation,selection_http_seconds=selected['elapsed_seconds'])
++        write(taskpath,parent)
++        if not validation['valid']:
++            parent.update(status='selection_output_failure',answer_not_executed=True,strict_denominator_included=True)
++        else:
++            middle=time.perf_counter()
++            used,trace=completion.complete_passages(data['question'],data['ordered'],validation)
++            assert used==[p for p in data['ordered'] if p['id'] in {q['id'] for q in used}]
++            conf=copy.deepcopy(config_fixed)
++            schema,rule=form.constrain_schema(data['question'],conf['parameters']['response_format']['json_schema']['schema'])
++            conf['parameters']['response_format']['json_schema']['schema']=schema
++            parent.update(used_passages=used,association_trace=trace,added_ids=[r['supplement_id'] for r in trace if r['added']],answer_form_rule=rule,answer_config=conf,middle_organization_seconds=time.perf_counter()-middle,status='answer_pending')
++            write(taskpath,parent)
++            result=call_stage(cid,'answer',data['question'],used,data['original'],conf)
++            parent.update(status='completed',answer_run_id=result['run_id'],raw_answer=result['response']['choices'][0]['message'].get('content',''),answer_http_seconds=result['elapsed_seconds'])
++            index.append({'case_id':cid,'run_id':result['run_id'],'variant':'fresh_full_flow'})
++            write('result-index.json',index)
++        parent.update(end_to_end_seconds=time.perf_counter()-begin,ended_at=datetime.now().astimezone().isoformat())
++        write(taskpath,parent);tasks.append(parent);write('task-results.json',tasks)
++    startup['all_tasks_finished']=len(tasks)==4
++except Exception as e:
++    startup.update(stopped_on_technical_failure=True,error=type(e).__name__,error_detail=str(e))
++    print('STOPPED:',repr(e),flush=True)
++finally:
++    memory_stop.set()
++    if memory_thread is not None:memory_thread.join(timeout=5)
++    if process is not None and process.pid==startup.get('owned_pid') and process.poll() is None:
++        process.terminate()
++        try:process.wait(timeout=10)
++        except subprocess.TimeoutExpired:process.kill();process.wait()
++    startup['server_stopped']=process is not None and process.poll() is not None
++    startup['memory_abort']=memory_abort.is_set();startup['after_stop']=memory_sample()
++    log=stderr_path.read_text(encoding='utf-8',errors='replace') if stderr_path.exists() else ''
++    write('runtime.json',startup)
++    (folder/'server-log.txt').write_text(log.replace(str(root),'%LOCALAPPDATA%\\ANTLabLocalModel'),encoding='utf-8')
++    if stdout_path.exists():(folder/'server-stdout.txt').write_text(stdout_path.read_text(encoding='utf-8',errors='replace').replace(str(root),'%LOCALAPPDATA%\\ANTLabLocalModel'),encoding='utf-8')
++    print('FINAL ATTEMPTS:',startup['generation_attempts'],'STOPPED:',startup['server_stopped'],flush=True)
+--- /dev/null
++++ b/基础/tests/review_two_step_linked_form_full.py
+@@ -0,0 +1,72 @@
++"""全部完整流程结束后评价；公开答案只用于判读，不改写响应。"""
++from pathlib import Path
++from datetime import datetime
++from decimal import Decimal, InvalidOperation
++import json,re,hashlib,sys
++folder=Path(sys.argv[1]);repo=Path(__file__).resolve().parents[2];base=repo/'基础'
++read=lambda p:json.loads(p.read_text(encoding='utf-8'))
++runtime=read(folder/'runtime.json');assert runtime['server_stopped'] and runtime.get('all_tasks_finished') and not runtime['stopped_on_technical_failure']
++# 到这里才读取公开答案；本文件不参与生成、Schema识别或原文选择。
++gold={g['id']:g for g in read(base/'data/dev_answers.json')}
++basis=read(base/'runs/two_step_linked/20261013-193700/effective-semantic-review.json')
++number=r'[-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?'
++def equal_decimal(a,b):
++    try:return Decimal(a)==Decimal(b)
++    except (InvalidOperation,ValueError):return False
++def parse_pairs(pairs):
++    value={}
++    for k,v in pairs:
++        if k in value:raise ValueError('duplicate_field')
++        value[k]=v
++    return value
++rows=[]
++for item in read(folder/'result-index.json'):
++    r=read(folder/('run-'+item['run_id']+'.json'));g=gold[r['case_id']]
++    task=read(folder/('task-'+r['case_id']+'.json'))
++    source=next(x for x in basis if x['case_id']==r['case_id'] and x['variant']=='linked_answer')
++    content=r['response']['choices'][0]['message'].get('content','')
++    try:parsed=json.loads(content,object_pairs_hook=parse_pairs)
++    except (ValueError,TypeError):parsed=None
++    valid=isinstance(parsed,dict) and set(parsed)=={'answer','citations'} and isinstance(parsed.get('answer'),str) and isinstance(parsed.get('citations'),list) and all(isinstance(x,str) for x in parsed['citations'])
++    answer=parsed['answer'] if valid else None;citations=parsed['citations'] if valid else []
++    correct=isinstance(answer,str) and answer.strip() in g['aliases'];semantic=correct
++    if isinstance(answer,str) and g['task_kind']=='difference':
++        correct=bool(re.fullmatch(number,answer) and equal_decimal(answer,g['answer']))
++        with_unit=re.fullmatch('('+number+r')\s*秒',answer)
++        semantic=correct or bool(with_unit and equal_decimal(with_unit.group(1),g['answer']))
++    elif isinstance(answer,str) and g['task_kind']=='percent':
++        correct=bool(answer.endswith('%') and re.fullmatch(number,answer[:-1]) and equal_decimal(answer[:-1],g['answer'].rstrip('%')))
++        semantic=correct
++    elif isinstance(answer,str) and g['task_kind']=='insufficient':
++        semantic=correct or answer in ['服务端GPU型号未知','未提及具体型号']
++    used=r['used_passages'];ids={p['id'] for p in used};required={p['id'] for p in source['source_basis']}
++    coverage=(bool(set(citations)&required) if g['task_kind']=='insufficient' else required.issubset(citations))
++    exists=valid and all(x in ids for x in citations);nonempty=bool(citations)
++    support=bool(semantic and exists and nonempty and coverage)
++    irrelevant=[x for x in citations if x in ids and x not in required]
++    strict=bool(correct and valid and exists and nonempty and support and not irrelevant)
++    reason=[]
++    if not valid:reason.append('JSON字段或类型不完整')
++    if not correct:reason.append('指定答法或答案值不合要求')
++    if semantic and not correct:reason.append('语义一致但附带单位/其他形式不符合题目要求')
++    if not coverage:reason.append('引用未覆盖必要依据')
++    if not support:reason.append('引用集合未支持实际answer')
++    if irrelevant:reason.append('含无关/范围冲突引用')
++    rows.append({'case_id':r['case_id'],'variant':item['variant'],'run_id':r['run_id'],'raw_content':content,'answer':answer,'citations':citations,'format_complete':valid,'answer_correct_specified_form':correct,'semantic_consistent':semantic,'citation_ids_exist':exists,'citations_nonempty':nonempty,'necessary_evidence_covered':coverage,'evidence_supports_actual_answer':support,'irrelevant_citations':irrelevant,'strict_complete_success':strict,'client_answer_seconds':r['elapsed_seconds'],'selection_http_seconds':task['selection_http_seconds'],'end_to_end_seconds':task['end_to_end_seconds'],'selected_ids':task['selection_validation']['selected_ids'],'added_ids':task['added_ids'],'association_trace':task['association_trace'],'input_necessary_evidence_covered':(bool(ids & required) if g['task_kind']=='insufficient' else required.issubset(ids)),'usage':r.get('usage'),'finish_reason':r['response']['choices'][0]['finish_reason'],'actual_schema':r['config']['parameters']['response_format']['json_schema']['schema'],'public_answer_reason':g['reason'],'source_basis':source['source_basis'],'question':json.loads(r['messages'][1]['content'])['question'],'failure_reasons':reason,'evaluation_limit':'数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。'})
++table=[]
++group=rows
++table.append({'variant':'fresh_full_flow','denominator':4,'format_complete':sum(r['format_complete'] for r in group),'specified_answer_correct':sum(r['answer_correct_specified_form'] for r in group),'semantic_consistent':sum(r['semantic_consistent'] for r in group),'input_necessary_coverage':sum(r['input_necessary_evidence_covered'] for r in group),'citation_support':sum(r['evidence_supports_actual_answer'] for r in group),'irrelevant_citation_results':sum(bool(r['irrelevant_citations']) for r in group),'strict_complete_success':sum(r['strict_complete_success'] for r in group),'total_end_to_end_seconds':sum(r['end_to_end_seconds'] for r in group)})
++history=read(base/'runs/answer_form/20261013-195237/resume-20261013-200333/semantic-review.json')
++comparison=[]
++for r in rows:
++    prior=next(x for x in history if x['case_id']==r['case_id'] and x['variant']=='answer_form_schema')
++    comparison.append({'case_id':r['case_id'],'historic_answer':prior['raw_content'],'current_answer':r['raw_content'],'historic_strict':prior['strict_complete_success'],'current_strict':r['strict_complete_success'],'historic_specified_correct':prior['answer_correct_specified_form'],'current_specified_correct':r['answer_correct_specified_form'],'historic_answer_http_seconds':prior['client_answer_seconds'],'current_end_to_end_seconds':r['end_to_end_seconds'],'limit':'历史重放只执行回答，本轮重新定位并补页；没有同步原方案，耗时口径不同，不作公平性能对比。'})
++runs=[read(p) for p in folder.glob('run-*.json')]
++assert len(runs)==runtime['generation_attempts']==8 and len({r['run_id'] for r in runs})==8
++summary={'reviewed_at':datetime.now().astimezone().isoformat(),'source':'Codex辅助公开开发答案与原文评价，尚未经本人逐项确认','table':table,'generation_calls':len(runs),'cumulative_generation_calls':144+len(runs),'fresh_selection_calls':4,'answer_calls':4,'no_synchronous_original_control':True,'timing_scope':'每题端到端包括两次实际请求、中间验证及容量核查；另列请求耗时。历史重放只回答，不能直接比较流程耗时。','limit':'本轮只验证完整候选；未自动替换生产方案，不能声称正式效果改善。','truncation_flags':re.findall(r'truncated\s*=\s*(\d+)',(folder/'server-log.txt').read_text(encoding='utf-8')),'choice':'与历史形式约束重放同质量时不追加优化、不自动采用；按预先规则保留更简单的原生产方案。'}
++assert len(summary['truncation_flags'])==8 and set(summary['truncation_flags'])=={'0'}
++protected=read(folder/'protected-hashes.json');assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in protected.items())
++for name,value in [('semantic-review.json',rows),('summary.json',summary),('historical-comparison.json',comparison)]:
++    p=folder/name;assert not p.exists();p.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++print(json.dumps(summary,ensure_ascii=False,indent=2))
++for r in rows:print(json.dumps({k:r[k] for k in ['case_id','raw_content','selected_ids','added_ids','input_necessary_evidence_covered','answer_correct_specified_form','semantic_consistent','evidence_supports_actual_answer','strict_complete_success','end_to_end_seconds']},ensure_ascii=False))

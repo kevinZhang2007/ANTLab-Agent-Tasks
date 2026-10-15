@@ -1,0 +1,577 @@
+{
+  "name": "selection_all_fields_equal_tie_ids",
+  "question": "竹岭项目V4版本在2026-04资源表应选择哪项方案？只输出方案名称。",
+  "passages": [
+    {
+      "id": "Remapped901",
+      "source": "自造资料/1",
+      "text": "竹岭项目V4版本在2026-04的记录：资源表Review73记录青完整支持89%、P50为6.4秒、2次调用；蓝89%、6.4秒、3次；紫89%、6.4秒、2次。"
+    },
+    {
+      "id": "Remapped902",
+      "source": "自造资料/2",
+      "text": "批次Review73的复核补页：Review73决策先要求完整支持率至少86%且P50不高于7秒，再比较平均调用次数和完整耗时。"
+    }
+  ],
+  "raw": "{\"answer\": \"紫\", \"citations\": []}",
+  "expected": false,
+  "actual": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": false,
+    "proof_status": "refused",
+    "proof_kind": "qualification_selection",
+    "trace": [
+      {
+        "stage": "question_project_boundary",
+        "audit": {
+          "status": "resolved",
+          "question_candidates": [
+            {
+              "entity": "竹岭项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                8
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "V4版本",
+              "date": "2026-04",
+              "passage_id": "Remapped901",
+              "source": "自造资料/1",
+              "start": 0,
+              "end": 20,
+              "quote": "竹岭项目V4版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "竹岭项目V4版本在2026-04资源表应选择哪项方案？只输出方案名称。",
+          "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+          "missing_fields_not_assumed_equal": true,
+          "chosen": {
+            "entity": "竹岭项目",
+            "interpretation": "literal_entity_no_char_removed",
+            "start": 0,
+            "end": 4,
+            "version_position": [
+              4,
+              8
+            ]
+          },
+          "supporting_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "V4版本",
+              "date": "2026-04",
+              "passage_id": "Remapped901",
+              "source": "自造资料/1",
+              "start": 0,
+              "end": 20,
+              "quote": "竹岭项目V4版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ]
+        }
+      },
+      {
+        "stage": "direct_relation_audit",
+        "links": [
+          {
+            "supplement_id": "Remapped902",
+            "target_id": "Remapped901",
+            "added": false,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "Review73",
+                "start": 0,
+                "end": 10,
+                "code_start": 2,
+                "code_end": 10,
+                "statement": {
+                  "text": "批次Review73的复核补页：Review73决策先要求完整支持率至少86%且P50不高于7秒，再比较平均调用次数和完整耗时。",
+                  "start": 0,
+                  "end": 64
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [
+              "Remapped901"
+            ],
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date",
+              "namespace"
+            ],
+            "semantic_support_verified": false,
+            "target_declarations": [
+              {
+                "object_type": "table",
+                "object_name": "资源表",
+                "raw_label": "资源表",
+                "code": "Review73",
+                "start": 20,
+                "end": 31,
+                "code_start": 23,
+                "code_end": 31,
+                "statement": {
+                  "text": "竹岭项目V4版本在2026-04的记录：资源表Review73记录青完整支持89%、P50为6.4秒、2次调用；",
+                  "start": 0,
+                  "end": 56
+                },
+                "reliable_declaration": true,
+                "direct_supplement_reference": false,
+                "mere_reference": false,
+                "declaration_predicate": {
+                  "text": "记录",
+                  "start": 31,
+                  "end": 33
+                }
+              }
+            ],
+            "reason": "unique_reliable_direct_reference",
+            "object_labels_equal": false,
+            "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+            "completion_reason": "already_selected"
+          }
+        ]
+      },
+      {
+        "stage": "pair_scope",
+        "main": "Remapped901",
+        "supplement": "Remapped902",
+        "main_status": "matched",
+        "supplement_status": "unknown",
+        "main_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [
+              "竹岭项目"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "version",
+            "question": [
+              "V4版本"
+            ],
+            "source": [
+              "V4版本"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [
+              "2026-04"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ],
+        "supplement_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "version",
+            "question": [
+              "V4版本"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ]
+      },
+      {
+        "stage": "selection_sources",
+        "rule": {
+          "conditions": [
+            {
+              "metric": "完整支持率",
+              "op": "至少",
+              "number": "86",
+              "unit": "%"
+            },
+            {
+              "metric": "P50",
+              "op": "不高于",
+              "number": "7",
+              "unit": "秒"
+            }
+          ],
+          "ranks": [],
+          "ranking_direction_unknown": true,
+          "source": {
+            "passage_id": "Remapped902",
+            "source": "自造资料/2",
+            "start": 24,
+            "end": 63,
+            "quote": "决策先要求完整支持率至少86%且P50不高于7秒，再比较平均调用次数和完整耗时",
+            "role": "资格及决策原文"
+          }
+        },
+        "columns": [
+          {
+            "unit": "%",
+            "aliases": [
+              "完整支持"
+            ],
+            "definition": {
+              "passage_id": "Remapped901",
+              "source": "自造资料/1",
+              "start": 33,
+              "end": 41,
+              "quote": "青完整支持89%",
+              "role": "首行字段定义"
+            }
+          },
+          {
+            "unit": "秒",
+            "aliases": [
+              "P50"
+            ],
+            "definition": {
+              "passage_id": "Remapped901",
+              "source": "自造资料/1",
+              "start": 42,
+              "end": 50,
+              "quote": "P50为6.4秒",
+              "role": "首行字段定义"
+            }
+          },
+          {
+            "unit": "次",
+            "aliases": [
+              "调用"
+            ],
+            "definition": {
+              "passage_id": "Remapped901",
+              "source": "自造资料/1",
+              "start": 51,
+              "end": 55,
+              "quote": "2次调用",
+              "role": "首行字段定义"
+            }
+          }
+        ],
+        "candidates": [
+          {
+            "name": "青",
+            "fields": [
+              {
+                "value": "89",
+                "unit": "%",
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 33,
+                  "end": 41,
+                  "quote": "青完整支持89%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "6.4",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 42,
+                  "end": 50,
+                  "quote": "P50为6.4秒",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "2",
+                "unit": "次",
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 51,
+                  "end": 55,
+                  "quote": "2次调用",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "source": {
+              "passage_id": "Remapped901",
+              "source": "自造资料/1",
+              "start": 33,
+              "end": 55,
+              "quote": "青完整支持89%、P50为6.4秒、2次调用",
+              "role": "候选完整数据行"
+            },
+            "conditions": [
+              {
+                "rule": {
+                  "metric": "完整支持率",
+                  "op": "至少",
+                  "number": "86",
+                  "unit": "%"
+                },
+                "actual": "89",
+                "passed": true,
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 33,
+                  "end": 41,
+                  "quote": "青完整支持89%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "rule": {
+                  "metric": "P50",
+                  "op": "不高于",
+                  "number": "7",
+                  "unit": "秒"
+                },
+                "actual": "6.4",
+                "passed": true,
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 42,
+                  "end": 50,
+                  "quote": "P50为6.4秒",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "eligible": true
+          },
+          {
+            "name": "蓝",
+            "fields": [
+              {
+                "value": "89",
+                "unit": "%",
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 56,
+                  "end": 60,
+                  "quote": "蓝89%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "6.4",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 61,
+                  "end": 65,
+                  "quote": "6.4秒",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "3",
+                "unit": "次",
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 66,
+                  "end": 68,
+                  "quote": "3次",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "source": {
+              "passage_id": "Remapped901",
+              "source": "自造资料/1",
+              "start": 56,
+              "end": 68,
+              "quote": "蓝89%、6.4秒、3次",
+              "role": "候选完整数据行"
+            },
+            "conditions": [
+              {
+                "rule": {
+                  "metric": "完整支持率",
+                  "op": "至少",
+                  "number": "86",
+                  "unit": "%"
+                },
+                "actual": "89",
+                "passed": true,
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 56,
+                  "end": 60,
+                  "quote": "蓝89%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "rule": {
+                  "metric": "P50",
+                  "op": "不高于",
+                  "number": "7",
+                  "unit": "秒"
+                },
+                "actual": "6.4",
+                "passed": true,
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 61,
+                  "end": 65,
+                  "quote": "6.4秒",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "eligible": true
+          },
+          {
+            "name": "紫",
+            "fields": [
+              {
+                "value": "89",
+                "unit": "%",
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 69,
+                  "end": 73,
+                  "quote": "紫89%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "6.4",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 74,
+                  "end": 78,
+                  "quote": "6.4秒",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "2",
+                "unit": "次",
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 79,
+                  "end": 81,
+                  "quote": "2次",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "source": {
+              "passage_id": "Remapped901",
+              "source": "自造资料/1",
+              "start": 69,
+              "end": 81,
+              "quote": "紫89%、6.4秒、2次",
+              "role": "候选完整数据行"
+            },
+            "conditions": [
+              {
+                "rule": {
+                  "metric": "完整支持率",
+                  "op": "至少",
+                  "number": "86",
+                  "unit": "%"
+                },
+                "actual": "89",
+                "passed": true,
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 69,
+                  "end": 73,
+                  "quote": "紫89%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "rule": {
+                  "metric": "P50",
+                  "op": "不高于",
+                  "number": "7",
+                  "unit": "秒"
+                },
+                "actual": "6.4",
+                "passed": true,
+                "source": {
+                  "passage_id": "Remapped901",
+                  "source": "自造资料/1",
+                  "start": 74,
+                  "end": 78,
+                  "quote": "6.4秒",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "eligible": true
+          }
+        ]
+      }
+    ],
+    "derived_response": null,
+    "requires_independent_original_text_review": true,
+    "reason": "decision_direction_unknown_with_competitors"
+  },
+  "passed": true,
+  "checked_at": "2026-10-15T13:34:05.423771+08:00"
+}

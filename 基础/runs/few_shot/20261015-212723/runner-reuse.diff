@@ -1,0 +1,35 @@
+--- frozen/run_bounded_round.py
++++ few_shot/run_bounded_round.py
+@@ -1,4 +1,4 @@
+-"""评测后资格证明完整流程：指定候选评测8题R0重复测试，最多16次生成，证明与引用组装离线。"""
++"""复用已验证运行器：开发4题少样例回答对照，最多8次生成。"""
+ from pathlib import Path
+ from datetime import datetime
+ import copy, ctypes, hashlib, json, math, os, re, socket, subprocess, sys, threading, time, uuid
+@@ -48,7 +48,7 @@
+                '基础/starter/student.py','基础/starter/provider.py','基础/starter/runner.py']
+     sources += ['基础/tests/direct_reference_candidate.py','基础/tests/association_repair_candidate.py']
+     sources += [(CODE/name).relative_to(repo).as_posix() for name in load(CODE/'baseline-verification.json')['modules']]
+-    sources += [(CODE/name).relative_to(repo).as_posix() for name in ['bounded_candidate.py','run_bounded_round.py','prepare_final_five.py']]
++    sources += [(CODE/name).relative_to(repo).as_posix() for name in ['bounded_candidate.py','run_bounded_round.py','prepare_final_five.py','examples.json','prepare_few_shot.py']]
+     sources += [(folder/name).relative_to(repo).as_posix() for name in ['execution-plan.prepared.json','settings.prepared.json','answer.prepared.json','selection.prepared.json']]
+     code_hashes = {p:sha(repo/p) for p in sources}
+     data_hashes = {p:sha(repo/p) for p in settings['data_sha256']}
+@@ -61,7 +61,7 @@
+                'quality':'错误答案、非法定位、漏选、空选择、格式错误、预算耗尽均保留，不重试。',
+                'selection_failure':'主任务保留分母，不执行第二步，不回退。',
+                'memory':'加载前至少2 GiB；请求前至少1 GiB；连续3个2秒样本低于1 GiB停止自有服务。',
+-               'denominator':'先开发4题再评测8题R0，分母分别4/8；最多24次生成；质量错误不重试。'}
++               'denominator':'4道开发题各对照/少样例候选一次；每侧分母4，共8次回答生成；定位只历史重放，不计新调用。'}
+     evaluation = load(first/'evaluation-rules.json')
+     research = {'recorded_at':now(),'main_question':'同一最新开发/评测冻结候选依次D4和T8完整重复；不优化、不调参、不复用历史模型输出。',
+                 'competing_explanations':['第一步可能漏选或选错范围，补页关系识别也可能失败。',
+@@ -219,7 +219,7 @@
+         write('capacity-summary.json',{'checked_at':now(),'all_fit':True,'main_tasks':len(jobs),'template_checks':len(templates),
+               'maximum_input_tokens':max(r['input_tokens'] for r in templates),'maximum_total':max(r['total'] for r in templates),
+               'context':4096,'output_budget':256,'actual_selected_branch_checked_before_each_request':True})
+-        write('freeze.json',{'frozen_at':now(),'frozen':True,'round':plan['round'],'bounded_five_round_design':plan,'research':plan['design'],
++        write('freeze.json',{'frozen_at':now(),'frozen':True,'round':'few_shot_answer_replay','few_shot_design':plan,'research':plan['design'],
+               'source_commit':subprocess.check_output([str(Path(os.environ['LOCALAPPDATA'])/'Programs/Git/cmd/git.exe'),'rev-parse','HEAD'],cwd=repo,text=True).strip(),
+               'code_hashes':code_hashes,'data_hashes':data_hashes,'model':settings['model'],'llama_cpp':settings['llama_cpp'],
+               'answer_config':answer,'selection_config':selection,'service_arguments':settings['service_arguments'],

@@ -1,0 +1,533 @@
+{
+  "basis": {
+    "case_id": "D03",
+    "question": "白榆项目R5版本在2026-05单并发主测中，方案乙的完整响应耗时中位数比方案甲少多少秒？只输出数值。",
+    "public_answer": {
+      "id": "D03",
+      "answer": "1.8",
+      "aliases": [
+        "1.8",
+        "1.8"
+      ],
+      "evidence_ids": [
+        "P695887",
+        "P419087"
+      ],
+      "reason": "7.6-5.8=1.8秒。",
+      "split": "dev",
+      "task_kind": "difference"
+    },
+    "derived_answer": "1.8",
+    "accepted_equivalent_forms": [
+      "1.8",
+      "1.8",
+      "1.8"
+    ],
+    "derivation": "同一BY53批次40问题、同设置，基础方案甲中位数7.6秒，候选乙5.8秒；问乙比甲少多少，应7.6−5.8=1.8，只输出数值。",
+    "required_evidence": [
+      {
+        "id": "P695887",
+        "quote": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。"
+      },
+      {
+        "id": "P419087",
+        "quote": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。"
+      }
+    ],
+    "alternative_insufficiency_check_ids": [],
+    "related_original_sources": [
+      {
+        "id": "P419087",
+        "source": "模拟记录/D03/页3",
+        "text": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。"
+      },
+      {
+        "id": "P695887",
+        "source": "模拟记录/D03/页1",
+        "text": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。"
+      }
+    ],
+    "excluded_evidence": [
+      {
+        "id": "P482205",
+        "reason": "其他项目、版本、月份、压力或迁移范围，不支持所问目标。"
+      },
+      {
+        "id": "P104320",
+        "reason": "其他项目、版本、月份、压力或迁移范围，不支持所问目标。"
+      },
+      {
+        "id": "P590520",
+        "reason": "其他项目、版本、月份、压力或迁移范围，不支持所问目标。"
+      },
+      {
+        "id": "P995129",
+        "reason": "其他项目、版本、月份、压力或迁移范围，不支持所问目标。"
+      },
+      {
+        "id": "P779882",
+        "reason": "其他项目、版本、月份、压力或迁移范围，不支持所问目标。"
+      }
+    ],
+    "timing": "全部24次生成结束并停止服务后才读取公开开发答案；不进入选择、关联、规则或回答。"
+  },
+  "row": {
+    "reviewed_at": "2026-10-15T15:51:50.829578+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认；仅本轮开发题，不是独立泛化成绩。",
+    "case_id": "D03",
+    "raw_response": {
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\"answer\":\"-0.8\",\"citations\":[\"P419087\",\"P695887\"]}"
+          }
+        }
+      ],
+      "created": 1792050664,
+      "model": "Qwen3-0.6B-Q8_0",
+      "system_fingerprint": "b11429-d81235049",
+      "object": "chat.completion",
+      "usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 809,
+        "total_tokens": 837,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "id": "chatcmpl-2yq9efz2BGjL4UKNhcn0U3Y6pHxTjsR5",
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 809,
+        "prompt_ms": 3403.671,
+        "prompt_per_token_ms": 4.207257107540173,
+        "prompt_per_second": 237.68454706697565,
+        "predicted_n": 28,
+        "predicted_ms": 757.332,
+        "predicted_per_token_ms": 28.049333333333333,
+        "predicted_per_second": 35.651471217378905
+      }
+    },
+    "raw_review": {
+      "answer": "-0.8",
+      "citations": [
+        "P419087",
+        "P695887"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_input_coverage": true,
+      "necessary_coverage": true,
+      "support_actual_answer": false,
+      "has_unrelated_references": false,
+      "irrelevant_ids": [],
+      "strict_complete_success": false,
+      "ambiguity": null,
+      "reasons": {
+        "answer": "同一BY53批次40问题、同设置，基础方案甲中位数7.6秒，候选乙5.8秒；问乙比甲少多少，应7.6−5.8=1.8，只输出数值。 实际answer='-0.8'，未改写。",
+        "coverage": "必要数据/规则来源必须共同引用；缺证题允许目标范围有效检查来源，不固定引用ID。",
+        "support": "按当前实际输入和上述原文推导核对，不把ID存在或系统证明标记当成语义通过。",
+        "unrelated": []
+      },
+      "source_evidence": [
+        {
+          "id": "P419087",
+          "quote": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        },
+        {
+          "id": "P695887",
+          "quote": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        }
+      ]
+    },
+    "reference_derived_response": null,
+    "proposed_response": null,
+    "system_final_response": {
+      "answer": "-0.8",
+      "citations": [
+        "P419087",
+        "P695887"
+      ]
+    },
+    "system_final_review": {
+      "answer": "-0.8",
+      "citations": [
+        "P419087",
+        "P695887"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_input_coverage": true,
+      "necessary_coverage": true,
+      "support_actual_answer": false,
+      "has_unrelated_references": false,
+      "irrelevant_ids": [],
+      "strict_complete_success": false,
+      "ambiguity": null,
+      "reasons": {
+        "answer": "同一BY53批次40问题、同设置，基础方案甲中位数7.6秒，候选乙5.8秒；问乙比甲少多少，应7.6−5.8=1.8，只输出数值。 实际answer='-0.8'，未改写。",
+        "coverage": "必要数据/规则来源必须共同引用；缺证题允许目标范围有效检查来源，不固定引用ID。",
+        "support": "按当前实际输入和上述原文推导核对，不把ID存在或系统证明标记当成语义通过。",
+        "unrelated": []
+      },
+      "source_evidence": [
+        {
+          "id": "P419087",
+          "quote": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        },
+        {
+          "id": "P695887",
+          "quote": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        }
+      ]
+    },
+    "output_source": "raw_model_response",
+    "proof": {
+      "judgment_source": "local_rule",
+      "run_kind": "offline_proof",
+      "proof_established": false,
+      "proof_status": "refused",
+      "proof_kind": "difference",
+      "trace": [
+        {
+          "stage": "question_project_boundary",
+          "audit": {
+            "status": "resolved",
+            "question_candidates": [
+              {
+                "entity": "白榆项目",
+                "interpretation": "literal_entity_no_char_removed",
+                "start": 0,
+                "end": 4,
+                "version_position": [
+                  4,
+                  8
+                ]
+              }
+            ],
+            "body_declarations": [
+              {
+                "entity": "白榆项目",
+                "version": "R5版本",
+                "date": "2026-05",
+                "passage_id": "P695887",
+                "source": "模拟记录/D03/页1",
+                "start": 0,
+                "end": 20,
+                "quote": "白榆项目R5版本在2026-05的记录：",
+                "entity_start": 0,
+                "entity_end": 4
+              }
+            ],
+            "question_original": "白榆项目R5版本在2026-05单并发主测中，方案乙的完整响应耗时中位数比方案甲少多少秒？只输出数值。",
+            "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+            "missing_fields_not_assumed_equal": true,
+            "chosen": {
+              "entity": "白榆项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                8
+              ]
+            },
+            "supporting_declarations": [
+              {
+                "entity": "白榆项目",
+                "version": "R5版本",
+                "date": "2026-05",
+                "passage_id": "P695887",
+                "source": "模拟记录/D03/页1",
+                "start": 0,
+                "end": 20,
+                "quote": "白榆项目R5版本在2026-05的记录：",
+                "entity_start": 0,
+                "entity_end": 4
+              }
+            ]
+          }
+        },
+        {
+          "stage": "direct_relation_audit",
+          "links": [
+            {
+              "supplement_id": "P419087",
+              "target_id": "P695887",
+              "added": false,
+              "reference_evidence": [
+                {
+                  "object_type": "batch",
+                  "object_name": "批次",
+                  "raw_label": "批次",
+                  "code": "BY53",
+                  "start": 0,
+                  "end": 6,
+                  "code_start": 2,
+                  "code_end": 6,
+                  "statement": {
+                    "text": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；",
+                    "start": 0,
+                    "end": 41
+                  },
+                  "reliable_declaration": false,
+                  "direct_supplement_reference": true,
+                  "mere_reference": false,
+                  "declaration_predicate": null
+                }
+              ],
+              "candidate_target_ids": [
+                "P695887"
+              ],
+              "unknown_scope_fields": [
+                "project",
+                "version",
+                "date",
+                "namespace"
+              ],
+              "semantic_support_verified": false,
+              "target_declarations": [
+                {
+                  "object_type": "test",
+                  "object_name": "主测",
+                  "raw_label": "单并发主测",
+                  "code": "BY53",
+                  "start": 20,
+                  "end": 29,
+                  "code_start": 25,
+                  "code_end": 29,
+                  "statement": {
+                    "text": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。",
+                    "start": 0,
+                    "end": 66
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "以同一顺序处理40个",
+                    "start": 29,
+                    "end": 39
+                  }
+                }
+              ],
+              "reason": "unique_reliable_direct_reference",
+              "object_labels_equal": false,
+              "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+              "completion_reason": "already_selected"
+            }
+          ]
+        },
+        {
+          "stage": "pair_scope",
+          "main": "P695887",
+          "supplement": "P419087",
+          "main_status": "matched",
+          "supplement_status": "unknown",
+          "main_fields": [
+            {
+              "field": "project",
+              "question": [
+                "白榆项目"
+              ],
+              "source": [
+                "白榆项目"
+              ],
+              "status": "explicit_scope_match"
+            },
+            {
+              "field": "version",
+              "question": [
+                "R5版本"
+              ],
+              "source": [
+                "R5版本"
+              ],
+              "status": "explicit_scope_match"
+            },
+            {
+              "field": "date",
+              "question": [
+                "2026-05"
+              ],
+              "source": [
+                "2026-05"
+              ],
+              "status": "explicit_scope_match"
+            },
+            {
+              "field": "namespace",
+              "question": [],
+              "source": [],
+              "status": "not_specified_in_question"
+            }
+          ],
+          "supplement_fields": [
+            {
+              "field": "project",
+              "question": [
+                "白榆项目"
+              ],
+              "source": [],
+              "status": "unknown_missing_scope"
+            },
+            {
+              "field": "version",
+              "question": [
+                "R5版本"
+              ],
+              "source": [],
+              "status": "unknown_missing_scope"
+            },
+            {
+              "field": "date",
+              "question": [
+                "2026-05"
+              ],
+              "source": [],
+              "status": "unknown_missing_scope"
+            },
+            {
+              "field": "namespace",
+              "question": [],
+              "source": [],
+              "status": "not_specified_in_question"
+            }
+          ]
+        }
+      ],
+      "derived_response": null,
+      "requires_independent_original_text_review": true,
+      "reason": "zero_or_multiple_reliable_operand_assignments"
+    },
+    "ratio_proof": {
+      "run_kind": "offline_ratio_calculation_proposal",
+      "judgment_source": "local_rule",
+      "applicable": false,
+      "proof_established": false,
+      "status": "not_applicable",
+      "trace": [],
+      "proposed_response": null,
+      "answer_changed": false,
+      "not_original_model_response": true,
+      "reason": "question_does_not_request_supported_ratio"
+    },
+    "erroneous_derivation": false,
+    "erroneous_association": false,
+    "association_review": [
+      {
+        "main_id": "P695887",
+        "supplement_id": "P419087",
+        "main_text": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+        "supplement_text": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+        "independent_provisional_correct": true,
+        "reason": "同一BY53批次40问题、同设置，基础方案甲中位数7.6秒，候选乙5.8秒；问乙比甲少多少，应7.6−5.8=1.8，只输出数值。 补页正文直接指向主记录编号，当前资料无竞争声明或明确范围冲突；缺失范围仍为未知。"
+      }
+    ],
+    "stage_run_ids": [
+      "8d04f77b-1526-4683-88fb-56abb018b785",
+      "6a30d443-fc70-42a6-ace2-27ae515f7e48"
+    ],
+    "timing": {
+      "selection_seconds": 11.11612999998033,
+      "answer_seconds": 4.214961300021969,
+      "tracked_local_rule_wall_seconds": 0.02043369982857257,
+      "rule_timing_note": "已跟踪规则调用区间取并集，嵌套不重复相加；端到端另含模板容量、日志和其他处理。",
+      "end_to_end_seconds": 15.81377110001631
+    },
+    "raw_strict_regression": false,
+    "system_strict_regression": false,
+    "system_strict_improved": false,
+    "historical_comparison": "上轮开发4题2/4，历史复用；本轮新定位新回答，未拼接旧回答。",
+    "material_policy": "证明事实及派生引用只来自used_passages；全部原始资料仅范围、实体和唯一性审计，不补标准答案。"
+  },
+  "previous_raw_review": {
+    "answer": "0.0",
+    "citations": [
+      "P695887"
+    ],
+    "answer_correct": false,
+    "semantic_consistent": false,
+    "format_complete": true,
+    "citation_ids_exist": true,
+    "necessary_input_coverage": false,
+    "necessary_coverage": false,
+    "support_actual_answer": false,
+    "has_unrelated_references": false,
+    "irrelevant_ids": [],
+    "strict_complete_success": false,
+    "ambiguity": null,
+    "reasons": {
+      "answer": "同一BY53批次40问题、同设置，基础方案甲中位数7.6秒，候选乙5.8秒；问乙比甲少多少，应7.6−5.8=1.8，只输出数值。 实际answer='0.0'，未改写。",
+      "coverage": "必要数据/规则来源必须共同引用；缺证题允许目标范围有效检查来源，不固定引用ID。",
+      "support": "按当前实际输入和上述原文推导核对，不把ID存在或系统证明标记当成语义通过。",
+      "unrelated": []
+    },
+    "source_evidence": [
+      {
+        "id": "P419087",
+        "quote": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+        "visible": false,
+        "cited": false
+      },
+      {
+        "id": "P695887",
+        "quote": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+        "visible": true,
+        "cited": true
+      }
+    ]
+  },
+  "previous_final_review": {
+    "answer": "0.0",
+    "citations": [
+      "P695887"
+    ],
+    "answer_correct": false,
+    "semantic_consistent": false,
+    "format_complete": true,
+    "citation_ids_exist": true,
+    "necessary_input_coverage": false,
+    "necessary_coverage": false,
+    "support_actual_answer": false,
+    "has_unrelated_references": false,
+    "irrelevant_ids": [],
+    "strict_complete_success": false,
+    "ambiguity": null,
+    "reasons": {
+      "answer": "同一BY53批次40问题、同设置，基础方案甲中位数7.6秒，候选乙5.8秒；问乙比甲少多少，应7.6−5.8=1.8，只输出数值。 实际answer='0.0'，未改写。",
+      "coverage": "必要数据/规则来源必须共同引用；缺证题允许目标范围有效检查来源，不固定引用ID。",
+      "support": "按当前实际输入和上述原文推导核对，不把ID存在或系统证明标记当成语义通过。",
+      "unrelated": []
+    },
+    "source_evidence": [
+      {
+        "id": "P419087",
+        "quote": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+        "visible": false,
+        "cited": false
+      },
+      {
+        "id": "P695887",
+        "quote": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+        "visible": true,
+        "cited": true
+      }
+    ]
+  }
+}

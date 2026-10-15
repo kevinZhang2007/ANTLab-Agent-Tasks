@@ -1,0 +1,293 @@
+{
+  "type": "object",
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "no_calculation",
+        "insufficient",
+        "calculate"
+      ]
+    },
+    "expression": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/expr4"
+        }
+      ]
+    }
+  },
+  "required": [
+    "mode",
+    "expression"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "expr0": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "number_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "number_ref"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "constant": {
+              "type": "integer",
+              "enum": [
+                100
+              ]
+            }
+          },
+          "required": [
+            "constant"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "expr1": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "number_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "number_ref"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "constant": {
+              "type": "integer",
+              "enum": [
+                100
+              ]
+            }
+          },
+          "required": [
+            "constant"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string",
+              "enum": [
+                "add",
+                "subtract",
+                "multiply",
+                "divide"
+              ]
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expr0"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "required": [
+            "op",
+            "args"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "expr2": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "number_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "number_ref"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "constant": {
+              "type": "integer",
+              "enum": [
+                100
+              ]
+            }
+          },
+          "required": [
+            "constant"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string",
+              "enum": [
+                "add",
+                "subtract",
+                "multiply",
+                "divide"
+              ]
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expr1"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "required": [
+            "op",
+            "args"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "expr3": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "number_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "number_ref"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "constant": {
+              "type": "integer",
+              "enum": [
+                100
+              ]
+            }
+          },
+          "required": [
+            "constant"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string",
+              "enum": [
+                "add",
+                "subtract",
+                "multiply",
+                "divide"
+              ]
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expr2"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "required": [
+            "op",
+            "args"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "expr4": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "number_ref": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "number_ref"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "constant": {
+              "type": "integer",
+              "enum": [
+                100
+              ]
+            }
+          },
+          "required": [
+            "constant"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "type": "string",
+              "enum": [
+                "add",
+                "subtract",
+                "multiply",
+                "divide"
+              ]
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/expr3"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "required": [
+            "op",
+            "args"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

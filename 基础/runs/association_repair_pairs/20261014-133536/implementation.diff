@@ -1,0 +1,400 @@
+--- /dev/null
++++ b/基础/tests/association_repair_candidate.py
+@@ -0,0 +1,121 @@
++"""独立声明提取候选；跨类型编号不自动视为同一业务对象。"""
++import copy
++import re
++import two_step_candidate as selection
++import two_step_linked_candidate as original
++
++# 通用对象后缀，不枚举项目、题目或具体编号。
++OBJECT = r'[一-鿿]{0,12}(?:组代号|批次(?:代号|编号)?|主测|评审|清单|表|集|组)'
++IDENTIFIER = re.compile(r'(?P<label>' + OBJECT + r')\s*(?P<code>[A-Za-z]+[0-9]+)(?![A-Za-z0-9_-])')
++SUPPLEMENT = r'(?:复核)?(?:补页|补充页|补充记录|补充说明|续页)'
++DECLARATION = re.compile(r'\s*的?\s*(?:记录|显示|固定|列出|列明|有|包含|登记|统计|保存|给出|采用|使用|收录|执行|处理|完成)|\s*(?:经|通过)[^。；\n]{0,60}(?:完成|执行|处理|记录|统计)')
++
++
++def object_name(label):
++    # 去掉声明连接词和范围前缀；原label和原句仍保留供核验。
++    label = re.sub(r'^.*项目', '', label)
++    label = re.sub(r'^(?:版本|的记录|对应|指向|参见|用于|上述|前述|该|本)+', '', label)
++    for ending, kind in [('组代号','group_code'),('批次代号','batch'),('批次编号','batch'),
++                         ('批次','batch'),('主测','test'),('评审','review'),('清单','list'),
++                         ('表','table'),('集','collection'),('组','group')]:
++        if label.endswith(ending):
++            name = ending if kind in ('batch','test','group_code') else label
++            return kind, name
++    raise ValueError('unrecognized_object_suffix')
++
++
++def statement(text, start, end):
++    separators = '。！？；;\n'
++    left = max((text.rfind(c, 0, start) for c in separators), default=-1) + 1
++    right = min((p for c in separators if (p := text.find(c, end)) >= 0), default=len(text))
++    if right < len(text):
++        right += 1
++    return {'text': text[left:right], 'start': left, 'end': right}
++
++
++def describe(text):
++    mentions = []
++    for match in IDENTIFIER.finditer(text):
++        kind, name = object_name(match['label'])
++        tail = text[match.end():]
++        ref = re.match(r'\s*的?\s*' + SUPPLEMENT, tail)
++        prefix = text[max(0, match.start()-24):match.end('label')]
++        bridge = bool(re.search(r'(?:对应|指向|参见)\s*' + re.escape(match['label'].removeprefix('对应').removeprefix('指向').removeprefix('参见')) + r'$', prefix))
++        # 已验证批次等声明保留原语境要求；新对象须有声明谓词或明确补页指称。
++        declared = bool(ref or bridge or DECLARATION.match(tail) or kind in ('batch','test','group_code'))
++        row = {'object_type':kind,'object_name':name,'raw_label':match['label'],
++               'code':match['code'],'start':match.start(),'end':match.end(),
++               'code_start':match.start('code'),'code_end':match.end('code'),
++               'statement':statement(text,match.start(),match.end()),
++               'declared':declared,'supplement_reference':bool(ref),'explicit_bridge':bridge}
++        mentions.append(row)
++    _, scope, legacy_supplemental = original.linked.passage_context(text)
++    return {'mentions':mentions,'declarations':[m for m in mentions if m['declared']],
++            'references':[m for m in mentions if m['supplement_reference']],
++            'bridges':[m for m in mentions if m['explicit_bridge']],
++            'scope':{k:sorted(v) for k,v in zip(('project','version','date'),scope)},
++            'supplemental':legacy_supplemental}
++
++
++def complete_passages(question, passages, validation):
++    selected = selection.select_original_passages(passages, validation)
++    seeds = {p['id'] for p in selected}
++    included = set(seeds)
++    contexts = [describe(p['text']) for p in passages]
++    trace = []
++    for passage, context in zip(passages, contexts):
++        if not context['supplemental']:
++            continue
++        refs = context['references']
++        row = {'supplement_id':passage['id'],'target_id':None,'added':False,
++               'reference_evidence':refs,'candidate_target_ids':[],
++               'unknown_scope_fields':[],'semantic_support_verified':False}
++        objects = {(m['object_type'],m['object_name'],m['code']) for m in refs}
++        if not objects:
++            row['reason']='no_explicit_reference'
++        elif len(objects)!=1:
++            row['reason']='multiple_reference_objects'
++        else:
++            ref = refs[0]
++            codes = {m['code'] for m in context['declarations']}
++            possible = [(p,c) for p,c in zip(passages,contexts) if not c['supplemental']
++                        and any(m['code']==ref['code'] for m in c['declarations'])]
++            row['candidate_target_ids']=[p['id'] for p,c in possible]
++            if len(codes)>1:
++                row['reason']='multiple_supplement_objects'
++            elif not possible:
++                row['reason']='zero_targets'
++            elif len(possible)>1:
++                row['reason']='multiple_targets'
++            else:
++                target, other = possible[0]
++                row['target_declarations']=other['declarations']
++                scopes = [context['scope'],other['scope']]
++                row['unknown_scope_fields']=[k for k in scopes[0] if not scopes[0][k] or not scopes[1][k]]
++                identities={(m['object_type'],m['object_name'],m['code']) for m in other['declarations']}
++                if any(len(v)>1 for s in scopes for v in s.values()):
++                    row['reason']='multiple_scopes'
++                elif len(identities)>1:
++                    row['reason']='multiple_main_objects'
++                elif any(scopes[0][k] and scopes[1][k] and scopes[0][k]!=scopes[1][k] for k in scopes[0]):
++                    row['reason']='scope_conflict'
++                else:
++                    declared = other['declarations'][0]
++                    same = (ref['object_type'],ref['object_name'])==(declared['object_type'],declared['object_name'])
++                    # 跨类型必须在同一补充指称句中明示对应的目标对象。
++                    bridges=[m for m in context['bridges'] if m['code']==ref['code']
++                             and (m['object_type'],m['object_name'])==(declared['object_type'],declared['object_name'])
++                             and m['statement']['start']==ref['statement']['start']]
++                    if not same and not bridges:
++                        row['reason']='cross_type_or_name_without_explicit_bridge'
++                    else:
++                        row.update(target_id=target['id'],reason='unique_direct_reference',
++                                   bridge_evidence=bridges,same_object_type_and_name=same)
++                        if target['id'] in seeds and passage['id'] not in seeds:
++                            included.add(passage['id']);row['added']=True
++                        elif passage['id'] in seeds:
++                            row['completion_reason']='already_selected'
++                        else:
++                            row['completion_reason']='target_not_original_seed_no_multihop'
++        trace.append(row)
++    return [copy.deepcopy(p) for p in passages if p['id'] in included], trace
+--- /dev/null
++++ b/基础/tests/check_association_repair.py
+@@ -0,0 +1,100 @@
++"""自造机制正反例及八题关联重算；不调用模型，不读取答案。"""
++import copy
++from datetime import datetime
++import hashlib
++import json
++from pathlib import Path
++import random
++import sys
++import association_repair_candidate as candidate
++import two_step_linked_candidate as old
++
++repo=Path(__file__).resolve().parents[2]
++folder=Path(sys.argv[1]).resolve()
++now=lambda:datetime.now().astimezone().isoformat()
++def write(name,value):
++    path=folder/name;assert not path.exists()
++    path.write_text(json.dumps(value,ensure_ascii=False,indent=2),encoding='utf-8')
++samples=[
++ ('批次直接指称',['甲项目R2版本批次AB12记录。','批次AB12的复核补页：数据。'],[0,1]),
++ ('非题目词汇的表声明',['甲项目R2版本预算审计表ZX19保存支出。','预算审计表ZX19的补充说明：规则。'],[0,1]),
++ ('通用清单声明',['甲项目R2版本巡检清单LM27列明检查项。','巡检清单LM27的续页：附数据。'],[0,1]),
++ ('通用集合声明',['甲项目R2版本训练数据集MN31收录样本。','训练数据集MN31的补充记录：定义。'],[0,1]),
++ ('通用评审声明',['甲项目R2版本例会评审HK11给出检查结果。','例会评审HK11的复核补页：规则。'],[0,1]),
++ ('通用组声明',['甲项目R2版本远程组NM22执行请求。','远程组NM22的补充页：计数。'],[0,1]),
++ ('跨类型有明示桥接',['甲项目R2版本核验表AB12记录计数。','批次AB12的复核补页：对应核验表AB12，补充其规则。'],[0,1]),
++ ('跨类型仅同号',['甲项目R2版本核验表AB12记录计数。','批次AB12的复核补页：计数。'],[0]),
++ ('同类型不同名称',['甲项目R2版本核验表AB12记录计数。','资源表AB12的复核补页：规则。'],[0]),
++ ('任意设备英文编号',['设备AB12开机。','批次AB12的复核补页。'],[0]),
++ ('对象提及无声明谓词',['这里提到预算表AB12，但不说明其内容。','预算表AB12的补页。'],[0]),
++ ('编号跨项目复用',['甲项目R2版本批次AB12记录。','乙项目R2版本批次AB12记录。','批次AB12的补页。'],[0]),
++ ('同范围多个主段',['甲项目R2版本批次AB12记录一。','甲项目R2版本批次AB12记录二。','批次AB12的补页。'],[0]),
++ ('版本冲突',['甲项目R2版本批次AB12记录。','甲项目R3版本批次AB12的补页。'],[0]),
++ ('项目冲突',['甲项目R2版本批次AB12记录。','乙项目R2版本批次AB12的补页。'],[0]),
++ ('日期冲突',['2027-01批次AB12记录。','2027-02批次AB12的补页。'],[0]),
++ ('多个版本',['甲项目R2版本批次AB12记录，并引用R3版本。','批次AB12的补页。'],[0]),
++ ('主段多个业务对象',['核验表AB12记录数据，巡检清单CD34列出规则。','核验表AB12的补页。'],[0]),
++ ('补页多个指称',['批次AB12记录。','批次AB12的补页和批次CD34的补页。'],[0]),
++ ('缺失范围保持未知',['甲项目R2版本2027-01批次AB12记录。','批次AB12的补页。'],[0,1]),
++ ('有编号无明确补充指称',['批次AB12记录。','补页：仅提及批次AB12。'],[0]),
++ ('无可靠关联',['记录没有编号。','另页补充说明：一些数据。'],[0]),
++ ('禁止多跳',['批次AB12记录。','批次AB12的补页，另提到CD34。','批次CD34的补页。'],[0,1]),
++]
++write('synthetic-fixtures-before-check.json',{'saved_at':now(),'samples':samples,'generation_calls':0,'independent_evaluation_set':False})
++snapshot=folder/'code-snapshot';snapshot.mkdir()
++for p in [Path(candidate.__file__),Path(__file__)]:
++    (snapshot/p.name).write_bytes(p.read_bytes())
++write('offline-code-hashes.json',{p.relative_to(repo).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in [Path(candidate.__file__),Path(__file__)]})
++checks=[]
++try:
++    for name,texts,expected in samples:
++        rows=[{'id':'item-'+str(i),'source':'same/'+str(i),'text':text} for i,text in enumerate(texts)]
++        before=copy.deepcopy(rows);validation={'valid':True,'selected_ids':['item-0']}
++        result,trace=candidate.complete_passages('检查资料',rows,validation)
++        actual=[p['id'] for p in result];expected_ids=['item-'+str(i) for i in expected]
++        record={'sample':name,'input':rows,'trace':trace,'actual_ids':actual,'expected_ids':expected_ids,'passed':actual==expected_ids}
++        checks.append(record)
++        assert actual==expected_ids,name+': '+str(actual)
++        assert rows==before and all(p in before for p in result)
++        wanted={(p['source'],p['text']) for p in result}
++        for seed in range(4):
++            shuffled=copy.deepcopy(rows);random.Random(seed).shuffle(shuffled)
++            mapping={p['id']:'renamed-'+str(seed)+'-'+str(i) for i,p in enumerate(shuffled)}
++            remapped=[dict(p,id=mapping[p['id']]) for p in shuffled]
++            selected={'valid':True,'selected_ids':[mapping['item-0']]}
++            other,_=candidate.complete_passages('检查资料',remapped,selected)
++            assert {(p['source'],p['text']) for p in other}==wanted
++            assert other==[p for p in remapped if p['id'] in {q['id'] for q in other}]
++        for p in rows:
++            for mention in candidate.describe(p['text'])['mentions']:
++                assert p['text'][mention['code_start']:mention['code_end']]==mention['code']
++                s=mention['statement'];assert p['text'][s['start']:s['end']]==s['text']
++        if name=='缺失范围保持未知':assert trace[0]['unknown_scope_fields']==['project','version','date']
++    assert candidate.complete_passages('问题',[],{'valid':True,'selected_ids':[]})==([],[])
++    empty,_=candidate.complete_passages('问题',rows,{'valid':True,'selected_ids':[]});assert empty==[]
++    for raw in ['bad json','{"selected_ids":["unknown"]}','{"selected_ids":["item-0","item-0"]}']:
++        invalid=candidate.selection.validate_selection(raw,rows)
++        try:candidate.complete_passages('问题',rows,invalid)
++        except ValueError:pass
++        else:raise AssertionError('非法选择被修补')
++    write('offline-check.json',{'checked_at':now(),'passed':True,'generation_calls':0,'items':checks,'shuffle_remap_trials':92,'empty_and_invalid_passed':True})
++    rerun=[]
++    original=repo/'基础/runs/formal/round2-20261014-133000'
++    for path in sorted(original.glob('task-*.json')):
++        task=json.loads(path.read_text(encoding='utf-8'))
++        if task['variant']!='improved':continue
++        old_used,old_trace=old.complete_passages(task['question'],task['original_passages'],task['selection_validation'])
++        new_used,new_trace=candidate.complete_passages(task['question'],task['original_passages'],task['selection_validation'])
++        assert old_used==task['used_passages'],'旧关联重算不一致'
++        assert new_used==old_used,'本轮出现未预期关联变化，停止'
++        rerun.append({'case_id':task['case_id'],'source_path':path.relative_to(repo).as_posix(),
++            'source_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'question':task['question'],
++            'original_passages':task['original_passages'],'selection_validation':task['selection_validation'],
++            'old_used_passages':old_used,'new_used_passages':new_used,'old_trace':old_trace,'new_trace':new_trace,
++            'extracted_contexts':[{'id':p['id'],**candidate.describe(p['text'])} for p in task['original_passages']],
++            'change_explained':'声明提取扩大；跨类型无明示桥接仍拒绝。T03同类型批次关系保留。','misassociation_found':False})
++    write('eight-case-association-recompute.json',{'checked_at':now(),'passed':True,'items':sorted(rerun,key=lambda r:r['case_id']),'generation_calls':0})
++    print('PASS 23 synthetic samples / 92 shuffle-remaps; 8 recomputations; no new association or model call')
++except Exception as error:
++    write('offline-stop.json',{'stopped_at':now(),'error':repr(error),'checks_completed':checks,'generation_calls':0})
++    raise
+--- /dev/null
++++ b/基础/tests/run_association_repair_pairs.py
+@@ -0,0 +1,170 @@
++"""历史定位选择重放；旧新关联器的16次回答阶段对照。"""
++from pathlib import Path
++import copy,ctypes,hashlib,json,math,os,re,socket,subprocess,sys,threading,time,uuid
++import urllib.request,urllib.error
++import general_candidate as generic
++from run_formal_round2 import now,load,sha
++import provider
++
++repo=Path(__file__).resolve().parents[2]
++base=repo/'基础'
++folder=Path(sys.argv[1]).resolve()
++assert not list(folder.glob('run-*.json')) and not (folder/'runtime.json').exists(),'禁止自动重复或续发'
++def write(name,value,update=False):
++    path=folder/name;assert update or not path.exists()
++    with path.open('w',encoding='utf-8') as stream:
++        json.dump(value,stream,ensure_ascii=False,indent=2);stream.flush();os.fsync(stream.fileno())
++plan=load(folder/'design-plan.json')
++assert load(folder/'offline-check.json')['passed']
++recomputed=load(folder/'eight-case-association-recompute.json');assert recomputed['passed']
++inputs={r['case_id']:r for r in recomputed['items']}
++freeze=load(base/'runs/formal/round2-20261014-133000/freeze.json')
++config=freeze['answer_config']
++root=Path(os.environ['LOCALAPPDATA'])/'ANTLabLocalModel'
++args=[a.replace('%LOCALAPPDATA%/ANTLabLocalModel',str(root)) for a in freeze['service_arguments']]
++source_names=['基础/tests/association_repair_candidate.py','基础/tests/check_association_repair.py',
++    '基础/tests/run_association_repair_pairs.py','基础/tests/general_candidate.py','基础/tests/answer_form_candidate.py',
++    '基础/tests/two_step_linked_candidate.py','基础/tests/two_step_candidate.py','基础/runs/improve/linked_r0/student-v2.py',
++    '基础/starter/student.py','基础/starter/provider.py']
++source_hashes={n:sha(repo/n) for n in source_names}
++for name in source_names:
++    dest=folder/'code-snapshot'/Path(name).name
++    if dest.exists():assert sha(dest)==source_hashes[name]
++    else:dest.write_bytes((repo/name).read_bytes())
++records=[];templates=[];process=None;thread=None
++stop=threading.Event();abort=threading.Event()
++runtime={'started_at':now(),'generation_dispatches':0,'technical_stop':False,'memory_samples':[]}
++class Memory(ctypes.Structure):
++    _fields_=[('length',ctypes.c_ulong),('load',ctypes.c_ulong)]+[(n,ctypes.c_ulonglong) for n in ('total','available','total_page','available_page','total_virtual','available_virtual','extended')]
++def memory():
++    m=Memory();m.length=ctypes.sizeof(m);assert ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(m))
++    return {'time':now(),'available_bytes':m.available,'total_bytes':m.total}
++def monitor():
++    low=0
++    while not stop.is_set():
++        m=memory();runtime['memory_samples'].append(m);low=low+1 if m['available_bytes']<1024**3 else 0
++        if low>=3:
++            abort.set()
++            if process and process.poll() is None:process.terminate()
++            return
++        stop.wait(2)
++opener=urllib.request.build_opener(urllib.request.ProxyHandler({}))
++def service(route,body=None):
++    assert route in {'health','props','slots','apply-template','tokenize','slots/0?action=erase'}
++    request=urllib.request.Request('http://127.0.0.1:8080/'+route,data=None if body is None else json.dumps(body,ensure_ascii=False).encode(),headers={'Content-Type':'application/json'})
++    with opener.open(request,timeout=20) as response:return json.loads(response.read())
++numeric={k:v for k,v in config['parameters'].items() if isinstance(v,(int,float)) and k!='max_tokens'}
++jobs=[];log=folder/'server-log.txt'
++try:
++    assert all(sha(repo/n)==h for n,h in source_hashes.items())
++    assert sha(root/'models/Qwen3-0.6B-Q8_0.gguf')==freeze['model']['actual_sha256']
++    assert sha(root/'llama-b11429/llama-server.exe')==freeze['llama_cpp']['executable_sha256']
++    runtime['memory_before']=memory();assert runtime['memory_before']['available_bytes']>=2*1024**3
++    with socket.socket() as sock:sock.bind(('127.0.0.1',8080))
++    with (folder/'server-stdout.log').open('wb') as out,log.open('wb') as err:
++        process=subprocess.Popen(args,stdout=out,stderr=err,creationflags=subprocess.CREATE_NO_WINDOW)
++    runtime['owned_pid']=process.pid;write('owned-service.json',{'pid':process.pid,'started_at':now(),'arguments':freeze['service_arguments']})
++    begin=time.perf_counter();thread=threading.Thread(target=monitor,daemon=True);thread.start()
++    while True:
++        assert not abort.is_set() and process.poll() is None,'服务或内存错误'
++        try:
++            if service('health').get('status')=='ok':break
++        except (urllib.error.URLError,TimeoutError):pass
++        if time.perf_counter()-begin>120:raise TimeoutError('服务加载超时')
++        time.sleep(.5)
++    runtime['load_seconds']=time.perf_counter()-begin;runtime['memory_after_load']=memory()
++    props=service('props');write('service-props.json',props)
++    assert props['default_generation_settings']['n_ctx']==4096 and props['total_slots']==1
++    assert props['build_info']=='b11429-d81235049' and props['model_alias']==config['model']
++    params=props['default_generation_settings']['params']
++    assert all(math.isclose(params[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric.items())
++    assert math.isclose(params['repeat_penalty'],1.0)
++    for job in plan['order']:
++        row=inputs[job['case_id']];used=row[job['variant']+'_used_passages']
++        messages,conf,rule=generic.answer_request(row['question'],used,config)
++        body={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']}
++        raw=service('apply-template',body);prompt=raw['prompt']
++        tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
++        item={**job,'messages':messages,'config':conf,'schema_rule':rule,'body':body,'used_passages':used,
++              'template_response':raw,'input_tokens':len(tokens),'budget':256,'total':len(tokens)+256}
++        jobs.append(item);write('capacity-check.json',{'checked_at':now(),'rows':jobs,'counts_as_generation':False},True)
++        assert all(m['content'] in prompt for m in messages) and prompt.endswith('<think>\n\n</think>\n\n')
++        assert item['total']<=4096,'完整输入超限'
++    for cid in inputs:
++        pair=[j for j in jobs if j['case_id']==cid]
++        assert pair[0]['body']==pair[1]['body'],'离线已确认相同输入却发生无法解释的变化'
++    write('precall-fixed-settings.json',{'saved_at':now(),'generation_calls_so_far':0,'order':plan['order'],
++        'config':config,'service_arguments':freeze['service_arguments'],'code_hashes':source_hashes,
++        'data_hashes':freeze['data_hashes'],'model':freeze['model'],'llama_cpp':freeze['llama_cpp'],
++        'actual_schemas':[{'case_id':j['case_id'],'variant':j['variant'],'response_format':j['body']['response_format']} for j in jobs],
++        'same_input_in_each_pair':True,'max_input_tokens':max(j['input_tokens'] for j in jobs),
++        'max_total_tokens':max(j['total'] for j in jobs),'evaluation_rules':freeze['evaluation_rules'],
++        'selection_provenance':'历史选择重放；本轮只有回答阶段，不重新执行完整两步流程。'})
++    print('PRECALL PASS; 16 pairs-stage requests; max tokens',max(j['total'] for j in jobs),flush=True)
++    for job in jobs:
++        assert not abort.is_set() and memory()['available_bytes']>=1024**3
++        assert all(sha(repo/n)==h for n,h in source_hashes.items())
++        row=inputs[job['case_id']]
++        record={k:copy.deepcopy(job[k]) for k in ['sequence','case_id','variant','messages','config','used_passages','input_tokens','schema_rule']}
++        record.update(run_id=str(uuid.uuid4()),started_at=now(),run_kind='live_api',mode='local',
++            condition='R0',answer_stage_only=True,selection_provenance='historical_replay',
++            original_passages=row['original_passages'],question=row['question'],selection_validation=row['selection_validation'],
++            selection_source_path=row['source_path'],selection_source_sha256=row['source_sha256'],
++            association_trace=row[job['variant']+'_trace'],memory_before=memory(),status='pending',
++            generation_dispatched=False,model_revision=freeze['model']['revision'],weight_sha256=freeze['model']['actual_sha256'],
++            attempt=1,retry_of=None)
++        records.append(record);name='run-'+record['run_id']+'.json';write(name,record)
++        record['cache_erase']=service('slots/0?action=erase',{})
++        offset=log.stat().st_size;build=urllib.request.build_opener
++        class Capture:
++            def __init__(self,inner):self.inner=inner
++            def open(self,request,*a,**kw):
++                actual=json.loads(request.data);assert actual==job['body'] and actual['max_tokens']==256
++                assert runtime['generation_dispatches']<16
++                record.update(actual_http_request_body=actual,raw_http_request_body=request.data.decode(),generation_dispatched=True)
++                runtime['generation_dispatches']+=1;write(name,record,True)
++                try:return self.inner.open(request,*a,**kw)
++                except urllib.error.HTTPError as error:
++                    record['raw_http_error_body']=error.read().decode(errors='replace');raise
++        urllib.request.build_opener=lambda *a,**kw:Capture(build(*a,**kw))
++        try:record.update(provider.call_model(job['messages'],job['config']))
++        finally:urllib.request.build_opener=build;write(name,record,True)
++        record['memory_after']=memory();record['returned_at']=now()
++        if record['status']!='ok' or not isinstance(record.get('response'),dict) or not record['response'].get('choices'):
++            record['technical_failure']=True;write(name,record,True);raise RuntimeError('技术请求失败 '+record['run_id'])
++        choice=record['response']['choices'][0]
++        record.update(raw_content=choice.get('message',{}).get('content',''),finish_reason=choice.get('finish_reason'),
++            budget_exhausted=choice.get('finish_reason')=='length',raw_reasoning=choice.get('message',{}).get('reasoning_content'))
++        slots=service('slots');record['slot_after']=slots;echo=slots[0]['params']
++        record['parameter_checks']={k:math.isclose(echo[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric.items() if k in echo}
++        record['parameters_not_echoed']=[k for k in numeric if k not in echo]+['response_format','effective_max_tokens']
++        with log.open('rb') as stream:stream.seek(offset);segment=stream.read().decode(errors='replace')
++        record['server_log_segment']=segment.replace(str(root),'%LOCALAPPDATA%/ANTLabLocalModel')
++        flags=re.findall(r'truncated\s*=\s*(\d+)',segment)
++        record['truncated']=any(int(f) for f in flags) if flags else 'not_verified'
++        write(name,record,True)
++        assert all(record['parameter_checks'].values()) and record['truncated'] is not True
++        write('result-index.json',{'items':[{'sequence':r['sequence'],'case_id':r['case_id'],'variant':r['variant'],
++            'run_id':r['run_id'],'path':(folder/('run-'+r['run_id']+'.json')).relative_to(repo).as_posix(),
++            'elapsed_seconds':r.get('elapsed_seconds'),'status':r['status']} for r in records]},True)
++        print('RESULT',job['sequence'],job['case_id'],job['variant'],record['run_id'],record['finish_reason'],flush=True)
++except Exception as error:
++    runtime.update(technical_stop=True,error=repr(error));write('technical-stop.json',{'stopped_at':now(),'error':repr(error),'generation_dispatches':runtime['generation_dispatches']})
++    print('STOP',repr(error),flush=True)
++finally:
++    stop.set()
++    if thread:thread.join(timeout=5)
++    if process and process.pid==runtime.get('owned_pid') and process.poll() is None:
++        process.terminate()
++        try:process.wait(timeout=10)
++        except subprocess.TimeoutExpired:process.kill();process.wait()
++    runtime.update(ended_at=now(),service_stopped=process is None or process.poll() is not None,memory_after_stop=memory())
++    write('runtime.json',runtime)
++    confirmed=[r for r in records if (r.get('usage') or {}).get('completion_tokens',0)>0]
++    summary={'completed_answers':len(confirmed),'generation_dispatches':runtime['generation_dispatches'],
++        'technical_stop':runtime['technical_stop'],'service_stopped':runtime['service_stopped'],
++        'previous_cumulative':246,'cumulative_confirmed':246+len(confirmed),
++        'unique_run_ids':[r['run_id'] for r in confirmed],'budget_exhausted':sum(r.get('budget_exhausted',False) for r in records),
++        'truncation_true':sum(r.get('truncated') is True for r in records),'truncation_unverified':sum(r.get('truncated')=='not_verified' for r in records)}
++    write('execution-summary.json',summary)
++    print('FINAL',json.dumps({k:v for k,v in summary.items() if k!='unique_run_ids'},ensure_ascii=False),flush=True)

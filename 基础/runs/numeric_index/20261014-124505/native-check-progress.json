@@ -1,0 +1,236 @@
+{
+  "tests": [
+    {
+      "name": "负数小数减法",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "subtract",
+          "args": [
+            {
+              "number_ref": "n5"
+            },
+            {
+              "number_ref": "n6"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": true
+    },
+    {
+      "name": "有限嵌套及100常量",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "multiply",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "number_ref": "n6"
+                },
+                {
+                  "number_ref": "n5"
+                }
+              ]
+            },
+            {
+              "constant": 100
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": true
+    },
+    {
+      "name": "重复数值独立引用",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "number_ref": "n7"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": true
+    },
+    {
+      "name": "未知引用",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "number_ref": "unknown"
+            },
+            {
+              "number_ref": "n6"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": false
+    },
+    {
+      "name": "除零",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "divide",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "number_ref": "n8"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": false
+    },
+    {
+      "name": "非法操作",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "power",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "number_ref": "n8"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": false,
+      "native_schema_accept": false,
+      "rejected_token": 13175,
+      "program_valid": false
+    },
+    {
+      "name": "任意事实常量",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "constant": 99
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": false,
+      "native_schema_accept": false,
+      "rejected_token": 24,
+      "program_valid": false
+    },
+    {
+      "name": "无须计算",
+      "raw_plan": {
+        "mode": "no_calculation",
+        "expression": null
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": true
+    },
+    {
+      "name": "证据不足",
+      "raw_plan": {
+        "mode": "insufficient",
+        "expression": null
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": true
+    },
+    {
+      "name": "超过节点或深度",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "op": "add",
+              "args": [
+                {
+                  "op": "add",
+                  "args": [
+                    {
+                      "op": "add",
+                      "args": [
+                        {
+                          "op": "add",
+                          "args": [
+                            {
+                              "number_ref": "n6"
+                            },
+                            {
+                              "number_ref": "n6"
+                            }
+                          ]
+                        },
+                        {
+                          "number_ref": "n6"
+                        }
+                      ]
+                    },
+                    {
+                      "number_ref": "n6"
+                    }
+                  ]
+                },
+                {
+                  "number_ref": "n6"
+                }
+              ]
+            },
+            {
+              "number_ref": "n6"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": false,
+      "native_schema_accept": false,
+      "rejected_token": 453,
+      "program_valid": false
+    }
+  ],
+  "passed_so_far": true,
+  "generation_calls": 0
+}

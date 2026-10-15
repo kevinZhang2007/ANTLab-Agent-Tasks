@@ -1,0 +1,759 @@
+{
+  "basis": {
+    "case_id": "T06",
+    "question_scope": "松影R3，2026-07首次执行SY37技术失败率；只输出百分数。",
+    "scope": {
+      "project": "松影",
+      "version": "R3",
+      "date": "2026-07",
+      "batch": "SY37",
+      "metric": "按该批次自有口径，超时和格式不合法均为技术失败，全部60项初次结果为分母"
+    },
+    "required_evidence": [
+      {
+        "id": "P873502",
+        "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+        "role": "首次任务数量与两类失败计数"
+      },
+      {
+        "id": "P721388",
+        "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+        "role": "题内技术失败定义及分母"
+      }
+    ],
+    "derivation": "(8超时+7格式不合法)/60×100%=25%。不剔除失败，不用重试；该题的统计定义与本轮请求技术/质量失败分类不是同一口径。",
+    "derived_answer": "25%",
+    "answer_form": "仅百分数",
+    "excluded_evidence": [
+      {
+        "id": "P466322",
+        "reason": "R2旧版"
+      },
+      {
+        "id": "P463444",
+        "reason": "迁移XQ59"
+      },
+      {
+        "id": "P276634",
+        "reason": "上月探索"
+      },
+      {
+        "id": "P878722",
+        "reason": "压力组并非SY37初次清单"
+      },
+      {
+        "id": "P151208",
+        "reason": "岫光项目"
+      }
+    ],
+    "ambiguities": [],
+    "limits": "K若缺P721388，技术失败是否包含格式不合法无法按本批次明确核对；不要从常见术语含义擅自替代该题口径。",
+    "reviewed_at": "2026-10-13T13:36:54.735007+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+    "source": "基础/data/cases.json",
+    "source_sha256": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "derivation_kind": "评测后原文推导，非官方标准答案",
+    "model_answers_read_before_saving": false
+  },
+  "row": {
+    "reviewed_at": "2026-10-15T13:49:31.714244+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认；非官方成绩。T题为评测后重复测试，非独立盲测或泛化验证。",
+    "case_id": "T06",
+    "dataset": "evaluation_repeat",
+    "main_task_id": "30d4294e-2ce1-457c-82a1-79a786f79be4",
+    "stage_run_ids": [
+      "7f6d9dea-23cc-4636-8bcd-cb5fd8208a50",
+      "569bf4f0-1211-46ca-9907-ddfb5b7a722a"
+    ],
+    "raw_review": {
+      "answer": "证据不足",
+      "citations": [
+        "P873502"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_input_coverage": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "has_unrelated_references": false,
+      "irrelevant_ids": [],
+      "strict_complete_success": false,
+      "ambiguity": null,
+      "reasons": {
+        "answer": "(8超时+7格式不合法)/60×100%=25%。不剔除失败，不用重试；该题的统计定义与本轮请求技术/质量失败分类不是同一口径。 实际answer='证据不足'，不改写。 完整R0有推导依据；拒答或定位漏选不能计为端到端成功。",
+        "coverage": "必要原文来源=P721388,P873502；实际引用=P873502",
+        "support": "原文数据与必要计算/选择/发布条件需共同覆盖；不是仅看ID有效或系统proof标记。",
+        "unrelated": []
+      },
+      "source_evidence": [
+        {
+          "id": "P873502",
+          "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+          "full_original_text": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        },
+        {
+          "id": "P721388",
+          "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+          "full_original_text": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": false
+        }
+      ]
+    },
+    "system_final_review": {
+      "answer": "25%",
+      "citations": [
+        "P873502",
+        "P721388"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_input_coverage": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "has_unrelated_references": false,
+      "irrelevant_ids": [],
+      "strict_complete_success": true,
+      "ambiguity": null,
+      "reasons": {
+        "answer": "(8超时+7格式不合法)/60×100%=25%。不剔除失败，不用重试；该题的统计定义与本轮请求技术/质量失败分类不是同一口径。 实际answer='25%'，不改写。",
+        "coverage": "必要原文来源=P721388,P873502；实际引用=P873502,P721388",
+        "support": "原文数据与必要计算/选择/发布条件需共同覆盖；不是仅看ID有效或系统proof标记。",
+        "unrelated": []
+      },
+      "source_evidence": [
+        {
+          "id": "P873502",
+          "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+          "full_original_text": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        },
+        {
+          "id": "P721388",
+          "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+          "full_original_text": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        }
+      ]
+    },
+    "raw_response": {
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "{\"answer\":\"证据不足\",\"citations\":[\"P873502\"]}"
+          }
+        }
+      ],
+      "created": 1792043272,
+      "model": "Qwen3-0.6B-Q8_0",
+      "system_fingerprint": "b11429-d81235049",
+      "object": "chat.completion",
+      "usage": {
+        "completion_tokens": 18,
+        "prompt_tokens": 794,
+        "total_tokens": 812,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "id": "chatcmpl-J5JJY0dOx5zwnAArHsQh1H1YCobVC74N",
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 794,
+        "prompt_ms": 3731.036,
+        "prompt_per_token_ms": 4.6990377833753145,
+        "prompt_per_second": 212.8095252900267,
+        "predicted_n": 18,
+        "predicted_ms": 466.262,
+        "predicted_per_token_ms": 27.427176470588236,
+        "predicted_per_second": 36.460187619836056
+      }
+    },
+    "reference_derived_response": null,
+    "reference_derived_review": null,
+    "proposed_response": {
+      "answer": "25%",
+      "citations": [
+        "P873502",
+        "P721388"
+      ]
+    },
+    "proposal_review": {
+      "answer": "25%",
+      "citations": [
+        "P873502",
+        "P721388"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_input_coverage": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "has_unrelated_references": false,
+      "irrelevant_ids": [],
+      "strict_complete_success": true,
+      "ambiguity": null,
+      "reasons": {
+        "answer": "(8超时+7格式不合法)/60×100%=25%。不剔除失败，不用重试；该题的统计定义与本轮请求技术/质量失败分类不是同一口径。 实际answer='25%'，不改写。",
+        "coverage": "必要原文来源=P721388,P873502；实际引用=P873502,P721388",
+        "support": "原文数据与必要计算/选择/发布条件需共同覆盖；不是仅看ID有效或系统proof标记。",
+        "unrelated": []
+      },
+      "source_evidence": [
+        {
+          "id": "P873502",
+          "quote": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。",
+          "full_original_text": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        },
+        {
+          "id": "P721388",
+          "quote": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。",
+          "full_original_text": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+          "visible": true,
+          "cited": true
+        }
+      ]
+    },
+    "actual_final_output": {
+      "answer": "25%",
+      "citations": [
+        "P873502",
+        "P721388"
+      ]
+    },
+    "actual_final_output_source": "local_rule_ratio_new_answer",
+    "answer_changed_from_model_raw": true,
+    "reference_proof": {
+      "judgment_source": "local_rule",
+      "run_kind": "offline_proof",
+      "proof_established": false,
+      "proof_status": "not_applicable",
+      "proof_kind": null,
+      "trace": [],
+      "derived_response": null,
+      "requires_independent_original_text_review": true,
+      "reason": "unsupported_question_branch_original_preserved"
+    },
+    "ratio_proof": {
+      "run_kind": "offline_ratio_calculation_proposal",
+      "judgment_source": "local_rule",
+      "applicable": true,
+      "proof_established": true,
+      "status": "established",
+      "trace": [
+        {
+          "stage": "question_project_boundary",
+          "audit": {
+            "status": "resolved",
+            "question_candidates": [
+              {
+                "entity": "松影项目",
+                "interpretation": "literal_entity_no_char_removed",
+                "start": 0,
+                "end": 4,
+                "version_position": [
+                  4,
+                  8
+                ]
+              }
+            ],
+            "body_declarations": [
+              {
+                "entity": "松影项目",
+                "version": "R3版本",
+                "date": "2026-07",
+                "passage_id": "P873502",
+                "source": "模拟记录/T06/页4",
+                "start": 0,
+                "end": 20,
+                "quote": "松影项目R3版本在2026-07的记录：",
+                "entity_start": 0,
+                "entity_end": 4
+              }
+            ],
+            "question_original": "松影项目R3版本在2026-07首次执行清单的技术失败率是多少？只输出百分数。",
+            "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+            "missing_fields_not_assumed_equal": true,
+            "chosen": {
+              "entity": "松影项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                8
+              ]
+            },
+            "supporting_declarations": [
+              {
+                "entity": "松影项目",
+                "version": "R3版本",
+                "date": "2026-07",
+                "passage_id": "P873502",
+                "source": "模拟记录/T06/页4",
+                "start": 0,
+                "end": 20,
+                "quote": "松影项目R3版本在2026-07的记录：",
+                "entity_start": 0,
+                "entity_end": 4
+              }
+            ]
+          }
+        },
+        {
+          "stage": "direct_relation_audit",
+          "links": [
+            {
+              "supplement_id": "P721388",
+              "target_id": "P873502",
+              "added": false,
+              "reference_evidence": [
+                {
+                  "object_type": "batch",
+                  "object_name": "批次",
+                  "raw_label": "批次",
+                  "code": "SY37",
+                  "start": 0,
+                  "end": 6,
+                  "code_start": 2,
+                  "code_end": 6,
+                  "statement": {
+                    "text": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；",
+                    "start": 0,
+                    "end": 46
+                  },
+                  "reliable_declaration": false,
+                  "direct_supplement_reference": true,
+                  "mere_reference": false,
+                  "declaration_predicate": null
+                }
+              ],
+              "candidate_target_ids": [
+                "P873502"
+              ],
+              "unknown_scope_fields": [
+                "project",
+                "version",
+                "date",
+                "namespace"
+              ],
+              "semantic_support_verified": false,
+              "target_declarations": [
+                {
+                  "object_type": "list",
+                  "object_name": "首次执行清单",
+                  "raw_label": "首次执行清单",
+                  "code": "SY37",
+                  "start": 20,
+                  "end": 30,
+                  "code_start": 26,
+                  "code_end": 30,
+                  "statement": {
+                    "text": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；",
+                    "start": 0,
+                    "end": 37
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "有",
+                    "start": 30,
+                    "end": 31
+                  }
+                }
+              ],
+              "reason": "unique_reliable_direct_reference",
+              "object_labels_equal": false,
+              "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+              "completion_reason": "already_selected"
+            }
+          ]
+        },
+        {
+          "stage": "pair_scope",
+          "main": "P873502",
+          "supplement": "P721388",
+          "main_status": "matched",
+          "supplement_status": "unknown",
+          "main_fields": [
+            {
+              "field": "project",
+              "question": [
+                "松影项目"
+              ],
+              "source": [
+                "松影项目"
+              ],
+              "status": "explicit_scope_match"
+            },
+            {
+              "field": "version",
+              "question": [
+                "R3版本"
+              ],
+              "source": [
+                "R3版本"
+              ],
+              "status": "explicit_scope_match"
+            },
+            {
+              "field": "date",
+              "question": [
+                "2026-07"
+              ],
+              "source": [
+                "2026-07"
+              ],
+              "status": "explicit_scope_match"
+            },
+            {
+              "field": "namespace",
+              "question": [],
+              "source": [],
+              "status": "not_specified_in_question"
+            }
+          ],
+          "supplement_fields": [
+            {
+              "field": "project",
+              "question": [
+                "松影项目"
+              ],
+              "source": [],
+              "status": "unknown_missing_scope"
+            },
+            {
+              "field": "version",
+              "question": [
+                "R3版本"
+              ],
+              "source": [],
+              "status": "unknown_missing_scope"
+            },
+            {
+              "field": "date",
+              "question": [
+                "2026-07"
+              ],
+              "source": [],
+              "status": "unknown_missing_scope"
+            },
+            {
+              "field": "namespace",
+              "question": [],
+              "source": [],
+              "status": "not_specified_in_question"
+            }
+          ]
+        }
+      ],
+      "proposed_response": {
+        "answer": "25%",
+        "citations": [
+          "P873502",
+          "P721388"
+        ]
+      },
+      "answer_changed": true,
+      "not_original_model_response": true,
+      "requested_metric": "技术失败率",
+      "definition": {
+        "included": [
+          "超时",
+          "格式不合法"
+        ],
+        "closed_definition": false,
+        "definition_form": "enumerated_assignment",
+        "source": {
+          "passage_id": "P721388",
+          "source": "模拟记录/T06/页1",
+          "start": 20,
+          "end": 36,
+          "quote": "把超时和格式不合法均列为技术失败",
+          "role": "指标分子分类定义"
+        }
+      },
+      "denominator": {
+        "value": "60",
+        "unit": "项",
+        "sources": [
+          {
+            "value": "60",
+            "unit": "项",
+            "population": "",
+            "source": {
+              "passage_id": "P721388",
+              "source": "模拟记录/T06/页1",
+              "start": 37,
+              "end": 45,
+              "quote": "分母为全部60项",
+              "role": "明确分母"
+            },
+            "quantity_span": [
+              42,
+              45
+            ]
+          }
+        ]
+      },
+      "category_counts": {
+        "rows": [
+          {
+            "category": "返回合法结果",
+            "value": "45",
+            "unit": "项",
+            "quantity_span": [
+              37,
+              40
+            ],
+            "source": {
+              "passage_id": "P873502",
+              "source": "模拟记录/T06/页4",
+              "start": 37,
+              "end": 46,
+              "quote": "45项返回合法结果",
+              "role": "并列分类计数"
+            }
+          },
+          {
+            "category": "超时",
+            "value": "8",
+            "unit": "项",
+            "quantity_span": [
+              47,
+              49
+            ],
+            "source": {
+              "passage_id": "P873502",
+              "source": "模拟记录/T06/页4",
+              "start": 47,
+              "end": 51,
+              "quote": "8项超时",
+              "role": "并列分类计数"
+            }
+          },
+          {
+            "category": "格式不合法",
+            "value": "7",
+            "unit": "项",
+            "quantity_span": [
+              52,
+              54
+            ],
+            "source": {
+              "passage_id": "P873502",
+              "source": "模拟记录/T06/页4",
+              "start": 52,
+              "end": 59,
+              "quote": "7项格式不合法",
+              "role": "并列分类计数"
+            }
+          }
+        ],
+        "source": {
+          "passage_id": "P873502",
+          "source": "模拟记录/T06/页4",
+          "start": 37,
+          "end": 59,
+          "quote": "45项返回合法结果、8项超时、7项格式不合法",
+          "role": "同批并列分类原文"
+        }
+      },
+      "statistical_scope": {
+        "question_first_attempt": true,
+        "explicit_first_attempt": true,
+        "retry_separation_quotes": [
+          {
+            "passage_id": "P873502",
+            "source": "模拟记录/T06/页4",
+            "start": 60,
+            "end": 68,
+            "quote": "每项只计初次结果",
+            "role": "统计阶段界限"
+          },
+          {
+            "passage_id": "P721388",
+            "source": "模拟记录/T06/页1",
+            "start": 46,
+            "end": 52,
+            "quote": "人工重试另列",
+            "role": "统计阶段界限"
+          }
+        ],
+        "total_count_crosscheck": [
+          {
+            "passage_id": "P873502",
+            "source": "模拟记录/T06/页4",
+            "start": 31,
+            "end": 34,
+            "quote": "60项",
+            "role": "同批总计交叉核对"
+          }
+        ]
+      },
+      "category_assignment": {
+        "included": [
+          "超时",
+          "格式不合法"
+        ],
+        "excluded": [
+          "返回合法结果"
+        ],
+        "basis": "实际原文的只计/列为定义形成封闭分子；不从术语常识补分类。",
+        "excluded_status_sources": [
+          {
+            "category": "返回合法结果",
+            "source": {
+              "passage_id": "P873502",
+              "source": "模拟记录/T06/页4",
+              "start": 37,
+              "end": 46,
+              "quote": "45项返回合法结果",
+              "role": "并列分类计数"
+            },
+            "basis": "同批单次结果并列分类中的明示正常/合法状态；分子仍仅使用原文列为目标指标的类别，不以分母减此项代算。"
+          }
+        ],
+        "partition_limit": "限同批并列复核结果、分类名不嵌套、无明示交叉/重复且总和吻合；不保证排除隐含的语义重叠，需独立原文复核。"
+      },
+      "numerator": {
+        "value": "15",
+        "unit": "项",
+        "sources": [
+          {
+            "category": "超时",
+            "value": "8",
+            "unit": "项",
+            "quantity_span": [
+              47,
+              49
+            ],
+            "source": {
+              "passage_id": "P873502",
+              "source": "模拟记录/T06/页4",
+              "start": 47,
+              "end": 51,
+              "quote": "8项超时",
+              "role": "并列分类计数"
+            }
+          },
+          {
+            "category": "格式不合法",
+            "value": "7",
+            "unit": "项",
+            "quantity_span": [
+              52,
+              54
+            ],
+            "source": {
+              "passage_id": "P873502",
+              "source": "模拟记录/T06/页4",
+              "start": 52,
+              "end": 59,
+              "quote": "7项格式不合法",
+              "role": "并列分类计数"
+            }
+          }
+        ]
+      },
+      "expression": "(8+7)/60*100",
+      "rounding": {
+        "mode": "exact_terminating_decimal_no_rounding_needed"
+      },
+      "reason": "explicit_metric_definition_partition_denominator_and_attempt_scope_confirmed",
+      "proposed_response_kind": "local_rule_calculated_new_answer_not_model_output",
+      "original_answer": "证据不足"
+    },
+    "erroneous_reference_derivation": false,
+    "erroneous_ratio_derivation": false,
+    "basis_path": "基础/runs/formal_review/round1/evidence-T06.json",
+    "basis_sha256": "a8bde5e6ae6afd8a82676624cd827661c732bca66645b6ec29467f7e64eb47b7",
+    "material_scope": {
+      "model_final_input_passages": [
+        {
+          "id": "P873502",
+          "source": "模拟记录/T06/页4",
+          "text": "松影项目R3版本在2026-07的记录：首次执行清单SY37有60项任务；45项返回合法结果、8项超时、7项格式不合法；每项只计初次结果。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P721388",
+          "source": "模拟记录/T06/页1",
+          "text": "批次SY37的复核补页：SY37质量口径把超时和格式不合法均列为技术失败，分母为全部60项；人工重试另列。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。"
+        }
+      ],
+      "audit_only_original_visible_passages": [
+        {
+          "id": "P878722",
+          "source": "模拟记录/T06/页5",
+          "text": "松影项目R3版本在2026-07的压力组使用八并发请求，96项返回成功、4项超时，P50为3.7秒；项目另列压力组汇总。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P276634",
+          "source": "模拟记录/T06/页6",
+          "text": "松影项目R3版本在2026-06的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P151208",
+          "source": "模拟记录/T06/页3",
+          "text": "岫光项目R3版本在2026-07登记同名指标和批次XQ59，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P466322",
+          "source": "模拟记录/T06/页2",
+          "text": "松影项目R2版本在2026-07的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P463444",
+          "source": "模拟记录/T06/页7",
+          "text": "松影项目R3版本在2026-07的迁移批次XQ59处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。"
+        }
+      ],
+      "model_final_input_ids": [
+        "P873502",
+        "P721388"
+      ],
+      "original_visible_ids": [
+        "P878722",
+        "P276634",
+        "P151208",
+        "P466322",
+        "P463444",
+        "P873502",
+        "P721388"
+      ],
+      "audit_only_ids": [
+        "P878722",
+        "P276634",
+        "P151208",
+        "P466322",
+        "P463444"
+      ],
+      "proof_fact_and_derived_citation_ids_subset_of_final_model_input": true,
+      "policy": "额外原始可见资料仅供范围、实体和唯一性审计；不得将其当作最终回答模型输入或派生事实来源。定位阶段输入另存selection_passages。"
+    },
+    "timing_summary": {
+      "selection_seconds": 12.781656099949032,
+      "answer_seconds": 4.225410300074145,
+      "tracked_local_rule_wall_seconds": 0.007475999998860061,
+      "rule_timing_note": "已跟踪规则调用区间取并集，嵌套不重复相加；端到端另含模板容量、日志和其他处理。",
+      "end_to_end_seconds": 17.295387899968773
+    },
+    "independent_judgment": "依据问题、完整原文和实际最终输入核对，不把程序proof_established或模型意见当作评分。"
+  }
+}

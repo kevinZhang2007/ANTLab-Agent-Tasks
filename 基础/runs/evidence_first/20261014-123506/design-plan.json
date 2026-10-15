@@ -1,0 +1,57 @@
+{
+  "recorded_at": "2026-10-14T12:35:06.660243+08:00",
+  "scope": "首次正式评测后的开发探索，仅D01—D04历史选择重放回答阶段",
+  "hypothesis": "同次生成先摘录必要数据与规则，可能帮助最终回答和引用。",
+  "competing_explanations": [
+    "额外证据结构与512预算一起变化，不能归因于单独推理步骤。",
+    "模型可能改写或伪造摘录；真实摘录也可能范围错误、漏证或不能支持最终答案。"
+  ],
+  "input_source": "基础/runs/two_step_linked_form/20261013-202853/task-Dxx.json 的question及used_passages",
+  "call_order": [
+    {
+      "case_id": "D01",
+      "variant": "control"
+    },
+    {
+      "case_id": "D01",
+      "variant": "evidence_first"
+    },
+    {
+      "case_id": "D02",
+      "variant": "evidence_first"
+    },
+    {
+      "case_id": "D02",
+      "variant": "control"
+    },
+    {
+      "case_id": "D03",
+      "variant": "control"
+    },
+    {
+      "case_id": "D03",
+      "variant": "evidence_first"
+    },
+    {
+      "case_id": "D04",
+      "variant": "evidence_first"
+    },
+    {
+      "case_id": "D04",
+      "variant": "control"
+    }
+  ],
+  "max_generations": 8,
+  "budgets": {
+    "control": 256,
+    "evidence_first": 512
+  },
+  "fixed": "同一Qwen3-0.6B-Q8_0及llama.cpp b11429，4096/CPU单槽4线程/batch128/ubatch64/关闭思考、上下文移位及预热；沿用原采样与答案形式约束。",
+  "schema_gate": "必须用实际原生转换器检查evidence先于answer及citations的强制顺序；不能保证则保存并停止。",
+  "validation": "passage_id属于输入；quote为非空连续原文。失败不修补。字段投影只提取answer/citations并另存，不冒充原始响应。",
+  "evaluation": "全部调用结束后才读公开开发答案；分别检查摘录真实性、必要证据、运算/选择依据、指定答法、语义、最终引用支持、无关引用与严格成功；非法或缺失evidence保留在分母。",
+  "adoption": "严格成功优先，其次答案正确；同分保留当前更简单方案，不自动替换生产。",
+  "stop_rule": "技术、资源、模板、容量或顺序约束失败保存停止；模型摘录错误、答错及漏引属于质量失败，不重试。",
+  "timing": "回答阶段完整非流式HTTP时间，不与完整两步流程混用。",
+  "prior_unique_generation_count": 170
+}

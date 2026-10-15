@@ -1,0 +1,67 @@
+{
+  "name": "selection_conflicting_scope_order",
+  "question": "竹岭项目V4版本在2026-04核验表应选择哪条流程？只输出流程名称。",
+  "passages": [
+    {
+      "id": "source-2",
+      "source": "自造资料/2",
+      "text": "批次Check64的复核补页：Check64的正式规则先要求错误证据不超过2条，再最大化召回；流程名称不参与第一轮筛选。"
+    },
+    {
+      "id": "source-1",
+      "source": "自造资料/1",
+      "text": "竹岭项目V5版本在2026-04的记录：核验表Check64记录流程春召回13条证据、引入5条错误证据；流程夏召回11条、错误1条；流程秋召回15条、错误4条。"
+    }
+  ],
+  "raw": "{\"answer\": \"流程夏\", \"citations\": []}",
+  "expected": false,
+  "actual": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": false,
+    "proof_status": "refused",
+    "proof_kind": "qualification_selection",
+    "trace": [
+      {
+        "stage": "question_project_boundary",
+        "audit": {
+          "status": "unknown",
+          "question_candidates": [
+            {
+              "entity": "竹岭项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                8
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "V5版本",
+              "date": "2026-04",
+              "passage_id": "source-1",
+              "source": "自造资料/1",
+              "start": 0,
+              "end": 20,
+              "quote": "竹岭项目V5版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "竹岭项目V4版本在2026-04核验表应选择哪条流程？只输出流程名称。",
+          "reason": "entity_declaration_version_or_date_not_confirmed",
+          "missing_fields_not_assumed_equal": true
+        }
+      }
+    ],
+    "derived_response": null,
+    "requires_independent_original_text_review": true,
+    "reason": "question_project_entity_unknown"
+  },
+  "passed": true,
+  "checked_at": "2026-10-15T13:34:05.355241+08:00"
+}

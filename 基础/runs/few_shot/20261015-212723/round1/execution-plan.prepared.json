@@ -1,0 +1,110 @@
+{
+  "experiment": "few_shot_final_answer",
+  "round": 1,
+  "saved_at": "2026-10-15T21:27:23.903551+08:00",
+  "items": [
+    {
+      "sequence": 1,
+      "case_id": "D01",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/final_five/20261015-210223/round5/task-01.json"
+    },
+    {
+      "sequence": 2,
+      "case_id": "D01",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "few_shot": true
+      },
+      "historical_task": "基础/runs/final_five/20261015-210223/round5/task-01.json"
+    },
+    {
+      "sequence": 3,
+      "case_id": "D02",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "few_shot": true
+      },
+      "historical_task": "基础/runs/final_five/20261015-210223/round5/task-02.json"
+    },
+    {
+      "sequence": 4,
+      "case_id": "D02",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/final_five/20261015-210223/round5/task-02.json"
+    },
+    {
+      "sequence": 5,
+      "case_id": "D03",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/final_five/20261015-210223/round5/task-03.json"
+    },
+    {
+      "sequence": 6,
+      "case_id": "D03",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "few_shot": true
+      },
+      "historical_task": "基础/runs/final_five/20261015-210223/round5/task-03.json"
+    },
+    {
+      "sequence": 7,
+      "case_id": "D04",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "few_shot": true
+      },
+      "historical_task": "基础/runs/final_five/20261015-210223/round5/task-04.json"
+    },
+    {
+      "sequence": 8,
+      "case_id": "D04",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/final_five/20261015-210223/round5/task-04.json"
+    }
+  ],
+  "generation_limit": 8,
+  "previous_cumulative": 526,
+  "design": {
+    "saved_at": "2026-10-15T21:27:23.902677+08:00",
+    "hypothesis": "定义、资格和缺证示例可能改善回答与引用；可能无效，也可能把示例数值、ID或业务定义套入当前题。",
+    "competition": "更长提示可能分散注意、增加漏引或使既有成功退步；规则后处理也可能掩盖原答变化。",
+    "unique_change": "最终system末尾追加三个示例；当前user、最终原段落与顺序、Schema、采样、256预算及规则后处理保持不变。",
+    "selection": "先系统最终严格成功数，再系统答案正确数；同分保留原方案。任何示例污染或既有成功项退步均不采用；不追加第二候选。",
+    "regression_veto": "逐题核对原始/系统答案正确和严格成功；同时对比本轮对照及最新冻结运行。已通过的格式、ID检查、必要覆盖、支持发生退步亦列为否决依据。",
+    "contamination": "示例独有项目、对象、引用ID进入当前回答/引用，或示例特有数值充当当前结论却无当前原文依据，记录污染；正常的证据不足分支不算污染。不能仅凭未发现字面污染证明不存在隐性迁移。",
+    "definition_boundary": "D01缺失定义绑定仍不得由示例补充；本轮不读取T题或处理T01歧义。",
+    "timing": "开发题与正式题均已接触；本轮仅开发题回答阶段历史最终输入重放，不是完整流程。",
+    "failure": "最多8次回答生成；质量不重试；请求技术失败先核查是否发送并停止，不自动重发；每项即存，结束停止自有服务。",
+    "after_improvement": "若有改善只保存并报告，不自动运行T题或完整流程。"
+  }
+}

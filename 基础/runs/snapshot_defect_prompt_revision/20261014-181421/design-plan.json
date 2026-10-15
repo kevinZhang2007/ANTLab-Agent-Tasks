@@ -1,0 +1,13 @@
+{
+  "saved_at": "2026-10-14T18:14:22.128216+08:00",
+  "kind": "historical_defect_prompt_organization_revision",
+  "hypothesis": "明确区分背景问题与摘录任务，并要求JSON对象，可能减少裸数组或任务混淆；不预设能识别缺陷。",
+  "competing_explanation": "缺陷识别或来源对应仍可能失败，格式修正不等于语义改善。",
+  "changes": "同时替换system，重组user原问题字段并增加task；只评价整体修订，不单独归因。",
+  "historical_control": "复用旧无Schema结果，每题只生成一次新候选。",
+  "previous_unique_generations": 302,
+  "max_calls": 2,
+  "max_tokens": 256,
+  "evaluation": "完整原始输出；分别核对JSON对象、明确缺陷、快照对应、连续摘录，空列表不算识别成功，不修补。",
+  "stop": "沿用2GiB启动门槛和监测；技术失败保存停止，质量不重试。"
+}

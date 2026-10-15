@@ -1,0 +1,89 @@
+{
+  "recorded_at": "2026-10-13T20:14:54.494362+08:00",
+  "original_plan": "../design-plan.json",
+  "call_order": [
+    {
+      "case_id": "D01",
+      "variants": [
+        "original_schema",
+        "answer_form_schema"
+      ]
+    },
+    {
+      "case_id": "D02",
+      "variants": [
+        "answer_form_schema",
+        "original_schema"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "variants": [
+        "original_schema",
+        "answer_form_schema"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "variants": [
+        "answer_form_schema",
+        "original_schema"
+      ]
+    }
+  ],
+  "max_generations": 8,
+  "source_hashes": {
+    "student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "runner.py": "c36aaff3708ebd2bb6a3d1ac639739fd8c75b5e76e8969bce0c7d9c978de6045"
+  },
+  "service_arguments": [
+    "%LOCALAPPDATA%/ANTLabLocalModel\\llama-b11429\\llama-server.exe",
+    "-m",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\models\\Qwen3-0.6B-Q8_0.gguf",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "--alias",
+    "Qwen3-0.6B-Q8_0",
+    "--ctx-size",
+    "4096",
+    "--parallel",
+    "1",
+    "--batch-size",
+    "128",
+    "--ubatch-size",
+    "64",
+    "--threads",
+    "4",
+    "--gpu-layers",
+    "0",
+    "--no-context-shift",
+    "--no-warmup",
+    "--temp",
+    "0.7",
+    "--top-p",
+    "0.8",
+    "--top-k",
+    "20",
+    "--min-p",
+    "0",
+    "--presence-penalty",
+    "1.5",
+    "--repeat-penalty",
+    "1.0",
+    "--reasoning",
+    "off",
+    "--seed",
+    "42",
+    "--predict",
+    "256",
+    "--slot-save-path",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\diagnostic-cache"
+  ],
+  "owned_pid": 11872,
+  "input_role": "历史重放原段落，只执行回答，不是完整两步流程",
+  "native_validation": "native-pattern-validation.json",
+  "evaluate_after_all_calls": true
+}

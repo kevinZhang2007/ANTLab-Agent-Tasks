@@ -1,0 +1,56 @@
+{
+  "recorded_at": "2026-10-13T20:50:33.628580+08:00",
+  "status": "planned_before_download_and_generation",
+  "research_kind": "评测后开发探索；只比较历史完整证据选择重放的回答阶段，不代表4B完整定位流程。",
+  "hypothesis": "4B在相同完整原段落输入下可能改善计算或引用；不预先认定更好。",
+  "competing_explanation": "模型训练、聊天模板、量化和参数量均不同，差异不能仅归因于大小。",
+  "input_source": "基础/runs/two_step_linked_form/20261013-202853/task-Dxx.json 的question和used_passages",
+  "input_kind": "historical_evidence_selection_replay",
+  "fixed": "原最终提示词及答案形式Schema派生，temperature0.7/top_p0.8/top_k20/min_p0/presence_penalty1.5/seed42/max_tokens256；4096/CPU/单槽/4线程/batch128/ubatch64/关闭思考、上下文移位和预热。",
+  "call_order": [
+    {
+      "case_id": "D01",
+      "model": "0.6B"
+    },
+    {
+      "case_id": "D01",
+      "model": "4B"
+    },
+    {
+      "case_id": "D02",
+      "model": "4B"
+    },
+    {
+      "case_id": "D02",
+      "model": "0.6B"
+    },
+    {
+      "case_id": "D03",
+      "model": "0.6B"
+    },
+    {
+      "case_id": "D03",
+      "model": "4B"
+    },
+    {
+      "case_id": "D04",
+      "model": "4B"
+    },
+    {
+      "case_id": "D04",
+      "model": "0.6B"
+    }
+  ],
+  "generation_limit": 8,
+  "service_lifecycle": "不同时加载两模型；依运行顺序按模型分块启动/停止自有服务。加载及预检不计生成。",
+  "loading_stop_rule": {
+    "minimum_available_before_4b_gib": 5.25,
+    "reason": "此前估计常驻3.2—4GiB，保留约1GiB系统余量；加载前重新测量。",
+    "minimum_available_after_load_gib": 1,
+    "during_load": "每2秒采样，连续3次低于1GiB则停止自有服务；其他程序不结束。"
+  },
+  "stop_rule": "下载TLS错误保存后停止，不重试或关闭证书验证；校验、资源、模板、Schema、容量或请求技术失败保存后停止；质量错误不重试。",
+  "evaluation": "全部生成结束后才读公开开发答案；分别评价指定答法、语义、引用支持、无关引用、严格完整成功。",
+  "adoption_rule": "严格完整成功优先，再比较答案正确；同分保留资源成本更低的0.6B；不自动替换生产或追加调用。",
+  "prior_unique_generation_count": 162
+}

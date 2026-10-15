@@ -1,0 +1,682 @@
+{
+  "checked_at": "2026-10-14T17:33:14.867338+08:00",
+  "passed": true,
+  "tests": [
+    {
+      "name": "mixed",
+      "text": "版本UV12。评审表WX34显示完成。快照YZ56通过。",
+      "expected_excluded": [
+        "UV12",
+        "WX34"
+      ],
+      "expected_kept": [
+        "YZ56"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "YZ56"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "UV12",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "WX34",
+            "start": 10,
+            "end": 14
+          },
+          {
+            "passage_index": 0,
+            "value": "YZ56",
+            "start": 21,
+            "end": 25
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "UV12",
+          "WX34",
+          "YZ56"
+        ],
+        "decisions": [
+          {
+            "value": "UV12",
+            "excluded": true,
+            "reason": "unique_explicit_excludable_role",
+            "roles": [
+              {
+                "value": "UV12",
+                "category": "version",
+                "object_type": "version",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "版本UV12",
+                "recognition_start": 0,
+                "recognition_end": 6,
+                "basis": "正文明确版本标签，不依据编号前缀。"
+              }
+            ]
+          },
+          {
+            "value": "WX34",
+            "excluded": true,
+            "reason": "unique_explicit_excludable_role",
+            "roles": [
+              {
+                "value": "WX34",
+                "category": "business",
+                "object_type": "table",
+                "passage_index": 0,
+                "start": 10,
+                "end": 14,
+                "recognition_text": "评审表WX34显示完成。",
+                "recognition_start": 7,
+                "recognition_end": 19,
+                "extractor_evidence": {
+                  "object_type": "table",
+                  "object_name": "评审表",
+                  "raw_label": "评审表",
+                  "code": "WX34",
+                  "start": 7,
+                  "end": 14,
+                  "code_start": 10,
+                  "code_end": 14,
+                  "statement": {
+                    "text": "评审表WX34显示完成。",
+                    "start": 7,
+                    "end": 19
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "显示",
+                    "start": 14,
+                    "end": 16
+                  }
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              }
+            ]
+          },
+          {
+            "value": "YZ56",
+            "excluded": false,
+            "reason": "unknown_or_other_role_keep",
+            "roles": [
+              {
+                "value": "YZ56",
+                "category": "other",
+                "object_type": "快照",
+                "passage_index": 0,
+                "start": 21,
+                "end": 25,
+                "recognition_text": "快照YZ56",
+                "recognition_start": 19,
+                "recognition_end": 25,
+                "basis": "明确其他角色只用于保留/冲突检查，不用于排除。"
+              }
+            ]
+          }
+        ],
+        "limit": "普通未带标签提及不推断新角色；发现多个明确角色则保留，无法穷尽自然语言角色声明。"
+      },
+      "passed": true
+    },
+    {
+      "name": "different_prefixes",
+      "text": "M9版本。批次Z8的补页。快照A7通过。",
+      "expected_excluded": [
+        "M9",
+        "Z8"
+      ],
+      "expected_kept": [
+        "A7"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "A7"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "M9",
+            "start": 0,
+            "end": 2
+          },
+          {
+            "passage_index": 0,
+            "value": "Z8",
+            "start": 7,
+            "end": 9
+          },
+          {
+            "passage_index": 0,
+            "value": "A7",
+            "start": 15,
+            "end": 17
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "M9",
+          "Z8",
+          "A7"
+        ],
+        "decisions": [
+          {
+            "value": "M9",
+            "excluded": true,
+            "reason": "unique_explicit_excludable_role",
+            "roles": [
+              {
+                "value": "M9",
+                "category": "version",
+                "object_type": "version",
+                "passage_index": 0,
+                "start": 0,
+                "end": 2,
+                "recognition_text": "M9版本",
+                "recognition_start": 0,
+                "recognition_end": 4,
+                "basis": "正文明确版本标签，不依据编号前缀。"
+              }
+            ]
+          },
+          {
+            "value": "Z8",
+            "excluded": true,
+            "reason": "unique_explicit_excludable_role",
+            "roles": [
+              {
+                "value": "Z8",
+                "category": "business",
+                "object_type": "batch",
+                "passage_index": 0,
+                "start": 7,
+                "end": 9,
+                "recognition_text": "批次Z8的补页。",
+                "recognition_start": 5,
+                "recognition_end": 13,
+                "extractor_evidence": {
+                  "object_type": "batch",
+                  "object_name": "批次",
+                  "raw_label": "批次",
+                  "code": "Z8",
+                  "start": 5,
+                  "end": 9,
+                  "code_start": 7,
+                  "code_end": 9,
+                  "statement": {
+                    "text": "批次Z8的补页。",
+                    "start": 5,
+                    "end": 13
+                  },
+                  "reliable_declaration": false,
+                  "direct_supplement_reference": true,
+                  "mere_reference": false,
+                  "declaration_predicate": null
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              }
+            ]
+          },
+          {
+            "value": "A7",
+            "excluded": false,
+            "reason": "unknown_or_other_role_keep",
+            "roles": [
+              {
+                "value": "A7",
+                "category": "other",
+                "object_type": "快照",
+                "passage_index": 0,
+                "start": 15,
+                "end": 17,
+                "recognition_text": "快照A7",
+                "recognition_start": 13,
+                "recognition_end": 17,
+                "basis": "明确其他角色只用于保留/冲突检查，不用于排除。"
+              }
+            ]
+          }
+        ],
+        "limit": "普通未带标签提及不推断新角色；发现多个明确角色则保留，无法穷尽自然语言角色声明。"
+      },
+      "passed": true
+    },
+    {
+      "name": "version_snapshot_conflict",
+      "text": "版本JJ11。快照JJ11通过。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "JJ11"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "JJ11"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "JJ11",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "JJ11",
+            "start": 9,
+            "end": 13
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "JJ11"
+        ],
+        "decisions": [
+          {
+            "value": "JJ11",
+            "excluded": false,
+            "reason": "multiple_roles_keep",
+            "roles": [
+              {
+                "value": "JJ11",
+                "category": "version",
+                "object_type": "version",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "版本JJ11",
+                "recognition_start": 0,
+                "recognition_end": 6,
+                "basis": "正文明确版本标签，不依据编号前缀。"
+              },
+              {
+                "value": "JJ11",
+                "category": "other",
+                "object_type": "快照",
+                "passage_index": 0,
+                "start": 9,
+                "end": 13,
+                "recognition_text": "快照JJ11",
+                "recognition_start": 7,
+                "recognition_end": 13,
+                "basis": "明确其他角色只用于保留/冲突检查，不用于排除。"
+              }
+            ]
+          }
+        ],
+        "limit": "普通未带标签提及不推断新角色；发现多个明确角色则保留，无法穷尽自然语言角色声明。"
+      },
+      "passed": true
+    },
+    {
+      "name": "business_snapshot_conflict",
+      "text": "评审表HH21显示数据。快照HH21通过。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "HH21"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "HH21"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "HH21",
+            "start": 3,
+            "end": 7
+          },
+          {
+            "passage_index": 0,
+            "value": "HH21",
+            "start": 14,
+            "end": 18
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "HH21"
+        ],
+        "decisions": [
+          {
+            "value": "HH21",
+            "excluded": false,
+            "reason": "multiple_roles_keep",
+            "roles": [
+              {
+                "value": "HH21",
+                "category": "business",
+                "object_type": "table",
+                "passage_index": 0,
+                "start": 3,
+                "end": 7,
+                "recognition_text": "评审表HH21显示数据。",
+                "recognition_start": 0,
+                "recognition_end": 12,
+                "extractor_evidence": {
+                  "object_type": "table",
+                  "object_name": "评审表",
+                  "raw_label": "评审表",
+                  "code": "HH21",
+                  "start": 0,
+                  "end": 7,
+                  "code_start": 3,
+                  "code_end": 7,
+                  "statement": {
+                    "text": "评审表HH21显示数据。",
+                    "start": 0,
+                    "end": 12
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "显示",
+                    "start": 7,
+                    "end": 9
+                  }
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              },
+              {
+                "value": "HH21",
+                "category": "other",
+                "object_type": "快照",
+                "passage_index": 0,
+                "start": 14,
+                "end": 18,
+                "recognition_text": "快照HH21",
+                "recognition_start": 12,
+                "recognition_end": 18,
+                "basis": "明确其他角色只用于保留/冲突检查，不用于排除。"
+              }
+            ]
+          }
+        ],
+        "limit": "普通未带标签提及不推断新角色；发现多个明确角色则保留，无法穷尽自然语言角色声明。"
+      },
+      "passed": true
+    },
+    {
+      "name": "business_role_conflict",
+      "text": "批次DD31的补页。评审DD31记录结果。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "DD31"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "DD31"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "DD31",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "DD31",
+            "start": 12,
+            "end": 16
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "DD31"
+        ],
+        "decisions": [
+          {
+            "value": "DD31",
+            "excluded": false,
+            "reason": "multiple_roles_keep",
+            "roles": [
+              {
+                "value": "DD31",
+                "category": "business",
+                "object_type": "batch",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "批次DD31的补页。",
+                "recognition_start": 0,
+                "recognition_end": 10,
+                "extractor_evidence": {
+                  "object_type": "batch",
+                  "object_name": "批次",
+                  "raw_label": "批次",
+                  "code": "DD31",
+                  "start": 0,
+                  "end": 6,
+                  "code_start": 2,
+                  "code_end": 6,
+                  "statement": {
+                    "text": "批次DD31的补页。",
+                    "start": 0,
+                    "end": 10
+                  },
+                  "reliable_declaration": false,
+                  "direct_supplement_reference": true,
+                  "mere_reference": false,
+                  "declaration_predicate": null
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              },
+              {
+                "value": "DD31",
+                "category": "business",
+                "object_type": "review",
+                "passage_index": 0,
+                "start": 12,
+                "end": 16,
+                "recognition_text": "评审DD31记录结果。",
+                "recognition_start": 10,
+                "recognition_end": 21,
+                "extractor_evidence": {
+                  "object_type": "review",
+                  "object_name": "评审",
+                  "raw_label": "评审",
+                  "code": "DD31",
+                  "start": 10,
+                  "end": 16,
+                  "code_start": 12,
+                  "code_end": 16,
+                  "statement": {
+                    "text": "评审DD31记录结果。",
+                    "start": 10,
+                    "end": 21
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "记录",
+                    "start": 16,
+                    "end": 18
+                  }
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              }
+            ]
+          }
+        ],
+        "limit": "普通未带标签提及不推断新角色；发现多个明确角色则保留，无法穷尽自然语言角色声明。"
+      },
+      "passed": true
+    },
+    {
+      "name": "no_type",
+      "text": "AA15通过，BB16记录结果。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "AA15",
+        "BB16"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "AA15",
+          "BB16"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "AA15",
+            "start": 0,
+            "end": 4
+          },
+          {
+            "passage_index": 0,
+            "value": "BB16",
+            "start": 7,
+            "end": 11
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "AA15",
+          "BB16"
+        ],
+        "decisions": [
+          {
+            "value": "AA15",
+            "excluded": false,
+            "reason": "unknown_or_other_role_keep",
+            "roles": []
+          },
+          {
+            "value": "BB16",
+            "excluded": false,
+            "reason": "unknown_or_other_role_keep",
+            "roles": []
+          }
+        ],
+        "limit": "普通未带标签提及不推断新角色；发现多个明确角色则保留，无法穷尽自然语言角色声明。"
+      },
+      "passed": true
+    },
+    {
+      "name": "mention_not_declaration",
+      "text": "提及复核表CC17，尚无声明。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "CC17"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "CC17"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "CC17",
+            "start": 5,
+            "end": 9
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "CC17"
+        ],
+        "decisions": [
+          {
+            "value": "CC17",
+            "excluded": false,
+            "reason": "unknown_or_other_role_keep",
+            "roles": []
+          }
+        ],
+        "limit": "普通未带标签提及不推断新角色；发现多个明确角色则保留，无法穷尽自然语言角色声明。"
+      },
+      "passed": true
+    },
+    {
+      "name": "same_value_repeat",
+      "text": "版本TT81。TT81版本。",
+      "expected_excluded": [
+        "TT81"
+      ],
+      "expected_kept": [],
+      "actual": {
+        "enabled": true,
+        "values": [],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "TT81",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "TT81",
+            "start": 7,
+            "end": 11
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "TT81"
+        ],
+        "decisions": [
+          {
+            "value": "TT81",
+            "excluded": true,
+            "reason": "unique_explicit_excludable_role",
+            "roles": [
+              {
+                "value": "TT81",
+                "category": "version",
+                "object_type": "version",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "版本TT81",
+                "recognition_start": 0,
+                "recognition_end": 6,
+                "basis": "正文明确版本标签，不依据编号前缀。"
+              },
+              {
+                "value": "TT81",
+                "category": "version",
+                "object_type": "version",
+                "passage_index": 0,
+                "start": 7,
+                "end": 11,
+                "recognition_text": "TT81版本",
+                "recognition_start": 7,
+                "recognition_end": 13,
+                "basis": "正文明确版本标签，不依据编号前缀。"
+              }
+            ]
+          }
+        ],
+        "limit": "普通未带标签提及不推断新角色；发现多个明确角色则保留，无法穷尽自然语言角色声明。"
+      },
+      "passed": true
+    }
+  ]
+}

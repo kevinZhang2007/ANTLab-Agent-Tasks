@@ -1,0 +1,13 @@
+answer ::= "\"" (([-+]? ([0-9]+ ([.] [0-9]+)? | [.] [0-9]+) ([eE] [-+]? [0-9]+)? "%" | "证据不足")) "\""
+answer-kv ::= "\"answer\"" space ":" space answer
+char ::= [^"\\\x7F\x00-\x1F] | [\\] (["\\bfnrt] | "u" [0-9a-fA-F]{4})
+citations ::= "[" space (string ("," space string)*)? space "]"
+citations-kv ::= "\"citations\"" space ":" space citations
+evidence ::= "[" space (evidence-item ("," space evidence-item)*)? space "]"
+evidence-item ::= "{" space evidence-item-passage-id-kv "," space evidence-item-quote-kv space "}"
+evidence-item-passage-id-kv ::= "\"passage_id\"" space ":" space string
+evidence-item-quote-kv ::= "\"quote\"" space ":" space string
+evidence-kv ::= "\"evidence\"" space ":" space evidence
+root ::= "{" space evidence-kv "," space answer-kv "," space citations-kv space "}"
+space ::= | " " | "\n"{1,2} [ \t]{0,20}
+string ::= "\"" char* "\""

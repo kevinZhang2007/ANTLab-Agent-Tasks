@@ -1,0 +1,732 @@
+{
+  "replayed_at": "2026-10-15T13:34:18.517811+08:00",
+  "case_id": "T07",
+  "source_path": "基础/runs/general_proof_full_r0/20261015-131742/task-07.json",
+  "source_sha256": "a2f46590fa6393d411bf6241f2483be039af57219560ebd60480169f9ac13e18",
+  "freeze_sha256": "e0221a5591feb44e2503940c444a194beeb7654aea30266c7fc24bed70f7961a",
+  "run_kind": "offline_ratio_proposal_not_model_rerun",
+  "question": "按知秋项目R5版本2026-08资源表的决策规则，应选择哪项方案？只输出方案名称。",
+  "raw_response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"answer\":\"丙\",\"citations\":[\"P313278\"]}"
+        }
+      }
+    ],
+    "created": 1792041616,
+    "model": "Qwen3-0.6B-Q8_0",
+    "system_fingerprint": "b11429-d81235049",
+    "object": "chat.completion",
+    "usage": {
+      "completion_tokens": 17,
+      "prompt_tokens": 830,
+      "total_tokens": 847,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "id": "chatcmpl-Il8667hjb7rTRCEleFPg75G3Lqe3yHFn",
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 830,
+      "prompt_ms": 4770.2,
+      "prompt_per_token_ms": 5.74722891566265,
+      "prompt_per_second": 173.99689740472098,
+      "predicted_n": 17,
+      "predicted_ms": 460.153,
+      "predicted_per_token_ms": 28.7595625,
+      "predicted_per_second": 34.77104354421247
+    }
+  },
+  "raw_content": "{\"answer\":\"丙\",\"citations\":[\"P313278\"]}",
+  "original_answer_citations": {
+    "answer": "丙",
+    "citations": [
+      "P313278"
+    ]
+  },
+  "existing_reference_proof": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": true,
+    "proof_status": "established",
+    "proof_kind": "qualification_selection",
+    "trace": [
+      {
+        "stage": "question_project_boundary",
+        "audit": {
+          "status": "resolved",
+          "question_candidates": [
+            {
+              "entity": "按知秋项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 5,
+              "version_position": [
+                5,
+                9
+              ]
+            },
+            {
+              "entity": "知秋项目",
+              "interpretation": "leading_question_guide",
+              "guide": "按",
+              "start": 1,
+              "end": 5,
+              "version_position": [
+                5,
+                9
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "知秋项目",
+              "version": "R5版本",
+              "date": "2026-08",
+              "passage_id": "P313278",
+              "source": "模拟记录/T07/页1",
+              "start": 0,
+              "end": 20,
+              "quote": "知秋项目R5版本在2026-08的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "按知秋项目R5版本2026-08资源表的决策规则，应选择哪项方案？只输出方案名称。",
+          "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+          "missing_fields_not_assumed_equal": true,
+          "chosen": {
+            "entity": "知秋项目",
+            "interpretation": "leading_question_guide",
+            "guide": "按",
+            "start": 1,
+            "end": 5,
+            "version_position": [
+              5,
+              9
+            ]
+          },
+          "supporting_declarations": [
+            {
+              "entity": "知秋项目",
+              "version": "R5版本",
+              "date": "2026-08",
+              "passage_id": "P313278",
+              "source": "模拟记录/T07/页1",
+              "start": 0,
+              "end": 20,
+              "quote": "知秋项目R5版本在2026-08的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ]
+        }
+      },
+      {
+        "stage": "direct_relation_audit",
+        "links": [
+          {
+            "supplement_id": "P850395",
+            "target_id": "P313278",
+            "added": false,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "ZQ58",
+                "start": 0,
+                "end": 6,
+                "code_start": 2,
+                "code_end": 6,
+                "statement": {
+                  "text": "批次ZQ58的复核补页：ZQ58决策先要求完整支持率至少85%且P50不高于7秒，再比较平均调用次数和完整耗时。",
+                  "start": 0,
+                  "end": 56
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [
+              "P313278"
+            ],
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date",
+              "namespace"
+            ],
+            "semantic_support_verified": false,
+            "target_declarations": [
+              {
+                "object_type": "table",
+                "object_name": "资源表",
+                "raw_label": "资源表",
+                "code": "ZQ58",
+                "start": 20,
+                "end": 27,
+                "code_start": 23,
+                "code_end": 27,
+                "statement": {
+                  "text": "知秋项目R5版本在2026-08的记录：资源表ZQ58记录甲完整支持84%、P50为6.1秒、2次调用；",
+                  "start": 0,
+                  "end": 52
+                },
+                "reliable_declaration": true,
+                "direct_supplement_reference": false,
+                "mere_reference": false,
+                "declaration_predicate": {
+                  "text": "记录",
+                  "start": 27,
+                  "end": 29
+                }
+              }
+            ],
+            "reason": "unique_reliable_direct_reference",
+            "object_labels_equal": false,
+            "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+            "completion_reason": "already_selected"
+          }
+        ]
+      },
+      {
+        "stage": "pair_scope",
+        "main": "P313278",
+        "supplement": "P850395",
+        "main_status": "matched",
+        "supplement_status": "unknown",
+        "main_fields": [
+          {
+            "field": "project",
+            "question": [
+              "知秋项目"
+            ],
+            "source": [
+              "知秋项目"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "version",
+            "question": [
+              "R5版本"
+            ],
+            "source": [
+              "R5版本"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-08"
+            ],
+            "source": [
+              "2026-08"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ],
+        "supplement_fields": [
+          {
+            "field": "project",
+            "question": [
+              "知秋项目"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "version",
+            "question": [
+              "R5版本"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-08"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ]
+      },
+      {
+        "stage": "selection_sources",
+        "rule": {
+          "conditions": [
+            {
+              "metric": "完整支持率",
+              "op": "至少",
+              "number": "85",
+              "unit": "%"
+            },
+            {
+              "metric": "P50",
+              "op": "不高于",
+              "number": "7",
+              "unit": "秒"
+            }
+          ],
+          "ranks": [],
+          "ranking_direction_unknown": true,
+          "source": {
+            "passage_id": "P850395",
+            "source": "模拟记录/T07/页6",
+            "start": 16,
+            "end": 55,
+            "quote": "决策先要求完整支持率至少85%且P50不高于7秒，再比较平均调用次数和完整耗时",
+            "role": "资格及决策原文"
+          }
+        },
+        "columns": [
+          {
+            "unit": "%",
+            "aliases": [
+              "完整支持"
+            ],
+            "definition": {
+              "passage_id": "P313278",
+              "source": "模拟记录/T07/页1",
+              "start": 29,
+              "end": 37,
+              "quote": "甲完整支持84%",
+              "role": "首行字段定义"
+            }
+          },
+          {
+            "unit": "秒",
+            "aliases": [
+              "P50"
+            ],
+            "definition": {
+              "passage_id": "P313278",
+              "source": "模拟记录/T07/页1",
+              "start": 38,
+              "end": 46,
+              "quote": "P50为6.1秒",
+              "role": "首行字段定义"
+            }
+          },
+          {
+            "unit": "次",
+            "aliases": [
+              "调用"
+            ],
+            "definition": {
+              "passage_id": "P313278",
+              "source": "模拟记录/T07/页1",
+              "start": 47,
+              "end": 51,
+              "quote": "2次调用",
+              "role": "首行字段定义"
+            }
+          }
+        ],
+        "candidates": [
+          {
+            "name": "甲",
+            "fields": [
+              {
+                "value": "84",
+                "unit": "%",
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 29,
+                  "end": 37,
+                  "quote": "甲完整支持84%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "6.1",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 38,
+                  "end": 46,
+                  "quote": "P50为6.1秒",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "2",
+                "unit": "次",
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 47,
+                  "end": 51,
+                  "quote": "2次调用",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "source": {
+              "passage_id": "P313278",
+              "source": "模拟记录/T07/页1",
+              "start": 29,
+              "end": 51,
+              "quote": "甲完整支持84%、P50为6.1秒、2次调用",
+              "role": "候选完整数据行"
+            },
+            "conditions": [
+              {
+                "rule": {
+                  "metric": "完整支持率",
+                  "op": "至少",
+                  "number": "85",
+                  "unit": "%"
+                },
+                "actual": "84",
+                "passed": false,
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 29,
+                  "end": 37,
+                  "quote": "甲完整支持84%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "rule": {
+                  "metric": "P50",
+                  "op": "不高于",
+                  "number": "7",
+                  "unit": "秒"
+                },
+                "actual": "6.1",
+                "passed": true,
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 38,
+                  "end": 46,
+                  "quote": "P50为6.1秒",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "eligible": false
+          },
+          {
+            "name": "乙",
+            "fields": [
+              {
+                "value": "87",
+                "unit": "%",
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 52,
+                  "end": 56,
+                  "quote": "乙87%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "7.4",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 57,
+                  "end": 61,
+                  "quote": "7.4秒",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "3",
+                "unit": "次",
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 62,
+                  "end": 64,
+                  "quote": "3次",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "source": {
+              "passage_id": "P313278",
+              "source": "模拟记录/T07/页1",
+              "start": 52,
+              "end": 64,
+              "quote": "乙87%、7.4秒、3次",
+              "role": "候选完整数据行"
+            },
+            "conditions": [
+              {
+                "rule": {
+                  "metric": "完整支持率",
+                  "op": "至少",
+                  "number": "85",
+                  "unit": "%"
+                },
+                "actual": "87",
+                "passed": true,
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 52,
+                  "end": 56,
+                  "quote": "乙87%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "rule": {
+                  "metric": "P50",
+                  "op": "不高于",
+                  "number": "7",
+                  "unit": "秒"
+                },
+                "actual": "7.4",
+                "passed": false,
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 57,
+                  "end": 61,
+                  "quote": "7.4秒",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "eligible": false
+          },
+          {
+            "name": "丙",
+            "fields": [
+              {
+                "value": "86",
+                "unit": "%",
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 65,
+                  "end": 69,
+                  "quote": "丙86%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "6.8",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 70,
+                  "end": 74,
+                  "quote": "6.8秒",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "value": "2",
+                "unit": "次",
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 75,
+                  "end": 77,
+                  "quote": "2次",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "source": {
+              "passage_id": "P313278",
+              "source": "模拟记录/T07/页1",
+              "start": 65,
+              "end": 77,
+              "quote": "丙86%、6.8秒、2次",
+              "role": "候选完整数据行"
+            },
+            "conditions": [
+              {
+                "rule": {
+                  "metric": "完整支持率",
+                  "op": "至少",
+                  "number": "85",
+                  "unit": "%"
+                },
+                "actual": "86",
+                "passed": true,
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 65,
+                  "end": 69,
+                  "quote": "丙86%",
+                  "role": "候选原文数据字段"
+                }
+              },
+              {
+                "rule": {
+                  "metric": "P50",
+                  "op": "不高于",
+                  "number": "7",
+                  "unit": "秒"
+                },
+                "actual": "6.8",
+                "passed": true,
+                "source": {
+                  "passage_id": "P313278",
+                  "source": "模拟记录/T07/页1",
+                  "start": 70,
+                  "end": 74,
+                  "quote": "6.8秒",
+                  "role": "候选原文数据字段"
+                }
+              }
+            ],
+            "eligible": true
+          }
+        ]
+      },
+      {
+        "stage": "selection_result",
+        "qualified_before_order": [
+          "丙"
+        ],
+        "decision_steps": [],
+        "winner": "丙",
+        "winner_chosen_without_answer": true,
+        "unused_ranking_not_required_when_unique_eligible": true
+      }
+    ],
+    "derived_response": {
+      "answer": "丙",
+      "citations": [
+        "P850395",
+        "P313278"
+      ]
+    },
+    "requires_independent_original_text_review": true,
+    "reason": "qualification_and_decision_order_proven",
+    "derived_response_kind": "local_rule_citation_assembly_not_original_model_response"
+  },
+  "existing_derived_response": {
+    "answer": "丙",
+    "citations": [
+      "P850395",
+      "P313278"
+    ]
+  },
+  "existing_final_output": {
+    "answer": "丙",
+    "citations": [
+      "P850395",
+      "P313278"
+    ]
+  },
+  "ratio_proof": {
+    "run_kind": "offline_ratio_calculation_proposal",
+    "judgment_source": "local_rule",
+    "applicable": false,
+    "proof_established": false,
+    "status": "not_applicable",
+    "trace": [],
+    "proposed_response": null,
+    "answer_changed": false,
+    "not_original_model_response": true,
+    "reason": "question_does_not_request_supported_ratio"
+  },
+  "proposed_response": null,
+  "answer_changed_in_proposal": false,
+  "candidate_composed_response": {
+    "answer": "丙",
+    "citations": [
+      "P850395",
+      "P313278"
+    ]
+  },
+  "proposal_kind": "local_rule_calculated_new_answer_not_original_model_response",
+  "not_automatically_adopted": true,
+  "material_scope": {
+    "model_final_input_passages": [
+      {
+        "id": "P850395",
+        "source": "模拟记录/T07/页6",
+        "text": "批次ZQ58的复核补页：ZQ58决策先要求完整支持率至少85%且P50不高于7秒，再比较平均调用次数和完整耗时。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。"
+      },
+      {
+        "id": "P313278",
+        "source": "模拟记录/T07/页1",
+        "text": "知秋项目R5版本在2026-08的记录：资源表ZQ58记录甲完整支持84%、P50为6.1秒、2次调用；乙87%、7.4秒、3次；丙86%、6.8秒、2次。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。"
+      }
+    ],
+    "audit_only_original_visible_passages": [
+      {
+        "id": "P545606",
+        "source": "模拟记录/T07/页4",
+        "text": "知秋项目R5版本在2026-07的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。"
+      },
+      {
+        "id": "P694541",
+        "source": "模拟记录/T07/页3",
+        "text": "岫光项目R5版本在2026-08登记同名指标和批次XQ60，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。"
+      },
+      {
+        "id": "P802784",
+        "source": "模拟记录/T07/页2",
+        "text": "知秋项目R5版本在2026-08的迁移批次XQ60处理相近题目；该批次统计80项输入，64项得到支持，候选流程耗时为5.9秒，快照S19完成初步定位。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。"
+      },
+      {
+        "id": "P304879",
+        "source": "模拟记录/T07/页7",
+        "text": "知秋项目R5版本在2026-08的压力组使用八并发请求，96项返回成功、4项超时，P50为3.7秒；项目另列压力组汇总。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。"
+      },
+      {
+        "id": "P244387",
+        "source": "模拟记录/T07/页5",
+        "text": "知秋项目R4版本在2026-08的正式组沿用旧清单，完整支持率为88%，记录中包含流程甲和配置甲，签署快照为K16。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。"
+      }
+    ],
+    "model_final_input_ids": [
+      "P850395",
+      "P313278"
+    ],
+    "audit_only_ids": [
+      "P545606",
+      "P694541",
+      "P802784",
+      "P304879",
+      "P244387"
+    ],
+    "audit_only_ids_consulted": [],
+    "policy": "计数/分类/分母事实与引用只来自最终回答模型输入；其余原始可见资料仅供范围、实体、唯一性审计，不能说是最终模型输入。"
+  },
+  "fact_sources_checked_against_final_model_input": [],
+  "local_rule_seconds": 3.909994848072529e-05,
+  "generation_calls": 0
+}

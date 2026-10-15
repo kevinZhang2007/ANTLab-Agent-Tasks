@@ -1,0 +1,142 @@
+{
+  "checked_at": "2026-10-14T18:33:44.699203+08:00",
+  "rows": [
+    {
+      "sequence": 1,
+      "case_id": "T01",
+      "variant": "first_clause_reading",
+      "messages": [
+        {
+          "role": "system",
+          "content": "只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。"
+        },
+        {
+          "role": "user",
+          "content": "{\"snapshot\": \"S23\", \"passage_id\": \"P555495\", \"start\": 0, \"end\": 46, \"text\": \"栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；\"}"
+        }
+      ],
+      "config": {
+        "provider": "llama.cpp",
+        "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+        "model": "Qwen3-0.6B-Q8_0",
+        "parameters": {
+          "temperature": 0.7,
+          "top_p": 0.8,
+          "top_k": 20,
+          "min_p": 0,
+          "presence_penalty": 1.5,
+          "seed": 42,
+          "max_tokens": 128
+        },
+        "timeout_seconds": 180
+      },
+      "schema_rule": {
+        "kind": "explicit_defect_diagnostic",
+        "answer_not_generated": true
+      },
+      "body": {
+        "model": "Qwen3-0.6B-Q8_0",
+        "messages": [
+          {
+            "role": "system",
+            "content": "只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。"
+          },
+          {
+            "role": "user",
+            "content": "{\"snapshot\": \"S23\", \"passage_id\": \"P555495\", \"start\": 0, \"end\": 46, \"text\": \"栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；\"}"
+          }
+        ],
+        "stream": false,
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "min_p": 0,
+        "presence_penalty": 1.5,
+        "seed": 42,
+        "max_tokens": 128
+      },
+      "used_passages": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "text": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；"
+        }
+      ],
+      "template_response": {
+        "prompt": "<|im_start|>system\n只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。<|im_end|>\n<|im_start|>user\n{\"snapshot\": \"S23\", \"passage_id\": \"P555495\", \"start\": 0, \"end\": 46, \"text\": \"栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；\"}<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+      },
+      "input_tokens": 155,
+      "budget": 128,
+      "total": 283
+    },
+    {
+      "sequence": 2,
+      "case_id": "T08",
+      "variant": "first_clause_reading",
+      "messages": [
+        {
+          "role": "system",
+          "content": "只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。"
+        },
+        {
+          "role": "user",
+          "content": "{\"snapshot\": \"K16\", \"passage_id\": \"P183430\", \"start\": 0, \"end\": 48, \"text\": \"归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；\"}"
+        }
+      ],
+      "config": {
+        "provider": "llama.cpp",
+        "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+        "model": "Qwen3-0.6B-Q8_0",
+        "parameters": {
+          "temperature": 0.7,
+          "top_p": 0.8,
+          "top_k": 20,
+          "min_p": 0,
+          "presence_penalty": 1.5,
+          "seed": 42,
+          "max_tokens": 128
+        },
+        "timeout_seconds": 180
+      },
+      "schema_rule": {
+        "kind": "explicit_defect_diagnostic",
+        "answer_not_generated": true
+      },
+      "body": {
+        "model": "Qwen3-0.6B-Q8_0",
+        "messages": [
+          {
+            "role": "system",
+            "content": "只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。"
+          },
+          {
+            "role": "user",
+            "content": "{\"snapshot\": \"K16\", \"passage_id\": \"P183430\", \"start\": 0, \"end\": 48, \"text\": \"归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；\"}"
+          }
+        ],
+        "stream": false,
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "min_p": 0,
+        "presence_penalty": 1.5,
+        "seed": 42,
+        "max_tokens": 128
+      },
+      "used_passages": [
+        {
+          "id": "P183430",
+          "source": "模拟记录/T08/页3",
+          "text": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；"
+        }
+      ],
+      "template_response": {
+        "prompt": "<|im_start|>system\n只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。<|im_end|>\n<|im_start|>user\n{\"snapshot\": \"K16\", \"passage_id\": \"P183430\", \"start\": 0, \"end\": 48, \"text\": \"归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；\"}<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+      },
+      "input_tokens": 156,
+      "budget": 128,
+      "total": 284
+    }
+  ],
+  "counts_as_generation": false
+}

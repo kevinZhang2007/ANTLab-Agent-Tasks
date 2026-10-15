@@ -1,0 +1,155 @@
+--- a/基础/tests/run_thinking_same_budget_pairs.py
++++ b/基础/tests/run_thinking_same_budget_pairs.py
+@@ -95,9 +95,46 @@
+ 
+ def preserved():
+     protected=json.loads((folder/'protected-hashes.json').read_text(encoding='utf-8'))
+-    assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in protected.items())
++    allowed=json.loads((folder/'allowed-code-change.json').read_text(encoding='utf-8'))
++    assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==(allowed['sha256'] if p==allowed['path'] else h) for p,h in protected.items())
+     hashes=json.loads((folder/'pre-generation-code-hashes.json').read_text(encoding='utf-8'))
+     assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in hashes.items())
++
++def audited_template(cid, thinking, body, label):
++    evidence={'recorded_at':datetime.now().astimezone().isoformat(),'case_id':cid,'thinking':thinking,'counts_as_generation':False,'template_http':{'route':'apply-template','method':'POST','actual_request_body':body}}
++    filename='template-evidence-'+label+'.json'
++    write(filename,evidence)
++    def audited_call(route,payload,key):
++        data=json.dumps(payload,ensure_ascii=False).encode('utf-8')
++        evidence[key]={'route':route,'method':'POST','raw_request_body':data.decode('utf-8'),'actual_request_body':payload};write(filename,evidence)
++        request=urllib.request.Request('http://127.0.0.1:8080/'+route,data=data,headers={'Content-Type':'application/json'})
++        try:
++            with opener.open(request,timeout=15) as response:
++                raw=response.read().decode('utf-8');evidence[key].update(http_status=response.status,raw_response=raw);write(filename,evidence)
++                parsed=json.loads(raw);evidence[key]['parsed_response']=parsed;write(filename,evidence);return parsed
++        except Exception as error:
++            evidence[key]['error']=repr(error)
++            if isinstance(error,urllib.error.HTTPError):evidence[key]['raw_error_response']=error.read().decode('utf-8',errors='replace')
++            write(filename,evidence);raise
++    template=audited_call('apply-template',body,'template_http');prompt=template['prompt']
++    evidence['rendered_prompt']=prompt;write(filename,evidence)
++    (folder/('rendered-'+label+'.txt')).write_text(prompt,encoding='utf-8')
++    token_response=audited_call('tokenize',{'content':prompt,'add_special':True,'parse_special':True},'tokenize_http')
++    tokens=token_response['tokens'];evidence.update(input_tokens=len(tokens),output_budget=1024,total_capacity=len(tokens)+1024);write(filename,evidence)
++    # 证据已保存，以下才核验；开模式不预填think起始标签是本机模板的实际分支。
++    model_template=startup['props']['chat_template']
++    marker='<|im_start|>assistant\n';disabled='<think>\n\n</think>\n\n';position=prompt.rfind(marker)
++    suffix=prompt[position+len(marker):] if position>=0 else None
++    checks={'switch_boolean_and_matches_mode':type(body['chat_template_kwargs']['enable_thinking']) is bool and body['chat_template_kwargs']['enable_thinking']==thinking,
++        'input_messages_retained':all(m['content'] in prompt for m in body['messages']),
++        'actual_model_template_has_disabled_branch':'if enable_thinking is defined and enable_thinking is false' in model_template,
++        'assistant_boundary_present':position>=0,
++        'branch_matches_actual_template':suffix==('' if thinking else disabled),
++        'actual_request_budget_1024':body['max_tokens']==1024,
++        'complete_input_fits':len(tokens)+1024<=4096}
++    evidence.update(actual_generation_suffix=suffix,checks=checks,verified=all(checks.values()),not_echoed=['实际enable_thinking内部布尔状态','本次编译grammar与PEG parser对象']);write(filename,evidence)
++    assert all(checks.values()),'模板开关、原文、分支或容量核验失败，完整证据见'+filename
++    return prompt,tokens,evidence
+ 
+ def call_stage(cid,stage,question,used,original,config,messages=None):
+     record={'run_id':str(uuid.uuid4()),'recorded_at':datetime.now().astimezone().isoformat(),
+@@ -111,10 +148,8 @@
+     record['messages']=messages if messages is not None else student.prepare_messages(question,used)
+     budget=config['parameters']['max_tokens'];assert budget==1024
+     body={'model':config['model'],'messages':record['messages'],'stream':False,**config['parameters']}
+-    prompt=service('apply-template',body)['prompt']
+-    assert all(m['content'] in prompt for m in record['messages'])
+-    assert prompt.endswith('<think>\n') if config['parameters']['chat_template_kwargs']['enable_thinking'] else prompt.endswith('<think>\n\n</think>\n\n')
+-    tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
++    prompt,tokens,template_evidence=audited_template(cid,config['parameters']['chat_template_kwargs']['enable_thinking'],body,record['run_id'])
++    record['template_evidence_file']='template-evidence-'+record['run_id']+'.json'
+     record.update(rendered_prompt=prompt,input_tokens=len(tokens),total_capacity=len(tokens)+budget)
+     save();assert len(tokens)+budget<4096,'实际完整输入超限，不删段'
+     assert not memory_abort.is_set();preserved()
+@@ -187,11 +222,17 @@
+         conf=copy.deepcopy(config_fixed);conf['parameters']['response_format']['json_schema']['schema']=data['schema'];conf['parameters']['chat_template_kwargs']={'enable_thinking':thinking}
+         assert conf['parameters']['max_tokens']==1024
+         body={'model':conf['model'],'messages':data['messages'],'stream':False,**conf['parameters']}
+-        prompt=service('apply-template',body)['prompt'];assert all(m['content'] in prompt for m in data['messages'])
+-        expected='<think>\n' if thinking else '<think>\n\n</think>\n\n';assert prompt.endswith(expected),'实际思考模板不符'
+-        tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
+-        row={'case_id':cid,'thinking':thinking,'config':conf,'messages':data['messages'],'rendered_prompt':prompt,'input_tokens':len(tokens),'output_budget':1024,'total':len(tokens)+1024,'template_suffix':expected}
++        label=cid+('-on' if thinking else '-off')
++        prompt,tokens,template_evidence=audited_template(cid,thinking,body,label)
++        row={'case_id':cid,'thinking':thinking,'config':conf,'messages':data['messages'],'rendered_prompt':prompt,'input_tokens':len(tokens),'output_budget':1024,'total':len(tokens)+1024,'actual_generation_suffix':template_evidence['actual_generation_suffix'],'template_evidence_file':'template-evidence-'+label+'.json'}
+         preflight.append(row);write('template-capacity.json',{'checked_at':datetime.now().astimezone().isoformat(),'counts_as_generation':False,'rows':preflight});assert row['total']<=4096,'完整输入加1024超限，不截断'
++    pairs=[]
++    for cid in inputs:
++        off=next(r for r in preflight if r['case_id']==cid and not r['thinking']);on=next(r for r in preflight if r['case_id']==cid and r['thinking'])
++        left=copy.deepcopy(off['config']);right=copy.deepcopy(on['config']);left['parameters'].pop('chat_template_kwargs');right['parameters'].pop('chat_template_kwargs')
++        checks={'same_messages':off['messages']==on['messages'],'same_schema_sampling_and_budget':left==right,'only_disabled_block_differs':off['rendered_prompt']==on['rendered_prompt']+'<think>\n\n</think>\n\n'}
++        pairs.append({'case_id':cid,'checks':checks,'off_evidence':off['template_evidence_file'],'on_evidence':on['template_evidence_file']})
++        write('paired-template-verification.json',{'checked_at':datetime.now().astimezone().isoformat(),'pairs':pairs,'not_a_generation':True});assert all(checks.values()),'两侧模板差异不符合源码分支'
+     write('precall-plan.json',{'recorded_at':datetime.now().astimezone().isoformat(),'order':call_order,'generation_limit':8,'both_output_budgets':1024,'service_arguments':startup['arguments'],'request_level_switch':'chat_template_kwargs.enable_thinking布尔值','actual_template_difference_verified':True,'same_schema_accepted_by_apply_template':True,'evaluation_after_all_calls':True})
+     write('runtime-before-generation.json',startup);print('PREFLIGHT PASS',[(r['case_id'],r['thinking'],r['total']) for r in preflight],flush=True)
+     index=[]
+--- /dev/null
++++ b/基础/tests/review_thinking_same_budget_pairs.py
+@@ -0,0 +1,67 @@
++"""全部同预算思考对照结束后仅评价最终content，不以思考文本替代答案。"""
++from pathlib import Path
++from datetime import datetime
++from decimal import Decimal, InvalidOperation
++import json,re,hashlib,sys
++folder=Path(sys.argv[1]);repo=Path(__file__).resolve().parents[2];base=repo/'基础'
++read=lambda p:json.loads(p.read_text(encoding='utf-8'))
++runtime=read(folder/'runtime.json');assert runtime['server_stopped'] and runtime.get('all_calls_completed') and not runtime['stopped_on_technical_failure']
++# 到这里才读取公开答案；本文件不参与生成、Schema识别或原文选择。
++gold={g['id']:g for g in read(base/'data/dev_answers.json')}
++basis=read(base/'runs/two_step_linked/20261013-193700/effective-semantic-review.json')
++number=r'[-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?'
++def equal_decimal(a,b):
++    try:return Decimal(a)==Decimal(b)
++    except (InvalidOperation,ValueError):return False
++def parse_pairs(pairs):
++    value={}
++    for k,v in pairs:
++        if k in value:raise ValueError('duplicate_field')
++        value[k]=v
++    return value
++rows=[]
++for item in read(folder/'result-index.json'):
++    r=read(folder/('run-'+item['run_id']+'.json'));r['variant']=item['variant'];g=gold[r['case_id']]
++    source=next(x for x in basis if x['case_id']==r['case_id'] and x['variant']=='linked_answer')
++    content=r['response']['choices'][0]['message'].get('content','')
++    try:parsed=json.loads(content,object_pairs_hook=parse_pairs)
++    except (ValueError,TypeError):parsed=None
++    valid=isinstance(parsed,dict) and set(parsed)=={'answer','citations'} and isinstance(parsed.get('answer'),str) and isinstance(parsed.get('citations'),list) and all(isinstance(x,str) for x in parsed['citations'])
++    answer=parsed['answer'] if valid else None;citations=parsed['citations'] if valid else []
++    correct=isinstance(answer,str) and answer.strip() in g['aliases'];semantic=correct
++    if isinstance(answer,str) and g['task_kind']=='difference':
++        correct=bool(re.fullmatch(number,answer) and equal_decimal(answer,g['answer']))
++        with_unit=re.fullmatch('('+number+r')\s*秒',answer)
++        semantic=correct or bool(with_unit and equal_decimal(with_unit.group(1),g['answer']))
++    elif isinstance(answer,str) and g['task_kind']=='percent':
++        correct=bool(answer.endswith('%') and re.fullmatch(number,answer[:-1]) and equal_decimal(answer[:-1],g['answer'].rstrip('%')))
++        semantic=correct
++    elif isinstance(answer,str) and g['task_kind']=='insufficient':
++        semantic=correct or answer in ['服务端GPU型号未知','未提及具体型号']
++    used=r['used_passages'];ids={p['id'] for p in used};required={p['id'] for p in source['source_basis']}
++    coverage=(bool(set(citations)&required) if g['task_kind']=='insufficient' else required.issubset(citations))
++    exists=valid and all(x in ids for x in citations);nonempty=bool(citations)
++    support=bool(semantic and exists and nonempty and coverage)
++    irrelevant=[x for x in citations if x in ids and x not in required]
++    strict=bool(correct and valid and exists and nonempty and support and not irrelevant)
++    reason=[]
++    if not valid:reason.append('JSON字段或类型不完整')
++    if not correct:reason.append('指定答法或答案值不合要求')
++    if semantic and not correct:reason.append('语义一致但附带单位/其他形式不符合题目要求')
++    if not coverage:reason.append('引用未覆盖必要依据')
++    if not support:reason.append('引用集合未支持实际answer')
++    if irrelevant:reason.append('含无关/范围冲突引用')
++    rows.append({'case_id':r['case_id'],'variant':r['variant'],'run_id':r['run_id'],'raw_content':content,'answer':answer,'citations':citations,'format_complete':valid,'answer_correct_specified_form':correct,'semantic_consistent':semantic,'citation_ids_exist':exists,'citations_nonempty':nonempty,'necessary_evidence_covered':coverage,'evidence_supports_actual_answer':support,'irrelevant_citations':irrelevant,'strict_complete_success':strict,'client_answer_seconds':r['elapsed_seconds'],'usage':r.get('usage'),'finish_reason':r['response']['choices'][0]['finish_reason'],'reasoning_content':r['response']['choices'][0]['message'].get('reasoning_content'),'reasoning_observed':bool(r['response']['choices'][0]['message'].get('reasoning_content')),'actual_schema':r['config']['parameters']['response_format']['json_schema']['schema'],'public_answer_reason':g['reason'],'source_basis':source['source_basis'],'question':json.loads(r['messages'][1]['content'])['question'],'failure_reasons':reason,'evaluation_limit':'数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。'})
++table=[]
++for v in ['thinking_off','thinking_on']:
++    group=[r for r in rows if r['variant']==v]
++    table.append({'variant':v,'denominator':4,'format_complete':sum(r['format_complete'] for r in group),'specified_answer_correct':sum(r['answer_correct_specified_form'] for r in group),'semantic_consistent':sum(r['semantic_consistent'] for r in group),'citation_support':sum(r['evidence_supports_actual_answer'] for r in group),'strict_complete_success':sum(r['strict_complete_success'] for r in group),'total_answer_http_seconds':sum(r['client_answer_seconds'] for r in group)})
++summary={'reviewed_at':datetime.now().astimezone().isoformat(),'source':'Codex辅助公开开发答案与原文评价，尚未经本人逐项确认','table':table,'generation_calls':8,'cumulative_generation_calls':198,'historical_selection_not_reexecuted':True,'timing_scope':'完整非流式请求，开启模式包含思考时间；两侧总输出预算1024，不与定位完整流程混用','limit':'本轮只有思考开关变化；总预算包含思考与最终内容，思考数字不算最终答案或因果机制直接证据。仅限定四题当前配置。','truncation_flags':re.findall(r'truncated\s*=\s*(\d+)',(folder/'server-log.txt').read_text(encoding='utf-8'))}
++assert len(summary['truncation_flags'])==8 and set(summary['truncation_flags'])=={'0'}
++protected=read(folder/'protected-hashes.json');allowed=read(folder/'allowed-code-change.json');assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==(allowed['sha256'] if p==allowed['path'] else h) for p,h in protected.items())
++quality=[(g['strict_complete_success'],g['specified_answer_correct']) for g in table]
++summary['choice']='开启思考本轮质量更好，可保留为独立开发候选审阅，不自动替换生产。' if quality[1]>quality[0] else '开启思考未超过关闭模式，按预先规则保留关闭思考，不追加调用。'
++for name,value in [('semantic-review.json',rows),('summary.json',summary)]:
++    p=folder/name;assert not p.exists();p.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++print(json.dumps(summary,ensure_ascii=False,indent=2))
++for r in rows:print(json.dumps({k:r[k] for k in ['case_id','variant','raw_content','answer_correct_specified_form','semantic_consistent','evidence_supports_actual_answer','strict_complete_success','client_answer_seconds']},ensure_ascii=False))

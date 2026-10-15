@@ -1,0 +1,564 @@
+[
+  {
+    "case_id": "D01",
+    "off": {
+      "case_id": "D01",
+      "variant": "thinking_off",
+      "run_id": "606ef25d-52ea-4dfb-ae00-d71d65cdc279",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P312446\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P312446"
+      ],
+      "format_complete": true,
+      "answer_correct_specified_form": false,
+      "semantic_consistent": false,
+      "citation_ids_exist": true,
+      "citations_nonempty": true,
+      "necessary_evidence_covered": false,
+      "evidence_supports_actual_answer": false,
+      "irrelevant_citations": [],
+      "strict_complete_success": false,
+      "client_answer_seconds": 5.521027699927799,
+      "usage": {
+        "completion_tokens": 18,
+        "prompt_tokens": 824,
+        "total_tokens": 842,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "reasoning_content": null,
+      "reasoning_observed": false,
+      "actual_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?%|证据不足)$"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "answer",
+          "citations"
+        ],
+        "additionalProperties": false
+      },
+      "public_answer_reason": "68/85=80%。",
+      "source_basis": [
+        {
+          "id": "P312446",
+          "source": "模拟记录/D01/页1",
+          "quote": "澄石项目R4版本在2026-03的记录：正式回归批次代号CS41，共收录85个有效问题；分母采用冻结后的有效问题数，格式错误也计入。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P898100",
+          "source": "模拟记录/D01/页2",
+          "quote": "批次CS41的复核补页：CS41双人复核台账中，有68个问题的必要结论获所选文档完整支持，另有11个无支持结论、6个响应格式错误。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。"
+        }
+      ],
+      "question": "澄石项目R4版本在2026-03正式回归批次的核验率是多少？只输出百分数。",
+      "failure_reasons": [
+        "指定答法或答案值不合要求",
+        "引用未覆盖必要依据",
+        "引用集合未支持实际answer"
+      ],
+      "evaluation_limit": "数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。"
+    },
+    "on": {
+      "case_id": "D01",
+      "variant": "thinking_on",
+      "run_id": "aaa5526a-0141-4171-87c6-ee15047b7368",
+      "raw_content": "{\"answer\":\"85%\",\"citations\":[\"P312446\"]}",
+      "answer": "85%",
+      "citations": [
+        "P312446"
+      ],
+      "format_complete": true,
+      "answer_correct_specified_form": false,
+      "semantic_consistent": false,
+      "citation_ids_exist": true,
+      "citations_nonempty": true,
+      "necessary_evidence_covered": false,
+      "evidence_supports_actual_answer": false,
+      "irrelevant_citations": [],
+      "strict_complete_success": false,
+      "client_answer_seconds": 12.127661700011231,
+      "usage": {
+        "completion_tokens": 285,
+        "prompt_tokens": 820,
+        "total_tokens": 1105,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "reasoning_content": "好的，我需要回答用户的问题：“澄石项目R4版本在2026-03正式回归批次的核验率是多少？只输出百分数。”首先，我要查看提供的段落来找到相关信息。\n\n首先看P312446，里面提到在2026-03正式回归批次CS41中，收录了85个有效问题。分母采用冻结后的有效问题数，格式错误也计入。这里可能是指核验率是85%，但需要确认是否包括所有问题。然后看P898100，同样提到CS41批次有68个问题的必要结论支持，还有11个无支持，以及6个格式错误。不过用户问的是核验率，这里可能指的是有效问题数除以总问题数或者有效问题数占总数的比例。\n\n但根据P312446的数据，总共有85个有效问题。如果假设所有问题都纳入核验率计算的话，那么核验率应该是85%。不过需要确认是否还有其他数据来源，比如是否有其他段落提到不同的数字。但目前只看这两个段落，没有其他信息。因此，答案应该是85%，对应的百分数。\n",
+      "reasoning_observed": true,
+      "actual_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?%|证据不足)$"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "answer",
+          "citations"
+        ],
+        "additionalProperties": false
+      },
+      "public_answer_reason": "68/85=80%。",
+      "source_basis": [
+        {
+          "id": "P312446",
+          "source": "模拟记录/D01/页1",
+          "quote": "澄石项目R4版本在2026-03的记录：正式回归批次代号CS41，共收录85个有效问题；分母采用冻结后的有效问题数，格式错误也计入。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 导出目录按首次运行、人工核查和修订建议分层保存；检查员在当月月底核对清单哈希与签署页码。若同一问题多次出现，页面显示第一次结论及后续复核时间，不把第二次输出回填初始表。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P898100",
+          "source": "模拟记录/D01/页2",
+          "quote": "批次CS41的复核补页：CS41双人复核台账中，有68个问题的必要结论获所选文档完整支持，另有11个无支持结论、6个响应格式错误。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。"
+        }
+      ],
+      "question": "澄石项目R4版本在2026-03正式回归批次的核验率是多少？只输出百分数。",
+      "failure_reasons": [
+        "指定答法或答案值不合要求",
+        "引用未覆盖必要依据",
+        "引用集合未支持实际answer"
+      ],
+      "evaluation_limit": "数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。"
+    }
+  },
+  {
+    "case_id": "D02",
+    "off": {
+      "case_id": "D02",
+      "variant": "thinking_off",
+      "run_id": "54e2df6e-6a98-4f29-a5d6-49b963f5c385",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P406170\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P406170"
+      ],
+      "format_complete": true,
+      "answer_correct_specified_form": true,
+      "semantic_consistent": true,
+      "citation_ids_exist": true,
+      "citations_nonempty": true,
+      "necessary_evidence_covered": true,
+      "evidence_supports_actual_answer": true,
+      "irrelevant_citations": [],
+      "strict_complete_success": true,
+      "client_answer_seconds": 4.255748600000516,
+      "usage": {
+        "completion_tokens": 18,
+        "prompt_tokens": 792,
+        "total_tokens": 810,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "reasoning_content": null,
+      "reasoning_observed": false,
+      "actual_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "answer",
+          "citations"
+        ],
+        "additionalProperties": false
+      },
+      "public_answer_reason": "所给范围没有具体GPU型号；区域或耗时不足以推定。",
+      "source_basis": [
+        {
+          "id": "P406170",
+          "source": "模拟记录/D02/页5",
+          "quote": "青岚项目R6版本在2026-04的记录：夜间组代号QL62，24次请求经共享网关转发，客户端只收到HTTP响应和模型显示名。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P562395",
+          "source": "模拟记录/D02/页4",
+          "quote": "批次QL62的复核补页：QL62台账登记服务区域zone-c、完整响应耗时与计费单位；资产、设备遥测与推理节点字段均未被采集。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。"
+        }
+      ],
+      "question": "青岚项目R6版本在2026-04夜间组使用的服务端GPU具体型号是什么？",
+      "failure_reasons": [],
+      "evaluation_limit": "数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。"
+    },
+    "on": {
+      "case_id": "D02",
+      "variant": "thinking_on",
+      "run_id": "7122ef04-1c98-42d3-b8ff-fedb1c84ee0b",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P406170\",\"P562395\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P406170",
+        "P562395"
+      ],
+      "format_complete": true,
+      "answer_correct_specified_form": true,
+      "semantic_consistent": true,
+      "citation_ids_exist": true,
+      "citations_nonempty": true,
+      "necessary_evidence_covered": true,
+      "evidence_supports_actual_answer": true,
+      "irrelevant_citations": [],
+      "strict_complete_success": true,
+      "client_answer_seconds": 10.14117019996047,
+      "usage": {
+        "completion_tokens": 232,
+        "prompt_tokens": 788,
+        "total_tokens": 1020,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "reasoning_content": "好的，我需要回答用户的问题：“青岚项目R6版本在2026-04夜间组使用的服务端GPU具体型号是什么？”首先，我要仔细查看提供的段落，寻找相关信息。\n\n首先看段落P406170，其中提到“夜间组代号QL62”，并指出服务端内部阶段没有被观测。不过这段并没有直接提到GPU的具体型号。接下来检查P562395，同样在该段中，关于批次QL62的复核补页，提到了资产、设备遥测与推理节点字段未被采集，但也没有提到GPU型号。\n\n用户的问题是关于服务端GPU型号的，而提供的资料中并没有明确提及具体的型号。因此，根据现有信息，无法确定具体型号。同时，两段内容都没有直接涉及GPU型号的信息，所以答案应该是“证据不足”。需要确认是否有遗漏或误解的地方，但根据现有的资料，无法找到相关数据。\n",
+      "reasoning_observed": true,
+      "actual_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "answer",
+          "citations"
+        ],
+        "additionalProperties": false
+      },
+      "public_answer_reason": "所给范围没有具体GPU型号；区域或耗时不足以推定。",
+      "source_basis": [
+        {
+          "id": "P406170",
+          "source": "模拟记录/D02/页5",
+          "quote": "青岚项目R6版本在2026-04的记录：夜间组代号QL62，24次请求经共享网关转发，客户端只收到HTTP响应和模型显示名。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P562395",
+          "source": "模拟记录/D02/页4",
+          "quote": "批次QL62的复核补页：QL62台账登记服务区域zone-c、完整响应耗时与计费单位；资产、设备遥测与推理节点字段均未被采集。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。"
+        }
+      ],
+      "question": "青岚项目R6版本在2026-04夜间组使用的服务端GPU具体型号是什么？",
+      "failure_reasons": [],
+      "evaluation_limit": "数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。"
+    }
+  },
+  {
+    "case_id": "D03",
+    "off": {
+      "case_id": "D03",
+      "variant": "thinking_off",
+      "run_id": "4b221a08-d77b-4318-b61f-8d2d6abecc10",
+      "raw_content": "{\"answer\":\"1.8\",\"citations\":[\"P695887\",\"P419087\"]}",
+      "answer": "1.8",
+      "citations": [
+        "P695887",
+        "P419087"
+      ],
+      "format_complete": true,
+      "answer_correct_specified_form": true,
+      "semantic_consistent": true,
+      "citation_ids_exist": true,
+      "citations_nonempty": true,
+      "necessary_evidence_covered": true,
+      "evidence_supports_actual_answer": true,
+      "irrelevant_citations": [],
+      "strict_complete_success": true,
+      "client_answer_seconds": 5.791241399943829,
+      "usage": {
+        "completion_tokens": 27,
+        "prompt_tokens": 809,
+        "total_tokens": 836,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "reasoning_content": null,
+      "reasoning_observed": false,
+      "actual_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "answer",
+          "citations"
+        ],
+        "additionalProperties": false
+      },
+      "public_answer_reason": "7.6-5.8=1.8秒。",
+      "source_basis": [
+        {
+          "id": "P695887",
+          "source": "模拟记录/D03/页1",
+          "quote": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P419087",
+          "source": "模拟记录/D03/页3",
+          "quote": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。"
+        }
+      ],
+      "question": "白榆项目R5版本在2026-05单并发主测中，方案乙的完整响应耗时中位数比方案甲少多少秒？只输出数值。",
+      "failure_reasons": [],
+      "evaluation_limit": "数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。"
+    },
+    "on": {
+      "case_id": "D03",
+      "variant": "thinking_on",
+      "run_id": "b1072d71-8111-479d-a598-2b77ee4fac6a",
+      "raw_content": "{\"answer\":\"1.8\",\"citations\":[\"P695887\",\"P419087\"]}",
+      "answer": "1.8",
+      "citations": [
+        "P695887",
+        "P419087"
+      ],
+      "format_complete": true,
+      "answer_correct_specified_form": true,
+      "semantic_consistent": true,
+      "citation_ids_exist": true,
+      "citations_nonempty": true,
+      "necessary_evidence_covered": true,
+      "evidence_supports_actual_answer": true,
+      "irrelevant_citations": [],
+      "strict_complete_success": true,
+      "client_answer_seconds": 12.35935879999306,
+      "usage": {
+        "completion_tokens": 287,
+        "prompt_tokens": 805,
+        "total_tokens": 1092,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "reasoning_content": "好的，我需要解决用户的问题：白榆项目R5版本在2026-05单并发主测中，方案乙的完整响应耗时中位数比方案甲少多少秒？只输出数值。\n\n首先，我要找到相关的段落。用户提供的资料中有两个段落，P695887和P419087。我需要查看这两个段落的内容。\n\n在P695887中，提到方案甲的客户端完整响应耗时中位数是7.6秒，而方案乙的中位数是5.8秒。这里直接给出了数值，所以可以比较这两个数值。\n\n接下来检查是否有其他信息或可能的混淆点。比如，是否还有其他版本或批次的信息？但用户的问题明确提到的是R5版本和2026-05单并发主测，两个段落都提到了同样的时间点和两个方案的中位数。\n\n因此，方案乙比方案甲少7.6 - 5.8 = 1.8秒。确认没有其他数据或来源影响结果，且两个段落都是关于同一时间点的不同方案中位数，所以答案应该是1.8秒。\n",
+      "reasoning_observed": true,
+      "actual_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string",
+            "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "answer",
+          "citations"
+        ],
+        "additionalProperties": false
+      },
+      "public_answer_reason": "7.6-5.8=1.8秒。",
+      "source_basis": [
+        {
+          "id": "P695887",
+          "source": "模拟记录/D03/页1",
+          "quote": "白榆项目R5版本在2026-05的记录：单并发主测BY53以同一顺序处理40个问题，基础方案甲的客户端完整响应耗时中位数为7.6秒。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P419087",
+          "source": "模拟记录/D03/页3",
+          "quote": "批次BY53的复核补页：BY53候选方案乙也处理相同40个问题，中位数为5.8秒；两组模型、输出上限和重试设置相同。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。"
+        }
+      ],
+      "question": "白榆项目R5版本在2026-05单并发主测中，方案乙的完整响应耗时中位数比方案甲少多少秒？只输出数值。",
+      "failure_reasons": [],
+      "evaluation_limit": "数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。"
+    }
+  },
+  {
+    "case_id": "D04",
+    "off": {
+      "case_id": "D04",
+      "variant": "thinking_off",
+      "run_id": "7c378243-113d-4250-b5e6-fb3373c2221a",
+      "raw_content": "{\"answer\":\"配置丙\",\"citations\":[\"P579223\"]}",
+      "answer": "配置丙",
+      "citations": [
+        "P579223"
+      ],
+      "format_complete": true,
+      "answer_correct_specified_form": true,
+      "semantic_consistent": true,
+      "citation_ids_exist": true,
+      "citations_nonempty": true,
+      "necessary_evidence_covered": false,
+      "evidence_supports_actual_answer": false,
+      "irrelevant_citations": [],
+      "strict_complete_success": false,
+      "client_answer_seconds": 4.41383550001774,
+      "usage": {
+        "completion_tokens": 18,
+        "prompt_tokens": 826,
+        "total_tokens": 844,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "reasoning_content": null,
+      "reasoning_observed": false,
+      "actual_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "answer",
+          "citations"
+        ],
+        "additionalProperties": false
+      },
+      "public_answer_reason": "乙与丙合格，丙预算更低。",
+      "source_basis": [
+        {
+          "id": "P579223",
+          "source": "模拟记录/D04/页4",
+          "quote": "雾川项目R3版本在2026-06的记录：正式选择表WC34登记配置甲覆盖率86%、预算1450、格式失败4次；配置乙89%、1980、1次；配置丙88%、1720、0次。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P611709",
+          "source": "模拟记录/D04/页7",
+          "quote": "批次WC34的复核补页：WC34签署规则为覆盖率至少88%且格式失败不超过1次，再在合格项中按输入预算从低到高决定。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。"
+        }
+      ],
+      "question": "按雾川项目R3版本2026-06正式选择表的规则，应选择哪项配置？只输出配置名称。",
+      "failure_reasons": [
+        "引用未覆盖必要依据",
+        "引用集合未支持实际answer"
+      ],
+      "evaluation_limit": "数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。"
+    },
+    "on": {
+      "case_id": "D04",
+      "variant": "thinking_on",
+      "run_id": "325093d4-0cf9-4ee6-8249-7568283ccc2b",
+      "raw_content": "{\"answer\":\"配置乙\",\"citations\":[\"P579223\",\"P611709\"]}",
+      "answer": "配置乙",
+      "citations": [
+        "P579223",
+        "P611709"
+      ],
+      "format_complete": true,
+      "answer_correct_specified_form": false,
+      "semantic_consistent": false,
+      "citation_ids_exist": true,
+      "citations_nonempty": true,
+      "necessary_evidence_covered": true,
+      "evidence_supports_actual_answer": false,
+      "irrelevant_citations": [],
+      "strict_complete_success": false,
+      "client_answer_seconds": 13.668502299929969,
+      "usage": {
+        "completion_tokens": 322,
+        "prompt_tokens": 822,
+        "total_tokens": 1144,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "reasoning_content": "好的，我需要根据用户提供的资料来回答关于雾川项目R3版本2026-06正式选择表的配置问题。问题要求只输出配置名称，所以首先我要找到相关的段落。\n\n查看用户提供的两个段落，P579223和P611709。这两个段落都提到了WC34这个配置，并且描述了不同版本的规则。\n\n在P579223中，提到配置甲、乙、丙对应的覆盖率、预算和失败次数。配置乙是89%，1980，1次；配置丙是88%，1720，0次。这些数据符合问题中的版本2026-06的要求。\n\n在P611709中，同样提到了批次WC34的复核补页规则，其中配置乙和丙的规则也类似，覆盖率达到至少88%且失败不超过1次。因此，可以确定正确的配置是乙或丙。\n\n需要确认是否只选择一个配置。根据问题中的选项，用户可能只需要配置名称，所以应该选择乙或者丙。但需要看具体哪个更符合问题中的描述。因为P579223中配置乙的覆盖率更高（89%），而P611709中的配置乙同样满足条件，因此正确的答案应该是配置乙。\n",
+      "reasoning_observed": true,
+      "actual_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "answer",
+          "citations"
+        ],
+        "additionalProperties": false
+      },
+      "public_answer_reason": "乙与丙合格，丙预算更低。",
+      "source_basis": [
+        {
+          "id": "P579223",
+          "source": "模拟记录/D04/页4",
+          "quote": "雾川项目R3版本在2026-06的记录：正式选择表WC34登记配置甲覆盖率86%、预算1450、格式失败4次；配置乙89%、1980、1次；配置丙88%、1720、0次。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。"
+        },
+        {
+          "id": "P611709",
+          "source": "模拟记录/D04/页7",
+          "quote": "批次WC34的复核补页：WC34签署规则为覆盖率至少88%且格式失败不超过1次，再在合格项中按输入预算从低到高决定。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。"
+        }
+      ],
+      "question": "按雾川项目R3版本2026-06正式选择表的规则，应选择哪项配置？只输出配置名称。",
+      "failure_reasons": [
+        "指定答法或答案值不合要求",
+        "引用集合未支持实际answer"
+      ],
+      "evaluation_limit": "数值等值与单位仅用于判读，不改原answer；未登记本人逐项核验。"
+    }
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "saved_at": "2026-10-15T00:01:49.532596+08:00",
+  "stage": "first_synthetic_position_check",
+  "error": "AssertionError: by_id[value[passage_id]][value[start]:value[end]] == value[quote]",
+  "source": "实际执行prepare_eligibility_proof.py的positions/visit校验异常，发生在第一项结果保存前。",
+  "cause": "继承的出现位置审计start/end指编号，quote指完整声明；原句另有statement_start/statement_end。校验脚本混用两组位置。",
+  "generation_calls": 0,
+  "services_started": false,
+  "real_material_recheck_not_run": true,
+  "old_source_and_plan_preserved": true,
+  "further_fix": "分开验证编号与原句位置，不删除位置断言。"
+}

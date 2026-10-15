@@ -1,0 +1,3428 @@
+{
+  "checked_at": "2026-10-15T16:09:56.964014+08:00",
+  "passed": true,
+  "rows": [
+    {
+      "name": "empty",
+      "passed": true,
+      "result": {
+        "variant": "improved",
+        "question": "只输出数值。",
+        "original_passages": [],
+        "stages": [
+          {
+            "stage": "selection",
+            "elapsed_seconds": 0,
+            "run_kind": "offline_stub_not_generation",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\": []}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "stage": "answer",
+            "elapsed_seconds": 0,
+            "run_kind": "offline_stub_not_generation",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"证据不足\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [],
+        "raw_selection": "{\"selected_ids\": []}",
+        "selection_validation": {
+          "valid": true,
+          "status": "empty_selection",
+          "selected_ids": []
+        },
+        "association_trace": [],
+        "added_ids": [],
+        "used_passages": [],
+        "answer_form_rule": {
+          "answer_form": {
+            "kind": "数值",
+            "reason": "问题末尾明确只输出数值",
+            "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string",
+                      "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "eligibility_rule_audit": {
+          "answer_form": {
+            "kind": "数值",
+            "reason": "问题末尾明确只输出数值",
+            "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "processing_status": "completed_with_explicit_unknown_fallback",
+        "raw_answer": "{\"answer\":\"证据不足\",\"citations\":[]}",
+        "end_to_end_seconds": 0.003840999910607934,
+        "model_flow_end_to_end_seconds": 0.0016049999976530671,
+        "derived_response": null,
+        "raw_response": {
+          "choices": [
+            {
+              "message": {
+                "content": "{\"answer\":\"证据不足\",\"citations\":[]}"
+              }
+            }
+          ]
+        },
+        "proof_record": {
+          "judgment_source": "local_rule",
+          "run_kind": "offline_proof",
+          "proof_established": false,
+          "proof_status": "not_applicable",
+          "proof_kind": null,
+          "trace": [],
+          "derived_response": null,
+          "requires_independent_original_text_review": true,
+          "reason": "unsupported_question_branch_original_preserved"
+        },
+        "derived_response_kind": "not_derived_original_result_preserved",
+        "proof": {
+          "judgment_source": "local_rule",
+          "run_kind": "offline_proof",
+          "proof_established": false,
+          "proof_status": "not_applicable",
+          "proof_kind": null,
+          "trace": [],
+          "derived_response": null,
+          "requires_independent_original_text_review": true,
+          "reason": "unsupported_question_branch_original_preserved"
+        },
+        "proof_fact_sources": [],
+        "reference_derived_response": null,
+        "ratio_proof": {
+          "run_kind": "offline_ratio_calculation_proposal",
+          "judgment_source": "local_rule",
+          "applicable": false,
+          "proof_established": false,
+          "status": "not_applicable",
+          "trace": [],
+          "proposed_response": null,
+          "answer_changed": false,
+          "not_original_model_response": true,
+          "reason": "question_does_not_request_supported_ratio"
+        },
+        "proposed_response": null,
+        "ratio_fact_sources": [],
+        "ratio_proposed_response": null,
+        "difference_proposal": {
+          "run_kind": "offline_difference_calculation_proposal",
+          "judgment_source": "local_rule",
+          "applicable": false,
+          "status": "not_applicable",
+          "proof_established": false,
+          "trace": [],
+          "proposed_response": null,
+          "answer_changed": false,
+          "not_original_model_response": true,
+          "reason": "question_does_not_request_supported_difference"
+        },
+        "difference_fact_sources": [],
+        "rule_proofs": {
+          "reference_proof": {
+            "judgment_source": "local_rule",
+            "run_kind": "offline_proof",
+            "proof_established": false,
+            "proof_status": "not_applicable",
+            "proof_kind": null,
+            "trace": [],
+            "derived_response": null,
+            "requires_independent_original_text_review": true,
+            "reason": "unsupported_question_branch_original_preserved"
+          },
+          "ratio_proof": {
+            "run_kind": "offline_ratio_calculation_proposal",
+            "judgment_source": "local_rule",
+            "applicable": false,
+            "proof_established": false,
+            "status": "not_applicable",
+            "trace": [],
+            "proposed_response": null,
+            "answer_changed": false,
+            "not_original_model_response": true,
+            "reason": "question_does_not_request_supported_ratio"
+          },
+          "difference_proof": {
+            "run_kind": "offline_difference_calculation_proposal",
+            "judgment_source": "local_rule",
+            "applicable": false,
+            "status": "not_applicable",
+            "proof_established": false,
+            "trace": [],
+            "proposed_response": null,
+            "answer_changed": false,
+            "not_original_model_response": true,
+            "reason": "question_does_not_request_supported_difference"
+          }
+        },
+        "material_scope": {
+          "model_final_input_passages": [],
+          "audit_only_original_visible_passages": [],
+          "model_final_input_ids": [],
+          "original_visible_ids": [],
+          "audit_only_ids": [],
+          "proof_fact_and_derived_citation_ids_subset_of_final_model_input": true,
+          "policy": "额外原始可见资料仅供范围、实体和唯一性审计；不得将其当作最终回答模型输入或派生事实来源。定位阶段输入另存selection_passages。"
+        },
+        "local_rule_processing": [
+          {
+            "judgment_source": "local_rule",
+            "operation": "lexical_ordering",
+            "rule_version": {
+              "file": "student.py",
+              "function": "improve",
+              "sha256": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678"
+            },
+            "elapsed_seconds": 3.100023604929447e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0018455999670550227,
+            "relative_end_seconds": 0.0018534999107941985,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "selection_id_validation",
+            "rule_version": {
+              "file": "two_step_candidate.py",
+              "function": "validate_selection",
+              "sha256": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524"
+            },
+            "elapsed_seconds": 2.3400061763823032e-05,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0019038999453186989,
+            "relative_end_seconds": 0.001935599953867495,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "validated_original_passage_selection",
+            "rule_version": {
+              "file": "two_step_candidate.py",
+              "function": "select_original_passages",
+              "sha256": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524"
+            },
+            "elapsed_seconds": 1.300009898841381e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0019714999943971634,
+            "relative_end_seconds": 0.00197350000962615,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "direct_supplement_relation",
+            "rule_version": {
+              "file": "direct_reference_candidate.py",
+              "function": "complete_passages",
+              "sha256": "6df5c54028ddebd75dde1848e65935c93c2b7c261021a9bcbc875397a90342e2"
+            },
+            "elapsed_seconds": 5.999929271638393e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0019703999860212207,
+            "relative_end_seconds": 0.001978499931283295,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "generic_answer_form_constraint",
+            "rule_version": {
+              "file": "answer_form_candidate.py",
+              "function": "constrain_schema",
+              "sha256": "0eec8cb38be8be1e40d4bce75c10313ad20e63b137ebd165bd449053d35d0f78"
+            },
+            "elapsed_seconds": 0.00025889999233186245,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0019981999648734927,
+            "relative_end_seconds": 0.00227269995957613,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "type_enum_constraint",
+            "rule_version": {
+              "file": "typed_enum_role_revision.py",
+              "function": "constrain_revised_roles",
+              "sha256": "7afdec584389d2fc1624dee77d16df51fb3cb9d75fd2dca1d2e8646455b4ba81"
+            },
+            "elapsed_seconds": 0.0009957000147551298,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0022914999863132834,
+            "relative_end_seconds": 0.0033052999060600996,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "answer_schema_and_qualification",
+            "rule_version": {
+              "file": "scope_candidate.py",
+              "function": "answer_request",
+              "sha256": "bcf5377f44eeafb2a9e46e2b0f286de3d02a58a8d036aa42485117443f48bd30"
+            },
+            "elapsed_seconds": 0.0013312000082805753,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0019806999480351806,
+            "relative_end_seconds": 0.003342699958011508,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "positive_proof_and_citation_assembly",
+            "rule_version": {
+              "file": "general_citation_proof.py",
+              "function": "prove_answer",
+              "sha256": "9ef6e0b9a7c85b7805c9ceb84ffd0793cf6a1cab29a62a19d9131c392ef42a2d"
+            },
+            "elapsed_seconds": 0.00018069997895509005,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0035293999826535583,
+            "relative_end_seconds": 0.0037172000156715512,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "ratio_calculation_proposal",
+            "rule_version": {
+              "file": "ratio_calculation_proof.py",
+              "function": "propose",
+              "sha256": "3872ab126a4070889fbe8e12f94335cf25ed781828cecdefcc0d49b4c9cda38c"
+            },
+            "elapsed_seconds": 1.9099912606179714e-05,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0037299999967217445,
+            "relative_end_seconds": 0.003754899953491986,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "difference_calculation_proposal",
+            "rule_version": {
+              "file": "difference_calculation_proposal.py",
+              "function": "propose",
+              "sha256": "6ece33997bfdd21fff3260aefeb4c7f16e56e840ae9aa821955178e65ac2ef49"
+            },
+            "elapsed_seconds": 7.2999391704797745e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0037617000052705407,
+            "relative_end_seconds": 0.003774499986320734,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          }
+        ],
+        "local_rule_input_positions": [],
+        "raw_response_preserved": true,
+        "timing_summary": {
+          "selection_seconds": 0,
+          "answer_seconds": 0,
+          "tracked_local_rule_wall_seconds": 0.0016351998783648014,
+          "rule_timing_note": "已跟踪规则调用区间取并集，嵌套不重复相加；端到端另含模板容量、日志和其他处理。",
+          "end_to_end_seconds": 0.003840999910607934
+        },
+        "actual_final_output": {
+          "answer": "证据不足",
+          "citations": []
+        },
+        "actual_final_raw_content": "{\"answer\":\"证据不足\",\"citations\":[]}",
+        "actual_final_output_source": "raw_model_response",
+        "answer_changed_from_model_raw": false,
+        "system_derived_response": null,
+        "output_policy": "差值或比例证明成立采用独立计算建议；否则引用证明；否则原答。原始、计算和引用组装分别保留。"
+      }
+    },
+    {
+      "name": "invalid_selection",
+      "passed": true,
+      "result": {
+        "variant": "improved",
+        "question": "普通问题",
+        "original_passages": [],
+        "stages": [
+          {
+            "stage": "selection",
+            "elapsed_seconds": 0,
+            "run_kind": "offline_stub_not_generation",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\": [\"missing\"]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "selection_output_failure",
+        "selection_is_fresh": true,
+        "selection_passages": [],
+        "raw_selection": "{\"selected_ids\": [\"missing\"]}",
+        "selection_validation": {
+          "valid": false,
+          "status": "unknown_id",
+          "selected_ids": [
+            "missing"
+          ]
+        },
+        "answer_not_executed": true,
+        "end_to_end_seconds": 0.0021385999862104654,
+        "model_flow_end_to_end_seconds": 0.000129799940623343,
+        "derived_response": null,
+        "proof_not_run_reason": "upstream_selection_output_failure",
+        "proof_record": {
+          "proof_established": false,
+          "proof_status": "not_run",
+          "proof_kind": null,
+          "reason": "upstream_selection_output_failure",
+          "derived_response": null
+        },
+        "raw_response": null,
+        "proof": {
+          "proof_established": false,
+          "proof_status": "not_run",
+          "proof_kind": null,
+          "reason": "upstream_selection_output_failure",
+          "derived_response": null
+        },
+        "proof_fact_sources": [],
+        "reference_derived_response": null,
+        "ratio_proof": {
+          "applicable": false,
+          "status": "not_run",
+          "proof_established": false,
+          "reason": "upstream_selection_or_raw_format_failure",
+          "proposed_response": null,
+          "answer_changed": false
+        },
+        "proposed_response": null,
+        "ratio_fact_sources": [],
+        "ratio_proposed_response": null,
+        "difference_proposal": {
+          "applicable": false,
+          "status": "not_run",
+          "proof_established": false,
+          "reason": "upstream_selection_or_raw_format_failure",
+          "proposed_response": null,
+          "trace": [],
+          "answer_changed": false
+        },
+        "difference_fact_sources": [],
+        "rule_proofs": {
+          "reference_proof": {
+            "proof_established": false,
+            "proof_status": "not_run",
+            "proof_kind": null,
+            "reason": "upstream_selection_output_failure",
+            "derived_response": null
+          },
+          "ratio_proof": {
+            "applicable": false,
+            "status": "not_run",
+            "proof_established": false,
+            "reason": "upstream_selection_or_raw_format_failure",
+            "proposed_response": null,
+            "answer_changed": false
+          },
+          "difference_proof": {
+            "applicable": false,
+            "status": "not_run",
+            "proof_established": false,
+            "reason": "upstream_selection_or_raw_format_failure",
+            "proposed_response": null,
+            "trace": [],
+            "answer_changed": false
+          }
+        },
+        "material_scope": {
+          "model_final_input_passages": [],
+          "audit_only_original_visible_passages": [],
+          "model_final_input_ids": [],
+          "original_visible_ids": [],
+          "audit_only_ids": [],
+          "proof_fact_and_derived_citation_ids_subset_of_final_model_input": true,
+          "policy": "额外原始可见资料仅供范围、实体和唯一性审计；不得将其当作最终回答模型输入或派生事实来源。定位阶段输入另存selection_passages。"
+        },
+        "local_rule_processing": [
+          {
+            "judgment_source": "local_rule",
+            "operation": "lexical_ordering",
+            "rule_version": {
+              "file": "student.py",
+              "function": "improve",
+              "sha256": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678"
+            },
+            "elapsed_seconds": 2.9999064281582832e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0019582000095397234,
+            "relative_end_seconds": 0.0019632999319583178,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "selection_id_validation",
+            "rule_version": {
+              "file": "two_step_candidate.py",
+              "function": "validate_selection",
+              "sha256": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524"
+            },
+            "elapsed_seconds": 2.420006785541773e-05,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0020083999261260033,
+            "relative_end_seconds": 0.002038799924775958,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          }
+        ],
+        "local_rule_input_positions": [],
+        "raw_response_preserved": true,
+        "timing_summary": {
+          "selection_seconds": 0,
+          "answer_seconds": 0,
+          "tracked_local_rule_wall_seconds": 3.5499921068549156e-05,
+          "rule_timing_note": "已跟踪规则调用区间取并集，嵌套不重复相加；端到端另含模板容量、日志和其他处理。",
+          "end_to_end_seconds": 0.0021385999862104654
+        },
+        "actual_final_output": null,
+        "actual_final_raw_content": null,
+        "actual_final_output_source": "raw_model_response",
+        "answer_changed_from_model_raw": false,
+        "system_derived_response": null,
+        "output_policy": "差值或比例证明成立采用独立计算建议；否则引用证明；否则原答。原始、计算和引用组装分别保留。"
+      }
+    },
+    {
+      "name": "invalid_raw_format",
+      "passed": true,
+      "result": {
+        "variant": "improved",
+        "question": "普通问题",
+        "original_passages": [],
+        "stages": [
+          {
+            "stage": "selection",
+            "elapsed_seconds": 0,
+            "run_kind": "offline_stub_not_generation",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\": []}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "stage": "answer",
+            "elapsed_seconds": 0,
+            "run_kind": "offline_stub_not_generation",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [],
+        "raw_selection": "{\"selected_ids\": []}",
+        "selection_validation": {
+          "valid": true,
+          "status": "empty_selection",
+          "selected_ids": []
+        },
+        "association_trace": [],
+        "added_ids": [],
+        "used_passages": [],
+        "answer_form_rule": {
+          "answer_form": {
+            "kind": null,
+            "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "eligibility_rule_audit": {
+          "answer_form": {
+            "kind": null,
+            "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "processing_status": "completed_with_explicit_unknown_fallback",
+        "raw_answer": "{\"answer\":",
+        "end_to_end_seconds": 0.0021045999601483345,
+        "model_flow_end_to_end_seconds": 0.00033660000190138817,
+        "derived_response": null,
+        "raw_response": {
+          "choices": [
+            {
+              "message": {
+                "content": "{\"answer\":"
+              }
+            }
+          ]
+        },
+        "proof_record": {
+          "proof_established": false,
+          "proof_status": "refused",
+          "proof_kind": null,
+          "reason": "invalid_raw_answer_quality_failure",
+          "derived_response": null
+        },
+        "derived_response_kind": "not_derived_original_result_preserved",
+        "proof": {
+          "proof_established": false,
+          "proof_status": "refused",
+          "proof_kind": null,
+          "reason": "invalid_raw_answer_quality_failure",
+          "derived_response": null
+        },
+        "proof_fact_sources": [],
+        "reference_derived_response": null,
+        "ratio_proof": {
+          "applicable": false,
+          "status": "not_run",
+          "proof_established": false,
+          "reason": "upstream_selection_or_raw_format_failure",
+          "proposed_response": null,
+          "answer_changed": false
+        },
+        "proposed_response": null,
+        "ratio_fact_sources": [],
+        "ratio_proposed_response": null,
+        "difference_proposal": {
+          "applicable": false,
+          "status": "not_run",
+          "proof_established": false,
+          "reason": "upstream_selection_or_raw_format_failure",
+          "proposed_response": null,
+          "trace": [],
+          "answer_changed": false
+        },
+        "difference_fact_sources": [],
+        "rule_proofs": {
+          "reference_proof": {
+            "proof_established": false,
+            "proof_status": "refused",
+            "proof_kind": null,
+            "reason": "invalid_raw_answer_quality_failure",
+            "derived_response": null
+          },
+          "ratio_proof": {
+            "applicable": false,
+            "status": "not_run",
+            "proof_established": false,
+            "reason": "upstream_selection_or_raw_format_failure",
+            "proposed_response": null,
+            "answer_changed": false
+          },
+          "difference_proof": {
+            "applicable": false,
+            "status": "not_run",
+            "proof_established": false,
+            "reason": "upstream_selection_or_raw_format_failure",
+            "proposed_response": null,
+            "trace": [],
+            "answer_changed": false
+          }
+        },
+        "material_scope": {
+          "model_final_input_passages": [],
+          "audit_only_original_visible_passages": [],
+          "model_final_input_ids": [],
+          "original_visible_ids": [],
+          "audit_only_ids": [],
+          "proof_fact_and_derived_citation_ids_subset_of_final_model_input": true,
+          "policy": "额外原始可见资料仅供范围、实体和唯一性审计；不得将其当作最终回答模型输入或派生事实来源。定位阶段输入另存selection_passages。"
+        },
+        "local_rule_processing": [
+          {
+            "judgment_source": "local_rule",
+            "operation": "lexical_ordering",
+            "rule_version": {
+              "file": "student.py",
+              "function": "improve",
+              "sha256": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678"
+            },
+            "elapsed_seconds": 2.400018274784088e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.001617999980226159,
+            "relative_end_seconds": 0.001623000018298626,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "selection_id_validation",
+            "rule_version": {
+              "file": "two_step_candidate.py",
+              "function": "validate_selection",
+              "sha256": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524"
+            },
+            "elapsed_seconds": 1.7700018361210823e-05,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0016621999675408006,
+            "relative_end_seconds": 0.0016847000224515796,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "validated_original_passage_selection",
+            "rule_version": {
+              "file": "two_step_candidate.py",
+              "function": "select_original_passages",
+              "sha256": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524"
+            },
+            "elapsed_seconds": 2.00001522898674e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0017194999381899834,
+            "relative_end_seconds": 0.0017221999587491155,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "direct_supplement_relation",
+            "rule_version": {
+              "file": "direct_reference_candidate.py",
+              "function": "complete_passages",
+              "sha256": "6df5c54028ddebd75dde1848e65935c93c2b7c261021a9bcbc875397a90342e2"
+            },
+            "elapsed_seconds": 6.5999338403344154e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0017185000469908118,
+            "relative_end_seconds": 0.0017272999975830317,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "generic_answer_form_constraint",
+            "rule_version": {
+              "file": "answer_form_candidate.py",
+              "function": "constrain_schema",
+              "sha256": "0eec8cb38be8be1e40d4bce75c10313ad20e63b137ebd165bd449053d35d0f78"
+            },
+            "elapsed_seconds": 1.3299984857439995e-05,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.001747500034980476,
+            "relative_end_seconds": 0.0017722999909892678,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "type_enum_constraint",
+            "rule_version": {
+              "file": "typed_enum_role_revision.py",
+              "function": "constrain_revised_roles",
+              "sha256": "7afdec584389d2fc1624dee77d16df51fb3cb9d75fd2dca1d2e8646455b4ba81"
+            },
+            "elapsed_seconds": 2.6699970476329327e-05,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0017855999758467078,
+            "relative_end_seconds": 0.0018257000483572483,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "answer_schema_and_qualification",
+            "rule_version": {
+              "file": "scope_candidate.py",
+              "function": "answer_request",
+              "sha256": "bcf5377f44eeafb2a9e46e2b0f286de3d02a58a8d036aa42485117443f48bd30"
+            },
+            "elapsed_seconds": 9.919994045048952e-05,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0017300000181421638,
+            "relative_end_seconds": 0.0018569999374449253,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          }
+        ],
+        "local_rule_input_positions": [],
+        "raw_response_preserved": true,
+        "timing_summary": {
+          "selection_seconds": 0,
+          "answer_seconds": 0,
+          "tracked_local_rule_wall_seconds": 0.00016329996287822723,
+          "rule_timing_note": "已跟踪规则调用区间取并集，嵌套不重复相加；端到端另含模板容量、日志和其他处理。",
+          "end_to_end_seconds": 0.0021045999601483345
+        },
+        "actual_final_output": null,
+        "actual_final_raw_content": "{\"answer\":",
+        "actual_final_output_source": "raw_model_response",
+        "answer_changed_from_model_raw": false,
+        "system_derived_response": null,
+        "output_policy": "差值或比例证明成立采用独立计算建议；否则引用证明；否则原答。原始、计算和引用组装分别保留。"
+      }
+    },
+    {
+      "name": "independent_difference_proposal",
+      "passed": true,
+      "result": {
+        "variant": "improved",
+        "question": "松镜项目V8版本在2026-02同机实验中，新流程的完整响应耗时中位数比旧流程少多少秒？只输出数值。",
+        "original_passages": [
+          {
+            "id": "alpha",
+            "source": "自造/一",
+            "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。"
+          },
+          {
+            "id": "beta",
+            "source": "自造/二",
+            "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；两组设置相同。"
+          }
+        ],
+        "stages": [
+          {
+            "stage": "selection",
+            "elapsed_seconds": 0,
+            "run_kind": "offline_stub_not_generation",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\": [\"alpha\", \"beta\"]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "stage": "answer",
+            "elapsed_seconds": 0,
+            "run_kind": "offline_stub_not_generation",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"错误原答\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "alpha",
+            "source": "自造/一",
+            "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。"
+          },
+          {
+            "id": "beta",
+            "source": "自造/二",
+            "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；两组设置相同。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\": [\"alpha\", \"beta\"]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "valid_selection",
+          "selected_ids": [
+            "alpha",
+            "beta"
+          ]
+        },
+        "association_trace": [
+          {
+            "supplement_id": "beta",
+            "target_id": "alpha",
+            "added": false,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "Record29",
+                "start": 0,
+                "end": 10,
+                "code_start": 2,
+                "code_end": 10,
+                "statement": {
+                  "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；",
+                  "start": 0,
+                  "end": 46
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [
+              "alpha"
+            ],
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date",
+              "namespace"
+            ],
+            "semantic_support_verified": false,
+            "target_declarations": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "顺序批次",
+                "code": "Record29",
+                "start": 20,
+                "end": 32,
+                "code_start": 24,
+                "code_end": 32,
+                "statement": {
+                  "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+                  "start": 0,
+                  "end": 64
+                },
+                "reliable_declaration": true,
+                "direct_supplement_reference": false,
+                "mere_reference": false,
+                "declaration_predicate": {
+                  "text": "的旧流程处理",
+                  "start": 32,
+                  "end": 38
+                }
+              }
+            ],
+            "reason": "unique_reliable_direct_reference",
+            "object_labels_equal": true,
+            "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+            "completion_reason": "already_selected"
+          }
+        ],
+        "added_ids": [],
+        "used_passages": [
+          {
+            "id": "alpha",
+            "source": "自造/一",
+            "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。"
+          },
+          {
+            "id": "beta",
+            "source": "自造/二",
+            "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；两组设置相同。"
+          }
+        ],
+        "answer_form_rule": {
+          "answer_form": {
+            "kind": "数值",
+            "reason": "问题末尾明确只输出数值",
+            "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [
+              "V8",
+              "Record29"
+            ],
+            "occurrences": [
+              {
+                "passage_index": 0,
+                "value": "V8",
+                "start": 4,
+                "end": 6
+              },
+              {
+                "passage_index": 0,
+                "value": "Record29",
+                "start": 24,
+                "end": 32
+              },
+              {
+                "passage_index": 1,
+                "value": "Record29",
+                "start": 2,
+                "end": 10
+              },
+              {
+                "passage_index": 1,
+                "value": "Record29",
+                "start": 16,
+                "end": 24
+              }
+            ],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [
+              "V8",
+              "Record29"
+            ],
+            "decisions": [
+              {
+                "value": "V8",
+                "excluded": false,
+                "reason": "unknown_role_keep",
+                "target_role": null,
+                "roles": [
+                  {
+                    "value": "V8",
+                    "category": "version",
+                    "object_type": "version",
+                    "passage_index": 0,
+                    "start": 4,
+                    "end": 6,
+                    "recognition_text": "V8版本",
+                    "recognition_start": 4,
+                    "recognition_end": 8,
+                    "basis": "正文明确版本标签，不依据编号前缀。"
+                  }
+                ],
+                "semantic_conflicts": []
+              },
+              {
+                "value": "Record29",
+                "excluded": false,
+                "reason": "unknown_role_keep",
+                "target_role": null,
+                "roles": [
+                  {
+                    "value": "Record29",
+                    "category": "business",
+                    "object_type": "batch",
+                    "passage_index": 0,
+                    "start": 24,
+                    "end": 32,
+                    "recognition_text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+                    "recognition_start": 0,
+                    "recognition_end": 64,
+                    "extractor_evidence": {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "顺序批次",
+                      "code": "Record29",
+                      "start": 20,
+                      "end": 32,
+                      "code_start": 24,
+                      "code_end": 32,
+                      "statement": {
+                        "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+                        "start": 0,
+                        "end": 64
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "的旧流程处理",
+                        "start": 32,
+                        "end": 38
+                      }
+                    },
+                    "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                  },
+                  {
+                    "value": "Record29",
+                    "category": "business",
+                    "object_type": "batch",
+                    "passage_index": 1,
+                    "start": 2,
+                    "end": 10,
+                    "recognition_text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；",
+                    "recognition_start": 0,
+                    "recognition_end": 46,
+                    "extractor_evidence": {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "Record29",
+                      "start": 0,
+                      "end": 10,
+                      "code_start": 2,
+                      "code_end": 10,
+                      "statement": {
+                        "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；",
+                        "start": 0,
+                        "end": 46
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    },
+                    "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                  }
+                ],
+                "semantic_conflicts": []
+              }
+            ],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string",
+                      "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "eligibility_rule_audit": {
+          "answer_form": {
+            "kind": "数值",
+            "reason": "问题末尾明确只输出数值",
+            "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [
+              "V8",
+              "Record29"
+            ],
+            "occurrences": [
+              {
+                "passage_index": 0,
+                "value": "V8",
+                "start": 4,
+                "end": 6
+              },
+              {
+                "passage_index": 0,
+                "value": "Record29",
+                "start": 24,
+                "end": 32
+              },
+              {
+                "passage_index": 1,
+                "value": "Record29",
+                "start": 2,
+                "end": 10
+              },
+              {
+                "passage_index": 1,
+                "value": "Record29",
+                "start": 16,
+                "end": 24
+              }
+            ],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [
+              "V8",
+              "Record29"
+            ],
+            "decisions": [
+              {
+                "value": "V8",
+                "excluded": false,
+                "reason": "unknown_role_keep",
+                "target_role": null,
+                "roles": [
+                  {
+                    "value": "V8",
+                    "category": "version",
+                    "object_type": "version",
+                    "passage_index": 0,
+                    "start": 4,
+                    "end": 6,
+                    "recognition_text": "V8版本",
+                    "recognition_start": 4,
+                    "recognition_end": 8,
+                    "basis": "正文明确版本标签，不依据编号前缀。"
+                  }
+                ],
+                "semantic_conflicts": []
+              },
+              {
+                "value": "Record29",
+                "excluded": false,
+                "reason": "unknown_role_keep",
+                "target_role": null,
+                "roles": [
+                  {
+                    "value": "Record29",
+                    "category": "business",
+                    "object_type": "batch",
+                    "passage_index": 0,
+                    "start": 24,
+                    "end": 32,
+                    "recognition_text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+                    "recognition_start": 0,
+                    "recognition_end": 64,
+                    "extractor_evidence": {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "顺序批次",
+                      "code": "Record29",
+                      "start": 20,
+                      "end": 32,
+                      "code_start": 24,
+                      "code_end": 32,
+                      "statement": {
+                        "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+                        "start": 0,
+                        "end": 64
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "的旧流程处理",
+                        "start": 32,
+                        "end": 38
+                      }
+                    },
+                    "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                  },
+                  {
+                    "value": "Record29",
+                    "category": "business",
+                    "object_type": "batch",
+                    "passage_index": 1,
+                    "start": 2,
+                    "end": 10,
+                    "recognition_text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；",
+                    "recognition_start": 0,
+                    "recognition_end": 46,
+                    "extractor_evidence": {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "Record29",
+                      "start": 0,
+                      "end": 10,
+                      "code_start": 2,
+                      "code_end": 10,
+                      "statement": {
+                        "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；",
+                        "start": 0,
+                        "end": 46
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    },
+                    "basis": "现有业务提取器的可靠声明或直接补充指称。"
+                  }
+                ],
+                "semantic_conflicts": []
+              }
+            ],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "processing_status": "completed_with_explicit_unknown_fallback",
+        "raw_answer": "{\"answer\":\"错误原答\",\"citations\":[]}",
+        "end_to_end_seconds": 0.014542799908667803,
+        "model_flow_end_to_end_seconds": 0.0040951999835669994,
+        "derived_response": null,
+        "raw_response": {
+          "choices": [
+            {
+              "message": {
+                "content": "{\"answer\":\"错误原答\",\"citations\":[]}"
+              }
+            }
+          ]
+        },
+        "proof_record": {
+          "judgment_source": "local_rule",
+          "run_kind": "offline_proof",
+          "proof_established": false,
+          "proof_status": "refused",
+          "proof_kind": "difference",
+          "trace": [
+            {
+              "stage": "question_project_boundary",
+              "audit": {
+                "status": "resolved",
+                "question_candidates": [
+                  {
+                    "entity": "松镜项目",
+                    "interpretation": "literal_entity_no_char_removed",
+                    "start": 0,
+                    "end": 4,
+                    "version_position": [
+                      4,
+                      8
+                    ]
+                  }
+                ],
+                "body_declarations": [
+                  {
+                    "entity": "松镜项目",
+                    "version": "V8版本",
+                    "date": "2026-02",
+                    "passage_id": "alpha",
+                    "source": "自造/一",
+                    "start": 0,
+                    "end": 20,
+                    "quote": "松镜项目V8版本在2026-02的记录：",
+                    "entity_start": 0,
+                    "entity_end": 4
+                  }
+                ],
+                "question_original": "松镜项目V8版本在2026-02同机实验中，新流程的完整响应耗时中位数比旧流程少多少秒？只输出数值。",
+                "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+                "missing_fields_not_assumed_equal": true,
+                "chosen": {
+                  "entity": "松镜项目",
+                  "interpretation": "literal_entity_no_char_removed",
+                  "start": 0,
+                  "end": 4,
+                  "version_position": [
+                    4,
+                    8
+                  ]
+                },
+                "supporting_declarations": [
+                  {
+                    "entity": "松镜项目",
+                    "version": "V8版本",
+                    "date": "2026-02",
+                    "passage_id": "alpha",
+                    "source": "自造/一",
+                    "start": 0,
+                    "end": 20,
+                    "quote": "松镜项目V8版本在2026-02的记录：",
+                    "entity_start": 0,
+                    "entity_end": 4
+                  }
+                ]
+              }
+            },
+            {
+              "stage": "direct_relation_audit",
+              "links": [
+                {
+                  "supplement_id": "beta",
+                  "target_id": "alpha",
+                  "added": false,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "Record29",
+                      "start": 0,
+                      "end": 10,
+                      "code_start": 2,
+                      "code_end": 10,
+                      "statement": {
+                        "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；",
+                        "start": 0,
+                        "end": 46
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "alpha"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "顺序批次",
+                      "code": "Record29",
+                      "start": 20,
+                      "end": 32,
+                      "code_start": 24,
+                      "code_end": 32,
+                      "statement": {
+                        "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+                        "start": 0,
+                        "end": 64
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "的旧流程处理",
+                        "start": 32,
+                        "end": 38
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": true,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+                  "completion_reason": "already_selected"
+                }
+              ]
+            },
+            {
+              "stage": "pair_scope",
+              "main": "alpha",
+              "supplement": "beta",
+              "main_status": "matched",
+              "supplement_status": "unknown",
+              "main_fields": [
+                {
+                  "field": "project",
+                  "question": [
+                    "松镜项目"
+                  ],
+                  "source": [
+                    "松镜项目"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "version",
+                  "question": [
+                    "V8版本"
+                  ],
+                  "source": [
+                    "V8版本"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "date",
+                  "question": [
+                    "2026-02"
+                  ],
+                  "source": [
+                    "2026-02"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "namespace",
+                  "question": [],
+                  "source": [],
+                  "status": "not_specified_in_question"
+                }
+              ],
+              "supplement_fields": [
+                {
+                  "field": "project",
+                  "question": [
+                    "松镜项目"
+                  ],
+                  "source": [],
+                  "status": "unknown_missing_scope"
+                },
+                {
+                  "field": "version",
+                  "question": [
+                    "V8版本"
+                  ],
+                  "source": [],
+                  "status": "unknown_missing_scope"
+                },
+                {
+                  "field": "date",
+                  "question": [
+                    "2026-02"
+                  ],
+                  "source": [],
+                  "status": "unknown_missing_scope"
+                },
+                {
+                  "field": "namespace",
+                  "question": [],
+                  "source": [],
+                  "status": "not_specified_in_question"
+                }
+              ]
+            },
+            {
+              "stage": "difference_operand_attempt_refused",
+              "left_source_id": "alpha",
+              "right_source_id": "beta",
+              "reason": "object_not_unique_in_operand_source"
+            },
+            {
+              "stage": "difference_proof",
+              "question_parse": {
+                "left": "新流程",
+                "metric": "完整响应耗时中位数",
+                "right": "旧流程",
+                "direction": "少",
+                "unit": "秒"
+              },
+              "left": {
+                "object": "新流程",
+                "metric": "完整响应耗时中位数",
+                "statistic": "中位数",
+                "value": "6.4",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "beta",
+                  "source": "自造/二",
+                  "start": 37,
+                  "end": 45,
+                  "quote": "中位数为6.4秒",
+                  "role": "比较操作数原文"
+                },
+                "object_source": {
+                  "passage_id": "beta",
+                  "source": "自造/二",
+                  "start": 24,
+                  "end": 27,
+                  "quote": "新流程",
+                  "role": "问题比较对象"
+                }
+              },
+              "right": {
+                "object": "旧流程",
+                "metric": "完整响应耗时中位数",
+                "statistic": "中位数",
+                "value": "9.7",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "alpha",
+                  "source": "自造/一",
+                  "start": 49,
+                  "end": 63,
+                  "quote": "完整响应耗时中位数为9.7秒",
+                  "role": "比较操作数原文"
+                },
+                "object_source": {
+                  "passage_id": "alpha",
+                  "source": "自造/一",
+                  "start": 33,
+                  "end": 36,
+                  "quote": "旧流程",
+                  "role": "问题比较对象"
+                }
+              },
+              "comparability": {
+                "passage_id": "beta",
+                "source": "自造/二",
+                "start": 29,
+                "end": 34,
+                "quote": "相同17个",
+                "role": "同一比较集合明示依据"
+              },
+              "operation": "right_minus_left",
+              "result": "3.3",
+              "operands_chosen_without_answer": true
+            }
+          ],
+          "derived_response": null,
+          "requires_independent_original_text_review": true,
+          "reason": "original_answer_not_equal_to_proven_difference"
+        },
+        "derived_response_kind": "not_derived_original_result_preserved",
+        "proof": {
+          "judgment_source": "local_rule",
+          "run_kind": "offline_proof",
+          "proof_established": false,
+          "proof_status": "refused",
+          "proof_kind": "difference",
+          "trace": [
+            {
+              "stage": "question_project_boundary",
+              "audit": {
+                "status": "resolved",
+                "question_candidates": [
+                  {
+                    "entity": "松镜项目",
+                    "interpretation": "literal_entity_no_char_removed",
+                    "start": 0,
+                    "end": 4,
+                    "version_position": [
+                      4,
+                      8
+                    ]
+                  }
+                ],
+                "body_declarations": [
+                  {
+                    "entity": "松镜项目",
+                    "version": "V8版本",
+                    "date": "2026-02",
+                    "passage_id": "alpha",
+                    "source": "自造/一",
+                    "start": 0,
+                    "end": 20,
+                    "quote": "松镜项目V8版本在2026-02的记录：",
+                    "entity_start": 0,
+                    "entity_end": 4
+                  }
+                ],
+                "question_original": "松镜项目V8版本在2026-02同机实验中，新流程的完整响应耗时中位数比旧流程少多少秒？只输出数值。",
+                "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+                "missing_fields_not_assumed_equal": true,
+                "chosen": {
+                  "entity": "松镜项目",
+                  "interpretation": "literal_entity_no_char_removed",
+                  "start": 0,
+                  "end": 4,
+                  "version_position": [
+                    4,
+                    8
+                  ]
+                },
+                "supporting_declarations": [
+                  {
+                    "entity": "松镜项目",
+                    "version": "V8版本",
+                    "date": "2026-02",
+                    "passage_id": "alpha",
+                    "source": "自造/一",
+                    "start": 0,
+                    "end": 20,
+                    "quote": "松镜项目V8版本在2026-02的记录：",
+                    "entity_start": 0,
+                    "entity_end": 4
+                  }
+                ]
+              }
+            },
+            {
+              "stage": "direct_relation_audit",
+              "links": [
+                {
+                  "supplement_id": "beta",
+                  "target_id": "alpha",
+                  "added": false,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "Record29",
+                      "start": 0,
+                      "end": 10,
+                      "code_start": 2,
+                      "code_end": 10,
+                      "statement": {
+                        "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；",
+                        "start": 0,
+                        "end": 46
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "alpha"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "顺序批次",
+                      "code": "Record29",
+                      "start": 20,
+                      "end": 32,
+                      "code_start": 24,
+                      "code_end": 32,
+                      "statement": {
+                        "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+                        "start": 0,
+                        "end": 64
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "的旧流程处理",
+                        "start": 32,
+                        "end": 38
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": true,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+                  "completion_reason": "already_selected"
+                }
+              ]
+            },
+            {
+              "stage": "pair_scope",
+              "main": "alpha",
+              "supplement": "beta",
+              "main_status": "matched",
+              "supplement_status": "unknown",
+              "main_fields": [
+                {
+                  "field": "project",
+                  "question": [
+                    "松镜项目"
+                  ],
+                  "source": [
+                    "松镜项目"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "version",
+                  "question": [
+                    "V8版本"
+                  ],
+                  "source": [
+                    "V8版本"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "date",
+                  "question": [
+                    "2026-02"
+                  ],
+                  "source": [
+                    "2026-02"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "namespace",
+                  "question": [],
+                  "source": [],
+                  "status": "not_specified_in_question"
+                }
+              ],
+              "supplement_fields": [
+                {
+                  "field": "project",
+                  "question": [
+                    "松镜项目"
+                  ],
+                  "source": [],
+                  "status": "unknown_missing_scope"
+                },
+                {
+                  "field": "version",
+                  "question": [
+                    "V8版本"
+                  ],
+                  "source": [],
+                  "status": "unknown_missing_scope"
+                },
+                {
+                  "field": "date",
+                  "question": [
+                    "2026-02"
+                  ],
+                  "source": [],
+                  "status": "unknown_missing_scope"
+                },
+                {
+                  "field": "namespace",
+                  "question": [],
+                  "source": [],
+                  "status": "not_specified_in_question"
+                }
+              ]
+            },
+            {
+              "stage": "difference_operand_attempt_refused",
+              "left_source_id": "alpha",
+              "right_source_id": "beta",
+              "reason": "object_not_unique_in_operand_source"
+            },
+            {
+              "stage": "difference_proof",
+              "question_parse": {
+                "left": "新流程",
+                "metric": "完整响应耗时中位数",
+                "right": "旧流程",
+                "direction": "少",
+                "unit": "秒"
+              },
+              "left": {
+                "object": "新流程",
+                "metric": "完整响应耗时中位数",
+                "statistic": "中位数",
+                "value": "6.4",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "beta",
+                  "source": "自造/二",
+                  "start": 37,
+                  "end": 45,
+                  "quote": "中位数为6.4秒",
+                  "role": "比较操作数原文"
+                },
+                "object_source": {
+                  "passage_id": "beta",
+                  "source": "自造/二",
+                  "start": 24,
+                  "end": 27,
+                  "quote": "新流程",
+                  "role": "问题比较对象"
+                }
+              },
+              "right": {
+                "object": "旧流程",
+                "metric": "完整响应耗时中位数",
+                "statistic": "中位数",
+                "value": "9.7",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "alpha",
+                  "source": "自造/一",
+                  "start": 49,
+                  "end": 63,
+                  "quote": "完整响应耗时中位数为9.7秒",
+                  "role": "比较操作数原文"
+                },
+                "object_source": {
+                  "passage_id": "alpha",
+                  "source": "自造/一",
+                  "start": 33,
+                  "end": 36,
+                  "quote": "旧流程",
+                  "role": "问题比较对象"
+                }
+              },
+              "comparability": {
+                "passage_id": "beta",
+                "source": "自造/二",
+                "start": 29,
+                "end": 34,
+                "quote": "相同17个",
+                "role": "同一比较集合明示依据"
+              },
+              "operation": "right_minus_left",
+              "result": "3.3",
+              "operands_chosen_without_answer": true
+            }
+          ],
+          "derived_response": null,
+          "requires_independent_original_text_review": true,
+          "reason": "original_answer_not_equal_to_proven_difference"
+        },
+        "proof_fact_sources": [],
+        "reference_derived_response": null,
+        "ratio_proof": {
+          "run_kind": "offline_ratio_calculation_proposal",
+          "judgment_source": "local_rule",
+          "applicable": false,
+          "proof_established": false,
+          "status": "not_applicable",
+          "trace": [],
+          "proposed_response": null,
+          "answer_changed": false,
+          "not_original_model_response": true,
+          "reason": "question_does_not_request_supported_ratio"
+        },
+        "proposed_response": {
+          "answer": "3.3",
+          "citations": [
+            "alpha",
+            "beta"
+          ]
+        },
+        "ratio_fact_sources": [],
+        "ratio_proposed_response": null,
+        "difference_proposal": {
+          "run_kind": "offline_difference_calculation_proposal",
+          "judgment_source": "local_rule",
+          "applicable": true,
+          "status": "established",
+          "proof_established": true,
+          "trace": [
+            {
+              "stage": "question_project_boundary",
+              "audit": {
+                "status": "resolved",
+                "question_candidates": [
+                  {
+                    "entity": "松镜项目",
+                    "interpretation": "literal_entity_no_char_removed",
+                    "start": 0,
+                    "end": 4,
+                    "version_position": [
+                      4,
+                      8
+                    ]
+                  }
+                ],
+                "body_declarations": [
+                  {
+                    "entity": "松镜项目",
+                    "version": "V8版本",
+                    "date": "2026-02",
+                    "passage_id": "alpha",
+                    "source": "自造/一",
+                    "start": 0,
+                    "end": 20,
+                    "quote": "松镜项目V8版本在2026-02的记录：",
+                    "entity_start": 0,
+                    "entity_end": 4
+                  }
+                ],
+                "question_original": "松镜项目V8版本在2026-02同机实验中，新流程的完整响应耗时中位数比旧流程少多少秒？只输出数值。",
+                "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+                "missing_fields_not_assumed_equal": true,
+                "chosen": {
+                  "entity": "松镜项目",
+                  "interpretation": "literal_entity_no_char_removed",
+                  "start": 0,
+                  "end": 4,
+                  "version_position": [
+                    4,
+                    8
+                  ]
+                },
+                "supporting_declarations": [
+                  {
+                    "entity": "松镜项目",
+                    "version": "V8版本",
+                    "date": "2026-02",
+                    "passage_id": "alpha",
+                    "source": "自造/一",
+                    "start": 0,
+                    "end": 20,
+                    "quote": "松镜项目V8版本在2026-02的记录：",
+                    "entity_start": 0,
+                    "entity_end": 4
+                  }
+                ]
+              }
+            },
+            {
+              "stage": "direct_relation_audit",
+              "links": [
+                {
+                  "supplement_id": "beta",
+                  "target_id": "alpha",
+                  "added": false,
+                  "reference_evidence": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "批次",
+                      "code": "Record29",
+                      "start": 0,
+                      "end": 10,
+                      "code_start": 2,
+                      "code_end": 10,
+                      "statement": {
+                        "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；",
+                        "start": 0,
+                        "end": 46
+                      },
+                      "reliable_declaration": false,
+                      "direct_supplement_reference": true,
+                      "mere_reference": false,
+                      "declaration_predicate": null
+                    }
+                  ],
+                  "candidate_target_ids": [
+                    "alpha"
+                  ],
+                  "unknown_scope_fields": [
+                    "project",
+                    "version",
+                    "date",
+                    "namespace"
+                  ],
+                  "semantic_support_verified": false,
+                  "target_declarations": [
+                    {
+                      "object_type": "batch",
+                      "object_name": "批次",
+                      "raw_label": "顺序批次",
+                      "code": "Record29",
+                      "start": 20,
+                      "end": 32,
+                      "code_start": 24,
+                      "code_end": 32,
+                      "statement": {
+                        "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+                        "start": 0,
+                        "end": 64
+                      },
+                      "reliable_declaration": true,
+                      "direct_supplement_reference": false,
+                      "mere_reference": false,
+                      "declaration_predicate": {
+                        "text": "的旧流程处理",
+                        "start": 32,
+                        "end": 38
+                      }
+                    }
+                  ],
+                  "reason": "unique_reliable_direct_reference",
+                  "object_labels_equal": true,
+                  "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+                  "completion_reason": "already_selected"
+                }
+              ]
+            },
+            {
+              "stage": "pair_scope",
+              "main": "alpha",
+              "supplement": "beta",
+              "main_status": "matched",
+              "supplement_status": "unknown",
+              "main_fields": [
+                {
+                  "field": "project",
+                  "question": [
+                    "松镜项目"
+                  ],
+                  "source": [
+                    "松镜项目"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "version",
+                  "question": [
+                    "V8版本"
+                  ],
+                  "source": [
+                    "V8版本"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "date",
+                  "question": [
+                    "2026-02"
+                  ],
+                  "source": [
+                    "2026-02"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "namespace",
+                  "question": [],
+                  "source": [],
+                  "status": "not_specified_in_question"
+                }
+              ],
+              "supplement_fields": [
+                {
+                  "field": "project",
+                  "question": [
+                    "松镜项目"
+                  ],
+                  "source": [],
+                  "status": "unknown_missing_scope"
+                },
+                {
+                  "field": "version",
+                  "question": [
+                    "V8版本"
+                  ],
+                  "source": [],
+                  "status": "unknown_missing_scope"
+                },
+                {
+                  "field": "date",
+                  "question": [
+                    "2026-02"
+                  ],
+                  "source": [],
+                  "status": "unknown_missing_scope"
+                },
+                {
+                  "field": "namespace",
+                  "question": [],
+                  "source": [],
+                  "status": "not_specified_in_question"
+                }
+              ]
+            },
+            {
+              "stage": "difference_operand_attempt_refused",
+              "left_source_id": "alpha",
+              "right_source_id": "beta",
+              "reason": "object_not_unique_in_operand_source"
+            },
+            {
+              "stage": "difference_proof",
+              "question_parse": {
+                "left": "新流程",
+                "metric": "完整响应耗时中位数",
+                "right": "旧流程",
+                "direction": "少",
+                "unit": "秒"
+              },
+              "left": {
+                "object": "新流程",
+                "metric": "完整响应耗时中位数",
+                "statistic": "中位数",
+                "value": "6.4",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "beta",
+                  "source": "自造/二",
+                  "start": 37,
+                  "end": 45,
+                  "quote": "中位数为6.4秒",
+                  "role": "比较操作数原文"
+                },
+                "object_source": {
+                  "passage_id": "beta",
+                  "source": "自造/二",
+                  "start": 24,
+                  "end": 27,
+                  "quote": "新流程",
+                  "role": "问题比较对象"
+                }
+              },
+              "right": {
+                "object": "旧流程",
+                "metric": "完整响应耗时中位数",
+                "statistic": "中位数",
+                "value": "9.7",
+                "unit": "秒",
+                "source": {
+                  "passage_id": "alpha",
+                  "source": "自造/一",
+                  "start": 49,
+                  "end": 63,
+                  "quote": "完整响应耗时中位数为9.7秒",
+                  "role": "比较操作数原文"
+                },
+                "object_source": {
+                  "passage_id": "alpha",
+                  "source": "自造/一",
+                  "start": 33,
+                  "end": 36,
+                  "quote": "旧流程",
+                  "role": "问题比较对象"
+                }
+              },
+              "comparability": {
+                "passage_id": "beta",
+                "source": "自造/二",
+                "start": 29,
+                "end": 34,
+                "quote": "相同17个",
+                "role": "同一比较集合明示依据"
+              },
+              "operation": "right_minus_left",
+              "result": "3.3",
+              "operands_chosen_without_answer": true
+            }
+          ],
+          "proposed_response": {
+            "answer": "3.3",
+            "citations": [
+              "alpha",
+              "beta"
+            ]
+          },
+          "answer_changed": true,
+          "not_original_model_response": true,
+          "reason": "original_operands_unit_metric_scope_direction_and_result_independently_calculated",
+          "original_answer": "错误原答",
+          "proposed_response_kind": "local_rule_calculated_new_answer_not_model_output"
+        },
+        "difference_fact_sources": [
+          {
+            "passage_id": "beta",
+            "start": 37,
+            "end": 45,
+            "quote": "中位数为6.4秒"
+          },
+          {
+            "passage_id": "beta",
+            "start": 24,
+            "end": 27,
+            "quote": "新流程"
+          },
+          {
+            "passage_id": "alpha",
+            "start": 49,
+            "end": 63,
+            "quote": "完整响应耗时中位数为9.7秒"
+          },
+          {
+            "passage_id": "alpha",
+            "start": 33,
+            "end": 36,
+            "quote": "旧流程"
+          },
+          {
+            "passage_id": "beta",
+            "start": 29,
+            "end": 34,
+            "quote": "相同17个"
+          }
+        ],
+        "rule_proofs": {
+          "reference_proof": {
+            "judgment_source": "local_rule",
+            "run_kind": "offline_proof",
+            "proof_established": false,
+            "proof_status": "refused",
+            "proof_kind": "difference",
+            "trace": [
+              {
+                "stage": "question_project_boundary",
+                "audit": {
+                  "status": "resolved",
+                  "question_candidates": [
+                    {
+                      "entity": "松镜项目",
+                      "interpretation": "literal_entity_no_char_removed",
+                      "start": 0,
+                      "end": 4,
+                      "version_position": [
+                        4,
+                        8
+                      ]
+                    }
+                  ],
+                  "body_declarations": [
+                    {
+                      "entity": "松镜项目",
+                      "version": "V8版本",
+                      "date": "2026-02",
+                      "passage_id": "alpha",
+                      "source": "自造/一",
+                      "start": 0,
+                      "end": 20,
+                      "quote": "松镜项目V8版本在2026-02的记录：",
+                      "entity_start": 0,
+                      "entity_end": 4
+                    }
+                  ],
+                  "question_original": "松镜项目V8版本在2026-02同机实验中，新流程的完整响应耗时中位数比旧流程少多少秒？只输出数值。",
+                  "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+                  "missing_fields_not_assumed_equal": true,
+                  "chosen": {
+                    "entity": "松镜项目",
+                    "interpretation": "literal_entity_no_char_removed",
+                    "start": 0,
+                    "end": 4,
+                    "version_position": [
+                      4,
+                      8
+                    ]
+                  },
+                  "supporting_declarations": [
+                    {
+                      "entity": "松镜项目",
+                      "version": "V8版本",
+                      "date": "2026-02",
+                      "passage_id": "alpha",
+                      "source": "自造/一",
+                      "start": 0,
+                      "end": 20,
+                      "quote": "松镜项目V8版本在2026-02的记录：",
+                      "entity_start": 0,
+                      "entity_end": 4
+                    }
+                  ]
+                }
+              },
+              {
+                "stage": "direct_relation_audit",
+                "links": [
+                  {
+                    "supplement_id": "beta",
+                    "target_id": "alpha",
+                    "added": false,
+                    "reference_evidence": [
+                      {
+                        "object_type": "batch",
+                        "object_name": "批次",
+                        "raw_label": "批次",
+                        "code": "Record29",
+                        "start": 0,
+                        "end": 10,
+                        "code_start": 2,
+                        "code_end": 10,
+                        "statement": {
+                          "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；",
+                          "start": 0,
+                          "end": 46
+                        },
+                        "reliable_declaration": false,
+                        "direct_supplement_reference": true,
+                        "mere_reference": false,
+                        "declaration_predicate": null
+                      }
+                    ],
+                    "candidate_target_ids": [
+                      "alpha"
+                    ],
+                    "unknown_scope_fields": [
+                      "project",
+                      "version",
+                      "date",
+                      "namespace"
+                    ],
+                    "semantic_support_verified": false,
+                    "target_declarations": [
+                      {
+                        "object_type": "batch",
+                        "object_name": "批次",
+                        "raw_label": "顺序批次",
+                        "code": "Record29",
+                        "start": 20,
+                        "end": 32,
+                        "code_start": 24,
+                        "code_end": 32,
+                        "statement": {
+                          "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+                          "start": 0,
+                          "end": 64
+                        },
+                        "reliable_declaration": true,
+                        "direct_supplement_reference": false,
+                        "mere_reference": false,
+                        "declaration_predicate": {
+                          "text": "的旧流程处理",
+                          "start": 32,
+                          "end": 38
+                        }
+                      }
+                    ],
+                    "reason": "unique_reliable_direct_reference",
+                    "object_labels_equal": true,
+                    "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+                    "completion_reason": "already_selected"
+                  }
+                ]
+              },
+              {
+                "stage": "pair_scope",
+                "main": "alpha",
+                "supplement": "beta",
+                "main_status": "matched",
+                "supplement_status": "unknown",
+                "main_fields": [
+                  {
+                    "field": "project",
+                    "question": [
+                      "松镜项目"
+                    ],
+                    "source": [
+                      "松镜项目"
+                    ],
+                    "status": "explicit_scope_match"
+                  },
+                  {
+                    "field": "version",
+                    "question": [
+                      "V8版本"
+                    ],
+                    "source": [
+                      "V8版本"
+                    ],
+                    "status": "explicit_scope_match"
+                  },
+                  {
+                    "field": "date",
+                    "question": [
+                      "2026-02"
+                    ],
+                    "source": [
+                      "2026-02"
+                    ],
+                    "status": "explicit_scope_match"
+                  },
+                  {
+                    "field": "namespace",
+                    "question": [],
+                    "source": [],
+                    "status": "not_specified_in_question"
+                  }
+                ],
+                "supplement_fields": [
+                  {
+                    "field": "project",
+                    "question": [
+                      "松镜项目"
+                    ],
+                    "source": [],
+                    "status": "unknown_missing_scope"
+                  },
+                  {
+                    "field": "version",
+                    "question": [
+                      "V8版本"
+                    ],
+                    "source": [],
+                    "status": "unknown_missing_scope"
+                  },
+                  {
+                    "field": "date",
+                    "question": [
+                      "2026-02"
+                    ],
+                    "source": [],
+                    "status": "unknown_missing_scope"
+                  },
+                  {
+                    "field": "namespace",
+                    "question": [],
+                    "source": [],
+                    "status": "not_specified_in_question"
+                  }
+                ]
+              },
+              {
+                "stage": "difference_operand_attempt_refused",
+                "left_source_id": "alpha",
+                "right_source_id": "beta",
+                "reason": "object_not_unique_in_operand_source"
+              },
+              {
+                "stage": "difference_proof",
+                "question_parse": {
+                  "left": "新流程",
+                  "metric": "完整响应耗时中位数",
+                  "right": "旧流程",
+                  "direction": "少",
+                  "unit": "秒"
+                },
+                "left": {
+                  "object": "新流程",
+                  "metric": "完整响应耗时中位数",
+                  "statistic": "中位数",
+                  "value": "6.4",
+                  "unit": "秒",
+                  "source": {
+                    "passage_id": "beta",
+                    "source": "自造/二",
+                    "start": 37,
+                    "end": 45,
+                    "quote": "中位数为6.4秒",
+                    "role": "比较操作数原文"
+                  },
+                  "object_source": {
+                    "passage_id": "beta",
+                    "source": "自造/二",
+                    "start": 24,
+                    "end": 27,
+                    "quote": "新流程",
+                    "role": "问题比较对象"
+                  }
+                },
+                "right": {
+                  "object": "旧流程",
+                  "metric": "完整响应耗时中位数",
+                  "statistic": "中位数",
+                  "value": "9.7",
+                  "unit": "秒",
+                  "source": {
+                    "passage_id": "alpha",
+                    "source": "自造/一",
+                    "start": 49,
+                    "end": 63,
+                    "quote": "完整响应耗时中位数为9.7秒",
+                    "role": "比较操作数原文"
+                  },
+                  "object_source": {
+                    "passage_id": "alpha",
+                    "source": "自造/一",
+                    "start": 33,
+                    "end": 36,
+                    "quote": "旧流程",
+                    "role": "问题比较对象"
+                  }
+                },
+                "comparability": {
+                  "passage_id": "beta",
+                  "source": "自造/二",
+                  "start": 29,
+                  "end": 34,
+                  "quote": "相同17个",
+                  "role": "同一比较集合明示依据"
+                },
+                "operation": "right_minus_left",
+                "result": "3.3",
+                "operands_chosen_without_answer": true
+              }
+            ],
+            "derived_response": null,
+            "requires_independent_original_text_review": true,
+            "reason": "original_answer_not_equal_to_proven_difference"
+          },
+          "ratio_proof": {
+            "run_kind": "offline_ratio_calculation_proposal",
+            "judgment_source": "local_rule",
+            "applicable": false,
+            "proof_established": false,
+            "status": "not_applicable",
+            "trace": [],
+            "proposed_response": null,
+            "answer_changed": false,
+            "not_original_model_response": true,
+            "reason": "question_does_not_request_supported_ratio"
+          },
+          "difference_proof": {
+            "run_kind": "offline_difference_calculation_proposal",
+            "judgment_source": "local_rule",
+            "applicable": true,
+            "status": "established",
+            "proof_established": true,
+            "trace": [
+              {
+                "stage": "question_project_boundary",
+                "audit": {
+                  "status": "resolved",
+                  "question_candidates": [
+                    {
+                      "entity": "松镜项目",
+                      "interpretation": "literal_entity_no_char_removed",
+                      "start": 0,
+                      "end": 4,
+                      "version_position": [
+                        4,
+                        8
+                      ]
+                    }
+                  ],
+                  "body_declarations": [
+                    {
+                      "entity": "松镜项目",
+                      "version": "V8版本",
+                      "date": "2026-02",
+                      "passage_id": "alpha",
+                      "source": "自造/一",
+                      "start": 0,
+                      "end": 20,
+                      "quote": "松镜项目V8版本在2026-02的记录：",
+                      "entity_start": 0,
+                      "entity_end": 4
+                    }
+                  ],
+                  "question_original": "松镜项目V8版本在2026-02同机实验中，新流程的完整响应耗时中位数比旧流程少多少秒？只输出数值。",
+                  "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+                  "missing_fields_not_assumed_equal": true,
+                  "chosen": {
+                    "entity": "松镜项目",
+                    "interpretation": "literal_entity_no_char_removed",
+                    "start": 0,
+                    "end": 4,
+                    "version_position": [
+                      4,
+                      8
+                    ]
+                  },
+                  "supporting_declarations": [
+                    {
+                      "entity": "松镜项目",
+                      "version": "V8版本",
+                      "date": "2026-02",
+                      "passage_id": "alpha",
+                      "source": "自造/一",
+                      "start": 0,
+                      "end": 20,
+                      "quote": "松镜项目V8版本在2026-02的记录：",
+                      "entity_start": 0,
+                      "entity_end": 4
+                    }
+                  ]
+                }
+              },
+              {
+                "stage": "direct_relation_audit",
+                "links": [
+                  {
+                    "supplement_id": "beta",
+                    "target_id": "alpha",
+                    "added": false,
+                    "reference_evidence": [
+                      {
+                        "object_type": "batch",
+                        "object_name": "批次",
+                        "raw_label": "批次",
+                        "code": "Record29",
+                        "start": 0,
+                        "end": 10,
+                        "code_start": 2,
+                        "code_end": 10,
+                        "statement": {
+                          "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；",
+                          "start": 0,
+                          "end": 46
+                        },
+                        "reliable_declaration": false,
+                        "direct_supplement_reference": true,
+                        "mere_reference": false,
+                        "declaration_predicate": null
+                      }
+                    ],
+                    "candidate_target_ids": [
+                      "alpha"
+                    ],
+                    "unknown_scope_fields": [
+                      "project",
+                      "version",
+                      "date",
+                      "namespace"
+                    ],
+                    "semantic_support_verified": false,
+                    "target_declarations": [
+                      {
+                        "object_type": "batch",
+                        "object_name": "批次",
+                        "raw_label": "顺序批次",
+                        "code": "Record29",
+                        "start": 20,
+                        "end": 32,
+                        "code_start": 24,
+                        "code_end": 32,
+                        "statement": {
+                          "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+                          "start": 0,
+                          "end": 64
+                        },
+                        "reliable_declaration": true,
+                        "direct_supplement_reference": false,
+                        "mere_reference": false,
+                        "declaration_predicate": {
+                          "text": "的旧流程处理",
+                          "start": 32,
+                          "end": 38
+                        }
+                      }
+                    ],
+                    "reason": "unique_reliable_direct_reference",
+                    "object_labels_equal": true,
+                    "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+                    "completion_reason": "already_selected"
+                  }
+                ]
+              },
+              {
+                "stage": "pair_scope",
+                "main": "alpha",
+                "supplement": "beta",
+                "main_status": "matched",
+                "supplement_status": "unknown",
+                "main_fields": [
+                  {
+                    "field": "project",
+                    "question": [
+                      "松镜项目"
+                    ],
+                    "source": [
+                      "松镜项目"
+                    ],
+                    "status": "explicit_scope_match"
+                  },
+                  {
+                    "field": "version",
+                    "question": [
+                      "V8版本"
+                    ],
+                    "source": [
+                      "V8版本"
+                    ],
+                    "status": "explicit_scope_match"
+                  },
+                  {
+                    "field": "date",
+                    "question": [
+                      "2026-02"
+                    ],
+                    "source": [
+                      "2026-02"
+                    ],
+                    "status": "explicit_scope_match"
+                  },
+                  {
+                    "field": "namespace",
+                    "question": [],
+                    "source": [],
+                    "status": "not_specified_in_question"
+                  }
+                ],
+                "supplement_fields": [
+                  {
+                    "field": "project",
+                    "question": [
+                      "松镜项目"
+                    ],
+                    "source": [],
+                    "status": "unknown_missing_scope"
+                  },
+                  {
+                    "field": "version",
+                    "question": [
+                      "V8版本"
+                    ],
+                    "source": [],
+                    "status": "unknown_missing_scope"
+                  },
+                  {
+                    "field": "date",
+                    "question": [
+                      "2026-02"
+                    ],
+                    "source": [],
+                    "status": "unknown_missing_scope"
+                  },
+                  {
+                    "field": "namespace",
+                    "question": [],
+                    "source": [],
+                    "status": "not_specified_in_question"
+                  }
+                ]
+              },
+              {
+                "stage": "difference_operand_attempt_refused",
+                "left_source_id": "alpha",
+                "right_source_id": "beta",
+                "reason": "object_not_unique_in_operand_source"
+              },
+              {
+                "stage": "difference_proof",
+                "question_parse": {
+                  "left": "新流程",
+                  "metric": "完整响应耗时中位数",
+                  "right": "旧流程",
+                  "direction": "少",
+                  "unit": "秒"
+                },
+                "left": {
+                  "object": "新流程",
+                  "metric": "完整响应耗时中位数",
+                  "statistic": "中位数",
+                  "value": "6.4",
+                  "unit": "秒",
+                  "source": {
+                    "passage_id": "beta",
+                    "source": "自造/二",
+                    "start": 37,
+                    "end": 45,
+                    "quote": "中位数为6.4秒",
+                    "role": "比较操作数原文"
+                  },
+                  "object_source": {
+                    "passage_id": "beta",
+                    "source": "自造/二",
+                    "start": 24,
+                    "end": 27,
+                    "quote": "新流程",
+                    "role": "问题比较对象"
+                  }
+                },
+                "right": {
+                  "object": "旧流程",
+                  "metric": "完整响应耗时中位数",
+                  "statistic": "中位数",
+                  "value": "9.7",
+                  "unit": "秒",
+                  "source": {
+                    "passage_id": "alpha",
+                    "source": "自造/一",
+                    "start": 49,
+                    "end": 63,
+                    "quote": "完整响应耗时中位数为9.7秒",
+                    "role": "比较操作数原文"
+                  },
+                  "object_source": {
+                    "passage_id": "alpha",
+                    "source": "自造/一",
+                    "start": 33,
+                    "end": 36,
+                    "quote": "旧流程",
+                    "role": "问题比较对象"
+                  }
+                },
+                "comparability": {
+                  "passage_id": "beta",
+                  "source": "自造/二",
+                  "start": 29,
+                  "end": 34,
+                  "quote": "相同17个",
+                  "role": "同一比较集合明示依据"
+                },
+                "operation": "right_minus_left",
+                "result": "3.3",
+                "operands_chosen_without_answer": true
+              }
+            ],
+            "proposed_response": {
+              "answer": "3.3",
+              "citations": [
+                "alpha",
+                "beta"
+              ]
+            },
+            "answer_changed": true,
+            "not_original_model_response": true,
+            "reason": "original_operands_unit_metric_scope_direction_and_result_independently_calculated",
+            "original_answer": "错误原答",
+            "proposed_response_kind": "local_rule_calculated_new_answer_not_model_output"
+          }
+        },
+        "material_scope": {
+          "model_final_input_passages": [
+            {
+              "id": "alpha",
+              "source": "自造/一",
+              "text": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。"
+            },
+            {
+              "id": "beta",
+              "source": "自造/二",
+              "text": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；两组设置相同。"
+            }
+          ],
+          "audit_only_original_visible_passages": [],
+          "model_final_input_ids": [
+            "alpha",
+            "beta"
+          ],
+          "original_visible_ids": [
+            "alpha",
+            "beta"
+          ],
+          "audit_only_ids": [],
+          "proof_fact_and_derived_citation_ids_subset_of_final_model_input": true,
+          "policy": "额外原始可见资料仅供范围、实体和唯一性审计；不得将其当作最终回答模型输入或派生事实来源。定位阶段输入另存selection_passages。"
+        },
+        "local_rule_processing": [
+          {
+            "judgment_source": "local_rule",
+            "operation": "lexical_ordering",
+            "rule_version": {
+              "file": "student.py",
+              "function": "improve",
+              "sha256": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678"
+            },
+            "elapsed_seconds": 0.0010094000026583672,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.003924299962818623,
+            "relative_end_seconds": 0.00494249991606921,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "selection_id_validation",
+            "rule_version": {
+              "file": "two_step_candidate.py",
+              "function": "validate_selection",
+              "sha256": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524"
+            },
+            "elapsed_seconds": 2.629996743053198e-05,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.004996099974960089,
+            "relative_end_seconds": 0.005027199978940189,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "validated_original_passage_selection",
+            "rule_version": {
+              "file": "two_step_candidate.py",
+              "function": "select_original_passages",
+              "sha256": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524"
+            },
+            "elapsed_seconds": 6.600050255656242e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0050675999373197556,
+            "relative_end_seconds": 0.005079299909994006,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "direct_supplement_relation",
+            "rule_version": {
+              "file": "direct_reference_candidate.py",
+              "function": "complete_passages",
+              "sha256": "6df5c54028ddebd75dde1848e65935c93c2b7c261021a9bcbc875397a90342e2"
+            },
+            "elapsed_seconds": 0.0021802999544888735,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.00506689993198961,
+            "relative_end_seconds": 0.00728039990644902,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "generic_answer_form_constraint",
+            "rule_version": {
+              "file": "answer_form_candidate.py",
+              "function": "constrain_schema",
+              "sha256": "0eec8cb38be8be1e40d4bce75c10313ad20e63b137ebd165bd449053d35d0f78"
+            },
+            "elapsed_seconds": 1.2899981811642647e-05,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.007306699990294874,
+            "relative_end_seconds": 0.007330699940212071,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "type_enum_constraint",
+            "rule_version": {
+              "file": "typed_enum_role_revision.py",
+              "function": "constrain_revised_roles",
+              "sha256": "7afdec584389d2fc1624dee77d16df51fb3cb9d75fd2dca1d2e8646455b4ba81"
+            },
+            "elapsed_seconds": 0.0003589000552892685,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.0073550998931750655,
+            "relative_end_seconds": 0.007772199925966561,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "answer_schema_and_qualification",
+            "rule_version": {
+              "file": "scope_candidate.py",
+              "function": "answer_request",
+              "sha256": "bcf5377f44eeafb2a9e46e2b0f286de3d02a58a8d036aa42485117443f48bd30"
+            },
+            "elapsed_seconds": 0.0004885999951511621,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.007288699969649315,
+            "relative_end_seconds": 0.0078478999203071,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "validated_original_passage_selection",
+            "rule_version": {
+              "file": "two_step_candidate.py",
+              "function": "select_original_passages",
+              "sha256": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524"
+            },
+            "elapsed_seconds": 7.5999414548277855e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.011998299974948168,
+            "relative_end_seconds": 0.012012999970465899,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "direct_supplement_relation",
+            "rule_version": {
+              "file": "direct_reference_candidate.py",
+              "function": "complete_passages",
+              "sha256": "6df5c54028ddebd75dde1848e65935c93c2b7c261021a9bcbc875397a90342e2"
+            },
+            "elapsed_seconds": 0.0001729999203234911,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.011997499968856573,
+            "relative_end_seconds": 0.012201899895444512,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "proof_visible_pair_and_scope_check",
+            "rule_version": {
+              "file": "general_citation_proof.py",
+              "function": "linked_pairs",
+              "sha256": "9ef6e0b9a7c85b7805c9ceb84ffd0793cf6a1cab29a62a19d9131c392ef42a2d"
+            },
+            "elapsed_seconds": 0.004180100047960877,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.00818279990926385,
+            "relative_end_seconds": 0.012392499949783087,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "decimal_difference_proof",
+            "rule_version": {
+              "file": "general_citation_proof.py",
+              "function": "difference",
+              "sha256": "9ef6e0b9a7c85b7805c9ceb84ffd0793cf6a1cab29a62a19d9131c392ef42a2d"
+            },
+            "elapsed_seconds": 0.0050336000276729465,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.008171599940396845,
+            "relative_end_seconds": 0.013209099997766316,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "positive_proof_and_citation_assembly",
+            "rule_version": {
+              "file": "general_citation_proof.py",
+              "function": "prove_answer",
+              "sha256": "9ef6e0b9a7c85b7805c9ceb84ffd0793cf6a1cab29a62a19d9131c392ef42a2d"
+            },
+            "elapsed_seconds": 0.0051374000031501055,
+            "status": "ok",
+            "original_text_positions": [
+              {
+                "passage_id": "alpha",
+                "start": 0,
+                "end": 20,
+                "quote": "松镜项目V8版本在2026-02的记录："
+              },
+              {
+                "passage_id": "beta",
+                "start": 37,
+                "end": 45,
+                "quote": "中位数为6.4秒"
+              },
+              {
+                "passage_id": "beta",
+                "start": 24,
+                "end": 27,
+                "quote": "新流程"
+              },
+              {
+                "passage_id": "alpha",
+                "start": 49,
+                "end": 63,
+                "quote": "完整响应耗时中位数为9.7秒"
+              },
+              {
+                "passage_id": "alpha",
+                "start": 33,
+                "end": 36,
+                "quote": "旧流程"
+              },
+              {
+                "passage_id": "beta",
+                "start": 29,
+                "end": 34,
+                "quote": "相同17个"
+              }
+            ],
+            "relative_start_seconds": 0.008140799938701093,
+            "relative_end_seconds": 0.01339939993340522,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "ratio_calculation_proposal",
+            "rule_version": {
+              "file": "ratio_calculation_proof.py",
+              "function": "propose",
+              "sha256": "3872ab126a4070889fbe8e12f94335cf25ed781828cecdefcc0d49b4c9cda38c"
+            },
+            "elapsed_seconds": 2.1499930880963802e-05,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.01349439995829016,
+            "relative_end_seconds": 0.013521499931812286,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "validated_original_passage_selection",
+            "rule_version": {
+              "file": "two_step_candidate.py",
+              "function": "select_original_passages",
+              "sha256": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524"
+            },
+            "elapsed_seconds": 5.699926987290382e-06,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.013651899993419647,
+            "relative_end_seconds": 0.013664099969901145,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "direct_supplement_relation",
+            "rule_version": {
+              "file": "direct_reference_candidate.py",
+              "function": "complete_passages",
+              "sha256": "6df5c54028ddebd75dde1848e65935c93c2b7c261021a9bcbc875397a90342e2"
+            },
+            "elapsed_seconds": 0.00016169995069503784,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.013651199988089502,
+            "relative_end_seconds": 0.013842799933627248,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "proof_visible_pair_and_scope_check",
+            "rule_version": {
+              "file": "general_citation_proof.py",
+              "function": "linked_pairs",
+              "sha256": "9ef6e0b9a7c85b7805c9ceb84ffd0793cf6a1cab29a62a19d9131c392ef42a2d"
+            },
+            "elapsed_seconds": 0.00043839996214956045,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.01355819997843355,
+            "relative_end_seconds": 0.014027499943040311,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "decimal_difference_proof",
+            "rule_version": {
+              "file": "general_citation_proof.py",
+              "function": "difference",
+              "sha256": "9ef6e0b9a7c85b7805c9ceb84ffd0793cf6a1cab29a62a19d9131c392ef42a2d"
+            },
+            "elapsed_seconds": 0.0005401000380516052,
+            "status": "ok",
+            "original_text_positions": [],
+            "relative_start_seconds": 0.01354749989695847,
+            "relative_end_seconds": 0.014090599957853556,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          },
+          {
+            "judgment_source": "local_rule",
+            "operation": "difference_calculation_proposal",
+            "rule_version": {
+              "file": "difference_calculation_proposal.py",
+              "function": "propose",
+              "sha256": "6ece33997bfdd21fff3260aefeb4c7f16e56e840ae9aa821955178e65ac2ef49"
+            },
+            "elapsed_seconds": 0.0005774999735876918,
+            "status": "ok",
+            "original_text_positions": [
+              {
+                "passage_id": "alpha",
+                "start": 0,
+                "end": 20,
+                "quote": "松镜项目V8版本在2026-02的记录："
+              },
+              {
+                "passage_id": "beta",
+                "start": 37,
+                "end": 45,
+                "quote": "中位数为6.4秒"
+              },
+              {
+                "passage_id": "beta",
+                "start": 24,
+                "end": 27,
+                "quote": "新流程"
+              },
+              {
+                "passage_id": "alpha",
+                "start": 49,
+                "end": 63,
+                "quote": "完整响应耗时中位数为9.7秒"
+              },
+              {
+                "passage_id": "alpha",
+                "start": 33,
+                "end": 36,
+                "quote": "旧流程"
+              },
+              {
+                "passage_id": "beta",
+                "start": 29,
+                "end": 34,
+                "quote": "相同17个"
+              }
+            ],
+            "relative_start_seconds": 0.013528799987398088,
+            "relative_end_seconds": 0.014226499944925308,
+            "position_note": "无直接摘录的格式/ID校验不制造原文证据，完整输入位置另存；资格证据以proof_record逐条件摘录为准。",
+            "timers_may_include_nested_operations": true
+          }
+        ],
+        "local_rule_input_positions": [
+          {
+            "passage_id": "alpha",
+            "start": 0,
+            "end": 64,
+            "quote": "松镜项目V8版本在2026-02的记录：顺序批次Record29的旧流程处理17个固定问题，客户端完整响应耗时中位数为9.7秒。",
+            "role": "完整输入位置非语义支持标签"
+          },
+          {
+            "passage_id": "beta",
+            "start": 0,
+            "end": 53,
+            "quote": "批次Record29的复核补页：Record29新流程处理相同17个问题，中位数为6.4秒；两组设置相同。",
+            "role": "完整输入位置非语义支持标签"
+          }
+        ],
+        "raw_response_preserved": true,
+        "timing_summary": {
+          "selection_seconds": 0,
+          "answer_seconds": 0,
+          "tracked_local_rule_wall_seconds": 0.009805399808101356,
+          "rule_timing_note": "已跟踪规则调用区间取并集，嵌套不重复相加；端到端另含模板容量、日志和其他处理。",
+          "end_to_end_seconds": 0.014542799908667803
+        },
+        "actual_final_output": {
+          "answer": "3.3",
+          "citations": [
+            "alpha",
+            "beta"
+          ]
+        },
+        "actual_final_raw_content": null,
+        "actual_final_output_source": "local_rule_difference_new_answer",
+        "answer_changed_from_model_raw": true,
+        "system_derived_response": {
+          "answer": "3.3",
+          "citations": [
+            "alpha",
+            "beta"
+          ]
+        },
+        "output_policy": "差值或比例证明成立采用独立计算建议；否则引用证明；否则原答。原始、计算和引用组装分别保留。"
+      }
+    }
+  ],
+  "generation_calls": 0
+}

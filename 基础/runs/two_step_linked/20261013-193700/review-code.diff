@@ -1,0 +1,81 @@
+--- /dev/null
++++ 基础/tests/review_two_step_linked.py
+@@ -0,0 +1,78 @@
++"""整轮停止后评价开发结果；答案文件不进入定位或补页代码。"""
++from pathlib import Path
++from datetime import datetime
++import json,hashlib,re,sys
++import two_step_candidate as selection
++folder=Path(sys.argv[1]);repo=Path(__file__).resolve().parents[2];base=repo/'基础'
++load=lambda p:json.loads(p.read_text(encoding='utf-8'))
++runtime=load(folder/'runtime.json');assert runtime['server_stopped']
++assert runtime.get('all_tasks_finished') and not runtime['stopped_on_technical_failure'],'技术停止时不伪造完整配对评价'
++# 只在生成驱动全部结束后读取公开开发答案。
++gold={g['id']:g for g in load(base/'data/dev_answers.json')}
++tasks=load(folder/'task-results.json');records={r['run_id']:r for r in [load(p) for p in folder.glob('run-*.json')]}
++rows=[]
++for task in tasks:
++    cid=task['case_id'];g=gold[cid];original=task['ordered_passages'];by_id={p['id']:p for p in original}
++    required=set(g['evidence_ids'])
++    if cid=='D02':
++        required={p['id'] for p in original if ('夜间组代号' in p['text'] and '只收到HTTP响应和模型显示名' in p['text']) or ('资产、设备遥测与推理节点字段均未被采集' in p['text'])}
++    def coverage(ids):return bool(set(ids)&required) if cid=='D02' else required.issubset(ids)
++    seed=task['selection_validation'];seed_ids=seed['selected_ids'] if seed['valid'] else []
++    for variant in ['old_answer','linked_answer']:
++        branch=task['branches'][variant];used=branch.get('used_passages',[]);used_ids={p['id'] for p in used}
++        content=branch.get('raw_content')
++        try:value=json.loads(content,object_pairs_hook=selection.unique_fields)
++        except (ValueError,TypeError):value=None
++        valid=isinstance(value,dict) and set(value)=={'answer','citations'} and isinstance(value.get('answer'),str) and isinstance(value.get('citations'),list) and all(isinstance(i,str) for i in value['citations'])
++        answer=value['answer'] if valid else None;citations=value['citations'] if valid else []
++        correct=isinstance(answer,str) and answer.strip() in g['aliases']
++        semantic=correct or (cid=='D02' and answer in ['服务端GPU型号未知','未提及具体型号'])
++        ids_exist=all(i in used_ids for i in citations) if valid else False
++        citations_nonempty=bool(citations)
++        necessary=coverage(citations)
++        support=bool(semantic and ids_exist and citations_nonempty and necessary)
++        irrelevant=[i for i in citations if i in by_id and i not in required]
++        full=bool(valid and correct and ids_exist and support and not irrelevant and seed['valid'])
++        input_coverage=coverage(used_ids);selection_coverage=coverage(seed_ids)
++        reasons=[]
++        if not valid:reasons.append('最终格式失败或定位非法未执行回答')
++        if not input_coverage:reasons.append('选取/补全后仍缺必要依据')
++        if input_coverage and not correct:reasons.append('输入证据已覆盖但答案错误：回答阶段问题；D02语义一致与指定答法另列')
++        elif not correct:reasons.append('答案不符合公开开发答案指定答法，不能全部归因定位')
++        if not necessary:reasons.append('引用没有覆盖必要依据')
++        if irrelevant:reasons.append('含无关或范围冲突引用')
++        record=records.get(branch.get('run_id'))
++        rows.append({'case_id':cid,'variant':variant,'selection_run_id':task['selection_run_id'],'selected_ids':seed_ids,
++                     'selection_valid':seed['valid'],'selection_necessary_coverage':selection_coverage,
++                     'added_passages':[p for p in used if p['id'] not in seed_ids],'association_trace':branch.get('association_trace',[]),
++                     'used_ids':[p['id'] for p in used],'input_necessary_evidence_coverage':input_coverage,
++                     'raw_content':content,'answer':answer,'citations':citations,'format_complete':valid,
++                     'answer_correct_specified_form':correct,'semantic_consistent':semantic,
++                     'D02_semantic_consistent':semantic if cid=='D02' else None,'D02_specified_form':correct if cid=='D02' else None,
++                     'citation_ids_exist':ids_exist,'citations_nonempty':citations_nonempty,'necessary_evidence_covered':necessary,
++                     'evidence_supports_actual_answer':support,'irrelevant_citations':irrelevant,'strict_complete_success':full,
++                     'failure_reasons':reasons,'public_answer_reason':g['reason'],
++                     'source_basis':[{'id':p['id'],'source':p['source'],'quote':p['text']} for p in original if p['id'] in required],
++                     'shared_selection_pipeline_seconds':task['shared_selection_pipeline_seconds'],
++                     'organization_seconds':branch.get('organization_seconds'),'answer_pipeline_seconds':branch.get('answer_pipeline_seconds'),
++                     'end_to_end_seconds':branch.get('end_to_end_shared_accounting_seconds'),
++                     'wall_clock_from_shared_start_seconds':branch.get('wall_clock_from_shared_start_seconds'),
++                     'answer_http_seconds':record['elapsed_seconds'] if record else None,
++                     'usage':record.get('usage') if record else None,'finish_reason':record['response']['choices'][0]['finish_reason'] if record else None,
++                     'answer_record_path':str((folder/('run-'+record['run_id']+'.json')).relative_to(repo)).replace('\\','/') if record else None})
++table=[]
++for variant in ['old_answer','linked_answer']:
++    group=[r for r in rows if r['variant']==variant]
++    table.append({'variant':variant,'denominator':4,'format_complete':sum(r['format_complete'] for r in group),'answer_correct':sum(r['answer_correct_specified_form'] for r in group),'strict_complete_success':sum(r['strict_complete_success'] for r in group),'total_end_to_end_seconds':sum(r['end_to_end_seconds'] or 0 for r in group)})
++selected='linked_answer' if (table[1]['strict_complete_success'],table[1]['answer_correct'])>(table[0]['strict_complete_success'],table[0]['answer_correct']) else 'old_answer'
++truncation=re.findall(r'truncated\s*=\s*(\d+)',(folder/'server-log.txt').read_text(encoding='utf-8'))
++assert len(truncation)==runtime['generation_attempts']==len(records) and set(truncation)=={'0'}
++assert len({r['run_id'] for r in records.values()})==len(records)<=12
++assert all(r['request_verified_before_send'] and r['actual_http_request_body']['max_tokens']==256 and all(r['parameter_checks'].values()) and r['total_capacity']<4096 for r in records.values())
++protected=load(folder/'protected-hashes.json');assert all(hashlib.sha256((repo/p).read_bytes()).hexdigest()==h for p,h in protected.items())
++history=load(base/'runs/two_step/dev_r0/summary.json')
++summary={'reviewed_at':datetime.now().astimezone().isoformat(),'review_source':'Codex辅助开发原文评价，未登记本人逐项核验','table':table,'selected':selected,'selection_rule':'严格完整成功优先，其次指定答法答案正确；同分保留更简单旧两步。','generation_calls':len(records),'cumulative_generation_calls':124+len(records),'shared_selection_calls':sum(r['stage']=='shared_selection' for r in records.values()),'answer_calls':sum(r['stage']!='shared_selection' for r in records.values()),'truncation_flags':truncation,'protected_files_unchanged':len(protected),'service_stopped':runtime['server_stopped'],'history_single_step_comparison':{'source':'基础/runs/two_step/dev_r0/summary.json','row':history['table'][0],'limit':'原单步方案仅引用历史结果，非本轮同步对照；不能直接归因补页。'},'post_formal_development':True,'no_follow_up_search_or_calls':True,'timing_limit':'每条流程分别计入共享定位成本，不把共享定位算两次生成；流程时间是分支归属成本，另列实际壁钟跨度。'}
++for name,value in [('semantic-review.json',rows),('summary.json',summary)]:
++    p=folder/name;assert not p.exists();p.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++print(json.dumps(summary,ensure_ascii=False,indent=2))
++for r in rows:print(json.dumps({k:r[k] for k in ['case_id','variant','selected_ids','used_ids','answer','citations','strict_complete_success','input_necessary_evidence_coverage','failure_reasons','end_to_end_seconds']},ensure_ascii=False))

@@ -1,0 +1,15 @@
+{
+  "revised_at": "2026-10-13T21:08:34.313474+08:00",
+  "original_plan": "基础/runs/models/qwen4b_answer_pair/20261013-205033/design-plan.json",
+  "original_before_load_threshold_gib": 5.25,
+  "new_decision": "用户授权在约4.58GiB可用内存下受控尝试加载；取消本次加载的5.25GiB启动门槛，保留原记录。",
+  "reason": "权重已通过锁定大小与SHA校验；先实测加载资源，不把估计当作失败或安全结论。",
+  "scope": "仅加载及health检查，不生成、不执行8次对照。",
+  "service_settings": "原4B权重、llama.cpp b11429、4096、CPU单槽4线程、batch128/ubatch64、关闭思考、上下文移位与预热，原采样数值不变。",
+  "stop_rule": "每0.5秒采样；一次可用物理内存低于1GiB即停止自有服务，不再等待原连续三次规则；分配失败或服务崩溃保存并停止。",
+  "ready_observation_seconds": 20,
+  "limitations": "关闭预热，仅就绪状态，不证明生成阶段峰值可用内存足够。",
+  "generation_calls": 0,
+  "cumulative_generation_calls": 162,
+  "old_stop_records_preserved": true
+}

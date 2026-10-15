@@ -1,0 +1,54 @@
+--- 基础/tests/run_direct_reference_pairs.py
++++ 基础/runs/id_answer_pairs/20261014-144324/run_id_answer_pair.py
+@@ -1,12 +1,15 @@
+ """直接交叉指称候选；只对序列化请求变化的题生成配对。"""
+ from pathlib import Path
++import sys
++sys.path.insert(0,str(Path(__file__).resolve().parents[4]/"基础/tests"))
++sys.path.insert(0,str(Path(__file__).resolve().parents[4]/"基础/starter"))
+ import copy,ctypes,hashlib,json,math,os,re,socket,subprocess,sys,threading,time,uuid
+ import urllib.request,urllib.error
+ import general_candidate as generic
+ from run_formal_round2 import now,load,sha
+ import provider
+ 
+-repo=Path(__file__).resolve().parents[2]
++repo=Path(__file__).resolve().parents[4]
+ base=repo/'基础'
+ folder=Path(sys.argv[1]).resolve()
+ assert not list(folder.glob('run-*.json')) and not (folder/'runtime.json').exists(),'禁止自动重复或续发'
+@@ -28,6 +31,7 @@
+     '基础/tests/run_direct_reference_pairs.py','基础/tests/association_repair_candidate.py','基础/tests/run_formal_round2.py','基础/tests/general_candidate.py','基础/tests/answer_form_candidate.py',
+     '基础/tests/two_step_linked_candidate.py','基础/tests/two_step_candidate.py','基础/runs/improve/linked_r0/student-v2.py',
+     '基础/starter/student.py','基础/starter/provider.py']
++source_names += [(folder/n).relative_to(repo).as_posix() for n in ['run_id_answer_pair.py','system-addition.json','config.answer.json','eight-case-association-recompute.json']]
+ source_hashes={n:sha(repo/n) for n in source_names}
+ for name in source_names:
+     dest=folder/'code-snapshot'/Path(name).name
+@@ -84,6 +88,8 @@
+     for job in plan['order']:
+         row=inputs[job['case_id']];used=row[job['variant']+'_used_passages']
+         messages,conf,rule=generic.answer_request(row['question'],used,config)
++        if job['variant']=='new':
++            messages[0]['content'] += '\n'+load(folder/'system-addition.json')['text']
+         body={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']}
+         raw=service('apply-template',body);prompt=raw['prompt']
+         tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
+@@ -102,7 +108,7 @@
+             assert not pair,'相同请求不得重新生成'
+     for item in reused['items']:
+         assert sha(repo/item['record_path'])==item['record_sha256']
+-    write('freeze.json',{'saved_at':now(),'generation_calls_so_far':0,'frozen':True,'experiment_kind':'post_evaluation_direct_reference_mechanism_pairs','design':design,'execution_plan':plan,'reused_results':reused,'order':plan['order'],
++    write('freeze.json',{'saved_at':now(),'generation_calls_so_far':0,'frozen':True,'experiment_kind':'post_evaluation_id_answer_system_suffix_pairs','design':design,'execution_plan':plan,'reused_results':reused,'order':plan['order'],
+         'config':config,'service_arguments':freeze['service_arguments'],'code_hashes':source_hashes,
+         'data_hashes':freeze['data_hashes'],'model':freeze['model'],'llama_cpp':freeze['llama_cpp'],
+         'actual_schemas':[{'case_id':j['case_id'],'variant':j['variant'],'response_format':j['body']['response_format']} for j in jobs],
+@@ -174,7 +180,7 @@
+     confirmed=[r for r in records if (r.get('usage') or {}).get('completion_tokens',0)>0]
+     summary={'completed_answers':len(confirmed),'generation_dispatches':runtime['generation_dispatches'],
+         'technical_stop':runtime['technical_stop'],'service_stopped':runtime['service_stopped'],
+-        'previous_cumulative':262,'cumulative_confirmed':262+len(confirmed),'planned_generated_answers':plan['planned_generation_calls'],'reused_logical_answers':2*len(reused['items']),
++        'previous_cumulative':284,'cumulative_confirmed':284+len(confirmed),'planned_generated_answers':plan['planned_generation_calls'],'reused_logical_answers':2*len(reused['items']),
+         'unique_run_ids':[r['run_id'] for r in confirmed],'budget_exhausted':sum(r.get('budget_exhausted',False) for r in records),
+         'truncation_true':sum(r.get('truncated') is True for r in records),'truncation_unverified':sum(r.get('truncated')=='not_verified' for r in records)}
+     write('execution-summary.json',summary)

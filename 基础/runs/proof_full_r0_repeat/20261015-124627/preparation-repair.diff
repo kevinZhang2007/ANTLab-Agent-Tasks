@@ -1,0 +1,133 @@
+--- preserved_failed/prepare_proof_full_repeat.py
++++ repaired/prepare_proof_full_repeat_repaired.py
+@@ -6,6 +6,8 @@
+ import json
+ import shutil
+ import sys
++import os
++import traceback
+ from datetime import datetime
+ from pathlib import Path
+ 
+@@ -24,8 +26,10 @@
+     return text.replace(old,new,1)
+ 
+ def main():
++    global active_folder
+     folder=ROOT/'基础/runs/proof_full_r0_repeat'/datetime.now().strftime('%Y%m%d-%H%M%S')
+     folder.mkdir(parents=True,exist_ok=False)
++    active_folder=folder
+     write(folder/'preparation-plan.json',{'saved_at':now(),'kind':'post_evaluation_repeated_test_not_blind',
+         'lineage':SOURCE.relative_to(ROOT).as_posix(),'maximum_main_tasks':8,'maximum_generation_calls':16,
+         'hypothesis':'当前独立完整候选在八题上能否保持原始回答，并仅在可靠快照正向证明成立时派生有依据的引用。',
+@@ -34,6 +38,29 @@
+         'prediction':'快照分支不应改变原始answer；未知、非适用或定位失败不得强行派生。八题质量不预设。',
+         'selection':'全部重新定位，不选历史最佳；质量错误不重试，技术失败立即停止。',
+         'denominator':8,'review_after_all_calls':True,'previous_cumulative':340})
++    # 原汇总未提供逐文件路径，因此建立明确清单；缺字段直接失败，不跳过。
++    variant_names=['variant-01.json','variant-02.json','variant-03.json','variant-04.json','variant-05.json','variant-06.json','variant-07.json','variant-08.json','variant-09.json']
++    regression_names=['test-01.json','test-02.json','test-03.json','test-04.json','test-05.json','test-06.json','test-07.json','test-08.json','test-09.json','test-10.json','test-11.json','test-12.json','test-13.json','test-14.json']
++    assert load(SOURCE/'variant-results.json')['total']==len(variant_names)
++    assert load(PROOF/'offline-check.json')['total']==len(regression_names)
++    fixtures=[]
++    for kind,directory,nameset in [('mechanism_variant',SOURCE,variant_names),('prior_regression',PROOF,regression_names)]:
++        for name in nameset:
++            path=directory/name
++            assert path.is_file() and path.suffix=='.json',str(path)
++            value=load(path);assert isinstance(value,dict),str(path)
++            required={'name','payload','expected_proof','expected_citations'} if kind=='mechanism_variant' else {'name','passages','raw_response','expected_established'}
++            assert required<=value.keys(),(name,required-value.keys())
++            if kind=='mechanism_variant':
++                payload=value['payload'];assert isinstance(payload,dict) and {'question','passages','raw','universe'}<=payload.keys()
++                assert isinstance(payload['question'],str) and isinstance(payload['raw'],str) and isinstance(value['expected_proof'],bool)
++                for key in ['passages','universe']:
++                    assert isinstance(payload[key],list)
++                    assert all(isinstance(p,dict) and all(isinstance(p.get(k),str) for k in ['id','source','text']) for p in payload[key])
++            else:
++                assert isinstance(value['passages'],list) and isinstance(value['raw_response'],str) and isinstance(value['expected_established'],bool)
++            fixtures.append({'kind':kind,'path':path.relative_to(ROOT).as_posix(),'sha256':sha(path),'required_fields':sorted(required),'structure_checked':True})
++    write(folder/'fixture-index.json',{'created_at':now(),'explicit_file_list':fixtures,'summary_files_excluded':['variant-results.json','offline-check.json'],'no_silent_skipping':True})
+     names=['scope_candidate.py','scope_first_occurrences.py','eligibility_proof_checker.py','explicit_state_checker.py',
+         'eligibility_exclusion_candidate.py','typed_enum_role_revision.py','typed_identifier_enum_candidate.py','body_identifier_enum_candidate.py','offline_gate.py']
+     for name in names:shutil.copyfile(SOURCE/name,folder/name)
+@@ -88,14 +115,14 @@
+     proof=mod(folder/'eligibility_proof_checker.py','proof_full_checks')
+     helpers=mod(PROOF/'prepare_eligibility_proof.py','proof_full_positions')
+     checks=[]
+-    for path in sorted(SOURCE.glob('variant-*.json')):
++    for path in [SOURCE/name for name in variant_names]:
+         oldcase=load(path);p=copy.deepcopy(oldcase['payload']);before=copy.deepcopy(p)
+         result=proof.prove_answer(p['question'],p['passages'],p['raw'],p['universe']);helpers.positions(result,p['universe'])
+         passed=result['proof_established']==oldcase['expected_proof'] and p==before
+         if oldcase['expected_proof']:passed=passed and set(result['final_response']['citations'])==set(oldcase['expected_citations']) and result['final_response']['answer']==json.loads(p['raw'])['answer']
+         else:passed=passed and result['final_response'] is None
+         checks.append({'name':oldcase['name'],'passed':passed,'source':path.relative_to(ROOT).as_posix(),'source_sha256':sha(path),'result':result})
+-    for path in sorted(PROOF.glob('test-*.json')):
++    for path in [PROOF/name for name in regression_names]:
+         oldcase=load(path);result=proof.prove_answer('竹岭项目V4版本在2026-04的发布快照是什么？只输出快照编号。',oldcase['passages'],oldcase['raw_response'])
+         helpers.positions(result,oldcase['passages'])
+         checks.append({'name':oldcase['name'],'passed':result['proof_established']==oldcase['expected_established'],'result':result})
+@@ -134,7 +161,62 @@
+     write(folder/'operation-logging-check.json',{'checked_at':now(),'passed':True,'code_sha256':sha(folder/'proof_pipeline_candidate.py'),'checked_event_versions_and_times':True})
+     for name in ['settings.prepared.json','answer.prepared.json','selection.prepared.json']:shutil.copyfile(SOURCE/name,folder/name)
+     write(folder/'execution-plan.prepared.json',{'saved_at':now(),'items':[{'sequence':i,'case_id':f'T{i:02d}','condition':'R0','variant':'improved'} for i in range(1,9)],'generation_limit':16,'fresh_selection':True})
++    # 启动前一次性核查依赖、配置、输入、输出保护与Schema结构；不发送请求。
++    import runner as data_runner
++    settings=load(folder/'settings.prepared.json')
++    jobs=load(folder/'execution-plan.prepared.json')['items']
++    assert len(jobs)==8 and [j['case_id'] for j in jobs]==[f'T{i:02d}' for i in range(1,9)]
++    assert all(j['condition']=='R0' and j['variant']=='improved' for j in jobs)
++    inputs=[]
++    for job in jobs:
++        case,passages,_,_=data_runner.prepare(job['case_id'],'R0','baseline')
++        assert isinstance(case['question'],str) and isinstance(passages,list) and passages
++        assert all(all(isinstance(p.get(k),str) for k in ['id','source','text']) for p in passages)
++        messages,conf,rule=pipeline.answer_request(case['question'],passages,answer)
++        schema=conf['parameters']['response_format']['json_schema']['schema']
++        assert schema['type']=='object' and schema['required']==['answer','citations']
++        assert schema['properties']['answer']['type']=='string' and schema['properties']['citations']['items']['type']=='string'
++        assert [m['role'] for m in messages]==['system','user']
++        inputs.append({'case_id':job['case_id'],'condition':'R0','passage_count':len(passages),'message_structure_checked':True,'schema_structure_checked':True})
++    path_checks=[]
++    for name,expected in {**settings['data_sha256'],**settings['code_sha256']}.items():
++        path=ROOT/name;assert path.is_file() and sha(path)==expected,name
++        path_checks.append({'path':name,'exists':True,'sha256_matches':True})
++    model_root=Path(os.environ['LOCALAPPDATA'])/'ANTLabLocalModel'
++    for path,expected in [(model_root/'models/Qwen3-0.6B-Q8_0.gguf',settings['model']['actual_sha256']),
++        (model_root/'llama-b11429/llama-server.exe',settings['llama_cpp']['executable_sha256'])]:
++        assert path.is_file() and sha(path)==expected,str(path)
++        path_checks.append({'path':str(path).replace(str(model_root),'%LOCALAPPDATA%/ANTLabLocalModel'),'exists':True,'sha256_matches':True})
++    assert answer==load(SOURCE/'answer.prepared.json') and selection==load(SOURCE/'selection.prepared.json')
++    assert selection['parameters']['response_format']['json_schema']['schema']==pipeline.selection.SELECTION_SCHEMA
++    for code in folder.glob('*.py'):ast.parse(code.read_text(encoding='utf-8-sig'))
++    assert not list(folder.glob('run-*.json')) and not (folder/'freeze.json').exists() and not (folder/'runtime.json').exists()
++    parsed=ast.parse(Path(__file__).read_text(encoding='utf-8'))
++    fixture_globs=[node for node in ast.walk(parsed) if isinstance(node,ast.Call) and isinstance(node.func,ast.Attribute)
++        and node.func.attr=='glob' and any(isinstance(arg,ast.Constant) and arg.value=='variant-'+'*.json' for arg in node.args)]
++    assert not fixture_globs and len(fixtures)==23
++    write(folder/'preflight.json',{'checked_at':now(),'passed':True,'returncode':0,'fixture_index':'fixture-index.json','fixture_count':len(fixtures),
++        'input_checks':inputs,'path_hash_checks':path_checks,'configuration_unchanged':True,'schema_structure_and_original_source_checked':True,
++        'native_schema_support':'沿用已验证的相同本机b11429、相同Schema派生实现；此处是结构和来源核查，不冒充新原生语法正反例测试。',
++        'imports_checked':True,'output_directory_new_and_empty_of_runs':True,'offline_failure_gate_exercised':True,
++        'patch_landed':"variant_names显式列表；逐项类型/必需字段断言；不扫描variant通配符，不缺字段跳过。",'generation_calls':0})
++    # 门禁本身读取完整预检结果；失败与运行器之间没有自动继续路径。
++    entry=(folder/'run_proof_full_repeat.py').read_text(encoding='utf-8')
++    entry=patch(entry,"    assert load(folder/'offline-check.json')['passed']","    assert load(folder/'preflight.json')['passed'] and load(folder/'preflight.json')['returncode']==0\n    assert load(folder/'offline-check.json')['passed']")
++    entry=patch(entry,"'execution-plan.prepared.json','scope_candidate.py'","'execution-plan.prepared.json','fixture-index.json','preflight.json','scope_candidate.py'")
++    (folder/'run_proof_full_repeat.py').write_text(entry,encoding='utf-8',newline='\n')
+     shutil.copyfile(Path(__file__),folder/Path(__file__).name)
++    failed_helper=ROOT/'基础/runs/proof_full_r0_repeat/20261015-124043/prepare_proof_full_repeat.py'
++    repair=''.join(difflib.unified_diff(failed_helper.read_text(encoding='utf-8').splitlines(True),Path(__file__).read_text(encoding='utf-8').splitlines(True),
++        fromfile='preserved_failed/prepare_proof_full_repeat.py',tofile='repaired/prepare_proof_full_repeat_repaired.py'))
++    (folder/'preparation-repair.diff').write_text(repair,encoding='utf-8',newline='\n')
+     print(json.dumps({'folder':str(folder),'passed':passed,'mechanism_cases':len(checks),'integration_cases':len(integration),'rule_files_identical':len(identical),'generation_calls':0},ensure_ascii=False))
+ 
+-if __name__=='__main__':main()
++if __name__=='__main__':
++    active_folder=None
++    try:main()
++    except Exception as error:
++        if active_folder is not None:
++            write(active_folder/'technical-stop.json',{'recorded_at':now(),'phase':'preparation','error_type':type(error).__name__,
++                'detail':str(error),'traceback':traceback.format_exc(),'generation_dispatches':0,'service_started':False})
++        raise

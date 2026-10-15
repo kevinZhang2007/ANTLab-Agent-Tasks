@@ -1,0 +1,110 @@
+[
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/common--arg.cpp.txt",
+    "line_start": 2425,
+    "line_end": 2432,
+    "source_text": "        {\"--repack\"},\n        {\"-nr\", \"--no-repack\"},\n        string_format(\"whether to enable weight repacking (default: %s)\", params.no_extra_bufts ? \"disabled\" : \"enabled\"),\n        [](common_params & params, bool value) {\n            params.no_extra_bufts = !value;\n        }\n    ).set_env(\"LLAMA_ARG_REPACK\"));\n    add_opt(common_arg("
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/common--arg.cpp.txt",
+    "line_start": 2689,
+    "line_end": 2710,
+    "source_text": "            add_rpc_devices(value);\n            GGML_UNUSED(params);\n        }\n    ).set_env(\"LLAMA_ARG_RPC\"));\n    add_opt(common_arg(\n        {\"-lm\", \"--load-mode\"}, \"MODE\",\n        \"model loading mode (default: auto)\\n\"\n        \"- auto: mmap, unless a device does not support it\\n\"\n        \"- none: no special loading mode\\n\"\n        \"- mmap: memory-map model (if mmap disabled, slower load but may reduce pageouts if not using mlock)\\n\"\n        \"- mlock: force system to keep model in RAM rather than swapping or compressing\\n\"\n        \"- mmap+mlock: mmap + force system to keep model in RAM rather than swapping or compressing\\n\"\n        \"- dio: use DirectIO if available\\n\",\n        [](common_params & params, const std::string & value) {\n            /**/ if (value == \"auto\")       { params.load_mode = LLAMA_LOAD_MODE_AUTO;       }\n            else if (value == \"none\")       { params.load_mode = LLAMA_LOAD_MODE_NONE;       }\n            else if (value == \"mmap\")       { params.load_mode = LLAMA_LOAD_MODE_MMAP;       }\n            else if (value == \"mlock\")      { params.load_mode = LLAMA_LOAD_MODE_MLOCK;      }\n            else if (value == \"mmap+mlock\") { params.load_mode = LLAMA_LOAD_MODE_MMAP_MLOCK; }\n            else if (value == \"dio\")        { params.load_mode = LLAMA_LOAD_MODE_DIRECT_IO;  }\n            else { throw std::invalid_argument(\"invalid value\"); }\n        }"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/common--common.h.txt",
+    "line_start": 487,
+    "line_end": 491,
+    "source_text": "\n    enum llama_split_mode split_mode = LLAMA_SPLIT_MODE_LAYER; // how to split the model across GPUs\n    enum llama_load_mode  load_mode  = LLAMA_LOAD_MODE_AUTO; // how to load the model\n\n    enum llama_lazy_mode lazy_mode = LLAMA_LAZY_MODE_AUTO; // on-demand reading of tensors marked by the arch"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/common--common.h.txt",
+    "line_start": 585,
+    "line_end": 589,
+    "source_text": "    bool check_tensors     = false; // validate tensor data\n    bool no_op_offload     = false; // globally disable offload host tensor operations to device\n    bool no_extra_bufts    = false; // disable extra buffer types (used for weight repacking)\n    bool no_host           = false; // bypass host buffer allowing extra buffers to be used\n    bool load_mtp          = false; // load MTP/NextN layers"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/common--common.cpp.txt",
+    "line_start": 1358,
+    "line_end": 1373,
+    "source_text": "        cparams.n_samplers = pimpl->samplers_seq_config.size();\n    }\n\n    llama_context * lctx = llama_init_from_model(model, cparams);\n    if (lctx == NULL) {\n        COM_ERR(\"failed to create context with model '%s'\\n\", params.model.path.c_str());\n        return;\n    }\n\n    pimpl->context.reset(lctx);\n\n    set_process_priority(params.cpuparams.priority);\n\n    pimpl->threadpools.init(lctx, params);\n}\n"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/common--common.cpp.txt",
+    "line_start": 1657,
+    "line_end": 1665,
+    "source_text": "    mparams.main_gpu        = params.main_gpu;\n    mparams.split_mode      = params.split_mode;\n    mparams.load_mode       = params.load_mode;\n    mparams.lazy_mode = params.lazy_mode;\n    mparams.tensor_split    = params.tensor_split;\n    mparams.check_tensors   = params.check_tensors;\n    mparams.use_extra_bufts = !params.no_extra_bufts;\n    mparams.no_host         = params.no_host;\n"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/common--common.cpp.txt",
+    "line_start": 1755,
+    "line_end": 1762,
+    "source_text": "void common_threadpools::init(llama_context * ctx, const common_params & params) {\n    GGML_ASSERT(!threadpool);\n    GGML_ASSERT(!threadpool_batch);\n\n    COM_INF(\"llama threadpool init, n_threads = %d\\n\", (int) params.cpuparams.n_threads);\n\n    auto * cpu_dev = ggml_backend_dev_by_type(GGML_BACKEND_DEVICE_TYPE_CPU);\n    if (!cpu_dev) {"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/src--llama-model.cpp.txt",
+    "line_start": 1111,
+    "line_end": 1129,
+    "source_text": "    // add extra buffer types\n    if (use_extra_bufts) {\n        auto * cpu_dev = ggml_backend_dev_by_type(GGML_BACKEND_DEVICE_TYPE_CPU);\n        if (cpu_dev == nullptr) {\n            throw std::runtime_error(format(\"%s: no CPU backend found\", __func__));\n        }\n\n        auto * cpu_reg = ggml_backend_dev_backend_reg(cpu_dev);\n        auto ggml_backend_dev_get_extra_bufts_fn = (ggml_backend_dev_get_extra_bufts_t)\n            ggml_backend_reg_get_proc_address(cpu_reg, \"ggml_backend_dev_get_extra_bufts\");\n        if (ggml_backend_dev_get_extra_bufts_fn) {\n            ggml_backend_buffer_type_t * extra_bufts = ggml_backend_dev_get_extra_bufts_fn(cpu_dev);\n            while (extra_bufts && *extra_bufts) {\n                buft_list.emplace_back(cpu_dev, *extra_bufts);\n                ++extra_bufts;\n            }\n        }\n    }\n"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/src--llama-model.cpp.txt",
+    "line_start": 1501,
+    "line_end": 1522,
+    "source_text": "\nbool llama_model_base::load_tensors(llama_model_loader & ml) {\n    const auto & split_mode   = params.split_mode;\n    const bool use_mlock      = params.load_mode == LLAMA_LOAD_MODE_MLOCK || params.load_mode == LLAMA_LOAD_MODE_MMAP_MLOCK;\n    const auto & tensor_split = params.tensor_split;\n\n    const int n_layer_all = hparams.n_layer_all;\n    const int n_gpu_layers = this->n_gpu_layers();\n\n    const bool use_mmap_buffer = true;\n\n    this->ml = &ml; // to be used by create_tensor() and load_arch_tensors()\n\n    if (ml.use_mmap && params.load_mode == LLAMA_LOAD_MODE_AUTO) {\n        for (const auto & dev : devices) {\n            ggml_backend_dev_props props;\n            ggml_backend_dev_get_props(dev.dev, &props);\n            if (!props.caps.mmap_support) {\n                ml.use_mmap = false;\n                break;\n            }\n        }"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/src--llama-model.cpp.txt",
+    "line_start": 1856,
+    "line_end": 1895,
+    "source_text": "        if ((ml.use_mmap || is_lazy_mapped) && use_mmap_buffer && buffer_from_host_ptr_supported && is_default_buft) {\n            GGML_ASSERT(!ml.no_alloc);\n            for (uint32_t idx = 0; idx < ml.files.size(); idx++) {\n                // only the mmap region containing the tensors in the model is mapped to the backend buffer\n                // this is important for metal with apple silicon: if the entire model could be mapped to a metal buffer,\n                //     then we could just use metal for all layers\n                // this allows using partial offloading when the model size exceeds the metal buffer size, but not the RAM size\n                void * addr = nullptr;\n                size_t first, last; // NOLINT\n                ml.get_mapping_range(&first, &last, &addr, idx, ctx);\n                if (first >= last) {\n                    continue;\n                }\n                const size_t max_size = ggml_get_max_tensor_size(ctx);\n                ggml_backend_buffer_t buf = ggml_backend_dev_buffer_from_host_ptr(dev, (char *) addr + first, last - first, max_size);\n                if (buf == nullptr) {\n                    throw std::runtime_error(format(\"unable to allocate %s buffer\", ggml_backend_buft_name(buft)));\n                }\n                bufs.emplace_back(buf);\n                buf_map.emplace(idx, buf);\n            }\n        } else {\n            ggml_backend_buffer_t buf;\n            if (ml.no_alloc) {\n                buf = ggml_backend_buft_alloc_buffer(buft, /*size =*/ 0); // dummy buffer\n                for (ggml_tensor * t = ggml_get_first_tensor(ctx); t != nullptr; t = ggml_get_next_tensor(ctx, t)) {\n                    t->buffer = buf; // set dummy buffer for weights so that the backend scheduler won't try to allocate them\n                }\n            } else {\n                buf = ggml_backend_alloc_ctx_tensors_from_buft(ctx, buft); // real buffer\n            }\n            if (buf == nullptr) {\n                throw std::runtime_error(format(\"unable to allocate %s buffer\", ggml_backend_buft_name(buft)));\n            }\n            if (use_mlock && ggml_backend_buffer_is_host(buf)) {\n                pimpl->mlock_bufs.emplace_back(new llama_mlock);\n                auto & mlock_buf = pimpl->mlock_bufs.back();\n                mlock_buf->init   (ggml_backend_buffer_get_base(buf));\n                mlock_buf->grow_to(ggml_backend_buffer_get_size(buf));\n            }"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/src--llama-model.cpp.txt",
+    "line_start": 1931,
+    "line_end": 1960,
+    "source_text": "        for (auto & buf: bufs) {\n            LLAMA_LOG_INFO(\"%s: %12s model buffer size = %8.2f MiB\\n\",\n                __func__, ggml_backend_buffer_name(buf.get()), ggml_backend_buffer_get_size(buf.get()) / 1024.0 / 1024.0);\n        }\n    }\n\n    if (ml.no_alloc) {\n        return true;\n    }\n\n    // without mmap, load non-host buffers first: their tensors go through a staging buffer, which is cheapest while the fewest weights are resident\n    if (!ml.use_mmap) {\n        std::stable_partition(ctx_buf_maps.begin(), ctx_buf_maps.end(), [](const auto & ctx_buf_map) {\n            const auto & buf_map = ctx_buf_map.second;\n            return !buf_map.empty() && !ggml_backend_buffer_is_host(buf_map.begin()->second);\n        });\n    }\n\n    // load tensor data\n    for (auto & [ctx, buf_map] : ctx_buf_maps) {\n        if (!ml.load_all_data(ctx, buf_map, use_mlock ? &pimpl->mlock_mmaps : NULL, params.progress_callback, params.progress_callback_user_data)) {\n            return false;\n        }\n    }\n\n    if (use_mmap_buffer) {\n        for (auto & mapping : ml.mappings) {\n            pimpl->mappings.emplace_back(std::move(mapping));\n        }\n    }"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/src--llama-model-loader.cpp.txt",
+    "line_start": 557,
+    "line_end": 561,
+    "source_text": "    tensor_buft_overrides = param_tensor_buft_overrides_p;\n\n    this->use_mmap      = load_mode == LLAMA_LOAD_MODE_MMAP || load_mode == LLAMA_LOAD_MODE_MMAP_MLOCK || load_mode == LLAMA_LOAD_MODE_AUTO;\n    this->use_direct_io = load_mode == LLAMA_LOAD_MODE_DIRECT_IO;\n"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/src--llama-model-loader.cpp.txt",
+    "line_start": 1639,
+    "line_end": 1674,
+    "source_text": "        const bool from_mapping = use_mmap || lazy.has(cur);\n\n        if (from_mapping) {\n            const auto & mapping = mappings.at(weight->idx);\n            ggml_backend_buffer_t buf_mmap = nullptr;\n            if (bufs.count(weight->idx)) {\n                buf_mmap = bufs.at(weight->idx);\n            }\n            uint8_t * data = (uint8_t *) mapping->addr() + weight->offs;\n\n            if (check_tensors) {\n                validation_result.emplace_back(std::async(std::launch::async, [cur, data, n_size] {\n                    return std::make_pair(cur, ggml_validate_row_data(cur->type, data, n_size));\n                }));\n            }\n\n            GGML_ASSERT(buf_mmap || cur->data); // either we have a buffer to allocate the tensor in, or it is already allocated\n            if (buf_mmap && cur->data == nullptr) {\n                ggml_backend_tensor_alloc(buf_mmap, cur, data);\n\n                // locking a lazy tensor would fault all of it in, which is what lazy avoids\n                if (lmlocks && !lazy.has(cur)) {\n                    const auto & lmlock = lmlocks->at(weight->idx);\n                    lmlock->grow_to(weight->offs + n_size);\n                }\n\n                auto & mmap_used = mmaps_used[weight->idx];\n                mmap_used.first  = std::min(mmap_used.first,  weight->offs);\n                mmap_used.second = std::max(mmap_used.second, weight->offs + n_size);\n            } else {\n                ggml_backend_tensor_set(cur, data, 0, n_size);\n            }\n        } else {\n            const auto & file = files.at(weight->idx);\n\n            if (ggml_backend_buffer_is_host(cur->buffer)) {"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/src--llama-model-loader.cpp.txt",
+    "line_start": 1775,
+    "line_end": 1793,
+    "source_text": "    // check if this is the last call and do final cleanup\n    if (size_done >= size_data) {\n        // unmap offloaded tensors and metadata\n        if (use_mmap) {\n            for (uint32_t idx = 0; idx < mappings.size(); idx++) {\n                const auto & mmap_used = mmaps_used.at(idx);\n                auto & mapping = mappings.at(idx);\n                mapping->unmap_fragment(0, mmap_used.first);\n                if (mmap_used.second != 0) {\n                    mapping->unmap_fragment(mmap_used.second, mapping->size());\n                }\n            }\n        }\n        if (progress_callback) {\n            // Even though the model is done loading, we still honor\n            // cancellation since we need to free allocations.\n            return progress_callback(1.0f, progress_callback_user_data);\n        }\n    }"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/ggml--src--ggml-cpu--repack.cpp.txt",
+    "line_start": 5006,
+    "line_end": 5012,
+    "source_text": "    } else if (cur->type == GGML_TYPE_Q4_K) {\n        if (ggml_cpu_has_avx2()) {\n            if (cur->ne[1] % 8 == 0) {\n                return &q4_K_8x8_q8_K;\n            }\n        }\n        if (ggml_cpu_has_neon() && ggml_cpu_has_matmul_int8()) {"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/ggml--src--ggml-cpu--repack.cpp.txt",
+    "line_start": 5148,
+    "line_end": 5179,
+    "source_text": "}\n\nstatic void ggml_backend_cpu_repack_buffer_set_tensor(ggml_backend_buffer_t buffer, struct ggml_tensor * tensor,\n                                                       const void * data, size_t offset, size_t size) {\n    GGML_ASSERT(offset == 0);\n    GGML_ASSERT(size == ggml_nbytes(tensor));\n\n    auto tensor_traits = (ggml::cpu::repack::tensor_traits_base *) tensor->extra;\n    auto OK            = tensor_traits->repack(tensor, data, size);\n\n    GGML_ASSERT(OK == 0);\n    GGML_UNUSED(buffer);\n}\n\nstatic const char * ggml_backend_cpu_repack_buffer_type_get_name(ggml_backend_buffer_type_t buft) {\n    return \"CPU_REPACK\";\n\n    GGML_UNUSED(buft);\n}\n\nstatic ggml_backend_buffer_t ggml_backend_cpu_repack_buffer_type_alloc_buffer(ggml_backend_buffer_type_t buft, size_t size) {\n    ggml_backend_buffer_t buffer = ggml_backend_buft_alloc_buffer(ggml_backend_cpu_buffer_type(), size);\n\n    if (buffer == nullptr) {\n        return nullptr;\n    }\n\n    buffer->buft              = buft;\n    buffer->iface.init_tensor = ggml_backend_cpu_repack_buffer_init_tensor;\n    buffer->iface.set_tensor  = ggml_backend_cpu_repack_buffer_set_tensor;\n    buffer->iface.get_tensor  = nullptr;\n    buffer->iface.cpy_tensor  = nullptr;"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/ggml--src--ggml-cpu--repack.cpp.txt",
+    "line_start": 5194,
+    "line_end": 5208,
+    "source_text": "                (ggml_n_dims(op->src[0]) == 2) &&\n                op->src[0]->buffer->buft == ggml_backend_cpu_repack_buffer_type() &&\n                ggml_repack_get_optimal_repack_type(op->src[0])\n                ) {\n            if (op->src[1]->buffer && !ggml_backend_buft_is_host(op->src[1]->buffer->buft)) {\n                return false;\n            }\n            if (op->src[1]->type == GGML_TYPE_F32) {\n                return true;\n            }\n            //if (op->src[1]->type == GGML_TYPE_Q8_0) {\n            //    return true;\n            //}\n            // may be possible if Q8_0 packed...\n        } else if (op->op == GGML_OP_MUL_MAT_ID"
+  },
+  {
+    "file": "基础/runs/models/qwen4b_memory_diagnosis/20261014-142426/tools--server--server-context.cpp.txt",
+    "line_start": 1380,
+    "line_end": 1388,
+    "source_text": "        }\n\n        // setup slots\n        SRV_INF(\"initializing, n_slots = %d, n_ctx_slot = %d, kv_unified = '%s'\\n\",\n                params_base.n_parallel, n_ctx_slot(), params_base.kv_unified ? \"true\" : \"false\");\n\n        // initialize slots\n        for (int i = 0; i < params_base.n_parallel; i++) {\n            slots.emplace_back();"
+  }
+]

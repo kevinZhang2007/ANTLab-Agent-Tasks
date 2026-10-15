@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-15T21:15:39.517817+08:00",
+  "entry": "reproduce_final.py",
+  "entry_sha256": "831c388fc9fea8f2f59f35c6c03fb32eb5e528892f474329299585b18442a4d3",
+  "arguments": [
+    "--output",
+    "基础/runs/final_reproduction/new-run",
+    "--verify-only"
+  ],
+  "first_check": {
+    "exit_code": 1,
+    "stage": "offline_path_verification",
+    "error_type": "FileNotFoundError",
+    "cause": "沙箱把LOCALAPPDATA重定向到sandbox包的AC目录，该目录没有模型；未启动服务、未调用模型。",
+    "original_error_path": "%LOCALAPPDATA%(sandbox)/ANTLabLocalModel/models/Qwen3-0.6B-Q8_0.gguf"
+  },
+  "second_check": {
+    "environment": "经授权在正常用户环境只读核对真实LOCALAPPDATA",
+    "exit_code": 0,
+    "verified": true,
+    "source_freeze_sha256": "86abf8e8732593e2244a43d9c46f2da4f83febe440f61e12dcf18e92f15287d7",
+    "generation_calls": 0
+  },
+  "full_reproduction_command_not_executed": true,
+  "note": "复现包装器只验证了只读分支；底层run_bounded_round.py已实际完成第五轮24次。未来执行不带verify-only会启动服务并新增最多24次，应先另获授权。"
+}

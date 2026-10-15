@@ -1,0 +1,1147 @@
+{
+  "checked_at": "2026-10-14T17:42:24.192120+08:00",
+  "passed": true,
+  "tests": [
+    {
+      "name": "review_and_batch_non_target",
+      "text": "评审AB12记录结果。批次AB12的补页。快照CD34通过。",
+      "expected_excluded": [
+        "AB12"
+      ],
+      "expected_kept": [
+        "CD34"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "CD34"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "AB12",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "AB12",
+            "start": 13,
+            "end": 17
+          },
+          {
+            "passage_index": 0,
+            "value": "CD34",
+            "start": 23,
+            "end": 27
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "AB12",
+          "CD34"
+        ],
+        "decisions": [
+          {
+            "value": "AB12",
+            "excluded": true,
+            "reason": "all_reliable_roles_explicitly_non_target",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "AB12",
+                "category": "business",
+                "object_type": "review",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "评审AB12记录结果。",
+                "recognition_start": 0,
+                "recognition_end": 11,
+                "extractor_evidence": {
+                  "object_type": "review",
+                  "object_name": "评审",
+                  "raw_label": "评审",
+                  "code": "AB12",
+                  "start": 0,
+                  "end": 6,
+                  "code_start": 2,
+                  "code_end": 6,
+                  "statement": {
+                    "text": "评审AB12记录结果。",
+                    "start": 0,
+                    "end": 11
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "记录",
+                    "start": 6,
+                    "end": 8
+                  }
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              },
+              {
+                "value": "AB12",
+                "category": "business",
+                "object_type": "batch",
+                "passage_index": 0,
+                "start": 13,
+                "end": 17,
+                "recognition_text": "批次AB12的补页。",
+                "recognition_start": 11,
+                "recognition_end": 21,
+                "extractor_evidence": {
+                  "object_type": "batch",
+                  "object_name": "批次",
+                  "raw_label": "批次",
+                  "code": "AB12",
+                  "start": 11,
+                  "end": 17,
+                  "code_start": 13,
+                  "code_end": 17,
+                  "statement": {
+                    "text": "批次AB12的补页。",
+                    "start": 11,
+                    "end": 21
+                  },
+                  "reliable_declaration": false,
+                  "direct_supplement_reference": true,
+                  "mere_reference": false,
+                  "declaration_predicate": null
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              }
+            ],
+            "semantic_conflicts": []
+          },
+          {
+            "value": "CD34",
+            "excluded": false,
+            "reason": "target_role_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "CD34",
+                "category": "other",
+                "object_type": "快照",
+                "passage_index": 0,
+                "start": 23,
+                "end": 27,
+                "recognition_text": "快照CD34",
+                "recognition_start": 21,
+                "recognition_end": 27,
+                "basis": "明确其他角色只用于保留/冲突检查，不用于排除。"
+              }
+            ],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "business_and_snapshot",
+      "text": "评审EF56记录结果。快照EF56通过。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "EF56"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "EF56"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "EF56",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "EF56",
+            "start": 13,
+            "end": 17
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "EF56"
+        ],
+        "decisions": [
+          {
+            "value": "EF56",
+            "excluded": false,
+            "reason": "target_role_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "EF56",
+                "category": "business",
+                "object_type": "review",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "评审EF56记录结果。",
+                "recognition_start": 0,
+                "recognition_end": 11,
+                "extractor_evidence": {
+                  "object_type": "review",
+                  "object_name": "评审",
+                  "raw_label": "评审",
+                  "code": "EF56",
+                  "start": 0,
+                  "end": 6,
+                  "code_start": 2,
+                  "code_end": 6,
+                  "statement": {
+                    "text": "评审EF56记录结果。",
+                    "start": 0,
+                    "end": 11
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "记录",
+                    "start": 6,
+                    "end": 8
+                  }
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              },
+              {
+                "value": "EF56",
+                "category": "other",
+                "object_type": "快照",
+                "passage_index": 0,
+                "start": 13,
+                "end": 17,
+                "recognition_text": "快照EF56",
+                "recognition_start": 11,
+                "recognition_end": 17,
+                "basis": "明确其他角色只用于保留/冲突检查，不用于排除。"
+              }
+            ],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "version_and_snapshot",
+      "text": "版本GH78。快照GH78通过。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "GH78"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "GH78"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "GH78",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "GH78",
+            "start": 9,
+            "end": 13
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "GH78"
+        ],
+        "decisions": [
+          {
+            "value": "GH78",
+            "excluded": false,
+            "reason": "target_role_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "GH78",
+                "category": "version",
+                "object_type": "version",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "版本GH78",
+                "recognition_start": 0,
+                "recognition_end": 6,
+                "basis": "正文明确版本标签，不依据编号前缀。"
+              },
+              {
+                "value": "GH78",
+                "category": "other",
+                "object_type": "快照",
+                "passage_index": 0,
+                "start": 9,
+                "end": 13,
+                "recognition_text": "快照GH78",
+                "recognition_start": 7,
+                "recognition_end": 13,
+                "basis": "明确其他角色只用于保留/冲突检查，不用于排除。"
+              }
+            ],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "unknown_role",
+      "text": "编号JK90用于本次发布。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "JK90"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "JK90"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "JK90",
+            "start": 2,
+            "end": 6
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "JK90"
+        ],
+        "decisions": [
+          {
+            "value": "JK90",
+            "excluded": false,
+            "reason": "unknown_role_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "JK90",
+                "category": "unknown",
+                "object_type": "编号",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "编号JK90",
+                "recognition_start": 0,
+                "recognition_end": 6,
+                "basis": "只声明泛称对象/记录/编号，不能可靠区分目标类型。"
+              }
+            ],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "business_plus_unknown",
+      "text": "评审LM11记录结果。对象LM11用于本次发布。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "LM11"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "LM11"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "LM11",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "LM11",
+            "start": 13,
+            "end": 17
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "LM11"
+        ],
+        "decisions": [
+          {
+            "value": "LM11",
+            "excluded": false,
+            "reason": "unknown_role_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "LM11",
+                "category": "business",
+                "object_type": "review",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "评审LM11记录结果。",
+                "recognition_start": 0,
+                "recognition_end": 11,
+                "extractor_evidence": {
+                  "object_type": "review",
+                  "object_name": "评审",
+                  "raw_label": "评审",
+                  "code": "LM11",
+                  "start": 0,
+                  "end": 6,
+                  "code_start": 2,
+                  "code_end": 6,
+                  "statement": {
+                    "text": "评审LM11记录结果。",
+                    "start": 0,
+                    "end": 11
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "记录",
+                    "start": 6,
+                    "end": 8
+                  }
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              },
+              {
+                "value": "LM11",
+                "category": "unknown",
+                "object_type": "对象",
+                "passage_index": 0,
+                "start": 13,
+                "end": 17,
+                "recognition_text": "对象LM11",
+                "recognition_start": 11,
+                "recognition_end": 17,
+                "basis": "只声明泛称对象/记录/编号，不能可靠区分目标类型。"
+              }
+            ],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "missing_declaration",
+      "text": "提及复核表NP22，但未提供对象声明。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "NP22"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "NP22"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "NP22",
+            "start": 5,
+            "end": 9
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "NP22"
+        ],
+        "decisions": [
+          {
+            "value": "NP22",
+            "excluded": false,
+            "reason": "unknown_role_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "NP22",
+                "category": "unknown",
+                "object_type": "table",
+                "passage_index": 0,
+                "start": 5,
+                "end": 9,
+                "recognition_text": "提及复核表NP22，但未提供对象声明。",
+                "recognition_start": 0,
+                "recognition_end": 19,
+                "basis": "业务标签提及未形成现有提取器认可的可靠声明或直接补充指称。"
+              }
+            ],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "different_prefixes",
+      "text": "评审ZX31记录结果。批次ZX31的补页。版本MN42。快照UV53通过。",
+      "expected_excluded": [
+        "ZX31",
+        "MN42"
+      ],
+      "expected_kept": [
+        "UV53"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "UV53"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "ZX31",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "ZX31",
+            "start": 13,
+            "end": 17
+          },
+          {
+            "passage_index": 0,
+            "value": "MN42",
+            "start": 23,
+            "end": 27
+          },
+          {
+            "passage_index": 0,
+            "value": "UV53",
+            "start": 30,
+            "end": 34
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "ZX31",
+          "MN42",
+          "UV53"
+        ],
+        "decisions": [
+          {
+            "value": "ZX31",
+            "excluded": true,
+            "reason": "all_reliable_roles_explicitly_non_target",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "ZX31",
+                "category": "business",
+                "object_type": "review",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "评审ZX31记录结果。",
+                "recognition_start": 0,
+                "recognition_end": 11,
+                "extractor_evidence": {
+                  "object_type": "review",
+                  "object_name": "评审",
+                  "raw_label": "评审",
+                  "code": "ZX31",
+                  "start": 0,
+                  "end": 6,
+                  "code_start": 2,
+                  "code_end": 6,
+                  "statement": {
+                    "text": "评审ZX31记录结果。",
+                    "start": 0,
+                    "end": 11
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "记录",
+                    "start": 6,
+                    "end": 8
+                  }
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              },
+              {
+                "value": "ZX31",
+                "category": "business",
+                "object_type": "batch",
+                "passage_index": 0,
+                "start": 13,
+                "end": 17,
+                "recognition_text": "批次ZX31的补页。",
+                "recognition_start": 11,
+                "recognition_end": 21,
+                "extractor_evidence": {
+                  "object_type": "batch",
+                  "object_name": "批次",
+                  "raw_label": "批次",
+                  "code": "ZX31",
+                  "start": 11,
+                  "end": 17,
+                  "code_start": 13,
+                  "code_end": 17,
+                  "statement": {
+                    "text": "批次ZX31的补页。",
+                    "start": 11,
+                    "end": 21
+                  },
+                  "reliable_declaration": false,
+                  "direct_supplement_reference": true,
+                  "mere_reference": false,
+                  "declaration_predicate": null
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              }
+            ],
+            "semantic_conflicts": []
+          },
+          {
+            "value": "MN42",
+            "excluded": true,
+            "reason": "all_reliable_roles_explicitly_non_target",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "MN42",
+                "category": "version",
+                "object_type": "version",
+                "passage_index": 0,
+                "start": 23,
+                "end": 27,
+                "recognition_text": "版本MN42",
+                "recognition_start": 21,
+                "recognition_end": 27,
+                "basis": "正文明确版本标签，不依据编号前缀。"
+              }
+            ],
+            "semantic_conflicts": []
+          },
+          {
+            "value": "UV53",
+            "excluded": false,
+            "reason": "target_role_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "UV53",
+                "category": "other",
+                "object_type": "快照",
+                "passage_index": 0,
+                "start": 30,
+                "end": 34,
+                "recognition_text": "快照UV53",
+                "recognition_start": 28,
+                "recognition_end": 34,
+                "basis": "明确其他角色只用于保留/冲突检查，不用于排除。"
+              }
+            ],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "remapped",
+      "text": "评审BC61记录结果。批次BC61的补页。版本DE72。快照FG83通过。",
+      "expected_excluded": [
+        "BC61",
+        "DE72"
+      ],
+      "expected_kept": [
+        "FG83"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "FG83"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "BC61",
+            "start": 2,
+            "end": 6
+          },
+          {
+            "passage_index": 0,
+            "value": "BC61",
+            "start": 13,
+            "end": 17
+          },
+          {
+            "passage_index": 0,
+            "value": "DE72",
+            "start": 23,
+            "end": 27
+          },
+          {
+            "passage_index": 0,
+            "value": "FG83",
+            "start": 30,
+            "end": 34
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "BC61",
+          "DE72",
+          "FG83"
+        ],
+        "decisions": [
+          {
+            "value": "BC61",
+            "excluded": true,
+            "reason": "all_reliable_roles_explicitly_non_target",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "BC61",
+                "category": "business",
+                "object_type": "review",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "评审BC61记录结果。",
+                "recognition_start": 0,
+                "recognition_end": 11,
+                "extractor_evidence": {
+                  "object_type": "review",
+                  "object_name": "评审",
+                  "raw_label": "评审",
+                  "code": "BC61",
+                  "start": 0,
+                  "end": 6,
+                  "code_start": 2,
+                  "code_end": 6,
+                  "statement": {
+                    "text": "评审BC61记录结果。",
+                    "start": 0,
+                    "end": 11
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "记录",
+                    "start": 6,
+                    "end": 8
+                  }
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              },
+              {
+                "value": "BC61",
+                "category": "business",
+                "object_type": "batch",
+                "passage_index": 0,
+                "start": 13,
+                "end": 17,
+                "recognition_text": "批次BC61的补页。",
+                "recognition_start": 11,
+                "recognition_end": 21,
+                "extractor_evidence": {
+                  "object_type": "batch",
+                  "object_name": "批次",
+                  "raw_label": "批次",
+                  "code": "BC61",
+                  "start": 11,
+                  "end": 17,
+                  "code_start": 13,
+                  "code_end": 17,
+                  "statement": {
+                    "text": "批次BC61的补页。",
+                    "start": 11,
+                    "end": 21
+                  },
+                  "reliable_declaration": false,
+                  "direct_supplement_reference": true,
+                  "mere_reference": false,
+                  "declaration_predicate": null
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              }
+            ],
+            "semantic_conflicts": []
+          },
+          {
+            "value": "DE72",
+            "excluded": true,
+            "reason": "all_reliable_roles_explicitly_non_target",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "DE72",
+                "category": "version",
+                "object_type": "version",
+                "passage_index": 0,
+                "start": 23,
+                "end": 27,
+                "recognition_text": "版本DE72",
+                "recognition_start": 21,
+                "recognition_end": 27,
+                "basis": "正文明确版本标签，不依据编号前缀。"
+              }
+            ],
+            "semantic_conflicts": []
+          },
+          {
+            "value": "FG83",
+            "excluded": false,
+            "reason": "target_role_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "FG83",
+                "category": "other",
+                "object_type": "快照",
+                "passage_index": 0,
+                "start": 30,
+                "end": 34,
+                "recognition_text": "快照FG83",
+                "recognition_start": 28,
+                "recognition_end": 34,
+                "basis": "明确其他角色只用于保留/冲突检查，不用于排除。"
+              }
+            ],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "explicit_conflict",
+      "text": "评审HI94记录结果，编号相同但对象不同。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "HI94"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "HI94"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "HI94",
+            "start": 2,
+            "end": 6
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "HI94"
+        ],
+        "decisions": [
+          {
+            "value": "HI94",
+            "excluded": false,
+            "reason": "explicit_semantic_conflict_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "HI94",
+                "category": "business",
+                "object_type": "review",
+                "passage_index": 0,
+                "start": 2,
+                "end": 6,
+                "recognition_text": "评审HI94记录结果，编号相同但对象不同。",
+                "recognition_start": 0,
+                "recognition_end": 21,
+                "extractor_evidence": {
+                  "object_type": "review",
+                  "object_name": "评审",
+                  "raw_label": "评审",
+                  "code": "HI94",
+                  "start": 0,
+                  "end": 6,
+                  "code_start": 2,
+                  "code_end": 6,
+                  "statement": {
+                    "text": "评审HI94记录结果，编号相同但对象不同。",
+                    "start": 0,
+                    "end": 21
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "记录",
+                    "start": 6,
+                    "end": 8
+                  }
+                },
+                "basis": "现有业务提取器的可靠声明或直接补充指称。"
+              }
+            ],
+            "semantic_conflicts": [
+              {
+                "passage_index": 0,
+                "text": "编号相同但对象不同"
+              }
+            ]
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "no_type",
+      "text": "PQ15已通过。",
+      "expected_excluded": [],
+      "expected_kept": [
+        "PQ15"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "PQ15"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "PQ15",
+            "start": 0,
+            "end": 4
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "PQ15"
+        ],
+        "decisions": [
+          {
+            "value": "PQ15",
+            "excluded": false,
+            "reason": "unknown_role_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "name": "version_label_nested",
+      "text": "版本编号RS26。快照TU37通过。",
+      "expected_excluded": [
+        "RS26"
+      ],
+      "expected_kept": [
+        "TU37"
+      ],
+      "actual": {
+        "enabled": true,
+        "values": [
+          "TU37"
+        ],
+        "occurrences": [
+          {
+            "passage_index": 0,
+            "value": "RS26",
+            "start": 4,
+            "end": 8
+          },
+          {
+            "passage_index": 0,
+            "value": "TU37",
+            "start": 11,
+            "end": 15
+          }
+        ],
+        "position_unit": "Python Unicode字符，start含/end不含",
+        "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+        "old_values": [
+          "RS26",
+          "TU37"
+        ],
+        "decisions": [
+          {
+            "value": "RS26",
+            "excluded": true,
+            "reason": "all_reliable_roles_explicitly_non_target",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "RS26",
+                "category": "version",
+                "object_type": "version",
+                "passage_index": 0,
+                "start": 4,
+                "end": 8,
+                "recognition_text": "版本编号RS26",
+                "recognition_start": 0,
+                "recognition_end": 8,
+                "basis": "正文明确版本标签，不依据编号前缀。"
+              }
+            ],
+            "semantic_conflicts": []
+          },
+          {
+            "value": "TU37",
+            "excluded": false,
+            "reason": "target_role_keep",
+            "target_role": [
+              "other",
+              "快照"
+            ],
+            "roles": [
+              {
+                "value": "TU37",
+                "category": "other",
+                "object_type": "快照",
+                "passage_index": 0,
+                "start": 11,
+                "end": 15,
+                "recognition_text": "快照TU37",
+                "recognition_start": 9,
+                "recognition_end": 15,
+                "basis": "明确其他角色只用于保留/冲突检查，不用于排除。"
+              }
+            ],
+            "semantic_conflicts": []
+          }
+        ],
+        "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+        "target_role": [
+          "other",
+          "快照"
+        ]
+      },
+      "passed": true
+    }
+  ],
+  "renaming_preserves_decisions": true
+}

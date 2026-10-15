@@ -1,0 +1,256 @@
+{
+  "sequence": 2,
+  "case_id": "T08",
+  "variant": "first_clause_reading",
+  "messages": [
+    {
+      "role": "system",
+      "content": "只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。"
+    },
+    {
+      "role": "user",
+      "content": "{\"snapshot\": \"K16\", \"passage_id\": \"P183430\", \"start\": 0, \"end\": 48, \"text\": \"归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；\"}"
+    }
+  ],
+  "config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 128
+    },
+    "timeout_seconds": 180
+  },
+  "used_passages": [
+    {
+      "id": "P183430",
+      "source": "模拟记录/T08/页3",
+      "text": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；"
+    }
+  ],
+  "input_tokens": 156,
+  "schema_rule": {
+    "kind": "explicit_defect_diagnostic",
+    "answer_not_generated": true
+  },
+  "run_id": "bcacf42f-3ffd-4620-b710-4851977fb35c",
+  "started_at": "2026-10-14T18:33:47.077929+08:00",
+  "run_kind": "live_api",
+  "mode": "local",
+  "condition": "R0",
+  "review_stage_only": true,
+  "original_answer_provenance": "historical_replay",
+  "original_passages": [
+    {
+      "id": "P183430",
+      "source": "模拟记录/T08/页3",
+      "text": "归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；"
+    }
+  ],
+  "question": null,
+  "original_response": {},
+  "original_raw_content": "",
+  "source_path": "基础/runs/snapshot_qualification_diagnostic/20261014-175307/source-inputs.json",
+  "source_sha256": "19d9a76c9bb4da552f9b1787437c025a477edbb1bd9ddea9044a2606f89ee2d0",
+  "source_run_id": "historical_character_positions_only",
+  "memory_before": {
+    "time": "2026-10-14T18:33:47.078019+08:00",
+    "available_bytes": 1956708352,
+    "total_bytes": 16785268736
+  },
+  "status": "ok",
+  "generation_dispatched": true,
+  "model_revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+  "weight_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+  "attempt": 1,
+  "retry_of": null,
+  "cache_erase": {
+    "id_slot": 0,
+    "n_erased": 207
+  },
+  "actual_http_request_body": {
+    "model": "Qwen3-0.6B-Q8_0",
+    "messages": [
+      {
+        "role": "system",
+        "content": "只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。"
+      },
+      {
+        "role": "user",
+        "content": "{\"snapshot\": \"K16\", \"passage_id\": \"P183430\", \"start\": 0, \"end\": 48, \"text\": \"归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；\"}"
+      }
+    ],
+    "stream": false,
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 1.5,
+    "seed": 42,
+    "max_tokens": 128
+  },
+  "raw_http_request_body": "{\"model\": \"Qwen3-0.6B-Q8_0\", \"messages\": [{\"role\": \"system\", \"content\": \"只看下面的原文，该候选是否明确存在检查缺陷？\\n返回JSON：\\n{\\\"has_explicit_defect\\\":true或false,\\n \\\"quote\\\":\\\"对应连续原文；没有则为空字符串\\\"}。\\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。\"}, {\"role\": \"user\", \"content\": \"{\\\"snapshot\\\": \\\"K16\\\", \\\"passage_id\\\": \\\"P183430\\\", \\\"start\\\": 0, \\\"end\\\": 48, \\\"text\\\": \\\"归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；\\\"}\"}], \"stream\": false, \"temperature\": 0.7, \"top_p\": 0.8, \"top_k\": 20, \"min_p\": 0, \"presence_penalty\": 1.5, \"seed\": 42, \"max_tokens\": 128}",
+  "elapsed_seconds": 2.7447270000120625,
+  "response": {
+    "choices": [
+      {
+        "finish_reason": "stop",
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"has_explicit_defect\": true, \"quote\": \"归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；\"}"
+        }
+      }
+    ],
+    "created": 1791974029,
+    "model": "Qwen3-0.6B-Q8_0",
+    "system_fingerprint": "b11429-d81235049",
+    "object": "chat.completion",
+    "usage": {
+      "completion_tokens": 54,
+      "prompt_tokens": 156,
+      "total_tokens": 210,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      }
+    },
+    "id": "chatcmpl-8TJXf8OZj0pMb7277R8UYFxetQCIIYm9",
+    "timings": {
+      "cache_n": 0,
+      "prompt_n": 156,
+      "prompt_ms": 1384.158,
+      "prompt_per_token_ms": 8.872807692307692,
+      "prompt_per_second": 112.70389652048394,
+      "predicted_n": 54,
+      "predicted_ms": 1308.611,
+      "predicted_per_token_ms": 24.690773584905664,
+      "predicted_per_second": 40.500958650049554
+    }
+  },
+  "raw_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"has_explicit_defect\\\": true, \\\"quote\\\": \\\"归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；\\\"}\"}}],\"created\":1791974029,\"model\":\"Qwen3-0.6B-Q8_0\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":54,\"prompt_tokens\":156,\"total_tokens\":210,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-8TJXf8OZj0pMb7277R8UYFxetQCIIYm9\",\"timings\":{\"cache_n\":0,\"prompt_n\":156,\"prompt_ms\":1384.158,\"prompt_per_token_ms\":8.872807692307692,\"prompt_per_second\":112.70389652048394,\"predicted_n\":54,\"predicted_ms\":1308.611,\"predicted_per_token_ms\":24.690773584905664,\"predicted_per_second\":40.500958650049554}}",
+  "usage": {
+    "completion_tokens": 54,
+    "prompt_tokens": 156,
+    "total_tokens": 210,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "http_status": 200,
+  "memory_after": {
+    "time": "2026-10-14T18:33:49.873622+08:00",
+    "available_bytes": 1952063488,
+    "total_bytes": 16785268736
+  },
+  "returned_at": "2026-10-14T18:33:49.873690+08:00",
+  "raw_content": "{\"has_explicit_defect\": true, \"quote\": \"归舟项目R6版本在2026-09的记录：复核表GZ69显示K16文本问答通过、区域定位4项偏移；\"}",
+  "finish_reason": "stop",
+  "budget_exhausted": false,
+  "raw_reasoning": null,
+  "id_validation": {
+    "json_object_complete": true,
+    "nonempty_quote_continuous": true,
+    "quote_empty": false,
+    "defect_truth_verified": false
+  },
+  "snapshot_candidates": [
+    {
+      "snapshot": "K16",
+      "sources": []
+    }
+  ],
+  "slot_after": [
+    {
+      "id": 0,
+      "n_ctx": 4096,
+      "speculative": false,
+      "is_processing": false,
+      "id_task": 58,
+      "n_prompt_tokens": 209,
+      "n_prompt_tokens_processed": 0,
+      "n_prompt_tokens_cache": 0,
+      "params": {
+        "seed": 42,
+        "temperature": 0.699999988079071,
+        "dynatemp_range": 0.0,
+        "dynatemp_exponent": 1.0,
+        "top_k": 20,
+        "top_p": 0.800000011920929,
+        "min_p": 0.0,
+        "top_n_sigma": -1.0,
+        "xtc_probability": 0.0,
+        "xtc_threshold": 0.10000000149011612,
+        "typical_p": 1.0,
+        "repeat_last_n": 64,
+        "repeat_penalty": 1.0,
+        "presence_penalty": 1.5,
+        "frequency_penalty": 0.0,
+        "dry_multiplier": 0.0,
+        "dry_base": 1.75,
+        "dry_allowed_length": 2,
+        "dry_penalty_last_n": 64,
+        "mirostat": 0,
+        "mirostat_tau": 5.0,
+        "mirostat_eta": 0.10000000149011612,
+        "adaptive_target": -1.0,
+        "adaptive_decay": 0.8999999761581421,
+        "max_tokens": 128,
+        "n_predict": 128,
+        "n_keep": 0,
+        "n_discard": 0,
+        "ignore_eos": false,
+        "stream": false,
+        "n_probs": 0,
+        "min_keep": 0,
+        "chat_format": "peg-native",
+        "reasoning_format": "deepseek",
+        "reasoning_in_content": false,
+        "generation_prompt": "<|im_start|>assistant\n<think>\n\n</think>\n\n",
+        "samplers": [
+          "penalties",
+          "dry",
+          "top_n_sigma",
+          "top_k",
+          "typ_p",
+          "top_p",
+          "min_p",
+          "xtc",
+          "temperature"
+        ],
+        "speculative.types": "none",
+        "timings_per_token": false,
+        "post_sampling_probs": false,
+        "backend_sampling": false,
+        "lora": []
+      },
+      "next_token": [
+        {
+          "has_next_token": false,
+          "has_new_line": false,
+          "n_remain": -1,
+          "n_decoded": 0
+        }
+      ]
+    }
+  ],
+  "parameter_checks": {
+    "temperature": true,
+    "top_p": true,
+    "top_k": true,
+    "min_p": true,
+    "presence_penalty": true,
+    "seed": true
+  },
+  "parameters_not_echoed": [
+    "response_format",
+    "effective_max_tokens"
+  ],
+  "server_log_segment": "0.04.568.965 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 4355022\r\n0.04.569.278 I slot launch_slot_: id  0 | task 58 | processing task, is_child = 0\r\n0.07.262.073 I slot print_timing: id  0 | task 58 | prompt eval time =    1384.16 ms /   156 tokens (    8.87 ms per token,   112.70 tokens per second)\r\n0.07.262.082 I slot print_timing: id  0 | task 58 |        eval time =    1308.61 ms /    54 tokens (   24.69 ms per token,    40.50 tokens per second)\r\n0.07.262.083 I slot print_timing: id  0 | task 58 |       total time =    2692.77 ms /   210 tokens\r\n0.07.262.084 I slot print_timing: id  0 | task 58 |    graphs reused =        105\r\n0.07.262.118 I slot      release: id  0 | task 58 | stop processing: n_tokens = 209, truncated = 0\r\n",
+  "truncated": false
+}

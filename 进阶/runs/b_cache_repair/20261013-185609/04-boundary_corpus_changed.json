@@ -1,0 +1,34 @@
+{
+  "scenario": "boundary_corpus_changed",
+  "original_target_order": 32,
+  "fixed_target_order": 34,
+  "original_answer": "请求超时阈值为30秒。",
+  "fixed_answer": "请求超时阈值为30秒。",
+  "original_cache_hit": true,
+  "fixed_cache_hit": false,
+  "original_evidence_ids": [
+    "b01"
+  ],
+  "fixed_evidence_ids": [
+    "b01"
+  ],
+  "original_retrieval_success": false,
+  "fixed_retrieval_success": true,
+  "fixed_checks": {
+    "response_structure": true,
+    "evidence_in_scope": true,
+    "evidence_retrieval_success": true,
+    "expected_evidence_ids": [
+      "b01"
+    ],
+    "current_draft_used": true,
+    "evidence_matches_current_corpus": true,
+    "locator_consistent_with_actual_evidence": true,
+    "locator_valid": true,
+    "request_echo_matches": true,
+    "fixed_cache_disabled": true,
+    "semantic_support_independently_checked": false
+  },
+  "prediction": "只更新同query/scope的证据正文；修复返回新原文，原Engine可能返回旧证据正文。draft不变。",
+  "boundary_passed": true
+}

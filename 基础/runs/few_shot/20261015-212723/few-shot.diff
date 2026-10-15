@@ -1,0 +1,19 @@
+--- frozen/bounded_candidate.py
++++ few_shot/bounded_candidate.py
+@@ -1,5 +1,7 @@
+ """五轮限定实验的通用消息/解码覆盖层；证明和算法沿用已验证候选。"""
+ import copy,json
++from pathlib import Path
++EXAMPLE_APPENDIX=json.loads(Path(__file__).with_name('examples.json').read_text(encoding='utf-8'))['system_appendix']
+ import proof_pipeline_candidate as core
+ student=core.student
+ selection=core.selection
+@@ -19,6 +21,8 @@
+         value=json.loads(messages[1]['content'])
+         messages[1]['content']=blocks(value['question'],value['passages'])
+     if policy.get('short_prompt'):messages[0]['content']=SHORT_PROMPT
++    if policy.get('few_shot'):
++        messages[0]['content']+='\n\n'+EXAMPLE_APPENDIX
+     if 'temperature' in policy:config['parameters']['temperature']=policy['temperature']
+     return messages,config
+ 

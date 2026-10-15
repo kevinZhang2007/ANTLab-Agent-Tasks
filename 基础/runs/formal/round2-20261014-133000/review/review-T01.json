@@ -1,0 +1,434 @@
+{
+  "reviewed_at": "2026-10-14T13:24:21.890245+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+  "basis": {
+    "case_id": "T01",
+    "question_scope": "栖云项目R7，2026-02交付评审QY71；只输出release_snapshot快照编号。",
+    "scope": {
+      "project": "栖云",
+      "version": "R7",
+      "date": "2026-02",
+      "batch": "QY71",
+      "metric": "同一快照完成问答、引用定位、冷启动恢复，且无未关闭定位问题"
+    },
+    "required_evidence": [
+      {
+        "id": "P555495",
+        "quote": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。",
+        "role": "候选快照实际检查情况"
+      },
+      {
+        "id": "P761989",
+        "quote": "批次QY71的复核补页：QY71的release_snapshot规则要求同一快照完成上述三项检查，且不存在未关闭定位问题；评审表按该规则发布。",
+        "role": "签署选择规则"
+      }
+    ],
+    "derivation": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。",
+    "derived_answer": "S24",
+    "answer_form": "仅快照编号",
+    "excluded_evidence": [
+      {
+        "id": "P408739",
+        "reason": "2026-01探索组，时间及用途不同"
+      },
+      {
+        "id": "P564279",
+        "reason": "R6旧版本"
+      },
+      {
+        "id": "P455007",
+        "reason": "岫光项目"
+      },
+      {
+        "id": "P306998",
+        "reason": "压力组不提供交付快照资格"
+      },
+      {
+        "id": "P130348",
+        "reason": "迁移XQ54，非交付QY71"
+      }
+    ],
+    "ambiguities": [],
+    "limits": "S24的通过依据来自枚举检查情况与QY71规则；不是官方答案。缺任一必要段的实际输入须另查可推导性，不能补入全文证据。",
+    "reviewed_at": "2026-10-13T13:32:43.279241+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+    "source": "基础/data/cases.json",
+    "source_sha256": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "derivation_kind": "评测后原文推导，非官方标准答案",
+    "model_answers_read_before_saving": false
+  },
+  "items": [
+    {
+      "case_id": "T01",
+      "condition": "R1",
+      "variant": "baseline",
+      "sequence": 2,
+      "main_task_id": "1d11b1f6-0746-449b-8ad6-757fed7319ba",
+      "end_to_end_seconds": 15.16831410001032,
+      "reviewed_at": "2026-10-14T13:24:21.890085+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"P761989\",\"citations\":[\"P761989\"]}",
+      "answer": "P761989",
+      "citations": [
+        "P761989"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P761989",
+        "P408739",
+        "P564279",
+        "P555495",
+        "P130348",
+        "P455007",
+        "P306998"
+      ],
+      "final_input_ids": [
+        "P761989",
+        "P408739",
+        "P564279",
+        "P555495",
+        "P130348",
+        "P455007",
+        "P306998"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "text": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P761989",
+          "source": "模拟记录/T01/页6",
+          "text": "批次QY71的复核补页：QY71的release_snapshot规则要求同一快照完成上述三项检查，且不存在未关闭定位问题；评审表按该规则发布。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "c789e45a-7910-48eb-b5fd-3d100e5994fa"
+      ],
+      "reasons": {
+        "answer_correct": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。 原始answer='P761989'，未做删单位、去前缀或补引用。 S24仅有条件推导：完成三项明示，但未关闭问题为0未明示；当前响应均不是可支持的S24推导。",
+        "semantic_consistent": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。 原始answer='P761989'，未做删单位、去前缀或补引用。 S24仅有条件推导：完成三项明示，但未关闭问题为0未明示；当前响应均不是可支持的S24推导。",
+        "necessary_coverage": "需要P555495,P761989提供的数据或规则；本次引用P761989。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T01",
+      "condition": "R0",
+      "variant": "baseline",
+      "sequence": 24,
+      "main_task_id": "b1340a13-a114-417f-a0a2-5fe9a1d90cf2",
+      "end_to_end_seconds": 14.521440199925564,
+      "reviewed_at": "2026-10-14T13:24:21.890143+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"P761989\",\"citations\":[\"P761989\"]}",
+      "answer": "P761989",
+      "citations": [
+        "P761989"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P761989",
+        "P555495",
+        "P564279",
+        "P130348",
+        "P408739",
+        "P306998",
+        "P455007"
+      ],
+      "final_input_ids": [
+        "P761989",
+        "P555495",
+        "P564279",
+        "P130348",
+        "P408739",
+        "P306998",
+        "P455007"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "text": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P761989",
+          "source": "模拟记录/T01/页6",
+          "text": "批次QY71的复核补页：QY71的release_snapshot规则要求同一快照完成上述三项检查，且不存在未关闭定位问题；评审表按该规则发布。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "728a0ae9-40a2-4f6a-a3a3-13e5c68bbfd2"
+      ],
+      "reasons": {
+        "answer_correct": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。 原始answer='P761989'，未做删单位、去前缀或补引用。 S24仅有条件推导：完成三项明示，但未关闭问题为0未明示；当前响应均不是可支持的S24推导。",
+        "semantic_consistent": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。 原始answer='P761989'，未做删单位、去前缀或补引用。 S24仅有条件推导：完成三项明示，但未关闭问题为0未明示；当前响应均不是可支持的S24推导。",
+        "necessary_coverage": "需要P555495,P761989提供的数据或规则；本次引用P761989。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T01",
+      "condition": "R2",
+      "variant": "baseline",
+      "sequence": 25,
+      "main_task_id": "f94d2e81-5f24-4cdb-ac4e-415ba39c2fe1",
+      "end_to_end_seconds": 13.683534999960102,
+      "reviewed_at": "2026-10-14T13:24:21.890179+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"S31\",\"citations\":[\"P455007\"]}",
+      "answer": "S31",
+      "citations": [
+        "P455007"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P455007"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P455007",
+        "P564279",
+        "P555495",
+        "P306998",
+        "P761989",
+        "P408739",
+        "P130348"
+      ],
+      "final_input_ids": [
+        "P455007",
+        "P564279",
+        "P555495",
+        "P306998",
+        "P761989",
+        "P408739",
+        "P130348"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "text": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P761989",
+          "source": "模拟记录/T01/页6",
+          "text": "批次QY71的复核补页：QY71的release_snapshot规则要求同一快照完成上述三项检查，且不存在未关闭定位问题；评审表按该规则发布。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P455007",
+          "source": "模拟记录/T01/页1",
+          "text": "岫光项目R7版本在2026-02登记同名指标和批次XQ54，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。 选择表由产品与质量人员共同签署，先检查资格条件，再比较剩余方案。若部分输入在第一次执行时失败，表格仍保留该行。后续的修复记录引用原行号，避免把测试后的改善写回初次结果。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 本组清单由两名核对员独立抽读，意见不一致的项目保留两份初判和仲裁日期。机器生成的建议只在旁列展示，正式签署使用可定位原文、计算口径和原始执行记录。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "5730cbdb-dc1b-4c6a-8517-6a05f55627ee"
+      ],
+      "reasons": {
+        "answer_correct": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。 原始answer='S31'，未做删单位、去前缀或补引用。 S24仅有条件推导：完成三项明示，但未关闭问题为0未明示；当前响应均不是可支持的S24推导。",
+        "semantic_consistent": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。 原始answer='S31'，未做删单位、去前缀或补引用。 S24仅有条件推导：完成三项明示，但未关闭问题为0未明示；当前响应均不是可支持的S24推导。",
+        "necessary_coverage": "需要P555495,P761989提供的数据或规则；本次引用P455007。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [
+          {
+            "id": "P455007",
+            "reason": "岫光项目"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T01",
+      "condition": "R0",
+      "variant": "improved",
+      "sequence": 31,
+      "main_task_id": "d11aedbd-f97c-469b-be48-68d911ad939b",
+      "end_to_end_seconds": 16.49170040001627,
+      "reviewed_at": "2026-10-14T13:24:21.890212+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"P555495\",\"citations\":[\"P555495\"]}",
+      "answer": "P555495",
+      "citations": [
+        "P555495"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P761989",
+        "P555495",
+        "P564279",
+        "P130348",
+        "P408739",
+        "P306998",
+        "P455007"
+      ],
+      "final_input_ids": [
+        "P555495"
+      ],
+      "necessary_input_coverage": false,
+      "final_stage_local_missing_evidence": true,
+      "source_basis": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "text": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        },
+        {
+          "id": "P761989",
+          "source": "模拟记录/T01/页6",
+          "text": "批次QY71的复核补页：QY71的release_snapshot规则要求同一快照完成上述三项检查，且不存在未关闭定位问题；评审表按该规则发布。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": false,
+          "actually_cited": false
+        }
+      ],
+      "run_ids": [
+        "9276b098-2d36-4ebb-be72-bbc012f6f6c3",
+        "ca967701-68b4-4f29-9f15-763243433c86"
+      ],
+      "reasons": {
+        "answer_correct": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。 原始answer='P555495'，未做删单位、去前缀或补引用。 S24仅有条件推导：完成三项明示，但未关闭问题为0未明示；当前响应均不是可支持的S24推导。",
+        "semantic_consistent": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。 原始answer='P555495'，未做删单位、去前缀或补引用。 S24仅有条件推导：完成三项明示，但未关闭问题为0未明示；当前响应均不是可支持的S24推导。",
+        "necessary_coverage": "需要P555495,P761989提供的数据或规则；本次引用P555495。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T01",
+      "condition": "K",
+      "variant": "baseline",
+      "sequence": 32,
+      "main_task_id": "4af6a68c-c1e3-460d-bc2d-d12ae98724cd",
+      "end_to_end_seconds": 4.797331899986602,
+      "reviewed_at": "2026-10-14T13:24:21.890236+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"S19\",\"citations\":[\"P555495\"]}",
+      "answer": "S19",
+      "citations": [
+        "P555495"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P555495",
+        "P130348"
+      ],
+      "final_input_ids": [
+        "P555495",
+        "P130348"
+      ],
+      "necessary_input_coverage": false,
+      "final_stage_local_missing_evidence": true,
+      "source_basis": [
+        {
+          "id": "P555495",
+          "source": "模拟记录/T01/页3",
+          "text": "栖云项目R7版本在2026-02的记录：交付评审QY71记录S23完成问答回归但缺坐标映射；S24完成问答、引用定位及冷启动恢复；S25的定位复核留三项未关闭问题。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "c1e7d5c4-1140-4ae2-93ab-48ba158d5349"
+      ],
+      "reasons": {
+        "answer_correct": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。 原始answer='S19'，未做删单位、去前缀或补引用。 S24仅有条件推导：完成三项明示，但未关闭问题为0未明示；当前响应均不是可支持的S24推导。",
+        "semantic_consistent": "S23缺定位映射，S25有三项未关闭定位问题；S24同时完成三项且未列未关闭问题，符合release_snapshot规则。 原始answer='S19'，未做删单位、去前缀或补引用。 S24仅有条件推导：完成三项明示，但未关闭问题为0未明示；当前响应均不是可支持的S24推导。",
+        "necessary_coverage": "需要P555495,P761989提供的数据或规则；本次引用P555495。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    }
+  ]
+}

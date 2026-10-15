@@ -1,0 +1,67 @@
+{
+  "name": "difference_other_batch_order",
+  "question": "竹岭项目V4版本在2026-04同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+  "passages": [
+    {
+      "id": "source-2",
+      "source": "自造资料/2",
+      "text": "批次Pair93的复核补页：Pair93新链路处理同样40个问题，中位数为8.2秒；两次保持输入顺序。"
+    },
+    {
+      "id": "source-1",
+      "source": "自造资料/1",
+      "text": "竹岭项目V4版本在2026-04的记录：同机顺序批次Trace82的旧链路处理40个固定问题，客户端完整响应耗时中位数为12.5秒。"
+    }
+  ],
+  "raw": "{\"answer\": \"4.3\", \"citations\": []}",
+  "expected": false,
+  "actual": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": false,
+    "proof_status": "refused",
+    "proof_kind": "difference",
+    "trace": [
+      {
+        "stage": "direct_relation_audit",
+        "links": [
+          {
+            "supplement_id": "source-2",
+            "target_id": null,
+            "added": false,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "Pair93",
+                "start": 0,
+                "end": 8,
+                "code_start": 2,
+                "code_end": 8,
+                "statement": {
+                  "text": "批次Pair93的复核补页：Pair93新链路处理同样40个问题，中位数为8.2秒；",
+                  "start": 0,
+                  "end": 42
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [],
+            "unknown_scope_fields": [],
+            "semantic_support_verified": false,
+            "reason": "zero_reliable_targets"
+          }
+        ]
+      }
+    ],
+    "derived_response": null,
+    "requires_independent_original_text_review": true,
+    "reason": "zero_or_multiple_unique_same_scope_visible_pairs"
+  },
+  "passed": true,
+  "checked_at": "2026-10-15T13:01:06.506125+08:00"
+}

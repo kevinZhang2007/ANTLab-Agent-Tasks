@@ -1,0 +1,567 @@
+{
+  "name": "snapshot_unknown_condition_remapped",
+  "branch": "qualification",
+  "question": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+  "passages": [
+    {
+      "id": "new-id-1",
+      "source": "独立自造资料",
+      "text": "批次Archive934的复核补页：Archive934的发布规则要求签章核验、箱体定位和重放恢复三项检查全部通过。"
+    },
+    {
+      "id": "new-id-0",
+      "source": "独立自造资料",
+      "text": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；View719箱体定位9项偏移。"
+    }
+  ],
+  "raw_response": "{\"answer\": \"View613\", \"citations\": []}",
+  "expected_derived_answer": null,
+  "expected_basis": "缺一个必要条件，不把未知当通过。",
+  "audit_universe": null,
+  "actual": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": false,
+    "proof_status": "unknown",
+    "proof_kind": "snapshot",
+    "trace": [],
+    "derived_response": null,
+    "requires_independent_original_text_review": true,
+    "snapshot_proof": {
+      "run_kind": "offline_proof",
+      "judgment_source": "local_rule",
+      "raw_response": "{\"answer\": \"View613\", \"citations\": []}",
+      "proof_established": false,
+      "proof_status": "unknown",
+      "conditions": [
+        {
+          "kind": "required_pass",
+          "name": "签章核验",
+          "status": "pass",
+          "rule": {
+            "passage_id": "new-id-1",
+            "source": "独立自造资料",
+            "start": 35,
+            "end": 57,
+            "quote": "签章核验、箱体定位和重放恢复三项检查全部通过",
+            "role": "发布必检条件"
+          },
+          "defined_check_set": [
+            "签章核验",
+            "箱体定位",
+            "重放恢复"
+          ],
+          "defined_count": 3,
+          "collection_definition_reliable": true,
+          "evidence": [
+            {
+              "passage_id": "new-id-0",
+              "source": "独立自造资料",
+              "start": 50,
+              "end": 56,
+              "quote": "签章核验通过",
+              "role": "获选候选明示检查状态"
+            }
+          ]
+        },
+        {
+          "kind": "required_pass",
+          "name": "箱体定位",
+          "status": "pass",
+          "rule": {
+            "passage_id": "new-id-1",
+            "source": "独立自造资料",
+            "start": 35,
+            "end": 57,
+            "quote": "签章核验、箱体定位和重放恢复三项检查全部通过",
+            "role": "发布必检条件"
+          },
+          "defined_check_set": [
+            "签章核验",
+            "箱体定位",
+            "重放恢复"
+          ],
+          "defined_count": 3,
+          "collection_definition_reliable": true,
+          "evidence": [
+            {
+              "passage_id": "new-id-0",
+              "source": "独立自造资料",
+              "start": 57,
+              "end": 63,
+              "quote": "箱体定位通过",
+              "role": "获选候选明示检查状态"
+            }
+          ]
+        },
+        {
+          "kind": "required_pass",
+          "name": "重放恢复",
+          "status": "unknown",
+          "rule": {
+            "passage_id": "new-id-1",
+            "source": "独立自造资料",
+            "start": 35,
+            "end": 57,
+            "quote": "签章核验、箱体定位和重放恢复三项检查全部通过",
+            "role": "发布必检条件"
+          },
+          "defined_check_set": [
+            "签章核验",
+            "箱体定位",
+            "重放恢复"
+          ],
+          "defined_count": 3,
+          "collection_definition_reliable": true,
+          "evidence": []
+        }
+      ],
+      "final_response": null,
+      "no_exclusion_as_positive_proof": true,
+      "requires_independent_original_text_review": true,
+      "answer_unchanged": "View613",
+      "scope_audit": {
+        "question_scope": {
+          "project": [
+            "绀羽项目"
+          ],
+          "version": [
+            "Edition583版本"
+          ],
+          "date": [
+            "2025-11"
+          ],
+          "namespace": []
+        },
+        "question_project_resolution": {
+          "status": "resolved",
+          "question_candidates": [
+            {
+              "entity": "绀羽项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                16
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "绀羽项目",
+              "version": "Edition583版本",
+              "date": "2025-11",
+              "passage_id": "new-id-0",
+              "source": "独立自造资料",
+              "start": 0,
+              "end": 28,
+              "quote": "绀羽项目Edition583版本在2025-11的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+          "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+          "missing_fields_not_assumed_equal": true,
+          "chosen": {
+            "entity": "绀羽项目",
+            "interpretation": "literal_entity_no_char_removed",
+            "start": 0,
+            "end": 4,
+            "version_position": [
+              4,
+              16
+            ]
+          },
+          "supporting_declarations": [
+            {
+              "entity": "绀羽项目",
+              "version": "Edition583版本",
+              "date": "2025-11",
+              "passage_id": "new-id-0",
+              "source": "独立自造资料",
+              "start": 0,
+              "end": 28,
+              "quote": "绀羽项目Edition583版本在2025-11的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ]
+        },
+        "removed_only_from_rule_analysis": [],
+        "original_model_passages_not_changed": true,
+        "unknown_scope_passages_remain_in_analysis": true
+      },
+      "occurrence_audit": {
+        "View613": {
+          "value": "View613",
+          "all_occurrences": [
+            {
+              "value": "View613",
+              "passage_id": "new-id-0",
+              "passage_index": 1,
+              "source": "独立自造资料",
+              "start": 43,
+              "end": 50,
+              "scope_status": "matched",
+              "scope_fields": [
+                {
+                  "field": "project",
+                  "question": [
+                    "绀羽项目"
+                  ],
+                  "source": [
+                    "绀羽项目"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "version",
+                  "question": [
+                    "Edition583版本"
+                  ],
+                  "source": [
+                    "Edition583版本"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "date",
+                  "question": [
+                    "2025-11"
+                  ],
+                  "source": [
+                    "2025-11"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "namespace",
+                  "question": [],
+                  "source": [],
+                  "status": "not_specified_in_question"
+                }
+              ],
+              "source_scope": {
+                "project": [
+                  "绀羽项目"
+                ],
+                "version": [
+                  "Edition583版本"
+                ],
+                "date": [
+                  "2025-11"
+                ],
+                "namespace": []
+              },
+              "quote": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；",
+              "statement_start": 0,
+              "statement_end": 64,
+              "reliable_declarations": [
+                {
+                  "object_type": "table",
+                  "object_name": "复核表",
+                  "raw_label": "复核表",
+                  "code": "Archive934",
+                  "start": 28,
+                  "end": 41,
+                  "code_start": 31,
+                  "code_end": 41,
+                  "statement": {
+                    "text": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；",
+                    "start": 0,
+                    "end": 64
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "显示",
+                    "start": 41,
+                    "end": 43
+                  }
+                }
+              ],
+              "identity": [
+                [
+                  "table",
+                  "复核表",
+                  "Archive934"
+                ]
+              ],
+              "not_a_competitor": false
+            }
+          ],
+          "target_occurrences": [
+            {
+              "value": "View613",
+              "passage_id": "new-id-0",
+              "passage_index": 1,
+              "source": "独立自造资料",
+              "start": 43,
+              "end": 50,
+              "scope_status": "matched",
+              "scope_fields": [
+                {
+                  "field": "project",
+                  "question": [
+                    "绀羽项目"
+                  ],
+                  "source": [
+                    "绀羽项目"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "version",
+                  "question": [
+                    "Edition583版本"
+                  ],
+                  "source": [
+                    "Edition583版本"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "date",
+                  "question": [
+                    "2025-11"
+                  ],
+                  "source": [
+                    "2025-11"
+                  ],
+                  "status": "explicit_scope_match"
+                },
+                {
+                  "field": "namespace",
+                  "question": [],
+                  "source": [],
+                  "status": "not_specified_in_question"
+                }
+              ],
+              "source_scope": {
+                "project": [
+                  "绀羽项目"
+                ],
+                "version": [
+                  "Edition583版本"
+                ],
+                "date": [
+                  "2025-11"
+                ],
+                "namespace": []
+              },
+              "quote": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；",
+              "statement_start": 0,
+              "statement_end": 64,
+              "reliable_declarations": [
+                {
+                  "object_type": "table",
+                  "object_name": "复核表",
+                  "raw_label": "复核表",
+                  "code": "Archive934",
+                  "start": 28,
+                  "end": 41,
+                  "code_start": 31,
+                  "code_end": 41,
+                  "statement": {
+                    "text": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；",
+                    "start": 0,
+                    "end": 64
+                  },
+                  "reliable_declaration": true,
+                  "direct_supplement_reference": false,
+                  "mere_reference": false,
+                  "declaration_predicate": {
+                    "text": "显示",
+                    "start": 41,
+                    "end": 43
+                  }
+                }
+              ],
+              "identity": [
+                [
+                  "table",
+                  "复核表",
+                  "Archive934"
+                ]
+              ],
+              "not_a_competitor": false
+            }
+          ],
+          "unknown_occurrences": [],
+          "eligible_for_exclusion_check": true,
+          "reason": "single_target_scope_occurrence",
+          "merging_does_not_prove_real_world_identity": true
+        }
+      },
+      "candidate_description": {
+        "passage_id": "new-id-0",
+        "source": "独立自造资料",
+        "start": 0,
+        "end": 64,
+        "quote": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；",
+        "role": "实际获选候选描述"
+      },
+      "explicit_state": {
+        "snapshot": "View613",
+        "passage_index": 1,
+        "passage_id": "new-id-0",
+        "candidate_start": 43,
+        "candidate_end": 50,
+        "start": 0,
+        "end": 64,
+        "quote": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；",
+        "events": [
+          {
+            "status": "explicit_pass",
+            "expression_class": "positive_presence",
+            "rule": "literal_pass_only",
+            "trigger": "通过",
+            "trigger_start": 54,
+            "trigger_end": 56,
+            "description_quote": "签章核验通过",
+            "description_start": 50,
+            "description_end": 56,
+            "negation_scope": null,
+            "quantity_scope": [],
+            "unparsed_quantity_scope": null,
+            "quantity_text": null,
+            "quantity": null,
+            "pass_scope": "stated_local_checks_only",
+            "overall_eligibility_not_inferred": true,
+            "condition_context_not_semantically_parsed": true,
+            "quote": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；",
+            "start": 0,
+            "end": 64
+          },
+          {
+            "status": "explicit_pass",
+            "expression_class": "positive_presence",
+            "rule": "literal_pass_only",
+            "trigger": "通过",
+            "trigger_start": 61,
+            "trigger_end": 63,
+            "description_quote": "箱体定位通过",
+            "description_start": 57,
+            "description_end": 63,
+            "negation_scope": null,
+            "quantity_scope": [],
+            "unparsed_quantity_scope": null,
+            "quantity_text": null,
+            "quantity": null,
+            "pass_scope": "stated_local_checks_only",
+            "overall_eligibility_not_inferred": true,
+            "condition_context_not_semantically_parsed": true,
+            "quote": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；",
+            "start": 0,
+            "end": 64
+          }
+        ],
+        "unparsed_content": [],
+        "qualification_not_checked": true,
+        "unclosed_count_not_defaulted_to_zero": true,
+        "observed_state": "explicit_pass_only"
+      },
+      "rule_relationships": [
+        {
+          "supplement_id": "new-id-1",
+          "target_id": "new-id-0",
+          "added": true,
+          "reference_evidence": [
+            {
+              "object_type": "batch",
+              "object_name": "批次",
+              "raw_label": "批次",
+              "code": "Archive934",
+              "start": 0,
+              "end": 12,
+              "code_start": 2,
+              "code_end": 12,
+              "statement": {
+                "text": "批次Archive934的复核补页：Archive934的发布规则要求签章核验、箱体定位和重放恢复三项检查全部通过。",
+                "start": 0,
+                "end": 58
+              },
+              "reliable_declaration": false,
+              "direct_supplement_reference": true,
+              "mere_reference": false,
+              "declaration_predicate": null
+            }
+          ],
+          "candidate_target_ids": [
+            "new-id-0"
+          ],
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date",
+            "namespace"
+          ],
+          "semantic_support_verified": false,
+          "target_declarations": [
+            {
+              "object_type": "table",
+              "object_name": "复核表",
+              "raw_label": "复核表",
+              "code": "Archive934",
+              "start": 28,
+              "end": 41,
+              "code_start": 31,
+              "code_end": 41,
+              "statement": {
+                "text": "绀羽项目Edition583版本在2025-11的记录：复核表Archive934显示View613签章核验通过、箱体定位通过；",
+                "start": 0,
+                "end": 64
+              },
+              "reliable_declaration": true,
+              "direct_supplement_reference": false,
+              "mere_reference": false,
+              "declaration_predicate": {
+                "text": "显示",
+                "start": 41,
+                "end": 43
+              }
+            }
+          ],
+          "reason": "unique_reliable_direct_reference",
+          "object_labels_equal": false,
+          "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+        }
+      ],
+      "rule_info": {
+        "rule": {
+          "passage_id": "new-id-1",
+          "source": "独立自造资料",
+          "start": 31,
+          "end": 57,
+          "quote": "规则要求签章核验、箱体定位和重放恢复三项检查全部通过",
+          "role": "完整发布规则"
+        }
+      },
+      "aggregate_check_set_binding": {
+        "accepted": false,
+        "candidate_count": null,
+        "defined_set": [
+          "签章核验",
+          "箱体定位",
+          "重放恢复"
+        ],
+        "main_record_inventories": [],
+        "basis": "获选候选自身明示完整数量通过；唯一同业务记录直接发布规则定义唯一同数量检查集合；已有明示集合不能不同。不是数量相等单独证明，也不使用其他候选的失败。",
+        "limit": "有限文本指称解释；仍需原文人工核对，不保证发现所有隐含的其他集合。"
+      },
+      "reason": "not_all_necessary_conditions_reliably_proved"
+    },
+    "reason": "not_all_necessary_conditions_reliably_proved"
+  },
+  "derived_response": null,
+  "final_response": {
+    "answer": "View613",
+    "citations": []
+  },
+  "passed": true,
+  "raw_response_preserved": true,
+  "checked_at": "2026-10-15T21:38:37.086243+08:00"
+}

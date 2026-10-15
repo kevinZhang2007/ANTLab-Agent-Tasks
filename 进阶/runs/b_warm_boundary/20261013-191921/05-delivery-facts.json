@@ -1,0 +1,85 @@
+{
+  "recorded_at": "2026-10-13T19:23:06.220388+08:00",
+  "directories": [
+    "进阶/runs/b_scope_diagnosis/20261013-184411",
+    "进阶/runs/b_cache_repair/20261013-185609",
+    "进阶/runs/b_http_page/20261013-190716",
+    "进阶/runs/b_warm_boundary/20261013-191921"
+  ],
+  "counts": {
+    "initial_direct_engine": 10,
+    "repair_direct_engine": 34,
+    "direct_engine_total": 44,
+    "first_direct_http": 14,
+    "warm_boundary_direct_http": 8,
+    "direct_http_total": 22,
+    "first_page_submissions": 14,
+    "warm_boundary_page_submissions": 8,
+    "page_submissions_total": 22,
+    "all_http_post_including_page": 44,
+    "all_engine_evaluations_including_http_and_page": 88,
+    "unique_request_ids": 88,
+    "new_model_generations": 0,
+    "foundation_model_generations": 124
+  },
+  "counting_note": "直接Engine44、直接HTTP22、页面22为互斥计数。页面22也在HTTP POST44和后端Engine88内，日志不是额外调用。",
+  "new_code_files": [
+    "进阶/challenge_b/no_cache_engine.py",
+    "进阶/challenge_b/server_review.py",
+    "进阶/challenge_b/review.html"
+  ],
+  "actual_startup": [
+    {
+      "variant": "original",
+      "working_directory": "进阶/challenge_b",
+      "python_executable": "C:\\Users\\86186\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+      "flags": [
+        "-X",
+        "utf8",
+        "-B"
+      ],
+      "script": "server_review.py",
+      "argv": {
+        "port": 8876,
+        "engine": "challenge:Engine",
+        "log_dir": "C:\\Users\\86186\\Projects\\ANTLab-Agent-Tasks\\进阶\\runs\\b_warm_boundary\\20261013-191921\\original-service"
+      },
+      "log_path": "进阶/runs/b_warm_boundary/20261013-191921/original-service/events.jsonl"
+    },
+    {
+      "variant": "fixed",
+      "working_directory": "进阶/challenge_b",
+      "python_executable": "C:\\Users\\86186\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+      "flags": [
+        "-X",
+        "utf8",
+        "-B"
+      ],
+      "script": "server_review.py",
+      "argv": {
+        "port": 8877,
+        "engine": "no_cache_engine:Engine",
+        "log_dir": "C:\\Users\\86186\\Projects\\ANTLab-Agent-Tasks\\进阶\\runs\\b_warm_boundary\\20261013-191921\\fixed-service"
+      },
+      "log_path": "进阶/runs/b_warm_boundary/20261013-191921/fixed-service/events.jsonl"
+    }
+  ],
+  "page_opened": [
+    "http://127.0.0.1:8876/",
+    "http://127.0.0.1:8877/"
+  ],
+  "reset_verified": {
+    "http_body_field": "reset=true",
+    "effect": "Engine.cache.clear()",
+    "page_action": "勾选运行前清空状态再点击提交请求；每组预热独立重置。",
+    "warm_action": "取消勾选，不清空状态后提交未知范围。"
+  },
+  "remaining": [
+    "top-k先截取后过滤，beta仍漏证。",
+    "Engine仅ID有效即supported，展示not_checked不是新增语义判分。",
+    "未知范围Engine仍返回固定draft/status=ok，外层invalid_scope只是如实标注。",
+    "重复请求缓存被移除，可能增加开销，没有性能保持证明。",
+    "单进程全局Engine无用户隔离；未验证并发、多worker一致性、生产安全。",
+    "页面请求等待期间上一响应可见；未做异步压力检查。"
+  ]
+}

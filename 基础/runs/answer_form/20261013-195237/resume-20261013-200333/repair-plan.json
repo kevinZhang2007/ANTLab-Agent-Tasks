@@ -1,0 +1,44 @@
+{
+  "recorded_at": "2026-10-13T20:03:33.835461+08:00",
+  "old_plan": "基础/runs/answer_form/20261013-195237/design-plan.json",
+  "generation_count_before": 136,
+  "existing_this_round_generations": 0,
+  "call_order_unchanged": [
+    {
+      "case_id": "D01",
+      "variants": [
+        "original_schema",
+        "answer_form_schema"
+      ]
+    },
+    {
+      "case_id": "D02",
+      "variants": [
+        "answer_form_schema",
+        "original_schema"
+      ]
+    },
+    {
+      "case_id": "D03",
+      "variants": [
+        "original_schema",
+        "answer_form_schema"
+      ]
+    },
+    {
+      "case_id": "D04",
+      "variants": [
+        "answer_form_schema",
+        "original_schema"
+      ]
+    }
+  ],
+  "generation_limit": 8,
+  "repairs": [
+    "不用props.grammar；同commit官方C++ Schema转换器输出GBNF，装机llama.dll的原生grammar sampler过滤人工token串。",
+    "清理仅操作本工具记录的自有Popen/PID，空列表可处理。",
+    "新文件实现修复，旧计划/异常/停止记录/源码均保留；逐项检查实际新文件和diff，不靠文本替换成功假设。"
+  ],
+  "offline_scope": "转换和grammar过滤不调用llama_decode/encode，不生成token；开发请求仍严格最多8次。",
+  "stop": "原生正反例、构建或请求技术失败保存后停止，不自动重试。"
+}

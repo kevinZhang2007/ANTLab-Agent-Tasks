@@ -1,0 +1,51 @@
+--- previous/general_citation_proof.py
++++ independent/general_citation_proof.py
+@@ -82,13 +82,17 @@
+             require(q['metric'] in first_sentence(main),'full_metric_definition_missing_in_main')
+             require(left['unit']==right['unit']==q['unit'],'operand_or_question_units_differ')
+             # 唯一补页中的“同样N个/条…”与主文相同数量，作为明确可比性依据。
+-            same=list(re.finditer(r'同样(?P<number>'+DEC+r')(?P<unit>个|条|次|人)',first_sentence(extra)))
++            same=list(re.finditer(r'(?:同样|相同)\s*(?P<number>'+DEC+r')(?P<unit>个|条|次|人)',first_sentence(extra)))
+             require(len(same)==1,'comparability_not_explicit')
+             same=same[0]
++            prefix=first_sentence(extra)[max(first_sentence(extra).rfind(c,0,same.start()) for c in '，,；;：:')+1:same.start()].rstrip()
++            require(not re.search(r'(?:不|并非|不是|未|不能|无法)$',prefix),'comparison_population_negated')
++            require(Decimal(same['number'])>0 and Decimal(same['number'])==Decimal(same['number']).to_integral_value(),'comparison_population_nonpositive_or_fractional')
+             primary=list(re.finditer(r'(?<![A-Za-z0-9_.])'+re.escape(same['number'])+re.escape(same['unit']),first_sentence(main)))
+             require(len(primary)==1,'comparability_population_not_unique')
+             options.append((left,right,ev(extra,same.start(),same.end(),'同一比较集合明示依据')))
+-        except Refuse:
++        except Refuse as error:
++            trace.append({'stage':'difference_operand_attempt_refused','left_source_id':left_source['id'],'right_source_id':right_source['id'],'reason':str(error)})
+             continue
+     require(len(options)==1,'zero_or_multiple_reliable_operand_assignments')
+     left,right,comparable=options[0]
+--- /dev/null
++++ independent/difference_calculation_proposal.py
+@@ -0,0 +1,26 @@
++"""独立差值计算建议；先从原文确定运算，不修改模型原答或引用证明。"""
++import copy, json
++import general_citation_proof as shared
++
++def propose(question,passages,raw_answer_json,universe=None):
++    before=copy.deepcopy((question,passages,raw_answer_json,universe))
++    result={'run_kind':'offline_difference_calculation_proposal','judgment_source':'local_rule',
++        'applicable':False,'status':'not_applicable','proof_established':False,'trace':[],
++        'proposed_response':None,'answer_changed':False,'not_original_model_response':True}
++    try:
++        if not shared.DIFFERENCE.search(question):
++            result['reason']='question_does_not_request_supported_difference';return result
++        result.update(applicable=True,status='unknown')
++        # 运算函数不接收原answer；操作数、范围、指标、方向和唯一性检查全部沿用。
++        expected,ids=shared.difference(question,passages,passages if universe is None else universe,result['trace'])
++        raw=json.loads(raw_answer_json)
++        shared.require(isinstance(raw,dict) and set(raw)=={'answer','citations'} and isinstance(raw['answer'],str)
++            and isinstance(raw['citations'],list) and all(isinstance(i,str) for i in raw['citations']),'invalid_original_answer')
++        needed=set(ids);shared.require(needed<={p['id'] for p in passages},'fact_or_citation_outside_final_input')
++        proposal={'answer':expected,'citations':[p['id'] for p in passages if p['id'] in needed]}
++        result.update(proof_established=True,status='established',reason='original_operands_unit_metric_scope_direction_and_result_independently_calculated',
++            proposed_response=proposal,original_answer=raw['answer'],answer_changed=expected!=raw['answer'],
++            proposed_response_kind='local_rule_calculated_new_answer_not_model_output')
++    except shared.Refuse as error:result.update(status='refused',reason=str(error),proposed_response=None)
++    finally:assert (question,passages,raw_answer_json,universe)==before
++    return result

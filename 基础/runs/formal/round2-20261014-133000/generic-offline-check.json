@@ -1,0 +1,1323 @@
+{
+  "checked_at": "2026-10-14T13:12:58.804686+08:00",
+  "passed": true,
+  "generation_calls": 0,
+  "uses_only_synthetic_fixtures": true,
+  "items": [
+    {
+      "sample": "直接补页",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "资料说明，只输出数值。",
+        "original_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"main\"]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"证据不足\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"main\"]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "valid_selection",
+          "selected_ids": [
+            "main"
+          ]
+        },
+        "association_trace": [
+          {
+            "supplement_id": "supp",
+            "target_id": "main",
+            "codes": [
+              "AB12"
+            ],
+            "reason": "直接补充指称、语境编号一致且主段唯一；缺失范围仍为未知",
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date"
+            ],
+            "semantic_support_verified": false,
+            "added": true,
+            "completion_reason": "唯一直接主段属于原定位选择，补入完整补页。"
+          }
+        ],
+        "added_ids": [
+          "supp"
+        ],
+        "used_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "answer_form_rule": {
+          "kind": "数值",
+          "reason": "问题末尾明确只输出数值",
+          "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string",
+                      "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "raw_answer": "{\"answer\":\"证据不足\",\"citations\":[]}",
+        "end_to_end_seconds": 0.003018299932591617
+      }
+    },
+    {
+      "sample": "空资料",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "资料说明，只输出数值。",
+        "original_passages": [],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"证据不足\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [],
+        "raw_selection": "{\"selected_ids\":[]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "empty_selection",
+          "selected_ids": []
+        },
+        "association_trace": [],
+        "added_ids": [],
+        "used_passages": [],
+        "answer_form_rule": {
+          "kind": "数值",
+          "reason": "问题末尾明确只输出数值",
+          "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string",
+                      "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "raw_answer": "{\"answer\":\"证据不足\",\"citations\":[]}",
+        "end_to_end_seconds": 0.0001406000228598714
+      }
+    },
+    {
+      "sample": "合法空选择",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "资料说明，只输出数值。",
+        "original_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"证据不足\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "empty_selection",
+          "selected_ids": []
+        },
+        "association_trace": [
+          {
+            "supplement_id": "supp",
+            "target_id": "main",
+            "codes": [
+              "AB12"
+            ],
+            "reason": "直接补充指称、语境编号一致且主段唯一；缺失范围仍为未知",
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date"
+            ],
+            "semantic_support_verified": false,
+            "added": false,
+            "completion_reason": "直接主段不在原定位选择；不从新补入段继续扩展。"
+          }
+        ],
+        "added_ids": [],
+        "used_passages": [],
+        "answer_form_rule": {
+          "kind": "数值",
+          "reason": "问题末尾明确只输出数值",
+          "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string",
+                      "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "raw_answer": "{\"answer\":\"证据不足\",\"citations\":[]}",
+        "end_to_end_seconds": 0.0002636000281199813
+      }
+    },
+    {
+      "sample": "非法ID",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "资料说明，只输出数值。",
+        "original_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"missing\"]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "selection_output_failure",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"missing\"]}",
+        "selection_validation": {
+          "valid": false,
+          "status": "unknown_id",
+          "selected_ids": [
+            "missing"
+          ]
+        },
+        "answer_not_executed": true,
+        "end_to_end_seconds": 9.929994121193886e-05
+      }
+    },
+    {
+      "sample": "重复ID",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "资料说明，只输出数值。",
+        "original_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"main\",\"main\"]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "selection_output_failure",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"main\",\"main\"]}",
+        "selection_validation": {
+          "valid": false,
+          "status": "duplicate_id",
+          "selected_ids": [
+            "main",
+            "main"
+          ]
+        },
+        "answer_not_executed": true,
+        "end_to_end_seconds": 9.169999975711107e-05
+      }
+    },
+    {
+      "sample": "非法JSON",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "资料说明，只输出数值。",
+        "original_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "bad json"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "selection_output_failure",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "raw_selection": "bad json",
+        "selection_validation": {
+          "valid": false,
+          "status": "invalid_json",
+          "selected_ids": null
+        },
+        "answer_not_executed": true,
+        "end_to_end_seconds": 9.789993055164814e-05
+      }
+    },
+    {
+      "sample": "编号复用",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "资料说明，只输出数值。",
+        "original_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          },
+          {
+            "id": "other",
+            "source": "same/a",
+            "text": "乙项目R2版本批次AB12记录。"
+          }
+        ],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"main\"]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"证据不足\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "other",
+            "source": "same/a",
+            "text": "乙项目R2版本批次AB12记录。"
+          },
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"main\"]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "valid_selection",
+          "selected_ids": [
+            "main"
+          ]
+        },
+        "association_trace": [
+          {
+            "supplement_id": "supp",
+            "target_id": null,
+            "codes": [
+              "AB12"
+            ],
+            "reason": "关联目标不唯一或不存在",
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date"
+            ],
+            "semantic_support_verified": false,
+            "added": false,
+            "completion_reason": "关联目标不唯一或不存在"
+          }
+        ],
+        "added_ids": [],
+        "used_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          }
+        ],
+        "answer_form_rule": {
+          "kind": "数值",
+          "reason": "问题末尾明确只输出数值",
+          "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string",
+                      "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "raw_answer": "{\"answer\":\"证据不足\",\"citations\":[]}",
+        "end_to_end_seconds": 0.00029500003438442945
+      }
+    },
+    {
+      "sample": "范围冲突",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "资料说明，只输出数值。",
+        "original_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "甲项目R3版本批次AB12的复核补页。"
+          }
+        ],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"main\"]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"证据不足\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "甲项目R3版本批次AB12的复核补页。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"main\"]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "valid_selection",
+          "selected_ids": [
+            "main"
+          ]
+        },
+        "association_trace": [
+          {
+            "supplement_id": "supp",
+            "target_id": null,
+            "codes": [
+              "AB12"
+            ],
+            "reason": "正文项目、版本或日期明确冲突",
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date"
+            ],
+            "semantic_support_verified": false,
+            "added": false,
+            "completion_reason": "正文项目、版本或日期明确冲突"
+          }
+        ],
+        "added_ids": [],
+        "used_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          }
+        ],
+        "answer_form_rule": {
+          "kind": "数值",
+          "reason": "问题末尾明确只输出数值",
+          "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string",
+                      "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "raw_answer": "{\"answer\":\"证据不足\",\"citations\":[]}",
+        "end_to_end_seconds": 0.00024049996864050627
+      }
+    },
+    {
+      "sample": "顺序变化",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "资料说明，只输出数值。",
+        "original_passages": [
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          },
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          }
+        ],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"main\"]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"证据不足\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"main\"]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "valid_selection",
+          "selected_ids": [
+            "main"
+          ]
+        },
+        "association_trace": [
+          {
+            "supplement_id": "supp",
+            "target_id": "main",
+            "codes": [
+              "AB12"
+            ],
+            "reason": "直接补充指称、语境编号一致且主段唯一；缺失范围仍为未知",
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date"
+            ],
+            "semantic_support_verified": false,
+            "added": true,
+            "completion_reason": "唯一直接主段属于原定位选择，补入完整补页。"
+          }
+        ],
+        "added_ids": [
+          "supp"
+        ],
+        "used_passages": [
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          },
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          }
+        ],
+        "answer_form_rule": {
+          "kind": "数值",
+          "reason": "问题末尾明确只输出数值",
+          "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string",
+                      "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "raw_answer": "{\"answer\":\"证据不足\",\"citations\":[]}",
+        "end_to_end_seconds": 0.00024690001737326384
+      }
+    },
+    {
+      "sample": "ID重映射",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "资料说明，只输出数值。",
+        "original_passages": [
+          {
+            "id": "renamed-0",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "renamed-1",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"renamed-0\"]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"证据不足\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "renamed-0",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "renamed-1",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"renamed-0\"]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "valid_selection",
+          "selected_ids": [
+            "renamed-0"
+          ]
+        },
+        "association_trace": [
+          {
+            "supplement_id": "renamed-1",
+            "target_id": "renamed-0",
+            "codes": [
+              "AB12"
+            ],
+            "reason": "直接补充指称、语境编号一致且主段唯一；缺失范围仍为未知",
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date"
+            ],
+            "semantic_support_verified": false,
+            "added": true,
+            "completion_reason": "唯一直接主段属于原定位选择，补入完整补页。"
+          }
+        ],
+        "added_ids": [
+          "renamed-1"
+        ],
+        "used_passages": [
+          {
+            "id": "renamed-0",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "renamed-1",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "answer_form_rule": {
+          "kind": "数值",
+          "reason": "问题末尾明确只输出数值",
+          "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string",
+                      "pattern": "^([-+]?([0-9]+([.][0-9]+)?|[.][0-9]+)([eE][-+]?[0-9]+)?|证据不足)$"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "raw_answer": "{\"answer\":\"证据不足\",\"citations\":[]}",
+        "end_to_end_seconds": 0.00024960003793239594
+      }
+    },
+    {
+      "sample": "无明确答法",
+      "passed": true,
+      "calls_are_fixtures": true,
+      "result": {
+        "variant": "improved",
+        "question": "说明情况",
+        "original_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "stages": [
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"main\"]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "status": "ok",
+            "fixture_not_generation": true,
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"证据不足\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"main\"]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "valid_selection",
+          "selected_ids": [
+            "main"
+          ]
+        },
+        "association_trace": [
+          {
+            "supplement_id": "supp",
+            "target_id": "main",
+            "codes": [
+              "AB12"
+            ],
+            "reason": "直接补充指称、语境编号一致且主段唯一；缺失范围仍为未知",
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date"
+            ],
+            "semantic_support_verified": false,
+            "added": true,
+            "completion_reason": "唯一直接主段属于原定位选择，补入完整补页。"
+          }
+        ],
+        "added_ids": [
+          "supp"
+        ],
+        "used_passages": [
+          {
+            "id": "main",
+            "source": "same/a",
+            "text": "甲项目R2版本2026-07批次AB12记录：总数12。"
+          },
+          {
+            "id": "supp",
+            "source": "same/b",
+            "text": "批次AB12的复核补页：通过6项。"
+          }
+        ],
+        "answer_form_rule": {
+          "kind": null,
+          "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "raw_answer": "{\"answer\":\"证据不足\",\"citations\":[]}",
+        "end_to_end_seconds": 0.00023360003251582384
+      }
+    }
+  ],
+  "baseline_preserves_input": true,
+  "final_order": "原输入相对顺序",
+  "limits": "夹具只检查程序分支，不表示模型能正确定位或回答。"
+}

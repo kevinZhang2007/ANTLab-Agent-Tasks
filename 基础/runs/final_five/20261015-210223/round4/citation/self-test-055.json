@@ -1,0 +1,67 @@
+{
+  "name": "difference_scope_conflict_order",
+  "question": "竹岭项目V4版本在2026-04同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+  "passages": [
+    {
+      "id": "source-2",
+      "source": "自造资料/2",
+      "text": "批次Trace82的复核补页：Trace82新链路处理同样40个问题，中位数为8.2秒；两次保持输入顺序。"
+    },
+    {
+      "id": "source-1",
+      "source": "自造资料/1",
+      "text": "竹岭项目V5版本在2026-04的记录：同机顺序批次Trace82的旧链路处理40个固定问题，客户端完整响应耗时中位数为12.5秒。"
+    }
+  ],
+  "raw": "{\"answer\": \"4.3\", \"citations\": []}",
+  "expected": false,
+  "actual": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": false,
+    "proof_status": "refused",
+    "proof_kind": "difference",
+    "trace": [
+      {
+        "stage": "question_project_boundary",
+        "audit": {
+          "status": "unknown",
+          "question_candidates": [
+            {
+              "entity": "竹岭项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                8
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "V5版本",
+              "date": "2026-04",
+              "passage_id": "source-1",
+              "source": "自造资料/1",
+              "start": 0,
+              "end": 20,
+              "quote": "竹岭项目V5版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "竹岭项目V4版本在2026-04同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+          "reason": "entity_declaration_version_or_date_not_confirmed",
+          "missing_fields_not_assumed_equal": true
+        }
+      }
+    ],
+    "derived_response": null,
+    "requires_independent_original_text_review": true,
+    "reason": "question_project_entity_unknown"
+  },
+  "passed": true,
+  "checked_at": "2026-10-15T21:08:08.380646+08:00"
+}

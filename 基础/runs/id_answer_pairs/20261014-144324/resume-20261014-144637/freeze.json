@@ -1,0 +1,372 @@
+{
+  "saved_at": "2026-10-14T14:46:50.280584+08:00",
+  "generation_calls_so_far": 0,
+  "frozen": true,
+  "experiment_kind": "post_evaluation_id_answer_system_suffix_pairs",
+  "design": {
+    "saved_at": "2026-10-14T14:43:25.221813+08:00",
+    "kind": "post_evaluation_targeted_development_check",
+    "prior_evaluation_exposure": true,
+    "hypothesis": "追加ID用途说明可能减少把引用ID直接填入answer。",
+    "competing_explanation": "即使不复制ID，仍可能误选正文编号、漏用规则或错误拒答；输出形式纠正不等于答案正确。",
+    "sole_change": "输入中的id是资料段落的引用标识，只用于citations，不代表正文中的快照、方案或批次编号。answer必须回答问题所问的对象，不能复制资料id作为答案。需要结合数据与规则时，应核对两者；单个段落不能回答，不代表全部资料证据不足。若全部资料仍无法确定，回答‘证据不足’。",
+    "selection_provenance": "历史补齐原文输入重放，不重新定位。",
+    "evaluation": "ID混淆、正文编号原文依据、引用充分、无依据替代编号分开；T01保留资格条件推导与严格字面歧义，不为候选放宽。",
+    "stop": "最多4次；质量错误不重试；任何技术错误保存停止，不追加生成。",
+    "prior_unique_generations": 284,
+    "adoption": "不自动采用，不修改任何生产配置。"
+  },
+  "execution_plan": {
+    "saved_at": "2026-10-14T14:43:25.222185+08:00",
+    "order": [
+      {
+        "sequence": 1,
+        "case_id": "T01",
+        "variant": "old"
+      },
+      {
+        "sequence": 2,
+        "case_id": "T01",
+        "variant": "new"
+      },
+      {
+        "sequence": 3,
+        "case_id": "T08",
+        "variant": "new"
+      },
+      {
+        "sequence": 4,
+        "case_id": "T08",
+        "variant": "old"
+      }
+    ],
+    "planned_generation_calls": 4,
+    "variant_labels": {
+      "old": "control",
+      "new": "id_clarification"
+    },
+    "max_tokens": 256,
+    "thinking": "off",
+    "same_original_passages": true
+  },
+  "reused_results": {
+    "items": [],
+    "note": "只复用历史输入，不复用本轮回答结果。"
+  },
+  "order": [
+    {
+      "sequence": 1,
+      "case_id": "T01",
+      "variant": "old"
+    },
+    {
+      "sequence": 2,
+      "case_id": "T01",
+      "variant": "new"
+    },
+    {
+      "sequence": 3,
+      "case_id": "T08",
+      "variant": "new"
+    },
+    {
+      "sequence": 4,
+      "case_id": "T08",
+      "variant": "old"
+    }
+  ],
+  "config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 256,
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "answer",
+              "citations"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "timeout_seconds": 180
+  },
+  "service_arguments": [
+    "%LOCALAPPDATA%/ANTLabLocalModel\\llama-b11429\\llama-server.exe",
+    "-m",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\models\\Qwen3-0.6B-Q8_0.gguf",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "--alias",
+    "Qwen3-0.6B-Q8_0",
+    "--ctx-size",
+    "4096",
+    "--parallel",
+    "1",
+    "--batch-size",
+    "128",
+    "--ubatch-size",
+    "64",
+    "--threads",
+    "4",
+    "--gpu-layers",
+    "0",
+    "--no-context-shift",
+    "--no-warmup",
+    "--temp",
+    "0.7",
+    "--top-p",
+    "0.8",
+    "--top-k",
+    "20",
+    "--min-p",
+    "0",
+    "--presence-penalty",
+    "1.5",
+    "--repeat-penalty",
+    "1.0",
+    "--reasoning",
+    "off",
+    "--seed",
+    "42",
+    "--predict",
+    "256",
+    "--slot-save-path",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\diagnostic-cache"
+  ],
+  "code_hashes": {
+    "基础/tests/direct_reference_candidate.py": "547e24a7016c724cc9a0591770dbc1c96ece77e8f571974f41289d7f6dd09b44",
+    "基础/tests/check_direct_reference.py": "af8917118a5a32e0529c79253cc8092e3fb7b1799a3e0d2f717baf64c1fa149a",
+    "基础/tests/run_direct_reference_pairs.py": "85aa54f1e9d60c6498e6c64aeaafec4a216529d603a2b95d7dfd17990db4a7f7",
+    "基础/tests/association_repair_candidate.py": "ae8c99534dbe5833630b36009241455f8a4f577601271c2b2b9b84ea9337f5ff",
+    "基础/tests/run_formal_round2.py": "678eb64a0d1831ef3cd47e642d038f8ea5cb8e349f1489adfc11ce14cb678d47",
+    "基础/tests/general_candidate.py": "bbb96087dfdad1a01b06181aa1e2702e153ab246b36ae800895c3e3ca289eed7",
+    "基础/tests/answer_form_candidate.py": "0eec8cb38be8be1e40d4bce75c10313ad20e63b137ebd165bd449053d35d0f78",
+    "基础/tests/two_step_linked_candidate.py": "0a371e4aae369ed6edbda291e7d702fe6def03a79a79b18df1c45e8023724f81",
+    "基础/tests/two_step_candidate.py": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524",
+    "基础/runs/improve/linked_r0/student-v2.py": "7ed5d741f96f3e5dad1c227a7ad8bd5d2743911b80021e81dd99b1ce0348420e",
+    "基础/starter/student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "基础/starter/provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "基础/runs/id_answer_pairs/20261014-144324/resume-20261014-144637/run_id_answer_pair.py": "1bbcd758d8cd91024f20dae60dde5a46ac6e85703dd5729a830daa6f68aa3463",
+    "基础/runs/id_answer_pairs/20261014-144324/resume-20261014-144637/system-addition.json": "0142755c5e85988483e7f7c305fb86ad71442274ee0d147f819d5ad20c364959",
+    "基础/runs/id_answer_pairs/20261014-144324/resume-20261014-144637/config.answer.json": "17df6426e3ab7ddf6a2aba4b893b5195372d06ac7eef3bfaec1c7bdfa1c88956",
+    "基础/runs/id_answer_pairs/20261014-144324/resume-20261014-144637/eight-case-association-recompute.json": "521795f178d0a410ee1ac32e5f8a87c25f1e878a117b8c7772501430671ae98c"
+  },
+  "data_hashes": {
+    "基础/data/cases.json": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "基础/data/manifest.json": "5ca24620a158ebb3429b6255b3e91f9fc26b749f12e41603245585ed32df8fb8"
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-0.6B-GGUF",
+    "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+    "file": "Qwen3-0.6B-Q8_0.gguf",
+    "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "bytes": 639446688,
+    "actual_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "actual_bytes": 639446688,
+    "external_path": "%LOCALAPPDATA%/ANTLabLocalModel/models/Qwen3-0.6B-Q8_0.gguf"
+  },
+  "llama_cpp": {
+    "build": "b11429",
+    "commit": "d81235049",
+    "version_output": "version: 0.6.0-dev (build 11429, commit d81235049)\nbuilt with Clang 20.1.8 for Windows x86_64\n",
+    "executable_sha256": "7e236243c9b670c6a49410c03186fd575c57a0efe3fd8a21d8727503d571d5b6"
+  },
+  "actual_schemas": [
+    {
+      "case_id": "T01",
+      "variant": "old",
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "answer",
+              "citations"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "case_id": "T01",
+      "variant": "new",
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "answer",
+              "citations"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "case_id": "T08",
+      "variant": "new",
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "answer",
+              "citations"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "case_id": "T08",
+      "variant": "old",
+      "response_format": {
+        "type": "json_schema",
+        "json_schema": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "answer": {
+                "type": "string"
+              },
+              "citations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "answer",
+              "citations"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  ],
+  "only_changed_request_pairs_generated": true,
+  "max_input_tokens": 904,
+  "max_total_tokens": 1160,
+  "evaluation_rules": {
+    "recorded_at": "2026-10-13T13:12:03.376478+08:00",
+    "status": "待确认评价口径",
+    "sources": [
+      "基础/01_考核题目.md 第四步",
+      "进阶/00_共同规则与接口.md",
+      "基础/runs/reading/alce-reading-evidence.json",
+      "基础/runs/review/stage3/citation-rules.json"
+    ],
+    "metrics": [
+      {
+        "name": "answer_correct",
+        "method": "根据问题指定表达形式、项目/版本/日期/批次/口径/签署状态，核对全部当前可见原文。计算逐项记录分子分母、运算方向单位；选择逐项记录资格及决策规则。证据不足须核查所需事实是否确实缺失。",
+        "unknown": "not_checked，不能编造标准答案"
+      },
+      {
+        "name": "format_complete",
+        "method": "原始content可解析为仅含answer字符串和citations字符串数组的JSON；不补字段、不修正原响应。空数组可以格式合法。"
+      },
+      {
+        "name": "citation_ids_exist",
+        "method": "分别记录空引用、每个ID是否属于该次实际输入、重复引用；ID存在不等于支持。"
+      },
+      {
+        "name": "necessary_evidence_covered",
+        "method": "先按问题和实际输入独立列出所需事实及来源，再检查引用覆盖。可能有等价证据组合，不把某一唯一ID集当金标准。"
+      },
+      {
+        "name": "citation_support",
+        "method": "将实际answer拆成可核验主张，检查引用集合是否足以推出结论；标supported/contradicted/insufficient/not_checked，并摘录原文、计算或规则依据。"
+      },
+      {
+        "name": "irrelevant_citations",
+        "method": "逐条判断是否为任何必要主张提供实质支持；范围错误或完全无关另列。多段共同支持的部分证据不因单段不足而自动算无关；相关冗余不自动算错误。"
+      }
+    ],
+    "strict_complete_success": {
+      "origin": "开发阶段选定的综合指标，不是任务原文唯一评分标准",
+      "definition": "格式完整、指定答法正确、非空且全部ID属于实际输入、必要依据覆盖、引用集合支持实际答案、没有无关引用；技术失败或无答案为不成功。尚未人工核验时为not_checked。"
+    },
+    "manual_review": {
+      "no_public_formal_gold": true,
+      "no_model_only_judge": true,
+      "procedure": [
+        "生成前只做容量检查，不人工分析题目或编造标签。",
+        "获授权完成正式调用后，以每次实际输入为边界逐题保存核对表：问题要求、范围、必要事实、原文定位、推导、原回答与引用、各分项状态。",
+        "题目完整可见资料另查输入是否缺证；实际输入无法推出时记录不足，K遗漏与错误拒答分开解释。",
+        "若有歧义，保存竞争解释并标未核验；人工调整保留旧标签、新标签、理由和时间，不改原响应。",
+        "完成可复核标签后才汇总；同时报告总分母、已核验数量及未知项，不能用已核验子集冒充全部正确率。"
+      ],
+      "reviewer_label": "human，人工评价不是系统输出",
+      "cost": "客户端完整非流式请求耗时；启动、模板检查和人工评价耗时另列。"
+    }
+  },
+  "selection_provenance": "历史选择重放；本轮只生成变化题的回答；相同请求有准确原记录链接，不新增生成。"
+}

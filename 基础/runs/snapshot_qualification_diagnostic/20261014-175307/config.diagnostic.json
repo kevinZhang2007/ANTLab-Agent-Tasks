@@ -1,0 +1,88 @@
+{
+  "provider": "llama.cpp",
+  "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+  "model": "Qwen3-0.6B-Q8_0",
+  "parameters": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 1.5,
+    "seed": 42,
+    "max_tokens": 512,
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "qualifications": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "snapshot": {
+                    "type": "string"
+                  },
+                  "data_source_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "rule_source_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "passed_conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "failed_conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "unspecified_conditions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "eligibility": {
+                    "type": "string",
+                    "enum": [
+                      "eligible",
+                      "ineligible",
+                      "unknown"
+                    ]
+                  }
+                },
+                "required": [
+                  "snapshot",
+                  "data_source_ids",
+                  "rule_source_ids",
+                  "passed_conditions",
+                  "failed_conditions",
+                  "unspecified_conditions",
+                  "eligibility"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "qualifications"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "timeout_seconds": 180
+}

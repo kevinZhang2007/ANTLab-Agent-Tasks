@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-10-13T18:56:09.696275+08:00",
+  "code_base_commit": "78b97898e713a3b8ec2cdffeec8c6758c4bcbbc9",
+  "original_path": "进阶/challenge_b/challenge.py",
+  "fixed_path": "进阶/challenge_b/no_cache_engine.py",
+  "original_sha256": "b84a035957ac457fb803c82f141c8684ccb5dbe9ff34c45bbb199ff613094ad1",
+  "fixed_sha256": "ab5852c20284e4f17097a1a9d7ac5343cf9dfea107e0f430c5ccda253f38d87a",
+  "full_diff": "engine-full.diff",
+  "only_cache_logic_changed_by_AST": true,
+  "compatibility": "evaluate(request,corpus,draft)签名相同；保留空cache属性兼容server reset，但evaluate不读写缓存。",
+  "functional_tradeoff": "移除缓存功能，重复请求重新执行原检索与判断，可能增加开销，不声称保留缓存性能。",
+  "unchanged": "全库top-k后scope过滤、固定draft、ID有效即supported的逻辑保留。"
+}

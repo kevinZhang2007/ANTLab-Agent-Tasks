@@ -1,0 +1,232 @@
+{
+  "saved_at": "2026-10-14T18:33:44.704332+08:00",
+  "generation_calls_so_far": 0,
+  "frozen": true,
+  "experiment_kind": "local_first_clause_defect_reading_diagnostic",
+  "design": {
+    "saved_at": "2026-10-14T18:33:21.785343+08:00",
+    "kind": "local_clause_reading_diagnostic",
+    "hypothesis": "局部完整子句可能更容易读出明示缺陷；不预设结果。",
+    "competing_explanation": "即使输入很短，仍可能否定明示缺陷或摘录错误。",
+    "selection_rule": "各题所有候选按原文位置取第一，不按缺陷挑选。",
+    "budget": 128,
+    "max_calls": 2,
+    "previous_unique_generations": 304,
+    "no_schema": true,
+    "limits": "局部短句不代表完整任务改善，也不说明模型能力上限。",
+    "stop": "沿用2GiB启动门槛及监测；技术失败停止，质量不重试。"
+  },
+  "execution_plan": {
+    "order": [
+      {
+        "sequence": 1,
+        "case_id": "T01",
+        "variant": "first_clause_reading"
+      },
+      {
+        "sequence": 2,
+        "case_id": "T08",
+        "variant": "first_clause_reading"
+      }
+    ],
+    "planned_generation_calls": 2
+  },
+  "order": [
+    {
+      "sequence": 1,
+      "case_id": "T01",
+      "variant": "first_clause_reading"
+    },
+    {
+      "sequence": 2,
+      "case_id": "T08",
+      "variant": "first_clause_reading"
+    }
+  ],
+  "review_prompt": "只看下面的原文，该候选是否明确存在检查缺陷？\n返回JSON：\n{\"has_explicit_defect\":true或false,\n \"quote\":\"对应连续原文；没有则为空字符串\"}。\n只判断明示缺陷，不判断整体资格，不推断未提到的条件。",
+  "review_schema": {
+    "type": "object",
+    "properties": {
+      "has_explicit_defect": {
+        "type": "boolean"
+      },
+      "quote": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "has_explicit_defect",
+      "quote"
+    ],
+    "additionalProperties": false
+  },
+  "config": {
+    "provider": "llama.cpp",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "model": "Qwen3-0.6B-Q8_0",
+    "parameters": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "seed": 42,
+      "max_tokens": 128
+    },
+    "timeout_seconds": 180
+  },
+  "service_arguments": [
+    "%LOCALAPPDATA%/ANTLabLocalModel\\llama-b11429\\llama-server.exe",
+    "-m",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\models\\Qwen3-0.6B-Q8_0.gguf",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "--alias",
+    "Qwen3-0.6B-Q8_0",
+    "--ctx-size",
+    "4096",
+    "--parallel",
+    "1",
+    "--batch-size",
+    "128",
+    "--ubatch-size",
+    "64",
+    "--threads",
+    "4",
+    "--gpu-layers",
+    "0",
+    "--no-context-shift",
+    "--no-warmup",
+    "--temp",
+    "0.7",
+    "--top-p",
+    "0.8",
+    "--top-k",
+    "20",
+    "--min-p",
+    "0",
+    "--presence-penalty",
+    "1.5",
+    "--repeat-penalty",
+    "1.0",
+    "--reasoning",
+    "off",
+    "--seed",
+    "42",
+    "--predict",
+    "256",
+    "--slot-save-path",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\diagnostic-cache"
+  ],
+  "code_hashes": {
+    "基础/tests/citation_review_candidate.py": "1ae46c415790f15c09ff94c2dd54d521b00a6261bc6c64365fd3058a4947c040",
+    "基础/tests/check_citation_review.py": "3547ffe342bdbe2e7f5dbcfc1ddda9c1ee8e2b1ab58272827dd727cf2eb24ecd",
+    "基础/tests/run_citation_review.py": "107952e214adc78de883034957d1f1c61ac23cdaa31c1be2861c7a457306559a",
+    "基础/tests/run_formal_round2.py": "678eb64a0d1831ef3cd47e642d038f8ea5cb8e349f1489adfc11ce14cb678d47",
+    "基础/tests/general_candidate.py": "bbb96087dfdad1a01b06181aa1e2702e153ab246b36ae800895c3e3ca289eed7",
+    "基础/tests/answer_form_candidate.py": "0eec8cb38be8be1e40d4bce75c10313ad20e63b137ebd165bd449053d35d0f78",
+    "基础/tests/two_step_linked_candidate.py": "0a371e4aae369ed6edbda291e7d702fe6def03a79a79b18df1c45e8023724f81",
+    "基础/tests/two_step_candidate.py": "feca94d53073fdf2fbc9e569bb24a4873e22c0132be8eb0d324db0033c0ba524",
+    "基础/runs/improve/linked_r0/student-v2.py": "7ed5d741f96f3e5dad1c227a7ad8bd5d2743911b80021e81dd99b1ce0348420e",
+    "基础/starter/student.py": "27acdf64d5c62fde468561b549b8ecec60a702481e4f8239f24d3fd4dac12678",
+    "基础/starter/provider.py": "85ebd56783ea8bb6a03588de46df44cff1d5016e8111797db0a52e388a34ac59",
+    "基础/runs/local_snapshot_defect_diagnostic/20261014-183320/source-inputs.json": "6ad39d5ef973687b18ee5a845d936d2da89c87b96a96dd133e0a5830f80099d2",
+    "基础/runs/local_snapshot_defect_diagnostic/20261014-183320/config.diagnostic.json": "56ec5e42d55790c7e9ef8160d23369874f0ab3d6e77eb9160dda9c83ca26c9ab",
+    "基础/runs/local_snapshot_defect_diagnostic/20261014-183320/request-diff.json": "d118a80395d5ba5c84a54e35ae32ba9cad23af6a5083ccab41f5471972d8ee82",
+    "基础/runs/local_snapshot_defect_diagnostic/20261014-183320/system.diagnostic.txt": "00120889114355c33835c0fe7b3f3428215ec874d74cca68f8a5176cabd99dc4",
+    "基础/runs/local_snapshot_defect_diagnostic/20261014-183320/local_defect_candidate.py": "2f72d82c4ac416325bcf86b10e29068cd12d88ba7a363231ce131eb8d8f43d6f",
+    "基础/runs/local_snapshot_defect_diagnostic/20261014-183320/run_local_defect_diagnostic.py": "168eb78ca45e87d5f5e0c69b7b8e2241bf2e7763e968b08520c2b46e671674d1"
+  },
+  "data_hashes": {
+    "基础/data/cases.json": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "基础/data/manifest.json": "5ca24620a158ebb3429b6255b3e91f9fc26b749f12e41603245585ed32df8fb8"
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-0.6B-GGUF",
+    "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+    "file": "Qwen3-0.6B-Q8_0.gguf",
+    "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "bytes": 639446688,
+    "actual_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "actual_bytes": 639446688,
+    "external_path": "%LOCALAPPDATA%/ANTLabLocalModel/models/Qwen3-0.6B-Q8_0.gguf"
+  },
+  "llama_cpp": {
+    "build": "b11429",
+    "commit": "d81235049",
+    "version_output": "version: 0.6.0-dev (build 11429, commit d81235049)\nbuilt with Clang 20.1.8 for Windows x86_64\n",
+    "executable_sha256": "7e236243c9b670c6a49410c03186fd575c57a0efe3fd8a21d8727503d571d5b6"
+  },
+  "actual_schemas": [
+    {
+      "case_id": "T01",
+      "variant": "first_clause_reading",
+      "response_format": null
+    },
+    {
+      "case_id": "T08",
+      "variant": "first_clause_reading",
+      "response_format": null
+    }
+  ],
+  "original_answer_side": "historical_reuse_not_synchronous_control",
+  "max_input_tokens": 156,
+  "max_total_tokens": 284,
+  "evaluation_rules": {
+    "recorded_at": "2026-10-13T13:12:03.376478+08:00",
+    "status": "待确认评价口径",
+    "sources": [
+      "基础/01_考核题目.md 第四步",
+      "进阶/00_共同规则与接口.md",
+      "基础/runs/reading/alce-reading-evidence.json",
+      "基础/runs/review/stage3/citation-rules.json"
+    ],
+    "metrics": [
+      {
+        "name": "answer_correct",
+        "method": "根据问题指定表达形式、项目/版本/日期/批次/口径/签署状态，核对全部当前可见原文。计算逐项记录分子分母、运算方向单位；选择逐项记录资格及决策规则。证据不足须核查所需事实是否确实缺失。",
+        "unknown": "not_checked，不能编造标准答案"
+      },
+      {
+        "name": "format_complete",
+        "method": "原始content可解析为仅含answer字符串和citations字符串数组的JSON；不补字段、不修正原响应。空数组可以格式合法。"
+      },
+      {
+        "name": "citation_ids_exist",
+        "method": "分别记录空引用、每个ID是否属于该次实际输入、重复引用；ID存在不等于支持。"
+      },
+      {
+        "name": "necessary_evidence_covered",
+        "method": "先按问题和实际输入独立列出所需事实及来源，再检查引用覆盖。可能有等价证据组合，不把某一唯一ID集当金标准。"
+      },
+      {
+        "name": "citation_support",
+        "method": "将实际answer拆成可核验主张，检查引用集合是否足以推出结论；标supported/contradicted/insufficient/not_checked，并摘录原文、计算或规则依据。"
+      },
+      {
+        "name": "irrelevant_citations",
+        "method": "逐条判断是否为任何必要主张提供实质支持；范围错误或完全无关另列。多段共同支持的部分证据不因单段不足而自动算无关；相关冗余不自动算错误。"
+      }
+    ],
+    "strict_complete_success": {
+      "origin": "开发阶段选定的综合指标，不是任务原文唯一评分标准",
+      "definition": "格式完整、指定答法正确、非空且全部ID属于实际输入、必要依据覆盖、引用集合支持实际答案、没有无关引用；技术失败或无答案为不成功。尚未人工核验时为not_checked。"
+    },
+    "manual_review": {
+      "no_public_formal_gold": true,
+      "no_model_only_judge": true,
+      "procedure": [
+        "生成前只做容量检查，不人工分析题目或编造标签。",
+        "获授权完成正式调用后，以每次实际输入为边界逐题保存核对表：问题要求、范围、必要事实、原文定位、推导、原回答与引用、各分项状态。",
+        "题目完整可见资料另查输入是否缺证；实际输入无法推出时记录不足，K遗漏与错误拒答分开解释。",
+        "若有歧义，保存竞争解释并标未核验；人工调整保留旧标签、新标签、理由和时间，不改原响应。",
+        "完成可复核标签后才汇总；同时报告总分母、已核验数量及未知项，不能用已核验子集冒充全部正确率。"
+      ],
+      "reviewer_label": "human，人工评价不是系统输出",
+      "cost": "客户端完整非流式请求耗时；启动、模板检查和人工评价耗时另列。"
+    }
+  },
+  "selection_provenance": "历史完整原段落和候选重放；本轮只摘录缺陷，不生成最终答案。"
+}

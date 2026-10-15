@@ -1,0 +1,35 @@
+{
+  "recorded_at": "2026-10-15T17:05:43.692118+08:00",
+  "scope": "只在results导出层映射，原记录不变",
+  "mappings": [
+    {
+      "record": "规则处理/计算/引用组装",
+      "run_kind": "local_rule",
+      "judgment_source": "rule"
+    },
+    {
+      "record": "真实模型请求",
+      "action": "保留实际归档run_kind；不把后处理冒充生成"
+    },
+    {
+      "record": "B固定draft",
+      "run_kind": "offline_replay",
+      "action": "Engine原始rule状态和展示层unverified/not_checked分别保留，不能将ID检查冒充语义支持"
+    }
+  ],
+  "preservation": [
+    "source_path和source_pointer定位原字段",
+    "original_run_kind与original_judgment_source直接读取原件",
+    "original_values保留指标原值和取值指针",
+    "原始响应、旧字段及旧文件不回写"
+  ],
+  "unknown": "原件没有字段则null/not_saved；未评价指标not_checked，不补造",
+  "non_execution": "准备停止通知run_kind=not_applicable，只是账本通知，不是一次执行",
+  "updated_at": "2026-10-15T21:50:23.905366+08:00",
+  "expected_counts": {
+    "model_generations": 534,
+    "b_offline_executions": 88
+  },
+  "previous_snapshot": "results/history/20261015-214234",
+  "new_views_note": "保留种子全部原spec；新增raw/final/system_review结构独立视图，按dataset及arm分组，不拼接轮次。"
+}

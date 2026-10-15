@@ -1,0 +1,36 @@
+{
+  "saved_at": "2026-10-15T21:02:23.531422+08:00",
+  "previous_cumulative": 478,
+  "maximum_generations": 48,
+  "rounds": [
+    {
+      "round": 1,
+      "factor": "最终user JSON改为完整原文分块",
+      "limit": 8
+    },
+    {
+      "round": 2,
+      "factor": "仅temperature .7与0",
+      "limit": 8
+    },
+    {
+      "round": 3,
+      "factor": "一个短system候选",
+      "limit": 8
+    },
+    {
+      "round": 4,
+      "factor": "离线规则稳健性，0生成",
+      "limit": 0
+    },
+    {
+      "round": 5,
+      "factor": "冻结后D4再T8完整R0",
+      "limit": 24
+    }
+  ],
+  "selection": "先系统最终严格成功数，再系统最终答案正确数；同分保留当前已验证方案（无新增覆盖层、改动更少）。模型原始指标单列。",
+  "failure": "质量不重试；请求技术错误先确认是否发送，停止，禁止自动重发；工程准备可离线修复并留档。",
+  "exposure": "前四轮只D和自造；第五轮为评测后重复测试，不是独立盲测或泛化成绩。",
+  "stop": "五轮结束不追加第六轮；D01定义及T01资格歧义不猜测补齐。"
+}

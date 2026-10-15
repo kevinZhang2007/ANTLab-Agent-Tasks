@@ -1,0 +1,138 @@
+--- 基础/runs/local_snapshot_defect_diagnostic/20261014-183320/run_local_defect_diagnostic.py
++++ 基础/runs/local_checks_full_answer/20261014-183922/run_local_checks_full_answer.py
+@@ -21,7 +21,7 @@
+ design=load(folder/'design-plan.json')
+ plan=load(folder/'execution-plan.json')
+ assert load(folder/'offline-check.json')['passed']
+-assert load(folder/'request-diff.json')['only_local_task_inputs']
++assert load(folder/'request-diff-plan.json')['notice']
+ recomputed=load(folder/'source-inputs.json')
+ inputs={r['case_id']:r for r in recomputed['items']}
+ freeze=load(base/'runs/formal/round2-20261014-133000/freeze.json')
+@@ -34,7 +34,7 @@
+     '基础/tests/run_citation_review.py','基础/tests/run_formal_round2.py' ,'基础/tests/general_candidate.py','基础/tests/answer_form_candidate.py',
+     '基础/tests/two_step_linked_candidate.py','基础/tests/two_step_candidate.py','基础/runs/improve/linked_r0/student-v2.py',
+     '基础/starter/student.py','基础/starter/provider.py']
+-source_names += [(folder/n).relative_to(repo).as_posix() for n in ['source-inputs.json','config.diagnostic.json','request-diff.json','system.diagnostic.txt','local_defect_candidate.py','run_local_defect_diagnostic.py']]
++source_names += [(folder/n).relative_to(repo).as_posix() for n in ['source-inputs.json','config.diagnostic.json','request-diff-plan.json','system.diagnostic.txt','local_defect_candidate.py','run_local_checks_full_answer.py']]
+ (folder/'code-snapshot').mkdir(parents=True,exist_ok=True)
+ source_hashes={n:sha(repo/n) for n in source_names}
+ for name in source_names:
+@@ -89,38 +89,69 @@
+     params=props['default_generation_settings']['params']
+     assert all(math.isclose(params[k],v,rel_tol=1e-6,abs_tol=1e-6) for k,v in numeric.items())
+     assert math.isclose(params['repeat_penalty'],1.0)
+-    for job in plan['order']:
+-        row=inputs[job['case_id']];used=row['passages']
+-        messages=copy.deepcopy(row['revised_messages'])
+-        conf=copy.deepcopy(config);rule={'kind':'explicit_defect_diagnostic','answer_not_generated':True}
+-        assert messages==reviewer.prepare_local_messages(row['local_clause'])
+-        body={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']}
+-        assert body['max_tokens']==128 and 'response_format' not in body
++    def prepare_capacity(job):
++        row=inputs[job['case_id']]
++        if job['stage']=='local':
++            clause=next(c for c in row['clauses'] if c['snapshot']==job['snapshot'])
++            used=[{'id':clause['passage_id'],'source':clause['source'],'text':clause['text']}]
++            messages=reviewer.prepare_local_messages(clause);conf=copy.deepcopy(config)
++            body={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']}
++            assert body['max_tokens']==128 and 'response_format' not in body
++        else:
++            entries=[]
++            for clause in row['clauses']:
++                matches=[r for r in records if r.get('stage')=='local' and r['case_id']==job['case_id'] and r.get('snapshot')==clause['snapshot']]
++                if matches:
++                    local_record=matches[0];raw_result=local_record['raw_content'];run_id=local_record['run_id']
++                    validation=local_record['id_validation'];provenance='new_local_request'
++                else:
++                    assert clause==row['clauses'][0]
++                    cached=load(repo/row['cached_local']['path']);assert sha(repo/row['cached_local']['path'])==row['cached_local']['sha256']
++                    raw_result=cached['raw_content'];run_id=cached['run_id'];validation=cached['id_validation'];provenance='historical_raw_reuse'
++                entries.append({'snapshot':clause['snapshot'],'source':{k:clause[k] for k in ('passage_id','start','end','text')},
++                    'raw_result':raw_result,'source_validation':validation,'provenance':provenance,'run_id':run_id})
++            old=copy.deepcopy(row['original_final_request']);body=copy.deepcopy(old)
++            payload=json.loads(body['messages'][1]['content'])
++            payload['local_defect_checks']={'notice':load(folder/'auxiliary-notice.json')['text'],'items':entries}
++            body['messages'][1]['content']=json.dumps(payload,ensure_ascii=False,indent=2)
++            removed=copy.deepcopy(body);old_payload=json.loads(removed['messages'][1]['content']);old_payload.pop('local_defect_checks')
++            assert old_payload==json.loads(old['messages'][1]['content'])
++            removed['messages'][1]['content']=old['messages'][1]['content'];assert removed==old
++            assert [e['snapshot'] for e in entries]==[c['snapshot'] for c in row['clauses']]
++            write('final-request-diff-'+job['case_id']+'.json',{'saved_at':now(),'old_request':old,'new_request':body,
++                'only_user_local_defect_checks_added':True,'no_candidate_removal_or_forced_choice':True})
++            used=row['passages'];messages=body['messages'];conf=copy.deepcopy(row['final_config'])
++            assert body=={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']} and body['max_tokens']==256
+         raw=service('apply-template',body);prompt=raw['prompt']
+         tokens=service('tokenize',{'content':prompt,'add_special':True,'parse_special':True})['tokens']
+-        item={**job,'messages':messages,'config':conf,'schema_rule':rule,'body':body,'used_passages':used,
+-              'template_response':raw,'input_tokens':len(tokens),'budget':128,'total':len(tokens)+128}
++        budget=body['max_tokens']
++        item={**job,'messages':messages,'config':conf,'schema_rule':{'stage':job['stage']},'body':body,'used_passages':used,
++            'template_response':raw,'input_tokens':len(tokens),'budget':budget,'total':len(tokens)+budget}
++        assert all(m['content'] in prompt for m in messages) and prompt.endswith('<think>\n\n</think>\n\n')
+         jobs.append(item);write('capacity-check.json',{'checked_at':now(),'rows':jobs,'counts_as_generation':False},True)
+-        assert all(m['content'] in prompt for m in messages) and prompt.endswith('<think>\n\n</think>\n\n')
+-        assert item['total']<=4096,'完整输入超限'
+-    assert len(jobs)==2 and len({j['case_id'] for j in jobs})==2
++        assert item['total']<=4096,'完整输入超限，不截断'
++        return item
++    prepared={j['sequence']:prepare_capacity(j) for j in plan['order'] if j['stage']=='local'}
++    assert len(prepared)==4
+     for row in inputs.values():
+         assert sha(repo/row['source_path'])==row['source_sha256']
+-    write('freeze.json',{'saved_at':now(),'generation_calls_so_far':0,'frozen':True,'experiment_kind':'local_first_clause_defect_reading_diagnostic','design':design,'execution_plan':plan,'order':plan['order'],'review_prompt':reviewer.REVIEW_PROMPT,'review_schema':reviewer.REVIEW_SCHEMA,
++    write('freeze.json',{'saved_at':now(),'generation_calls_so_far':0,'frozen':True,'experiment_kind':'local_all_candidates_plus_complete_original_final_answer','design':design,'execution_plan':plan,'order':plan['order'],'review_prompt':reviewer.REVIEW_PROMPT,'review_schema':reviewer.REVIEW_SCHEMA,
+         'config':config,'service_arguments':freeze['service_arguments'],'code_hashes':source_hashes,
+         'data_hashes':freeze['data_hashes'],'model':freeze['model'],'llama_cpp':freeze['llama_cpp'],
+         'actual_schemas':[{'case_id':j['case_id'],'variant':j['variant'],'response_format':j['body'].get('response_format')} for j in jobs],
+         'original_answer_side':'historical_reuse_not_synchronous_control','max_input_tokens':max(j['input_tokens'] for j in jobs),
+         'max_total_tokens':max(j['total'] for j in jobs),'evaluation_rules':freeze['evaluation_rules'],
+-        'selection_provenance':'历史完整原段落和候选重放；本轮只摘录缺陷，不生成最终答案。'})
++        'selection_provenance':'逐候选局部检查（两项历史复用）+完整原文最终回答；最终实际容量在发送前核验。'})
+     fixed_hash=sha(folder/'freeze.json')
+     print('FREEZE SAVED',now(),'review calls',len(jobs),'max tokens',max(j['total'] for j in jobs),flush=True)
+-    for job in jobs:
++    for planned_job in plan['order']:
++        job=prepared[planned_job['sequence']] if planned_job['stage']=='local' else prepare_capacity(planned_job)
+         assert sha(folder/'freeze.json')==fixed_hash
+         assert not abort.is_set() and memory()['available_bytes']>=1024**3
+         assert all(sha(repo/n)==h for n,h in source_hashes.items())
+         row=inputs[job['case_id']]
+-        record={k:copy.deepcopy(job[k]) for k in ['sequence','case_id','variant','messages','config','used_passages','input_tokens','schema_rule']}
++        record={k:copy.deepcopy(job[k]) for k in ['sequence','case_id','variant','messages','config','used_passages','input_tokens','schema_rule','stage']}
++        record['snapshot']=job.get('snapshot')
+         record.update(run_id=str(uuid.uuid4()),started_at=now(),run_kind='live_api',mode='local',
+             condition='R0',review_stage_only=True,original_answer_provenance='historical_replay',
+             original_passages=row['passages'],question=row['question'],original_response=row['original_response'],
+@@ -134,8 +165,8 @@
+         class Capture:
+             def __init__(self,inner):self.inner=inner
+             def open(self,request,*a,**kw):
+-                actual=json.loads(request.data);assert actual==job['body'] and actual['max_tokens']==128
+-                assert runtime['generation_dispatches']<2
++                actual=json.loads(request.data);assert actual==job['body'] and actual['max_tokens']==job['config']['parameters']['max_tokens']
++                assert runtime['generation_dispatches']<6
+                 record.update(actual_http_request_body=actual,raw_http_request_body=request.data.decode(),generation_dispatched=True)
+                 runtime['generation_dispatches']+=1;write(name,record,True)
+                 try:return self.inner.open(request,*a,**kw)
+@@ -150,7 +181,10 @@
+         choice=record['response']['choices'][0]
+         record.update(raw_content=choice.get('message',{}).get('content',''),finish_reason=choice.get('finish_reason'),
+             budget_exhausted=choice.get('finish_reason')=='length',raw_reasoning=choice.get('message',{}).get('reasoning_content'))
+-        record['id_validation']=reviewer.check_local(record['raw_content'],row['passages'])
++        if job['stage']=='local':
++            record['id_validation']=reviewer.check_local(record['raw_content'],job['used_passages'])
++        else:
++            record['id_validation']={'semantic_review_pending':True}
+         record['snapshot_candidates']=row['candidates']
+         write(name,record,True)
+         slots=service('slots');record['slot_after']=slots;echo=slots[0]['params']
+@@ -181,7 +215,7 @@
+     confirmed=[r for r in records if (r.get('usage') or {}).get('completion_tokens',0)>0]
+     summary={'completed_diagnostic_responses':len(confirmed),'generation_dispatches':runtime['generation_dispatches'],
+         'technical_stop':runtime['technical_stop'],'service_stopped':runtime['service_stopped'],
+-        'previous_cumulative':304,'cumulative_confirmed':304+len(confirmed),'initial_answer_generation_calls':0,
++        'previous_cumulative':306,'cumulative_confirmed':306+len(confirmed),'final_answer_generation_calls':sum(r.get('stage')=='final' for r in confirmed),
+         'unique_run_ids':[r['run_id'] for r in confirmed],'budget_exhausted':sum(r.get('budget_exhausted',False) for r in records),
+         'truncation_true':sum(r.get('truncated') is True for r in records),'truncation_unverified':sum(r.get('truncated')=='not_verified' for r in records)}
+     write('execution-summary.json',summary)

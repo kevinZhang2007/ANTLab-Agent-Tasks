@@ -1,0 +1,97 @@
+{
+  "name": "overlapping_guides_two_entities_id_remap",
+  "question": "按照竹岭项目V4版本2026-04核验表应选择哪条流程？只输出流程名称。",
+  "passages": [
+    {
+      "id": "Remapped0",
+      "source": "自造边界材料",
+      "text": "竹岭项目V4版本在2026-04的记录：核验表Trace42记录流程春召回13条证据、引入4条错误证据；流程夏召回11条、错误1条。"
+    },
+    {
+      "id": "Remapped1",
+      "source": "自造边界材料",
+      "text": "照竹岭项目V4版本在2026-04的记录：核验表Trace42记录流程春召回13条证据、引入4条错误证据；流程夏召回11条、错误1条。"
+    }
+  ],
+  "expected_status": "unknown",
+  "expected_entity": null,
+  "scope": {
+    "project": [
+      "按照竹岭项目"
+    ],
+    "version": [
+      "V4版本"
+    ],
+    "date": [
+      "2026-04"
+    ],
+    "namespace": []
+  },
+  "audit": {
+    "status": "unknown",
+    "question_candidates": [
+      {
+        "entity": "按照竹岭项目",
+        "interpretation": "literal_entity_no_char_removed",
+        "start": 0,
+        "end": 6,
+        "version_position": [
+          6,
+          10
+        ]
+      },
+      {
+        "entity": "竹岭项目",
+        "interpretation": "leading_question_guide",
+        "guide": "按照",
+        "start": 2,
+        "end": 6,
+        "version_position": [
+          6,
+          10
+        ]
+      },
+      {
+        "entity": "照竹岭项目",
+        "interpretation": "leading_question_guide",
+        "guide": "按",
+        "start": 1,
+        "end": 6,
+        "version_position": [
+          6,
+          10
+        ]
+      }
+    ],
+    "body_declarations": [
+      {
+        "entity": "竹岭项目",
+        "version": "V4版本",
+        "date": "2026-04",
+        "passage_id": "Remapped0",
+        "source": "自造边界材料",
+        "start": 0,
+        "end": 20,
+        "quote": "竹岭项目V4版本在2026-04的记录：",
+        "entity_start": 0,
+        "entity_end": 4
+      },
+      {
+        "entity": "照竹岭项目",
+        "version": "V4版本",
+        "date": "2026-04",
+        "passage_id": "Remapped1",
+        "source": "自造边界材料",
+        "start": 0,
+        "end": 21,
+        "quote": "照竹岭项目V4版本在2026-04的记录：",
+        "entity_start": 0,
+        "entity_end": 5
+      }
+    ],
+    "question_original": "按照竹岭项目V4版本2026-04核验表应选择哪条流程？只输出流程名称。",
+    "reason": "zero_or_multiple_declared_entity_interpretations",
+    "missing_fields_not_assumed_equal": true
+  },
+  "passed": true
+}

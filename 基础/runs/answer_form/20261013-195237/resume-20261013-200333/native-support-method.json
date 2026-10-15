@@ -1,0 +1,18 @@
+{
+  "recorded_at": "2026-10-13T20:19:02.150202+08:00",
+  "official_commit": "d81235049",
+  "sources": [
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049/common/json-schema-to-grammar.h",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049/common/json-schema-to-grammar.cpp",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049/common/json.h",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049/include/llama.h",
+    "https://github.com/ggml-org/llama.cpp/blob/d81235049/common/sampling.cpp"
+  ],
+  "native_conversion": "直接调用装机common_json::parse和json_schema_to_grammar(common_json,true)导出，实际GBNF保存native-*.gbnf；不从props读取grammar。",
+  "native_validation": "同包llama_sampler_init_grammar/apply/accept，逐个检查人工token串与EOS。这里只加载词表，不decode、不生成。",
+  "command_reference": "native-v2-command-result.json",
+  "proof_reference": "native-pattern-validation.json",
+  "all_old_preparation_errors_preserved": true,
+  "source_fetch_failure": "source-fetch-failure.json：unicode.cpp的TLS失败保留；未重试或关闭证书校验，转用已安装库，不需要源码构建。",
+  "scope_limit": "桥接针对本次核对的Windows x64/MSVC布局及本包导出，不声称跨平台通用接口。"
+}

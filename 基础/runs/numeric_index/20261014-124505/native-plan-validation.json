@@ -1,0 +1,242 @@
+{
+  "checked_at": "2026-10-14T12:46:04.243402+08:00",
+  "passed": true,
+  "tests": [
+    {
+      "name": "负数小数减法",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "subtract",
+          "args": [
+            {
+              "number_ref": "n5"
+            },
+            {
+              "number_ref": "n6"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": true
+    },
+    {
+      "name": "有限嵌套及100常量",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "multiply",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "number_ref": "n6"
+                },
+                {
+                  "number_ref": "n5"
+                }
+              ]
+            },
+            {
+              "constant": 100
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": true
+    },
+    {
+      "name": "重复数值独立引用",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "number_ref": "n7"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": true
+    },
+    {
+      "name": "未知引用",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "number_ref": "unknown"
+            },
+            {
+              "number_ref": "n6"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": false
+    },
+    {
+      "name": "除零",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "divide",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "number_ref": "n8"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": false
+    },
+    {
+      "name": "非法操作",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "power",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "number_ref": "n8"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": false,
+      "native_schema_accept": false,
+      "rejected_token": 13175,
+      "program_valid": false
+    },
+    {
+      "name": "任意事实常量",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "constant": 99
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": false,
+      "native_schema_accept": false,
+      "rejected_token": 24,
+      "program_valid": false
+    },
+    {
+      "name": "无须计算",
+      "raw_plan": {
+        "mode": "no_calculation",
+        "expression": null
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": true
+    },
+    {
+      "name": "证据不足",
+      "raw_plan": {
+        "mode": "insufficient",
+        "expression": null
+      },
+      "expected_schema_accept": true,
+      "native_schema_accept": true,
+      "rejected_token": null,
+      "program_valid": true
+    },
+    {
+      "name": "超过节点或深度",
+      "raw_plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "op": "add",
+              "args": [
+                {
+                  "op": "add",
+                  "args": [
+                    {
+                      "op": "add",
+                      "args": [
+                        {
+                          "op": "add",
+                          "args": [
+                            {
+                              "number_ref": "n6"
+                            },
+                            {
+                              "number_ref": "n6"
+                            }
+                          ]
+                        },
+                        {
+                          "number_ref": "n6"
+                        }
+                      ]
+                    },
+                    {
+                      "number_ref": "n6"
+                    }
+                  ]
+                },
+                {
+                  "number_ref": "n6"
+                }
+              ]
+            },
+            {
+              "number_ref": "n6"
+            }
+          ]
+        }
+      },
+      "expected_schema_accept": false,
+      "native_schema_accept": false,
+      "rejected_token": 453,
+      "program_valid": false
+    }
+  ],
+  "generation_calls": 0,
+  "dll_sha256": {
+    "llama-common.dll": "cb5011455243a8b6a91fed00fbb33d93fdb53fa7c417fc59f27a004af85d7d9b",
+    "llama.dll": "48d2b52f4d6b2d7db2ca4698edbb95ecb4511b792396c566e1340668b6415a71"
+  },
+  "scope": "同包原生Schema转换及grammar sampler，不加载张量，不创建context或decode；位置/引用/除零语义由独立程序检查"
+}

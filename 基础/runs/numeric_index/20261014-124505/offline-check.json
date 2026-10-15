@@ -1,0 +1,690 @@
+{
+  "checked_at": "2026-10-14T12:45:05.705395+08:00",
+  "passed": true,
+  "self_original": [
+    {
+      "id": "self-a",
+      "source": "自造",
+      "text": "🧪版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+    }
+  ],
+  "catalog": [
+    {
+      "number_ref": "n1",
+      "passage_id": "self-a",
+      "raw_number": "4",
+      "start": 4,
+      "end": 5,
+      "context_start": 0,
+      "context_end": 29,
+      "context": "🧪版本R4，日期2027-08-09，值-2.5和0.75"
+    },
+    {
+      "number_ref": "n2",
+      "passage_id": "self-a",
+      "raw_number": "2027",
+      "start": 8,
+      "end": 12,
+      "context_start": 0,
+      "context_end": 36,
+      "context": "🧪版本R4，日期2027-08-09，值-2.5和0.75，重复0.75"
+    },
+    {
+      "number_ref": "n3",
+      "passage_id": "self-a",
+      "raw_number": "08",
+      "start": 13,
+      "end": 15,
+      "context_start": 0,
+      "context_end": 39,
+      "context": "🧪版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记"
+    },
+    {
+      "number_ref": "n4",
+      "passage_id": "self-a",
+      "raw_number": "09",
+      "start": 16,
+      "end": 18,
+      "context_start": 0,
+      "context_end": 41,
+      "context": "🧪版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+    },
+    {
+      "number_ref": "n5",
+      "passage_id": "self-a",
+      "raw_number": "-2.5",
+      "start": 20,
+      "end": 24,
+      "context_start": 0,
+      "context_end": 41,
+      "context": "🧪版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+    },
+    {
+      "number_ref": "n6",
+      "passage_id": "self-a",
+      "raw_number": "0.75",
+      "start": 25,
+      "end": 29,
+      "context_start": 1,
+      "context_end": 41,
+      "context": "版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+    },
+    {
+      "number_ref": "n7",
+      "passage_id": "self-a",
+      "raw_number": "0.75",
+      "start": 32,
+      "end": 36,
+      "context_start": 8,
+      "context_end": 41,
+      "context": "2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+    },
+    {
+      "number_ref": "n8",
+      "passage_id": "self-a",
+      "raw_number": "0",
+      "start": 39,
+      "end": 40,
+      "context_start": 15,
+      "context_end": 41,
+      "context": "-09，值-2.5和0.75，重复0.75，另记0。"
+    }
+  ],
+  "tests": [
+    {
+      "name": "负数小数减法",
+      "plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "subtract",
+          "args": [
+            {
+              "number_ref": "n5"
+            },
+            {
+              "number_ref": "n6"
+            }
+          ]
+        }
+      },
+      "result": {
+        "valid": true,
+        "source_positions_verified": true,
+        "tool_status": "executed",
+        "tool_result": "-3.25",
+        "errors": [],
+        "operations": [
+          {
+            "op": "subtract",
+            "left": "-2.5",
+            "right": "0.75",
+            "result": "-3.25"
+          }
+        ],
+        "used_numbers": [
+          {
+            "number_ref": "n5",
+            "passage_id": "self-a",
+            "raw_number": "-2.5",
+            "start": 20,
+            "end": 24,
+            "context_start": 0,
+            "context_end": 41,
+            "context": "🧪版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+          },
+          {
+            "number_ref": "n6",
+            "passage_id": "self-a",
+            "raw_number": "0.75",
+            "start": 25,
+            "end": 29,
+            "context_start": 1,
+            "context_end": 41,
+            "context": "版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+          }
+        ],
+        "semantics_verified": false,
+        "raw_plan": {
+          "mode": "calculate",
+          "expression": {
+            "op": "subtract",
+            "args": [
+              {
+                "number_ref": "n5"
+              },
+              {
+                "number_ref": "n6"
+              }
+            ]
+          }
+        },
+        "operation_nodes": 1,
+        "decimal_flags": [],
+        "decimal_precision": 50
+      }
+    },
+    {
+      "name": "有限嵌套及100常量",
+      "plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "multiply",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "number_ref": "n6"
+                },
+                {
+                  "number_ref": "n5"
+                }
+              ]
+            },
+            {
+              "constant": 100
+            }
+          ]
+        }
+      },
+      "result": {
+        "valid": true,
+        "source_positions_verified": true,
+        "tool_status": "executed",
+        "tool_result": "-30.0",
+        "errors": [],
+        "operations": [
+          {
+            "op": "divide",
+            "left": "0.75",
+            "right": "-2.5",
+            "result": "-0.3"
+          },
+          {
+            "op": "multiply",
+            "left": "-0.3",
+            "right": "100",
+            "result": "-30.0"
+          }
+        ],
+        "used_numbers": [
+          {
+            "number_ref": "n6",
+            "passage_id": "self-a",
+            "raw_number": "0.75",
+            "start": 25,
+            "end": 29,
+            "context_start": 1,
+            "context_end": 41,
+            "context": "版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+          },
+          {
+            "number_ref": "n5",
+            "passage_id": "self-a",
+            "raw_number": "-2.5",
+            "start": 20,
+            "end": 24,
+            "context_start": 0,
+            "context_end": 41,
+            "context": "🧪版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+          }
+        ],
+        "semantics_verified": false,
+        "raw_plan": {
+          "mode": "calculate",
+          "expression": {
+            "op": "multiply",
+            "args": [
+              {
+                "op": "divide",
+                "args": [
+                  {
+                    "number_ref": "n6"
+                  },
+                  {
+                    "number_ref": "n5"
+                  }
+                ]
+              },
+              {
+                "constant": 100
+              }
+            ]
+          }
+        },
+        "operation_nodes": 2,
+        "decimal_flags": [],
+        "decimal_precision": 50
+      }
+    },
+    {
+      "name": "重复数值独立引用",
+      "plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "number_ref": "n7"
+            }
+          ]
+        }
+      },
+      "result": {
+        "valid": true,
+        "source_positions_verified": true,
+        "tool_status": "executed",
+        "tool_result": "1.50",
+        "errors": [],
+        "operations": [
+          {
+            "op": "add",
+            "left": "0.75",
+            "right": "0.75",
+            "result": "1.50"
+          }
+        ],
+        "used_numbers": [
+          {
+            "number_ref": "n6",
+            "passage_id": "self-a",
+            "raw_number": "0.75",
+            "start": 25,
+            "end": 29,
+            "context_start": 1,
+            "context_end": 41,
+            "context": "版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+          },
+          {
+            "number_ref": "n7",
+            "passage_id": "self-a",
+            "raw_number": "0.75",
+            "start": 32,
+            "end": 36,
+            "context_start": 8,
+            "context_end": 41,
+            "context": "2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+          }
+        ],
+        "semantics_verified": false,
+        "raw_plan": {
+          "mode": "calculate",
+          "expression": {
+            "op": "add",
+            "args": [
+              {
+                "number_ref": "n6"
+              },
+              {
+                "number_ref": "n7"
+              }
+            ]
+          }
+        },
+        "operation_nodes": 1,
+        "decimal_flags": [],
+        "decimal_precision": 50
+      }
+    },
+    {
+      "name": "未知引用",
+      "plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "number_ref": "unknown"
+            },
+            {
+              "number_ref": "n6"
+            }
+          ]
+        }
+      },
+      "result": {
+        "valid": false,
+        "source_positions_verified": true,
+        "tool_status": "not_executed",
+        "tool_result": null,
+        "errors": [
+          "未知数值引用"
+        ],
+        "operations": [],
+        "used_numbers": [],
+        "semantics_verified": false,
+        "raw_plan": {
+          "mode": "calculate",
+          "expression": {
+            "op": "add",
+            "args": [
+              {
+                "number_ref": "unknown"
+              },
+              {
+                "number_ref": "n6"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "除零",
+      "plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "divide",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "number_ref": "n8"
+            }
+          ]
+        }
+      },
+      "result": {
+        "valid": false,
+        "source_positions_verified": true,
+        "tool_status": "execution_failed",
+        "tool_result": null,
+        "errors": [
+          "拒绝除零"
+        ],
+        "operations": [],
+        "used_numbers": [
+          {
+            "number_ref": "n6",
+            "passage_id": "self-a",
+            "raw_number": "0.75",
+            "start": 25,
+            "end": 29,
+            "context_start": 1,
+            "context_end": 41,
+            "context": "版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+          },
+          {
+            "number_ref": "n8",
+            "passage_id": "self-a",
+            "raw_number": "0",
+            "start": 39,
+            "end": 40,
+            "context_start": 15,
+            "context_end": 41,
+            "context": "-09，值-2.5和0.75，重复0.75，另记0。"
+          }
+        ],
+        "semantics_verified": false,
+        "raw_plan": {
+          "mode": "calculate",
+          "expression": {
+            "op": "divide",
+            "args": [
+              {
+                "number_ref": "n6"
+              },
+              {
+                "number_ref": "n8"
+              }
+            ]
+          }
+        },
+        "operation_nodes": 1
+      }
+    },
+    {
+      "name": "非法操作",
+      "plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "power",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "number_ref": "n8"
+            }
+          ]
+        }
+      },
+      "result": {
+        "valid": false,
+        "source_positions_verified": true,
+        "tool_status": "not_executed",
+        "tool_result": null,
+        "errors": [
+          "非法运算结构"
+        ],
+        "operations": [],
+        "used_numbers": [],
+        "semantics_verified": false,
+        "raw_plan": {
+          "mode": "calculate",
+          "expression": {
+            "op": "power",
+            "args": [
+              {
+                "number_ref": "n6"
+              },
+              {
+                "number_ref": "n8"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "任意事实常量",
+      "plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "number_ref": "n6"
+            },
+            {
+              "constant": 99
+            }
+          ]
+        }
+      },
+      "result": {
+        "valid": false,
+        "source_positions_verified": true,
+        "tool_status": "not_executed",
+        "tool_result": null,
+        "errors": [
+          "只允许通用换算常量100"
+        ],
+        "operations": [],
+        "used_numbers": [
+          {
+            "number_ref": "n6",
+            "passage_id": "self-a",
+            "raw_number": "0.75",
+            "start": 25,
+            "end": 29,
+            "context_start": 1,
+            "context_end": 41,
+            "context": "版本R4，日期2027-08-09，值-2.5和0.75，重复0.75，另记0。"
+          }
+        ],
+        "semantics_verified": false,
+        "raw_plan": {
+          "mode": "calculate",
+          "expression": {
+            "op": "add",
+            "args": [
+              {
+                "number_ref": "n6"
+              },
+              {
+                "constant": 99
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "无须计算",
+      "plan": {
+        "mode": "no_calculation",
+        "expression": null
+      },
+      "result": {
+        "valid": true,
+        "source_positions_verified": true,
+        "tool_status": "not_required",
+        "tool_result": null,
+        "errors": [],
+        "operations": [],
+        "used_numbers": [],
+        "semantics_verified": false,
+        "raw_plan": {
+          "mode": "no_calculation",
+          "expression": null
+        }
+      }
+    },
+    {
+      "name": "证据不足",
+      "plan": {
+        "mode": "insufficient",
+        "expression": null
+      },
+      "result": {
+        "valid": true,
+        "source_positions_verified": true,
+        "tool_status": "not_required",
+        "tool_result": null,
+        "errors": [],
+        "operations": [],
+        "used_numbers": [],
+        "semantics_verified": false,
+        "raw_plan": {
+          "mode": "insufficient",
+          "expression": null
+        }
+      }
+    },
+    {
+      "name": "超过节点或深度",
+      "plan": {
+        "mode": "calculate",
+        "expression": {
+          "op": "add",
+          "args": [
+            {
+              "op": "add",
+              "args": [
+                {
+                  "op": "add",
+                  "args": [
+                    {
+                      "op": "add",
+                      "args": [
+                        {
+                          "op": "add",
+                          "args": [
+                            {
+                              "number_ref": "n6"
+                            },
+                            {
+                              "number_ref": "n6"
+                            }
+                          ]
+                        },
+                        {
+                          "number_ref": "n6"
+                        }
+                      ]
+                    },
+                    {
+                      "number_ref": "n6"
+                    }
+                  ]
+                },
+                {
+                  "number_ref": "n6"
+                }
+              ]
+            },
+            {
+              "number_ref": "n6"
+            }
+          ]
+        }
+      },
+      "result": {
+        "valid": false,
+        "source_positions_verified": true,
+        "tool_status": "not_executed",
+        "tool_result": null,
+        "errors": [
+          "超过4个运算节点"
+        ],
+        "operations": [],
+        "used_numbers": [],
+        "semantics_verified": false,
+        "raw_plan": {
+          "mode": "calculate",
+          "expression": {
+            "op": "add",
+            "args": [
+              {
+                "op": "add",
+                "args": [
+                  {
+                    "op": "add",
+                    "args": [
+                      {
+                        "op": "add",
+                        "args": [
+                          {
+                            "op": "add",
+                            "args": [
+                              {
+                                "number_ref": "n6"
+                              },
+                              {
+                                "number_ref": "n6"
+                              }
+                            ]
+                          },
+                          {
+                            "number_ref": "n6"
+                          }
+                        ]
+                      },
+                      {
+                        "number_ref": "n6"
+                      }
+                    ]
+                  },
+                  {
+                    "number_ref": "n6"
+                  }
+                ]
+              },
+              {
+                "number_ref": "n6"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "tampered_position_rejected": true,
+  "input_unchanged": true,
+  "counts_as_generation": false
+}

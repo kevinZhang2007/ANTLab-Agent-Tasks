@@ -1,0 +1,250 @@
+{
+  "name": "difference_short_metric_wrong_modifier_ids",
+  "question": "竹岭项目V4版本在2026-04同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+  "passages": [
+    {
+      "id": "Remapped901",
+      "source": "自造资料/1",
+      "text": "竹岭项目V4版本在2026-04的记录：同机顺序批次Trace82的旧链路处理40个固定问题，客户端完整响应耗时中位数为12.5秒。"
+    },
+    {
+      "id": "Remapped902",
+      "source": "自造资料/2",
+      "text": "批次Trace82的复核补页：Trace82新链路处理同样40个问题，另一个指标中位数为8.2秒；两次保持输入顺序。"
+    }
+  ],
+  "raw": "{\"answer\": \"4.3\", \"citations\": []}",
+  "expected": false,
+  "actual": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": false,
+    "proof_status": "refused",
+    "proof_kind": "difference",
+    "trace": [
+      {
+        "stage": "question_project_boundary",
+        "audit": {
+          "status": "resolved",
+          "question_candidates": [
+            {
+              "entity": "竹岭项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                8
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "V4版本",
+              "date": "2026-04",
+              "passage_id": "Remapped901",
+              "source": "自造资料/1",
+              "start": 0,
+              "end": 20,
+              "quote": "竹岭项目V4版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "竹岭项目V4版本在2026-04同机实验中，新链路的完整响应耗时中位数比旧链路少多少秒？只输出数值。",
+          "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+          "missing_fields_not_assumed_equal": true,
+          "chosen": {
+            "entity": "竹岭项目",
+            "interpretation": "literal_entity_no_char_removed",
+            "start": 0,
+            "end": 4,
+            "version_position": [
+              4,
+              8
+            ]
+          },
+          "supporting_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "V4版本",
+              "date": "2026-04",
+              "passage_id": "Remapped901",
+              "source": "自造资料/1",
+              "start": 0,
+              "end": 20,
+              "quote": "竹岭项目V4版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ]
+        }
+      },
+      {
+        "stage": "direct_relation_audit",
+        "links": [
+          {
+            "supplement_id": "Remapped902",
+            "target_id": "Remapped901",
+            "added": false,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "Trace82",
+                "start": 0,
+                "end": 9,
+                "code_start": 2,
+                "code_end": 9,
+                "statement": {
+                  "text": "批次Trace82的复核补页：Trace82新链路处理同样40个问题，另一个指标中位数为8.2秒；",
+                  "start": 0,
+                  "end": 49
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [
+              "Remapped901"
+            ],
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date",
+              "namespace"
+            ],
+            "semantic_support_verified": false,
+            "target_declarations": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "同机顺序批次",
+                "code": "Trace82",
+                "start": 20,
+                "end": 33,
+                "code_start": 26,
+                "code_end": 33,
+                "statement": {
+                  "text": "竹岭项目V4版本在2026-04的记录：同机顺序批次Trace82的旧链路处理40个固定问题，客户端完整响应耗时中位数为12.5秒。",
+                  "start": 0,
+                  "end": 66
+                },
+                "reliable_declaration": true,
+                "direct_supplement_reference": false,
+                "mere_reference": false,
+                "declaration_predicate": {
+                  "text": "的旧链路处理",
+                  "start": 33,
+                  "end": 39
+                }
+              }
+            ],
+            "reason": "unique_reliable_direct_reference",
+            "object_labels_equal": true,
+            "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+            "completion_reason": "already_selected"
+          }
+        ]
+      },
+      {
+        "stage": "pair_scope",
+        "main": "Remapped901",
+        "supplement": "Remapped902",
+        "main_status": "matched",
+        "supplement_status": "unknown",
+        "main_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [
+              "竹岭项目"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "version",
+            "question": [
+              "V4版本"
+            ],
+            "source": [
+              "V4版本"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [
+              "2026-04"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ],
+        "supplement_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "version",
+            "question": [
+              "V4版本"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ]
+      },
+      {
+        "stage": "difference_operand_attempt_refused",
+        "left_source_id": "Remapped901",
+        "right_source_id": "Remapped902",
+        "reason": "object_not_unique_in_operand_source"
+      },
+      {
+        "stage": "difference_operand_attempt_refused",
+        "left_source_id": "Remapped902",
+        "right_source_id": "Remapped901",
+        "reason": "zero_or_multiple_operand_metrics"
+      }
+    ],
+    "derived_response": null,
+    "requires_independent_original_text_review": true,
+    "reason": "zero_or_multiple_reliable_operand_assignments"
+  },
+  "passed": true,
+  "checked_at": "2026-10-15T21:08:08.382959+08:00"
+}

@@ -1,0 +1,120 @@
+{
+  "checked_at": "2026-10-14T14:27:43.848005+08:00",
+  "run_kind": "read_only_resource_diagnosis",
+  "generation_calls": 0,
+  "model_loaded_this_round": false,
+  "binary_build": "b11429-d81235049",
+  "binary_hash_matches_both_attempts": true,
+  "observations": [
+    "4096与3072均由监测脚本在一次采样低于1GiB时终止；未出现已记录分配失败，也未健康就绪。",
+    "完整stderr分别6/7行，stdout为空。没有CPU_Mapped、CPU_REPACK、KV或compute buffer分项大小日志。",
+    "两次均到达threadpool init；b11429源码在模型加载和llama_init_from_model返回成功后才执行此日志。3072还到达槽初始化。不能说两次都停在KV分配前。",
+    "采样从启动后立即开始，约0.5秒一次；没有逐样本加载阶段标记。两次结束样本并非相同精确阶段或稳定内存测量。"
+  ],
+  "feature_audit": {
+    "mmap": {
+      "configured": "未指定load-mode，默认auto；CPU正常支持时解析为mmap。",
+      "actual": "未知：旧日志无解析后的load_mode，旧环境变量未保存。"
+    },
+    "mlock": {
+      "configured": "默认auto不请求mlock，启动参数未显式启用。",
+      "actual": "未知：无运行时锁页状态记录，不能排除未归档环境覆盖。"
+    },
+    "cpu_repack": {
+      "configured": "默认启用，旧命令未禁用。",
+      "actual": "未知：无CPU_REPACK分配或实际选择的buffer类型日志。"
+    },
+    "weights": {
+      "file_gib": 2.3257734775543213,
+      "mapped_and_repacked_resident_bytes": "未知；工作集不能拆解这些类型。"
+    },
+    "kv": {
+      "actual_allocation_bytes": "未知",
+      "f16_estimate_bytes": {
+        "4096": 603979776,
+        "3072": 452984832
+      },
+      "formula": "layers × kv_heads × (key_dim + value_dim) × ctx × 2 bytes；理论tensor载荷，不含对齐等额外开销。"
+    },
+    "compute_buffer": {
+      "actual_bytes": "未知，batch128/ubatch64/threads4在两次相同；未保存compute buffer分项。"
+    }
+  },
+  "smaller_context_higher_observation": {
+    "working_set_difference_gib": 0.5359649658203125,
+    "private_bytes_difference_gib": -0.14126205444335938,
+    "kv_estimate_saved_bytes": 150994944,
+    "conclusion": "只能解释为不可直接配对的加载过程采样，不能确定更高工作集的具体原因。降低上下文理论减少KV，不减少权重重排。映射页面驻留、其他程序变化、加载进度均未独立测量；不认定重复加载。"
+  },
+  "source_mechanism": [
+    "--no-repack设置no_extra_bufts=true，传递use_extra_bufts=false，使CPU buffer候选列表跳过额外类型。",
+    "CPU_REPACK实际另行分配CPU缓冲；从映射源向非直接映射tensor设置数据会走repack转换。源码表明可能出现映射源与重排缓冲的共存；这不是旧运行已证实的内存分项。",
+    "关闭repack仍用同一GGUF量化权重，但不使用这一路的重排矩阵运算内核；可能降低CPU速度，幅度未实测，浮点执行路径变化也不保证答案逐字一致。"
+  ],
+  "candidate": {
+    "status": "proposed_not_run",
+    "arguments": [
+      "%LOCALAPPDATA%/ANTLabLocalModel\\llama-b11429\\llama-server.exe",
+      "-m",
+      "%LOCALAPPDATA%/ANTLabLocalModel\\models\\Qwen3-4B-Q4_K_M.gguf",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8080",
+      "--alias",
+      "Qwen3-4B-Q4_K_M",
+      "--ctx-size",
+      "4096",
+      "--parallel",
+      "1",
+      "--batch-size",
+      "128",
+      "--ubatch-size",
+      "64",
+      "--threads",
+      "4",
+      "--gpu-layers",
+      "0",
+      "--no-context-shift",
+      "--no-warmup",
+      "--temp",
+      "0.7",
+      "--top-p",
+      "0.8",
+      "--top-k",
+      "20",
+      "--min-p",
+      "0",
+      "--presence-penalty",
+      "1.5",
+      "--repeat-penalty",
+      "1.0",
+      "--reasoning",
+      "off",
+      "--seed",
+      "42",
+      "--predict",
+      "256",
+      "--slot-save-path",
+      "%LOCALAPPDATA%/ANTLabLocalModel\\diagnostic-cache",
+      "--no-repack",
+      "--load-mode",
+      "mmap",
+      "--verbose"
+    ],
+    "reference": "4096旧启动参数",
+    "differences": [
+      "新增--no-repack：唯一资源机制变化",
+      "新增--load-mode mmap：明确映射并不锁页，原auto的通常行为，但原实际模式未知",
+      "新增--verbose：诊断日志级别变化，不是节省内存参数"
+    ],
+    "preserved": "同权重、4096、CPU单槽4线程、batch128/ubatch64、关闭思考/上下文移位/预热及全部采样设置；不删段、不截断资料。",
+    "expected_effect": "如果原运行确实选择重排buffer，可避免该额外缓冲与重排阶段峰值；具体能省多少未知。",
+    "estimate": "权重文件2.326GiB，4096 F16 KV理论0.5625GiB，两者合计约2.888GiB；不是进程峰值或足够内存结论，未包含运行时、计算缓冲、系统文件缓存等。原重排缓冲大小未记录，不能给出节省GiB的实测承诺。",
+    "cost_and_risk": "CPU可能变慢；mmap驻留与系统波动仍可能触发低内存停止；日志IO也有开销。加载成功不证明生成峰值安全。",
+    "other_options_not_selected": "不启用mlock；不使用已移除/未确认的--no-mmap。load-mode none是存在的模式，但不能保证更省内存。KV量化会改变配置且不针对权重峰值；继续降低ctx会改变容量，均不选。",
+    "stop_rule": "一次可用物理内存低于1GiB、分配失败或崩溃立即保存并停止本轮自有PID，不降低门槛、不结束其他程序、不重试。采样约0.5秒有检测间隔，不能保证任何时刻都不跌破阈值。",
+    "next_if_authorized": "仅一次加载/健康检查，重新测量启动前内存，留足额外余量；保存解析后的load_mode及各buffer日志。只有后续实际模板核对完整输入加预算通过，才可另行考虑生成。",
+    "recommendation": "值得考虑一次仅加载验证，目的是检验明确的内存机制候选；现有证据不能保证就绪。当前未获本轮加载授权，未执行。"
+  }
+}

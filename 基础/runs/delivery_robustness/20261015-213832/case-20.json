@@ -1,0 +1,112 @@
+{
+  "name": "snapshot_scope_conflict",
+  "branch": "qualification",
+  "question": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+  "passages": [
+    {
+      "id": "snapshot-data",
+      "source": "独立自造资料",
+      "text": "绀羽项目Edition584版本在2025-11的记录：复核表Document862显示Cap875签章核验通过、箱体定位通过、重放恢复通过；Cap982箱体定位9项偏移。"
+    },
+    {
+      "id": "snapshot-rule",
+      "source": "独立自造资料",
+      "text": "批次Document862的复核补页：Document862的发布规则要求签章核验、箱体定位和重放恢复三项检查全部通过。"
+    }
+  ],
+  "raw_response": "{\"answer\": \"Cap875\", \"citations\": []}",
+  "expected_derived_answer": null,
+  "expected_basis": "项目版本范围冲突。",
+  "audit_universe": null,
+  "actual": {
+    "judgment_source": "local_rule",
+    "run_kind": "offline_proof",
+    "proof_established": false,
+    "proof_status": "unknown",
+    "proof_kind": "snapshot",
+    "trace": [],
+    "derived_response": null,
+    "requires_independent_original_text_review": true,
+    "snapshot_proof": {
+      "run_kind": "offline_proof",
+      "judgment_source": "local_rule",
+      "raw_response": "{\"answer\": \"Cap875\", \"citations\": []}",
+      "proof_established": false,
+      "proof_status": "unknown",
+      "conditions": [],
+      "final_response": null,
+      "no_exclusion_as_positive_proof": true,
+      "requires_independent_original_text_review": true,
+      "answer_unchanged": "Cap875",
+      "scope_audit": {
+        "question_scope": {
+          "project": [
+            "绀羽项目"
+          ],
+          "version": [
+            "Edition583版本"
+          ],
+          "date": [
+            "2025-11"
+          ],
+          "namespace": []
+        },
+        "question_project_resolution": {
+          "status": "unknown",
+          "question_candidates": [
+            {
+              "entity": "绀羽项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                16
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "绀羽项目",
+              "version": "Edition584版本",
+              "date": "2025-11",
+              "passage_id": "snapshot-data",
+              "source": "独立自造资料",
+              "start": 0,
+              "end": 28,
+              "quote": "绀羽项目Edition584版本在2025-11的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "绀羽项目Edition583版本在2025-11应发布哪个快照？只输出快照编号。",
+          "reason": "entity_declaration_version_or_date_not_confirmed",
+          "missing_fields_not_assumed_equal": true
+        },
+        "removed_only_from_rule_analysis": [],
+        "original_model_passages_not_changed": true,
+        "unknown_scope_passages_remain_in_analysis": true
+      },
+      "occurrence_audit": {
+        "Cap875": {
+          "value": "Cap875",
+          "eligible_for_exclusion_check": false,
+          "reason": "question_project_entity_unknown",
+          "all_occurrences": [],
+          "target_occurrences": [],
+          "unknown_occurrences": []
+        }
+      },
+      "reason": "answer_identity_or_scope_not_reliably_confirmed"
+    },
+    "reason": "answer_identity_or_scope_not_reliably_confirmed"
+  },
+  "derived_response": null,
+  "final_response": {
+    "answer": "Cap875",
+    "citations": []
+  },
+  "passed": true,
+  "raw_response_preserved": true,
+  "checked_at": "2026-10-15T21:38:37.069370+08:00"
+}

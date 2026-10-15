@@ -1,0 +1,96 @@
+[
+  {
+    "requirement": "主故障复现",
+    "state": "已保存",
+    "paths": [
+      "进阶/runs/b_scope_diagnosis/20261013-184411/04-observation-02.json",
+      "进阶/runs/b_scope_diagnosis/20261013-184411/04-observation-06.json",
+      "进阶/runs/b_scope_diagnosis/20261013-184411/06-findings.json"
+    ]
+  },
+  {
+    "requirement": "两个竞争机制与区分性干预",
+    "state": "已保存机制比较；窄症状解释有边界",
+    "paths": [
+      "进阶/runs/b_scope_diagnosis/20261013-184411/03-design-plan.json",
+      "进阶/runs/b_scope_diagnosis/20261013-184411/04-observation-03.json",
+      "进阶/runs/b_scope_diagnosis/20261013-184411/04-observation-04.json",
+      "进阶/runs/b_scope_diagnosis/20261013-184411/04-observation-07.json",
+      "进阶/runs/b_scope_diagnosis/20261013-184411/04-observation-08.json"
+    ],
+    "limit": "缓存解释旧来源复用；top-k前置解释冷请求漏证。源码已排除top-k单独产生旧范围证据，不能将两者写成同一窄症状的同等竞争解释。"
+  },
+  {
+    "requirement": "最小修复及差异/哈希",
+    "state": "已保存",
+    "paths": [
+      "进阶/challenge_b/no_cache_engine.py",
+      "进阶/runs/b_cache_repair/20261013-185609/01-implementation.json",
+      "进阶/runs/b_cache_repair/20261013-185609/engine-logic.diff"
+    ]
+  },
+  {
+    "requirement": "两个正常回归",
+    "state": "冷请求、同范围重复已保存",
+    "paths": [
+      "进阶/runs/b_cache_repair/20261013-185609/04-normal_cold.json",
+      "进阶/runs/b_cache_repair/20261013-185609/04-normal_repeat.json"
+    ]
+  },
+  {
+    "requirement": "两个等价变体",
+    "state": "顺序打乱、ID一致重映射已保存",
+    "paths": [
+      "进阶/runs/b_cache_repair/20261013-185609/04-equivalent_corpus_order.json",
+      "进阶/runs/b_cache_repair/20261013-185609/04-equivalent_block_ids.json"
+    ],
+    "limit": "ID重映射保留字典序，未证明任意ID改名在并列排序时无差异。"
+  },
+  {
+    "requirement": "边界",
+    "state": "draft、正文变化及冷/暖未知范围已保存；未知范围Engine契约仍不合格",
+    "paths": [
+      "进阶/runs/b_cache_repair/20261013-185609/04-boundary_draft_changed.json",
+      "进阶/runs/b_cache_repair/20261013-185609/04-boundary_corpus_changed.json",
+      "进阶/runs/b_http_page/20261013-190716/04-page-log-closure.json",
+      "进阶/runs/b_warm_boundary/20261013-191921/03-page-log-closure.json"
+    ]
+  },
+  {
+    "requirement": "HTTP、页面与同request_id日志",
+    "state": "已实际操作并关联",
+    "paths": [
+      "进阶/runs/b_http_page/20261013-190716/04-page-log-closure.json",
+      "进阶/runs/b_warm_boundary/20261013-191921/03-page-log-closure.json"
+    ]
+  },
+  {
+    "requirement": "两个其他风险",
+    "state": "已列检索漏证与语义误标风险",
+    "paths": [
+      "进阶/runs/b_scope_diagnosis/20261013-184411/01-source-review.json",
+      "进阶/runs/b_http_page/20261013-190716/06-findings.json"
+    ]
+  },
+  {
+    "requirement": "阅读范围依据",
+    "state": "复用已归档范围，不新增阅读",
+    "paths": [
+      "基础/runs/reading/p1-reading-evidence.json",
+      "基础/runs/reading/p2-reading-evidence.json",
+      "基础/runs/reading/technical-evidence-index.json"
+    ]
+  },
+  {
+    "requirement": "三项关键决策的本人判断及AI影响、整合报告/README入口映射",
+    "state": "本轮未写入，不登记已完成",
+    "paths": [],
+    "limit": "已有技术计划不替代本人决策声明；三个说明文档按授权保持原样。"
+  },
+  {
+    "requirement": "迁移到多用户/多worker的可执行验证计划与停止条件",
+    "state": "未完成",
+    "paths": [],
+    "limit": "当前单进程样机结果不能证明并发或隔离安全。"
+  }
+]

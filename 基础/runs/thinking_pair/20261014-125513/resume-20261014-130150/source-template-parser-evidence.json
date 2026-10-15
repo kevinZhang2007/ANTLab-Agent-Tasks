@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-14T13:01:51.379559+08:00",
+  "source_commit": "d81235049",
+  "template_actual_reference": "基础/runs/prompts/qwen06_short_budget_r0/round2/runtime.json props.chat_template",
+  "template_branch": "add_generation_prompt追加assistant起始标记；仅enable_thinking is false时追加空think块。开启时think起始标签由模型输出，不能要求prompt预填。",
+  "switch_source": "基础/runs/prompts/qwen06_short_budget_r0/official-server-common.cpp.txt:1396—1408",
+  "parser_source": "基础/runs/prompts/qwen06_short_budget_r0/official-chat-auto-parser-generator.cpp.txt:105—134及138—155",
+  "parser_meaning": "reasoning parser与Schema final-content parser组合；content及reasoning_content等实际字段原样保存。",
+  "verified_items": [
+    "相同b11429版本与原文",
+    "实际布尔请求开关",
+    "props中的本机模板",
+    "两侧渲染全文及token",
+    "Schema接口接受"
+  ],
+  "not_echoed": [
+    "内部enable_thinking状态",
+    "本次编译grammar和parser对象"
+  ],
+  "generation_reasoning_observation": "开启思考是否真的产生reasoning_content只能在实际8次响应后记录，不能由模板通过代替。",
+  "no_test_generation": true
+}

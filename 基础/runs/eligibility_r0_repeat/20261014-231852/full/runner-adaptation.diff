@@ -1,0 +1,145 @@
+--- reused/run_formal_round2.py
++++ independent/run_full_r0.py
+@@ -3,9 +3,10 @@
+ from datetime import datetime
+ import copy, ctypes, hashlib, json, math, os, re, socket, subprocess, sys, threading, time, uuid
+ import urllib.request, urllib.error
+-import general_candidate as candidate
+-
+-repo = Path(__file__).resolve().parents[2]
++sys.path.insert(0,str(next(p for p in Path(__file__).resolve().parents if (p/'基础/starter/provider.py').is_file())/'基础/tests'))
++import eligibility_general_candidate as candidate
++
++repo = next(p for p in Path(__file__).resolve().parents if (p/'基础/starter/provider.py').is_file())
+ base = repo/'基础'
+ sys.path.insert(0, str(base/'starter'))
+ import runner, provider
+@@ -17,20 +18,19 @@
+ 
+ def main():
+     folder = Path(sys.argv[1]).resolve()
+-    assert not folder.exists(), '新轮次必须使用全新目录，禁止自动续发或覆盖'
+-    folder.mkdir(parents=True)
++    assert folder.exists() and not list(folder.glob('run-*.json')) and not (folder/'runtime.json').exists(), '禁止重复或自动续发'
+     def write(name, value, update=False):
+         path = folder/name
+         assert update or not path.exists(), '禁止覆盖'+name
+         with path.open('w',encoding='utf-8') as stream:
+             json.dump(value,stream,ensure_ascii=False,indent=2); stream.flush(); os.fsync(stream.fileno())
+     first = base/'runs/formal_preparation/20261013-131201'
+-    settings = load(first/'candidate-settings.json')
+-    answer = load(base/'runs/two_step/dev_r0/config.answer.json')
+-    selection = load(base/'runs/two_step/dev_r0/config.selection.json')
+-    jobs = load(first/'run-list.json')['items']
+-    assert len(jobs)==40 and sum(j['variant']=='baseline' for j in jobs)==32
+-    assert len({(j['case_id'],j['condition'],j['variant']) for j in jobs})==40
++    settings = load(folder/'settings.prepared.json')
++    answer = load(folder/'answer.prepared.json')
++    selection = load(folder/'selection.prepared.json')
++    jobs = load(folder/'execution-plan.prepared.json')['items']
++    assert len(jobs)==8 and all(j['condition']=='R0' and j['variant']=='improved' for j in jobs)
++    assert len({(j['case_id'],j['condition'],j['variant']) for j in jobs})==8
+     root = Path(os.environ['LOCALAPPDATA'])/'ANTLabLocalModel'
+     args = [a.replace('%LOCALAPPDATA%/ANTLabLocalModel',str(root)) for a in settings['service_arguments']]
+     sources = ['基础/tests/general_candidate.py','基础/tests/check_general_candidate.py',
+@@ -38,6 +38,8 @@
+                '基础/tests/two_step_linked_candidate.py','基础/tests/answer_form_candidate.py',
+                '基础/runs/improve/linked_r0/student-v2.py',
+                '基础/starter/student.py','基础/starter/provider.py','基础/starter/runner.py']
++    sources += ['基础/tests/direct_reference_candidate.py','基础/tests/association_repair_candidate.py']
++    sources += [(folder/name).relative_to(repo).as_posix() for name in ['run_full_r0.py','eligibility_general_candidate.py','explicit_state_checker.py','eligibility_exclusion_candidate.py','typed_enum_role_revision.py','typed_identifier_enum_candidate.py','body_identifier_enum_candidate.py','offline_gate.py','settings.prepared.json','answer.prepared.json','selection.prepared.json','execution-plan.prepared.json']]
+     code_hashes = {p:sha(repo/p) for p in sources}
+     data_hashes = {p:sha(repo/p) for p in settings['data_sha256']}
+     old = {p.relative_to(repo).as_posix():sha(p) for p in (base/'runs').rglob('*') if p.is_file() and folder not in p.parents}
+@@ -48,25 +50,25 @@
+                'quality':'错误答案、非法定位、漏选、空选择、格式错误、预算耗尽均保留，不重试。',
+                'selection_failure':'主任务保留分母，不执行第二步，不回退。',
+                'memory':'加载前至少2 GiB；请求前至少1 GiB；连续3个2秒样本低于1 GiB停止自有服务。',
+-               'denominator':'每条件8题；主任务40；生成最多48；配对单位8道题。'}
++               'denominator':'本轮仅R0 improved，8道主任务；最多16次生成，失败仍计8题分母。'}
+     evaluation = load(first/'evaluation-rules.json')
+-    research = {'recorded_at':now(),'main_question':'最佳开发候选在已接触的评测题上是否改善证据覆盖与严格成功。',
++    research = {'recorded_at':now(),'main_question':'独立最佳流程在已接触的8题R0上的表现；可靠资格排除仅自动核查通过时启用。',
+                 'competing_explanations':['第一步可能漏选或选错范围，补页关系识别也可能失败。',
+                     '资料缩减、顺序、额外调用和答案形式Schema共同变化；覆盖齐全后仍可能计算或回答错误。'],
+                 'timing':'开发和首轮评测结果已接触；这是评测后重复评测，不是独立盲测或泛化验证。',
+                 'K':'同时改变资料选择和数量，单独分析。',
+-                'history_differences':['baseline增加问题派生的答案形式pattern。',
+-                    'improved由单次全部资料文字排序，改为文字排序定位、合法性核验、直接补页和原输入相对顺序回答。',
++                'history_differences':['本轮不跑baseline或其他条件；只报告本轮完整R0 improved，不把历史差异归因于单一因素。',
++                    '当前完整流程为新定位、直接补页、原输入相对顺序回答、通用答案形式及类型enum；可靠资格规则自动核查通过才排除。',
+                     '额外定位请求、最终资料选择和调用总量变化；模型/最终提示词/采样/256预算/服务设置不变。'],
+                 'development_lineage':'复用已验证组件；为遵守本轮原输入相对顺序契约，最终展示顺序不沿用历史开发的排序后顺序。'}
+     write('design-plan.json',{'saved_at':now(),'research':research,'order':jobs,'failure_rules':failure,
+-          'evaluation':evaluation,'maximum_generation_calls':48,'evaluation_after_all_calls':True})
++          'evaluation':evaluation,'maximum_generation_calls':16,'evaluation_after_all_calls':True})
+     write('config.answer.json',answer); write('config.selection.json',selection)
+-    for script in ['check_two_step_linked.py','check_general_candidate.py']:
+-        result = subprocess.run([sys.executable,'-X','utf8','-B',str(base/'tests'/script),str(folder)],capture_output=True,text=True,encoding='utf-8')
+-        write(script+'.result.json',{'command':[sys.executable,'-X','utf8','-B','基础/tests/'+script,folder.relative_to(repo).as_posix()],
+-              'exit_code':result.returncode,'stdout':result.stdout,'stderr':result.stderr,'counts_as_generation':False})
+-        assert result.returncode==0, '离线检查失败'
++    assert load(folder/'offline-check.json')['passed']
++    assert load(folder/'runner-gate-integration.json')['passed']
++    assert load(folder.parent/'small/execution-summary.json')['completed_answers']==2
++    assert not load(folder.parent/'small/execution-summary.json')['technical_stop']
++    assert load(folder.parent/'small/execution-summary.json')['service_stopped']
+     differences=[]
+     for name, expected in {**settings['data_sha256'],**{n:v for n,v in settings['code_sha256'].items() if n.startswith('基础/starter/')}}.items():
+         if sha(repo/name)!=expected: differences.append(name)
+@@ -132,7 +134,7 @@
+             def open(self,request,*a,**kw):
+                 actual=json.loads(request.data)
+                 assert actual==rendered['request'] and actual['max_tokens']==256
+-                assert runtime['generation_dispatches']<48
++                assert runtime['generation_dispatches']<16
+                 record.update(actual_http_request_body=actual,raw_http_request_body=request.data.decode(),generation_dispatched=True)
+                 runtime['generation_dispatches']+=1;write(path,record,True)
+                 try:return self.inner.open(request,*a,**kw)
+@@ -192,20 +194,20 @@
+                 render(candidate.selection.prepare_selection_messages(case['question'],ordered),selection,{**job,'kind':'selection_full_sorted'})
+                 messages,conf,_=candidate.answer_request(case['question'],[],answer)
+                 render(messages,conf,{**job,'kind':'answer_empty'})
+-        write('capacity-summary.json',{'checked_at':now(),'all_fit':True,'main_tasks':40,'template_checks':len(templates),
++        write('capacity-summary.json',{'checked_at':now(),'all_fit':True,'main_tasks':8,'template_checks':len(templates),
+               'maximum_input_tokens':max(r['input_tokens'] for r in templates),'maximum_total':max(r['total'] for r in templates),
+               'context':4096,'output_budget':256,'actual_selected_branch_checked_before_each_request':True})
+-        write('freeze.json',{'frozen_at':now(),'frozen':True,'round':'post_evaluation_repeat_round2','research':research,
++        write('freeze.json',{'frozen_at':now(),'frozen':True,'round':'post_evaluation_eligibility_r0_repeat','research':research,
+               'source_commit':subprocess.check_output([str(Path(os.environ['LOCALAPPDATA'])/'Programs/Git/cmd/git.exe'),'rev-parse','HEAD'],cwd=repo,text=True).strip(),
+               'code_hashes':code_hashes,'data_hashes':data_hashes,'model':settings['model'],'llama_cpp':settings['llama_cpp'],
+               'answer_config':answer,'selection_config':selection,'service_arguments':settings['service_arguments'],
+               'selection_prompt':candidate.selection.SELECTION_PROMPT,'selection_schema':candidate.selection.SELECTION_SCHEMA,
+               'answer_prompt':candidate.student.prepare_messages('',[])[0]['content'],
+               'answer_form_patterns':candidate.constrain_schema.__globals__['PATTERNS'],
+-              'order':jobs,'evaluation_rules':evaluation,'failure_rules':failure,'main_task_limit':40,'generation_limit':48,
+-              'final_order':'baseline全部原顺序；improved所选原段落按当前原输入相对顺序',
++              'order':jobs,'evaluation_rules':evaluation,'failure_rules':failure,'main_task_limit':8,'generation_limit':16,
++              'final_order':'最终所选完整原段落按当前原输入相对顺序',
+               'capacity_reference':'capacity-summary.json','cache_policy':'每阶段清空单槽缓存',
+-              'review_note':'所有生成结束后再复用首轮原文依据；有争议保留，K只按实际可见资料。'})
++              'review_note':'所有生成结束后再复用已有原文依据与澄清；有争议保留，所有标签辅助暂判。'})
+         freeze_hash=sha(folder/'freeze.json');print('FREEZE',folder.relative_to(repo),now(),flush=True)
+         for job in jobs:
+             current={**job,'main_task_id':str(uuid.uuid4()),'started_at':now(),'status':'pending'}
+@@ -238,8 +240,8 @@
+         ids=[r['run_id'] for r in confirmed];assert len(ids)==len(set(ids))
+         summary={'completed_main_tasks':sum(t.get('status') in ('completed','selection_output_failure') for t in tasks),
+                  'selection_output_failures':sum(t.get('status')=='selection_output_failure' for t in tasks),
+-                 'planned_main_tasks':40,'generation_dispatches':runtime['generation_dispatches'],'confirmed_generation_calls':len(ids),
+-                 'previous_cumulative':198,'cumulative_confirmed':198+len(ids),'unique_run_ids':ids,
++                 'planned_main_tasks':8,'generation_dispatches':runtime['generation_dispatches'],'confirmed_generation_calls':len(ids),
++                 'previous_cumulative':318,'cumulative_confirmed':318+len(ids),'unique_run_ids':ids,
+                  'technical_stop':runtime['technical_stop'],'service_stopped':runtime['service_stopped'],
+                  'budget_exhausted':sum(r.get('budget_exhausted',False) for r in calls),
+                  'truncated':sum(r.get('truncated') is True for r in calls),'truncation_unverified':sum(r.get('truncated')=='not_verified' for r in calls)}
+@@ -248,4 +250,8 @@
+         write('protected-file-audit.json',{'checked_at':now(),'protected_count':len(old),'changed':changed,'all_unchanged':not changed})
+         print('FINAL',json.dumps({k:v for k,v in summary.items() if k!='unique_run_ids'},ensure_ascii=False),flush=True)
+ 
+-if __name__=='__main__': main()
++from offline_gate import after_offline_success
++
++if __name__=='__main__':
++    target=Path(sys.argv[1]).resolve()
++    after_offline_success(lambda:load(target/'offline-check.json'),main)

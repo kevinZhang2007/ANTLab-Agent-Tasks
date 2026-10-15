@@ -1,0 +1,46 @@
+--- previous/explicit_state_checker.py
++++ repair/explicit_state_checker.py
+@@ -5,6 +5,8 @@
+ NUMBER = r'(?:[+＋\-负]?[0-9]+(?:\.[0-9]+)?|[零〇一二两三四五六七八九十百千]+)'
+ BEFORE_COUNT = re.compile(r'(?<![0-9.＋+\-负])(?P<n>'+NUMBER+r')\s*(?:项|次)\s*$')
+ AFTER_COUNT = re.compile(r'^\s*(?:(?:次数|数量|数目|计数|总数)\s*(?:为|是|[:：=])?\s*|(?:为|是|[:：=])\s*)(?P<n>'+NUMBER+r')\s*(?:项|次)?\s*$')
++PASS_COUNT = re.compile(r'(?<![0-9.＋+\-负])(?P<n>'+NUMBER+r')\s*项\s*(?:检查)?\s*$')
++PASS_LIMIT = re.compile(r'部分|未全部|未全|不全|尚未全部|其中|项中')
+ AFTER_ITEMS = re.compile(r'^\s*(?P<n>'+NUMBER+r')\s*(?:项|次)\s*$')
+ NEGATION = re.compile(r'并非|不是|不存在|没有|未发生|未发现|未见|无|不|未(?!关闭)')
+ AFTER_NEGATION = re.compile(r'^\s*(?:情况|现象|记录)?\s*(?:不存在|没有|未发生|未发现|未见)\s*$')
+@@ -52,7 +54,7 @@
+     for signal in signals:
+         token = signal.group()
+         prefix, suffix = phrase[:signal.start()], phrase[signal.end():]
+-        before = BEFORE_COUNT.search(prefix)
++        before = (PASS_COUNT if token == '通过' else BEFORE_COUNT).search(prefix)
+         after = AFTER_COUNT.fullmatch(suffix) or AFTER_ITEMS.fullmatch(suffix)
+         counts = [(before, start), (after, start+signal.end())]
+         quantities = []
+@@ -63,6 +65,7 @@
+                                    'number_end': offset+match.end('n'), 'raw': match['n'],
+                                    'value': parse_integer(match['n']),
+                                    'ownership': 'current_check_item',
++                                   'quantity_kind': 'passed_check_count' if token == '通过' else 'defect_count',
+                                    'item_scope': scope(text, start, end)})
+         # 否定只在本项内查找；多重否定、否定精确数量不作反向推断。
+         prefix_negatives = list(NEGATION.finditer(prefix))
+@@ -86,6 +89,8 @@
+             reason = 'multiple_predicates_without_reliable_scope'
+         elif UNCERTAIN.search(phrase) or metric:
+             reason = 'conditional_uncertain_or_metric'
++        elif token == '通过' and PASS_LIMIT.search(phrase):
++            reason = 'partial_or_not_all_pass_not_generalized'
+         elif len(quantities) > 1 or (quantity and value is None) or malformed_quantity or unowned_prefix_quantity:
+             reason = 'quantity_not_reliably_parsed_or_owned'
+         elif loose_prefix_negation or (suffix_negatives and not post_negative):
+@@ -117,6 +122,8 @@
+                        'negation_scope': negation_scope, 'quantity_scope': quantities,
+                        'unparsed_quantity_scope': scope(text, start, end) if malformed_quantity or unowned_prefix_quantity else None,
+                        'quantity_text': quantity['raw'] if quantity else None, 'quantity': value,
++                       'pass_scope': 'stated_local_checks_only' if status == 'explicit_pass' else None,
++                       'overall_eligibility_not_inferred': True,
+                        'condition_context_not_semantically_parsed': True})
+     return events
+ 

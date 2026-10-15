@@ -1,0 +1,894 @@
+{
+  "checked_at": "2026-10-14T13:30:19.842715+08:00",
+  "kind": "synthetic_mechanism_checks_not_independent_evaluation",
+  "new_generation_calls": 0,
+  "existing_algorithm_checks": 12,
+  "items": [
+    {
+      "sample": "已支持的批次指称",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "甲项目R2版本2027-01批次AB12记录。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "批次AB12的复核补页：附数据。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0",
+        "s1"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s1",
+          "target_id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "reason": "直接补充指称、语境编号一致且主段唯一；缺失范围仍为未知",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": true,
+          "completion_reason": "唯一直接主段属于原定位选择，补入完整补页。"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": [
+              "2027-01"
+            ]
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "应关联",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "已支持的选择表指称",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "甲项目R2版本选择表AB12记录。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "选择表AB12的补充说明：规则。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0",
+        "s1"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s1",
+          "target_id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "reason": "直接补充指称、语境编号一致且主段唯一；缺失范围仍为未知",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": true,
+          "completion_reason": "唯一直接主段属于原定位选择，补入完整补页。"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": []
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "应关联",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "未支持的业务表指称",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "甲项目R2版本核验表AB12记录。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "批次AB12的复核补页：规则。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s1",
+          "target_id": null,
+          "codes": [
+            "AB12"
+          ],
+          "reason": "关联目标不唯一或不存在",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": false,
+          "completion_reason": "关联目标不唯一或不存在"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": []
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "目前漏识别；拟候选须验证对象指称与类型兼容",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "任意设备词不是业务范围",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "设备AB12开机。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "批次AB12的复核补页。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s1",
+          "target_id": null,
+          "codes": [
+            "AB12"
+          ],
+          "reason": "关联目标不唯一或不存在",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": false,
+          "completion_reason": "关联目标不唯一或不存在"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "应放弃，不能只按英数文本相同",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "编号跨项目复用",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "甲项目R2版本批次AB12记录。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "乙项目R2版本批次AB12记录。"
+        },
+        {
+          "id": "s2",
+          "source": "same-directory/2",
+          "text": "批次AB12的复核补页。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s2",
+          "target_id": null,
+          "codes": [
+            "AB12"
+          ],
+          "reason": "关联目标不唯一或不存在",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": false,
+          "completion_reason": "关联目标不唯一或不存在"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": []
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [
+              "乙项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": []
+          }
+        },
+        {
+          "id": "s2",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "目标数2，应放弃",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "明确版本冲突",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "甲项目R2版本批次AB12记录。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "甲项目R3版本批次AB12的复核补页。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s1",
+          "target_id": null,
+          "codes": [
+            "AB12"
+          ],
+          "reason": "正文项目、版本或日期明确冲突",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": false,
+          "completion_reason": "正文项目、版本或日期明确冲突"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": []
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R3版本"
+            ],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "范围冲突应放弃",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "同范围多个主段",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "甲项目R2版本批次AB12记录一。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "甲项目R2版本批次AB12记录二。"
+        },
+        {
+          "id": "s2",
+          "source": "same-directory/2",
+          "text": "批次AB12的复核补页。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s2",
+          "target_id": null,
+          "codes": [
+            "AB12"
+          ],
+          "reason": "关联目标不唯一或不存在",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": false,
+          "completion_reason": "关联目标不唯一或不存在"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": []
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": []
+          }
+        },
+        {
+          "id": "s2",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "目标数2，应放弃，不能仅因一段被选中而消除歧义",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "缺失范围但有唯一直接指称",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "甲项目R2版本2027-01批次AB12记录。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "批次AB12的复核补页。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0",
+        "s1"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s1",
+          "target_id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "reason": "直接补充指称、语境编号一致且主段唯一；缺失范围仍为未知",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": true,
+          "completion_reason": "唯一直接主段属于原定位选择，补入完整补页。"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": [
+              "2027-01"
+            ]
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "可按明确直接指称关联，缺失范围仍未知",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "缺少明确指称",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "甲项目R2版本批次AB12记录。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "补充说明：记录一些数据。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s1",
+          "target_id": null,
+          "codes": [],
+          "reason": "补充段没有明确语境编号",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": false,
+          "completion_reason": "补充段没有明确语境编号"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": []
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "没有语境编号，应放弃",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "无业务编号且无法关联",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "甲项目R2版本记录。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "另页有附表。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0"
+      ],
+      "trace": [],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [],
+          "scope": {
+            "project": [
+              "甲项目"
+            ],
+            "version": [
+              "R2版本"
+            ],
+            "date": []
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "无可靠关系，应放弃",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "多个补充指称",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "批次AB12记录。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "批次AB12的补页及批次CD34的补页。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s1",
+          "target_id": null,
+          "codes": [
+            "AB12",
+            "CD34"
+          ],
+          "reason": "补充段包含多个编号，关系不明确",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": false,
+          "completion_reason": "补充段包含多个编号，关系不明确"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [
+            "AB12",
+            "CD34"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "多个编号，应放弃",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    },
+    {
+      "sample": "禁止多跳",
+      "input": [
+        {
+          "id": "s0",
+          "source": "same-directory/0",
+          "text": "批次AB12记录。"
+        },
+        {
+          "id": "s1",
+          "source": "same-directory/1",
+          "text": "批次AB12的复核补页，另登记批次CD34。"
+        },
+        {
+          "id": "s2",
+          "source": "same-directory/2",
+          "text": "批次CD34的复核补页。"
+        }
+      ],
+      "original_seed_ids": [
+        "s0"
+      ],
+      "actual_output_ids": [
+        "s0",
+        "s1"
+      ],
+      "trace": [
+        {
+          "supplement_id": "s1",
+          "target_id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "reason": "直接补充指称、语境编号一致且主段唯一；缺失范围仍为未知",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": true,
+          "completion_reason": "唯一直接主段属于原定位选择，补入完整补页。"
+        },
+        {
+          "supplement_id": "s2",
+          "target_id": null,
+          "codes": [
+            "CD34"
+          ],
+          "reason": "关联目标不唯一或不存在",
+          "unknown_scope_fields": [
+            "project",
+            "version",
+            "date"
+          ],
+          "semantic_support_verified": false,
+          "added": false,
+          "completion_reason": "关联目标不唯一或不存在"
+        }
+      ],
+      "contexts": [
+        {
+          "id": "s0",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        },
+        {
+          "id": "s1",
+          "codes": [
+            "AB12"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        },
+        {
+          "id": "s2",
+          "codes": [
+            "CD34"
+          ],
+          "scope": {
+            "project": [],
+            "version": [],
+            "date": []
+          }
+        }
+      ],
+      "interpretation": "只补直接页，不把新补页作为下一跳主段",
+      "input_unchanged": true,
+      "uses_existing_algorithm_only": true
+    }
+  ],
+  "candidate_implemented_or_tested": false
+}

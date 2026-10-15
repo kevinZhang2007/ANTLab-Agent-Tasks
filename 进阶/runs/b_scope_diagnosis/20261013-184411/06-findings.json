@@ -1,0 +1,116 @@
+{
+  "interpreted_at": "2026-10-13T18:44:22.105673+08:00",
+  "code_base_commit": "78b97898e713a3b8ec2cdffeec8c6758c4bcbbc9",
+  "observed_facts": [
+    {
+      "case": "R01→R02",
+      "records": [
+        1,
+        2
+      ],
+      "cache_hit": true,
+      "response_answer": "请求超时阈值为30秒。",
+      "current_request_scope": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "alpha"
+        ],
+        "snapshot": "v2",
+        "k": 2
+      },
+      "actual_evidence_scope": [
+        {
+          "id": "b01",
+          "doc_id": "alpha",
+          "snapshot": "v1"
+        }
+      ],
+      "out_of_scope": true
+    },
+    {
+      "case": "R02 clear/new",
+      "records": [
+        3,
+        4
+      ],
+      "after_clear_answer": "请求超时阈值为12秒。",
+      "new_engine_answer": "请求超时阈值为12秒。",
+      "after_clear_ids": [
+        "b02"
+      ],
+      "new_engine_ids": [
+        "b02"
+      ],
+      "identical_input_sha256": "40a0c79ee9b0b5736f226ef72976165d86eb16a9ea66f0999d3c17ce313b4434"
+    },
+    {
+      "case": "R01→R03",
+      "records": [
+        5,
+        6
+      ],
+      "warm_answer": "请求超时阈值为30秒。",
+      "warm_scope": [
+        {
+          "id": "b01",
+          "doc_id": "alpha",
+          "snapshot": "v1"
+        }
+      ],
+      "current_request_scope": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "beta"
+        ],
+        "snapshot": "v1",
+        "k": 1
+      }
+    },
+    {
+      "case": "R03 clear/new",
+      "records": [
+        7,
+        8
+      ],
+      "clear_ids": [],
+      "new_ids": [],
+      "expected_scope_ids": [
+        "b03"
+      ],
+      "fixed_draft_answer_after_clear": "实验B超时为5秒。",
+      "locator_after_clear": "invalid"
+    },
+    {
+      "case": "same scope repeat",
+      "records": [
+        9,
+        10
+      ],
+      "cache_hit": true,
+      "same_content_and_scope": true,
+      "new_request_id": true
+    }
+  ],
+  "causal_judgments": [
+    "同一R02输入、corpus、draft保持完全相同，只去除旧缓存或换原Engine即消除旧来源复用，支持暖缓存是本复现旧答案的原因。最早错误边界为query-only键命中并直接读取旧result（challenge.py 12—15行），随后28行的新request外壳掩盖旧evidence。",
+    "R03清缓存/新Engine仍遗漏scope内匹配。源码18—20行全库先取top-k，alpha较高分条目占满k=1后被scope过滤，支持另一个独立的范围内漏证机制。它不能解释缓存命中时直接返回旧来源，也没有被清缓存修好。",
+    "同范围同输入缓存控制内容一致，说明本次不是所有缓存命中都错。cache_hit、locator有效和semantic supported都不能单独证明结果适用于当前请求。"
+  ],
+  "remaining_explanations": [
+    "只检验题包单进程合成资料与三个请求，未验证所有缓存依赖（k、draft、语料内容等）的影响。",
+    "未运行实际HTTP/UI，不能声称页面闭环或多worker行为已验证。",
+    "语义supported由原Engine生成，未作为金标准；R04等独立语义风险本轮未执行。",
+    "测量仅离线函数时间，不推断GPU资源释放、真实模型或稳定延迟改善。"
+  ],
+  "minimal_fix_recommendation": "优先在独立兼容Engine中禁用缓存读写，先消除主故障；若保留缓存须完整键覆盖scope、snapshot、k、语料/draft或配置版本，并验证等价输入。全库top-k顺序及语义状态问题另立修复，不一次改全部。",
+  "rejected_for_now": "暂不采用同时重写缓存、检索、语义判分和页面的组合修复，避免无法归因。",
+  "not_completed": [
+    "生产修复",
+    "修复后正常回归",
+    "等价变体与边界",
+    "页面到同请求日志闭环",
+    "完整进阶B验收"
+  ],
+  "model_generations": 0,
+  "base_generation_count_unchanged": 124
+}

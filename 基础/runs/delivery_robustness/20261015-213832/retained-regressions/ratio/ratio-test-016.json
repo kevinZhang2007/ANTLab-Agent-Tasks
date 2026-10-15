@@ -1,0 +1,357 @@
+{
+  "name": "positive_denominator_adjustment",
+  "question": "竹岭项目V4版本在2026-04冻结清单的完整支持率是多少？只输出百分数。",
+  "passages": [
+    {
+      "id": "doc-1",
+      "source": "自造比例资料",
+      "text": "竹岭项目V4版本在2026-04的记录：冻结评测集Trace82固定80条主张为分母，后续复跑剔除无引用和格式异常主张。"
+    },
+    {
+      "id": "doc-2",
+      "source": "自造比例资料",
+      "text": "批次Trace82的复核补页：Trace82人工复核显示52条完全支持、13条部分支持、9条矛盾、6条无引用；完整支持只计完全支持。"
+    }
+  ],
+  "raw": "{\"answer\": \"证据不足\", \"citations\": []}",
+  "expected_answer": null,
+  "actual": {
+    "run_kind": "offline_ratio_calculation_proposal",
+    "judgment_source": "local_rule",
+    "applicable": true,
+    "proof_established": false,
+    "status": "refused",
+    "trace": [
+      {
+        "stage": "question_project_boundary",
+        "audit": {
+          "status": "resolved",
+          "question_candidates": [
+            {
+              "entity": "竹岭项目",
+              "interpretation": "literal_entity_no_char_removed",
+              "start": 0,
+              "end": 4,
+              "version_position": [
+                4,
+                8
+              ]
+            }
+          ],
+          "body_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "V4版本",
+              "date": "2026-04",
+              "passage_id": "doc-1",
+              "source": "自造比例资料",
+              "start": 0,
+              "end": 20,
+              "quote": "竹岭项目V4版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ],
+          "question_original": "竹岭项目V4版本在2026-04冻结清单的完整支持率是多少？只输出百分数。",
+          "reason": "unique_question_interpretation_confirmed_by_body_entity_version_date",
+          "missing_fields_not_assumed_equal": true,
+          "chosen": {
+            "entity": "竹岭项目",
+            "interpretation": "literal_entity_no_char_removed",
+            "start": 0,
+            "end": 4,
+            "version_position": [
+              4,
+              8
+            ]
+          },
+          "supporting_declarations": [
+            {
+              "entity": "竹岭项目",
+              "version": "V4版本",
+              "date": "2026-04",
+              "passage_id": "doc-1",
+              "source": "自造比例资料",
+              "start": 0,
+              "end": 20,
+              "quote": "竹岭项目V4版本在2026-04的记录：",
+              "entity_start": 0,
+              "entity_end": 4
+            }
+          ]
+        }
+      },
+      {
+        "stage": "direct_relation_audit",
+        "links": [
+          {
+            "supplement_id": "doc-2",
+            "target_id": "doc-1",
+            "added": false,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "Trace82",
+                "start": 0,
+                "end": 9,
+                "code_start": 2,
+                "code_end": 9,
+                "statement": {
+                  "text": "批次Trace82的复核补页：Trace82人工复核显示52条完全支持、13条部分支持、9条矛盾、6条无引用；",
+                  "start": 0,
+                  "end": 55
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [
+              "doc-1"
+            ],
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date",
+              "namespace"
+            ],
+            "semantic_support_verified": false,
+            "target_declarations": [
+              {
+                "object_type": "collection",
+                "object_name": "冻结评测集",
+                "raw_label": "冻结评测集",
+                "code": "Trace82",
+                "start": 20,
+                "end": 32,
+                "code_start": 25,
+                "code_end": 32,
+                "statement": {
+                  "text": "竹岭项目V4版本在2026-04的记录：冻结评测集Trace82固定80条主张为分母，后续复跑剔除无引用和格式异常主张。",
+                  "start": 0,
+                  "end": 60
+                },
+                "reliable_declaration": true,
+                "direct_supplement_reference": false,
+                "mere_reference": false,
+                "declaration_predicate": {
+                  "text": "固定",
+                  "start": 32,
+                  "end": 34
+                }
+              }
+            ],
+            "reason": "unique_reliable_direct_reference",
+            "object_labels_equal": false,
+            "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。",
+            "completion_reason": "already_selected"
+          }
+        ]
+      },
+      {
+        "stage": "pair_scope",
+        "main": "doc-1",
+        "supplement": "doc-2",
+        "main_status": "matched",
+        "supplement_status": "unknown",
+        "main_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [
+              "竹岭项目"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "version",
+            "question": [
+              "V4版本"
+            ],
+            "source": [
+              "V4版本"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [
+              "2026-04"
+            ],
+            "status": "explicit_scope_match"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ],
+        "supplement_fields": [
+          {
+            "field": "project",
+            "question": [
+              "竹岭项目"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "version",
+            "question": [
+              "V4版本"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "date",
+            "question": [
+              "2026-04"
+            ],
+            "source": [],
+            "status": "unknown_missing_scope"
+          },
+          {
+            "field": "namespace",
+            "question": [],
+            "source": [],
+            "status": "not_specified_in_question"
+          }
+        ]
+      }
+    ],
+    "proposed_response": null,
+    "answer_changed": false,
+    "not_original_model_response": true,
+    "requested_metric": "完整支持率",
+    "definition": {
+      "included": [
+        "完全支持"
+      ],
+      "closed_definition": true,
+      "definition_form": "exclusive_only_count",
+      "source": {
+        "passage_id": "doc-2",
+        "source": "自造比例资料",
+        "start": 55,
+        "end": 65,
+        "quote": "完整支持只计完全支持",
+        "role": "指标分子分类定义"
+      }
+    },
+    "denominator": {
+      "value": "80",
+      "unit": "条",
+      "sources": [
+        {
+          "value": "80",
+          "unit": "条",
+          "population": "主张",
+          "source": {
+            "passage_id": "doc-1",
+            "source": "自造比例资料",
+            "start": 34,
+            "end": 42,
+            "quote": "80条主张为分母",
+            "role": "明确分母"
+          },
+          "quantity_span": [
+            34,
+            37
+          ]
+        }
+      ]
+    },
+    "category_counts": {
+      "rows": [
+        {
+          "category": "完全支持",
+          "value": "52",
+          "unit": "条",
+          "quantity_span": [
+            28,
+            31
+          ],
+          "source": {
+            "passage_id": "doc-2",
+            "source": "自造比例资料",
+            "start": 28,
+            "end": 35,
+            "quote": "52条完全支持",
+            "role": "并列分类计数"
+          }
+        },
+        {
+          "category": "部分支持",
+          "value": "13",
+          "unit": "条",
+          "quantity_span": [
+            36,
+            39
+          ],
+          "source": {
+            "passage_id": "doc-2",
+            "source": "自造比例资料",
+            "start": 36,
+            "end": 43,
+            "quote": "13条部分支持",
+            "role": "并列分类计数"
+          }
+        },
+        {
+          "category": "矛盾",
+          "value": "9",
+          "unit": "条",
+          "quantity_span": [
+            44,
+            46
+          ],
+          "source": {
+            "passage_id": "doc-2",
+            "source": "自造比例资料",
+            "start": 44,
+            "end": 48,
+            "quote": "9条矛盾",
+            "role": "并列分类计数"
+          }
+        },
+        {
+          "category": "无引用",
+          "value": "6",
+          "unit": "条",
+          "quantity_span": [
+            49,
+            51
+          ],
+          "source": {
+            "passage_id": "doc-2",
+            "source": "自造比例资料",
+            "start": 49,
+            "end": 54,
+            "quote": "6条无引用",
+            "role": "并列分类计数"
+          }
+        }
+      ],
+      "source": {
+        "passage_id": "doc-2",
+        "source": "自造比例资料",
+        "start": 0,
+        "end": 54,
+        "quote": "批次Trace82的复核补页：Trace82人工复核显示52条完全支持、13条部分支持、9条矛盾、6条无引用",
+        "role": "同批并列分类原文"
+      }
+    },
+    "reason": "denominator_adjustment_not_supported"
+  },
+  "passed": true
+}

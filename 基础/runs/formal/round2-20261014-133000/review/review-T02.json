@@ -1,0 +1,464 @@
+{
+  "reviewed_at": "2026-10-14T13:24:21.891871+08:00",
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+  "basis": {
+    "case_id": "T02",
+    "question_scope": "临溪项目R6，2026-03冻结评测集LX63的完整支持率；只输出百分数。",
+    "scope": {
+      "project": "临溪",
+      "version": "R6",
+      "date": "2026-03",
+      "batch": "LX63",
+      "metric": "完全支持主张数/冻结100条主张；不剔除异常，不将部分支持并入分子"
+    },
+    "required_evidence": [
+      {
+        "id": "P552476",
+        "quote": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。",
+        "role": "冻结分母及统计范围"
+      },
+      {
+        "id": "P169676",
+        "quote": "批次LX63的复核补页：LX63人工复核显示76条完全支持、9条部分支持、7条矛盾、8条无可定位引用；完整支持只计完全支持。",
+        "role": "分子及完整支持定义"
+      }
+    ],
+    "derivation": "完整支持率=76/100×100%=76%。部分支持9条不能加到分子，无引用8条不能从分母剔除。",
+    "derived_answer": "76%",
+    "answer_form": "仅百分数",
+    "excluded_evidence": [
+      {
+        "id": "P185211",
+        "reason": "2026-02探索组"
+      },
+      {
+        "id": "P505639",
+        "reason": "岫光项目"
+      },
+      {
+        "id": "P588872",
+        "reason": "R5旧版本"
+      },
+      {
+        "id": "P500295",
+        "reason": "迁移XQ55而非LX63"
+      },
+      {
+        "id": "P627886",
+        "reason": "压力请求成功不是主张完整支持"
+      }
+    ],
+    "ambiguities": [],
+    "limits": "P169676各分类总和为100，可与明确冻结分母交叉核对；是否单独足够要逐引用判断，不能仅按预定ID集机械判分。",
+    "reviewed_at": "2026-10-13T13:33:58.669853+08:00",
+    "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+    "source": "基础/data/cases.json",
+    "source_sha256": "c37cda40ada89a18630dd7be098672f7e942e6f57e6199fe1aa2d6046e2b4961",
+    "derivation_kind": "评测后原文推导，非官方标准答案",
+    "model_answers_read_before_saving": false
+  },
+  "items": [
+    {
+      "case_id": "T02",
+      "condition": "R1",
+      "variant": "baseline",
+      "sequence": 8,
+      "main_task_id": "1c54d5d8-ba60-4ea3-933c-f3da2ff0a6df",
+      "end_to_end_seconds": 13.37163569999393,
+      "reviewed_at": "2026-10-14T13:24:21.891720+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P185211\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P185211"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P185211"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P185211",
+        "P500295",
+        "P505639",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P169676"
+      ],
+      "final_input_ids": [
+        "P185211",
+        "P500295",
+        "P505639",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P169676"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P552476",
+          "source": "模拟记录/T02/页6",
+          "text": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P169676",
+          "source": "模拟记录/T02/页2",
+          "text": "批次LX63的复核补页：LX63人工复核显示76条完全支持、9条部分支持、7条矛盾、8条无可定位引用；完整支持只计完全支持。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P185211",
+          "source": "模拟记录/T02/页5",
+          "text": "临溪项目R6版本在2026-02的探索组采用24个临时问题，完整支持率为75%，一项耗时中位数为6.0秒。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "e920b2a1-8b79-42a8-875a-b57112214f96"
+      ],
+      "reasons": {
+        "answer_correct": "完整支持率=76/100×100%=76%。部分支持9条不能加到分子，无引用8条不能从分母剔除。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "完整支持率=76/100×100%=76%。部分支持9条不能加到分子，无引用8条不能从分母剔除。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P169676,P552476提供的数据或规则；本次引用P185211。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [
+          {
+            "id": "P185211",
+            "reason": "2026-02探索组"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T02",
+      "condition": "R0",
+      "variant": "improved",
+      "sequence": 17,
+      "main_task_id": "eab272ba-c0ff-4ea6-ae24-b046ef231283",
+      "end_to_end_seconds": 16.50553020008374,
+      "reviewed_at": "2026-10-14T13:24:21.891770+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P552476\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P552476"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P505639",
+        "P185211",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P500295",
+        "P169676"
+      ],
+      "final_input_ids": [
+        "P552476"
+      ],
+      "necessary_input_coverage": false,
+      "final_stage_local_missing_evidence": true,
+      "source_basis": [
+        {
+          "id": "P552476",
+          "source": "模拟记录/T02/页6",
+          "text": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        },
+        {
+          "id": "P169676",
+          "source": "模拟记录/T02/页2",
+          "text": "批次LX63的复核补页：LX63人工复核显示76条完全支持、9条部分支持、7条矛盾、8条无可定位引用；完整支持只计完全支持。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": false,
+          "actually_cited": false
+        }
+      ],
+      "run_ids": [
+        "29f504f2-211f-47e6-b9e9-12d7748c8801",
+        "59f4bdbe-e044-426e-a52c-b3579b0b7458"
+      ],
+      "reasons": {
+        "answer_correct": "完整支持率=76/100×100%=76%。部分支持9条不能加到分子，无引用8条不能从分母剔除。 原始answer='证据不足'，未做删单位、去前缀或补引用。 最终输入缺证是定位漏选造成；主任务原输入含完整数据及定义，所以端到端答案失败。",
+        "semantic_consistent": "完整支持率=76/100×100%=76%。部分支持9条不能加到分子，无引用8条不能从分母剔除。 原始answer='证据不足'，未做删单位、去前缀或补引用。 最终输入缺证是定位漏选造成；主任务原输入含完整数据及定义，所以端到端答案失败。",
+        "necessary_coverage": "需要P169676,P552476提供的数据或规则；本次引用P552476。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T02",
+      "condition": "R0",
+      "variant": "baseline",
+      "sequence": 18,
+      "main_task_id": "2545fd8b-8d0f-4a04-8d2e-4160bc31038f",
+      "end_to_end_seconds": 14.724022899987176,
+      "reviewed_at": "2026-10-14T13:24:21.891800+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P505639\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P505639"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P505639"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P505639",
+        "P185211",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P500295",
+        "P169676"
+      ],
+      "final_input_ids": [
+        "P505639",
+        "P185211",
+        "P588872",
+        "P552476",
+        "P627886",
+        "P500295",
+        "P169676"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P552476",
+          "source": "模拟记录/T02/页6",
+          "text": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P169676",
+          "source": "模拟记录/T02/页2",
+          "text": "批次LX63的复核补页：LX63人工复核显示76条完全支持、9条部分支持、7条矛盾、8条无可定位引用；完整支持只计完全支持。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P505639",
+          "source": "模拟记录/T02/页4",
+          "text": "岫光项目R6版本在2026-03登记同名指标和批次XQ55，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "24e7e1ed-9bac-4195-bcab-42bc55211544"
+      ],
+      "reasons": {
+        "answer_correct": "完整支持率=76/100×100%=76%。部分支持9条不能加到分子，无引用8条不能从分母剔除。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "完整支持率=76/100×100%=76%。部分支持9条不能加到分子，无引用8条不能从分母剔除。 原始answer='证据不足'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P169676,P552476提供的数据或规则；本次引用P505639。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [
+          {
+            "id": "P505639",
+            "reason": "岫光项目"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T02",
+      "condition": "K",
+      "variant": "baseline",
+      "sequence": 28,
+      "main_task_id": "005a39c6-4a8e-4a9a-8446-7ee0f4c92dbe",
+      "end_to_end_seconds": 5.006673899944872,
+      "reviewed_at": "2026-10-14T13:24:21.891829+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P552476\"]}",
+      "answer": "证据不足",
+      "citations": [
+        "P552476"
+      ],
+      "answer_correct": true,
+      "semantic_consistent": true,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": true,
+      "support_actual_answer": true,
+      "irrelevant_ids": [],
+      "no_irrelevant_references": true,
+      "strict_complete_success": true,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P552476",
+        "P500295"
+      ],
+      "final_input_ids": [
+        "P552476",
+        "P500295"
+      ],
+      "necessary_input_coverage": false,
+      "final_stage_local_missing_evidence": true,
+      "source_basis": [
+        {
+          "id": "P552476",
+          "source": "模拟记录/T02/页6",
+          "text": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "cca2f546-c6f4-45c5-aa80-a2bc484a7b54"
+      ],
+      "reasons": {
+        "answer_correct": "K缺LX63完全支持计数。不能借不可见补页或通常术语选口径。",
+        "semantic_consistent": "K缺LX63完全支持计数。不能借不可见补页或通常术语选口径。",
+        "necessary_coverage": "目标主记录P552476是当前可见的有效缺证检查来源。",
+        "support_actual_answer": "引用目标范围记录并回答证据不足，未借用不可见定义或计数。",
+        "irrelevant_citations": [],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    },
+    {
+      "case_id": "T02",
+      "condition": "R2",
+      "variant": "baseline",
+      "sequence": 34,
+      "main_task_id": "0762dce1-ce18-4aed-8cf9-6f99f2e284b9",
+      "end_to_end_seconds": 13.957491699955426,
+      "reviewed_at": "2026-10-14T13:24:21.891862+08:00",
+      "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认。",
+      "raw_content": "{\"answer\":\"91%\",\"citations\":[\"P505639\"]}",
+      "answer": "91%",
+      "citations": [
+        "P505639"
+      ],
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "format_complete": true,
+      "citation_ids_exist": true,
+      "necessary_coverage": false,
+      "support_actual_answer": false,
+      "irrelevant_ids": [
+        "P505639"
+      ],
+      "no_irrelevant_references": false,
+      "strict_complete_success": false,
+      "missing_evidence_response_compliant": "not_checked",
+      "main_input_ids": [
+        "P505639",
+        "P552476",
+        "P169676",
+        "P627886",
+        "P500295",
+        "P588872",
+        "P185211"
+      ],
+      "final_input_ids": [
+        "P505639",
+        "P552476",
+        "P169676",
+        "P627886",
+        "P500295",
+        "P588872",
+        "P185211"
+      ],
+      "necessary_input_coverage": true,
+      "final_stage_local_missing_evidence": false,
+      "source_basis": [
+        {
+          "id": "P552476",
+          "source": "模拟记录/T02/页6",
+          "text": "临溪项目R6版本在2026-03的记录：冻结评测集LX63固定100条主张为分母，后续复跑不能剔除无引用和格式异常主张。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 同一资料在多个视图中使用时，系统保留共同文档编号和各自页面位置。跨页引用由原始片段与映射关系组成；页面预览属于呈现数据，不能替代经过复核的文本内容。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P169676",
+          "source": "模拟记录/T02/页2",
+          "text": "批次LX63的复核补页：LX63人工复核显示76条完全支持、9条部分支持、7条矛盾、8条无可定位引用；完整支持只计完全支持。 本页还记录版本升级后的回滚入口、会话恢复尝试和文档区域映射状态。摘要用于快速浏览，正式决定仍依据签署规则及原始检查项。只有项目、版本、窗口、批次一致的记录才能放在一次决策中比较。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 质量复核表同时保存通过项、拒答项和异常项，避免只汇总有输出的请求。后续小范围修复可能改善其中一类错误，但只有原始输入和首次结果仍可访问，才方便判断改善来自哪里。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": false
+        },
+        {
+          "id": "P505639",
+          "source": "模拟记录/T02/页4",
+          "text": "岫光项目R6版本在2026-03登记同名指标和批次XQ55，其支持率为91%，流程乙平均耗时4.2秒，快照为S31。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 该记录保留批次编号、样本清单散列和负责人签名。复核者按固定输入重放，逐条保存原始响应、重试状态与引用位置；后续补录单列，不能覆盖第一次结果。耗时由客户端从提交请求计到读完响应，记录不含服务端排队拆分。 批次登记表标注生产、试运行与迁移三类用途；任务数量相似并不意味着能混用结果。每次替换模型或检索设置后，记录者保留旧配置散列，便于按真实执行版本重新计算。 每周核对本页行号、资料版本与签署记录。",
+          "visible_in_main_input": true,
+          "visible_in_final_input": true,
+          "actually_cited": true
+        }
+      ],
+      "run_ids": [
+        "4b104f7a-0206-4785-a193-de9820547c2f"
+      ],
+      "reasons": {
+        "answer_correct": "完整支持率=76/100×100%=76%。部分支持9条不能加到分子，无引用8条不能从分母剔除。 原始answer='91%'，未做删单位、去前缀或补引用。",
+        "semantic_consistent": "完整支持率=76/100×100%=76%。部分支持9条不能加到分子，无引用8条不能从分母剔除。 原始answer='91%'，未做删单位、去前缀或补引用。",
+        "necessary_coverage": "需要P169676,P552476提供的数据或规则；本次引用P505639。",
+        "support_actual_answer": "引用集合须足以推出实际answer；回答正确不自动使单一运算量或缺规则引用通过。",
+        "irrelevant_citations": [
+          {
+            "id": "P505639",
+            "reason": "岫光项目"
+          }
+        ],
+        "format": "原始JSON严格解析，不补字段。",
+        "ids": "逐ID核对最终实际输入；空数组不能算引用成功。"
+      },
+      "status": "provisional_not_personally_confirmed"
+    }
+  ]
+}

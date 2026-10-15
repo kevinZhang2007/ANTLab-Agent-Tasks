@@ -1,0 +1,299 @@
+{
+  "extracted_at": "2026-10-15T16:24:25.769634+08:00",
+  "source_contract": "基础/runs/calculation_full_dev/20261015-160956/freeze.json",
+  "source_contract_sha256": "731b8694dfdda435107fa3cff927cf5700a0aa1f7f5287a21e1fb82a31a2b0f4",
+  "execution_freeze": "基础/runs/calculation_full_eval/20261015-161821/freeze.json",
+  "code_entry": "基础/runs/calculation_full_eval/20261015-161821/scope_candidate.py",
+  "proof_entry": "基础/runs/calculation_full_eval/20261015-161821/proof_pipeline_candidate.py",
+  "runner": "基础/runs/calculation_full_eval/20261015-161821/run_calculation_full_eval.py",
+  "answer_config": "基础/runs/calculation_full_eval/20261015-161821/config.answer.json",
+  "selection_config": "基础/runs/calculation_full_eval/20261015-161821/config.selection.json",
+  "executed_command": "& \"C:\\Users\\86186\\AppData\\Local\\Programs\\Python\\Python314\\python.exe\" -X utf8 -B \"C:\\Users\\86186\\Projects\\ANTLab-Agent-Tasks\\基础\\runs\\calculation_full_eval\\20261015-161821\\run_calculation_full_eval.py\" \"C:\\Users\\86186\\Projects\\ANTLab-Agent-Tasks\\基础\\runs\\calculation_full_eval\\20261015-161821\"",
+  "command_status": "已实际执行；有已有目录保护，不得在此目录重复生成或覆盖。新的复现需先创建独立目录并核对同一候选哈希。",
+  "scope": [
+    "只用当前question/passages；新定位、直接关联、范围优先、答案形式/资格约束，保留未知与拒绝。",
+    "有限快照/差值/资格选择引用证明；明确分类定义的比例和可靠可比集合差值可另存计算新答。",
+    "事实和派生引用只来自最终模型输入；其他可见资料仅审计范围、实体和唯一性，不强制纠正不适用题。"
+  ],
+  "model": {
+    "repository": "Qwen/Qwen3-0.6B-GGUF",
+    "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+    "file": "Qwen3-0.6B-Q8_0.gguf",
+    "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "bytes": 639446688,
+    "actual_sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "actual_bytes": 639446688,
+    "external_path": "%LOCALAPPDATA%/ANTLabLocalModel/models/Qwen3-0.6B-Q8_0.gguf"
+  },
+  "service_arguments": [
+    "%LOCALAPPDATA%/ANTLabLocalModel\\llama-b11429\\llama-server.exe",
+    "-m",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\models\\Qwen3-0.6B-Q8_0.gguf",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "--alias",
+    "Qwen3-0.6B-Q8_0",
+    "--ctx-size",
+    "4096",
+    "--parallel",
+    "1",
+    "--batch-size",
+    "128",
+    "--ubatch-size",
+    "64",
+    "--threads",
+    "4",
+    "--gpu-layers",
+    "0",
+    "--no-context-shift",
+    "--no-warmup",
+    "--temp",
+    "0.7",
+    "--top-p",
+    "0.8",
+    "--top-k",
+    "20",
+    "--min-p",
+    "0",
+    "--presence-penalty",
+    "1.5",
+    "--repeat-penalty",
+    "1.0",
+    "--reasoning",
+    "off",
+    "--seed",
+    "42",
+    "--predict",
+    "256",
+    "--slot-save-path",
+    "%LOCALAPPDATA%/ANTLabLocalModel\\diagnostic-cache"
+  ],
+  "answer_parameters": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 1.5,
+    "seed": 42,
+    "max_tokens": 256,
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "answer": {
+              "type": "string"
+            },
+            "citations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "answer",
+            "citations"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "selection_parameters": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "min_p": 0,
+    "presence_penalty": 1.5,
+    "seed": 42,
+    "max_tokens": 256,
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "schema": {
+          "type": "object",
+          "properties": {
+            "selected_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "selected_ids"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "development_metrics": {
+    "raw_review": {
+      "answer_correct": {
+        "numerator": 2,
+        "denominator": 4,
+        "percent": 50
+      },
+      "strict_complete_success": {
+        "numerator": 2,
+        "denominator": 4,
+        "percent": 50
+      }
+    },
+    "system_final_review": {
+      "answer_correct": {
+        "numerator": 3,
+        "denominator": 4,
+        "percent": 75
+      },
+      "strict_complete_success": {
+        "numerator": 3,
+        "denominator": 4,
+        "percent": 75
+      }
+    }
+  },
+  "development_source": "基础/runs/calculation_full_dev/20261015-160956/review/summary.json",
+  "evaluation_metrics": {
+    "raw_review": {
+      "answer_correct": {
+        "numerator": 5,
+        "denominator": 8,
+        "percent": 62.5,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "semantic_consistent": {
+        "numerator": 5,
+        "denominator": 8,
+        "percent": 62.5,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "format_complete": {
+        "numerator": 8,
+        "denominator": 8,
+        "percent": 100.0,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "citation_ids_exist": {
+        "numerator": 8,
+        "denominator": 8,
+        "percent": 100.0,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "necessary_input_coverage": {
+        "numerator": 8,
+        "denominator": 8,
+        "percent": 100.0,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "necessary_coverage": {
+        "numerator": 1,
+        "denominator": 8,
+        "percent": 12.5,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "support_actual_answer": {
+        "numerator": 1,
+        "denominator": 8,
+        "percent": 12.5,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "has_unrelated_references": {
+        "numerator": 0,
+        "denominator": 8,
+        "percent": 0.0,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "strict_complete_success": {
+        "numerator": 1,
+        "denominator": 8,
+        "percent": 12.5,
+        "ambiguous": 0,
+        "not_checked": 0
+      }
+    },
+    "system_final_review": {
+      "answer_correct": {
+        "numerator": 7,
+        "denominator": 8,
+        "percent": 87.5,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "semantic_consistent": {
+        "numerator": 7,
+        "denominator": 8,
+        "percent": 87.5,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "format_complete": {
+        "numerator": 8,
+        "denominator": 8,
+        "percent": 100.0,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "citation_ids_exist": {
+        "numerator": 8,
+        "denominator": 8,
+        "percent": 100.0,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "necessary_input_coverage": {
+        "numerator": 8,
+        "denominator": 8,
+        "percent": 100.0,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "necessary_coverage": {
+        "numerator": 7,
+        "denominator": 8,
+        "percent": 87.5,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "support_actual_answer": {
+        "numerator": 7,
+        "denominator": 8,
+        "percent": 87.5,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "has_unrelated_references": {
+        "numerator": 0,
+        "denominator": 8,
+        "percent": 0.0,
+        "ambiguous": 0,
+        "not_checked": 0
+      },
+      "strict_complete_success": {
+        "numerator": 7,
+        "denominator": 8,
+        "percent": 87.5,
+        "ambiguous": 0,
+        "not_checked": 0
+      }
+    }
+  },
+  "evaluation_source": "基础/runs/calculation_full_eval/20261015-161821/review/summary.json",
+  "this_round_generations": 16,
+  "cumulative_generations": 428,
+  "reviewer_note": "Codex辅助原文复核，尚未经本人逐项确认；非官方成绩。已接触题上的评测后重复测试，不是独立盲测或泛化成绩。"
+}

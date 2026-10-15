@@ -1,0 +1,66 @@
+{
+  "case_id": "D02",
+  "question": "青岚项目R6版本在2026-04夜间组使用的服务端GPU具体型号是什么？",
+  "used_passages": [
+    {
+      "id": "P406170",
+      "source": "模拟记录/D02/页5",
+      "text": "青岚项目R6版本在2026-04的记录：夜间组代号QL62，24次请求经共享网关转发，客户端只收到HTTP响应和模型显示名。 资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。一个批次的中位数不用于推断另一批次的首字延迟。 来源栏包含资料页、采集日期和签署状态。页面只显示与本次请求快照相同的证据，引用可定位和内容得到支持分别记录。临时预热、正式批次、迁移批次采用各自的清单，数字之间不直接合并。 采集端分别记录请求发出时间、收到完整响应时间和错误类型；服务端内部阶段没有被观测。每条回归问题附资料版本和文档范围，合并报表时先检查这些字段，再计算计数与中位数。 每周核对本页行号、资料版本与签署记录。"
+    },
+    {
+      "id": "P562395",
+      "source": "模拟记录/D02/页4",
+      "text": "批次QL62的复核补页：QL62台账登记服务区域zone-c、完整响应耗时与计费单位；资产、设备遥测与推理节点字段均未被采集。 执行环境登记客户端运行时、接口模式与日志保留策略。连续请求按输入顺序保存，每次返回的使用量按服务字段原样写入；缺失字段保持空白。复核记录会链接到当时的输入摘要和结果文件，便于后来核算。 登记系统保存字段定义和计算口径；百分比的分子分母都能追到清单行。数据在导出前经过一次格式检查，但格式检查通过并不意味着引文语义正确。人员复核与机器状态同时留在记录中。 页面记录打开原文的位置、对应的资料快照和检查状态。引用位置存在时仍可能出现内容不支持的回答，所以核对员保存了主张文本和证据原句；这些字段可在审阅报告中逐项追溯。 每周核对本页行号、资料版本与签署记录。"
+    }
+  ],
+  "input_kind": "historical_evidence_selection_replay",
+  "source_path": "基础/runs/two_step_linked_form/20261013-202853/task-D02.json",
+  "source_sha256": "3408fcd5f667f41544d86d43f622f2a54bdcedb4f700e1cffb9a7793c2ccf6c4",
+  "stages": {
+    "evidence": {
+      "run_id": "e8dd5dc7-3c44-4011-8e89-beb616249e43",
+      "raw_content": "{\n  \"target_scope\": \"青岚项目R6版本在2026-04夜间组使用的服务端GPU具体型号\",\n  \"evidence\": [\n    {\n      \"passage_id\": \"P406170\",\n      \"quote\": \"资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。\",\n      \"role\": \"data\"\n    },\n    {\n      \"passage_id\": \"P562395\",\n      \"quote\": \"批次QL62的复核补页：QL62台账登记服务区域zone-c、完整响应耗时与计费单位；资产、设备遥测与推理节点字段均未被采集。\",\n      \"role\": \"data\"\n    }\n  ],\n  \"calculation\": {\n    \"operation\": \"none\",\n    \"operands\": []\n  }\n}",
+      "http_seconds": 10.379542700015008
+    },
+    "candidate_answer": {
+      "run_id": "4adebce2-f568-4fb8-b266-01fa87f1fcc5",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P406170\"]}",
+      "http_seconds": 6.264005500008352
+    },
+    "control": {
+      "run_id": "2fc2e7a1-912e-4453-b639-8951605aed70",
+      "raw_content": "{\"answer\":\"证据不足\",\"citations\":[\"P406170\"]}",
+      "http_seconds": 4.4817769000073895
+    }
+  },
+  "status": "completed",
+  "validation": {
+    "valid": true,
+    "source_verified": true,
+    "errors": [],
+    "tool_status": "not_required",
+    "tool_result": null,
+    "scope_and_operation_semantics_verified": false,
+    "raw_structured_evidence": {
+      "target_scope": "青岚项目R6版本在2026-04夜间组使用的服务端GPU具体型号",
+      "evidence": [
+        {
+          "passage_id": "P406170",
+          "quote": "资料表还登记文档快照、问题清单、检索候选数与人工反馈。检查员把格式错误、拒答和引用错误分列，遇到版本切换时重新核对实际使用的文档标识。",
+          "role": "data"
+        },
+        {
+          "passage_id": "P562395",
+          "quote": "批次QL62的复核补页：QL62台账登记服务区域zone-c、完整响应耗时与计费单位；资产、设备遥测与推理节点字段均未被采集。",
+          "role": "data"
+        }
+      ],
+      "calculation": {
+        "operation": "none",
+        "operands": []
+      }
+    }
+  },
+  "validation_seconds": 9.400001727044582e-05,
+  "candidate_end_to_end_seconds": 16.94914639997296
+}

@@ -1,0 +1,112 @@
+{
+  "round": 1,
+  "saved_at": "2026-10-15T21:04:08.118187+08:00",
+  "items": [
+    {
+      "sequence": 1,
+      "case_id": "D01",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-01.json"
+    },
+    {
+      "sequence": 2,
+      "case_id": "D01",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "presentation": "blocks"
+      },
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-01.json"
+    },
+    {
+      "sequence": 3,
+      "case_id": "D02",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "presentation": "blocks"
+      },
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-02.json"
+    },
+    {
+      "sequence": 4,
+      "case_id": "D02",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-02.json"
+    },
+    {
+      "sequence": 5,
+      "case_id": "D03",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-03.json"
+    },
+    {
+      "sequence": 6,
+      "case_id": "D03",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "presentation": "blocks"
+      },
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-03.json"
+    },
+    {
+      "sequence": 7,
+      "case_id": "D04",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "candidate",
+      "policy": {
+        "presentation": "blocks"
+      },
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-04.json"
+    },
+    {
+      "sequence": 8,
+      "case_id": "D04",
+      "dataset": "development",
+      "condition": "R0",
+      "variant": "improved",
+      "comparison_arm": "control",
+      "policy": {},
+      "historical_task": "基础/runs/repeat_integrated/20261015-192436/task-04.json"
+    }
+  ],
+  "generation_limit": 8,
+  "previous_cumulative": 478,
+  "design": {
+    "saved_at": "2026-10-15T21:04:08.117806+08:00",
+    "round": 1,
+    "hypothesis_and_competition": "原文分块可能降低解析负担；也可能改变注意分配且不改善计算、缺证或引用。",
+    "selection_rule": "先系统最终严格成功数，再系统最终正确数；同分保留当前已验证方案，原始模型指标单列。",
+    "control_policy": {},
+    "candidate_policy": {
+      "presentation": "blocks"
+    },
+    "short_prompt": null,
+    "failure": "质量不重试；技术停止，先核查是否发出；不得自动重发。",
+    "scope": "D01定义不足不补映射；T01资格歧义不放宽。",
+    "replay": true,
+    "cost": "前三轮仅回答及规则，定位历史重放不计入新耗时或新生成；第五轮真实端到端。",
+    "exposure": "前四轮只开发题和自造；第五轮为评测后重复测试。"
+  }
+}

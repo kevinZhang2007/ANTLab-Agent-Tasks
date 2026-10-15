@@ -1,0 +1,185 @@
+{
+  "checked_at": "2026-10-14T23:07:58.660090+08:00",
+  "name": "zero",
+  "passages": [
+    {
+      "id": "data",
+      "source": "self",
+      "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。"
+    },
+    {
+      "id": "rule",
+      "source": "different-directory",
+      "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。"
+    }
+  ],
+  "states": [
+    {
+      "snapshot": "Snap11",
+      "passage_index": 0,
+      "passage_id": "data",
+      "candidate_start": 29,
+      "candidate_end": 35,
+      "start": 0,
+      "end": 44,
+      "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。",
+      "events": [
+        {
+          "status": "explicit_absence",
+          "expression_class": "explicit_zero_quantity",
+          "rule": "local_explicit_zero",
+          "trigger": "偏移",
+          "trigger_start": 41,
+          "trigger_end": 43,
+          "description_quote": "区域定位0项偏移",
+          "description_start": 35,
+          "description_end": 43,
+          "negation_scope": null,
+          "quantity_scope": [
+            {
+              "start": 39,
+              "end": 41,
+              "quote": "0项",
+              "number_start": 39,
+              "number_end": 40,
+              "raw": "0",
+              "value": 0,
+              "ownership": "current_check_item",
+              "quantity_kind": "defect_count",
+              "item_scope": {
+                "start": 35,
+                "end": 43,
+                "quote": "区域定位0项偏移"
+              }
+            }
+          ],
+          "unparsed_quantity_scope": null,
+          "quantity_text": "0",
+          "quantity": 0,
+          "pass_scope": null,
+          "overall_eligibility_not_inferred": true,
+          "condition_context_not_semantically_parsed": true,
+          "quote": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。",
+          "start": 0,
+          "end": 44
+        }
+      ],
+      "unparsed_content": [],
+      "qualification_not_checked": true,
+      "unclosed_count_not_defaulted_to_zero": true,
+      "observed_state": "explicit_absence_only"
+    }
+  ],
+  "expected_excluded": false,
+  "actual_excluded": false,
+  "passed": true,
+  "audit": {
+    "original_enum": [
+      "Snap11",
+      "证据不足"
+    ],
+    "answer_enum": [
+      "Snap11",
+      "证据不足"
+    ],
+    "changed": false,
+    "decisions": [
+      {
+        "candidate": "Snap11",
+        "description": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。",
+        "passage_id": "data",
+        "start": 0,
+        "end": 44,
+        "excluded": false,
+        "eligibility": "unknown",
+        "relations": [
+          {
+            "supplement_id": "rule",
+            "target_id": "data",
+            "added": true,
+            "reference_evidence": [
+              {
+                "object_type": "batch",
+                "object_name": "批次",
+                "raw_label": "批次",
+                "code": "BX37",
+                "start": 0,
+                "end": 6,
+                "code_start": 2,
+                "code_end": 6,
+                "statement": {
+                  "text": "批次BX37的复核补页：BX37的发布规则要求区域定位检查全部通过。",
+                  "start": 0,
+                  "end": 34
+                },
+                "reliable_declaration": false,
+                "direct_supplement_reference": true,
+                "mere_reference": false,
+                "declaration_predicate": null
+              }
+            ],
+            "candidate_target_ids": [
+              "data"
+            ],
+            "unknown_scope_fields": [
+              "project",
+              "version",
+              "date",
+              "namespace"
+            ],
+            "semantic_support_verified": false,
+            "target_declarations": [
+              {
+                "object_type": "table",
+                "object_name": "复核表",
+                "raw_label": "复核表",
+                "code": "BX37",
+                "start": 20,
+                "end": 27,
+                "code_start": 23,
+                "code_end": 27,
+                "statement": {
+                  "text": "澄海项目V2版本在2026-01的记录：复核表BX37显示Snap11区域定位0项偏移。",
+                  "start": 0,
+                  "end": 44
+                },
+                "reliable_declaration": true,
+                "direct_supplement_reference": false,
+                "mere_reference": false,
+                "declaration_predicate": {
+                  "text": "显示",
+                  "start": 27,
+                  "end": 29
+                }
+              }
+            ],
+            "reason": "unique_reliable_direct_reference",
+            "object_labels_equal": false,
+            "identity_basis": "完整编号直接補充指称+全输入唯一可靠声明+无明示冲突；不是仅按类型或编号相等。"
+          }
+        ],
+        "rule_evidence": [
+          {
+            "passage_id": "rule",
+            "start": 19,
+            "end": 33,
+            "quote": "规则要求区域定位检查全部通过",
+            "required_pass_items": [
+              "区域定位"
+            ],
+            "forbidden_literals": [],
+            "unresolved_required_checks": false,
+            "limit": "不解析上述指代，不推断完成等于通过，不作同义词映射。"
+          }
+        ],
+        "matches": [],
+        "unmatched_defects": [],
+        "remaining_does_not_mean_eligible": true,
+        "reason": "unknown_keep_no_reliable_violation_match"
+      }
+    ],
+    "unresolved_rules": [],
+    "needs_manual_correspondence": false,
+    "no_automatic_qualification_or_citation": true
+  }
+}

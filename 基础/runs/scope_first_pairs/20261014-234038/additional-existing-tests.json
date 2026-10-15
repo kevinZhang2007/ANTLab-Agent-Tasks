@@ -1,0 +1,342 @@
+{
+  "checked_at": "2026-10-14T23:42:07.314120+08:00",
+  "passed": true,
+  "total": 3,
+  "tests": [
+    {
+      "name": "previous_empty",
+      "passed": true,
+      "output": {
+        "variant": "improved",
+        "question": "资料说明什么？",
+        "original_passages": [],
+        "stages": [
+          {
+            "run_kind": "offline_stub_not_model",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "run_kind": "offline_stub_not_model",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"offline_fixture\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [],
+        "raw_selection": "{\"selected_ids\":[]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "empty_selection",
+          "selected_ids": []
+        },
+        "association_trace": [],
+        "added_ids": [],
+        "used_passages": [],
+        "answer_form_rule": {
+          "answer_form": {
+            "kind": null,
+            "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "eligibility_rule_audit": {
+          "answer_form": {
+            "kind": null,
+            "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "processing_status": "completed_with_explicit_unknown_fallback",
+        "raw_answer": "{\"answer\":\"offline_fixture\",\"citations\":[]}",
+        "end_to_end_seconds": 0.0019960999488830566
+      },
+      "model_calls": 0
+    },
+    {
+      "name": "previous_invalid",
+      "passed": true,
+      "output": {
+        "variant": "improved",
+        "question": "资料说明什么？",
+        "original_passages": [
+          {
+            "id": "one",
+            "source": "self",
+            "text": "普通资料。"
+          }
+        ],
+        "stages": [
+          {
+            "run_kind": "offline_stub_not_model",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"unknown\"]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "selection_output_failure",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "one",
+            "source": "self",
+            "text": "普通资料。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"unknown\"]}",
+        "selection_validation": {
+          "valid": false,
+          "status": "unknown_id",
+          "selected_ids": [
+            "unknown"
+          ]
+        },
+        "answer_not_executed": true,
+        "end_to_end_seconds": 0.001330800005234778
+      },
+      "model_calls": 0
+    },
+    {
+      "name": "previous_ordinary",
+      "passed": true,
+      "output": {
+        "variant": "improved",
+        "question": "资料说明什么？",
+        "original_passages": [
+          {
+            "id": "renamed",
+            "source": "self",
+            "text": "普通资料。"
+          }
+        ],
+        "stages": [
+          {
+            "run_kind": "offline_stub_not_model",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"selected_ids\":[\"renamed\"]}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "run_kind": "offline_stub_not_model",
+            "response": {
+              "choices": [
+                {
+                  "message": {
+                    "content": "{\"answer\":\"offline_fixture\",\"citations\":[]}"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "status": "completed",
+        "selection_is_fresh": true,
+        "selection_passages": [
+          {
+            "id": "renamed",
+            "source": "self",
+            "text": "普通资料。"
+          }
+        ],
+        "raw_selection": "{\"selected_ids\":[\"renamed\"]}",
+        "selection_validation": {
+          "valid": true,
+          "status": "valid_selection",
+          "selected_ids": [
+            "renamed"
+          ]
+        },
+        "association_trace": [],
+        "added_ids": [],
+        "used_passages": [
+          {
+            "id": "renamed",
+            "source": "self",
+            "text": "普通资料。"
+          }
+        ],
+        "answer_form_rule": {
+          "answer_form": {
+            "kind": null,
+            "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "answer_config": {
+          "provider": "llama.cpp",
+          "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+          "model": "Qwen3-0.6B-Q8_0",
+          "parameters": {
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "seed": 42,
+            "max_tokens": 256,
+            "response_format": {
+              "type": "json_schema",
+              "json_schema": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "answer": {
+                      "type": "string"
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "answer",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "timeout_seconds": 180
+        },
+        "eligibility_rule_audit": {
+          "answer_form": {
+            "kind": null,
+            "reason": "没有可靠的末尾明确要求或要求冲突；沿用原Schema。"
+          },
+          "type_enum": {
+            "enabled": false,
+            "values": [],
+            "occurrences": [],
+            "position_unit": "Python Unicode字符，start含/end不含",
+            "identifier_definition": "完整连续ASCII英数词，至少一个字母和一个数字；不按前缀或语义过滤。",
+            "old_values": [],
+            "decisions": [],
+            "limit": "规则仅识别已保存的有限明确声明；不保证穷尽语义冲突。普通无标签复述不推断角色。",
+            "target_role": null
+          },
+          "qualification_enabled": false,
+          "qualification_status": "not_applicable",
+          "no_remaining_candidate_qualification": true,
+          "qualification_reason": "question_does_not_explicitly_request_snapshot_identifier"
+        },
+        "processing_status": "completed_with_explicit_unknown_fallback",
+        "raw_answer": "{\"answer\":\"offline_fixture\",\"citations\":[]}",
+        "end_to_end_seconds": 0.0018307999707758427
+      },
+      "model_calls": 0
+    }
+  ],
+  "regression_total_combined": 20,
+  "all_previous_13_cases_retained": true
+}

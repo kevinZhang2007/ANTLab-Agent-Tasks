@@ -1,0 +1,430 @@
+{
+  "checked_at": "2026-10-14T14:06:55.376414+08:00",
+  "passed": true,
+  "checks": [
+    {
+      "sample": "supported合法",
+      "raw_fixture": "{\"verdict\":\"supported\",\"citations\":[\"alpha\",\"beta\"],\"reason\":\"自造检查\"}",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": true,
+          "structure_valid": true,
+          "status": "valid",
+          "value": {
+            "verdict": "supported",
+            "citations": [
+              "alpha",
+              "beta"
+            ],
+            "reason": "自造检查"
+          },
+          "unknown_ids": [],
+          "duplicate_ids": [],
+          "citations_empty": false,
+          "semantic_support_verified": false
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha",
+            "beta"
+          ]
+        },
+        "citation_replacement_applied": true,
+        "review_supported": true,
+        "answer_exactly_unchanged": true,
+        "response_origin": "citation_postprocessing_derived",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    },
+    {
+      "sample": "未知ID",
+      "raw_fixture": "{\"verdict\":\"supported\",\"citations\":[\"unknown\"],\"reason\":\"自造检查\"}",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": false,
+          "structure_valid": true,
+          "status": "invalid_ids",
+          "value": {
+            "verdict": "supported",
+            "citations": [
+              "unknown"
+            ],
+            "reason": "自造检查"
+          },
+          "unknown_ids": [
+            "unknown"
+          ],
+          "duplicate_ids": [],
+          "citations_empty": false,
+          "semantic_support_verified": false
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "citation_replacement_applied": false,
+        "review_supported": false,
+        "answer_exactly_unchanged": true,
+        "response_origin": "original_retained_review_not_supported",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    },
+    {
+      "sample": "重复ID",
+      "raw_fixture": "{\"verdict\":\"supported\",\"citations\":[\"alpha\",\"alpha\"],\"reason\":\"自造检查\"}",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": false,
+          "structure_valid": true,
+          "status": "invalid_ids",
+          "value": {
+            "verdict": "supported",
+            "citations": [
+              "alpha",
+              "alpha"
+            ],
+            "reason": "自造检查"
+          },
+          "unknown_ids": [],
+          "duplicate_ids": [
+            "alpha"
+          ],
+          "citations_empty": false,
+          "semantic_support_verified": false
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "citation_replacement_applied": false,
+        "review_supported": false,
+        "answer_exactly_unchanged": true,
+        "response_origin": "original_retained_review_not_supported",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    },
+    {
+      "sample": "非法verdict",
+      "raw_fixture": "{\"verdict\":\"correct\",\"citations\":[\"alpha\"],\"reason\":\"自造检查\"}",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": false,
+          "structure_valid": false,
+          "status": "invalid_structure",
+          "value": {
+            "verdict": "correct",
+            "citations": [
+              "alpha"
+            ],
+            "reason": "自造检查"
+          }
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "citation_replacement_applied": false,
+        "review_supported": false,
+        "answer_exactly_unchanged": true,
+        "response_origin": "original_retained_review_not_supported",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    },
+    {
+      "sample": "空引用supported",
+      "raw_fixture": "{\"verdict\":\"supported\",\"citations\":[],\"reason\":\"自造检查\"}",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": true,
+          "structure_valid": true,
+          "status": "valid",
+          "value": {
+            "verdict": "supported",
+            "citations": [],
+            "reason": "自造检查"
+          },
+          "unknown_ids": [],
+          "duplicate_ids": [],
+          "citations_empty": true,
+          "semantic_support_verified": false
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": []
+        },
+        "citation_replacement_applied": true,
+        "review_supported": true,
+        "answer_exactly_unchanged": true,
+        "response_origin": "citation_postprocessing_derived",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    },
+    {
+      "sample": "contradicted保留原回答",
+      "raw_fixture": "{\"verdict\":\"contradicted\",\"citations\":[\"beta\"],\"reason\":\"自造检查\"}",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": true,
+          "structure_valid": true,
+          "status": "valid",
+          "value": {
+            "verdict": "contradicted",
+            "citations": [
+              "beta"
+            ],
+            "reason": "自造检查"
+          },
+          "unknown_ids": [],
+          "duplicate_ids": [],
+          "citations_empty": false,
+          "semantic_support_verified": false
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "citation_replacement_applied": false,
+        "review_supported": false,
+        "answer_exactly_unchanged": true,
+        "response_origin": "original_retained_review_not_supported",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    },
+    {
+      "sample": "insufficient保留原回答",
+      "raw_fixture": "{\"verdict\":\"insufficient\",\"citations\":[],\"reason\":\"自造检查\"}",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": true,
+          "structure_valid": true,
+          "status": "valid",
+          "value": {
+            "verdict": "insufficient",
+            "citations": [],
+            "reason": "自造检查"
+          },
+          "unknown_ids": [],
+          "duplicate_ids": [],
+          "citations_empty": true,
+          "semantic_support_verified": false
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "citation_replacement_applied": false,
+        "review_supported": false,
+        "answer_exactly_unchanged": true,
+        "response_origin": "original_retained_review_not_supported",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    },
+    {
+      "sample": "不得另写答案",
+      "raw_fixture": "{\"verdict\":\"supported\",\"citations\":[\"beta\"],\"reason\":\"自造检查\",\"answer\":\"改写\"}",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": false,
+          "structure_valid": false,
+          "status": "invalid_structure",
+          "value": {
+            "verdict": "supported",
+            "citations": [
+              "beta"
+            ],
+            "reason": "自造检查",
+            "answer": "改写"
+          }
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "citation_replacement_applied": false,
+        "review_supported": false,
+        "answer_exactly_unchanged": true,
+        "response_origin": "original_retained_review_not_supported",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    },
+    {
+      "sample": "非法JSON",
+      "raw_fixture": "bad json",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": false,
+          "structure_valid": false,
+          "status": "invalid_json",
+          "value": null
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "citation_replacement_applied": false,
+        "review_supported": false,
+        "answer_exactly_unchanged": true,
+        "response_origin": "original_retained_review_not_supported",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    },
+    {
+      "sample": "重复JSON字段",
+      "raw_fixture": "{\"verdict\":\"supported\",\"verdict\":\"insufficient\",\"citations\":[],\"reason\":\"自造检查\"}",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": false,
+          "structure_valid": false,
+          "status": "invalid_json",
+          "value": null
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "citation_replacement_applied": false,
+        "review_supported": false,
+        "answer_exactly_unchanged": true,
+        "response_origin": "original_retained_review_not_supported",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    },
+    {
+      "sample": "空理由",
+      "raw_fixture": "{\"verdict\":\"supported\",\"citations\":[\"beta\"],\"reason\":\"\"}",
+      "result": {
+        "original_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "review_validation": {
+          "valid": false,
+          "structure_valid": false,
+          "status": "invalid_structure",
+          "value": {
+            "verdict": "supported",
+            "citations": [
+              "beta"
+            ],
+            "reason": ""
+          }
+        },
+        "candidate_response": {
+          "answer": "保留 \"引号\"\n中文、空格  ",
+          "citations": [
+            "alpha"
+          ]
+        },
+        "citation_replacement_applied": false,
+        "review_supported": false,
+        "answer_exactly_unchanged": true,
+        "response_origin": "original_retained_review_not_supported",
+        "not_raw_model_response": true,
+        "semantic_support_verified": false
+      },
+      "passed": true
+    }
+  ],
+  "empty_input_and_id_remap_passed": true,
+  "generation_calls": 0,
+  "empty_citations_are_not_semantic_success": true
+}

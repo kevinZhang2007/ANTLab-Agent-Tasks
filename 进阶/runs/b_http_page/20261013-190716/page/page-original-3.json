@@ -1,0 +1,149 @@
+{
+  "variant": "original",
+  "sequence": 3,
+  "request_id": "7c22cdb8-830f-484f-a6fa-59b2544fa990",
+  "submitted": {
+    "case_id": "R03",
+    "reset": false,
+    "request": {
+      "query": "timeout request threshold",
+      "doc_ids": [
+        "beta"
+      ],
+      "snapshot": "v1",
+      "k": 1,
+      "mode": "offline_replay"
+    }
+  },
+  "response": {
+    "request_id": "7c22cdb8-830f-484f-a6fa-59b2544fa990",
+    "request": {
+      "query": "timeout request threshold",
+      "doc_ids": [
+        "beta"
+      ],
+      "snapshot": "v1",
+      "k": 1,
+      "mode": "offline_replay"
+    },
+    "answer": "请求超时阈值为30秒。",
+    "citations": [
+      "b01"
+    ],
+    "evidence": [
+      {
+        "id": "b01",
+        "doc_id": "alpha",
+        "snapshot": "v1",
+        "page": 1,
+        "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+        "tags": [
+          "timeout",
+          "request",
+          "threshold",
+          "30"
+        ],
+        "block_id": "b01"
+      }
+    ],
+    "actual_scopes": [
+      [
+        "alpha",
+        "v1"
+      ]
+    ],
+    "locator_status": "invalid",
+    "support_status": "not_checked",
+    "judgment_source": "unverified",
+    "elapsed_ms": 0.06959994789212942,
+    "run_kind": "offline_replay",
+    "scope_status": "known",
+    "evidence_in_scope": false,
+    "citation_status": "present",
+    "engine_response": {
+      "answer": "请求超时阈值为30秒。",
+      "citations": [
+        "b01"
+      ],
+      "evidence": [
+        {
+          "id": "b01",
+          "doc_id": "alpha",
+          "snapshot": "v1",
+          "page": 1,
+          "text": "实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。",
+          "tags": [
+            "timeout",
+            "request",
+            "threshold",
+            "30"
+          ]
+        }
+      ],
+      "locator_status": "valid",
+      "support_status": "supported",
+      "judgment_source": "rule",
+      "status": "ok",
+      "request_id": "7c22cdb8-830f-484f-a6fa-59b2544fa990",
+      "request": {
+        "query": "timeout request threshold",
+        "doc_ids": [
+          "beta"
+        ],
+        "snapshot": "v1",
+        "k": 1,
+        "mode": "offline_replay"
+      },
+      "cache_hit": true,
+      "elapsed_ms": 0.06959994789212942,
+      "run_kind": "offline_replay"
+    },
+    "service": {
+      "version": "b-http-review-v1",
+      "engine": "challenge:Engine",
+      "default_engine": "challenge:Engine",
+      "host": "127.0.0.1",
+      "port": 8876,
+      "run_kind": "offline_replay",
+      "engine_sha256": "b84a035957ac457fb803c82f141c8684ccb5dbe9ff34c45bbb199ff613094ad1"
+    },
+    "state_mapping": {
+      "locator_status": "展示层检查引用ID、实际证据及请求范围；不替换Engine原值。",
+      "support_status": "not_checked：Engine只按ID产生状态，未做语义检查。",
+      "judgment_source": "unverified：没有语义判分器。",
+      "scope_status": "只核对输入范围存在性，不修复Engine检索或改变其响应。"
+    }
+  },
+  "summary": {
+    "http_status": 200,
+    "request_id": "7c22cdb8-830f-484f-a6fa-59b2544fa990",
+    "engine": "challenge:Engine",
+    "request": {
+      "query": "timeout request threshold",
+      "doc_ids": [
+        "beta"
+      ],
+      "snapshot": "v1",
+      "k": 1,
+      "mode": "offline_replay"
+    },
+    "scope_status": "known",
+    "answer": "请求超时阈值为30秒。",
+    "citations": [
+      "b01"
+    ],
+    "actual_scopes": [
+      [
+        "alpha",
+        "v1"
+      ]
+    ],
+    "locator_status": "invalid",
+    "citation_status": "present",
+    "cache_hit": true,
+    "elapsed_ms": 0.06959994789212942,
+    "run_kind": "offline_replay"
+  },
+  "dom_snapshot": "- heading \"进阶B：范围与证据核对\" [level=1]\n- paragraph: 固定合成draft离线重放（offline_replay）；没有模型请求。\n- paragraph: 服务 b-http-review-v1 | Engine challenge:Engine | 默认 challenge:Engine\n- text: 案例\n- combobox \"案例\":\n  - option \"R01 · alpha/v1\"\n  - option \"R02 · alpha/v2\"\n  - option \"R03 · beta/v1\" [selected]\n  - option \"R04 · alpha/v2\"\n  - option \"R05 · beta/v1\"\n  - option \"R06 · alpha/v2\"\n  - option \"R07 · missing/v1\"\n- checkbox \"运行前清空状态\"\n- text: 运行前清空状态\n- text: query\n- textbox \"query\": timeout request threshold\n- text: doc_ids（逗号分隔）\n- textbox \"doc_ids（逗号分隔）\": beta\n- text: snapshot\n- textbox \"snapshot\": v1\n- text: k\n- spinbutton \"k\": \"1\"\n- button \"提交请求\"\n- generic \"本次提交内容\"\n- heading \"当前请求与结果\" [level=2]\n- generic: \"{ \\\"http_status\\\": 200, \\\"request_id\\\": \\\"7c22cdb8-830f-484f-a6fa-59b2544fa990\\\", \\\"engine\\\": \\\"challenge:Engine\\\", \\\"request\\\": { \\\"query\\\": \\\"timeout request threshold\\\", \\\"doc_ids\\\": [ \\\"beta\\\" ], \\\"snapshot\\\": \\\"v1\\\", \\\"k\\\": 1, \\\"mode\\\": \\\"offline_replay\\\" }, \\\"scope_status\\\": \\\"known\\\", \\\"answer\\\": \\\"请求超时阈值为30秒。\\\", \\\"citations\\\": [ \\\"b01\\\" ], \\\"actual_scopes\\\": [ [ \\\"alpha\\\", \\\"v1\\\" ] ], \\\"locator_status\\\": \\\"invalid\\\", \\\"citation_status\\\": \\\"present\\\", \\\"cache_hit\\\": true, \\\"elapsed_ms\\\": 0.06959994789212942, \\\"run_kind\\\": \\\"offline_replay\\\" }\"\n- paragraph: 展示支持状态：not_checked；判断来源：unverified。Engine原始支持状态：supported（rule）。ID规则产生的状态，语义未核验；待检查主张：请求超时阈值为30秒。\n- heading \"实际证据与原文定位\" [level=2]\n- article:\n  - paragraph: alpha / v1 · 块 b01 · 页 1 | 范围冲突：不是当前请求资料\n  - paragraph: 实验A timeout request threshold 为30秒。此值仅适用于第一版请求客户端。\n- generic \"完整HTTP响应（含未改写的Engine响应）\"",
+  "screenshot": "page-original-3.jpg"
+}

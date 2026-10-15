@@ -1,0 +1,15 @@
+--- a/基础/tests/check_qwen25_answer_schema_native.py
++++ b/基础/tests/check_qwen25_answer_schema_native.py
+@@ -9,8 +9,11 @@
+ import struct
+ import sys
+ 
++repo = Path(__file__).resolve().parents[2]
+ folder = Path(sys.argv[1])
+-old = Path(__file__).resolve().parents[2] / 'runs/answer_form/20261013-195237'
++if not folder.is_absolute():
++    folder = repo / folder
++old = repo / '基础/runs/answer_form/20261013-195237'
+ binary = Path(r'C:\Users\86186\AppData\Local\ANTLabLocalModel\llama-b11429')
+ root = binary.parent
+ 

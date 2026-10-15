@@ -1,0 +1,14 @@
+{
+  "revised_at": "2026-10-13T21:12:13.355619+08:00",
+  "original_plan": "基础/runs/models/qwen4b_answer_pair/20261013-205033/design-plan.json",
+  "previous_attempt": "基础/runs/models/qwen4b_answer_pair/20261013-205033/load-revised-20261013-210834/loading-result.json",
+  "old_context": 4096,
+  "new_context": 3072,
+  "reason": "用户授权一次降低上下文的低内存尝试，其余服务与生成参数不变；不把修订追溯成旧计划。",
+  "stop_rule": "每0.5秒采样，一次低于1GiB立即停止自有服务；分配失败、崩溃、容量超限或技术错误保存停止，不重试。",
+  "scope": "仅D01原定配对输入的最终回答阶段；健康就绪后先检查实际4B模板及完整输入加256预算，最多一次生成。",
+  "prior_generation_count": 162,
+  "expected": "上下文减少可能降低KV等内存占用，能否就绪及生成仍未验证。",
+  "old_records_preserved": true,
+  "not_comparable_to_original_4096_pair": "本次3072属于单独资源修订，不混入原8次配对。"
+}

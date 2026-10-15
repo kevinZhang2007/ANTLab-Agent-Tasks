@@ -1,0 +1,108 @@
+{
+  "checked_at": "2026-10-15T17:39:20.300047+08:00",
+  "passed": true,
+  "returncode": 0,
+  "case": "D03",
+  "condition": "R0",
+  "ports_available": [
+    8080,
+    8765
+  ],
+  "model_and_frozen_hashes_match": true,
+  "locator_support_separation_checks": [
+    true,
+    true,
+    true
+  ],
+  "memory": {
+    "time": "2026-10-15T17:39:20.300161+08:00",
+    "available_bytes": 3698495488,
+    "total_bytes": 16785268736
+  },
+  "generation_limit": 2,
+  "source_freeze": "基础/runs/repeat_integrated/20261015-171741/freeze.json",
+  "source_freeze_sha256": "fd3be85975b1b5067fb09cccc1c0bc7466e5640d646da5dbb2b622b0d4a4c905",
+  "entry_hashes": {
+    "基础/starter/server_exploration.py": "6219db16cfac15eaca5815b246bea047a72723d8b6648fb0a4d6b1b5fdcb5838",
+    "基础/starter/index.html": "f793d70070a3c2eaee4224502aeaead342fb7715b8672e89753946bf741119dd",
+    "基础/tests/run_page_closure.py": "6aec409fd9fd5c0c3be187aa28474443c82bff6eab60626bbc32d81f0b791b17"
+  },
+  "configs": {
+    "answer": {
+      "provider": "llama.cpp",
+      "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+      "model": "Qwen3-0.6B-Q8_0",
+      "parameters": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "min_p": 0,
+        "presence_penalty": 1.5,
+        "seed": 42,
+        "max_tokens": 256,
+        "response_format": {
+          "type": "json_schema",
+          "json_schema": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "answer": {
+                  "type": "string"
+                },
+                "citations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "answer",
+                "citations"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "timeout_seconds": 180
+    },
+    "selection": {
+      "provider": "llama.cpp",
+      "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+      "model": "Qwen3-0.6B-Q8_0",
+      "parameters": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "min_p": 0,
+        "presence_penalty": 1.5,
+        "seed": 42,
+        "max_tokens": 256,
+        "response_format": {
+          "type": "json_schema",
+          "json_schema": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "selected_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "selected_ids"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "timeout_seconds": 180
+    }
+  },
+  "original_records_not_changed": true
+}
