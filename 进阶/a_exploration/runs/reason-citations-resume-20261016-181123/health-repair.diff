@@ -1,0 +1,53 @@
+--- diagnose_reason_citations.py
++++ diagnose_reason_citations_resume.py
+@@ -1,6 +1,7 @@
+ """固定自动证据的紧凑思考下理由和引用提示对照；复用请求记录器，不重检索或读答案。"""
+ from pathlib import Path
+-import argparse, ast, json, socket, subprocess, threading, time, uuid
++import argparse, ast, json, socket, subprocess, threading, time, uuid, os, urllib.request
++from audited_health import wait_health
+ from thinking_modes import ThinkingEngine as Engine
+ from runtime import TechnicalStop,load,write,sha,now,memory,ROOT,HERE
+ 
+@@ -35,6 +36,8 @@
+         write(out/'resource-stop.json',{'at':now(),'available_GiB':m['available_bytes']/2**30,'required_GiB':2,'generation_calls':0});print('RESOURCE_STOP',flush=True);return
+     launch=plan['service_arguments'];assert sha(launch[0])==plan['executable_hash'] and sha(launch[launch.index('-m')+1])==plan['model_hash']
+     (out/'slot-cache').mkdir();engine=Engine(out);stop=threading.Event();abort=threading.Event();samples=[];process=None;phase='loading';start=time.perf_counter()
++    assert engine.url=='http://127.0.0.1:8080/'
++    write(out/'launch-environment.json',{'at':now(),'cwd':str(out),'python':os.sys.executable,'proxy_env_presence':{k:bool(os.environ.get(k)) for k in ['HTTP_PROXY','HTTPS_PROXY','ALL_PROXY','NO_PROXY','http_proxy','https_proxy','all_proxy','no_proxy']},'environment_proxy_bypassed':True,'actual_proxy_handlers':[getattr(h,'proxies',None) for h in engine.opener.handlers if isinstance(h,urllib.request.ProxyHandler)],'path_length':len(str(out)),'launch_attempt_cap':1})
+     record={'at':now(),'run_kind':'live_api','diagnostic_input_origin':'automatic_improved_evidence_replay','generations_baseline':plan['cumulative_baseline'],'service_arguments':launch,'memory_before':m}
+     def monitor():
+         low=0
+@@ -49,14 +52,8 @@
+     try:
+         with (out/'model-stdout.log').open('xb') as stdout,(out/'model-stderr.log').open('xb') as stderr:
+             process=subprocess.Popen(launch,stdout=stdout,stderr=stderr,cwd=out,creationflags=subprocess.CREATE_NO_WINDOW)
+-        write(out/'owned-service.json',{'pid':process.pid,'started_at':now(),'arguments':launch});thread.start();phase='health'
+-        while time.perf_counter()-start<120:
+-            if abort.is_set() or process.poll() is not None:raise TechnicalStop('加载期间资源/进程停止')
+-            try:
+-                if engine.service('health').get('status')=='ok':break
+-            except Exception:pass
+-            time.sleep(.5)
+-        else:raise TechnicalStop('健康超时')
++        write(out/'owned-service.json',{'pid':process.pid,'started_at':now(),'arguments':launch,'cwd':str(out),'creationflags':subprocess.CREATE_NO_WINDOW,'one_start_only':True});thread.start();phase='health'
++        wait_health(engine,process,out,abort,start,limit=120)
+         props=engine.service('props');write(out/'props.json',props)
+         assert props['build_info']=='b11429-d81235049' and props['default_generation_settings']['n_ctx']==4096 and props['total_slots']==1
+         assert props['default_generation_settings']['params']['repeat_penalty']==1.0
+@@ -92,13 +89,14 @@
+     except Exception as e:
+         record.update(error=repr(e),failure_phase=phase);write(out/'technical-stop.json',{'at':now(),'phase':phase,'error':repr(e),'dispatches':engine.dispatches,'confirmed_generations':engine.completed,'no_automatic_resend':True});print('TECHNICAL_STOP',phase,repr(e),flush=True)
+     finally:
++        record.update(process_exit_code_before_cleanup=process.poll() if process else None,cleanup_termination_requested=bool(process and process.poll() is None))
+         stop.set()
+         if thread.is_alive():thread.join(5)
+         if process and process.poll() is None:
+             process.terminate()
+             try:process.wait(10)
+             except subprocess.TimeoutExpired:process.kill();process.wait()
+-        record.update(ended_at=now(),dispatches=engine.dispatches,confirmed_generations=engine.completed,model_stopped=process is None or process.poll() is not None,memory_samples=samples,memory_after_stop=memory())
++        record.update(process_exit_code_after_cleanup=process.poll() if process else None,ended_at=now(),dispatches=engine.dispatches,confirmed_generations=engine.completed,model_stopped=process is None or process.poll() is not None,memory_samples=samples,memory_after_stop=memory())
+         write(out/'runtime.json',record);print('FINAL',engine.completed,'STOPPED',record['model_stopped'],flush=True)
+ 
+ if __name__=='__main__':main()

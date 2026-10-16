@@ -1,0 +1,88 @@
+{
+  "at": "2026-10-16T18:13:24.076682+08:00",
+  "id": "AD03",
+  "variant": "original",
+  "request_id": "f06a8edb-d708-4f7f-84a6-49ebc1d9e40f",
+  "run_id": "e8499900-9bfc-47de-bf1a-ae3c3f250cdc",
+  "raw_record": "run-e8499900-9bfc-47de-bf1a-ae3c3f250cdc.json",
+  "input_origin": "automatic_improved_evidence_replay",
+  "not_automatic_retrieval": true,
+  "not_end_to_end_score": true,
+  "raw_content": "{\n  \"label\": \"insufficient\",\n  \"reason\": \"资料中未明确提及绘图过程中仅保留最终图片满足作者关于图底层数据的建议，且相关证据（如使用HTML文件输出）支持其他做法而非直接关联。\",\n  \"sentence_ids\": [\"sent-0009\", \"sent-0013\"]\n}",
+  "parsed_final": {
+    "label": "insufficient",
+    "reason": "资料中未明确提及绘图过程中仅保留最终图片满足作者关于图底层数据的建议，且相关证据（如使用HTML文件输出）支持其他做法而非直接关联。",
+    "sentence_ids": [
+      "sent-0009",
+      "sent-0013"
+    ]
+  },
+  "public_reference_label": "contradicted",
+  "label_correct": false,
+  "format_complete": true,
+  "selection_valid": true,
+  "source_authenticity": true,
+  "reason_label_consistent": true,
+  "reason_source_attribution_correct": "not_checked",
+  "necessary_evidence_coverage": "ambiguous",
+  "citation_support_actual_label": "ambiguous",
+  "has_unrelated_citations": false,
+  "strict_complete_success": false,
+  "basis": "实际没有公开参考指定的S08绘图数据变换直接依据；0009描述最终图表高度汇总，0013在存储条件允许时建议永久保留全部底层数据。这些既可能作为可见范围的缺证检查来源，也可能提供有条件反证，沿用覆盖及支持ambiguous；不引入未发送S08，不移出分母。insufficient不符合公开contradicted，严格失败。",
+  "selected_sources": [
+    {
+      "sentence_id": "sent-0009",
+      "block_id": "P1-S09-p01",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "text": "The final results that make it to an article, be it plots or tables, often represent highly summarized data. ",
+      "start": 0,
+      "end": 109,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    },
+    {
+      "sentence_id": "sent-0013",
+      "block_id": "P1-S09-p01",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "text": "When the storage context allows, it is better to simply incorporate permanent output of all underlying data when a main result is generated, using a systematic naming convention to allow the full data underlying a given summarized value to be easily found. ",
+      "start": 474,
+      "end": 731,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    }
+  ],
+  "expanded_response": {
+    "label": "insufficient",
+    "reason": "资料中未明确提及绘图过程中仅保留最终图片满足作者关于图底层数据的建议，且相关证据（如使用HTML文件输出）支持其他做法而非直接关联。",
+    "evidence": [
+      {
+        "block_id": "P1-S09-p01",
+        "quote": "The final results that make it to an article, be it plots or tables, often represent highly summarized data. "
+      },
+      {
+        "block_id": "P1-S09-p01",
+        "quote": "When the storage context allows, it is better to simply incorporate permanent output of all underlying data when a main result is generated, using a systematic naming convention to allow the full data underlying a given summarized value to be easily found. "
+      }
+    ]
+  },
+  "input_tokens": 1144,
+  "usage": {
+    "completion_tokens": 491,
+    "prompt_tokens": 1144,
+    "total_tokens": 1635,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "finish_reason": "stop",
+  "budget_exhausted": false,
+  "truncated": false,
+  "client_seconds": 22.907939300173894,
+  "reasoning_produced": true,
+  "judgment_source": "unverified",
+  "reviewer": "Codex辅助原文复核，尚待本人确认"
+}

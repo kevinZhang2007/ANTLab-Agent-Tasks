@@ -1,0 +1,558 @@
+{
+  "reviewed_at": "2026-10-16T12:07:30.473301+08:00",
+  "run_kind": "local_rule",
+  "judgment_source": "unverified",
+  "reviewer": "Codex辅助原文复核，尚待本人确认",
+  "evaluation_after_all_generations_saved": true,
+  "public_reference_source": "进阶/materials/a_dev_answers.json",
+  "public_reference_sha256": "322a6e5821b06df0fafd0b3b74de1bf1b1f4920a412ad002b1c64c1868ed2c7e",
+  "rows": [
+    {
+      "task_id": "AD01",
+      "variant": "baseline",
+      "request_id": "b5fb4fe2-a4b4-434b-a258-757e0073e637",
+      "pair_request_id": "125da50b-2abf-4795-af23-010bfcb6ee1d",
+      "run_id": "930e10cf-f721-44ee-906d-f3b99739d774",
+      "shared_query_run_id": "cc15ecce-be71-417d-b0d3-cded086798da",
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"The claim is supported by the passage that states 'you should at least record sufficient details on programs, parameters, and manual procedures to allow yourself, in a year or so, to approximately reproduce the results.' Additionally, it mentions avoiding manual data manipulation steps and noting modifications when necessary.\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S02-p03\",\n      \"quote\": \"As a minimum, you should at least record sufficient details on programs, parameters, and manual procedures to allow yourself, in a year or so, to approximately reproduce the results.\"\n    },\n    {\n      \"block_id\": \"P1-S03-p01\",\n      \"quote\": \"If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts. If working with integrated frameworks, there will typically be a quite rich collection of components for data manipulation.\"\n    }\n  ]\n}",
+      "actual_label": "supported",
+      "reference_label": "contradicted",
+      "format_complete": true,
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "reason_language_chinese": false,
+      "id_membership_check": true,
+      "nonempty_references": true,
+      "quote_authenticity": [
+        true,
+        true
+      ],
+      "necessary_input_coverage": true,
+      "necessary_cited_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "locator_status": "invalid",
+      "locator_valid_references": 1,
+      "reference_count": 2,
+      "actual_input_ids": [
+        "P1-S02-p03",
+        "P1-S03-p01"
+      ],
+      "answer_client_seconds": 8.597248999867588,
+      "answer_stage_wall_seconds": 8.757867899956182,
+      "shared_query_cost_fraction": 0.5,
+      "allocated_total_seconds": 9.515728699974716,
+      "usage": {
+        "completion_tokens": 214,
+        "prompt_tokens": 558,
+        "total_tokens": 772,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "basis": {
+        "necessary_blocks": [
+          "P1-S03-p01"
+        ],
+        "original_sources": [
+          {
+            "section": "P1-S03",
+            "paragraph_index": 0,
+            "text": "Whenever possible, rely on the execution of programs instead of manual procedures to modify data. Such manual procedures are not only inefficient and error-prone, they are also difficult to reproduce. If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts. If working with integrated frameworks, there will typically be a quite rich collection of components for data manipulation. As an example, manual tweaking of data files to attain format compatibility should be replaced by format converters that can be reenacted and included into executable workflows. Other manual operations like the use of copy and paste between documents should also be avoided. If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose.",
+            "text_sha256": "216e4e8a2fe72f29af0a8ee0f89680608aa5d684f38f7bfcceada1094addb406",
+            "start": 0,
+            "end": 888
+          }
+        ],
+        "key_original": "If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose.",
+        "judgment": "原文对无法避免的手工操作仍要求记录哪些文件被修改/移动及目的，反对无需记录；不等于绝对禁止手工操作。",
+        "error": "两侧最终输入都有完整例外条件。baseline把应记录的原文当成无需记录的支持；improved改为拒判，也与已提供原文不符。",
+        "input_coverage": {
+          "baseline": true,
+          "improved": true
+        }
+      },
+      "judgment_note": "Codex辅助原文复核，尚待本人确认；非官方成绩。id集合检查允许空引用，但空引用不算证据/定位/支持成功。",
+      "semantic_support_reason": "该次判断错误或拒判与原文不符；原文片段真实/可定位不能支持错误判断。"
+    },
+    {
+      "task_id": "AD01",
+      "variant": "improved",
+      "request_id": "34758075-2bcd-4e57-8bba-9b90ae9403d1",
+      "pair_request_id": "125da50b-2abf-4795-af23-010bfcb6ee1d",
+      "run_id": "38c91b9e-706b-46dd-aa29-a2470c6ace3d",
+      "shared_query_run_id": "cc15ecce-be71-417d-b0d3-cded086798da",
+      "raw_content": "{\n  \"label\": \"insufficient\",\n  \"reason\": \"The passage does not provide sufficient evidence to confirm or deny the claim. The evidence includes rules about documentation requirements and avoiding manual data manipulation, but there is no explicit statement that addresses whether manual modifications are avoided or if saving files without recording details is acceptable.\",\n  \"evidence\": []\n}",
+      "actual_label": "insufficient",
+      "reference_label": "contradicted",
+      "format_complete": true,
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "reason_language_chinese": false,
+      "id_membership_check": true,
+      "nonempty_references": false,
+      "quote_authenticity": [],
+      "necessary_input_coverage": true,
+      "necessary_cited_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "locator_status": "absent",
+      "locator_valid_references": 0,
+      "reference_count": 0,
+      "actual_input_ids": [
+        "P1-S02-p02",
+        "P1-S02-p03",
+        "P1-S03-p01"
+      ],
+      "answer_client_seconds": 5.5490254000760615,
+      "answer_stage_wall_seconds": 5.751723400084302,
+      "shared_query_cost_fraction": 0.5,
+      "allocated_total_seconds": 6.509584200102836,
+      "usage": {
+        "completion_tokens": 72,
+        "prompt_tokens": 796,
+        "total_tokens": 868,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "basis": {
+        "necessary_blocks": [
+          "P1-S03-p01"
+        ],
+        "original_sources": [
+          {
+            "section": "P1-S03",
+            "paragraph_index": 0,
+            "text": "Whenever possible, rely on the execution of programs instead of manual procedures to modify data. Such manual procedures are not only inefficient and error-prone, they are also difficult to reproduce. If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts. If working with integrated frameworks, there will typically be a quite rich collection of components for data manipulation. As an example, manual tweaking of data files to attain format compatibility should be replaced by format converters that can be reenacted and included into executable workflows. Other manual operations like the use of copy and paste between documents should also be avoided. If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose.",
+            "text_sha256": "216e4e8a2fe72f29af0a8ee0f89680608aa5d684f38f7bfcceada1094addb406",
+            "start": 0,
+            "end": 888
+          }
+        ],
+        "key_original": "If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose.",
+        "judgment": "原文对无法避免的手工操作仍要求记录哪些文件被修改/移动及目的，反对无需记录；不等于绝对禁止手工操作。",
+        "error": "两侧最终输入都有完整例外条件。baseline把应记录的原文当成无需记录的支持；improved改为拒判，也与已提供原文不符。",
+        "input_coverage": {
+          "baseline": true,
+          "improved": true
+        }
+      },
+      "judgment_note": "Codex辅助原文复核，尚待本人确认；非官方成绩。id集合检查允许空引用，但空引用不算证据/定位/支持成功。",
+      "semantic_support_reason": "该次判断错误或拒判与原文不符；原文片段真实/可定位不能支持错误判断。"
+    },
+    {
+      "task_id": "AD02",
+      "variant": "improved",
+      "request_id": "b921a815-f586-4109-8cea-504e0ad2834d",
+      "pair_request_id": "d04f57e9-3512-4ee8-88a0-cd250b9fff9c",
+      "run_id": "16e95f1d-7d35-414b-9aa0-0435bc65498e",
+      "shared_query_run_id": "0deb0761-25e7-4612-a3f8-de32fb63e4bf",
+      "raw_content": "{\n  \"label\": \"insufficient\",\n  \"reason\": \"The claim cannot be fully supported by the given passages, as they primarily discuss how to support others’ reuse of notebooks but do not explicitly state that static HTML/PDF or static views via GitHub are sufficient for execution.\",\n  \"evidence\": []\n}",
+      "actual_label": "insufficient",
+      "reference_label": "supported",
+      "format_complete": true,
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "reason_language_chinese": false,
+      "id_membership_check": true,
+      "nonempty_references": false,
+      "quote_authenticity": [],
+      "necessary_input_coverage": true,
+      "necessary_cited_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "locator_status": "absent",
+      "locator_valid_references": 0,
+      "reference_count": 0,
+      "actual_input_ids": [
+        "P2-S10-p01",
+        "P2-S10-p02",
+        "P2-S10-p03"
+      ],
+      "answer_client_seconds": 5.496024599997327,
+      "answer_stage_wall_seconds": 5.692459599813446,
+      "shared_query_cost_fraction": 0.5,
+      "allocated_total_seconds": 6.3306771498173475,
+      "usage": {
+        "completion_tokens": 65,
+        "prompt_tokens": 842,
+        "total_tokens": 907,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "basis": {
+        "necessary_blocks": [
+          "P2-S10-p02",
+          "P2-S10-p03"
+        ],
+        "original_sources": [
+          {
+            "section": "P2-S10",
+            "paragraph_index": 1,
+            "text": "Read: Beyond granting permission to reuse your notebook, consider how you can leverage the unique structure of notebooks to support reading. At the very least, leave static HTML/PDF versions of all notebooks stored in the final version of the repository accompanying a publication. If, in 20 years, all other execution technology fails, these are likely to still provide a readable archival record, and with a full dependences list, future users are more likely to be able to recreate the compute environment. You can also use Nbviewer ( https://nbviewer.jupyter.org/ ) to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first. GitHub uses this service to render any notebooks on their site, so pushing a notebook to GitHub is another good way to make static views easily available. In both cases, you can point collaborators to a URL where they can read through your notebook online.",
+            "text_sha256": "866ad1797e9072e98a3b4b9af535ad045efe63a2acd42621430d7edb12a7a40d",
+            "start": 0,
+            "end": 943
+          },
+          {
+            "section": "P2-S10",
+            "paragraph_index": 2,
+            "text": "Run: To support others running your notebooks, you can use Binder [ 16 ] to provide a zero-install environment to run your notebooks in the cloud ( https://mybinder.org/ ). Binder enables community members to rerun your notebook online without needing to install Jupyter Notebook or Jupyter Lab on their own machine. More generally, you can create a portable containerized environment, for example, a Docker image ( https://docs.docker.com/ ), or create a dependency description file (see Rule 3 ) so future users of your notebook can more easily replicate your computing environment when rerunning your notebook.",
+            "text_sha256": "1e7320f9e3d2204d4e267d138b3a72c43da0c114749b5c6da9799cf962d0e7ef",
+            "start": 0,
+            "end": 613
+          }
+        ],
+        "key_original": "Read与Run分开：静态HTML/PDF供阅读归档；运行还讨论Binder、容器或依赖描述。",
+        "judgment": "结合两个用途说明可以支持“有助阅读但仅此不足执行”；不把原文没有保证充分执行误读成该主张缺证。",
+        "error": "baseline缺少Run段，存在选证不足；improved补入Run完整段后仍insufficient，其英文理由把“仅此不足执行”读成“足以执行”。",
+        "input_coverage": {
+          "baseline": false,
+          "improved": true
+        }
+      },
+      "judgment_note": "Codex辅助原文复核，尚待本人确认；非官方成绩。id集合检查允许空引用，但空引用不算证据/定位/支持成功。",
+      "semantic_support_reason": "该次判断错误或拒判与原文不符；原文片段真实/可定位不能支持错误判断。"
+    },
+    {
+      "task_id": "AD02",
+      "variant": "baseline",
+      "request_id": "e214cc3b-d6e0-4d34-b802-1036cddb823c",
+      "pair_request_id": "d04f57e9-3512-4ee8-88a0-cd250b9fff9c",
+      "run_id": "ea62f194-f4ed-43df-89f9-69e6b7201537",
+      "shared_query_run_id": "0deb0761-25e7-4612-a3f8-de32fb63e4bf",
+      "raw_content": "{\n  \"label\": \"insufficient\",\n  \"reason\": \"资料中未明确说明是否足以让他人执行原计算，仅提到存储方式和静态HTML/PDF的可用性，但未涉及具体执行计算的技术或方法。\",\n  \"evidence\": []\n}",
+      "actual_label": "insufficient",
+      "reference_label": "supported",
+      "format_complete": true,
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "reason_language_chinese": true,
+      "id_membership_check": true,
+      "nonempty_references": false,
+      "quote_authenticity": [],
+      "necessary_input_coverage": false,
+      "necessary_cited_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "locator_status": "absent",
+      "locator_valid_references": 0,
+      "reference_count": 0,
+      "actual_input_ids": [
+        "P2-S10-p01",
+        "P2-S10-p02"
+      ],
+      "answer_client_seconds": 4.716832700185478,
+      "answer_stage_wall_seconds": 4.865523000014946,
+      "shared_query_cost_fraction": 0.5,
+      "allocated_total_seconds": 5.503740550018847,
+      "usage": {
+        "completion_tokens": 62,
+        "prompt_tokens": 638,
+        "total_tokens": 700,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "basis": {
+        "necessary_blocks": [
+          "P2-S10-p02",
+          "P2-S10-p03"
+        ],
+        "original_sources": [
+          {
+            "section": "P2-S10",
+            "paragraph_index": 1,
+            "text": "Read: Beyond granting permission to reuse your notebook, consider how you can leverage the unique structure of notebooks to support reading. At the very least, leave static HTML/PDF versions of all notebooks stored in the final version of the repository accompanying a publication. If, in 20 years, all other execution technology fails, these are likely to still provide a readable archival record, and with a full dependences list, future users are more likely to be able to recreate the compute environment. You can also use Nbviewer ( https://nbviewer.jupyter.org/ ) to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first. GitHub uses this service to render any notebooks on their site, so pushing a notebook to GitHub is another good way to make static views easily available. In both cases, you can point collaborators to a URL where they can read through your notebook online.",
+            "text_sha256": "866ad1797e9072e98a3b4b9af535ad045efe63a2acd42621430d7edb12a7a40d",
+            "start": 0,
+            "end": 943
+          },
+          {
+            "section": "P2-S10",
+            "paragraph_index": 2,
+            "text": "Run: To support others running your notebooks, you can use Binder [ 16 ] to provide a zero-install environment to run your notebooks in the cloud ( https://mybinder.org/ ). Binder enables community members to rerun your notebook online without needing to install Jupyter Notebook or Jupyter Lab on their own machine. More generally, you can create a portable containerized environment, for example, a Docker image ( https://docs.docker.com/ ), or create a dependency description file (see Rule 3 ) so future users of your notebook can more easily replicate your computing environment when rerunning your notebook.",
+            "text_sha256": "1e7320f9e3d2204d4e267d138b3a72c43da0c114749b5c6da9799cf962d0e7ef",
+            "start": 0,
+            "end": 613
+          }
+        ],
+        "key_original": "Read与Run分开：静态HTML/PDF供阅读归档；运行还讨论Binder、容器或依赖描述。",
+        "judgment": "结合两个用途说明可以支持“有助阅读但仅此不足执行”；不把原文没有保证充分执行误读成该主张缺证。",
+        "error": "baseline缺少Run段，存在选证不足；improved补入Run完整段后仍insufficient，其英文理由把“仅此不足执行”读成“足以执行”。",
+        "input_coverage": {
+          "baseline": false,
+          "improved": true
+        }
+      },
+      "judgment_note": "Codex辅助原文复核，尚待本人确认；非官方成绩。id集合检查允许空引用，但空引用不算证据/定位/支持成功。",
+      "semantic_support_reason": "该次判断错误或拒判与原文不符；原文片段真实/可定位不能支持错误判断。"
+    },
+    {
+      "task_id": "AD03",
+      "variant": "baseline",
+      "request_id": "90205249-76c8-49ca-8631-2fa368780c66",
+      "pair_request_id": "afb778b0-f5cc-4e6d-be2a-7e956ecd5dc3",
+      "run_id": "1449443b-3c26-4fc3-8620-b8e9e74ddb9b",
+      "shared_query_run_id": "35766f8f-a7f5-4247-b771-df3c9aaf76b9",
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"资料明确支持绘图过程中保留最终图片来满足作者关于图底层数据的建议，且强调了存储完整程序或虚拟机图像以确保未来可用性。\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S04-p01\",\n      \"quote\": \"In some cases, all that is needed is to store a single executable or source code file.\"\n    },\n    {\n      \"block_id\": \"P1-S09-p01\",\n      \"quote\": \"We find hypertext (i.e., html file output) to be particularly useful for this purpose.\"\n    }\n  ]\n}",
+      "actual_label": "supported",
+      "reference_label": "contradicted",
+      "format_complete": true,
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "reason_language_chinese": true,
+      "id_membership_check": true,
+      "nonempty_references": true,
+      "quote_authenticity": [
+        true,
+        true
+      ],
+      "necessary_input_coverage": false,
+      "necessary_cited_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": true,
+      "strict_complete_success": false,
+      "locator_status": "valid",
+      "locator_valid_references": 2,
+      "reference_count": 2,
+      "actual_input_ids": [
+        "P1-S04-p01",
+        "P1-S09-p01"
+      ],
+      "answer_client_seconds": 8.007715299958363,
+      "answer_stage_wall_seconds": 8.22420520009473,
+      "shared_query_cost_fraction": 0.5,
+      "allocated_total_seconds": 8.791926150093786,
+      "usage": {
+        "completion_tokens": 145,
+        "prompt_tokens": 771,
+        "total_tokens": 916,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "basis": {
+        "necessary_blocks": [
+          "P1-S08-p01"
+        ],
+        "original_sources": [
+          {
+            "section": "P1-S08",
+            "paragraph_index": 0,
+            "text": "From the time a figure is first generated to it being part of a published article, it is often modified several times. In some cases, such modifications are merely visual adjustments to improve readability, or to ensure visual consistency between figures. If raw data behind figures are stored in a systematic manner, so as to allow raw data for a given figure to be easily retrieved, one can simply modify the plotting procedure, instead of having to redo the whole analysis. An additional advantage of this is that if one really wants to read fine values in a figure, one can consult the raw numbers. In cases where plotting involves more than a direct visualization of underlying numbers, it can be useful to store both the underlying data and the processed values that are directly visualized. An example of this is the plotting of histograms, where both the values before binning (original data) and the counts per bin (heights of visualized bars) could be stored. When plotting is performed using a command-based system like R, it is convenient to also store the code used to make the plot. One can then apply slight modifications to these commands, instead of having to specify the plot from scratch. As a minimum, one should note which data formed the basis of a given plot and how this data could be reconstructed.",
+            "text_sha256": "21ab89364c6d35b87ffc28d3dd16f63feb500dca9e9ccedf14ee221250c0015c",
+            "start": 0,
+            "end": 1323
+          }
+        ],
+        "key_original": "In cases where plotting involves more than a direct visualization of underlying numbers, it can be useful to store both the underlying data and the processed values that are directly visualized.",
+        "judgment": "原文要求保留图形底层数据/处理值及可重建信息，最终图片不足。",
+        "error": "检索词仅为data conversion, final image；命中外部程序版本和分层结果，不含绘图底层数据章节。两个种子章节都只有一段，无邻段可补，两侧完整请求相同，均以无关资料错误支持。",
+        "input_coverage": {
+          "baseline": false,
+          "improved": false
+        }
+      },
+      "judgment_note": "Codex辅助原文复核，尚待本人确认；非官方成绩。id集合检查允许空引用，但空引用不算证据/定位/支持成功。",
+      "semantic_support_reason": "该次判断错误或拒判与原文不符；原文片段真实/可定位不能支持错误判断。"
+    },
+    {
+      "task_id": "AD03",
+      "variant": "improved",
+      "request_id": "e31c1899-e66e-4285-83da-06a2a1b14042",
+      "pair_request_id": "afb778b0-f5cc-4e6d-be2a-7e956ecd5dc3",
+      "run_id": "edf2645b-a3d9-4768-98b0-c1059f01663a",
+      "shared_query_run_id": "35766f8f-a7f5-4247-b771-df3c9aaf76b9",
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"资料明确支持绘图过程中保留最终图片来满足作者关于图底层数据的建议，且强调了存储完整程序或虚拟机图像以确保未来可用性。\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S04-p01\",\n      \"quote\": \"In some cases, all that is needed is to store a single executable or source code file.\"\n    },\n    {\n      \"block_id\": \"P1-S09-p01\",\n      \"quote\": \"We find hypertext (i.e., html file output) to be particularly useful for this purpose.\"\n    }\n  ]\n}",
+      "actual_label": "supported",
+      "reference_label": "contradicted",
+      "format_complete": true,
+      "answer_correct": false,
+      "semantic_consistent": false,
+      "reason_language_chinese": true,
+      "id_membership_check": true,
+      "nonempty_references": true,
+      "quote_authenticity": [
+        true,
+        true
+      ],
+      "necessary_input_coverage": false,
+      "necessary_cited_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": true,
+      "strict_complete_success": false,
+      "locator_status": "valid",
+      "locator_valid_references": 2,
+      "reference_count": 2,
+      "actual_input_ids": [
+        "P1-S04-p01",
+        "P1-S09-p01"
+      ],
+      "answer_client_seconds": 7.441124399891123,
+      "answer_stage_wall_seconds": 7.623973399866372,
+      "shared_query_cost_fraction": 0.5,
+      "allocated_total_seconds": 8.191694349865429,
+      "usage": {
+        "completion_tokens": 145,
+        "prompt_tokens": 771,
+        "total_tokens": 916,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "basis": {
+        "necessary_blocks": [
+          "P1-S08-p01"
+        ],
+        "original_sources": [
+          {
+            "section": "P1-S08",
+            "paragraph_index": 0,
+            "text": "From the time a figure is first generated to it being part of a published article, it is often modified several times. In some cases, such modifications are merely visual adjustments to improve readability, or to ensure visual consistency between figures. If raw data behind figures are stored in a systematic manner, so as to allow raw data for a given figure to be easily retrieved, one can simply modify the plotting procedure, instead of having to redo the whole analysis. An additional advantage of this is that if one really wants to read fine values in a figure, one can consult the raw numbers. In cases where plotting involves more than a direct visualization of underlying numbers, it can be useful to store both the underlying data and the processed values that are directly visualized. An example of this is the plotting of histograms, where both the values before binning (original data) and the counts per bin (heights of visualized bars) could be stored. When plotting is performed using a command-based system like R, it is convenient to also store the code used to make the plot. One can then apply slight modifications to these commands, instead of having to specify the plot from scratch. As a minimum, one should note which data formed the basis of a given plot and how this data could be reconstructed.",
+            "text_sha256": "21ab89364c6d35b87ffc28d3dd16f63feb500dca9e9ccedf14ee221250c0015c",
+            "start": 0,
+            "end": 1323
+          }
+        ],
+        "key_original": "In cases where plotting involves more than a direct visualization of underlying numbers, it can be useful to store both the underlying data and the processed values that are directly visualized.",
+        "judgment": "原文要求保留图形底层数据/处理值及可重建信息，最终图片不足。",
+        "error": "检索词仅为data conversion, final image；命中外部程序版本和分层结果，不含绘图底层数据章节。两个种子章节都只有一段，无邻段可补，两侧完整请求相同，均以无关资料错误支持。",
+        "input_coverage": {
+          "baseline": false,
+          "improved": false
+        }
+      },
+      "judgment_note": "Codex辅助原文复核，尚待本人确认；非官方成绩。id集合检查允许空引用，但空引用不算证据/定位/支持成功。",
+      "semantic_support_reason": "该次判断错误或拒判与原文不符；原文片段真实/可定位不能支持错误判断。"
+    }
+  ],
+  "pairs": [
+    {
+      "task_id": "AD01",
+      "pair_request_id": "125da50b-2abf-4795-af23-010bfcb6ee1d",
+      "shared_terms": "handwritten file modification, save final file, record modification object and purpose",
+      "actual_added_ids": [
+        "P1-S02-p02"
+      ],
+      "raw_neighbor_trace_note": "原added_neighbors记录邻接关系，包含已是种子的邻段；actual_added_ids才是净新增，不改旧轨迹。",
+      "actual_requests_identical": false,
+      "pair_elapsed_seconds": 16.202653399901465,
+      "query_elapsed_seconds": 1.238381400005892,
+      "query_usage": {
+        "completion_tokens": 19,
+        "prompt_tokens": 107,
+        "total_tokens": 126,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "query_run_id_counted_once": "cc15ecce-be71-417d-b0d3-cded086798da",
+      "baseline_final_label": "supported",
+      "improved_final_label": "insufficient"
+    },
+    {
+      "task_id": "AD02",
+      "pair_request_id": "d04f57e9-3512-4ee8-88a0-cd250b9fff9c",
+      "shared_terms": "notebook export, static HTML/PDF, help others read, execute original calculations",
+      "actual_added_ids": [
+        "P2-S10-p03"
+      ],
+      "raw_neighbor_trace_note": "原added_neighbors记录邻接关系，包含已是种子的邻段；actual_added_ids才是净新增，不改旧轨迹。",
+      "actual_requests_identical": false,
+      "pair_elapsed_seconds": 12.030657599912956,
+      "query_elapsed_seconds": 1.0961851999163628,
+      "query_usage": {
+        "completion_tokens": 21,
+        "prompt_tokens": 108,
+        "total_tokens": 129,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "query_run_id_counted_once": "0deb0761-25e7-4612-a3f8-de32fb63e4bf",
+      "baseline_final_label": "insufficient",
+      "improved_final_label": "insufficient"
+    },
+    {
+      "task_id": "AD03",
+      "pair_request_id": "afb778b0-f5cc-4e6d-be2a-7e956ecd5dc3",
+      "shared_terms": "data conversion, final image",
+      "actual_added_ids": [],
+      "raw_neighbor_trace_note": "原added_neighbors记录邻接关系，包含已是种子的邻段；actual_added_ids才是净新增，不改旧轨迹。",
+      "actual_requests_identical": true,
+      "pair_elapsed_seconds": 17.17704139999114,
+      "query_elapsed_seconds": 0.9888497998472303,
+      "query_usage": {
+        "completion_tokens": 10,
+        "prompt_tokens": 105,
+        "total_tokens": 115,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "query_run_id_counted_once": "35766f8f-a7f5-4247-b771-df3c9aaf76b9",
+      "baseline_final_label": "supported",
+      "improved_final_label": "supported"
+    }
+  ],
+  "groups": {
+    "baseline": {
+      "denominator": 3,
+      "format_complete": 3,
+      "answer_correct": 0,
+      "semantic_consistent": 0,
+      "id_membership_check": 3,
+      "nonempty_references": 2,
+      "necessary_input_coverage": 1,
+      "necessary_cited_coverage": 0,
+      "citation_support_actual_judgment": 0,
+      "has_unrelated_citations": 1,
+      "strict_complete_success": 0,
+      "locator_valid_tasks": 1,
+      "answer_http_total_seconds": 21.32179700001143,
+      "allocated_total_seconds": 23.81139540008735
+    },
+    "improved": {
+      "denominator": 3,
+      "format_complete": 3,
+      "answer_correct": 0,
+      "semantic_consistent": 0,
+      "id_membership_check": 3,
+      "nonempty_references": 1,
+      "necessary_input_coverage": 2,
+      "necessary_cited_coverage": 0,
+      "citation_support_actual_judgment": 0,
+      "has_unrelated_citations": 1,
+      "strict_complete_success": 0,
+      "locator_valid_tasks": 1,
+      "answer_http_total_seconds": 18.48617439996451,
+      "allocated_total_seconds": 21.031955699785613
+    }
+  },
+  "technical_generation_failures": 0,
+  "quality_retry_count": 0,
+  "length_finish_count": 0,
+  "A_confirmed_generations": 9,
+  "cumulative_confirmed_generations": 543,
+  "A_total_budget": 54,
+  "A_remaining": 45,
+  "decision": "开发判断正确和严格成功均未改善；按同分保留简单基线，不自动采用邻段补全，也不追加优化。是否继续固定候选正式比较由本人决定。",
+  "limits": [
+    "仅三道开发题，不是评测或泛化成绩",
+    "原生PDF插件空白，保留失败；本地渲染物理页查看和字段适配另做零生成回放验证",
+    "没有读取AT正文或开展AT生成"
+  ]
+}

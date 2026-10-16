@@ -1,0 +1,105 @@
+{
+  "at": "2026-10-16T18:13:46.680863+08:00",
+  "id": "AD03",
+  "variant": "revised",
+  "request_id": "6e23cb35-63ab-4e39-8c10-1e17d42dec4a",
+  "run_id": "1cd129a5-2732-4ec8-8bdd-be7f2e4aa3ae",
+  "raw_record": "run-1cd129a5-2732-4ec8-8bdd-be7f2e4aa3ae.json",
+  "input_origin": "automatic_improved_evidence_replay",
+  "not_automatic_retrieval": true,
+  "not_end_to_end_score": true,
+  "raw_content": "{\n  \"label\":\"supported\",\n  \"reason\":\"资料明确指出在程序版本管理、详细数据生成及虚拟机图像存储等环节中，需保存精确版本以确保后续可追溯性，并强调生成完整数据而非仅保留最终结果。主张与作者建议一致。\",\n  \"sentence_ids\": [\"sent-0004\", \"sent-0013\", \"sent-0016\"]\n}",
+  "parsed_final": {
+    "label": "supported",
+    "reason": "资料明确指出在程序版本管理、详细数据生成及虚拟机图像存储等环节中，需保存精确版本以确保后续可追溯性，并强调生成完整数据而非仅保留最终结果。主张与作者建议一致。",
+    "sentence_ids": [
+      "sent-0004",
+      "sent-0013",
+      "sent-0016"
+    ]
+  },
+  "public_reference_label": "contradicted",
+  "label_correct": false,
+  "format_complete": true,
+  "selection_valid": true,
+  "source_authenticity": true,
+  "reason_label_consistent": false,
+  "reason_source_attribution_correct": "not_checked",
+  "necessary_evidence_coverage": "ambiguous",
+  "citation_support_actual_label": false,
+  "has_unrelated_citations": true,
+  "strict_complete_success": false,
+  "basis": "0004只谈归档程序版本，与仅留最终图片是否满足底层数据建议没有直接支持，属于无关片段。0013条件性建议保存全部底层数据，0016要求至少一次生成、检查和验证详细值，不支持“只保留最终图片就满足”；reason自己强调完整数据而非仅最终结果却称原主张一致，方向矛盾。S08仍未输入，必要覆盖的边界保留ambiguous；supported无论公开标签还是当前引用集合均不通过。",
+  "selected_sources": [
+    {
+      "sentence_id": "sent-0004",
+      "block_id": "P1-S04-p01",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "text": "Archiving the exact versions of programs actually used may thus save a lot of hassle at later stages. ",
+      "start": 413,
+      "end": 515,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    },
+    {
+      "sentence_id": "sent-0013",
+      "block_id": "P1-S09-p01",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "text": "When the storage context allows, it is better to simply incorporate permanent output of all underlying data when a main result is generated, using a systematic naming convention to allow the full data underlying a given summarized value to be easily found. ",
+      "start": 474,
+      "end": 731,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    },
+    {
+      "sentence_id": "sent-0016",
+      "block_id": "P1-S09-p01",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "text": "When working with summarized results, you should as a minimum at least once generate, inspect, and validate the detailed values underlying the summaries.",
+      "start": 993,
+      "end": 1146,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    }
+  ],
+  "expanded_response": {
+    "label": "supported",
+    "reason": "资料明确指出在程序版本管理、详细数据生成及虚拟机图像存储等环节中，需保存精确版本以确保后续可追溯性，并强调生成完整数据而非仅保留最终结果。主张与作者建议一致。",
+    "evidence": [
+      {
+        "block_id": "P1-S04-p01",
+        "quote": "Archiving the exact versions of programs actually used may thus save a lot of hassle at later stages. "
+      },
+      {
+        "block_id": "P1-S09-p01",
+        "quote": "When the storage context allows, it is better to simply incorporate permanent output of all underlying data when a main result is generated, using a systematic naming convention to allow the full data underlying a given summarized value to be easily found. "
+      },
+      {
+        "block_id": "P1-S09-p01",
+        "quote": "When working with summarized results, you should as a minimum at least once generate, inspect, and validate the detailed values underlying the summaries."
+      }
+    ]
+  },
+  "input_tokens": 1221,
+  "usage": {
+    "completion_tokens": 450,
+    "prompt_tokens": 1221,
+    "total_tokens": 1671,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "finish_reason": "stop",
+  "budget_exhausted": false,
+  "truncated": false,
+  "client_seconds": 22.36058650002815,
+  "reasoning_produced": true,
+  "judgment_source": "unverified",
+  "reviewer": "Codex辅助原文复核，尚待本人确认"
+}

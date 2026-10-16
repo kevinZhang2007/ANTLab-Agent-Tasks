@@ -1,0 +1,368 @@
+{
+  "at": "2026-10-16T22:15:49.824775+08:00",
+  "source": "Codex依据指定原文推导，尚待本人确认；非官方标准答案。",
+  "built_before_inspecting_formal_model_responses": true,
+  "freeze_already_saved": true,
+  "rows": [
+    {
+      "id": "AT01",
+      "claim": "这篇文章足以证明：给任意远程大语言模型API设置固定seed，就能保证每次返回逐字完全相同的答案。",
+      "doc_ids": [
+        "P1"
+      ],
+      "provisional_reference_label": "insufficient",
+      "source_evidence": [
+        {
+          "block": {
+            "block_id": "P1-S07-p01",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S07",
+            "heading": "Rule 6: For Analyses That Include Randomness, Note Underlying Random Seeds",
+            "paragraph_index": 0,
+            "text": "Many analyses and predictions include some element of randomness, meaning the same program will typically give slightly different results every time it is executed (even when receiving identical inputs and parameters). However, given the same initial seed, all random numbers used in an analysis will be equal, thus giving identical results every time it is run. There is a large difference between observing that a result has been reproduced exactly or only approximately. While achieving equal results is a strong indication that a procedure has been reproduced exactly, it is often hard to conclude anything when achieving only approximately equal results. For analyses that involve random numbers, this means that the random seed should be recorded. This allows results to be reproduced exactly by providing the same seed to the random number generator in future runs. As a minimum, you should note which analysis steps involve randomness, so that a certain level of discrepancy can be anticipated when reproducing the results."
+          },
+          "start": 0,
+          "end": 1031,
+          "original_excerpt": "Many analyses and predictions include some element of randomness, meaning the same program will typically give slightly different results every time it is executed (even when receiving identical inputs and parameters). However, given the same initial seed, all random numbers used in an analysis will be equal, thus giving identical results every time it is run. There is a large difference between observing that a result has been reproduced exactly or only approximately. While achieving equal results is a strong indication that a procedure has been reproduced exactly, it is often hard to conclude anything when achieving only approximately equal results. For analyses that involve random numbers, this means that the random seed should be recorded. This allows results to be reproduced exactly by providing the same seed to the random number generator in future runs. As a minimum, you should note which analysis steps involve randomness, so that a certain level of discrepancy can be anticipated when reproducing the results."
+        },
+        {
+          "block": {
+            "block_id": "P1-S04-p01",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S04",
+            "heading": "Rule 3: Archive the Exact Versions of All External Programs Used",
+            "paragraph_index": 0,
+            "text": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. Also, as both input and output formats may change between versions, a newer version of a program may not even run without modifying its inputs. Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. Archiving the exact versions of programs actually used may thus save a lot of hassle at later stages. In some cases, all that is needed is to store a single executable or source code file. In other cases, a given program may again have specific requirements to other installed programs/packages, or dependencies to specific operating system components. To ensure future availability, the only viable solution may then be to store a full virtual machine image of the operating system and program. As a minimum, you should note the exact names and versions of the main programs you use."
+          },
+          "start": 0,
+          "end": 997,
+          "original_excerpt": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. Also, as both input and output formats may change between versions, a newer version of a program may not even run without modifying its inputs. Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. Archiving the exact versions of programs actually used may thus save a lot of hassle at later stages. In some cases, all that is needed is to store a single executable or source code file. In other cases, a given program may again have specific requirements to other installed programs/packages, or dependencies to specific operating system components. To ensure future availability, the only viable solution may then be to store a full virtual machine image of the operating system and program. As a minimum, you should note the exact names and versions of the main programs you use."
+        }
+      ],
+      "basis": "随机步骤记录seed的建议，不等于任意远程LLM API的字节级确定性服务契约。原文没有这种API实验；不能把缺失当作已经证明其反面。",
+      "limits": "原文描述同seed随机数序列相同，另要求注意版本/依赖；向远程API保证外推缺少实现、环境等条件。",
+      "official_gold": false
+    },
+    {
+      "id": "AT02",
+      "claim": "在原始数据受大小或隐私约束时，作者提出分层共享的办法，使他人在未取得完整原始数据的情况下仍有机会复用分析的后续阶段。",
+      "doc_ids": [
+        "P2"
+      ],
+      "provisional_reference_label": "supported",
+      "source_evidence": [
+        {
+          "block": {
+            "block_id": "P2-S09-p02",
+            "doc_id": "P2",
+            "snapshot": "published",
+            "section_id": "P2-S09",
+            "heading": "Rule 8: Share and explain your data",
+            "paragraph_index": 1,
+            "text": "Ideally, you will share your entire data set alongside your notebooks. We realize many data sets are too large or too sensitive to share this way. In these cases, consider breaking down large and complex data sets into tiers such that, even if the raw data are prohibitively large to include alongside your published notebooks or are constrained by privacy or other access issues, reproducibility and interpretability isn’t lost. You can host public copies of medium-sized, anonymized data in a variety of hosting services (for example, figshare [ https://figshare.com/ ], zenodo [ https://zenodo.org/ ]), and include further processed data sets alongside the notebooks in the final repository. To uniquely and permanently identify data sets, these hosting services provide Digital Object Identifiers (dois). This tiered approach both provides public confidence and allows others to reproduce and reuse the latter stages of an analysis even without access to the full, raw data set."
+          },
+          "start": 0,
+          "end": 982,
+          "original_excerpt": "Ideally, you will share your entire data set alongside your notebooks. We realize many data sets are too large or too sensitive to share this way. In these cases, consider breaking down large and complex data sets into tiers such that, even if the raw data are prohibitively large to include alongside your published notebooks or are constrained by privacy or other access issues, reproducibility and interpretability isn’t lost. You can host public copies of medium-sized, anonymized data in a variety of hosting services (for example, figshare [ https://figshare.com/ ], zenodo [ https://zenodo.org/ ]), and include further processed data sets alongside the notebooks in the final repository. To uniquely and permanently identify data sets, these hosting services provide Digital Object Identifiers (dois). This tiered approach both provides public confidence and allows others to reproduce and reuse the latter stages of an analysis even without access to the full, raw data set."
+        }
+      ],
+      "basis": "大小或隐私限制下，分层公开中型匿名数据和进一步处理数据，使没有全量raw data的人能复用latter stages。",
+      "limits": "需同时覆盖限制、分层办法和后续阶段复用，不能只引一般数据分享。",
+      "official_gold": false
+    },
+    {
+      "id": "AT03",
+      "claim": "按作者的建议，每条研究结论只链接到一个最终数值已经足够，不需要知道该结果如何生成。",
+      "doc_ids": [
+        "P1"
+      ],
+      "provisional_reference_label": "contradicted",
+      "source_evidence": [
+        {
+          "block": {
+            "block_id": "P1-S02-p01",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S02",
+            "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+            "paragraph_index": 0,
+            "text": "Whenever a result may be of potential interest, keep track of how it was produced. When doing this, one will frequently find that getting from raw data to the final result involves many interrelated steps (single commands, scripts, programs). We refer to such a sequence of steps, whether it is automated or performed manually, as an analysis workflow. While the essential part of an analysis is often represented by only one of the steps, the full sequence of pre- and post-processing steps are often critical in order to reach the achieved result. For every involved step, you should ensure that every detail that may influence the execution of the step is recorded. If the step is performed by a computer program, the critical details include the name and version of the program, as well as the exact parameters and inputs that were used."
+          },
+          "start": 0,
+          "end": 841,
+          "original_excerpt": "Whenever a result may be of potential interest, keep track of how it was produced. When doing this, one will frequently find that getting from raw data to the final result involves many interrelated steps (single commands, scripts, programs). We refer to such a sequence of steps, whether it is automated or performed manually, as an analysis workflow. While the essential part of an analysis is often represented by only one of the steps, the full sequence of pre- and post-processing steps are often critical in order to reach the achieved result. For every involved step, you should ensure that every detail that may influence the execution of the step is recorded. If the step is performed by a computer program, the critical details include the name and version of the program, as well as the exact parameters and inputs that were used."
+        },
+        {
+          "block": {
+            "block_id": "P1-S10-p02",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S10",
+            "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+            "paragraph_index": 1,
+            "text": "If you want to reevaluate your previous interpretations, or allow peers to make their own assessment of claims you make in a scientific paper, you will have to connect a given textual statement (interpretation, claim, conclusion) to the precise results underlying the statement. Making this connection when it is needed may be difficult and error-prone, as it may be hard to locate the exact result underlying and supporting the statement from a large pool of different analyses with various versions."
+          },
+          "start": 0,
+          "end": 501,
+          "original_excerpt": "If you want to reevaluate your previous interpretations, or allow peers to make their own assessment of claims you make in a scientific paper, you will have to connect a given textual statement (interpretation, claim, conclusion) to the precise results underlying the statement. Making this connection when it is needed may be difficult and error-prone, as it may be hard to locate the exact result underlying and supporting the statement from a large pool of different analyses with various versions."
+        },
+        {
+          "block": {
+            "block_id": "P1-S10-p03",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S10",
+            "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+            "paragraph_index": 2,
+            "text": "To allow efficient retrieval of details behind textual statements, we suggest that statements are connected to underlying results already from the time the statements are initially formulated (for instance in notes or emails). Such a connection can for instance be a simple file path to detailed results, or the ID of a result in an analysis framework, included within the text itself. For an even tighter integration, there are tools available to help integrate reproducible analyses directly into textual documents, such as Sweave [19] , the GenePattern Word add-in [4] , and Galaxy Pages [20] . These solutions can also subsequently be used in connection with publications, as discussed in the next rule."
+          },
+          "start": 0,
+          "end": 707,
+          "original_excerpt": "To allow efficient retrieval of details behind textual statements, we suggest that statements are connected to underlying results already from the time the statements are initially formulated (for instance in notes or emails). Such a connection can for instance be a simple file path to detailed results, or the ID of a result in an analysis framework, included within the text itself. For an even tighter integration, there are tools available to help integrate reproducible analyses directly into textual documents, such as Sweave [19] , the GenePattern Word add-in [4] , and Galaxy Pages [20] . These solutions can also subsequently be used in connection with publications, as discussed in the next rule."
+        },
+        {
+          "block": {
+            "block_id": "P1-S10-p04",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S10",
+            "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+            "paragraph_index": 3,
+            "text": "As a minimum, you should provide enough details along with your textual interpretations so as to allow the exact underlying results, or at least some related results, to be tracked down in the future."
+          },
+          "start": 0,
+          "end": 200,
+          "original_excerpt": "As a minimum, you should provide enough details along with your textual interpretations so as to allow the exact underlying results, or at least some related results, to be tracked down in the future."
+        }
+      ],
+      "basis": "Rule1要求记录影响每个步骤的细节和生成过程；Rule9把文字解释连到对应精确结果。因此最终一个数值链接不能豁免生成过程。",
+      "limits": "允许有充分替代原文，不要求固定引用ID；反驳的是无需过程，不要求每条结论必须多于一个数值。",
+      "official_gold": false
+    },
+    {
+      "id": "AT04",
+      "claim": "对运行较快的Notebook，重启内核并从头运行全部单元是发现隐藏状态或遗漏步骤的一种检查办法。",
+      "doc_ids": [
+        "P2"
+      ],
+      "provisional_reference_label": "supported",
+      "source_evidence": [
+        {
+          "block": {
+            "block_id": "P2-S08-p02",
+            "doc_id": "P2",
+            "snapshot": "published",
+            "section_id": "P2-S08",
+            "heading": "Rule 7: Build a pipeline",
+            "paragraph_index": 1,
+            "text": "Because notebooks’ interactivity make them vulnerable to accidental overwriting or deletion of critical steps by the user, if your analysis runs quickly, make a habit of regularly restarting your kernel and rerunning all cells to make sure you did not accidentally delete a step while cleaning your notebook (and if you did, retrieve the code for it from version control). Restarting your kernel and running all cells is also a good final test of results. To allow partial execution of complex analyses, break long notebooks into smaller notebooks that focus on one or a few analysis steps. Then, ensure that each notebook stores serialized versions of key intermediate results to disk for subsequent notebooks to use."
+          },
+          "start": 0,
+          "end": 718,
+          "original_excerpt": "Because notebooks’ interactivity make them vulnerable to accidental overwriting or deletion of critical steps by the user, if your analysis runs quickly, make a habit of regularly restarting your kernel and rerunning all cells to make sure you did not accidentally delete a step while cleaning your notebook (and if you did, retrieve the code for it from version control). Restarting your kernel and running all cells is also a good final test of results. To allow partial execution of complex analyses, break long notebooks into smaller notebooks that focus on one or a few analysis steps. Then, ensure that each notebook stores serialized versions of key intermediate results to disk for subsequent notebooks to use."
+        },
+        {
+          "block": {
+            "block_id": "P2-S01-p03",
+            "doc_id": "P2",
+            "snapshot": "published",
+            "section_id": "P2-S01",
+            "heading": "Introduction",
+            "paragraph_index": 2,
+            "text": "The interactive and narrative nature of computational notebooks presents unique opportunities for performing and sharing computational research. With some forethought, they can provide not only richly detailed descriptions of analyses but also interactive computing environments for replicating, exploring, and extending them. Yet, as with other computing environments, using notebooks for research requires special care. Interactively running and editing code in notebooks can delete key steps or introduce “hidden state” that confounds analyses and confuses readers [ 12 ]. Analyses documented in notebooks cannot be easily rerun if users do not first freeze their dependencies, share their data, and adequately describe their computing environment [ 13 ]. And many notebooks lack sufficient descriptive text to guide readers in using them [ 11 , 14 ]."
+          },
+          "start": 0,
+          "end": 854,
+          "original_excerpt": "The interactive and narrative nature of computational notebooks presents unique opportunities for performing and sharing computational research. With some forethought, they can provide not only richly detailed descriptions of analyses but also interactive computing environments for replicating, exploring, and extending them. Yet, as with other computing environments, using notebooks for research requires special care. Interactively running and editing code in notebooks can delete key steps or introduce “hidden state” that confounds analyses and confuses readers [ 12 ]. Analyses documented in notebooks cannot be easily rerun if users do not first freeze their dependencies, share their data, and adequately describe their computing environment [ 13 ]. And many notebooks lack sufficient descriptive text to guide readers in using them [ 11 , 14 ]."
+        }
+      ],
+      "basis": "运行较快时，重启内核、重跑全部cells可检查是否清理时漏删步骤，亦是最终测试；引言说明交互可能引入hidden state。",
+      "limits": "这是检查办法而非保证发现所有缺陷；不能把建议改成无例外强制。",
+      "official_gold": false
+    },
+    {
+      "id": "AT05",
+      "claim": "两篇文章提出的记录要求包含不同层次：P1要求能追踪结果的生成过程并把文字解释连到结果；P2进一步提醒，Notebook捕获了代码并不意味着当时的推理和直觉也被记录下来。",
+      "doc_ids": [
+        "P1",
+        "P2"
+      ],
+      "provisional_reference_label": "supported",
+      "source_evidence": [
+        {
+          "block": {
+            "block_id": "P1-S02-p01",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S02",
+            "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+            "paragraph_index": 0,
+            "text": "Whenever a result may be of potential interest, keep track of how it was produced. When doing this, one will frequently find that getting from raw data to the final result involves many interrelated steps (single commands, scripts, programs). We refer to such a sequence of steps, whether it is automated or performed manually, as an analysis workflow. While the essential part of an analysis is often represented by only one of the steps, the full sequence of pre- and post-processing steps are often critical in order to reach the achieved result. For every involved step, you should ensure that every detail that may influence the execution of the step is recorded. If the step is performed by a computer program, the critical details include the name and version of the program, as well as the exact parameters and inputs that were used."
+          },
+          "start": 0,
+          "end": 841,
+          "original_excerpt": "Whenever a result may be of potential interest, keep track of how it was produced. When doing this, one will frequently find that getting from raw data to the final result involves many interrelated steps (single commands, scripts, programs). We refer to such a sequence of steps, whether it is automated or performed manually, as an analysis workflow. While the essential part of an analysis is often represented by only one of the steps, the full sequence of pre- and post-processing steps are often critical in order to reach the achieved result. For every involved step, you should ensure that every detail that may influence the execution of the step is recorded. If the step is performed by a computer program, the critical details include the name and version of the program, as well as the exact parameters and inputs that were used."
+        },
+        {
+          "block": {
+            "block_id": "P1-S10-p02",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S10",
+            "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+            "paragraph_index": 1,
+            "text": "If you want to reevaluate your previous interpretations, or allow peers to make their own assessment of claims you make in a scientific paper, you will have to connect a given textual statement (interpretation, claim, conclusion) to the precise results underlying the statement. Making this connection when it is needed may be difficult and error-prone, as it may be hard to locate the exact result underlying and supporting the statement from a large pool of different analyses with various versions."
+          },
+          "start": 0,
+          "end": 501,
+          "original_excerpt": "If you want to reevaluate your previous interpretations, or allow peers to make their own assessment of claims you make in a scientific paper, you will have to connect a given textual statement (interpretation, claim, conclusion) to the precise results underlying the statement. Making this connection when it is needed may be difficult and error-prone, as it may be hard to locate the exact result underlying and supporting the statement from a large pool of different analyses with various versions."
+        },
+        {
+          "block": {
+            "block_id": "P1-S10-p03",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S10",
+            "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+            "paragraph_index": 2,
+            "text": "To allow efficient retrieval of details behind textual statements, we suggest that statements are connected to underlying results already from the time the statements are initially formulated (for instance in notes or emails). Such a connection can for instance be a simple file path to detailed results, or the ID of a result in an analysis framework, included within the text itself. For an even tighter integration, there are tools available to help integrate reproducible analyses directly into textual documents, such as Sweave [19] , the GenePattern Word add-in [4] , and Galaxy Pages [20] . These solutions can also subsequently be used in connection with publications, as discussed in the next rule."
+          },
+          "start": 0,
+          "end": 707,
+          "original_excerpt": "To allow efficient retrieval of details behind textual statements, we suggest that statements are connected to underlying results already from the time the statements are initially formulated (for instance in notes or emails). Such a connection can for instance be a simple file path to detailed results, or the ID of a result in an analysis framework, included within the text itself. For an even tighter integration, there are tools available to help integrate reproducible analyses directly into textual documents, such as Sweave [19] , the GenePattern Word add-in [4] , and Galaxy Pages [20] . These solutions can also subsequently be used in connection with publications, as discussed in the next rule."
+        },
+        {
+          "block": {
+            "block_id": "P2-S03-p02",
+            "doc_id": "P2",
+            "snapshot": "published",
+            "section_id": "P2-S03",
+            "heading": "Rule 2: Document the process, not just the results",
+            "paragraph_index": 1,
+            "text": "Many notebook users wait to add such explanatory text until the end of an analysis, after they have a solid result. Don’t wait—by that point you may have forgotten why you chose a particular parameter value, where you copied a block of code from, or what you found interesting about an intermediate result. If you do not have time to fully document what you are doing or thinking in the moment, leave short descriptive notes to remind yourself what to add when you get to a good stopping point. While the code needed to reproduce the analysis may be automatically captured in your notebook, the reasoning and intuition may not. It is okay if the story in your notebook changes over time; you should still tell a story from the very beginning, even if you don’t know the ending yet."
+          },
+          "start": 0,
+          "end": 781,
+          "original_excerpt": "Many notebook users wait to add such explanatory text until the end of an analysis, after they have a solid result. Don’t wait—by that point you may have forgotten why you chose a particular parameter value, where you copied a block of code from, or what you found interesting about an intermediate result. If you do not have time to fully document what you are doing or thinking in the moment, leave short descriptive notes to remind yourself what to add when you get to a good stopping point. While the code needed to reproduce the analysis may be automatically captured in your notebook, the reasoning and intuition may not. It is okay if the story in your notebook changes over time; you should still tell a story from the very beginning, even if you don’t know the ending yet."
+        }
+      ],
+      "basis": "P1追踪生成步骤并关联文字与结果；P2明确代码可能自动捕获，但reasoning and intuition未必记录。",
+      "limits": "多项合取需覆盖两文档及P1两个层次；只证其中一层属于部分覆盖，不按部分支持判完整。",
+      "official_gold": false
+    },
+    {
+      "id": "AT06",
+      "claim": "因为作者允许面向展示或新输入的精简Notebook，所以可以认定作者主张整个研究过程都不用保留失败探索记录。",
+      "doc_ids": [
+        "P2"
+      ],
+      "provisional_reference_label": "contradicted",
+      "source_evidence": [
+        {
+          "block": {
+            "block_id": "P2-S03-p01",
+            "doc_id": "P2",
+            "snapshot": "published",
+            "section_id": "P2-S03",
+            "heading": "Rule 2: Document the process, not just the results",
+            "paragraph_index": 0,
+            "text": "Computational notebooks’ interactivity makes it quick and easy to try out and compare different approaches or parameters—so quick and easy that we often fail to document those interactive investigations at the time we perform them. Thus, the advice long provided regarding paper lab scientific notebooks becomes even more critical: make sure to document all your explorations, even (or perhaps especially) those that led to dead ends. These comments will help you remember what you did and why. You can always remove these comments later if turning your notebook into a pipeline (see Rule 7 ) or preparing to share it with a wider audience (Rule 1), who may prefer to see a concise presentation of results rather than a detailed lab notebook."
+          },
+          "start": 0,
+          "end": 742,
+          "original_excerpt": "Computational notebooks’ interactivity makes it quick and easy to try out and compare different approaches or parameters—so quick and easy that we often fail to document those interactive investigations at the time we perform them. Thus, the advice long provided regarding paper lab scientific notebooks becomes even more critical: make sure to document all your explorations, even (or perhaps especially) those that led to dead ends. These comments will help you remember what you did and why. You can always remove these comments later if turning your notebook into a pipeline (see Rule 7 ) or preparing to share it with a wider audience (Rule 1), who may prefer to see a concise presentation of results rather than a detailed lab notebook."
+        },
+        {
+          "block": {
+            "block_id": "P2-S08-p03",
+            "doc_id": "P2",
+            "snapshot": "published",
+            "section_id": "P2-S08",
+            "heading": "Rule 7: Build a pipeline",
+            "paragraph_index": 2,
+            "text": "Once a notebook has been developed, it can be parameterized with a tool such as papermill ( https://github.com/nteract/papermill ). Such notebooks can be used not only interactively but also as command-line tools that can be executed automatically—a great boon for pipelines! Consider linking your analysis pipeline steps via a Makefile or similar tool that allows for complete noninteractive execution of the entire pipeline, either in full or partial steps. Such automation also supports code quality techniques like software testing; consider testing your workflows from end to end each time a change is committed by integrating your repository to a Continuous Integration system (for example, https://travis-ci.org/ ). Last but not least, be aware that pipeline notebooks will almost certainly have a very different story (Rule 1) than the initial analyses that engendered them! Remember to remove any introduction, interpretation, or conclusion text that is not universally applicable to different inputs and results and instead replace it with guidance for the pipeline user on how to run and interpret its (potentially novel) results."
+          },
+          "start": 0,
+          "end": 1141,
+          "original_excerpt": "Once a notebook has been developed, it can be parameterized with a tool such as papermill ( https://github.com/nteract/papermill ). Such notebooks can be used not only interactively but also as command-line tools that can be executed automatically—a great boon for pipelines! Consider linking your analysis pipeline steps via a Makefile or similar tool that allows for complete noninteractive execution of the entire pipeline, either in full or partial steps. Such automation also supports code quality techniques like software testing; consider testing your workflows from end to end each time a change is committed by integrating your repository to a Continuous Integration system (for example, https://travis-ci.org/ ). Last but not least, be aware that pipeline notebooks will almost certainly have a very different story (Rule 1) than the initial analyses that engendered them! Remember to remove any introduction, interpretation, or conclusion text that is not universally applicable to different inputs and results and instead replace it with guidance for the pipeline user on how to run and interpret its (potentially novel) results."
+        }
+      ],
+      "basis": "P2要求记录all explorations，尤其dead ends；之后面向流水线或受众可精简，不意味着研究过程无需记录失败。",
+      "limits": "阶段和用途不能混同；不能把允许删展示性评论推成全程不记录。",
+      "official_gold": false
+    },
+    {
+      "id": "AT07",
+      "claim": "这两篇文章报告了一项对照实验，证明给文档查证流程增加三个协作模块会使任务准确率提高20个百分点。",
+      "doc_ids": [
+        "P1",
+        "P2"
+      ],
+      "provisional_reference_label": "insufficient",
+      "source_evidence": [
+        {
+          "block": {
+            "block_id": "P1-S01-p04",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S01",
+            "heading": "Introduction (unheaded)",
+            "paragraph_index": 3,
+            "text": "We further note that reproducibility is just as much about the habits that ensure reproducible research as the technologies that can make these processes efficient and realistic. Each of the following ten rules captures a specific aspect of reproducibility, and discusses what is needed in terms of information handling and tracking of procedures. If you are taking a bare-bones approach to bioinformatics analysis, i.e., running various custom scripts from the command line, you will probably need to handle each rule explicitly. If you are instead performing your analyses through an integrated framework (such as GenePattern [10] , Galaxy [11] , LONI pipeline [12] , or Taverna [13] ), the system may already provide full or partial support for most of the rules. What is needed on your part is then merely the knowledge of how to exploit these existing possibilities."
+          },
+          "start": 0,
+          "end": 871,
+          "original_excerpt": "We further note that reproducibility is just as much about the habits that ensure reproducible research as the technologies that can make these processes efficient and realistic. Each of the following ten rules captures a specific aspect of reproducibility, and discusses what is needed in terms of information handling and tracking of procedures. If you are taking a bare-bones approach to bioinformatics analysis, i.e., running various custom scripts from the command line, you will probably need to handle each rule explicitly. If you are instead performing your analyses through an integrated framework (such as GenePattern [10] , Galaxy [11] , LONI pipeline [12] , or Taverna [13] ), the system may already provide full or partial support for most of the rules. What is needed on your part is then merely the knowledge of how to exploit these existing possibilities."
+        },
+        {
+          "block": {
+            "block_id": "P1-S01-p08",
+            "doc_id": "P1",
+            "snapshot": "published",
+            "section_id": "P1-S01",
+            "heading": "Introduction (unheaded)",
+            "paragraph_index": 7,
+            "text": "We here present ten simple rules for reproducibility of computational research. These rules can be at your disposal for whenever you want to make your research more accessible—be it for peers or for your future self."
+          },
+          "start": 0,
+          "end": 216,
+          "original_excerpt": "We here present ten simple rules for reproducibility of computational research. These rules can be at your disposal for whenever you want to make your research more accessible—be it for peers or for your future self."
+        },
+        {
+          "block": {
+            "block_id": "P2-S01-p04",
+            "doc_id": "P2",
+            "snapshot": "published",
+            "section_id": "P2-S01",
+            "heading": "Introduction",
+            "paragraph_index": 3,
+            "text": "The explosive growth of computational notebooks provides a unique opportunity to support computational research, but care must be taken when performing and sharing analyses in notebooks. Given these opportunities and challenges, we have compiled a set of rules, tips, tools, and example notebooks to help guide Jupyter Notebook authors. While we focus on a few core uses of Jupyter Notebooks observed in our own research, many of these rules can be applied to other computational notebooks and use cases. In Fig 1 , we give a preview of the rules applied at different phases of the notebook development cycle. Whether you use notebooks to track preliminary analyses, to present polished results to collaborators, as finely tuned pipelines for recurring analyses, or for all of the above, following this advice will help you write and share analyses that are easier to read, run, and explore."
+          },
+          "start": 0,
+          "end": 891,
+          "original_excerpt": "The explosive growth of computational notebooks provides a unique opportunity to support computational research, but care must be taken when performing and sharing analyses in notebooks. Given these opportunities and challenges, we have compiled a set of rules, tips, tools, and example notebooks to help guide Jupyter Notebook authors. While we focus on a few core uses of Jupyter Notebooks observed in our own research, many of these rules can be applied to other computational notebooks and use cases. In Fig 1 , we give a preview of the rules applied at different phases of the notebook development cycle. Whether you use notebooks to track preliminary analyses, to present polished results to collaborators, as finely tuned pipelines for recurring analyses, or for all of the above, following this advice will help you write and share analyses that are easier to read, run, and explore."
+        },
+        {
+          "block": {
+            "block_id": "P2-S13-p01",
+            "doc_id": "P2",
+            "snapshot": "published",
+            "section_id": "P2-S13",
+            "heading": "Conclusions",
+            "paragraph_index": 0,
+            "text": "Robust and reproducible analyses lie at the heart of science, and several papers have already provided excellent general advice for how to perform and document computational science. However, the advent of computational notebooks presents new opportunities and challenges, both easing precise documentation of complex workflows, and complicating it by means of interactivity. We present 10 simple rules for writing and sharing analyses in Jupyter Notebooks, focusing on annotation of the analysis, organization of code, and ease of access and reuse. Informed by our experience, we hope they contribute to the ecosystem of individuals, labs, publishers, and organizations using notebooks to perform and share computational research."
+          },
+          "start": 0,
+          "end": 731,
+          "original_excerpt": "Robust and reproducible analyses lie at the heart of science, and several papers have already provided excellent general advice for how to perform and document computational science. However, the advent of computational notebooks presents new opportunities and challenges, both easing precise documentation of complex workflows, and complicating it by means of interactivity. We present 10 simple rules for writing and sharing analyses in Jupyter Notebooks, focusing on annotation of the analysis, organization of code, and ease of access and reuse. Informed by our experience, we hope they contribute to the ecosystem of individuals, labs, publishers, and organizations using notebooks to perform and share computational research."
+        }
+      ],
+      "basis": "两文为可复现性与Notebook实践规则，没有给定三协作模块及准确率提升20百分点的对照实验。",
+      "limits": "此为全文材料范围核查，不代表外部世界不存在该实验；不能因没有提到直接判contradicted。引用应是有效检查来源，不引用无关20年或参数数字凑数。",
+      "official_gold": false
+    }
+  ],
+  "not_read_by_runtime": true
+}

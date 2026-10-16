@@ -1,0 +1,238 @@
+{
+  "at": "2026-10-16T12:30:17.723036+08:00",
+  "passed": true,
+  "existing_checks": {
+    "status": "passed",
+    "passed": 35,
+    "failed": 0,
+    "checks": [
+      {
+        "name": "scope_no_leak",
+        "passed": true
+      },
+      {
+        "name": "unknown_document",
+        "passed": true
+      },
+      {
+        "name": "unknown_snapshot",
+        "passed": true
+      },
+      {
+        "name": "empty_doc_ids",
+        "passed": true
+      },
+      {
+        "name": "positive_scores_only",
+        "passed": true
+      },
+      {
+        "name": "chapter_barrier",
+        "passed": true
+      },
+      {
+        "name": "three_neighbors",
+        "passed": true
+      },
+      {
+        "name": "duplicate_seeds_no_duplicate_output",
+        "passed": true
+      },
+      {
+        "name": "all_full_paragraphs_preserved",
+        "passed": true
+      },
+      {
+        "name": "inputs_unchanged",
+        "passed": true
+      },
+      {
+        "name": "empty_query_retrieval",
+        "passed": true
+      },
+      {
+        "name": "empty_corpus",
+        "passed": true
+      },
+      {
+        "name": "empty_messages_no_answer_fabrication",
+        "passed": true
+      },
+      {
+        "name": "id_remap_content_invariance",
+        "passed": true
+      },
+      {
+        "name": "valid_id_and_quote",
+        "passed": true
+      },
+      {
+        "name": "invalid_reference_not_repaired",
+        "passed": true
+      },
+      {
+        "name": "fabricated_quote_not_repaired",
+        "passed": true
+      },
+      {
+        "name": "invalid_json",
+        "passed": true
+      },
+      {
+        "name": "invalid_query",
+        "passed": true
+      },
+      {
+        "name": "invalid_label",
+        "passed": true
+      },
+      {
+        "name": "answer_schema_required",
+        "passed": true
+      },
+      {
+        "name": "query_schema_required",
+        "passed": true
+      },
+      {
+        "name": "zoom_half",
+        "passed": true
+      },
+      {
+        "name": "zoom_double",
+        "passed": true
+      },
+      {
+        "name": "nonuniform_scale",
+        "passed": true
+      },
+      {
+        "name": "invalid_page_size",
+        "passed": true
+      },
+      {
+        "name": "whole_line_box_precision",
+        "passed": true
+      },
+      {
+        "name": "fake_quote_invalid",
+        "passed": true
+      },
+      {
+        "name": "ambiguous_location_rejected",
+        "passed": true
+      },
+      {
+        "name": "scope_location_no_leak",
+        "passed": true
+      },
+      {
+        "name": "development_parser_stops_before_fourth_object",
+        "passed": true
+      },
+      {
+        "name": "regression_detects_bad_cross_chapter_implementation",
+        "passed": true
+      },
+      {
+        "name": "technical_failure_saved_without_generation",
+        "passed": true
+      },
+      {
+        "name": "technical_failure_blocks_next_generation",
+        "passed": true
+      },
+      {
+        "name": "capacity_failure_blocks_http",
+        "passed": true
+      }
+    ],
+    "run_kind": "local_rule",
+    "generation_calls": 0,
+    "synthetic_only": true
+  },
+  "paired_synthetic_examples": [
+    {
+      "pair": "affirmation_negation",
+      "evidence": "Every exported bundle must include a manifest.",
+      "claims": [
+        {
+          "zh": "每份导出包必须包含清单。",
+          "en": "Every exported bundle must include a manifest.",
+          "expected": "supported",
+          "construction_check_passed": true
+        },
+        {
+          "zh": "导出包无需包含清单。",
+          "en": "Exported bundles do not need to include a manifest.",
+          "expected": "contradicted",
+          "construction_check_passed": true
+        }
+      ]
+    },
+    {
+      "pair": "necessary_sufficient",
+      "evidence": "Publication requires a valid signature and independent approval. Neither requirement alone is sufficient.",
+      "claims": [
+        {
+          "zh": "有效签名是发布的必要条件。",
+          "en": "A valid signature is necessary for publication.",
+          "expected": "supported",
+          "construction_check_passed": true
+        },
+        {
+          "zh": "只有有效签名就足以发布。",
+          "en": "A valid signature alone is sufficient for publication.",
+          "expected": "contradicted",
+          "construction_check_passed": true
+        }
+      ]
+    },
+    {
+      "pair": "recommendation_requirement",
+      "evidence": "Keeping an index is recommended, but it is not mandatory.",
+      "claims": [
+        {
+          "zh": "建议保留索引。",
+          "en": "Keeping an index is recommended.",
+          "expected": "supported",
+          "construction_check_passed": true
+        },
+        {
+          "zh": "必须保留索引。",
+          "en": "Keeping an index is mandatory.",
+          "expected": "contradicted",
+          "construction_check_passed": true
+        }
+      ]
+    }
+  ],
+  "label_definition_text": {
+    "supported": "表示资料支持完整主张",
+    "contradicted": "表示资料明确冲突或提供反例",
+    "insufficient": "表示资料不足以判定"
+  },
+  "label_definitions_preserved": true,
+  "scope": "程序只检查消息构造、标签定义保留及预期标签枚举合法；不验证模型理解或自动证明译文忠实。自造预期不进入真实请求。",
+  "offline_template_token_counts": [
+    442,
+    452,
+    677,
+    682,
+    540,
+    544
+  ],
+  "output_budget": 256,
+  "safety_margin": 64,
+  "native_command": [
+    "C:\\Users\\86186\\AppData\\Local\\ANTLabLocalModel\\llama-b11429\\llama-tokenize.exe",
+    "-m",
+    "C:\\Users\\86186\\AppData\\Local\\ANTLabLocalModel\\models\\Qwen3-0.6B-Q8_0.gguf",
+    "--stdin",
+    "--ids",
+    "--no-bos",
+    "--offline"
+  ],
+  "generation_calls": 0,
+  "actual_service_template_required": true
+}

@@ -1,0 +1,85 @@
+{
+  "tests": [
+    {
+      "case": "AD01",
+      "name": "empty",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "insufficient",
+        "reason": "synthetic structure check",
+        "sentence_ids": []
+      }
+    },
+    {
+      "case": "AD01",
+      "name": "first_last",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "insufficient",
+        "reason": "synthetic structure check",
+        "sentence_ids": [
+          "sent-0001",
+          "sent-0011"
+        ]
+      }
+    },
+    {
+      "case": "AD01",
+      "name": "unknown",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 1921,
+      "response": {
+        "label": "insufficient",
+        "reason": "synthetic structure check",
+        "sentence_ids": [
+          "not-in-index"
+        ]
+      }
+    },
+    {
+      "case": "AD01",
+      "name": "duplicate_schema_accepts_program_rejects",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "insufficient",
+        "reason": "synthetic structure check",
+        "sentence_ids": [
+          "sent-0001",
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01",
+      "name": "old_shape_rejected",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 68,
+      "response": {
+        "label": "insufficient",
+        "reason": "synthetic",
+        "evidence": []
+      }
+    },
+    {
+      "case": "AD02",
+      "name": "empty",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "insufficient",
+        "reason": "synthetic structure check",
+        "sentence_ids": []
+      }
+    }
+  ],
+  "generation_calls": 0
+}

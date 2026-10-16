@@ -1,0 +1,190 @@
+--- /dev/null
++++ b/进阶/a_exploration/bounded_candidate.py
+@@ -0,0 +1,101 @@
++"""统一单侧入口及共享查询配对；不读取任务、答案或历史模型输出。"""
++import copy,json,time,uuid,urllib.request,urllib.error
++from runtime import Engine as RecordedEngine,TechnicalStop,CapacityStop,load,write,sha_text,now,config as original_config
++from engine import answer_messages,query_messages,retrieve,neighbors,public,parse_terms
++from sentence_selection import adapt_messages,build_index,schema,expand,CANDIDATE_PROMPT
++from compact_factorial import compact_messages,audit
++from reason_citations import adapt,NOTE
++from sentence_interface import interface_response
++
++def build_answer(claim,blocks,doc_ids,snapshot,base_config):
++    blocks=[public(b) for b in blocks];index=build_index(blocks,doc_ids,snapshot)
++    original=adapt_messages(answer_messages(claim,blocks),index)
++    compact=compact_messages(original,blocks,index,doc_ids,snapshot);messages=adapt(compact)
++    assert messages[0]['content']==CANDIDATE_PROMPT+NOTE and messages[1:]==compact[1:]
++    check=audit(messages,blocks,index,doc_ids,snapshot)
++    conf=copy.deepcopy(base_config);conf['parameters']['response_format']={'type':'json_schema','json_schema':{'schema':schema(index)}}
++    return messages,conf,index,check
++
++def query_config():
++    c=original_config('query');c['parameters']['chat_template_kwargs']={'enable_thinking':False};return c
++
++class BoundedEngine(RecordedEngine):
++    def __init__(self,folder):
++        super().__init__(folder);self.configuration=load(folder/'configuration.json');self.answer_base=self.configuration['request_common'];self.profile=load(folder/'profile.json')
++    def query_messages(self,claim):
++        ms=query_messages(claim)
++        if self.profile.get('query_prompt'):ms[0]['content']=self.profile['query_prompt']
++        return ms
++    def retrieve(self,terms,blocks):
++        if self.profile['retrieval']=='body':return retrieve(terms,blocks)
++        if self.profile['retrieval']!='title-body':raise ValueError('unknown retrieval')
++        _,bs=retrieve(terms,blocks);head=[{**b,'text':b['heading']} for b in blocks];_,hs=retrieve(terms,head);h={r['block_id']:r['score'] for r in hs}
++        scores=[{'block_id':r['block_id'],'score':.75*r['score']+.25*h[r['block_id']],'body_score':r['score'],'heading_score':h[r['block_id']]} for r in bs];s={r['block_id']:r['score'] for r in scores}
++        ranked=sorted(blocks,key=lambda b:(-s[b['block_id']],b['heading'],b['text'],b['paragraph_index']));seeds=[copy.deepcopy(b) for b in ranked if s[b['block_id']]>0][:2]
++        return sorted(seeds,key=lambda b:b['_order']),scores
++    def build_answer(self,claim,blocks,doc_ids,snapshot):
++        ms,conf,index,byte=build_answer(claim,blocks,doc_ids,snapshot,self.answer_base)
++        ms[0]['content']+=self.profile.get('extra_system','')
++        if self.profile.get('schema_order')=='reason-first':
++            sc=conf['parameters']['response_format']['json_schema']['schema'];sc['properties']={k:sc['properties'][k] for k in ['reason','sentence_ids','label']};sc['required']=['reason','sentence_ids','label']
++        return ms,conf,index,byte
++    def capacity(self,messages,conf,label):
++        body={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']};path=self.folder/('capacity-'+label+'.json')
++        check={'checked_at':now(),'label':label,'actual_request_body':body,'context':4096,'output_budget':body['max_tokens'],'run_kind':'local_rule','generation_calls':0};write(path,check)
++        def http(route,payload,key):
++            check[key]={'url':self.url+route,'request':payload};write(path,check)
++            req=urllib.request.Request(self.url+route,data=json.dumps(payload,ensure_ascii=False).encode(),headers={'Content-Type':'application/json'})
++            try:
++                with self.opener.open(req,timeout=30) as r:raw=r.read().decode();status=r.status
++                check[key].update(http_status=status,raw_response=raw);write(path,check);return json.loads(raw)
++            except Exception as e:
++                check[key]['error']=repr(e)
++                if isinstance(e,urllib.error.HTTPError):check[key].update(http_status=e.code,raw_response=e.read().decode(errors='replace'))
++                write(path,check);raise
++        template=http('apply-template',body,'template_http');prompt=template.get('prompt','');check.update(template_response=template,rendered_prompt=prompt);write(path,check)
++        (self.folder/('rendered-'+label+'.txt')).write_text(prompt,encoding='utf-8')
++        tok=http('tokenize',{'content':prompt,'add_special':True,'parse_special':True},'tokenize_http');flag=body['chat_template_kwargs']['enable_thinking'];suffix=prompt.rsplit('<|im_start|>assistant\n',1)[-1]
++        checks={'boolean_mode':type(flag) is bool,'expected_budget':body['max_tokens']==(1024 if flag else 128),'branch':suffix==('' if flag else '<think>\n\n</think>\n\n'),'all_messages_present':all(m['content'] in prompt for m in messages),'fits':len(tok['tokens'])+body['max_tokens']<=4096}
++        check.update(token_response=tok,input_tokens=len(tok['tokens']),checks=checks,fits=checks['fits'],actual_generation_suffix=suffix,actual_enable_thinking_request=flag,not_echoed=['内部enable_thinking布尔状态','编译grammar与PEG对象']);write(path,check)
++        if not all(checks.values()):raise CapacityStop('阶段模板/完整资料/容量门禁失败，证据已保存')
++        return check
++    def execute(self,claim,doc_ids,snapshot,mode='improved'):
++        if mode not in ('baseline','improved'):raise ValueError('unknown mode')
++        return self._execute_modes(claim,doc_ids,snapshot,[mode])
++    def execute_pair(self,claim,doc_ids,snapshot,order):
++        if sorted(order)!=['baseline','improved']:raise ValueError('invalid pair order')
++        return self._execute_modes(claim,doc_ids,snapshot,order)
++    def _execute_modes(self,claim,doc_ids,snapshot,modes):
++        if self.technical_stop:raise TechnicalStop('上次技术失败，不再调用')
++        blocks=self.corpus.scope(doc_ids,snapshot)
++        if not isinstance(claim,str) or not claim.strip():raise ValueError('empty claim')
++        key=sha_text(json.dumps([claim,doc_ids,snapshot],ensure_ascii=False))
++        if key in self.started:raise ValueError('同一输入已尝试，不重发')
++        self.started.add(key);pid=str(uuid.uuid4());start=time.perf_counter();path=self.folder/('pair-'+pid+'.json')
++        pair={'request_id':pid,'claim':claim,'doc_ids':doc_ids,'snapshot':snapshot,'order':modes,'status':'started','shared_query':None,'arms':{},'run_kind':'live_api','judgment_source':'model','started_at':now(),'scope_blocks':[public(b) for b in blocks],'version':'compact-thinking-sentence-reason-citations'}
++        write(path,pair);self.event('pair_start',request_id=pid,doc_ids=doc_ids,snapshot=snapshot,version=pair['version'])
++        try:
++            qstart=time.perf_counter();qraw=self.generate(self.query_messages(claim),query_config(),'query-'+pid,pid,[]);pair['shared_query']=qraw;pair['shared_query_wall_seconds']=time.perf_counter()-qstart;write(path,pair)
++            try:terms=parse_terms(qraw['content'])
++            except (ValueError,TypeError,json.JSONDecodeError) as e:pair.update(status='query_quality_failure',error=repr(e));return pair
++            rstart=time.perf_counter();seeds,scores=self.retrieve(terms,blocks);extended,added=neighbors(seeds,blocks);pair.update(retrieval_terms=terms,retrieval_scores=scores,seed_ids=[b['block_id'] for b in seeds],added_neighbors=added,retrieval_seconds=time.perf_counter()-rstart)
++            prepared={};prep_times={}
++            for arm in modes:
++                t=time.perf_counter();used=seeds if arm=='baseline' else extended;ms,conf,index,bytecheck=self.build_answer(claim,used,doc_ids,snapshot)
++                self.capacity(ms,conf,'before-pair-'+pid+'-'+arm);prepared[arm]=(used,ms,conf,index,bytecheck);prep_times[arm]=time.perf_counter()-t
++            for arm in modes:
++                used,ms,conf,index,bytecheck=prepared[arm];mid=str(uuid.uuid4());t=time.perf_counter();raw=self.generate(ms,conf,arm+'-'+pid,mid,used)
++                params=raw['slot_after'][0].get('params',{});assert raw['actual_http_request_body']['max_tokens']==1024 and params.get('max_tokens')==1024 and params.get('presence_penalty')==1.5 and params.get('repeat_penalty')==1.0
++                ex=expand(raw['content'],[public(b) for b in used],index,doc_ids,snapshot);write(self.folder/('expansion-'+raw['run_id']+'.json'),ex)
++                interface=interface_response(mid,claim,doc_ids,snapshot,raw['run_id'],ex,raw['elapsed_seconds'],locator=self.locator,actual_input_blocks=used)
++                interface.update(end_to_end_note='自动完整流程，流程组件耗时和整对实测时间另列；非固定证据重放。')
++                view={'main_task_id':mid,'parent_request_id':pid,'variant':arm,'raw_record':raw,'actual_input_passages':[public(b) for b in used],'sentence_index':index,'byte_audit':bytecheck,'format_complete':ex['valid'],'status':'returned' if ex['valid'] else 'answer_quality_failure','parsed':ex['expanded_response'] or {},'claim_judgment':interface['answer'],'claim_judgment_source':'model','support_status':'not_checked','judgment_source':'unverified','locator_status':interface['locator_status'],'evidence':[],'expansion_record':'expansion-'+raw['run_id']+'.json','interface_response':interface}
++                for e in interface['evidence']:view['evidence'].append({**e,'location':e['pdf_location'],'citation_semantic_support':'not_checked'})
++                view.update(answer_stage_wall_seconds=time.perf_counter()-t,preparation_seconds=prep_times[arm],shared_query_cost_share=1/len(modes))
++                view['reconstructed_flow_seconds']=pair['shared_query_wall_seconds']+pair['retrieval_seconds']+view['preparation_seconds']+view['answer_stage_wall_seconds']
++                view['allocated_total_seconds']=(pair['shared_query_wall_seconds']+pair['retrieval_seconds'])/len(modes)+view['preparation_seconds']+view['answer_stage_wall_seconds']
++                view['cost_note']='共享查询只计一次；各侧分摊一半公共耗时和usage。reconstructed_flow_seconds为实测组件和，非两条独立请求计时；pair_elapsed_seconds为整对实测。'
++                pair['arms'][arm]=view;write(path,pair);self.event('arm_result',request_id=mid,parent_request_id=pid,variant=arm,run_id=raw['run_id'],locator_status=view['locator_status'],semantic_support='not_checked')
++            pair['status']='completed';return pair
++        except Exception as e:self.technical_stop=True;pair.update(status='technical_stop',error=repr(e));self.event('technical_stop',request_id=pid,error=repr(e),dispatches=self.dispatches);raise
++        finally:pair.update(pair_elapsed_seconds=time.perf_counter()-start,ended_at=now());write(path,pair);self.event('pair_saved',request_id=pid,status=pair['status'],path=path.name)
+--- /dev/null
++++ b/进阶/a_exploration/run_bounded_stage.py
+@@ -0,0 +1,83 @@
++"""复用当前候选、请求记录器、健康检查及逐任务目录；不自动评语义或重试。"""
++from pathlib import Path
++import argparse,os,sys,time,subprocess,threading,copy,uuid
++from datetime import datetime
++from runtime import load,write,sha,now,memory,TechnicalStop,ROOT,HERE
++from bounded_candidate import BoundedEngine,query_config
++from engine import neighbors,public,parse_terms
++from audited_health import wait_health
++from sentence_selection import expand
++from sentence_interface import interface_response
++
++def main():
++    ap=argparse.ArgumentParser();ap.add_argument('--stage',type=Path,required=True);a=ap.parse_args();stage=a.stage.resolve();plan=load(stage/'plan.json');batch=stage.parent
++    if plan['phase']=='development' and datetime.now().hour*60+datetime.now().minute>=22*60+35:raise RuntimeError('22:35后不启动新的开发轮次')
++    if (stage/'owned-service.json').exists() or list(stage.rglob('run-*.json')):raise RuntimeError('已有启动或请求，不重试')
++    assert load(stage/'offline-checks.json')['passed']
++    for n,h in plan['code_hashes'].items():assert sha(ROOT/n)==h,n
++    for n,h in plan['data_hashes'].items():assert sha(ROOT/n)==h,n
++    cfg=load(batch/'configuration.json');profile=load(stage/'profile.json');tasks=load(stage/'tasks.json');launch=cfg['service_arguments'];assert sha(Path(launch[0]))==cfg['executable']['sha256'] and sha(Path(launch[launch.index('-m')+1]))==cfg['model']['sha256']
++    import socket
++    with socket.socket() as s:s.bind(('127.0.0.1',8080))
++    before=memory();write(stage/'resource-before.json',before)
++    if before['available_bytes']<2*1024**3:write(stage/'resource-stop.json',{'at':now(),'memory':before,'minimum_GiB':2,'generation_calls':0});print('RESOURCE_STOP',flush=True);return
++    engines=[];results=[];samples=[];stop=threading.Event();abort=threading.Event();process=None;phase='loading';start=time.perf_counter();record={'at':now(),'plan':plan,'memory_before':before}
++    def monitor():
++        low=0
++        while not stop.is_set():
++            m=memory();samples.append(m);low=low+1 if m['available_bytes']<1024**3 else 0
++            if low>=3:
++                abort.set()
++                if process and process.poll() is None:process.terminate()
++                return
++            stop.wait(2)
++    thread=threading.Thread(target=monitor,daemon=True)
++    def engine_for(name):
++        folder=stage/name;folder.mkdir();write(folder/'configuration.json',cfg);write(folder/'profile.json',profile);os.link(stage/'model-stderr.log',folder/'model-stderr.log');e=BoundedEngine(folder);engines.append(e);return e
++    try:
++        (stage/'slot-cache').mkdir()
++        with (stage/'model-stdout.log').open('xb') as stdout,(stage/'model-stderr.log').open('xb') as stderr:process=subprocess.Popen(launch,cwd=stage,stdout=stdout,stderr=stderr,creationflags=subprocess.CREATE_NO_WINDOW)
++        write(stage/'owned-service.json',{'at':now(),'pid':process.pid,'arguments':launch,'cwd':str(stage)});thread.start();phase='health';control=engine_for('service-preflight');wait_health(control,process,stage,abort,start,120);props=control.service('props');write(stage/'props.json',props)
++        assert props['build_info']=='b11429-d81235049' and props['default_generation_settings']['n_ctx']==4096 and props['total_slots']==1 and props['default_generation_settings']['params']['repeat_penalty']==1.0
++        record.update(load_seconds=time.perf_counter()-start,memory_after_load=memory());phase='template_preflight'
++        for task in tasks:
++            control.capacity(control.query_messages(task['claim']),query_config(),'pre-query-'+task['id'])
++            scope=control.corpus.scope(task['doc_ids'],task['snapshot']);ranked=sorted(scope,key=lambda b:sum(len(x['text']) for x in neighbors([b],scope)[0]),reverse=True);worst,_=neighbors(ranked[:2],scope)
++            if task.get('block_id_mapping'):worst=[{**b,'block_id':task['block_id_mapping'][b['block_id']]} for b in worst]
++            ms,conf,idx,byte=control.build_answer(task['claim'],worst,task['doc_ids'],task['snapshot']);control.capacity(ms,conf,'pre-worst-'+task['id'])
++        phase='generation'
++        for task in tasks:
++            if abort.is_set() or process.poll() is not None:raise TechnicalStop('运行前资源或进程停止')
++            e=engine_for(task['id']);scope=e.corpus.scope(task['doc_ids'],task['snapshot'])
++            if task.get('block_id_mapping'):
++                mapping=task['block_id_mapping'];e.corpus.blocks=[{**b,'block_id':mapping.get(b['block_id'],b['block_id'])} for b in e.corpus.blocks];scope=e.corpus.scope(task['doc_ids'],task['snapshot'])
++            result={'at':now(),'task_id':task['id'],'claim':task['claim'],'doc_ids':task['doc_ids'],'snapshot':task['snapshot'],'kind':plan['kind'],'profile':profile,'arms':{},'query':None};clock=time.perf_counter();path=e.folder/'task-result.json';write(path,result)
++            if plan['kind']=='full_pairs':
++                pair=e.execute_pair(task['claim'],task['doc_ids'],task['snapshot'],task['order']);result.update(pair=pair,query=pair['shared_query'],status=pair['status']);write(path,result)
++            else:
++                if plan['kind']=='query_answer':
++                    q=e.generate(e.query_messages(task['claim']),query_config(),'query',str(uuid.uuid4()),[]);result['query']=q;write(path,result)
++                    try:terms=parse_terms(q['content'])
++                    except Exception as ex:result.update(status='query_quality_failure',error=repr(ex));write(path,result);results.append(result);continue
++                else:terms=task['terms'];result['query_origin']='historical_query_replay';result['query_source']=task['query_source']
++                seeds,scores=e.retrieve(terms,scope);extended,added=neighbors(seeds,scope);result.update(terms=terms,ranking=scores,seeds=[b['block_id'] for b in seeds],added_neighbors=added,baseline_blocks=[public(b) for b in seeds],improved_blocks=[public(b) for b in extended]);write(path,result)
++                for arm in task['order']:
++                    used=seeds if arm=='baseline' else extended;ms,conf,idx,byte=e.build_answer(task['claim'],used,task['doc_ids'],task['snapshot']);e.capacity(ms,conf,'before-'+arm)
++                    total=sum(x.dispatches for x in engines)
++                    if total>=plan['generation_cap']:raise TechnicalStop('阶段调用上限')
++                    r=e.generate(ms,conf,arm,str(uuid.uuid4()),used);ex=expand(r['content'],[public(b) for b in used],idx,task['doc_ids'],task['snapshot']);view=interface_response(r['request_id'],task['claim'],task['doc_ids'],task['snapshot'],r['run_id'],ex,r['elapsed_seconds'],locator=e.locator,actual_input_blocks=used)
++                    result['arms'][arm]={'raw':r,'blocks':[public(b) for b in used],'sentence_index':idx,'byte_audit':byte,'expansion':ex,'interface':view};write(path,result)
++                result['status']='completed';write(path,result)
++            result['elapsed_seconds']=time.perf_counter()-clock;write(path,result);results.append(result);print('SAVED',task['id'],'dispatches',sum(x.dispatches for x in engines),flush=True)
++        write(stage/'result-index.json',{'at':now(),'tasks':[{'id':t['task_id'],'path':t['task_id']+'/task-result.json','status':t['status']} for t in results]})
++    except Exception as ex:record.update(error=repr(ex),failure_phase=phase);write(stage/'technical-stop.json',{'at':now(),'phase':phase,'error':repr(ex),'dispatches':sum(x.dispatches for x in engines),'confirmed_generations':sum(x.completed for x in engines),'no_retry':True});print('TECHNICAL_STOP',phase,repr(ex),flush=True)
++    finally:
++        record['exit_code_before_cleanup']=process.poll() if process else None;stop.set()
++        if thread.is_alive():thread.join(5)
++        if process and process.poll() is None:
++            process.terminate()
++            try:process.wait(10)
++            except subprocess.TimeoutExpired:process.kill();process.wait()
++        record.update(ended_at=now(),dispatches=sum(x.dispatches for x in engines),confirmed_generations=sum(x.completed for x in engines),model_stopped=process is None or process.poll() is not None,memory_samples=samples,memory_after_stop=memory(),exit_code_after_cleanup=process.poll() if process else None);write(stage/'runtime.json',record);print('FINAL',record['confirmed_generations'],'STOPPED',record['model_stopped'],flush=True)
++
++if __name__=='__main__':main()

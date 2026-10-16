@@ -1,0 +1,387 @@
+[
+  {
+    "name": "ids-0",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "block_id": {
+                "type": "string"
+              },
+              "quote": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "block_id",
+              "quote"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 0
+        }
+      },
+      "required": [
+        "label",
+        "reason",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "empty_array",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": []
+        },
+        "accept": true
+      },
+      {
+        "name": "foreign_id",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": [
+            {
+              "block_id": "not-in-current-input",
+              "quote": "original phrase"
+            }
+          ]
+        },
+        "accept": false
+      }
+    ]
+  },
+  {
+    "name": "ids-1",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "block_id": {
+                "type": "string",
+                "enum": [
+                  "synthetic-0"
+                ]
+              },
+              "quote": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "block_id",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "label",
+        "reason",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "empty_array",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": []
+        },
+        "accept": true
+      },
+      {
+        "name": "foreign_id",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": [
+            {
+              "block_id": "not-in-current-input",
+              "quote": "original phrase"
+            }
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "actual_id",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": [
+            {
+              "block_id": "synthetic-0",
+              "quote": "original phrase"
+            }
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "actual_all_ids",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": [
+            {
+              "block_id": "synthetic-0",
+              "quote": "original phrase"
+            }
+          ]
+        },
+        "accept": true
+      }
+    ]
+  },
+  {
+    "name": "ids-2",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "block_id": {
+                "type": "string",
+                "enum": [
+                  "synthetic-0",
+                  "synthetic-1"
+                ]
+              },
+              "quote": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "block_id",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "label",
+        "reason",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "empty_array",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": []
+        },
+        "accept": true
+      },
+      {
+        "name": "foreign_id",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": [
+            {
+              "block_id": "not-in-current-input",
+              "quote": "original phrase"
+            }
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "actual_id",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": [
+            {
+              "block_id": "synthetic-1",
+              "quote": "original phrase"
+            }
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "actual_all_ids",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": [
+            {
+              "block_id": "synthetic-0",
+              "quote": "original phrase"
+            },
+            {
+              "block_id": "synthetic-1",
+              "quote": "original phrase"
+            }
+          ]
+        },
+        "accept": true
+      }
+    ]
+  },
+  {
+    "name": "ids-3",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "block_id": {
+                "type": "string",
+                "enum": [
+                  "synthetic-0",
+                  "synthetic-1",
+                  "synthetic-2"
+                ]
+              },
+              "quote": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "block_id",
+              "quote"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "label",
+        "reason",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "empty_array",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": []
+        },
+        "accept": true
+      },
+      {
+        "name": "foreign_id",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": [
+            {
+              "block_id": "not-in-current-input",
+              "quote": "original phrase"
+            }
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "actual_id",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": [
+            {
+              "block_id": "synthetic-2",
+              "quote": "original phrase"
+            }
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "actual_all_ids",
+        "response": {
+          "label": "insufficient",
+          "reason": "made up",
+          "evidence": [
+            {
+              "block_id": "synthetic-0",
+              "quote": "original phrase"
+            },
+            {
+              "block_id": "synthetic-1",
+              "quote": "original phrase"
+            },
+            {
+              "block_id": "synthetic-2",
+              "quote": "original phrase"
+            }
+          ]
+        },
+        "accept": true
+      }
+    ]
+  }
+]

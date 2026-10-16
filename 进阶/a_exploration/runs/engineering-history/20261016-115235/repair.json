@@ -1,0 +1,12 @@
+{
+  "time": "2026-10-16T11:52:35.676394+08:00",
+  "failure_source": "runs/development-resume-20261016-114702/technical-stop.json",
+  "actual_dispatches_before_repair": 0,
+  "cause": "移除slot-save-path使erase槽API不可用，收到501；发生在provider生成请求之前。",
+  "repair": "改用本轮cwd内ASCII相对slot-cache目录；页面开放前实际调用清槽接口，辅助接口错误保存完整返回",
+  "preserved": "所有旧失败、计划和未发出run记录不改",
+  "changed": [
+    "launch.py",
+    "runtime.py"
+  ]
+}

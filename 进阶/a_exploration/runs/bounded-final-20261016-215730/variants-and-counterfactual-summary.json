@@ -1,0 +1,46 @@
+{
+  "at": "2026-10-16T22:27:59.744972+08:00",
+  "dev_equivalence": {
+    "source": "AD01",
+    "old_labels": [
+      "contradicted",
+      "contradicted"
+    ],
+    "new_labels": [
+      "insufficient",
+      "supported"
+    ],
+    "passed": false,
+    "cause_not_isolated": "查询及检索证据随等义措辞变化，且判断方向仍错；不能只归因于模型语言或某一关键词。"
+  },
+  "eval_equivalence": {
+    "source": "AT01",
+    "transform": "全部块ID一致重映射",
+    "old_labels": [
+      "insufficient",
+      "insufficient"
+    ],
+    "new_labels": [
+      "insufficient",
+      "insufficient"
+    ],
+    "label_invariant": true,
+    "meaningful_nonempty_ID_test": false,
+    "limitation": "两侧空检索，没有ID实际进入最终模型输入；不能写成已验证非空ID鲁棒。"
+  },
+  "counterfactual": {
+    "source": "AD01",
+    "transform": "无需记录→仍应记录",
+    "expected": "supported",
+    "actual": [
+      "supported",
+      "supported"
+    ],
+    "strict": [
+      true,
+      true
+    ],
+    "scope": "完整流程，查询重新执行；原文条件和原始响应全部保存。"
+  },
+  "no_additional_calls_for_weak_variant": true
+}

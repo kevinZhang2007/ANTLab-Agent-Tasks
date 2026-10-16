@@ -1,0 +1,1139 @@
+{
+  "at": "2026-10-16T12:55:36.333642+08:00",
+  "run_kind": "local_rule",
+  "judgment_source": "unverified",
+  "reviewer": "Codex辅助原文复核，尚待本人确认",
+  "rows": [
+    {
+      "id": "AD01",
+      "variant": "baseline",
+      "request_id": "b29f24ba-b55d-4948-8425-42c4dc299131",
+      "pair_request_id": "e7b4887a-0f1a-4aca-91ca-3e7142ac6127",
+      "run_id": "be1b7c00-7c03-4534-9d0a-da56501bdc97",
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"Rule 2 explicitly states that manual data manipulation is not advisable and recommends using automated tools to avoid errors. Rule 3 emphasizes storing exact program versions to ensure reproducibility, which aligns with the claim that final files should be saved regardless of manual modifications.\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S03-p01\",\n      \"quote\": \"If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts.\"\n    },\n    {\n      \"block_id\": \"P1-S04-p01\",\n      \"quote\": \"In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally.\"\n    }\n  ]\n}",
+      "parsed": {
+        "label": "supported",
+        "reason": "Rule 2 explicitly states that manual data manipulation is not advisable and recommends using automated tools to avoid errors. Rule 3 emphasizes storing exact program versions to ensure reproducibility, which aligns with the claim that final files should be saved regardless of manual modifications.",
+        "evidence": [
+          {
+            "block_id": "P1-S03-p01",
+            "quote": "If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts."
+          },
+          {
+            "block_id": "P1-S04-p01",
+            "quote": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally."
+          }
+        ]
+      },
+      "format_complete": true,
+      "public_reference_label": "contradicted",
+      "label_correct": false,
+      "necessary_input_coverage": true,
+      "reason_label_consistent": false,
+      "id_membership": true,
+      "continuous_quotes": [
+        {
+          "block_id": "P1-S03-p01",
+          "id_valid": true,
+          "quote_continuous_original": true
+        },
+        {
+          "block_id": "P1-S04-p01",
+          "id_valid": true,
+          "quote_continuous_original": true
+        }
+      ],
+      "quoted_source_audit": [
+        {
+          "reported_id": "P1-S03-p01",
+          "quote": "If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts.",
+          "continuous_in_reported_block": true,
+          "other_actual_input_ids_containing_exact_quote": []
+        },
+        {
+          "reported_id": "P1-S04-p01",
+          "quote": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally.",
+          "continuous_in_reported_block": true,
+          "other_actual_input_ids_containing_exact_quote": []
+        }
+      ],
+      "quote_authenticity_all": true,
+      "necessary_citation_coverage": false,
+      "citation_support": false,
+      "has_unrelated_citations": true,
+      "strict_complete_success": false,
+      "review_basis": "两侧都含完整P1-S03末句，要求人工操作不可避免时仍记录对象和目的。模型只据避免手工操作/保存程序版本来支持无需记录；后者无关。两个摘录确属对应原文，但不支持当前label。",
+      "client_seconds": 8.110582000110298,
+      "stage_wall_seconds": 8.298877499997616,
+      "allocated_total_seconds": 8.843772449996322,
+      "usage": {
+        "completion_tokens": 178,
+        "prompt_tokens": 739,
+        "total_tokens": 917,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "input_tokens": 739,
+      "finish_reason": "stop",
+      "truncated": false,
+      "old_result": {
+        "actual_label": "supported",
+        "format_complete": true,
+        "answer_correct": false,
+        "strict_complete_success": false,
+        "necessary_input_coverage": true
+      },
+      "reviewer": "Codex原文辅助复核，尚待本人确认"
+    },
+    {
+      "id": "AD01",
+      "variant": "improved",
+      "request_id": "f2fbc993-bc80-4a90-b3a2-60243002388b",
+      "pair_request_id": "e7b4887a-0f1a-4aca-91ca-3e7142ac6127",
+      "run_id": "99d772c0-5733-4aec-b2a8-c3b0d29ae3df",
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"Rule 2 explicitly states that manual data manipulation is not advisable and recommends using automated tools to avoid errors. Rule 3 emphasizes storing exact program versions to ensure reproducibility, which aligns with the claim that final files should be saved regardless of manual modifications.\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S03-p01\",\n      \"quote\": \"If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts.\"\n    },\n    {\n      \"block_id\": \"P1-S04-p01\",\n      \"quote\": \"In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally.\"\n    }\n  ]\n}",
+      "parsed": {
+        "label": "supported",
+        "reason": "Rule 2 explicitly states that manual data manipulation is not advisable and recommends using automated tools to avoid errors. Rule 3 emphasizes storing exact program versions to ensure reproducibility, which aligns with the claim that final files should be saved regardless of manual modifications.",
+        "evidence": [
+          {
+            "block_id": "P1-S03-p01",
+            "quote": "If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts."
+          },
+          {
+            "block_id": "P1-S04-p01",
+            "quote": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally."
+          }
+        ]
+      },
+      "format_complete": true,
+      "public_reference_label": "contradicted",
+      "label_correct": false,
+      "necessary_input_coverage": true,
+      "reason_label_consistent": false,
+      "id_membership": true,
+      "continuous_quotes": [
+        {
+          "block_id": "P1-S03-p01",
+          "id_valid": true,
+          "quote_continuous_original": true
+        },
+        {
+          "block_id": "P1-S04-p01",
+          "id_valid": true,
+          "quote_continuous_original": true
+        }
+      ],
+      "quoted_source_audit": [
+        {
+          "reported_id": "P1-S03-p01",
+          "quote": "If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts.",
+          "continuous_in_reported_block": true,
+          "other_actual_input_ids_containing_exact_quote": []
+        },
+        {
+          "reported_id": "P1-S04-p01",
+          "quote": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally.",
+          "continuous_in_reported_block": true,
+          "other_actual_input_ids_containing_exact_quote": []
+        }
+      ],
+      "quote_authenticity_all": true,
+      "necessary_citation_coverage": false,
+      "citation_support": false,
+      "has_unrelated_citations": true,
+      "strict_complete_success": false,
+      "review_basis": "两侧都含完整P1-S03末句，要求人工操作不可避免时仍记录对象和目的。模型只据避免手工操作/保存程序版本来支持无需记录；后者无关。两个摘录确属对应原文，但不支持当前label。",
+      "client_seconds": 11.050098999869078,
+      "stage_wall_seconds": 11.749153499957174,
+      "allocated_total_seconds": 12.29404844995588,
+      "usage": {
+        "completion_tokens": 178,
+        "prompt_tokens": 739,
+        "total_tokens": 917,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "input_tokens": 739,
+      "finish_reason": "stop",
+      "truncated": false,
+      "old_result": {
+        "actual_label": "insufficient",
+        "format_complete": true,
+        "answer_correct": false,
+        "strict_complete_success": false,
+        "necessary_input_coverage": true
+      },
+      "reviewer": "Codex原文辅助复核，尚待本人确认"
+    },
+    {
+      "id": "AD02",
+      "variant": "baseline",
+      "request_id": "89152a07-a1a6-4643-b182-57696ac183da",
+      "pair_request_id": "9bad6c82-ea70-46b4-99df-14e037b81d13",
+      "run_id": "2f88ee1a-2e79-4eac-bd4b-379cfdf87df3",
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"The passage supports the claim that exporting notebooks as HTML or PDF helps readers access content, but it also highlights that this is not sufficient for execution and sharing.\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P2-S01-p04\",\n      \"quote\": \"Read: Beyond granting permission to reuse your notebook, consider how you can leverage the unique structure of notebooks to support reading. At the very least, leave static HTML/PDF versions of all notebooks stored in the final version of the repository accompanying a publication.\"\n    },\n    {\n      \"block_id\": \"P2-S10-p02\",\n      \"quote\": \"You can also use Nbviewer ( https://nbviewer.jupyter.org/ ) to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first. GitHub uses this service to render any notebooks on their site, so pushing a notebook to GitHub is another good way to make static views easily available.\"\n    }\n  ]\n}",
+      "parsed": {
+        "label": "supported",
+        "reason": "The passage supports the claim that exporting notebooks as HTML or PDF helps readers access content, but it also highlights that this is not sufficient for execution and sharing.",
+        "evidence": [
+          {
+            "block_id": "P2-S01-p04",
+            "quote": "Read: Beyond granting permission to reuse your notebook, consider how you can leverage the unique structure of notebooks to support reading. At the very least, leave static HTML/PDF versions of all notebooks stored in the final version of the repository accompanying a publication."
+          },
+          {
+            "block_id": "P2-S10-p02",
+            "quote": "You can also use Nbviewer ( https://nbviewer.jupyter.org/ ) to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first. GitHub uses this service to render any notebooks on their site, so pushing a notebook to GitHub is another good way to make static views easily available."
+          }
+        ]
+      },
+      "format_complete": true,
+      "public_reference_label": "supported",
+      "label_correct": true,
+      "necessary_input_coverage": "ambiguous",
+      "reason_label_consistent": true,
+      "id_membership": true,
+      "continuous_quotes": [
+        {
+          "block_id": "P2-S01-p04",
+          "id_valid": true,
+          "quote_continuous_original": false
+        },
+        {
+          "block_id": "P2-S10-p02",
+          "id_valid": true,
+          "quote_continuous_original": true
+        }
+      ],
+      "quoted_source_audit": [
+        {
+          "reported_id": "P2-S01-p04",
+          "quote": "Read: Beyond granting permission to reuse your notebook, consider how you can leverage the unique structure of notebooks to support reading. At the very least, leave static HTML/PDF versions of all notebooks stored in the final version of the repository accompanying a publication.",
+          "continuous_in_reported_block": false,
+          "other_actual_input_ids_containing_exact_quote": [
+            "P2-S10-p02"
+          ]
+        },
+        {
+          "reported_id": "P2-S10-p02",
+          "quote": "You can also use Nbviewer ( https://nbviewer.jupyter.org/ ) to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first. GitHub uses this service to render any notebooks on their site, so pushing a notebook to GitHub is another good way to make static views easily available.",
+          "continuous_in_reported_block": true,
+          "other_actual_input_ids_containing_exact_quote": []
+        }
+      ],
+      "quote_authenticity_all": false,
+      "necessary_citation_coverage": false,
+      "citation_support": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "review_basis": "label与参考一致，理由大体保持有助阅读但不足执行。第一条quote来自实际P2-S10-p02，却标为P2-S01-p04；不能修ID后算通过。基线只有Read与概览，Read也提依赖清单/重建环境，是否单段已足够支持全部运行限制有解释边界，输入覆盖单列待确认，不按固定ID强制缺证。",
+      "client_seconds": 9.102843399858102,
+      "stage_wall_seconds": 9.317770400084555,
+      "allocated_total_seconds": 9.89008880010806,
+      "usage": {
+        "completion_tokens": 219,
+        "prompt_tokens": 732,
+        "total_tokens": 951,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "input_tokens": 732,
+      "finish_reason": "stop",
+      "truncated": false,
+      "old_result": {
+        "actual_label": "insufficient",
+        "format_complete": true,
+        "answer_correct": false,
+        "strict_complete_success": false,
+        "necessary_input_coverage": false
+      },
+      "reviewer": "Codex原文辅助复核，尚待本人确认"
+    },
+    {
+      "id": "AD02",
+      "variant": "improved",
+      "request_id": "28d55a58-c6bc-4955-b464-8cff92124203",
+      "pair_request_id": "9bad6c82-ea70-46b4-99df-14e037b81d13",
+      "run_id": "9590bbd6-54eb-4b12-90a1-00d01adb9ccb",
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"The passage supports the claim that exporting notebooks as static HTML or PDF does not fully solve the problem of reusing them, as it highlights the need for additional steps like storing in public repositories, using tools like Nbviewer, and setting up a zero-install environment (e.g., Binder). These measures are necessary to ensure readability, reproducibility, and accessibility.\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P2-S01-p03\",\n      \"quote\": \"Analyses documented in notebooks cannot be easily rerun if users do not first freeze their dependencies, share their data, and adequately describe their computing environment [ 13 ].\"\n    },\n    {\n      \"block_id\": \"P2-S10-p01\",\n      \"quote\": \"Store your notebooks in a public code repository with a clear README file and a liberal open source license ( https://opensource.org/licenses ) granting permission to reuse your code.\"\n    },\n    {\n      \"block_id\": \"P2-S10-p02\",\n      \"quote\": \"Use Nbviewer to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first.\"\n    },\n",
+      "parsed": null,
+      "format_complete": false,
+      "public_reference_label": "supported",
+      "label_correct": "not_checked",
+      "necessary_input_coverage": true,
+      "reason_label_consistent": "not_checked",
+      "id_membership": "not_checked",
+      "continuous_quotes": [],
+      "quoted_source_audit": [],
+      "quote_authenticity_all": "not_checked",
+      "necessary_citation_coverage": "not_checked",
+      "citation_support": "not_checked",
+      "has_unrelated_citations": "not_checked",
+      "strict_complete_success": false,
+      "review_basis": "补邻段取得明确执行依赖(P2-S01-p03)及Run完整原文；但输出256 token耗尽，第三个evidence后未闭合。不得抽取supported前缀判答案成功。片段还把Store与Use等改写成原句，局部风险另记，不冒充完整字段评价。",
+      "client_seconds": 15.547828999813646,
+      "stage_wall_seconds": 15.714769500074908,
+      "allocated_total_seconds": 16.287087900098413,
+      "usage": {
+        "completion_tokens": 256,
+        "prompt_tokens": 1321,
+        "total_tokens": 1577,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "input_tokens": 1321,
+      "finish_reason": "length",
+      "truncated": false,
+      "old_result": {
+        "actual_label": "insufficient",
+        "format_complete": true,
+        "answer_correct": false,
+        "strict_complete_success": false,
+        "necessary_input_coverage": true
+      },
+      "reviewer": "Codex原文辅助复核，尚待本人确认"
+    },
+    {
+      "id": "AD03",
+      "variant": "baseline",
+      "request_id": "19aa41f9-4f2d-4576-9861-64945353a39b",
+      "pair_request_id": "5ec6f267-f9e7-4c47-8d55-0ce1eb702fde",
+      "run_id": "cf948e31-15fb-4d7c-8357-38bd0e416c92",
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"绘图过程中做过数据转换时，只保留最终图片就满足作者关于图底层数据的建议。根据规则3和规则8，只有在必要时保留原始程序版本文件，并通过系统化命名来确保数据可访问。\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S04-p01\",\n      \"quote\": \"In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. Also, as both input and output formats may change between versions, a newer version of a program may not even run without modifying its inputs. Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. Archiving the exact versions of programs actually saves a lot of hassle at later stages.\"\n    },\n    {\n      \"block_id\": \"P1-S09-p01\",\n      \"quote\": \"We find hypertext (i.e., html file output) to be particularly useful for this purpose. This allows summarized results to be generated along with links that can be very conveniently followed (by simply clicking)",
+      "parsed": null,
+      "format_complete": false,
+      "public_reference_label": "contradicted",
+      "label_correct": "not_checked",
+      "necessary_input_coverage": false,
+      "reason_label_consistent": "not_checked",
+      "id_membership": "not_checked",
+      "continuous_quotes": [],
+      "quoted_source_audit": [],
+      "quote_authenticity_all": "not_checked",
+      "necessary_citation_coverage": "not_checked",
+      "citation_support": "not_checked",
+      "has_unrelated_citations": "not_checked",
+      "strict_complete_success": false,
+      "review_basis": "新查询仍未出现plot/plotting等具体对象，只有data/conversion/final/image及author's recommendation；必要图数据章节仍未命中，无同章节邻段。两侧请求及原始输出相同，均在第二个quote中途耗尽256预算，完整语义字段not_checked。可见前缀仍用程序版本/层次输出解释只存图，不能用不可见图数据原文补证。",
+      "client_seconds": 10.374072500038892,
+      "stage_wall_seconds": 10.549134900094941,
+      "allocated_total_seconds": 11.244960100157186,
+      "usage": {
+        "completion_tokens": 256,
+        "prompt_tokens": 798,
+        "total_tokens": 1054,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "input_tokens": 798,
+      "finish_reason": "length",
+      "truncated": false,
+      "old_result": {
+        "actual_label": "supported",
+        "format_complete": true,
+        "answer_correct": false,
+        "strict_complete_success": false,
+        "necessary_input_coverage": false
+      },
+      "reviewer": "Codex原文辅助复核，尚待本人确认"
+    },
+    {
+      "id": "AD03",
+      "variant": "improved",
+      "request_id": "3a7b959d-2c43-47f0-bd4f-e5b003df447c",
+      "pair_request_id": "5ec6f267-f9e7-4c47-8d55-0ce1eb702fde",
+      "run_id": "22d2f504-f178-4f9f-b15d-f9e75bc8120c",
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"绘图过程中做过数据转换时，只保留最终图片就满足作者关于图底层数据的建议。根据规则3和规则8，只有在必要时保留原始程序版本文件，并通过系统化命名来确保数据可访问。\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S04-p01\",\n      \"quote\": \"In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. Also, as both input and output formats may change between versions, a newer version of a program may not even run without modifying its inputs. Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. Archiving the exact versions of programs actually saves a lot of hassle at later stages.\"\n    },\n    {\n      \"block_id\": \"P1-S09-p01\",\n      \"quote\": \"We find hypertext (i.e., html file output) to be particularly useful for this purpose. This allows summarized results to be generated along with links that can be very conveniently followed (by simply clicking)",
+      "parsed": null,
+      "format_complete": false,
+      "public_reference_label": "contradicted",
+      "label_correct": "not_checked",
+      "necessary_input_coverage": false,
+      "reason_label_consistent": "not_checked",
+      "id_membership": "not_checked",
+      "continuous_quotes": [],
+      "quoted_source_audit": [],
+      "quote_authenticity_all": "not_checked",
+      "necessary_citation_coverage": "not_checked",
+      "citation_support": "not_checked",
+      "has_unrelated_citations": "not_checked",
+      "strict_complete_success": false,
+      "review_basis": "新查询仍未出现plot/plotting等具体对象，只有data/conversion/final/image及author's recommendation；必要图数据章节仍未命中，无同章节邻段。两侧请求及原始输出相同，均在第二个quote中途耗尽256预算，完整语义字段not_checked。可见前缀仍用程序版本/层次输出解释只存图，不能用不可见图数据原文补证。",
+      "client_seconds": 10.521643100073561,
+      "stage_wall_seconds": 10.687036500079557,
+      "allocated_total_seconds": 11.382861700141802,
+      "usage": {
+        "completion_tokens": 256,
+        "prompt_tokens": 798,
+        "total_tokens": 1054,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "input_tokens": 798,
+      "finish_reason": "length",
+      "truncated": false,
+      "old_result": {
+        "actual_label": "supported",
+        "format_complete": true,
+        "answer_correct": false,
+        "strict_complete_success": false,
+        "necessary_input_coverage": false
+      },
+      "reviewer": "Codex原文辅助复核，尚待本人确认"
+    }
+  ],
+  "groups": {
+    "baseline": {
+      "denominator": 3,
+      "definite_input_coverage": 1,
+      "ambiguous_input_coverage": 1,
+      "format_complete": 2,
+      "label_correct": 1,
+      "label_not_checked": 1,
+      "id_valid_complete_outputs": 2,
+      "authentic_nonempty_quote_outputs": 1,
+      "necessary_citation_coverage": 0,
+      "citation_support": 0,
+      "semantic_support_not_checked": 1,
+      "strict_complete_success": 0,
+      "budget_exhausted": 1,
+      "answer_http_seconds": 27.587497900007293,
+      "allocated_total_seconds": 29.97882135026157,
+      "old_group": {
+        "denominator": 3,
+        "format_complete": 3,
+        "answer_correct": 0,
+        "semantic_consistent": 0,
+        "id_membership_check": 3,
+        "nonempty_references": 2,
+        "necessary_input_coverage": 1,
+        "necessary_cited_coverage": 0,
+        "citation_support_actual_judgment": 0,
+        "has_unrelated_citations": 1,
+        "strict_complete_success": 0,
+        "locator_valid_tasks": 1,
+        "answer_http_total_seconds": 21.32179700001143,
+        "allocated_total_seconds": 23.81139540008735
+      }
+    },
+    "improved": {
+      "denominator": 3,
+      "definite_input_coverage": 2,
+      "ambiguous_input_coverage": 0,
+      "format_complete": 1,
+      "label_correct": 0,
+      "label_not_checked": 2,
+      "id_valid_complete_outputs": 1,
+      "authentic_nonempty_quote_outputs": 1,
+      "necessary_citation_coverage": 0,
+      "citation_support": 0,
+      "semantic_support_not_checked": 2,
+      "strict_complete_success": 0,
+      "budget_exhausted": 2,
+      "answer_http_seconds": 37.119571099756286,
+      "allocated_total_seconds": 39.963998050196096,
+      "old_group": {
+        "denominator": 3,
+        "format_complete": 3,
+        "answer_correct": 0,
+        "semantic_consistent": 0,
+        "id_membership_check": 3,
+        "nonempty_references": 1,
+        "necessary_input_coverage": 2,
+        "necessary_cited_coverage": 0,
+        "citation_support_actual_judgment": 0,
+        "has_unrelated_citations": 1,
+        "strict_complete_success": 0,
+        "locator_valid_tasks": 1,
+        "answer_http_total_seconds": 18.48617439996451,
+        "allocated_total_seconds": 21.031955699785613
+      }
+    }
+  },
+  "pairs": [
+    {
+      "id": "AD01",
+      "pair_request_id": "e7b4887a-0f1a-4aca-91ca-3e7142ac6127",
+      "query_run_id": "5cc189eb-cdf7-4cb6-a0b6-e8bf1e4b62bf",
+      "query_terms": "save, modify, file, object, purpose",
+      "query_tokens": [
+        "save",
+        "modify",
+        "file",
+        "object",
+        "purpose"
+      ],
+      "seed_ids": [
+        "P1-S03-p01",
+        "P1-S04-p01"
+      ],
+      "ranked": [
+        {
+          "rank": 1,
+          "block_id": "P1-S04-p01",
+          "section": "P1-S04",
+          "score": 0.09547833393668319,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 2,
+          "block_id": "P1-S03-p01",
+          "section": "P1-S03",
+          "score": 0.0939541356417691,
+          "reference_section_audit_only": true
+        },
+        {
+          "rank": 3,
+          "block_id": "P1-S09-p01",
+          "section": "P1-S09",
+          "score": 0.07563740199645762,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 4,
+          "block_id": "P1-S10-p03",
+          "section": "P1-S10",
+          "score": 0.04584105810556141,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 5,
+          "block_id": "P1-S08-p01",
+          "section": "P1-S08",
+          "score": 0.03733621231814012,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 6,
+          "block_id": "P1-S01-p06",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 7,
+          "block_id": "P1-S01-p05",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 8,
+          "block_id": "P1-S01-p01",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 9,
+          "block_id": "P1-S01-p02",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 10,
+          "block_id": "P1-S01-p04",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 11,
+          "block_id": "P1-S01-p08",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 12,
+          "block_id": "P1-S01-p03",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 13,
+          "block_id": "P1-S01-p07",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 14,
+          "block_id": "P1-S11-p01",
+          "section": "P1-S11",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 15,
+          "block_id": "P1-S11-p02",
+          "section": "P1-S11",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 16,
+          "block_id": "P1-S02-p02",
+          "section": "P1-S02",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 17,
+          "block_id": "P1-S02-p03",
+          "section": "P1-S02",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 18,
+          "block_id": "P1-S02-p01",
+          "section": "P1-S02",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 19,
+          "block_id": "P1-S05-p03",
+          "section": "P1-S05",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 20,
+          "block_id": "P1-S05-p01",
+          "section": "P1-S05",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 21,
+          "block_id": "P1-S05-p02",
+          "section": "P1-S05",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 22,
+          "block_id": "P1-S06-p01",
+          "section": "P1-S06",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 23,
+          "block_id": "P1-S07-p01",
+          "section": "P1-S07",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 24,
+          "block_id": "P1-S10-p04",
+          "section": "P1-S10",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 25,
+          "block_id": "P1-S10-p02",
+          "section": "P1-S10",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 26,
+          "block_id": "P1-S10-p01",
+          "section": "P1-S10",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        }
+      ],
+      "added_trace": [],
+      "same_actual_request": true,
+      "pair_elapsed_seconds": 21.29600639990531,
+      "query_seconds": 0.9752783000003546,
+      "query_cost_share_each": 0.5
+    },
+    {
+      "id": "AD02",
+      "pair_request_id": "9bad6c82-ea70-46b4-99df-14e037b81d13",
+      "query_run_id": "6665814c-e192-4104-b5d3-9ae91dd8a424",
+      "query_terms": "notebook export, static HTML/PDF, help read, execute calculation",
+      "query_tokens": [
+        "notebook",
+        "export",
+        "static",
+        "html",
+        "pdf",
+        "help",
+        "read",
+        "execute",
+        "calculation"
+      ],
+      "seed_ids": [
+        "P2-S01-p04",
+        "P2-S10-p02"
+      ],
+      "ranked": [
+        {
+          "rank": 1,
+          "block_id": "P2-S10-p02",
+          "section": "P2-S10",
+          "score": 0.34228427895018826,
+          "reference_section_audit_only": true
+        },
+        {
+          "rank": 2,
+          "block_id": "P2-S01-p04",
+          "section": "P2-S01",
+          "score": 0.09958104827397943,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 3,
+          "block_id": "P2-S06-p02",
+          "section": "P2-S06",
+          "score": 0.08259948913924282,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 4,
+          "block_id": "P2-S03-p01",
+          "section": "P2-S03",
+          "score": 0.053190625534888944,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 5,
+          "block_id": "P2-S04-p02",
+          "section": "P2-S04",
+          "score": 0.05174995313893322,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 6,
+          "block_id": "P2-S05-p01",
+          "section": "P2-S05",
+          "score": 0.0321265419314561,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 7,
+          "block_id": "P2-S10-p01",
+          "section": "P2-S10",
+          "score": 0.03036528848265015,
+          "reference_section_audit_only": true
+        },
+        {
+          "rank": 8,
+          "block_id": "P2-S11-p01",
+          "section": "P2-S11",
+          "score": 0.030327284098735433,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 9,
+          "block_id": "P2-S12-p01",
+          "section": "P2-S12",
+          "score": 0.026603270418771988,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 10,
+          "block_id": "P2-S10-p03",
+          "section": "P2-S10",
+          "score": 0.022805330735200278,
+          "reference_section_audit_only": true
+        },
+        {
+          "rank": 11,
+          "block_id": "P2-S08-p01",
+          "section": "P2-S08",
+          "score": 0.022063431479226403,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 12,
+          "block_id": "P2-S03-p03",
+          "section": "P2-S03",
+          "score": 0.02101937677828407,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 13,
+          "block_id": "P2-S07-p02",
+          "section": "P2-S07",
+          "score": 0.019490220637213923,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 14,
+          "block_id": "P2-S10-p04",
+          "section": "P2-S10",
+          "score": 0.01882706112192416,
+          "reference_section_audit_only": true
+        },
+        {
+          "rank": 15,
+          "block_id": "P2-S09-p01",
+          "section": "P2-S09",
+          "score": 0.018567256740531664,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 16,
+          "block_id": "P2-S01-p02",
+          "section": "P2-S01",
+          "score": 0.01629862956758721,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 17,
+          "block_id": "P2-S03-p02",
+          "section": "P2-S03",
+          "score": 0.015573815009767884,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 18,
+          "block_id": "P2-S08-p02",
+          "section": "P2-S08",
+          "score": 0.014552289867710956,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 19,
+          "block_id": "P2-S05-p02",
+          "section": "P2-S05",
+          "score": 0.011038267181153978,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 20,
+          "block_id": "P2-S04-p01",
+          "section": "P2-S04",
+          "score": 0.009388000357906722,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 21,
+          "block_id": "P2-S02-p02",
+          "section": "P2-S02",
+          "score": 0.008152924248084396,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 22,
+          "block_id": "P2-S07-p01",
+          "section": "P2-S07",
+          "score": 0.00810014752967876,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 23,
+          "block_id": "P2-S08-p03",
+          "section": "P2-S08",
+          "score": 0.006604944521610941,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 24,
+          "block_id": "P2-S13-p01",
+          "section": "P2-S13",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 25,
+          "block_id": "P2-S01-p01",
+          "section": "P2-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 26,
+          "block_id": "P2-S01-p03",
+          "section": "P2-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 27,
+          "block_id": "P2-S02-p01",
+          "section": "P2-S02",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 28,
+          "block_id": "P2-S06-p01",
+          "section": "P2-S06",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 29,
+          "block_id": "P2-S09-p02",
+          "section": "P2-S09",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        }
+      ],
+      "added_trace": [
+        {
+          "seed": "P2-S01-p04",
+          "added": "P2-S01-p03",
+          "reason": "同文档、快照、章节内的紧邻原段落"
+        },
+        {
+          "seed": "P2-S10-p02",
+          "added": "P2-S10-p01",
+          "reason": "同文档、快照、章节内的紧邻原段落"
+        },
+        {
+          "seed": "P2-S10-p02",
+          "added": "P2-S10-p03",
+          "reason": "同文档、快照、章节内的紧邻原段落"
+        }
+      ],
+      "same_actual_request": false,
+      "pair_elapsed_seconds": 26.36211819993332,
+      "query_seconds": 0.9721352998167276,
+      "query_cost_share_each": 0.5
+    },
+    {
+      "id": "AD03",
+      "pair_request_id": "5ec6f267-f9e7-4c47-8d55-0ce1eb702fde",
+      "query_run_id": "a098b4ad-fc2f-44fb-9a66-fc8820a41ddf",
+      "query_terms": "data conversion, final image, author's recommendation",
+      "query_tokens": [
+        "data",
+        "conversion",
+        "final",
+        "image",
+        "author's",
+        "recommendation"
+      ],
+      "seed_ids": [
+        "P1-S04-p01",
+        "P1-S09-p01"
+      ],
+      "ranked": [
+        {
+          "rank": 1,
+          "block_id": "P1-S09-p01",
+          "section": "P1-S09",
+          "score": 0.08491086352557088,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 2,
+          "block_id": "P1-S04-p01",
+          "section": "P1-S04",
+          "score": 0.0766681469502561,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 3,
+          "block_id": "P1-S11-p01",
+          "section": "P1-S11",
+          "score": 0.07401380351494231,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 4,
+          "block_id": "P1-S02-p01",
+          "section": "P1-S02",
+          "score": 0.07167543804460826,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 5,
+          "block_id": "P1-S06-p01",
+          "section": "P1-S06",
+          "score": 0.06242486370213656,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 6,
+          "block_id": "P1-S01-p01",
+          "section": "P1-S01",
+          "score": 0.05408206111632594,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 7,
+          "block_id": "P1-S03-p01",
+          "section": "P1-S03",
+          "score": 0.05240925163533604,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 8,
+          "block_id": "P1-S02-p02",
+          "section": "P1-S02",
+          "score": 0.051197975142979336,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 9,
+          "block_id": "P1-S08-p01",
+          "section": "P1-S08",
+          "score": 0.04873110877625543,
+          "reference_section_audit_only": true
+        },
+        {
+          "rank": 10,
+          "block_id": "P1-S01-p03",
+          "section": "P1-S01",
+          "score": 0.031193544357327914,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 11,
+          "block_id": "P1-S05-p01",
+          "section": "P1-S05",
+          "score": 0.024898965310601248,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 12,
+          "block_id": "P1-S10-p01",
+          "section": "P1-S10",
+          "score": 0.02480357986021822,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 13,
+          "block_id": "P1-S01-p06",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 14,
+          "block_id": "P1-S01-p05",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 15,
+          "block_id": "P1-S01-p02",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 16,
+          "block_id": "P1-S01-p04",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 17,
+          "block_id": "P1-S01-p08",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 18,
+          "block_id": "P1-S01-p07",
+          "section": "P1-S01",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 19,
+          "block_id": "P1-S11-p02",
+          "section": "P1-S11",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 20,
+          "block_id": "P1-S02-p03",
+          "section": "P1-S02",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 21,
+          "block_id": "P1-S05-p03",
+          "section": "P1-S05",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 22,
+          "block_id": "P1-S05-p02",
+          "section": "P1-S05",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 23,
+          "block_id": "P1-S07-p01",
+          "section": "P1-S07",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 24,
+          "block_id": "P1-S10-p04",
+          "section": "P1-S10",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 25,
+          "block_id": "P1-S10-p02",
+          "section": "P1-S10",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        },
+        {
+          "rank": 26,
+          "block_id": "P1-S10-p03",
+          "section": "P1-S10",
+          "score": 0.0,
+          "reference_section_audit_only": false
+        }
+      ],
+      "added_trace": [],
+      "same_actual_request": true,
+      "pair_elapsed_seconds": 22.783727600006387,
+      "query_seconds": 1.2143065000418574,
+      "query_cost_share_each": 0.5
+    }
+  ],
+  "decision": {
+    "strict_success_improvement": false,
+    "baseline_secondary_label_improvement": "按预先的次级指标，baseline有效标签由0/3到1/3；但这一题引用归属失败，不能算严格成功。",
+    "improved_arm": "完整有效标签正确与严格成功仍0/3且2条not_checked；同分保留旧侧，格式从3/3降至1/3。",
+    "common_flow_adoption": "两侧共同流程不能分别挑选有利结果。本轮不自动替换原入口：仅baseline次级标签改善，邻段侧无收益且格式退步；保留整体候选及负面结果供本人决定，不声称整体胜出。",
+    "quality_regressions": "完整JSON总数由6/6降至3/6，出现3次输出预算耗尽；没有输入截断。",
+    "mechanism_limits": "检索词提示、短判断和动态ID enum共同改变，不能独立归因；enum防止未知ID但没防住合法ID下的错误摘录归属、改写或语义错误。",
+    "no_more_search": true,
+    "AT_not_read": true,
+    "no_formal_freeze": true,
+    "3B_cancelled": true
+  },
+  "new_generations": 9,
+  "A_used": 36,
+  "A_remaining": 18,
+  "cumulative": 570,
+  "technical_failures": 0,
+  "quality_retries": 0
+}

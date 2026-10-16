@@ -1,0 +1,102 @@
+{
+  "tests": [
+    {
+      "case": "AD01-original",
+      "name": "entails_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "supported",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "conflicts_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "contradicted",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "undetermined_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "insufficient",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "unknown_id",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 30616,
+      "response": {
+        "label": "supported",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "missing"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "illegal_value",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 9614,
+      "response": {
+        "label": "undefined",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "duplicate_id_program_rejects",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "supported",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001",
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "empty_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "supported",
+        "reason": "self-made structure check",
+        "sentence_ids": []
+      }
+    }
+  ],
+  "generation_calls": 0
+}

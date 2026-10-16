@@ -1,0 +1,31 @@
+diff --git a/decisions.md b/decisions.md
+index e01eb9a..4311e11 100644
+--- a/decisions.md
++++ b/decisions.md
+@@ -42,3 +42,5 @@
+ 在探索中，规则计算能修正部分算术错误，证明检查能补齐部分引用。但这些不是模型原始输出。我保留两层结果，系统派生注明计算或引用组装来源。
+ 
+ 替代方案是只展示最终结果，或把最终87.5%写成模型正确率。这样会混淆能力来源，因此不采用。若派生证据缺失、范围冲突或规则不适用，就不输出派生结果。
++
++进阶A的取舍在执行后整理。本人接受额外耗时，保留句子选择与原文展开的来源可靠性收益，并采用紧凑输入、开启思考及理由／引用提示；不追溯覆盖旧取舍，也不表示全面提高判断能力。最后五轮保留改善、退步和回退，第4轮回退注明事后保守决定。冻结后的七题两侧标签正确均5/7、严格成功均2/7，邻段增加覆盖但未提高支持且耗时更高，因此不推荐替代简单基线。本人已审阅全部实验资料，决定停止追加优化，完成交付；A为附加探索，B仍为主要进阶交付。
+diff --git a/declaration.md b/declaration.md
+index f0844a3..bb9b16a 100644
+--- a/declaration.md
++++ b/declaration.md
+@@ -2,7 +2,7 @@
+ 
+ 主要本地模型为Qwen3-0.6B-Q8_0，使用llama.cpp b11429和CPU推理。探索中另有Qwen2.5-3B对照及Qwen3-4B加载尝试；加载失败不计作模型生成。
+ 
+-累计保存534个唯一生成run ID。进阶B使用固定draft完成88次offline_replay，另行计数。Token总量本声明不作估计，以原始usage及日志为准。
++累计保存678个唯一生成run ID。进阶B使用固定draft完成88次offline_replay，另行计数。Token总量本声明不作估计，以原始usage及日志为准。
+ 
+ ## 本人工作与辅助范围
+ 
+@@ -23,4 +23,4 @@
+ 
+ 未完成独立新题泛化验证。进阶B仍有检索漏证、Engine语义状态误标和未知范围返回契约问题；多客户端、多worker只有可执行计划，未实际运行。基础真实模型页面仅验证D03，未覆盖全部题型和并发。
+ 
+-Python 3.10、其他操作系统、全新机器安装和模型加载尚未验证。进阶A尚未启动，不计入已完成内容。
++Python 3.10、其他操作系统、全新机器安装和模型加载尚未验证。进阶A已完成独立实现、开发比较、PDF定位页面、冻结后的七题对照、两题等价变体及一次反事实验证，冻结后未再根据评测结果修改方法。本人已审阅全部实验资料，评分采用AI辅助原文复核，不是官方成绩或独立人工评分；审阅不等于独立重做全部实验或逐行验证代码。A作为附加探索，A/B双题验收方式及本地模型服务是否满足A的API要求尚未得到组织方明确确认，系统仍有已披露的检索、判断、引用和定位限制。
+warning: in the working copy of 'decisions.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'declaration.md', LF will be replaced by CRLF the next time Git touches it

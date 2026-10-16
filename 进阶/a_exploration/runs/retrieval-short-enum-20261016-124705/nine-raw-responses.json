@@ -1,0 +1,151 @@
+{
+  "at": "2026-10-16T12:55:36.341015+08:00",
+  "raw_responses": [
+    {
+      "id": "AD01",
+      "variant": "shared_query",
+      "run_id": "5cc189eb-cdf7-4cb6-a0b6-e8bf1e4b62bf",
+      "content": "{\"terms\":\"save, modify, file, object, purpose\"}",
+      "seconds": 0.9752783000003546,
+      "usage": {
+        "completion_tokens": 18,
+        "prompt_tokens": 117,
+        "total_tokens": 135,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "AD01",
+      "variant": "baseline",
+      "run_id": "be1b7c00-7c03-4534-9d0a-da56501bdc97",
+      "content": "{\n  \"label\": \"supported\",\n  \"reason\": \"Rule 2 explicitly states that manual data manipulation is not advisable and recommends using automated tools to avoid errors. Rule 3 emphasizes storing exact program versions to ensure reproducibility, which aligns with the claim that final files should be saved regardless of manual modifications.\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S03-p01\",\n      \"quote\": \"If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts.\"\n    },\n    {\n      \"block_id\": \"P1-S04-p01\",\n      \"quote\": \"In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally.\"\n    }\n  ]\n}",
+      "seconds": 8.110582000110298,
+      "usage": {
+        "completion_tokens": 178,
+        "prompt_tokens": 739,
+        "total_tokens": 917,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "AD01",
+      "variant": "improved",
+      "run_id": "99d772c0-5733-4aec-b2a8-c3b0d29ae3df",
+      "content": "{\n  \"label\": \"supported\",\n  \"reason\": \"Rule 2 explicitly states that manual data manipulation is not advisable and recommends using automated tools to avoid errors. Rule 3 emphasizes storing exact program versions to ensure reproducibility, which aligns with the claim that final files should be saved regardless of manual modifications.\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S03-p01\",\n      \"quote\": \"If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts.\"\n    },\n    {\n      \"block_id\": \"P1-S04-p01\",\n      \"quote\": \"In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally.\"\n    }\n  ]\n}",
+      "seconds": 11.050098999869078,
+      "usage": {
+        "completion_tokens": 178,
+        "prompt_tokens": 739,
+        "total_tokens": 917,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "AD02",
+      "variant": "shared_query",
+      "run_id": "6665814c-e192-4104-b5d3-9ae91dd8a424",
+      "content": "{\"terms\":\"notebook export, static HTML/PDF, help read, execute calculation\"}",
+      "seconds": 0.9721352998167276,
+      "usage": {
+        "completion_tokens": 23,
+        "prompt_tokens": 118,
+        "total_tokens": 141,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "AD02",
+      "variant": "baseline",
+      "run_id": "2f88ee1a-2e79-4eac-bd4b-379cfdf87df3",
+      "content": "{\n  \"label\": \"supported\",\n  \"reason\": \"The passage supports the claim that exporting notebooks as HTML or PDF helps readers access content, but it also highlights that this is not sufficient for execution and sharing.\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P2-S01-p04\",\n      \"quote\": \"Read: Beyond granting permission to reuse your notebook, consider how you can leverage the unique structure of notebooks to support reading. At the very least, leave static HTML/PDF versions of all notebooks stored in the final version of the repository accompanying a publication.\"\n    },\n    {\n      \"block_id\": \"P2-S10-p02\",\n      \"quote\": \"You can also use Nbviewer ( https://nbviewer.jupyter.org/ ) to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first. GitHub uses this service to render any notebooks on their site, so pushing a notebook to GitHub is another good way to make static views easily available.\"\n    }\n  ]\n}",
+      "seconds": 9.102843399858102,
+      "usage": {
+        "completion_tokens": 219,
+        "prompt_tokens": 732,
+        "total_tokens": 951,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "AD02",
+      "variant": "improved",
+      "run_id": "9590bbd6-54eb-4b12-90a1-00d01adb9ccb",
+      "content": "{\n  \"label\": \"supported\",\n  \"reason\": \"The passage supports the claim that exporting notebooks as static HTML or PDF does not fully solve the problem of reusing them, as it highlights the need for additional steps like storing in public repositories, using tools like Nbviewer, and setting up a zero-install environment (e.g., Binder). These measures are necessary to ensure readability, reproducibility, and accessibility.\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P2-S01-p03\",\n      \"quote\": \"Analyses documented in notebooks cannot be easily rerun if users do not first freeze their dependencies, share their data, and adequately describe their computing environment [ 13 ].\"\n    },\n    {\n      \"block_id\": \"P2-S10-p01\",\n      \"quote\": \"Store your notebooks in a public code repository with a clear README file and a liberal open source license ( https://opensource.org/licenses ) granting permission to reuse your code.\"\n    },\n    {\n      \"block_id\": \"P2-S10-p02\",\n      \"quote\": \"Use Nbviewer to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first.\"\n    },\n",
+      "seconds": 15.547828999813646,
+      "usage": {
+        "completion_tokens": 256,
+        "prompt_tokens": 1321,
+        "total_tokens": 1577,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "length"
+    },
+    {
+      "id": "AD03",
+      "variant": "shared_query",
+      "run_id": "a098b4ad-fc2f-44fb-9a66-fc8820a41ddf",
+      "content": "{\"terms\":\"data conversion, final image, author's recommendation\"}",
+      "seconds": 1.2143065000418574,
+      "usage": {
+        "completion_tokens": 18,
+        "prompt_tokens": 115,
+        "total_tokens": 133,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop"
+    },
+    {
+      "id": "AD03",
+      "variant": "baseline",
+      "run_id": "cf948e31-15fb-4d7c-8357-38bd0e416c92",
+      "content": "{\n  \"label\": \"supported\",\n  \"reason\": \"绘图过程中做过数据转换时，只保留最终图片就满足作者关于图底层数据的建议。根据规则3和规则8，只有在必要时保留原始程序版本文件，并通过系统化命名来确保数据可访问。\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S04-p01\",\n      \"quote\": \"In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. Also, as both input and output formats may change between versions, a newer version of a program may not even run without modifying its inputs. Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. Archiving the exact versions of programs actually saves a lot of hassle at later stages.\"\n    },\n    {\n      \"block_id\": \"P1-S09-p01\",\n      \"quote\": \"We find hypertext (i.e., html file output) to be particularly useful for this purpose. This allows summarized results to be generated along with links that can be very conveniently followed (by simply clicking)",
+      "seconds": 10.374072500038892,
+      "usage": {
+        "completion_tokens": 256,
+        "prompt_tokens": 798,
+        "total_tokens": 1054,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "length"
+    },
+    {
+      "id": "AD03",
+      "variant": "improved",
+      "run_id": "22d2f504-f178-4f9f-b15d-f9e75bc8120c",
+      "content": "{\n  \"label\": \"supported\",\n  \"reason\": \"绘图过程中做过数据转换时，只保留最终图片就满足作者关于图底层数据的建议。根据规则3和规则8，只有在必要时保留原始程序版本文件，并通过系统化命名来确保数据可访问。\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S04-p01\",\n      \"quote\": \"In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. Also, as both input and output formats may change between versions, a newer version of a program may not even run without modifying its inputs. Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. Archiving the exact versions of programs actually saves a lot of hassle at later stages.\"\n    },\n    {\n      \"block_id\": \"P1-S09-p01\",\n      \"quote\": \"We find hypertext (i.e., html file output) to be particularly useful for this purpose. This allows summarized results to be generated along with links that can be very conveniently followed (by simply clicking)",
+      "seconds": 10.521643100073561,
+      "usage": {
+        "completion_tokens": 256,
+        "prompt_tokens": 798,
+        "total_tokens": 1054,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "length"
+    }
+  ],
+  "count": 9,
+  "no_repair": true
+}

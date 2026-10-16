@@ -1,0 +1,151 @@
+--- /dev/null
++++ b/进阶/a_exploration/thinking_modes.py
+@@ -0,0 +1,46 @@
++"""仅扩展实际模板审计；生成、参数和原始记录仍复用runtime.Engine。"""
++import json,urllib.request,urllib.error
++from runtime import Engine,CapacityStop,write,load,now
++
++class ThinkingEngine(Engine):
++    def capacity(self,messages,conf,label):
++        body={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']}
++        path=self.folder/('capacity-'+label+'.json')
++        check={'checked_at':now(),'label':label,'actual_request_body':body,'run_kind':'local_rule','generation_calls':0,'context':4096,'output_budget':conf['parameters']['max_tokens']}
++        write(path,check)
++        def audited(route,payload,field):
++            check[field]={'route':route,'method':'POST','actual_request_body':payload};write(path,check)
++            req=urllib.request.Request(self.url+route,data=json.dumps(payload,ensure_ascii=False).encode('utf-8'),headers={'Content-Type':'application/json'})
++            try:
++                with self.opener.open(req,timeout=30) as response:raw=response.read().decode('utf-8');status=response.status
++                check[field].update(http_status=status,raw_response=raw);write(path,check)
++                parsed=json.loads(raw);check[field]['parsed_response']=parsed;write(path,check);return parsed
++            except Exception as e:
++                check[field]['error']=repr(e)
++                if isinstance(e,urllib.error.HTTPError):check[field]['http_status']=e.code;check[field]['raw_response']=e.read().decode('utf-8',errors='replace')
++                write(path,check);raise
++        response=audited('apply-template',body,'template_http');check['template_response']=response;prompt=response.get('prompt','');check['rendered_prompt']=prompt;write(path,check)
++        (self.folder/('rendered-'+label+'.txt')).write_text(prompt,encoding='utf-8')
++        tokenized=audited('tokenize',{'content':prompt,'add_special':True,'parse_special':True},'tokenize_http');check.update(token_response=tokenized,input_tokens=len(tokenized['tokens']));write(path,check)
++        # 先保存完整HTTP证据和token，再依据当前真实模板的false分支断言。
++        flag=body.get('chat_template_kwargs',{}).get('enable_thinking');template=load(self.folder/'props.json')['chat_template'];marker='<|im_start|>assistant\n';position=prompt.rfind(marker);suffix=prompt[position+len(marker):] if position>=0 else None
++        checks={'boolean_switch':type(flag) is bool,'current_template_has_false_branch':'if enable_thinking is defined and enable_thinking is false' in template,'assistant_boundary_present':position>=0,'actual_branch_matches':suffix==('' if flag else '<think>\n\n</think>\n\n'),'all_messages_present':all(m['content'] in prompt for m in messages),'budget_1024':body['max_tokens']==1024,'fits':len(tokenized['tokens'])+body['max_tokens']<=4096}
++        check.update(checks=checks,fits=checks['fits'],all_messages_present=checks['all_messages_present'],actual_enable_thinking_request=flag,actual_generation_suffix=suffix,not_echoed=['内部enable_thinking布尔状态','本请求编译grammar/PEG对象'],closed_think_template=suffix=='<think>\n\n</think>\n\n');write(path,check)
++        if not all(checks.values()):raise CapacityStop('模式/完整模板/容量检查失败，完整原始证据已先保存')
++        return check
++
++def offline_checks():
++    import copy
++    from sentence_selection import expand,build_index
++    blocks=[{'block_id':'synthetic','doc_id':'made-up','snapshot':'published','text':'A log is required.'}];idx=build_index(blocks,['made-up'],'published');tests=[]
++    def check(name,value):
++        tests.append({'name':name,'passed':bool(value)})
++        if not value:raise AssertionError(name)
++    check('off_suffix_matches_false_branch','<|im_start|>assistant\n<think>\n\n</think>\n\n'.split('<|im_start|>assistant\n')[-1]=='<think>\n\n</think>\n\n')
++    check('on_empty_suffix_allowed','<|im_start|>assistant\n'.split('<|im_start|>assistant\n')[-1]=='')
++    check('string_is_not_boolean',type('true') is not bool and type(True) is bool)
++    check('reasoning_only_not_final_success',not expand('',blocks,idx,['made-up'],'published')['valid'])
++    check('partial_final_not_repaired',not expand('{"label":"supported",',blocks,idx,['made-up'],'published')['valid'])
++    good=json.dumps({'label':'contradicted','reason':'synthetic','sentence_ids':[idx[0]['sentence_id']]});check('only_content_is_projected',expand(good,blocks,idx,['made-up'],'published')['expanded_response']['label']=='contradicted')
++    check('missing_reasoning_not_invented',{'content':good}.get('reasoning_content') is None)
++    return {'passed':True,'count':len(tests),'checks':tests,'generation_calls':0,'limits':'模式实际生效依据后续HTTP模板/同版本源码；是否产生思考只看真实响应，不把自造模板字符串当服务验证。'}
+--- /dev/null
++++ b/进阶/a_exploration/diagnose_thinking_modes.py
+@@ -0,0 +1,99 @@
++"""固定自动证据的同预算开关思考对照；复用请求记录器，不重检索或读答案。"""
++from pathlib import Path
++import argparse, ast, json, socket, subprocess, threading, time, uuid
++from thinking_modes import ThinkingEngine as Engine
++from runtime import TechnicalStop,load,write,sha,now,memory,ROOT,HERE
++
++def main():
++    parser=argparse.ArgumentParser();parser.add_argument('--out',type=Path,required=True);a=parser.parse_args();out=a.out.resolve()
++    plan=load(out/'intervention-plan.json');inputs=load(out/'diagnostic-inputs.json')
++    if (out/'owned-service.json').exists() or list(out.glob('run-*.json')):raise ValueError('已有启动或请求记录，不重发')
++    assert load(out/'offline-checks.json')['passed']
++    assert load(out/'mode-offline-checks.json')['passed']
++    assert sha(out/'serialized-request-plan.json')==plan['serialized_requests_sha256']
++    assert sha(out/'diagnostic-inputs.json')==plan['input_sha256']
++    for path,h in plan['code_hashes'].items():assert sha(ROOT/path)==h,path
++    for path,h in plan['data_hashes'].items():assert sha(ROOT/path)==h,path
++    for p in HERE.glob('*.py'):ast.parse(p.read_text(encoding='utf-8'))
++    from sentence_selection import schema,build_index
++    for item in inputs:
++        assert item['sentence_index']==build_index(item['blocks'],item['doc_ids'],item['snapshot'])
++        assert item['messages']['off']==item['messages']['on']
++        for mode in ['off','on']:
++            conf=item['configs'][mode];assert conf['parameters']['max_tokens']==1024
++            assert conf['parameters']['chat_template_kwargs']=={'enable_thinking':mode=='on'}
++            assert conf['parameters']['presence_penalty']==1.5
++            assert conf['parameters']['response_format']['json_schema']['schema']==schema(item['sentence_index'])
++    with socket.socket() as s:s.bind(('127.0.0.1',8080))
++    m=memory();write(out/'resource-before.json',m)
++    if m['available_bytes']<2*1024**3:
++        write(out/'resource-stop.json',{'at':now(),'available_GiB':m['available_bytes']/2**30,'required_GiB':2,'generation_calls':0});print('RESOURCE_STOP',flush=True);return
++    launch=plan['service_arguments'];assert sha(launch[0])==plan['executable_hash'] and sha(launch[launch.index('-m')+1])==plan['model_hash']
++    (out/'slot-cache').mkdir();engine=Engine(out);stop=threading.Event();abort=threading.Event();samples=[];process=None;phase='loading';start=time.perf_counter()
++    record={'at':now(),'run_kind':'live_api','diagnostic_input_origin':'automatic_improved_evidence_replay','generations_baseline':plan['cumulative_baseline'],'service_arguments':launch,'memory_before':m}
++    def monitor():
++        low=0
++        while not stop.is_set():
++            sample=memory();samples.append(sample);low=low+1 if sample['available_bytes']<1024**3 else 0
++            if low>=3:
++                abort.set()
++                if process and process.poll() is None:process.terminate()
++                return
++            stop.wait(2)
++    thread=threading.Thread(target=monitor,daemon=True)
++    try:
++        with (out/'model-stdout.log').open('xb') as stdout,(out/'model-stderr.log').open('xb') as stderr:
++            process=subprocess.Popen(launch,stdout=stdout,stderr=stderr,cwd=out,creationflags=subprocess.CREATE_NO_WINDOW)
++        write(out/'owned-service.json',{'pid':process.pid,'started_at':now(),'arguments':launch});thread.start();phase='health'
++        while time.perf_counter()-start<120:
++            if abort.is_set() or process.poll() is not None:raise TechnicalStop('加载期间资源/进程停止')
++            try:
++                if engine.service('health').get('status')=='ok':break
++            except Exception:pass
++            time.sleep(.5)
++        else:raise TechnicalStop('健康超时')
++        props=engine.service('props');write(out/'props.json',props)
++        assert props['build_info']=='b11429-d81235049' and props['default_generation_settings']['n_ctx']==4096 and props['total_slots']==1
++        assert props['default_generation_settings']['params']['repeat_penalty']==1.0
++        record.update(load_seconds=time.perf_counter()-start,memory_after_load=memory());phase='template_preflight'
++        write(out/'startup-slot-erase.json',engine.service('slots/0?action=erase',{}))
++        for item in inputs:
++            for variant in ['off','on']:engine.capacity(item['messages'][variant],item['configs'][variant],'before-'+item['id']+'-'+variant)
++        pairs=[]
++        for item in inputs:
++            a=load(out/('capacity-before-'+item['id']+'-off.json'));b=load(out/('capacity-before-'+item['id']+'-on.json'))
++            checks={'same_messages':a['actual_request_body']['messages']==b['actual_request_body']['messages'],'only_false_branch_padding_differs':a['rendered_prompt']==b['rendered_prompt']+'<think>\n\n</think>\n\n','both_fit':a['fits'] and b['fits']}
++            pairs.append({'id':item['id'],'checks':checks})
++            write(out/'paired-template-verification.json',{'at':now(),'pairs':pairs,'generation_calls':0})
++            if not all(checks.values()):raise TechnicalStop('两侧模板差异不符，已保存完整证据')
++        phase='generation'
++        by_id={x['id']:x for x in inputs}
++        for n,entry in enumerate(plan['order']):
++            if abort.is_set() or process.poll() is not None:raise TechnicalStop('请求前资源停止')
++            if engine.dispatches>=6:raise TechnicalStop('达到6次上限')
++            item=by_id[entry['id']];variant=entry['variant'];request_id=str(uuid.uuid4())
++            raw=engine.generate(item['messages'][variant],item['configs'][variant],f'diagnostic-{n+1}-{entry["id"]}-{variant}',request_id,item['blocks'])
++            expected=next(x for x in load(out/'serialized-request-plan.json') if x['id']==entry['id'] and x['mode']==variant)
++            params=raw['slot_after'][0].get('params',{})
++            verified={'actual_serialization_matches':raw['actual_http_request_raw']==expected['serialized'],'explicit_boolean_switch':raw['actual_http_request_body']['chat_template_kwargs']=={'enable_thinking':variant=='on'},'request_budget_1024':raw['actual_http_request_body']['max_tokens']==1024,'slot_budget_1024':params.get('max_tokens')==1024,'presence_echo_1_5':params.get('presence_penalty')==1.5,'repeat_echo_1':params.get('repeat_penalty')==1.0}
++            message=raw['response']['choices'][0]['message']
++            write(out/f'mode-observation-{n+1:02}.json',{'at':now(),'verified':verified,'raw_message':message,'reasoning_field_present':'reasoning_content' in message,'reasoning_content':message.get('reasoning_content'),'content':message.get('content'),'usage':raw['usage'],'finish_reason':raw['finish_reason'],'not_echoed':['内部enable_thinking状态','编译grammar与PEG parser对象'],'response_schema_not_inferred_from_format_flags':True})
++            if not all(verified.values()):raise TechnicalStop('实际模式请求或参数不符')
++            from sentence_selection import expand
++            expansion=expand(raw['content'],item['blocks'],item['sentence_index'],item['doc_ids'],item['snapshot'])
++            write(out/f'expansion-{n+1:02}.json',expansion)
++            write(out/f'item-{n+1:02}.json',{'at':now(),'id':entry['id'],'variant':variant,'request_id':request_id,'run_id':raw['run_id'],'raw_record':'run-'+raw['run_id']+'.json','input_origin':'automatic_improved_evidence_replay','not_automatic_retrieval':True,'not_end_to_end_score':True})
++            print('SAVED',entry['id'],variant,raw['run_id'],flush=True)
++    except Exception as e:
++        record.update(error=repr(e),failure_phase=phase);write(out/'technical-stop.json',{'at':now(),'phase':phase,'error':repr(e),'dispatches':engine.dispatches,'confirmed_generations':engine.completed,'no_automatic_resend':True});print('TECHNICAL_STOP',phase,repr(e),flush=True)
++    finally:
++        stop.set()
++        if thread.is_alive():thread.join(5)
++        if process and process.poll() is None:
++            process.terminate()
++            try:process.wait(10)
++            except subprocess.TimeoutExpired:process.kill();process.wait()
++        record.update(ended_at=now(),dispatches=engine.dispatches,confirmed_generations=engine.completed,model_stopped=process is None or process.poll() is not None,memory_samples=samples,memory_after_stop=memory())
++        write(out/'runtime.json',record);print('FINAL',engine.completed,'STOPPED',record['model_stopped'],flush=True)
++
++if __name__=='__main__':main()

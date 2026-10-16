@@ -1,0 +1,10 @@
+char ::= [^"\\\x7F\x00-\x1F] | [\\] (["\\bfnrt] | "u" [0-9a-fA-F]{4})
+reason-kv ::= "\"reason\"" space ":" space string
+relation ::= ("\"entails\"" | "\"conflicts\"" | "\"undetermined\"")
+relation-kv ::= "\"relation\"" space ":" space relation
+root ::= "{" space relation-kv "," space reason-kv "," space sentence-ids-kv space "}"
+sentence-ids ::= "[" space (sentence-ids-item ("," space sentence-ids-item)*)? space "]"
+sentence-ids-item ::= ("\"sent-0001\"" | "\"sent-0002\"" | "\"sent-0003\"" | "\"sent-0004\"" | "\"sent-0005\"" | "\"sent-0006\"" | "\"sent-0007\"" | "\"sent-0008\"" | "\"sent-0009\"" | "\"sent-0010\"" | "\"sent-0011\"" | "\"sent-0012\"" | "\"sent-0013\"" | "\"sent-0014\"" | "\"sent-0015\"" | "\"sent-0016\"")
+sentence-ids-kv ::= "\"sentence_ids\"" space ":" space sentence-ids
+space ::= | " " | "\n"{1,2} [ \t]{0,20}
+string ::= "\"" char* "\""

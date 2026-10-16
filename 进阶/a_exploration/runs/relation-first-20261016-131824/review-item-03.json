@@ -1,0 +1,99 @@
+{
+  "at": "2026-10-16T13:23:14.469528+08:00",
+  "id": "AD02",
+  "variant": "revised",
+  "request_id": "30ae71a6-0ce3-40ee-a2d6-0ff3c31df89c",
+  "run_id": "109e3207-f702-4756-9100-36d3c513ceb0",
+  "raw_record": "run-109e3207-f702-4756-9100-36d3c513ceb0.json",
+  "input_origin": "automatic_improved_evidence_replay",
+  "not_automatic_retrieval": true,
+  "not_end_to_end_score": true,
+  "raw_internal_content": "{\n  \"relation\": \"entails\",\n  \"explanation\": \"The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.\",\n  \"sentence_ids\": [\"sent-0002\", \"sent-0003\"],\n  \"label\": \"contradicted\"\n}",
+  "parsed_internal": {
+    "relation": "entails",
+    "explanation": "The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.",
+    "sentence_ids": [
+      "sent-0002",
+      "sent-0003"
+    ],
+    "label": "contradicted"
+  },
+  "format_complete": true,
+  "actual_serialized_field_order": [
+    "relation",
+    "explanation",
+    "sentence_ids",
+    "label"
+  ],
+  "native_expected_order_matches": true,
+  "relation": "entails",
+  "relation_correct_from_actual_input": true,
+  "relation_label_consistent": false,
+  "label": "contradicted",
+  "public_reference_label": "supported",
+  "label_correct": false,
+  "reason_label_consistent_for_original_claim": false,
+  "reason_factual_correct": false,
+  "source_authenticity": true,
+  "selected_sources": [
+    {
+      "sentence_id": "sent-0002",
+      "block_id": "P2-S10-p01",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "text": "But how will others access, run, and explore them? ",
+      "start": 112,
+      "end": 163,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    },
+    {
+      "sentence_id": "sent-0003",
+      "block_id": "P2-S10-p01",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "text": "There are a number of ways you can support others’ reuse of your notebooks. ",
+      "start": 163,
+      "end": 239,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    }
+  ],
+  "selected_sentence_count": 2,
+  "necessary_evidence_coverage": false,
+  "citation_support_actual_label": false,
+  "has_unrelated_evidence": false,
+  "strict_complete_success": false,
+  "basis": "对完整实际输入，Read静态档案与Run运行环境组合支持原主张，因此entails方向正确；实际label仍contradicted，关系标签不一致。解释先称帮助read and run又称不足执行，且只选sent-0002/0003这两个泛泛问句/引言，不含静态导出与运行环境证据。不能把正确relation当成最终label成功。",
+  "expanded_response": {
+    "label": "contradicted",
+    "reason": "The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.",
+    "evidence": [
+      {
+        "block_id": "P2-S10-p01",
+        "quote": "But how will others access, run, and explore them? "
+      },
+      {
+        "block_id": "P2-S10-p01",
+        "quote": "There are a number of ways you can support others’ reuse of your notebooks. "
+      }
+    ]
+  },
+  "client_seconds": 20.0405798999127,
+  "input_tokens": 2708,
+  "usage": {
+    "completion_tokens": 80,
+    "prompt_tokens": 2708,
+    "total_tokens": 2788,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "finish_reason": "stop",
+  "truncated": false,
+  "judgment_source": "unverified",
+  "reviewer": "Codex辅助原文复核，尚待本人确认",
+  "output_origin": "模型选择、程序逐字展开原文；未补选、未改label"
+}

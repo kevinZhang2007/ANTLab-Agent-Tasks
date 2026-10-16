@@ -1,0 +1,46 @@
+{
+  "tests": [
+    {
+      "case": "ids-0",
+      "name": "empty_array",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "insufficient",
+        "reason": "made up",
+        "evidence": []
+      }
+    },
+    {
+      "case": "ids-0",
+      "name": "foreign_id",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 66582,
+      "response": {
+        "label": "insufficient",
+        "reason": "made up",
+        "evidence": [
+          {
+            "block_id": "not-in-current-input",
+            "quote": "original phrase"
+          }
+        ]
+      }
+    },
+    {
+      "case": "ids-1",
+      "name": "empty_array",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "insufficient",
+        "reason": "made up",
+        "evidence": []
+      }
+    }
+  ],
+  "generation_calls": 0
+}

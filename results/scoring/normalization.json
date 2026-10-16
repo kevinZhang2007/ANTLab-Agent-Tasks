@@ -15,6 +15,30 @@
       "record": "B固定draft",
       "run_kind": "offline_replay",
       "action": "Engine原始rule状态和展示层unverified/not_checked分别保留，不能将ID检查冒充语义支持"
+    },
+    {
+      "record": "A句子选择与原文展开",
+      "run_kind": "local_rule",
+      "judgment_source": "rule",
+      "action": "模型选择sentence_ids，程序仅展开实际原文；不改变label、不补选句，不代表语义支持"
+    },
+    {
+      "record": "A辅助语义评价",
+      "run_kind": "offline_review",
+      "judgment_source": "AI_assisted_original_text_review",
+      "action": "本人本轮确认已审阅全部实验资料；不是独立人工评分或官方成绩，历史状态保留"
+    },
+    {
+      "record": "A句子选择与原文展开",
+      "run_kind": "local_rule",
+      "judgment_source": "rule",
+      "action": "模型选择sentence_ids，程序仅展开实际原文；不改变label、不补选句，不代表语义支持"
+    },
+    {
+      "record": "A辅助语义评价",
+      "run_kind": "offline_review",
+      "judgment_source": "AI_assisted_original_text_review",
+      "action": "本人本轮确认已审阅全部实验资料；不是独立人工评分或官方成绩，历史状态保留"
     }
   ],
   "preservation": [
@@ -25,11 +49,12 @@
   ],
   "unknown": "原件没有字段则null/not_saved；未评价指标not_checked，不补造",
   "non_execution": "准备停止通知run_kind=not_applicable，只是账本通知，不是一次执行",
-  "updated_at": "2026-10-15T21:50:23.905366+08:00",
+  "updated_at": "2026-10-16T22:54:11.033110+08:00",
   "expected_counts": {
-    "model_generations": 534,
+    "model_generations": 678,
     "b_offline_executions": 88
   },
-  "previous_snapshot": "results/history/20261015-214234",
-  "new_views_note": "保留种子全部原spec；新增raw/final/system_review结构独立视图，按dataset及arm分组，不拼接轮次。"
+  "previous_snapshot": "results/history/before-a-20261016-224440",
+  "new_views_note": "保留种子全部原spec；新增raw/final/system_review结构独立视图，按dataset及arm分组，不拼接轮次。",
+  "current_review_acknowledgment": "results/delivery/20261016-224440/review-acknowledgment.json"
 }

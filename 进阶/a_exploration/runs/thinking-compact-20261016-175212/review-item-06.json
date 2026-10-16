@@ -1,0 +1,92 @@
+{
+  "at": "2026-10-16T17:55:36.196646+08:00",
+  "id": "AD03",
+  "variant": "compact",
+  "request_id": "1e4ef6c5-5399-44dd-8b0f-a885ac1bb48f",
+  "run_id": "d357e1fb-7ffb-45ea-b5ab-3f118550b986",
+  "raw_record": "run-d357e1fb-7ffb-45ea-b5ab-3f118550b986.json",
+  "input_origin": "automatic_improved_evidence_replay",
+  "not_automatic_retrieval": true,
+  "not_end_to_end_score": true,
+  "raw_final_content": "{\n  \"label\": \"insufficient\",\n  \"reason\": \"资料中未明确提及绘图过程中仅保留最终图片满足作者关于图底层数据的建议，且相关证据（如使用HTML文件输出）支持其他做法而非直接关联。\",\n  \"sentence_ids\": [\"sent-0009\", \"sent-0013\"]\n}",
+  "parsed_final": {
+    "label": "insufficient",
+    "reason": "资料中未明确提及绘图过程中仅保留最终图片满足作者关于图底层数据的建议，且相关证据（如使用HTML文件输出）支持其他做法而非直接关联。",
+    "sentence_ids": [
+      "sent-0009",
+      "sent-0013"
+    ]
+  },
+  "label": "insufficient",
+  "public_reference_label": "contradicted",
+  "label_correct": false,
+  "reason_label_consistent": true,
+  "reason_source_attribution_correct": "not_checked",
+  "format_complete": true,
+  "selection_valid": true,
+  "source_authenticity": true,
+  "empty_selection": false,
+  "necessary_evidence_coverage": "ambiguous",
+  "citation_support": "ambiguous",
+  "has_unrelated_citations": false,
+  "strict_complete_success": false,
+  "basis": "只引0009汇总图表与0013在存储条件允许时保留全部底层数据；没有补入未输入S08。它们既可能作当前可见范围的缺证检查来源，也对只留图的断言有条件性反证，支持insufficient是否充分保留ambiguous，不能强行判通过或借参考补证。公开标签仍不符合，严格失败不受此歧义影响。",
+  "selected_sources": [
+    {
+      "sentence_id": "sent-0009",
+      "block_id": "P1-S09-p01",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "text": "The final results that make it to an article, be it plots or tables, often represent highly summarized data. ",
+      "start": 0,
+      "end": 109,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    },
+    {
+      "sentence_id": "sent-0013",
+      "block_id": "P1-S09-p01",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "text": "When the storage context allows, it is better to simply incorporate permanent output of all underlying data when a main result is generated, using a systematic naming convention to allow the full data underlying a given summarized value to be easily found. ",
+      "start": 474,
+      "end": 731,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    }
+  ],
+  "expanded_response": {
+    "label": "insufficient",
+    "reason": "资料中未明确提及绘图过程中仅保留最终图片满足作者关于图底层数据的建议，且相关证据（如使用HTML文件输出）支持其他做法而非直接关联。",
+    "evidence": [
+      {
+        "block_id": "P1-S09-p01",
+        "quote": "The final results that make it to an article, be it plots or tables, often represent highly summarized data. "
+      },
+      {
+        "block_id": "P1-S09-p01",
+        "quote": "When the storage context allows, it is better to simply incorporate permanent output of all underlying data when a main result is generated, using a systematic naming convention to allow the full data underlying a given summarized value to be easily found. "
+      }
+    ]
+  },
+  "reasoning_produced": true,
+  "reasoning_character_count": 869,
+  "reasoning_token_count": "not_echoed",
+  "input_tokens": 1144,
+  "usage": {
+    "completion_tokens": 491,
+    "prompt_tokens": 1144,
+    "total_tokens": 1635,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "finish_reason": "stop",
+  "budget_exhausted": false,
+  "truncated": false,
+  "client_seconds": 22.066399700008333,
+  "judgment_source": "unverified",
+  "reviewer": "Codex辅助原文复核，尚待本人确认"
+}

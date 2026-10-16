@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "C:\Users\86186\Projects\ANTLab-Agent-Tasks\进阶\a_exploration\launch_short_enum.py", line 31, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "C:\Users\86186\Projects\ANTLab-Agent-Tasks\进阶\a_exploration\launch_short_enum.py", line 19, in main
+    assert load(folder/'candidate-offline-checks.json')['passed']
+           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\86186\Projects\ANTLab-Agent-Tasks\进阶\a_exploration\runtime.py", line 11, in load
+    def load(path):return json.loads(Path(path).read_text(encoding='utf-8-sig'))
+                                     ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\86186\AppData\Local\Programs\Python\Python314\Lib\pathlib\__init__.py", line 787, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\86186\AppData\Local\Programs\Python\Python314\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\86186\\Projects\\ANTLab-Agent-Tasks\\进阶\\a_exploration\\runs\\retrieval-short-enum-20261016-124705\\candidate-blocked-fixture\\candidate-offline-checks.json'

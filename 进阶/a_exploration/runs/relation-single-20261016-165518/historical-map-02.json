@@ -1,0 +1,108 @@
+{
+  "at": "2026-10-16T16:55:18.944583+08:00",
+  "id": "AD02",
+  "source_raw_path": "进阶/a_exploration/runs/relation-first-20261016-131824/run-109e3207-f702-4756-9100-36d3c513ceb0.json",
+  "source_raw_sha256": "134fe33f7e4d85d6744cc37c8e7fdb59d23d7390478ab11535d4ab3a9f76c0bc",
+  "original_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"relation\\\": \\\"entails\\\",\\n  \\\"explanation\\\": \\\"The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.\\\",\\n  \\\"sentence_ids\\\": [\\\"sent-0002\\\", \\\"sent-0003\\\"],\\n  \\\"label\\\": \\\"contradicted\\\"\\n}\"}}],\"created\":1792128194,\"model\":\"Qwen3-0.6B-Q8_0\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":80,\"prompt_tokens\":2708,\"total_tokens\":2788,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-bPYgn4Xg6SoPNIbPSBr2be4YwChb5XXe\",\"timings\":{\"cache_n\":0,\"prompt_n\":2708,\"prompt_ms\":15441.157,\"prompt_per_token_ms\":5.702052067946824,\"prompt_per_second\":175.375459235341,\"predicted_n\":80,\"predicted_ms\":4527.615,\"predicted_per_token_ms\":57.31158227848101,\"predicted_per_second\":17.448480049650865}}",
+  "original_content": "{\n  \"relation\": \"entails\",\n  \"explanation\": \"The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.\",\n  \"sentence_ids\": [\"sent-0002\", \"sent-0003\"],\n  \"label\": \"contradicted\"\n}",
+  "original_relation": "entails",
+  "original_label": "contradicted",
+  "original_explanation": "The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.",
+  "projection_note": "历史explanation逐字投影为reason，不改变文字；原始四字段响应完整保留。",
+  "mapping": {
+    "raw_internal_content": "{\"relation\": \"entails\", \"reason\": \"The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.\", \"sentence_ids\": [\"sent-0002\", \"sent-0003\"]}",
+    "parsed_internal": {
+      "relation": "entails",
+      "reason": "The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.",
+      "sentence_ids": [
+        "sent-0002",
+        "sent-0003"
+      ]
+    },
+    "valid": true,
+    "expanded_response": {
+      "label": "supported",
+      "reason": "The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.",
+      "evidence": [
+        {
+          "block_id": "P2-S10-p01",
+          "quote": "But how will others access, run, and explore them? "
+        },
+        {
+          "block_id": "P2-S10-p01",
+          "quote": "There are a number of ways you can support others’ reuse of your notebooks. "
+        }
+      ]
+    },
+    "selected_sources": [
+      {
+        "sentence_id": "sent-0002",
+        "block_id": "P2-S10-p01",
+        "doc_id": "P2",
+        "snapshot": "published",
+        "text": "But how will others access, run, and explore them? ",
+        "start": 112,
+        "end": 163,
+        "offset_unit": "unicode_code_point",
+        "interval": "[start,end)",
+        "segmentation": "conservative_punctuation_or_complete_fragment"
+      },
+      {
+        "sentence_id": "sent-0003",
+        "block_id": "P2-S10-p01",
+        "doc_id": "P2",
+        "snapshot": "published",
+        "text": "There are a number of ways you can support others’ reuse of your notebooks. ",
+        "start": 163,
+        "end": 239,
+        "offset_unit": "unicode_code_point",
+        "interval": "[start,end)",
+        "segmentation": "conservative_punctuation_or_complete_fragment"
+      }
+    ],
+    "model_original_label": null,
+    "mapped_label": "supported",
+    "mapping_valid": true,
+    "external_label_origin": "deterministic_mapping_from_model_relation",
+    "run_kind": "local_rule",
+    "judgment_source": "rule",
+    "semantic_support": "not_checked",
+    "reason_relation_consistency": "not_checked",
+    "repair_applied": false,
+    "added_unselected_sentences": false,
+    "model_relation": "entails",
+    "projection_for_expansion": {
+      "label": "supported",
+      "reason": "The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.",
+      "sentence_ids": [
+        "sent-0002",
+        "sent-0003"
+      ]
+    }
+  },
+  "derived_response": {
+    "label": "supported",
+    "reason": "The passage supports the claim that exporting notebooks as static HTML or PDF can help others read and run them, but this is not sufficient to enable execution of original computations.",
+    "evidence": [
+      {
+        "block_id": "P2-S10-p01",
+        "quote": "But how will others access, run, and explore them? "
+      },
+      {
+        "block_id": "P2-S10-p01",
+        "quote": "There are a number of ways you can support others’ reuse of your notebooks. "
+      }
+    ]
+  },
+  "derived_label_origin": "local_rule_mapping_from_historical_model_relation",
+  "mapping_consistent": true,
+  "relation_correct": true,
+  "external_label_correct": true,
+  "original_label_correct": false,
+  "necessary_coverage": false,
+  "citation_support_after_mapping": false,
+  "strict_success_after_mapping": false,
+  "basis": "entails映射supported后外部标签符合参考，但原先只选两个泛泛引言，没有Read与Run关键证据。映射未修正解释事实或补证，不算严格成功。",
+  "generation_calls": 0,
+  "reviewer": "Codex原文辅助复核，尚待本人确认"
+}

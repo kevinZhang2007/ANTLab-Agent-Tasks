@@ -1,0 +1,91 @@
+{
+  "id": "AT02",
+  "arm": "baseline",
+  "status": "returned",
+  "reference_label": "supported",
+  "reference_source": "P2-S09-p02的分层、隐私大小条件及后续复用；人工原文推导暂判。",
+  "model_label": "supported",
+  "label_correct": true,
+  "format_complete": true,
+  "source_authenticity": true,
+  "empty_evidence": false,
+  "input_coverage": true,
+  "necessary_coverage": true,
+  "citation_support": true,
+  "unrelated": false,
+  "reason_consistent": true,
+  "strict": true,
+  "basis": "所选0006明确raw大小/隐私限制与分层，0007将匿名中型/进一步处理数据与Notebook公开，组合足以支持后续阶段仍有机会复用；0003是必要的上游处理描述背景。虽未引用最后直接结论句，但不要求固定ID；该替代组合属原文推断，尚待本人确认。reason把核心来源写为p01不准确，单列，不据此改模型引用。",
+  "request_id": "8abce757-045a-4530-b1d5-b6ac0cd1a78a",
+  "parent_request_id": "cb2f56c1-49bb-44ed-9e16-9e939aa29bc8",
+  "run_id": "ec688b3f-55fb-41a6-88c3-069abd8688cf",
+  "query_run_id": "d3589eef-5d2d-4a1d-baa8-e925ddc88349",
+  "raw_file": "AT02/run-ec688b3f-55fb-41a6-88c3-069abd8688cf.json",
+  "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"资料中明确提到了分层共享的方法（P2-S09-p01段落），指出即使原始数据受大小或隐私约束时，作者提出将数据分解为多个层级的方式，允许后续分析阶段的复用（sent-0003、sent-0006、sent-0007）。同时，分层共享方案通过DOI和存储结构满足了未获取完整原始数据仍可复用分析需求。\",\n  \"sentence_ids\": [\"sent-0003\", \"sent-0006\", \"sent-0007\"]\n}",
+  "actual_input_blocks": [
+    "P2-S09-p01",
+    "P2-S09-p02"
+  ],
+  "source_selected": [
+    {
+      "sentence_id": "sent-0003",
+      "block_id": "P2-S09-p01",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "text": "While sharing your data takes careful planning, notebooks make it easy to provide a description of your input data and upstream processing steps, which are essential for interpreting results.",
+      "start": 250,
+      "end": 441,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    },
+    {
+      "sentence_id": "sent-0006",
+      "block_id": "P2-S09-p02",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "text": "In these cases, consider breaking down large and complex data sets into tiers such that, even if the raw data are prohibitively large to include alongside your published notebooks or are constrained by privacy or other access issues, reproducibility and interpretability isn’t lost. ",
+      "start": 147,
+      "end": 430,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    },
+    {
+      "sentence_id": "sent-0007",
+      "block_id": "P2-S09-p02",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "text": "You can host public copies of medium-sized, anonymized data in a variety of hosting services (for example, figshare [ https://figshare.com/ ], zenodo [ https://zenodo.org/ ]), and include further processed data sets alongside the notebooks in the final repository. ",
+      "start": 430,
+      "end": 695,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    }
+  ],
+  "pdf_statuses": [
+    "valid",
+    "valid",
+    "valid"
+  ],
+  "pdf_all_valid": true,
+  "input_tokens": 927,
+  "usage": {
+    "completion_tokens": 433,
+    "prompt_tokens": 927,
+    "total_tokens": 1360,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "finish_reason": "stop",
+  "budget_exhausted": false,
+  "truncated": false,
+  "http_seconds": 19.097085200017318,
+  "reconstructed_flow_seconds": 20.460493800230324,
+  "allocated_cost_seconds": 19.945135550107807,
+  "pair_elapsed_seconds": 38.840205000014976,
+  "judgment_source": "unverified",
+  "reviewer": "Codex辅助原文复核，尚待本人确认；非官方成绩。"
+}

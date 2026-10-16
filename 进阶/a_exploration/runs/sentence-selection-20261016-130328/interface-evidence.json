@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-16T13:03:29.049451+08:00",
+  "sources": [
+    {
+      "path": "进阶/00_共同规则与接口.md",
+      "sha256": "bc2ca4ca78435e000f167e94605c0463e8a982fdabfff476a0231f9d5bf5636f",
+      "matches": [
+        {
+          "line": 13,
+          "text": "接口路径自由，README给出映射。请求至少含query或claim、doc_ids、snapshot、mode；结果至少含request_id、实际使用的文档/快照、answer或claim、evidence、locator_status、support_status、judgment_source、elapsed_ms、run_kind。每项证据有doc_id、snapshot、稳定block_id、原文、page；使用坐标时说明坐标系。不适用字段写null和原因。"
+        }
+      ]
+    },
+    {
+      "path": "进阶/00_共同规则与接口.md",
+      "sha256": "bc2ca4ca78435e000f167e94605c0463e8a982fdabfff476a0231f9d5bf5636f",
+      "matches": [
+        {
+          "line": 13,
+          "text": "接口路径自由，README给出映射。请求至少含query或claim、doc_ids、snapshot、mode；结果至少含request_id、实际使用的文档/快照、answer或claim、evidence、locator_status、support_status、judgment_source、elapsed_ms、run_kind。每项证据有doc_id、snapshot、稳定block_id、原文、page；使用坐标时说明坐标系。不适用字段写null和原因。"
+        }
+      ]
+    },
+    {
+      "path": "进阶/00_共同规则与接口.md",
+      "sha256": "bc2ca4ca78435e000f167e94605c0463e8a982fdabfff476a0231f9d5bf5636f",
+      "matches": [
+        {
+          "line": 15,
+          "text": "- locator_status：valid / invalid / absent；表示引用存在且属于当前请求实际资料范围。"
+        }
+      ]
+    },
+    {
+      "path": "进阶/00_共同规则与接口.md",
+      "sha256": "bc2ca4ca78435e000f167e94605c0463e8a982fdabfff476a0231f9d5bf5636f",
+      "matches": [
+        {
+          "line": 18,
+          "text": "- run_kind：live_api / offline_replay / dry_run / local_rule。成本、延迟按类型分别报告。"
+        }
+      ]
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "sha256": "505804b0bb2e46835ef371e3a0d442c42805798fec16ef309125462b5ae4f2b5",
+      "matches": [
+        {
+          "line": 21,
+          "text": "给出你能解释的简单基线，以及一种主要改进。基线可以复用基础题；新增复杂检索必须和更简单选择比较。主要改进作用于生成前的证据选择或组织，不得通过修改判分规则制造提升。页面可选基线/改进，显示主张判断、证据原文、PDF物理页跳转及引用检查状态。至少一个正确证据区域可在页内框选/高亮。"
+        }
+      ]
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "sha256": "505804b0bb2e46835ef371e3a0d442c42805798fec16ef309125462b5ae4f2b5",
+      "matches": [
+        {
+          "line": 31,
+          "text": "在3个开发题完成调试，然后冻结代码/参数/选择规则。在7个评测题上各跑基线和改进一次，共14个主任务输出；多轮内部调用全记。自费API；真实生成必须保留实际messages和原始返回。"
+        }
+      ]
+    }
+  ],
+  "conclusion": "共同接口规定对外结果字段、来源和原始请求记录，未发现禁止模型内部选句后适配证据的明确条款。外部展开仍须有原文/页码/范围/来源；当前只做独立输出诊断，不声称完成新的页面交付或取代生成前邻段主改进。",
+  "limitation": "接口层级解释非外部验收确认；程序展开要标local_rule，模型label来源=model，语义状态not_checked。",
+  "same_block_multiple_sentences": "原文未禁止同块多条片段。不同sentence_id可指向同一block_id；重复sentence_id拒绝。旧parse_answer对block_id去重规则不修改，也不用于把这种合法展开误判为重复模型选句。"
+}

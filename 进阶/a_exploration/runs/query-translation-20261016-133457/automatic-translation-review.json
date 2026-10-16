@@ -1,0 +1,1422 @@
+{
+  "at": "2026-10-16T16:49:28.418432+08:00",
+  "allow_answers": false,
+  "rows": [
+    {
+      "at": "2026-10-16T16:49:28.380081+08:00",
+      "id": "AD01",
+      "claim": "当手工修改或移动数据文件确实无法避免时，只要保存最终文件，无需记录修改对象和目的。",
+      "old_query": "handwritten file modification, save final file, record modification object and purpose",
+      "manual_translation": "When manually editing or moving data files really cannot be avoided, it is enough to save the final files; there is no need to record which files were affected or why.",
+      "actual_automatic_translation": "When manual modifications or file movement cannot be avoided, as long as the final file is saved, no record of the modification object and purpose is required.",
+      "fidelity": {
+        "fully_faithful": "partial",
+        "direction_preserved": true,
+        "basis": "cannot be avoided、as long as及no record required保留了条件、充分性和否定。data files被泛化为file；manual modifications未明确数据对象，记录对象仍为modification object，具体对象有遗漏，不能称逐项完全忠实。",
+        "alignment": [
+          {
+            "zh": "手工修改或移动数据文件",
+            "actual_en": "manual modifications or file movement",
+            "assessment": "数据限定遗漏，操作大体保留"
+          },
+          {
+            "zh": "确实无法避免时",
+            "actual_en": "cannot be avoided",
+            "assessment": "无法避免条件保留，确实语气略弱"
+          },
+          {
+            "zh": "只要保存最终文件",
+            "actual_en": "as long as the final file is saved",
+            "assessment": "充分性方向保留"
+          },
+          {
+            "zh": "无需记录修改对象和目的",
+            "actual_en": "no record of the modification object and purpose is required",
+            "assessment": "否定方向及两类记录内容保留"
+          }
+        ]
+      },
+      "translation_raw_record": "进阶/a_exploration/runs/query-translation-20261016-133457/automatic-translations/run-57ec114c-d89a-4325-8c65-5af1abfb95a1.json",
+      "translation_run_id": "57ec114c-d89a-4325-8c65-5af1abfb95a1",
+      "translation_raw_content": "{\"translation\":\"When manual modifications or file movement cannot be avoided, as long as the final file is saved, no record of the modification object and purpose is required.\"}",
+      "translation_seconds": 1.4535703000146896,
+      "usage": {
+        "completion_tokens": 35,
+        "prompt_tokens": 136,
+        "total_tokens": 171,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "translation_input_tokens": 136,
+      "truncated": false,
+      "query_tokens": [
+        "when",
+        "manual",
+        "modifications",
+        "or",
+        "file",
+        "movement",
+        "cannot",
+        "be",
+        "avoided",
+        "as",
+        "long",
+        "as",
+        "the",
+        "final",
+        "file",
+        "is",
+        "saved",
+        "no",
+        "record",
+        "of",
+        "the",
+        "modification",
+        "object",
+        "and",
+        "purpose",
+        "is",
+        "required"
+      ],
+      "full_ranking": [
+        {
+          "rank": 1,
+          "score": 0.2537990527488498,
+          "block_id": "P1-S03-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S03",
+          "heading": "Rule 2: Avoid Manual Data Manipulation Steps",
+          "paragraph_index": 0,
+          "text": "Whenever possible, rely on the execution of programs instead of manual procedures to modify data. Such manual procedures are not only inefficient and error-prone, they are also difficult to reproduce. If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts. If working with integrated frameworks, there will typically be a quite rich collection of components for data manipulation. As an example, manual tweaking of data files to attain format compatibility should be replaced by format converters that can be reenacted and included into executable workflows. Other manual operations like the use of copy and paste between documents should also be avoided. If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose."
+        },
+        {
+          "rank": 2,
+          "score": 0.18907052384396186,
+          "block_id": "P1-S06-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S06",
+          "heading": "Rule 5: Record All Intermediate Results, When Possible in Standardized Formats",
+          "paragraph_index": 0,
+          "text": "In principle, as long as the full process used to produce a given result is tracked, all intermediate data can also be regenerated. In practice, having easily accessible intermediate results may be of great value. Quickly browsing through intermediate results can reveal discrepancies toward what is assumed, and can in this way uncover bugs or faulty interpretations that are not apparent in the final results. Secondly, it more directly reveals consequences of alternative programs and parameter choices at individual steps. Thirdly, when the full process is not readily executable, it allows parts of the process to be rerun. Fourthly, when reproducing results, it allows any experienced inconsistencies to be tracked to the steps where the problems arise. Fifth, it allows critical examination of the full process behind a result, without the need to have all executables operational. When possible, store such intermediate results in standardized formats. As a minimum, archive any intermediate result files that are produced when running an analysis (as long as the required storage space is not prohibitive)."
+        },
+        {
+          "rank": 3,
+          "score": 0.180370921913702,
+          "block_id": "P1-S02-p03",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S02",
+          "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+          "paragraph_index": 2,
+          "text": "As a minimum, you should at least record sufficient details on programs, parameters, and manual procedures to allow yourself, in a year or so, to approximately reproduce the results."
+        },
+        {
+          "rank": 4,
+          "score": 0.14558117171823104,
+          "block_id": "P1-S09-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S09",
+          "heading": "Rule 8: Generate Hierarchical Analysis Output, Allowing Layers of Increasing Detail to Be Inspected",
+          "paragraph_index": 0,
+          "text": "The final results that make it to an article, be it plots or tables, often represent highly summarized data. For instance, each value along a curve may in turn represent averages from an underlying distribution. In order to validate and fully understand the main result, it is often useful to inspect the detailed values underlying the summaries. A common but impractical way of doing this is to incorporate various debug outputs in the source code of scripts and programs. When the storage context allows, it is better to simply incorporate permanent output of all underlying data when a main result is generated, using a systematic naming convention to allow the full data underlying a given summarized value to be easily found. We find hypertext (i.e., html file output) to be particularly useful for this purpose. This allows summarized results to be generated along with links that can be very conveniently followed (by simply clicking) to the full data underlying each summarized value. When working with summarized results, you should as a minimum at least once generate, inspect, and validate the detailed values underlying the summaries."
+        },
+        {
+          "rank": 5,
+          "score": 0.11353595930515484,
+          "block_id": "P1-S08-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S08",
+          "heading": "Rule 7: Always Store Raw Data behind Plots",
+          "paragraph_index": 0,
+          "text": "From the time a figure is first generated to it being part of a published article, it is often modified several times. In some cases, such modifications are merely visual adjustments to improve readability, or to ensure visual consistency between figures. If raw data behind figures are stored in a systematic manner, so as to allow raw data for a given figure to be easily retrieved, one can simply modify the plotting procedure, instead of having to redo the whole analysis. An additional advantage of this is that if one really wants to read fine values in a figure, one can consult the raw numbers. In cases where plotting involves more than a direct visualization of underlying numbers, it can be useful to store both the underlying data and the processed values that are directly visualized. An example of this is the plotting of histograms, where both the values before binning (original data) and the counts per bin (heights of visualized bars) could be stored. When plotting is performed using a command-based system like R, it is convenient to also store the code used to make the plot. One can then apply slight modifications to these commands, instead of having to specify the plot from scratch. As a minimum, one should note which data formed the basis of a given plot and how this data could be reconstructed."
+        },
+        {
+          "rank": 6,
+          "score": 0.1095660185505531,
+          "block_id": "P1-S02-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S02",
+          "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+          "paragraph_index": 0,
+          "text": "Whenever a result may be of potential interest, keep track of how it was produced. When doing this, one will frequently find that getting from raw data to the final result involves many interrelated steps (single commands, scripts, programs). We refer to such a sequence of steps, whether it is automated or performed manually, as an analysis workflow. While the essential part of an analysis is often represented by only one of the steps, the full sequence of pre- and post-processing steps are often critical in order to reach the achieved result. For every involved step, you should ensure that every detail that may influence the execution of the step is recorded. If the step is performed by a computer program, the critical details include the name and version of the program, as well as the exact parameters and inputs that were used."
+        },
+        {
+          "rank": 7,
+          "score": 0.10541745503091857,
+          "block_id": "P1-S05-p03",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S05",
+          "heading": "Rule 4: Version Control All Custom Scripts",
+          "paragraph_index": 2,
+          "text": "As a minimum, you should archive copies of your scripts from time to time, so that you keep a rough record of the various states the code has taken during development."
+        },
+        {
+          "rank": 8,
+          "score": 0.10109981352464265,
+          "block_id": "P1-S04-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S04",
+          "heading": "Rule 3: Archive the Exact Versions of All External Programs Used",
+          "paragraph_index": 0,
+          "text": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. Also, as both input and output formats may change between versions, a newer version of a program may not even run without modifying its inputs. Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. Archiving the exact versions of programs actually used may thus save a lot of hassle at later stages. In some cases, all that is needed is to store a single executable or source code file. In other cases, a given program may again have specific requirements to other installed programs/packages, or dependencies to specific operating system components. To ensure future availability, the only viable solution may then be to store a full virtual machine image of the operating system and program. As a minimum, you should note the exact names and versions of the main programs you use."
+        },
+        {
+          "rank": 9,
+          "score": 0.08966929824451342,
+          "block_id": "P1-S10-p03",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S10",
+          "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+          "paragraph_index": 2,
+          "text": "To allow efficient retrieval of details behind textual statements, we suggest that statements are connected to underlying results already from the time the statements are initially formulated (for instance in notes or emails). Such a connection can for instance be a simple file path to detailed results, or the ID of a result in an analysis framework, included within the text itself. For an even tighter integration, there are tools available to help integrate reproducible analyses directly into textual documents, such as Sweave [19] , the GenePattern Word add-in [4] , and Galaxy Pages [20] . These solutions can also subsequently be used in connection with publications, as discussed in the next rule."
+        },
+        {
+          "rank": 10,
+          "score": 0.08451114711700335,
+          "block_id": "P1-S10-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S10",
+          "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+          "paragraph_index": 1,
+          "text": "If you want to reevaluate your previous interpretations, or allow peers to make their own assessment of claims you make in a scientific paper, you will have to connect a given textual statement (interpretation, claim, conclusion) to the precise results underlying the statement. Making this connection when it is needed may be difficult and error-prone, as it may be hard to locate the exact result underlying and supporting the statement from a large pool of different analyses with various versions."
+        },
+        {
+          "rank": 11,
+          "score": 0.08153358669921934,
+          "block_id": "P1-S07-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S07",
+          "heading": "Rule 6: For Analyses That Include Randomness, Note Underlying Random Seeds",
+          "paragraph_index": 0,
+          "text": "Many analyses and predictions include some element of randomness, meaning the same program will typically give slightly different results every time it is executed (even when receiving identical inputs and parameters). However, given the same initial seed, all random numbers used in an analysis will be equal, thus giving identical results every time it is run. There is a large difference between observing that a result has been reproduced exactly or only approximately. While achieving equal results is a strong indication that a procedure has been reproduced exactly, it is often hard to conclude anything when achieving only approximately equal results. For analyses that involve random numbers, this means that the random seed should be recorded. This allows results to be reproduced exactly by providing the same seed to the random number generator in future runs. As a minimum, you should note which analysis steps involve randomness, so that a certain level of discrepancy can be anticipated when reproducing the results."
+        },
+        {
+          "rank": 12,
+          "score": 0.07914245748722776,
+          "block_id": "P1-S01-p03",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 2,
+          "text": "We want to emphasize that reproducibility is not only a moral responsibility with respect to the scientific field, but that a lack of reproducibility can also be a burden for you as an individual researcher. As an example, a good practice of reproducibility is necessary in order to allow previously developed methodology to be effectively applied on new data, or to allow reuse of code and results for new projects. In other words, good habits of reproducibility may actually turn out to be a time-saver in the longer run."
+        },
+        {
+          "rank": 13,
+          "score": 0.0769431267207607,
+          "block_id": "P1-S05-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S05",
+          "heading": "Rule 4: Version Control All Custom Scripts",
+          "paragraph_index": 0,
+          "text": "Even the slightest change to a computer program can have large intended or unintended consequences. When a continually developed piece of code (typically a small script) has been used to generate a certain result, only that exact state of the script may be able to produce that exact output, even given the same input data and parameters. As also discussed for rules 3 and 6, exact reproduction of results may in certain situations be essential. If computer code is not systematically archived along its evolution, backtracking to a code state that gave a certain result may be a hopeless task. This can cast doubt on previous results, as it may be impossible to know if they were partly the result of a bug or otherwise unfortunate behavior."
+        },
+        {
+          "rank": 14,
+          "score": 0.07632247841000066,
+          "block_id": "P1-S05-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S05",
+          "heading": "Rule 4: Version Control All Custom Scripts",
+          "paragraph_index": 1,
+          "text": "The standard solution to track evolution of code is to use a version control system [15] , such as Subversion, Git, or Mercurial. These systems are relatively easy to set up and use, and may be used to systematically store the state of the code throughout development at any desired time granularity."
+        },
+        {
+          "rank": 15,
+          "score": 0.0728266102678675,
+          "block_id": "P1-S01-p04",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 3,
+          "text": "We further note that reproducibility is just as much about the habits that ensure reproducible research as the technologies that can make these processes efficient and realistic. Each of the following ten rules captures a specific aspect of reproducibility, and discusses what is needed in terms of information handling and tracking of procedures. If you are taking a bare-bones approach to bioinformatics analysis, i.e., running various custom scripts from the command line, you will probably need to handle each rule explicitly. If you are instead performing your analyses through an integrated framework (such as GenePattern [10] , Galaxy [11] , LONI pipeline [12] , or Taverna [13] ), the system may already provide full or partial support for most of the rules. What is needed on your part is then merely the knowledge of how to exploit these existing possibilities."
+        },
+        {
+          "rank": 16,
+          "score": 0.07070465591194339,
+          "block_id": "P1-S01-p05",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 4,
+          "text": "In a pragmatic setting, with publication pressure and deadlines, one may face the need to make a trade-off between the ideals of reproducibility and the need to get the research out while it is still relevant. This trade-off becomes more important when considering that a large part of the analyses being tried out never end up yielding any results. However, frequently one will, with the wisdom of hindsight, contemplate the missed opportunity to ensure reproducibility, as it may already be too late to take the necessary notes from memory (or at least much more difficult than to do it while underway). We believe that the rewards of reproducibility will compensate for the risk of having spent valuable time developing an annotated catalog of analyses that turned out as blind alleys."
+        },
+        {
+          "rank": 17,
+          "score": 0.06517000382098707,
+          "block_id": "P1-S01-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 0,
+          "text": "Replication is the cornerstone of a cumulative science [1] . However, new tools and technologies, massive amounts of data, interdisciplinary approaches, and the complexity of the questions being asked are complicating replication efforts, as are increased pressures on scientists to advance their research [2] . As full replication of studies on independently collected data is often not feasible, there has recently been a call for reproducible research as an attainable minimum standard for assessing the value of scientific claims [3] . This requires that papers in experimental science describe the results and provide a sufficiently clear protocol to allow successful repetition and extension of analyses based on original data [4] ."
+        },
+        {
+          "rank": 18,
+          "score": 0.0651407981622461,
+          "block_id": "P1-S10-p04",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S10",
+          "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+          "paragraph_index": 3,
+          "text": "As a minimum, you should provide enough details along with your textual interpretations so as to allow the exact underlying results, or at least some related results, to be tracked down in the future."
+        },
+        {
+          "rank": 19,
+          "score": 0.06490091913043078,
+          "block_id": "P1-S02-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S02",
+          "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+          "paragraph_index": 1,
+          "text": "Although manually noting the precise sequence of steps taken allows for an analysis to be reproduced, the documentation can easily get out of sync with how the analysis was really performed in its final version. By instead specifying the full analysis workflow in a form that allows for direct execution, one can ensure that the specification matches the analysis that was (subsequently) performed, and that the analysis can be reproduced by yourself or others in an automated way. Such executable descriptions [10] might come in the form of simple shell scripts or makefiles [15] , [16] at the command line, or in the form of stored workflows in a workflow management system [10] , [11] , [13] , [17] , [18] ."
+        },
+        {
+          "rank": 20,
+          "score": 0.052526320715849825,
+          "block_id": "P1-S01-p07",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 6,
+          "text": "With this basic level of reproducibility in place, there is much more that can be wished for. An obvious extension is to go from a level where you can reproduce results in case of a critical situation to a level where you can practically and routinely reuse your previous work and increase your productivity. A second extension is to ensure that peers have a practical possibility of reproducing your results, which can lead to increased trust in, interest for, and citations of your work [6] , [14] ."
+        },
+        {
+          "rank": 21,
+          "score": 0.04467433432955895,
+          "block_id": "P1-S01-p06",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 5,
+          "text": "As a minimal requirement, you should at least be able to reproduce the results yourself. This would satisfy the most basic requirements of sound research, allowing any substantial future questioning of the research to be met with a precise explanation. Although it may sound like a very weak requirement, even this level of reproducibility will often require a certain level of care in order to be met. There will for a given analysis be an exponential number of possible combinations of software versions, parameter values, pre-processing steps, and so on, meaning that a failure to take notes may make exact reproduction essentially impossible."
+        },
+        {
+          "rank": 22,
+          "score": 0.04449825702277824,
+          "block_id": "P1-S11-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S11",
+          "heading": "Rule 10: Provide Public Access to Scripts, Runs, and Results",
+          "paragraph_index": 0,
+          "text": "Last, but not least, all input data, scripts, versions, parameters, and intermediate results should be made publicly and easily accessible. Various solutions have now become available to make data sharing more convenient, standardized, and accessible in particular domains, such as for gene expression data [21] – [23] . Most journals allow articles to be supplemented with online material, and some journals have initiated further efforts for making data and code more integrated with publications [3] , [24] . As a minimum, you should submit the main data and source code as supplementary material, and be prepared to respond to any requests for further data or methodology details by peers."
+        },
+        {
+          "rank": 23,
+          "score": 0.04448001805245708,
+          "block_id": "P1-S10-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S10",
+          "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+          "paragraph_index": 0,
+          "text": "Throughout a typical research project, a range of different analyses are tried and interpretation of the results made. Although the results of analyses and their corresponding textual interpretations are clearly interconnected at the conceptual level, they tend to live quite separate lives in their representations: results usually live on a data area on a server or personal computer, while interpretations live in text documents in the form of personal notes or emails to collaborators. Such textual interpretations are not generally mere shadows of the results—they often involve viewing the results in light of other theories and results. As such, they carry extra information, while at the same time having their necessary support in a given result."
+        },
+        {
+          "rank": 24,
+          "score": 0.03930959652378373,
+          "block_id": "P1-S11-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S11",
+          "heading": "Rule 10: Provide Public Access to Scripts, Runs, and Results",
+          "paragraph_index": 1,
+          "text": "Making reproducibility of your work by peers a realistic possibility sends a strong signal of quality, trustworthiness, and transparency. This could increase the quality and speed of the reviewing process on your work, the chances of your work getting published, and the chances of your work being taken further and cited by other researchers after publication [25] ."
+        },
+        {
+          "rank": 25,
+          "score": 0.02871384835081045,
+          "block_id": "P1-S01-p08",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 7,
+          "text": "We here present ten simple rules for reproducibility of computational research. These rules can be at your disposal for whenever you want to make your research more accessible—be it for peers or for your future self."
+        },
+        {
+          "rank": 26,
+          "score": 0.023861811625502407,
+          "block_id": "P1-S01-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 1,
+          "text": "The importance of replication and reproducibility has recently been exemplified through studies showing that scientific papers commonly leave out experimental details essential for reproduction [5] , studies showing difficulties with replicating published experimental results [6] , an increase in retracted papers [7] , and through a high number of failing clinical trials [8] , [9] . This has led to discussions on how individual researchers, institutions, funding bodies, and journals can establish routines that increase transparency and reproducibility. In order to foster such aspects, it has been suggested that the scientific community needs to develop a “culture of reproducibility” for computational science, and to require it for published claims [3] ."
+        }
+      ],
+      "baseline": [
+        {
+          "block_id": "P1-S03-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S03",
+          "heading": "Rule 2: Avoid Manual Data Manipulation Steps",
+          "paragraph_index": 0,
+          "text": "Whenever possible, rely on the execution of programs instead of manual procedures to modify data. Such manual procedures are not only inefficient and error-prone, they are also difficult to reproduce. If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts. If working with integrated frameworks, there will typically be a quite rich collection of components for data manipulation. As an example, manual tweaking of data files to attain format compatibility should be replaced by format converters that can be reenacted and included into executable workflows. Other manual operations like the use of copy and paste between documents should also be avoided. If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose."
+        },
+        {
+          "block_id": "P1-S06-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S06",
+          "heading": "Rule 5: Record All Intermediate Results, When Possible in Standardized Formats",
+          "paragraph_index": 0,
+          "text": "In principle, as long as the full process used to produce a given result is tracked, all intermediate data can also be regenerated. In practice, having easily accessible intermediate results may be of great value. Quickly browsing through intermediate results can reveal discrepancies toward what is assumed, and can in this way uncover bugs or faulty interpretations that are not apparent in the final results. Secondly, it more directly reveals consequences of alternative programs and parameter choices at individual steps. Thirdly, when the full process is not readily executable, it allows parts of the process to be rerun. Fourthly, when reproducing results, it allows any experienced inconsistencies to be tracked to the steps where the problems arise. Fifth, it allows critical examination of the full process behind a result, without the need to have all executables operational. When possible, store such intermediate results in standardized formats. As a minimum, archive any intermediate result files that are produced when running an analysis (as long as the required storage space is not prohibitive)."
+        }
+      ],
+      "improved": [
+        {
+          "block_id": "P1-S03-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S03",
+          "heading": "Rule 2: Avoid Manual Data Manipulation Steps",
+          "paragraph_index": 0,
+          "text": "Whenever possible, rely on the execution of programs instead of manual procedures to modify data. Such manual procedures are not only inefficient and error-prone, they are also difficult to reproduce. If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts. If working with integrated frameworks, there will typically be a quite rich collection of components for data manipulation. As an example, manual tweaking of data files to attain format compatibility should be replaced by format converters that can be reenacted and included into executable workflows. Other manual operations like the use of copy and paste between documents should also be avoided. If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose."
+        },
+        {
+          "block_id": "P1-S06-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S06",
+          "heading": "Rule 5: Record All Intermediate Results, When Possible in Standardized Formats",
+          "paragraph_index": 0,
+          "text": "In principle, as long as the full process used to produce a given result is tracked, all intermediate data can also be regenerated. In practice, having easily accessible intermediate results may be of great value. Quickly browsing through intermediate results can reveal discrepancies toward what is assumed, and can in this way uncover bugs or faulty interpretations that are not apparent in the final results. Secondly, it more directly reveals consequences of alternative programs and parameter choices at individual steps. Thirdly, when the full process is not readily executable, it allows parts of the process to be rerun. Fourthly, when reproducing results, it allows any experienced inconsistencies to be tracked to the steps where the problems arise. Fifth, it allows critical examination of the full process behind a result, without the need to have all executables operational. When possible, store such intermediate results in standardized formats. As a minimum, archive any intermediate result files that are produced when running an analysis (as long as the required storage space is not prohibitive)."
+        }
+      ],
+      "neighbors": [],
+      "coverage": {
+        "baseline": {
+          "required_blocks": [
+            "P1-S03-p01"
+          ],
+          "present_required": [
+            "P1-S03-p01"
+          ],
+          "complete": true
+        },
+        "improved": {
+          "required_blocks": [
+            "P1-S03-p01"
+          ],
+          "present_required": [
+            "P1-S03-p01"
+          ],
+          "complete": true
+        }
+      },
+      "scope_and_section_boundaries": true,
+      "no_manual_repair": true,
+      "label_correct": "not_run",
+      "source_authenticity_of_model_selected_citations": "not_run",
+      "citation_support": "not_run",
+      "strict_success": "not_run",
+      "judgment_source": "unverified",
+      "reviewer": "Codex原文辅助复核，尚待本人确认"
+    },
+    {
+      "at": "2026-10-16T16:49:28.400408+08:00",
+      "id": "AD02",
+      "claim": "把Notebook导出为静态HTML或PDF，可以帮助他人阅读，但仅此不足以让他人执行原计算。",
+      "old_query": "notebook export, static HTML/PDF, help others read, execute original calculations",
+      "manual_translation": "Exporting a notebook as static HTML or PDF can help other people read it, but that alone is not enough for them to execute the original computation.",
+      "actual_automatic_translation": "Exporting the Notebook as static HTML or PDF helps others read it, but only this is sufficient for them to perform the original calculation.",
+      "fidelity": {
+        "fully_faithful": false,
+        "direction_preserved": false,
+        "basis": "原文但仅此不足以让他人执行被译为but only this is sufficient...，把不充分反转为充分，门禁失败。不得因检索仍命中同段而忽略语义反转。",
+        "alignment": [
+          {
+            "zh": "可以帮助他人阅读",
+            "actual_en": "helps others read it",
+            "assessment": "可以被轻度强化为直接helps"
+          },
+          {
+            "zh": "但仅此不足以让他人执行原计算",
+            "actual_en": "but only this is sufficient for them to perform the original calculation",
+            "assessment": "不足反转为sufficient；关键方向错误"
+          }
+        ]
+      },
+      "translation_raw_record": "进阶/a_exploration/runs/query-translation-20261016-133457/automatic-translations/run-13fcce96-8e4b-4bf7-b3b7-905397713ef9.json",
+      "translation_run_id": "13fcce96-8e4b-4bf7-b3b7-905397713ef9",
+      "translation_raw_content": "{\"translation\":\"Exporting the Notebook as static HTML or PDF helps others read it, but only this is sufficient for them to perform the original calculation.\"}",
+      "translation_seconds": 1.2934804998803884,
+      "usage": {
+        "completion_tokens": 36,
+        "prompt_tokens": 137,
+        "total_tokens": 173,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "translation_input_tokens": 137,
+      "truncated": false,
+      "query_tokens": [
+        "exporting",
+        "the",
+        "notebook",
+        "as",
+        "static",
+        "html",
+        "or",
+        "pdf",
+        "helps",
+        "others",
+        "read",
+        "it",
+        "but",
+        "only",
+        "this",
+        "is",
+        "sufficient",
+        "for",
+        "them",
+        "to",
+        "perform",
+        "the",
+        "original",
+        "calculation"
+      ],
+      "full_ranking": [
+        {
+          "rank": 1,
+          "score": 0.2918734115200744,
+          "block_id": "P2-S10-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S10",
+          "heading": "Rule 9: Design your notebooks to be read, run, and explored",
+          "paragraph_index": 1,
+          "text": "Read: Beyond granting permission to reuse your notebook, consider how you can leverage the unique structure of notebooks to support reading. At the very least, leave static HTML/PDF versions of all notebooks stored in the final version of the repository accompanying a publication. If, in 20 years, all other execution technology fails, these are likely to still provide a readable archival record, and with a full dependences list, future users are more likely to be able to recreate the compute environment. You can also use Nbviewer ( https://nbviewer.jupyter.org/ ) to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first. GitHub uses this service to render any notebooks on their site, so pushing a notebook to GitHub is another good way to make static views easily available. In both cases, you can point collaborators to a URL where they can read through your notebook online."
+        },
+        {
+          "rank": 2,
+          "score": 0.15530501428779908,
+          "block_id": "P2-S05-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S05",
+          "heading": "Rule 4: Modularize code",
+          "paragraph_index": 0,
+          "text": "It is always good practice to avoid duplicate code, but in notebooks, it is especially easy to copy a cell, tweak a few lines, paste the resulting code into a new cell or another notebook, and run it again. This form of experimentation is expedient but makes notebooks difficult to read and nearly impossible to maintain if you want to change the functionality of or fix a bug in the copied code. Instead, wrap code you are about to copy and reuse in a function, which you can then call from as many cells as desired. If you are going to reuse the code in other projects or notebooks, consider turning it into a module, package, or library."
+        },
+        {
+          "rank": 3,
+          "score": 0.1427926281465642,
+          "block_id": "P2-S01-p03",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S01",
+          "heading": "Introduction",
+          "paragraph_index": 2,
+          "text": "The interactive and narrative nature of computational notebooks presents unique opportunities for performing and sharing computational research. With some forethought, they can provide not only richly detailed descriptions of analyses but also interactive computing environments for replicating, exploring, and extending them. Yet, as with other computing environments, using notebooks for research requires special care. Interactively running and editing code in notebooks can delete key steps or introduce “hidden state” that confounds analyses and confuses readers [ 12 ]. Analyses documented in notebooks cannot be easily rerun if users do not first freeze their dependencies, share their data, and adequately describe their computing environment [ 13 ]. And many notebooks lack sufficient descriptive text to guide readers in using them [ 11 , 14 ]."
+        },
+        {
+          "rank": 4,
+          "score": 0.14185910517378436,
+          "block_id": "P2-S04-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S04",
+          "heading": "Rule 3: Use cell divisions to make steps clear",
+          "paragraph_index": 0,
+          "text": "Notebooks are an interactive environment, so it is very easy to write and run one-line cells. This supports experimentation but can leave your notebooks messy and full of short fragments that are hard to follow. Instead, try to make each cell in your notebook perform one meaningful step of the analysis that is easy to understand from the code in the cell or the surrounding markdown description. Modularize your code by cells and label the cells with markdown above the cell. Think of each cell as being one paragraph, having one function, or accomplishing one task (for example, create a plot)."
+        },
+        {
+          "rank": 5,
+          "score": 0.13495247012284292,
+          "block_id": "P2-S11-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S11",
+          "heading": "Rule 10: Advocate for open research",
+          "paragraph_index": 0,
+          "text": "Clearly, the mere use of a computational notebook does not guarantee others will be able to read, run, or explore your analysis. If the convenience and interactivity of this technology has convinced you to adopt it, take the next step and become an advocate in your lab or workplace in promoting its effective use. Ask lab-mates or colleagues to try to run one of your notebooks and then listen when they explain any difficulties. Try to run their notebooks and let them know if you hit snags. Commit yourself to robust and reproducible analyses as key element of all your research group’s computational work, not a phase performed after an analysis is complete or an afterthought triggered by journal or reviewer demands."
+        },
+        {
+          "rank": 6,
+          "score": 0.1327422471156345,
+          "block_id": "P2-S10-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S10",
+          "heading": "Rule 9: Design your notebooks to be read, run, and explored",
+          "paragraph_index": 0,
+          "text": "If you have followed the previous rules, your notebooks should capture your entire process and be easy to read. But how will others access, run, and explore them? There are a number of ways you can support others’ reuse of your notebooks. First, store your notebooks in a public code repository with a clear README file and a liberal open source license ( https://opensource.org/licenses ) granting permission to reuse your code."
+        },
+        {
+          "rank": 7,
+          "score": 0.1311980166399652,
+          "block_id": "P2-S02-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S02",
+          "heading": "Rule 1: Tell a story for an audience",
+          "paragraph_index": 0,
+          "text": "One key benefit of using Jupyter Notebooks is being able to interleave explanatory text with code and results to create a computational narrative [ 7 ]. Rather than only keep sporadic notes, use explanatory text to tell a compelling story that has a beginning that introduces the topic, a middle that describes your steps, and an end that interprets the results. Describe not just what you did but why you did it, how the steps are connected, and what it all means. It is okay for your story to change over time, especially as your analysis evolves, but be sure to start documenting your thoughts and process as early as possible."
+        },
+        {
+          "rank": 8,
+          "score": 0.1272312693924339,
+          "block_id": "P2-S08-p03",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S08",
+          "heading": "Rule 7: Build a pipeline",
+          "paragraph_index": 2,
+          "text": "Once a notebook has been developed, it can be parameterized with a tool such as papermill ( https://github.com/nteract/papermill ). Such notebooks can be used not only interactively but also as command-line tools that can be executed automatically—a great boon for pipelines! Consider linking your analysis pipeline steps via a Makefile or similar tool that allows for complete noninteractive execution of the entire pipeline, either in full or partial steps. Such automation also supports code quality techniques like software testing; consider testing your workflows from end to end each time a change is committed by integrating your repository to a Continuous Integration system (for example, https://travis-ci.org/ ). Last but not least, be aware that pipeline notebooks will almost certainly have a very different story (Rule 1) than the initial analyses that engendered them! Remember to remove any introduction, interpretation, or conclusion text that is not universally applicable to different inputs and results and instead replace it with guidance for the pipeline user on how to run and interpret its (potentially novel) results."
+        },
+        {
+          "rank": 9,
+          "score": 0.12021812379492372,
+          "block_id": "P2-S01-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S01",
+          "heading": "Introduction",
+          "paragraph_index": 1,
+          "text": "Reproducibility, the scientific standard that others should be able to recreate your results, requires at a minimum that “data and the computer code used to analyze [that] data be made available to others” [ 2 ]. Achieving even this minimum standard typically requires both machine-readable descriptions of the data, software, dependencies, and computational environment involved (for example, hardware or cloud configuration), as well as human-readable documentation describing how all these pieces fit together. Whereas analysts previously kept code, documentation, and results in separate files, they increasingly use computational notebooks such as Jupyter Notebooks and R Notebooks to both perform analyses and combine code, results, and descriptive text in a single “computational narrative” to be read and rerun by others [ 7 , 8 ]. This ability to combine executable code and descriptive text in a single document has close ties to Knuth’s notion of “literate programming” [ 9 ] and has convinced many researchers to switch to computational notebooks from other programming environments. Jupyter Notebooks in particular have seen widespread adoption: as of December 2018, there were more than 3 million Jupyter Notebooks shared publicly on GitHub ( https://www.github.com ) [ 10 ], many of which document academic research [ 11 ]."
+        },
+        {
+          "rank": 10,
+          "score": 0.11451677950569532,
+          "block_id": "P2-S05-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S05",
+          "heading": "Rule 4: Modularize code",
+          "paragraph_index": 1,
+          "text": "Not only does modularization save space, support maintenance, and ease debugging, it also makes it easier to add interactivity. For example, you can tie widgets (ipywidgets, https://ipywidgets.readthedocs.io/en/stable/ ) to functions to support exploration of different parameter values or support interaction with visualizations without needing to modify the code. This is one way you can design your notebook to be explored (Rule 9)."
+        },
+        {
+          "rank": 11,
+          "score": 0.10854194703601643,
+          "block_id": "P2-S08-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S08",
+          "heading": "Rule 7: Build a pipeline",
+          "paragraph_index": 0,
+          "text": "Notebooks documenting initial, exploratory investigations will rarely be widely generalizable, but once a stable analysis approach has been identified, a well-designed notebook can be generalized into a pipeline that easily repeats that analysis using different input data and parameters. With this end in mind, design your notebook from the beginning to allow such future repurposing. Place key variable declarations, especially those that will be changed when doing a new analysis, at the top of the notebook rather than burying them somewhere in the middle. Perform preparatory steps, like data cleaning, directly in the notebook and avoid manual interventions."
+        },
+        {
+          "rank": 12,
+          "score": 0.10257075697857787,
+          "block_id": "P2-S06-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S06",
+          "heading": "Rule 5: Record dependencies",
+          "paragraph_index": 0,
+          "text": "Rerunning your analysis in the future will require accessing not only your code but also any module or library that your code relied on. As is best practice across computational science, manage your dependencies using a package or environment manager like pip or Conda. These enable you to download modules and libraries, specify the version of each you want to use in your analysis, and even generate files such as Conda’s environment.yml or pip’s requirements.txt that concisely describe all of your dependencies. These files can be used by tools such as Binder or Docker to generate a “container” that other researchers can use to reproduce your analysis using the same versions of every module and library as you did. Always conduct your work in an environment created only from these dependencies to ensure you do not add undocumented dependencies."
+        },
+        {
+          "rank": 13,
+          "score": 0.09675320930052872,
+          "block_id": "P2-S01-p04",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S01",
+          "heading": "Introduction",
+          "paragraph_index": 3,
+          "text": "The explosive growth of computational notebooks provides a unique opportunity to support computational research, but care must be taken when performing and sharing analyses in notebooks. Given these opportunities and challenges, we have compiled a set of rules, tips, tools, and example notebooks to help guide Jupyter Notebook authors. While we focus on a few core uses of Jupyter Notebooks observed in our own research, many of these rules can be applied to other computational notebooks and use cases. In Fig 1 , we give a preview of the rules applied at different phases of the notebook development cycle. Whether you use notebooks to track preliminary analyses, to present polished results to collaborators, as finely tuned pipelines for recurring analyses, or for all of the above, following this advice will help you write and share analyses that are easier to read, run, and explore."
+        },
+        {
+          "rank": 14,
+          "score": 0.09242673271014966,
+          "block_id": "P2-S07-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S07",
+          "heading": "Rule 6: Use version control",
+          "paragraph_index": 1,
+          "text": "However, be aware that Jupyter Notebooks store both code and extensive metadata about each cell as a text file in the JavaScript Object Notation (JSON) format. Version control systems compare differences in these JSON files, not differences in the user-friendly notebook graphical user interface (GUI). Because of this, reported differences between versions of a given notebook are usually difficult for users to find and understand because they are expressed as changes in the abstruse JSON metadata for the notebook. One way to address this issue is to use a notebook-specific diffing tool like nbdime that understands notebook structure and presents differences in meaningful ways ( https://github.com/jupyter/nbdime ). Another approach is to convert your notebook to a more version-control–friendly filetype such as .py before committing changes."
+        },
+        {
+          "rank": 15,
+          "score": 0.09075899770062325,
+          "block_id": "P2-S03-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S03",
+          "heading": "Rule 2: Document the process, not just the results",
+          "paragraph_index": 0,
+          "text": "Computational notebooks’ interactivity makes it quick and easy to try out and compare different approaches or parameters—so quick and easy that we often fail to document those interactive investigations at the time we perform them. Thus, the advice long provided regarding paper lab scientific notebooks becomes even more critical: make sure to document all your explorations, even (or perhaps especially) those that led to dead ends. These comments will help you remember what you did and why. You can always remove these comments later if turning your notebook into a pipeline (see Rule 7 ) or preparing to share it with a wider audience (Rule 1), who may prefer to see a concise presentation of results rather than a detailed lab notebook."
+        },
+        {
+          "rank": 16,
+          "score": 0.08679656763615616,
+          "block_id": "P2-S08-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S08",
+          "heading": "Rule 7: Build a pipeline",
+          "paragraph_index": 1,
+          "text": "Because notebooks’ interactivity make them vulnerable to accidental overwriting or deletion of critical steps by the user, if your analysis runs quickly, make a habit of regularly restarting your kernel and rerunning all cells to make sure you did not accidentally delete a step while cleaning your notebook (and if you did, retrieve the code for it from version control). Restarting your kernel and running all cells is also a good final test of results. To allow partial execution of complex analyses, break long notebooks into smaller notebooks that focus on one or a few analysis steps. Then, ensure that each notebook stores serialized versions of key intermediate results to disk for subsequent notebooks to use."
+        },
+        {
+          "rank": 17,
+          "score": 0.08595537038748897,
+          "block_id": "P2-S10-p04",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S10",
+          "heading": "Rule 9: Design your notebooks to be read, run, and explored",
+          "paragraph_index": 3,
+          "text": "Explore: Beyond simply replicating the analysis in your notebook, consider how you can design your notebook so future users can tweak and explore your analysis. Consider using ipywidgets ( https://ipywidgets.readthedocs.io/en/stable/ ) to enable future users to change parameters using graphical elements such as dropdowns and sliders rather than tweaking code. Beyond enabling future users to change parameters or insert their own data set, consider how they might want remix or reuse portions of your notebook (perhaps only the data cleaning or plotting steps) and use cell-structure and functions to make it easier to extract these sections (Rule 7)."
+        },
+        {
+          "rank": 18,
+          "score": 0.0841929992810304,
+          "block_id": "P2-S03-p03",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S03",
+          "heading": "Rule 2: Document the process, not just the results",
+          "paragraph_index": 2,
+          "text": "Clean, organize, and annotate your notebook after each experiment or meaningful chunk of work and do all your cleaning in the notebook. For example, when preparing to publish, avoid manually tweaking figures with desktop publishing tools and instead use plotting libraries with the notebook to produce publication-ready versions of figures and other artifacts to be used in manuscripts. Make sure you include your name as well as contact information for yourself and a future contact in your lab that can answer basic questions about the code. Documenting the beginning and end date of your analysis is also a good idea and can highlight the effort that you have put into the development of the notebook."
+        },
+        {
+          "rank": 19,
+          "score": 0.08374479074771805,
+          "block_id": "P2-S13-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S13",
+          "heading": "Conclusions",
+          "paragraph_index": 0,
+          "text": "Robust and reproducible analyses lie at the heart of science, and several papers have already provided excellent general advice for how to perform and document computational science. However, the advent of computational notebooks presents new opportunities and challenges, both easing precise documentation of complex workflows, and complicating it by means of interactivity. We present 10 simple rules for writing and sharing analyses in Jupyter Notebooks, focusing on annotation of the analysis, organization of code, and ease of access and reuse. Informed by our experience, we hope they contribute to the ecosystem of individuals, labs, publishers, and organizations using notebooks to perform and share computational research."
+        },
+        {
+          "rank": 20,
+          "score": 0.08090810363363987,
+          "block_id": "P2-S09-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S09",
+          "heading": "Rule 8: Share and explain your data",
+          "paragraph_index": 0,
+          "text": "Having access to a clearly annotated notebook is of little use to those wanting to reproduce or extend your results if the underlying data are locked away. Strive to make your data or a sample of your data publicly available along with the notebook. While sharing your data takes careful planning, notebooks make it easy to provide a description of your input data and upstream processing steps, which are essential for interpreting results."
+        },
+        {
+          "rank": 21,
+          "score": 0.07933206406042513,
+          "block_id": "P2-S07-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S07",
+          "heading": "Rule 6: Use version control",
+          "paragraph_index": 0,
+          "text": "Version control is a critical adjunct to notebook use because the interactive nature of notebooks makes it easy to accidentally change or delete important content. Furthermore, since notebooks contain code and code inevitably contains bugs, being able to determine the history of when a given bug you have discovered was introduced to the code versus when it was fixed—and thus what analyses it may have affected—is a key capability in scientific computation. Consult the Ten Simple Rules paper by Perez-Riverol and colleagues [ 15 ] on how to take advantage of Git and GitHub for version control generally. Also follow best practices for organizing your repository for easy version control, for example, http://drivendata.github.io/cookiecutter-data-science/ ."
+        },
+        {
+          "rank": 22,
+          "score": 0.07794646401378574,
+          "block_id": "P2-S10-p03",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S10",
+          "heading": "Rule 9: Design your notebooks to be read, run, and explored",
+          "paragraph_index": 2,
+          "text": "Run: To support others running your notebooks, you can use Binder [ 16 ] to provide a zero-install environment to run your notebooks in the cloud ( https://mybinder.org/ ). Binder enables community members to rerun your notebook online without needing to install Jupyter Notebook or Jupyter Lab on their own machine. More generally, you can create a portable containerized environment, for example, a Docker image ( https://docs.docker.com/ ), or create a dependency description file (see Rule 3 ) so future users of your notebook can more easily replicate your computing environment when rerunning your notebook."
+        },
+        {
+          "rank": 23,
+          "score": 0.07554676556060484,
+          "block_id": "P2-S04-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S04",
+          "heading": "Rule 3: Use cell divisions to make steps clear",
+          "paragraph_index": 1,
+          "text": "Avoid long cells (we suggest that anything over 100 lines or one page is too long). Put low-level documentation in code comments. Use descriptive markdown headers to organize your notebook into sections that can be used to easily navigate the notebook and add a table of contents. Split long notebooks into a series of notebooks and keep a top-level index notebook with links to the individual notebooks. Using clear cell and notebook divisions will make your analysis much easier to read."
+        },
+        {
+          "rank": 24,
+          "score": 0.07426582919304701,
+          "block_id": "P2-S06-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S06",
+          "heading": "Rule 5: Record dependencies",
+          "paragraph_index": 1,
+          "text": "As an extra precaution in notebooks, you can explicitly print out your dependencies using a notebook extension such as watermark ( https://github.com/rasbt/watermark ). Listing the versions of critical dependencies in the notebook itself (best done at the bottom) will ensure that, if used in isolation from its environment, the notebook still contains critical information to help readers run it."
+        },
+        {
+          "rank": 25,
+          "score": 0.07030735606600134,
+          "block_id": "P2-S01-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S01",
+          "heading": "Introduction",
+          "paragraph_index": 0,
+          "text": "As studies grow in scale and complexity, it has become increasingly difficult to provide clear descriptions and open access to the methods and data needed to understand and reproduce computational research. Numerous papers [ 1 – 3 ], including several in the Ten Simple Rules collection [ 4 , 5 ], have highlighted the need for robust and reproducible analyses in computational research, described the difficulty of achieving these standards, and enumerated best practices. We aim to augment this existing wellspring of advice by addressing the unique challenges and opportunities that arise when using computational notebooks, especially Jupyter Notebooks, for research [ 6 ]."
+        },
+        {
+          "rank": 26,
+          "score": 0.06685968398682977,
+          "block_id": "P2-S09-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S09",
+          "heading": "Rule 8: Share and explain your data",
+          "paragraph_index": 1,
+          "text": "Ideally, you will share your entire data set alongside your notebooks. We realize many data sets are too large or too sensitive to share this way. In these cases, consider breaking down large and complex data sets into tiers such that, even if the raw data are prohibitively large to include alongside your published notebooks or are constrained by privacy or other access issues, reproducibility and interpretability isn’t lost. You can host public copies of medium-sized, anonymized data in a variety of hosting services (for example, figshare [ https://figshare.com/ ], zenodo [ https://zenodo.org/ ]), and include further processed data sets alongside the notebooks in the final repository. To uniquely and permanently identify data sets, these hosting services provide Digital Object Identifiers (dois). This tiered approach both provides public confidence and allows others to reproduce and reuse the latter stages of an analysis even without access to the full, raw data set."
+        },
+        {
+          "rank": 27,
+          "score": 0.05762819761975468,
+          "block_id": "P2-S03-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S03",
+          "heading": "Rule 2: Document the process, not just the results",
+          "paragraph_index": 1,
+          "text": "Many notebook users wait to add such explanatory text until the end of an analysis, after they have a solid result. Don’t wait—by that point you may have forgotten why you chose a particular parameter value, where you copied a block of code from, or what you found interesting about an intermediate result. If you do not have time to fully document what you are doing or thinking in the moment, leave short descriptive notes to remind yourself what to add when you get to a good stopping point. While the code needed to reproduce the analysis may be automatically captured in your notebook, the reasoning and intuition may not. It is okay if the story in your notebook changes over time; you should still tell a story from the very beginning, even if you don’t know the ending yet."
+        },
+        {
+          "rank": 28,
+          "score": 0.04942155075210487,
+          "block_id": "P2-S02-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S02",
+          "heading": "Rule 1: Tell a story for an audience",
+          "paragraph_index": 1,
+          "text": "How you tell the story will depend on your goal and audience. Do you plan to share your notebook with a nontechnical colleague in your lab, analysts at another lab, readers of a particular journal, or the general public? You may need different kinds and levels of explanation for each audience. In any case, remember that your primary audience will most likely be your future self. Is your explanation clear enough that you will be able to understand and reproduce the analysis a month from now? People often overestimate what they will be able to remember in the future, so err on the side of overexplaining. If you won’t be able to recreate your own analysis in the near future, how could anyone else?"
+        },
+        {
+          "rank": 29,
+          "score": 0.03976741806480274,
+          "block_id": "P2-S12-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S12",
+          "heading": "Annotated notebooks",
+          "paragraph_index": 0,
+          "text": "To demonstrate the 10 rules, we have created a Git Repository with annotated example notebooks ( https://github.com/jupyter-guide/ten-rules-jupyter ). Following Rule 9, read, run, and explore these notebooks. In addition, we have created a repository ( https://github.com/jupyter-guide/jupyter-guide ) to crowdsource more technical and in-depth tutorials and to keep up with the rapidly evolving Jupyter ecosystem. We encourage you to contribute and share your experiences and know-how following Rule 10."
+        }
+      ],
+      "baseline": [
+        {
+          "block_id": "P2-S05-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S05",
+          "heading": "Rule 4: Modularize code",
+          "paragraph_index": 0,
+          "text": "It is always good practice to avoid duplicate code, but in notebooks, it is especially easy to copy a cell, tweak a few lines, paste the resulting code into a new cell or another notebook, and run it again. This form of experimentation is expedient but makes notebooks difficult to read and nearly impossible to maintain if you want to change the functionality of or fix a bug in the copied code. Instead, wrap code you are about to copy and reuse in a function, which you can then call from as many cells as desired. If you are going to reuse the code in other projects or notebooks, consider turning it into a module, package, or library."
+        },
+        {
+          "block_id": "P2-S10-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S10",
+          "heading": "Rule 9: Design your notebooks to be read, run, and explored",
+          "paragraph_index": 1,
+          "text": "Read: Beyond granting permission to reuse your notebook, consider how you can leverage the unique structure of notebooks to support reading. At the very least, leave static HTML/PDF versions of all notebooks stored in the final version of the repository accompanying a publication. If, in 20 years, all other execution technology fails, these are likely to still provide a readable archival record, and with a full dependences list, future users are more likely to be able to recreate the compute environment. You can also use Nbviewer ( https://nbviewer.jupyter.org/ ) to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first. GitHub uses this service to render any notebooks on their site, so pushing a notebook to GitHub is another good way to make static views easily available. In both cases, you can point collaborators to a URL where they can read through your notebook online."
+        }
+      ],
+      "improved": [
+        {
+          "block_id": "P2-S05-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S05",
+          "heading": "Rule 4: Modularize code",
+          "paragraph_index": 0,
+          "text": "It is always good practice to avoid duplicate code, but in notebooks, it is especially easy to copy a cell, tweak a few lines, paste the resulting code into a new cell or another notebook, and run it again. This form of experimentation is expedient but makes notebooks difficult to read and nearly impossible to maintain if you want to change the functionality of or fix a bug in the copied code. Instead, wrap code you are about to copy and reuse in a function, which you can then call from as many cells as desired. If you are going to reuse the code in other projects or notebooks, consider turning it into a module, package, or library."
+        },
+        {
+          "block_id": "P2-S05-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S05",
+          "heading": "Rule 4: Modularize code",
+          "paragraph_index": 1,
+          "text": "Not only does modularization save space, support maintenance, and ease debugging, it also makes it easier to add interactivity. For example, you can tie widgets (ipywidgets, https://ipywidgets.readthedocs.io/en/stable/ ) to functions to support exploration of different parameter values or support interaction with visualizations without needing to modify the code. This is one way you can design your notebook to be explored (Rule 9)."
+        },
+        {
+          "block_id": "P2-S10-p01",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S10",
+          "heading": "Rule 9: Design your notebooks to be read, run, and explored",
+          "paragraph_index": 0,
+          "text": "If you have followed the previous rules, your notebooks should capture your entire process and be easy to read. But how will others access, run, and explore them? There are a number of ways you can support others’ reuse of your notebooks. First, store your notebooks in a public code repository with a clear README file and a liberal open source license ( https://opensource.org/licenses ) granting permission to reuse your code."
+        },
+        {
+          "block_id": "P2-S10-p02",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S10",
+          "heading": "Rule 9: Design your notebooks to be read, run, and explored",
+          "paragraph_index": 1,
+          "text": "Read: Beyond granting permission to reuse your notebook, consider how you can leverage the unique structure of notebooks to support reading. At the very least, leave static HTML/PDF versions of all notebooks stored in the final version of the repository accompanying a publication. If, in 20 years, all other execution technology fails, these are likely to still provide a readable archival record, and with a full dependences list, future users are more likely to be able to recreate the compute environment. You can also use Nbviewer ( https://nbviewer.jupyter.org/ ) to provide static views of your executed notebook online without needing to convert it to a PDF/HTML document first. GitHub uses this service to render any notebooks on their site, so pushing a notebook to GitHub is another good way to make static views easily available. In both cases, you can point collaborators to a URL where they can read through your notebook online."
+        },
+        {
+          "block_id": "P2-S10-p03",
+          "doc_id": "P2",
+          "snapshot": "published",
+          "section_id": "P2-S10",
+          "heading": "Rule 9: Design your notebooks to be read, run, and explored",
+          "paragraph_index": 2,
+          "text": "Run: To support others running your notebooks, you can use Binder [ 16 ] to provide a zero-install environment to run your notebooks in the cloud ( https://mybinder.org/ ). Binder enables community members to rerun your notebook online without needing to install Jupyter Notebook or Jupyter Lab on their own machine. More generally, you can create a portable containerized environment, for example, a Docker image ( https://docs.docker.com/ ), or create a dependency description file (see Rule 3 ) so future users of your notebook can more easily replicate your computing environment when rerunning your notebook."
+        }
+      ],
+      "neighbors": [
+        {
+          "seed": "P2-S05-p01",
+          "added": "P2-S05-p02",
+          "reason": "同文档、快照、章节内的紧邻原段落"
+        },
+        {
+          "seed": "P2-S10-p02",
+          "added": "P2-S10-p01",
+          "reason": "同文档、快照、章节内的紧邻原段落"
+        },
+        {
+          "seed": "P2-S10-p02",
+          "added": "P2-S10-p03",
+          "reason": "同文档、快照、章节内的紧邻原段落"
+        }
+      ],
+      "coverage": {
+        "baseline": {
+          "required_blocks": [
+            "P2-S10-p02",
+            "P2-S10-p03"
+          ],
+          "present_required": [
+            "P2-S10-p02"
+          ],
+          "complete": false
+        },
+        "improved": {
+          "required_blocks": [
+            "P2-S10-p02",
+            "P2-S10-p03"
+          ],
+          "present_required": [
+            "P2-S10-p02",
+            "P2-S10-p03"
+          ],
+          "complete": true
+        }
+      },
+      "scope_and_section_boundaries": true,
+      "no_manual_repair": true,
+      "label_correct": "not_run",
+      "source_authenticity_of_model_selected_citations": "not_run",
+      "citation_support": "not_run",
+      "strict_success": "not_run",
+      "judgment_source": "unverified",
+      "reviewer": "Codex原文辅助复核，尚待本人确认"
+    },
+    {
+      "at": "2026-10-16T16:49:28.415025+08:00",
+      "id": "AD03",
+      "claim": "绘图过程中做过数据转换时，只保留最终图片就满足作者关于图底层数据的建议。",
+      "old_query": "data conversion, final image",
+      "manual_translation": "When data transformations have been performed during plotting, keeping only the final image satisfies the author's recommendations about the data underlying the plot.",
+      "actual_automatic_translation": "When drawing, only retain the final image after data conversion to meet the author's suggestion of preserving the underlying data.",
+      "fidelity": {
+        "fully_faithful": "partial",
+        "direction_preserved": true,
+        "basis": "only、final image、after data conversion保留了主要对象与限制；原来这是一个满足建议的陈述，被改成only retain...to meet...的祈使/目的表达，并增加preserving措辞，不称完全忠实。没有把原主张改成反对只留图，但实际译文未复现人工理想译文的检索收益。",
+        "alignment": [
+          {
+            "zh": "绘图过程中做过数据转换时",
+            "actual_en": "When drawing ... after data conversion",
+            "assessment": "大体保留绘图与已转换条件"
+          },
+          {
+            "zh": "只保留最终图片就满足作者关于图底层数据的建议",
+            "actual_en": "only retain the final image ... to meet the author's suggestion of preserving the underlying data",
+            "assessment": "断言改为祈使/目的，增加preserving措辞；非逐项完整等价"
+          }
+        ]
+      },
+      "translation_raw_record": "进阶/a_exploration/runs/query-translation-20261016-133457/automatic-translations/run-f4e1469e-8a51-48b4-821d-b02588edf03e.json",
+      "translation_run_id": "f4e1469e-8a51-48b4-821d-b02588edf03e",
+      "translation_raw_content": "{\"translation\":\"When drawing, only retain the final image after data conversion to meet the author's suggestion of preserving the underlying data.\"}",
+      "translation_seconds": 1.1006583999842405,
+      "usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 134,
+        "total_tokens": 162,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "translation_input_tokens": 134,
+      "truncated": false,
+      "query_tokens": [
+        "when",
+        "drawing",
+        "only",
+        "retain",
+        "the",
+        "final",
+        "image",
+        "after",
+        "data",
+        "conversion",
+        "to",
+        "meet",
+        "the",
+        "author's",
+        "suggestion",
+        "of",
+        "preserving",
+        "the",
+        "underlying",
+        "data"
+      ],
+      "full_ranking": [
+        {
+          "rank": 1,
+          "score": 0.2005776834629384,
+          "block_id": "P1-S09-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S09",
+          "heading": "Rule 8: Generate Hierarchical Analysis Output, Allowing Layers of Increasing Detail to Be Inspected",
+          "paragraph_index": 0,
+          "text": "The final results that make it to an article, be it plots or tables, often represent highly summarized data. For instance, each value along a curve may in turn represent averages from an underlying distribution. In order to validate and fully understand the main result, it is often useful to inspect the detailed values underlying the summaries. A common but impractical way of doing this is to incorporate various debug outputs in the source code of scripts and programs. When the storage context allows, it is better to simply incorporate permanent output of all underlying data when a main result is generated, using a systematic naming convention to allow the full data underlying a given summarized value to be easily found. We find hypertext (i.e., html file output) to be particularly useful for this purpose. This allows summarized results to be generated along with links that can be very conveniently followed (by simply clicking) to the full data underlying each summarized value. When working with summarized results, you should as a minimum at least once generate, inspect, and validate the detailed values underlying the summaries."
+        },
+        {
+          "rank": 2,
+          "score": 0.1492284336783329,
+          "block_id": "P1-S02-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S02",
+          "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+          "paragraph_index": 0,
+          "text": "Whenever a result may be of potential interest, keep track of how it was produced. When doing this, one will frequently find that getting from raw data to the final result involves many interrelated steps (single commands, scripts, programs). We refer to such a sequence of steps, whether it is automated or performed manually, as an analysis workflow. While the essential part of an analysis is often represented by only one of the steps, the full sequence of pre- and post-processing steps are often critical in order to reach the achieved result. For every involved step, you should ensure that every detail that may influence the execution of the step is recorded. If the step is performed by a computer program, the critical details include the name and version of the program, as well as the exact parameters and inputs that were used."
+        },
+        {
+          "rank": 3,
+          "score": 0.13985093026190518,
+          "block_id": "P1-S08-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S08",
+          "heading": "Rule 7: Always Store Raw Data behind Plots",
+          "paragraph_index": 0,
+          "text": "From the time a figure is first generated to it being part of a published article, it is often modified several times. In some cases, such modifications are merely visual adjustments to improve readability, or to ensure visual consistency between figures. If raw data behind figures are stored in a systematic manner, so as to allow raw data for a given figure to be easily retrieved, one can simply modify the plotting procedure, instead of having to redo the whole analysis. An additional advantage of this is that if one really wants to read fine values in a figure, one can consult the raw numbers. In cases where plotting involves more than a direct visualization of underlying numbers, it can be useful to store both the underlying data and the processed values that are directly visualized. An example of this is the plotting of histograms, where both the values before binning (original data) and the counts per bin (heights of visualized bars) could be stored. When plotting is performed using a command-based system like R, it is convenient to also store the code used to make the plot. One can then apply slight modifications to these commands, instead of having to specify the plot from scratch. As a minimum, one should note which data formed the basis of a given plot and how this data could be reconstructed."
+        },
+        {
+          "rank": 4,
+          "score": 0.13937661736269552,
+          "block_id": "P1-S10-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S10",
+          "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+          "paragraph_index": 1,
+          "text": "If you want to reevaluate your previous interpretations, or allow peers to make their own assessment of claims you make in a scientific paper, you will have to connect a given textual statement (interpretation, claim, conclusion) to the precise results underlying the statement. Making this connection when it is needed may be difficult and error-prone, as it may be hard to locate the exact result underlying and supporting the statement from a large pool of different analyses with various versions."
+        },
+        {
+          "rank": 5,
+          "score": 0.1284817156347919,
+          "block_id": "P1-S06-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S06",
+          "heading": "Rule 5: Record All Intermediate Results, When Possible in Standardized Formats",
+          "paragraph_index": 0,
+          "text": "In principle, as long as the full process used to produce a given result is tracked, all intermediate data can also be regenerated. In practice, having easily accessible intermediate results may be of great value. Quickly browsing through intermediate results can reveal discrepancies toward what is assumed, and can in this way uncover bugs or faulty interpretations that are not apparent in the final results. Secondly, it more directly reveals consequences of alternative programs and parameter choices at individual steps. Thirdly, when the full process is not readily executable, it allows parts of the process to be rerun. Fourthly, when reproducing results, it allows any experienced inconsistencies to be tracked to the steps where the problems arise. Fifth, it allows critical examination of the full process behind a result, without the need to have all executables operational. When possible, store such intermediate results in standardized formats. As a minimum, archive any intermediate result files that are produced when running an analysis (as long as the required storage space is not prohibitive)."
+        },
+        {
+          "rank": 6,
+          "score": 0.12429957440622927,
+          "block_id": "P1-S11-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S11",
+          "heading": "Rule 10: Provide Public Access to Scripts, Runs, and Results",
+          "paragraph_index": 1,
+          "text": "Making reproducibility of your work by peers a realistic possibility sends a strong signal of quality, trustworthiness, and transparency. This could increase the quality and speed of the reviewing process on your work, the chances of your work getting published, and the chances of your work being taken further and cited by other researchers after publication [25] ."
+        },
+        {
+          "rank": 7,
+          "score": 0.11608997178019839,
+          "block_id": "P1-S10-p04",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S10",
+          "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+          "paragraph_index": 3,
+          "text": "As a minimum, you should provide enough details along with your textual interpretations so as to allow the exact underlying results, or at least some related results, to be tracked down in the future."
+        },
+        {
+          "rank": 8,
+          "score": 0.11553022456718928,
+          "block_id": "P1-S03-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S03",
+          "heading": "Rule 2: Avoid Manual Data Manipulation Steps",
+          "paragraph_index": 0,
+          "text": "Whenever possible, rely on the execution of programs instead of manual procedures to modify data. Such manual procedures are not only inefficient and error-prone, they are also difficult to reproduce. If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts. If working with integrated frameworks, there will typically be a quite rich collection of components for data manipulation. As an example, manual tweaking of data files to attain format compatibility should be replaced by format converters that can be reenacted and included into executable workflows. Other manual operations like the use of copy and paste between documents should also be avoided. If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose."
+        },
+        {
+          "rank": 9,
+          "score": 0.1148952314676472,
+          "block_id": "P1-S04-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S04",
+          "heading": "Rule 3: Archive the Exact Versions of All External Programs Used",
+          "paragraph_index": 0,
+          "text": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. Also, as both input and output formats may change between versions, a newer version of a program may not even run without modifying its inputs. Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. Archiving the exact versions of programs actually used may thus save a lot of hassle at later stages. In some cases, all that is needed is to store a single executable or source code file. In other cases, a given program may again have specific requirements to other installed programs/packages, or dependencies to specific operating system components. To ensure future availability, the only viable solution may then be to store a full virtual machine image of the operating system and program. As a minimum, you should note the exact names and versions of the main programs you use."
+        },
+        {
+          "rank": 10,
+          "score": 0.11369153864143483,
+          "block_id": "P1-S05-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S05",
+          "heading": "Rule 4: Version Control All Custom Scripts",
+          "paragraph_index": 0,
+          "text": "Even the slightest change to a computer program can have large intended or unintended consequences. When a continually developed piece of code (typically a small script) has been used to generate a certain result, only that exact state of the script may be able to produce that exact output, even given the same input data and parameters. As also discussed for rules 3 and 6, exact reproduction of results may in certain situations be essential. If computer code is not systematically archived along its evolution, backtracking to a code state that gave a certain result may be a hopeless task. This can cast doubt on previous results, as it may be impossible to know if they were partly the result of a bug or otherwise unfortunate behavior."
+        },
+        {
+          "rank": 11,
+          "score": 0.11203940039274955,
+          "block_id": "P1-S01-p03",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 2,
+          "text": "We want to emphasize that reproducibility is not only a moral responsibility with respect to the scientific field, but that a lack of reproducibility can also be a burden for you as an individual researcher. As an example, a good practice of reproducibility is necessary in order to allow previously developed methodology to be effectively applied on new data, or to allow reuse of code and results for new projects. In other words, good habits of reproducibility may actually turn out to be a time-saver in the longer run."
+        },
+        {
+          "rank": 12,
+          "score": 0.10419828891629869,
+          "block_id": "P1-S01-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 0,
+          "text": "Replication is the cornerstone of a cumulative science [1] . However, new tools and technologies, massive amounts of data, interdisciplinary approaches, and the complexity of the questions being asked are complicating replication efforts, as are increased pressures on scientists to advance their research [2] . As full replication of studies on independently collected data is often not feasible, there has recently been a call for reproducible research as an attainable minimum standard for assessing the value of scientific claims [3] . This requires that papers in experimental science describe the results and provide a sufficiently clear protocol to allow successful repetition and extension of analyses based on original data [4] ."
+        },
+        {
+          "rank": 13,
+          "score": 0.09968928400142764,
+          "block_id": "P1-S07-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S07",
+          "heading": "Rule 6: For Analyses That Include Randomness, Note Underlying Random Seeds",
+          "paragraph_index": 0,
+          "text": "Many analyses and predictions include some element of randomness, meaning the same program will typically give slightly different results every time it is executed (even when receiving identical inputs and parameters). However, given the same initial seed, all random numbers used in an analysis will be equal, thus giving identical results every time it is run. There is a large difference between observing that a result has been reproduced exactly or only approximately. While achieving equal results is a strong indication that a procedure has been reproduced exactly, it is often hard to conclude anything when achieving only approximately equal results. For analyses that involve random numbers, this means that the random seed should be recorded. This allows results to be reproduced exactly by providing the same seed to the random number generator in future runs. As a minimum, you should note which analysis steps involve randomness, so that a certain level of discrepancy can be anticipated when reproducing the results."
+        },
+        {
+          "rank": 14,
+          "score": 0.09653950312078304,
+          "block_id": "P1-S11-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S11",
+          "heading": "Rule 10: Provide Public Access to Scripts, Runs, and Results",
+          "paragraph_index": 0,
+          "text": "Last, but not least, all input data, scripts, versions, parameters, and intermediate results should be made publicly and easily accessible. Various solutions have now become available to make data sharing more convenient, standardized, and accessible in particular domains, such as for gene expression data [21] – [23] . Most journals allow articles to be supplemented with online material, and some journals have initiated further efforts for making data and code more integrated with publications [3] , [24] . As a minimum, you should submit the main data and source code as supplementary material, and be prepared to respond to any requests for further data or methodology details by peers."
+        },
+        {
+          "rank": 15,
+          "score": 0.08158030676017514,
+          "block_id": "P1-S02-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S02",
+          "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+          "paragraph_index": 1,
+          "text": "Although manually noting the precise sequence of steps taken allows for an analysis to be reproduced, the documentation can easily get out of sync with how the analysis was really performed in its final version. By instead specifying the full analysis workflow in a form that allows for direct execution, one can ensure that the specification matches the analysis that was (subsequently) performed, and that the analysis can be reproduced by yourself or others in an automated way. Such executable descriptions [10] might come in the form of simple shell scripts or makefiles [15] , [16] at the command line, or in the form of stored workflows in a workflow management system [10] , [11] , [13] , [17] , [18] ."
+        },
+        {
+          "rank": 16,
+          "score": 0.07617685528162496,
+          "block_id": "P1-S10-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S10",
+          "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+          "paragraph_index": 0,
+          "text": "Throughout a typical research project, a range of different analyses are tried and interpretation of the results made. Although the results of analyses and their corresponding textual interpretations are clearly interconnected at the conceptual level, they tend to live quite separate lives in their representations: results usually live on a data area on a server or personal computer, while interpretations live in text documents in the form of personal notes or emails to collaborators. Such textual interpretations are not generally mere shadows of the results—they often involve viewing the results in light of other theories and results. As such, they carry extra information, while at the same time having their necessary support in a given result."
+        },
+        {
+          "rank": 17,
+          "score": 0.07592963311291154,
+          "block_id": "P1-S10-p03",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S10",
+          "heading": "Rule 9: Connect Textual Statements to Underlying Results",
+          "paragraph_index": 2,
+          "text": "To allow efficient retrieval of details behind textual statements, we suggest that statements are connected to underlying results already from the time the statements are initially formulated (for instance in notes or emails). Such a connection can for instance be a simple file path to detailed results, or the ID of a result in an analysis framework, included within the text itself. For an even tighter integration, there are tools available to help integrate reproducible analyses directly into textual documents, such as Sweave [19] , the GenePattern Word add-in [4] , and Galaxy Pages [20] . These solutions can also subsequently be used in connection with publications, as discussed in the next rule."
+        },
+        {
+          "rank": 18,
+          "score": 0.07369843379893494,
+          "block_id": "P1-S01-p05",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 4,
+          "text": "In a pragmatic setting, with publication pressure and deadlines, one may face the need to make a trade-off between the ideals of reproducibility and the need to get the research out while it is still relevant. This trade-off becomes more important when considering that a large part of the analyses being tried out never end up yielding any results. However, frequently one will, with the wisdom of hindsight, contemplate the missed opportunity to ensure reproducibility, as it may already be too late to take the necessary notes from memory (or at least much more difficult than to do it while underway). We believe that the rewards of reproducibility will compensate for the risk of having spent valuable time developing an annotated catalog of analyses that turned out as blind alleys."
+        },
+        {
+          "rank": 19,
+          "score": 0.06668375526728848,
+          "block_id": "P1-S05-p03",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S05",
+          "heading": "Rule 4: Version Control All Custom Scripts",
+          "paragraph_index": 2,
+          "text": "As a minimum, you should archive copies of your scripts from time to time, so that you keep a rough record of the various states the code has taken during development."
+        },
+        {
+          "rank": 20,
+          "score": 0.06389438160231835,
+          "block_id": "P1-S05-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S05",
+          "heading": "Rule 4: Version Control All Custom Scripts",
+          "paragraph_index": 1,
+          "text": "The standard solution to track evolution of code is to use a version control system [15] , such as Subversion, Git, or Mercurial. These systems are relatively easy to set up and use, and may be used to systematically store the state of the code throughout development at any desired time granularity."
+        },
+        {
+          "rank": 21,
+          "score": 0.0509325160628358,
+          "block_id": "P1-S01-p06",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 5,
+          "text": "As a minimal requirement, you should at least be able to reproduce the results yourself. This would satisfy the most basic requirements of sound research, allowing any substantial future questioning of the research to be met with a precise explanation. Although it may sound like a very weak requirement, even this level of reproducibility will often require a certain level of care in order to be met. There will for a given analysis be an exponential number of possible combinations of software versions, parameter values, pre-processing steps, and so on, meaning that a failure to take notes may make exact reproduction essentially impossible."
+        },
+        {
+          "rank": 22,
+          "score": 0.04933129841139054,
+          "block_id": "P1-S01-p04",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 3,
+          "text": "We further note that reproducibility is just as much about the habits that ensure reproducible research as the technologies that can make these processes efficient and realistic. Each of the following ten rules captures a specific aspect of reproducibility, and discusses what is needed in terms of information handling and tracking of procedures. If you are taking a bare-bones approach to bioinformatics analysis, i.e., running various custom scripts from the command line, you will probably need to handle each rule explicitly. If you are instead performing your analyses through an integrated framework (such as GenePattern [10] , Galaxy [11] , LONI pipeline [12] , or Taverna [13] ), the system may already provide full or partial support for most of the rules. What is needed on your part is then merely the knowledge of how to exploit these existing possibilities."
+        },
+        {
+          "rank": 23,
+          "score": 0.04347816934587175,
+          "block_id": "P1-S02-p03",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S02",
+          "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+          "paragraph_index": 2,
+          "text": "As a minimum, you should at least record sufficient details on programs, parameters, and manual procedures to allow yourself, in a year or so, to approximately reproduce the results."
+        },
+        {
+          "rank": 24,
+          "score": 0.03782718416867946,
+          "block_id": "P1-S01-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 1,
+          "text": "The importance of replication and reproducibility has recently been exemplified through studies showing that scientific papers commonly leave out experimental details essential for reproduction [5] , studies showing difficulties with replicating published experimental results [6] , an increase in retracted papers [7] , and through a high number of failing clinical trials [8] , [9] . This has led to discussions on how individual researchers, institutions, funding bodies, and journals can establish routines that increase transparency and reproducibility. In order to foster such aspects, it has been suggested that the scientific community needs to develop a “culture of reproducibility” for computational science, and to require it for published claims [3] ."
+        },
+        {
+          "rank": 25,
+          "score": 0.028119855197213318,
+          "block_id": "P1-S01-p07",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 6,
+          "text": "With this basic level of reproducibility in place, there is much more that can be wished for. An obvious extension is to go from a level where you can reproduce results in case of a critical situation to a level where you can practically and routinely reuse your previous work and increase your productivity. A second extension is to ensure that peers have a practical possibility of reproducing your results, which can lead to increased trust in, interest for, and citations of your work [6] , [14] ."
+        },
+        {
+          "rank": 26,
+          "score": 0.01844082834372286,
+          "block_id": "P1-S01-p08",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S01",
+          "heading": "Introduction (unheaded)",
+          "paragraph_index": 7,
+          "text": "We here present ten simple rules for reproducibility of computational research. These rules can be at your disposal for whenever you want to make your research more accessible—be it for peers or for your future self."
+        }
+      ],
+      "baseline": [
+        {
+          "block_id": "P1-S02-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S02",
+          "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+          "paragraph_index": 0,
+          "text": "Whenever a result may be of potential interest, keep track of how it was produced. When doing this, one will frequently find that getting from raw data to the final result involves many interrelated steps (single commands, scripts, programs). We refer to such a sequence of steps, whether it is automated or performed manually, as an analysis workflow. While the essential part of an analysis is often represented by only one of the steps, the full sequence of pre- and post-processing steps are often critical in order to reach the achieved result. For every involved step, you should ensure that every detail that may influence the execution of the step is recorded. If the step is performed by a computer program, the critical details include the name and version of the program, as well as the exact parameters and inputs that were used."
+        },
+        {
+          "block_id": "P1-S09-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S09",
+          "heading": "Rule 8: Generate Hierarchical Analysis Output, Allowing Layers of Increasing Detail to Be Inspected",
+          "paragraph_index": 0,
+          "text": "The final results that make it to an article, be it plots or tables, often represent highly summarized data. For instance, each value along a curve may in turn represent averages from an underlying distribution. In order to validate and fully understand the main result, it is often useful to inspect the detailed values underlying the summaries. A common but impractical way of doing this is to incorporate various debug outputs in the source code of scripts and programs. When the storage context allows, it is better to simply incorporate permanent output of all underlying data when a main result is generated, using a systematic naming convention to allow the full data underlying a given summarized value to be easily found. We find hypertext (i.e., html file output) to be particularly useful for this purpose. This allows summarized results to be generated along with links that can be very conveniently followed (by simply clicking) to the full data underlying each summarized value. When working with summarized results, you should as a minimum at least once generate, inspect, and validate the detailed values underlying the summaries."
+        }
+      ],
+      "improved": [
+        {
+          "block_id": "P1-S02-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S02",
+          "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+          "paragraph_index": 0,
+          "text": "Whenever a result may be of potential interest, keep track of how it was produced. When doing this, one will frequently find that getting from raw data to the final result involves many interrelated steps (single commands, scripts, programs). We refer to such a sequence of steps, whether it is automated or performed manually, as an analysis workflow. While the essential part of an analysis is often represented by only one of the steps, the full sequence of pre- and post-processing steps are often critical in order to reach the achieved result. For every involved step, you should ensure that every detail that may influence the execution of the step is recorded. If the step is performed by a computer program, the critical details include the name and version of the program, as well as the exact parameters and inputs that were used."
+        },
+        {
+          "block_id": "P1-S02-p02",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S02",
+          "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+          "paragraph_index": 1,
+          "text": "Although manually noting the precise sequence of steps taken allows for an analysis to be reproduced, the documentation can easily get out of sync with how the analysis was really performed in its final version. By instead specifying the full analysis workflow in a form that allows for direct execution, one can ensure that the specification matches the analysis that was (subsequently) performed, and that the analysis can be reproduced by yourself or others in an automated way. Such executable descriptions [10] might come in the form of simple shell scripts or makefiles [15] , [16] at the command line, or in the form of stored workflows in a workflow management system [10] , [11] , [13] , [17] , [18] ."
+        },
+        {
+          "block_id": "P1-S09-p01",
+          "doc_id": "P1",
+          "snapshot": "published",
+          "section_id": "P1-S09",
+          "heading": "Rule 8: Generate Hierarchical Analysis Output, Allowing Layers of Increasing Detail to Be Inspected",
+          "paragraph_index": 0,
+          "text": "The final results that make it to an article, be it plots or tables, often represent highly summarized data. For instance, each value along a curve may in turn represent averages from an underlying distribution. In order to validate and fully understand the main result, it is often useful to inspect the detailed values underlying the summaries. A common but impractical way of doing this is to incorporate various debug outputs in the source code of scripts and programs. When the storage context allows, it is better to simply incorporate permanent output of all underlying data when a main result is generated, using a systematic naming convention to allow the full data underlying a given summarized value to be easily found. We find hypertext (i.e., html file output) to be particularly useful for this purpose. This allows summarized results to be generated along with links that can be very conveniently followed (by simply clicking) to the full data underlying each summarized value. When working with summarized results, you should as a minimum at least once generate, inspect, and validate the detailed values underlying the summaries."
+        }
+      ],
+      "neighbors": [
+        {
+          "seed": "P1-S02-p01",
+          "added": "P1-S02-p02",
+          "reason": "同文档、快照、章节内的紧邻原段落"
+        }
+      ],
+      "coverage": {
+        "baseline": {
+          "required_blocks": [
+            "P1-S08-p01"
+          ],
+          "present_required": [],
+          "complete": false
+        },
+        "improved": {
+          "required_blocks": [
+            "P1-S08-p01"
+          ],
+          "present_required": [],
+          "complete": false
+        }
+      },
+      "scope_and_section_boundaries": true,
+      "no_manual_repair": true,
+      "label_correct": "not_run",
+      "source_authenticity_of_model_selected_citations": "not_run",
+      "citation_support": "not_run",
+      "strict_success": "not_run",
+      "judgment_source": "unverified",
+      "reviewer": "Codex原文辅助复核，尚待本人确认"
+    }
+  ],
+  "decision": {
+    "at": "2026-10-16T16:49:28.418399+08:00",
+    "allow_answers": false,
+    "reason": "AD02关键否定/充分性反转，自动译文未通过忠实度门禁；此外AD03的指定核心段仅排第3，未进入top2或其同章节邻段，自动检索无必要覆盖改善。",
+    "direction_changed": [
+      "AD02"
+    ],
+    "other_fidelity_omissions": [
+      "AD01数据文件限定泛化",
+      "AD03陈述改祈使/目的表达"
+    ],
+    "manual_ideal_improvement": [
+      "AD03"
+    ],
+    "actual_automatic_improvements": [],
+    "actual_automatic_regressions": [],
+    "coverage_denominators": {
+      "baseline": 3,
+      "improved": 3
+    },
+    "coverage_counts": {
+      "old_keywords_baseline": 1,
+      "old_keywords_improved": 2,
+      "manual_translation_baseline": 2,
+      "manual_translation_improved": 3,
+      "actual_automatic_baseline": 1,
+      "actual_automatic_improved": 2
+    },
+    "answer_calls_executed": 0,
+    "answer_calls_not_executed": 6,
+    "answer_metrics": "not_run，不计为模型判断错误或成功。",
+    "not_adopted": true,
+    "retained": "现有关键词转换、共同判断提示和句子选择机制保持不变。",
+    "limits": [
+      "人工译文提升仅支持理想译文条件下检索可能改善，不是自动成绩。",
+      "长译文也引入中间结果/模块化段；覆盖/干扰变化不能单独归于长度或某个关键词。",
+      "TF-IDF不验证逻辑方向，错误译文仍可命中同一段。",
+      "AD03原S09有相邻底层值论述，指定S08覆盖与其他可能的部分依据分开；本轮未用缺失S08补模型回答。"
+    ],
+    "stop": "不追加搜索或生成；七道评测未读取。",
+    "new_generations": 3,
+    "cumulative": 585,
+    "A_used": 51,
+    "A_cap": 90,
+    "A_remaining": 39,
+    "cap_adjusted_by_user_before_execution": true,
+    "technical_request_failures": 0
+  }
+}

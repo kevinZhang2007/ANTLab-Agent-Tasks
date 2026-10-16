@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-16T17:41:26.203804+08:00",
+  "reused_history": "基础/runs/thinking_pair/20261014-125513/resume-20261014-130150/source-template-parser-evidence.json",
+  "sources": [
+    {
+      "path": "基础/runs/prompts/qwen06_short_budget_r0/official-server-common.cpp.txt",
+      "official_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049/tools/server/server-common.cpp",
+      "source_commit": "d81235049",
+      "recorded_sha256": "74181b0fa4ac076debdffaac77c61f371bf1176836fa6743a1a6692f92104401",
+      "actual_byte_sha256": "74181b0fa4ac076debdffaac77c61f371bf1176836fa6743a1a6692f92104401",
+      "LF_normalized_in_memory_sha256": "74181b0fa4ac076debdffaac77c61f371bf1176836fa6743a1a6692f92104401",
+      "lines": [
+        1396,
+        1408
+      ],
+      "excerpt": "    // merge the template args provided from command line with the args provided in the user request\n    auto chat_template_kwargs_object = json_value(body, \"chat_template_kwargs\", json::object());\n    inputs.chat_template_kwargs = opt.chat_template_kwargs;\n    for (const auto & item : chat_template_kwargs_object.items()) {\n        inputs.chat_template_kwargs[item.key()] = item.value().dump();\n    }\n\n    // parse the \"enable_thinking\" kwarg to override the default value\n    auto enable_thinking_kwarg = json_value(inputs.chat_template_kwargs, \"enable_thinking\", std::string(\"\"));\n    if (enable_thinking_kwarg == \"true\") {\n        inputs.enable_thinking = true;\n    } else if (enable_thinking_kwarg == \"false\") {\n        inputs.enable_thinking = false;"
+    },
+    {
+      "path": "基础/runs/prompts/qwen06_short_budget_r0/official-chat-auto-parser-generator.cpp.txt",
+      "official_url": "https://raw.githubusercontent.com/ggml-org/llama.cpp/d81235049/common/chat-auto-parser-generator.cpp",
+      "source_commit": "d81235049",
+      "recorded_sha256": "9f76ec58eb8e7aa8d2c40df1be0a75ba2e90a0486fc347f6a00e73b4457d1df4",
+      "actual_byte_sha256": "9f76ec58eb8e7aa8d2c40df1be0a75ba2e90a0486fc347f6a00e73b4457d1df4",
+      "LF_normalized_in_memory_sha256": "9f76ec58eb8e7aa8d2c40df1be0a75ba2e90a0486fc347f6a00e73b4457d1df4",
+      "lines": [
+        105,
+        155
+      ],
+      "excerpt": "        bool                 extract_reasoning = inputs.reasoning_format != COMMON_REASONING_FORMAT_NONE;\n\n        ctx.extracting_reasoning = extract_reasoning && reasoning.mode != reasoning_mode::NONE;\n        ctx.content              = &content;\n        ctx.reasoning            = &reasoning;\n\n        // Build reasoning parser\n        ctx.reasoning_parser = reasoning.build_parser(ctx);\n\n        auto parser = p.eps();\n\n        bool has_tools           = inputs.tools.is_array() && !inputs.tools.empty();\n        bool has_response_format = inputs.json_schema.is_object() && !inputs.json_schema.empty();\n        bool pure_content        = reasoning.mode == reasoning_mode::NONE;\n\n        if (has_response_format) {\n            auto response_format = p.rule(\"response-format\", p.content(p.schema(p.json(), \"response-format-schema\", inputs.json_schema)));\n            parser = ctx.reasoning_parser + p.space() + p.choice({\n                p.literal(\"```json\") + p.space() + response_format + p.space() + p.literal(\"```\"),\n                p.space() + response_format  + p.space()\n            }) + p.end();\n            pure_content = false;\n        } else if (has_tools && inputs.tool_choice != COMMON_CHAT_TOOL_CHOICE_NONE && jinja_caps.supports_tool_calls) {\n            parser = tools.build_parser(ctx);\n            pure_content = false;\n        } else {\n            parser = content.build_parser(ctx);\n        }\n        const std::string reasoning_start = trim_whitespace(reasoning.start);\n        return pure_content ? p.prefix(generation_prompt, reasoning_start) + parser : p.prefix(generation_prompt, reasoning_start) << parser;\n    });\n}\n\ncommon_peg_parser analyze_reasoning::build_parser(parser_build_context & ctx) const {\n    auto & p = ctx.p;\n\n    if (!ctx.extracting_reasoning) {\n        return p.eps();\n    }\n\n    if (mode == reasoning_mode::TAG_BASED || mode == reasoning_mode::TOOLS_ONLY) {\n        if (!end.empty()) {\n            if (!start.empty()) {\n                // Standard tag-based: optional(<think>reasoning</think>)\n                return p.optional(p.optspace(start) + p.reasoning(p.until(trim_whitespace(end))) + p.optspace(end));\n            }\n            // Delimiter-style (empty start)\n            return p.optional(p.reasoning(p.until(trim_whitespace(end))) + p.optspace(end));\n        }\n    }\n"
+    }
+  ],
+  "reading": "请求kwargs布尔值覆盖enable_thinking；parser将reasoning parser与最终JSON Schema parser组合。实际本机Jinja只在false时补空think块，true不必预填think。",
+  "not_echoed": [
+    "内部enable_thinking布尔状态",
+    "本请求编译grammar与PEG对象"
+  ],
+  "no_network_or_download": true
+}

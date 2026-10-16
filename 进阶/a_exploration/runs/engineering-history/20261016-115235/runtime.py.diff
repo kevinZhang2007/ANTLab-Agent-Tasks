@@ -1,0 +1,15 @@
+--- old/runtime.py
++++ new/runtime.py
+@@ -37,7 +37,11 @@
+ 
+     def service(self,path,body=None):
+         req=urllib.request.Request(self.url+path,data=None if body is None else json.dumps(body,ensure_ascii=False).encode(),headers={'Content-Type':'application/json'})
+-        with self.opener.open(req,timeout=30) as r:return json.loads(r.read())
++        try:
++            with self.opener.open(req,timeout=30) as r:return json.loads(r.read())
++        except urllib.error.HTTPError as e:
++            write(self.folder/('auxiliary-http-error-'+str(time.time_ns())+'.json'),{'at':now(),'route':path,'request_body':body,'http_status':e.code,'raw_response':e.read().decode('utf-8',errors='replace'),'generation_interface':False})
++            raise
+ 
+     def event(self,event,**fields):
+         with (self.folder/'events.jsonl').open('a',encoding='utf-8') as f:f.write(json.dumps({'at':now(),'event':event,**fields},ensure_ascii=False)+'\n');f.flush();os.fsync(f.fileno())

@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-16T17:41:26.191835+08:00",
+  "status": "独立模板审计适配已起草，尚未执行检查/启动/生成",
+  "hypothesis": "在相同1024总输出预算下，真实思考模式可能改变原主张理解及引用判断，但也可能耗尽预算而没有最终结果。",
+  "competing_explanation": "reasoning可能重复错误判断或挤占最终JSON预算；正确思考句不能抵消最终错误，也不证明内部因果机制。",
+  "fixed": "原重复输入、原判断system、同句子Schema、同0.6B模型、采样与presence1.5、repeat1.0；不重新查询、不用人工充分证据。",
+  "mode_control": "统一支持推理解析的服务；每请求chat_template_kwargs.enable_thinking布尔false/true。只有该请求开关不同，不将解析格式字符串当开关证据。",
+  "service_common_adjustment": "相对前轮共同服务仅--reasoning off改on以支持解析；本轮两侧完全共用该服务，off由显式false渲染关闭分支。其余启动参数不变。",
+  "selection": "严格成功优先，其次最终标签正确；已有成功项不得退步，同分保留关闭思考。",
+  "evaluation": "全部生成结束后读取开发参考；最终JSON、标签、理由一致、非空来源真实、必要覆盖、支持、严格、预算耗尽、总输出tokens和完整请求耗时分列，残缺和无最终答案保留3题分母。",
+  "generation_cap": 6,
+  "baseline_cumulative": 603,
+  "A_used_before": 69,
+  "original_plan_budget": 90,
+  "original_plan_remaining_before": 21,
+  "future_reserved_additional": 30,
+  "future_reservation_used": 0,
+  "future_reservation_authorizes_execution": false,
+  "reservation_note": "本人本轮另行要求为后续七题对照、变体与反事实预留30次；与原90计划及本轮6次授权分列，未恢复七题执行，不把预留计入真实调用。",
+  "stopping": "完整输入+1024须<=4096；不截断。准备错误可离线修复留档；请求技术失败停止不自动重发；质量错误不重试；2GiB加载门槛，连续3个2秒低于1GiB样本停止自有服务。",
+  "no_AT_read": true
+}

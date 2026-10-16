@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-16T22:31:01.008285+08:00",
+  "reading": "复用已有A准备和基础reading证据；本批不声称重新读全文。",
+  "baseline_improvement": "正文TF-IDF最高2完整段落；改进仅补同章节前后邻段。",
+  "development": "five-rounds-summary.json；最终保留配置开发完整结果引用current-e2e-20261016-183739，没把被放弃配置或历史最好输出拼入。",
+  "freeze": "final-freeze.json，22:12:26先落盘，再解析evaluation-tasks.json。",
+  "seven_main_results": "evaluation/result-index.json、raw-response-index.json和review.json；7共享query＋14判断。",
+  "page": "current-e2e-20261016-183739/page-closure-index.json，采用版本与本次retained逐字节等价；本批评测走相同后端CLI，没有新评测页面截图，不冒充新页面闭环。",
+  "regions_zoom": "既有locator.py、reader.py、current_page.html；原始PDF页、词/行框精度保留，缩放按point坐标映射，不算自有CV。",
+  "failure": "failure-diagnosis.json；检索缺失与生成方向错误并存，第1轮证据补回仍拒判。",
+  "equivalence_counterfactual": "variants-and-counterfactual-summary.json；评测ID变体空输入限制未解决。",
+  "next_decision": "停止候选搜索，保留两方案可运行对照；无严格成功收益且成本增加，不宣称邻段优于简单基线或建议无条件部署。",
+  "request_chain": [
+    "页面(本批复用旧验证)→本地HTTP /api/run-pair→CurrentEngine",
+    "一次关键词生成→范围过滤→正文TF-IDF两段→同章节邻段",
+    "两侧完整原文＋句子索引紧凑输入→Qwen3-0.6B思考回答",
+    "模型选句→local_rule逐字展开→PDF保守定位→同request_id日志及页面"
+  ],
+  "timing_measured": [
+    "完整非流式模型HTTP时间",
+    "后端整对实测时间",
+    "各侧共享查询＋检索＋准备＋回答/定位组件和"
+  ],
+  "timing_not_measured": [
+    "前端网络和页面渲染的独立精确分项",
+    "跨用户排队及多worker"
+  ],
+  "future_inference_group_hypothesis": {
+    "question": "在固定模型、采样、CPU线程、单槽、缓存策略，并匹配输入/输出token数时，邻段组织的客户端延迟增量是否主要由prompt处理而非decode或排队解释？",
+    "needed_fields": [
+      "request_id",
+      "slot_id",
+      "prompt_tokens",
+      "completion_tokens",
+      "prompt_eval_ms",
+      "decode_ms",
+      "cached_tokens",
+      "queue_wait_ms",
+      "n_ctx",
+      "truncated",
+      "client_full_request_ms"
+    ],
+    "control": "先单槽串行，匹配输入和输出预算/实际长度；另行授权后才做并发，不把当前耗时外推服务端效率。",
+    "falsifier": "匹配token后差异消失或队列/缓存解释大部分增量，即不支持组织本身降低推理开销；需要保留失败样本。"
+  },
+  "still_missing": [
+    "本人逐项确认辅助原文判分，尤其AT02替代引用组合、AT04相关冗余边界。",
+    "非空评测输入上的模型ID重映射检验；本轮不擅自补跑。",
+    "聊天助手提供五份文档正文并经本人审核后落盘。",
+    "A/B双提交及本地自建服务验收仍无明确认可。",
+    "全新机器、其他OS、多用户及多worker未验证。"
+  ],
+  "no_experiments_added": true
+}

@@ -1,0 +1,293 @@
+{
+  "at": "2026-10-16T12:37:49.387732+08:00",
+  "passed": true,
+  "existing_checks": {
+    "status": "passed",
+    "passed": 35,
+    "failed": 0,
+    "checks": [
+      {
+        "name": "scope_no_leak",
+        "passed": true
+      },
+      {
+        "name": "unknown_document",
+        "passed": true
+      },
+      {
+        "name": "unknown_snapshot",
+        "passed": true
+      },
+      {
+        "name": "empty_doc_ids",
+        "passed": true
+      },
+      {
+        "name": "positive_scores_only",
+        "passed": true
+      },
+      {
+        "name": "chapter_barrier",
+        "passed": true
+      },
+      {
+        "name": "three_neighbors",
+        "passed": true
+      },
+      {
+        "name": "duplicate_seeds_no_duplicate_output",
+        "passed": true
+      },
+      {
+        "name": "all_full_paragraphs_preserved",
+        "passed": true
+      },
+      {
+        "name": "inputs_unchanged",
+        "passed": true
+      },
+      {
+        "name": "empty_query_retrieval",
+        "passed": true
+      },
+      {
+        "name": "empty_corpus",
+        "passed": true
+      },
+      {
+        "name": "empty_messages_no_answer_fabrication",
+        "passed": true
+      },
+      {
+        "name": "id_remap_content_invariance",
+        "passed": true
+      },
+      {
+        "name": "valid_id_and_quote",
+        "passed": true
+      },
+      {
+        "name": "invalid_reference_not_repaired",
+        "passed": true
+      },
+      {
+        "name": "fabricated_quote_not_repaired",
+        "passed": true
+      },
+      {
+        "name": "invalid_json",
+        "passed": true
+      },
+      {
+        "name": "invalid_query",
+        "passed": true
+      },
+      {
+        "name": "invalid_label",
+        "passed": true
+      },
+      {
+        "name": "answer_schema_required",
+        "passed": true
+      },
+      {
+        "name": "query_schema_required",
+        "passed": true
+      },
+      {
+        "name": "zoom_half",
+        "passed": true
+      },
+      {
+        "name": "zoom_double",
+        "passed": true
+      },
+      {
+        "name": "nonuniform_scale",
+        "passed": true
+      },
+      {
+        "name": "invalid_page_size",
+        "passed": true
+      },
+      {
+        "name": "whole_line_box_precision",
+        "passed": true
+      },
+      {
+        "name": "fake_quote_invalid",
+        "passed": true
+      },
+      {
+        "name": "ambiguous_location_rejected",
+        "passed": true
+      },
+      {
+        "name": "scope_location_no_leak",
+        "passed": true
+      },
+      {
+        "name": "development_parser_stops_before_fourth_object",
+        "passed": true
+      },
+      {
+        "name": "regression_detects_bad_cross_chapter_implementation",
+        "passed": true
+      },
+      {
+        "name": "technical_failure_saved_without_generation",
+        "passed": true
+      },
+      {
+        "name": "technical_failure_blocks_next_generation",
+        "passed": true
+      },
+      {
+        "name": "capacity_failure_blocks_http",
+        "passed": true
+      }
+    ],
+    "run_kind": "local_rule",
+    "generation_calls": 0,
+    "synthetic_only": true
+  },
+  "deterministic_candidate_checks": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "authentic_quote_passes",
+        "passed": true
+      },
+      {
+        "name": "unknown_id_fails",
+        "passed": true
+      },
+      {
+        "name": "added_ellipsis_fails",
+        "passed": true
+      },
+      {
+        "name": "translated_quote_fails",
+        "passed": true
+      },
+      {
+        "name": "paraphrased_quote_fails",
+        "passed": true
+      },
+      {
+        "name": "empty_quote_fails",
+        "passed": true
+      },
+      {
+        "name": "duplicate_id_fails",
+        "passed": true
+      },
+      {
+        "name": "fenced_json_not_stripped",
+        "passed": true
+      },
+      {
+        "name": "missing_field_not_added",
+        "passed": true
+      },
+      {
+        "name": "empty_references_structurally_valid_not_support",
+        "passed": true
+      },
+      {
+        "name": "authentic_unrelated_quote_semantics_not_checked",
+        "passed": true
+      },
+      {
+        "name": "failure_preserves_raw_and_label",
+        "passed": true
+      },
+      {
+        "name": "invalid_label_rejected",
+        "passed": true
+      },
+      {
+        "name": "candidate_changes_only_system_and_not_input",
+        "passed": true
+      }
+    ],
+    "count": 14,
+    "generation_calls": 0,
+    "semantic_support_not_inferred": true
+  },
+  "definition_cases": [
+    {
+      "case": "required_record_vs_no_need",
+      "evidence": "Every change must be recorded.",
+      "claim": "Changes do not need to be recorded.",
+      "expected_label": "contradicted",
+      "basis": "必要记录与无需记录直接不相容。"
+    },
+    {
+      "case": "read_only_vs_execution",
+      "evidence": "This file is a readable record. No information about execution is supplied.",
+      "claim": "This file is sufficient to execute the computation.",
+      "expected_label": "insufficient",
+      "basis": "只谈阅读且缺执行依据，不能把未提到直接当反证。"
+    },
+    {
+      "case": "recommendation_vs_mandatory",
+      "evidence": "Maintaining an index is recommended, but is not mandatory.",
+      "claim": "An index is mandatory in every case.",
+      "expected_label": "contradicted",
+      "basis": "建议且明确非强制，不支持无例外强制。"
+    },
+    {
+      "case": "partial_vs_all",
+      "evidence": "Some items passed the check; the remaining items failed.",
+      "claim": "All items passed the check.",
+      "expected_label": "contradicted",
+      "basis": "明确其余失败，与全部通过冲突；不把some单独误读成必然非全部。"
+    },
+    {
+      "case": "true_unrelated_quote",
+      "evidence": "The cover is blue. Approval requires a signature.",
+      "claim": "Approval can be given without a signature.",
+      "candidate_quote": "The cover is blue.",
+      "expected_label": "contradicted",
+      "basis": "真实颜色摘录与资格结论无关；来源核验可通过，语义支持仍须另核。"
+    },
+    {
+      "case": "invented_ellipsis",
+      "evidence": "Keep the complete input table.",
+      "claim": "The input table should be retained.",
+      "candidate_quote": "Keep...input table.",
+      "expected_label": "supported",
+      "basis": "主张可支持，不代表含添加省略号的摘录可通过。"
+    },
+    {
+      "case": "neither_support_nor_refute",
+      "evidence": "The folder is named amber.",
+      "claim": "The archive contains executable source code.",
+      "expected_label": "insufficient",
+      "basis": "文件夹名称既不支持也不反驳源码存在。"
+    }
+  ],
+  "offline_token_counts": [
+    796,
+    952,
+    771,
+    927,
+    842,
+    998
+  ],
+  "output_budget": 256,
+  "safety_margin": 64,
+  "native_command": [
+    "C:\\Users\\86186\\AppData\\Local\\ANTLabLocalModel\\llama-b11429\\llama-tokenize.exe",
+    "-m",
+    "C:\\Users\\86186\\AppData\\Local\\ANTLabLocalModel\\models\\Qwen3-0.6B-Q8_0.gguf",
+    "--stdin",
+    "--ids",
+    "--no-bos",
+    "--offline"
+  ],
+  "generation_calls": 0,
+  "limits": "自造预期为定义说明；程序检查只验证结构、引用来源、原文连续性和失败保留，不验证模型理解/语义支持，也不强制label翻转。",
+  "actual_template_check_required": true
+}

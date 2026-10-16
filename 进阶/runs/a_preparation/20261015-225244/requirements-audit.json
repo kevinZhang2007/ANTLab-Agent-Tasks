@@ -1,0 +1,217 @@
+{
+  "recorded_at": "2026-10-15T22:52:44.632607+08:00",
+  "code_base": "60617b5e2e6c082771b92b1f5dae5bd11efc4955",
+  "status": "reading_and_proposal_only_not_frozen",
+  "generation_calls": 0,
+  "services_started": false,
+  "downloads": 0,
+  "existing_generation_ledger": {
+    "model_generations": 534,
+    "b_offline_executions": 88,
+    "source": "results/scoring/manifest.json",
+    "basis": "读取既有账本，不声称本轮重新扫描全部生成记录"
+  },
+  "requirements": [
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "line": 13,
+      "original": "阅读基础主论文相关实验，以及ALCE的评价定义与局限。若自选第三种方法，再核对它的原始论文或官方文档。用一小表写清：采用的方法及其机制 → 本题保留条件 → 改变条件 → 预期变化 → 什么观察会推翻你的预期。至少核对一个原文实验或指标定义。",
+      "category": "required",
+      "interpretation": "复用主论文指定章节与ALCE定义证据，必须补一张机制迁移条件表；不把已有摘要说成本轮重新阅读全文。"
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "line": 17,
+      "original": "从P1/P2理解题目涉及的原文；开发AD01–03有参考，AT01–07无公开答案。模型只能依照请求指定的doc_ids取材料，不把外部知识或论文摘要当原文证据。",
+      "category": "required",
+      "interpretation": "固定P1/P2及3开发7评测，模型仅能看到请求doc_ids范围；公开开发答案不进入运行模块。"
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "line": 21,
+      "original": "给出你能解释的简单基线，以及一种主要改进。基线可以复用基础题；新增复杂检索必须和更简单选择比较。主要改进作用于生成前的证据选择或组织，不得通过修改判分规则制造提升。页面可选基线/改进，显示主张判断、证据原文、PDF物理页跳转及引用检查状态。至少一个正确证据区域可在页内框选/高亮。",
+      "category": "required",
+      "interpretation": "一个简单基线、一项生成前证据选择/组织改进；页面可切换；至少一个正确区域高亮。"
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "line": 25,
+      "original": "使用materials/sections.json作检索文本，page_words.json辅助定位。章节来自XML，词来自PDF，二者不是天然一一对应；你须解释如何关联并抽查两个不同页的结果。使用浏览器自带PDF页跳转也可，但至少一个区域定位仍须实现。坐标为PDF左上角原点、点单位，不是屏幕像素；必须处理缩放。不应把给定词坐标当自己的CV贡献。",
+      "category": "required",
+      "interpretation": "sections用于检索，page_words用于定位；需解释XML到PDF关联，抽查不同两页，坐标缩放需验证。"
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "line": 27,
+      "original": "判定类别为supported/contradicted/insufficient；系统尚不能判断可用not_checked。系统结果、人工评价、模型裁判分开。评价须检查条件、量词和适用范围，而不是关键词吻合。复杂答案可按主张拆分，报告聚合规则。",
+      "category": "required",
+      "interpretation": "三类判断可加not_checked，不能用定位有效替代语义核验；需检查条件、量词和范围。"
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "line": 31,
+      "original": "在3个开发题完成调试，然后冻结代码/参数/选择规则。在7个评测题上各跑基线和改进一次，共14个主任务输出；多轮内部调用全记。自费API；真实生成必须保留实际messages和原始返回。",
+      "category": "required",
+      "interpretation": "开发调试后冻结；7题每题两方案，14个主输出；全部内部生成另记；自费API条款的本地服务解释仍需澄清。"
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "line": 33,
+      "original": "至少报告：任务判断正确情况（含not_checked/失败，分母7）；证据定位有效性；逐主张语义支持复核；可回答覆盖；客户端耗时/调用数。用逐题表和原文解释结果。答案判断正确与生成答案被引文支持是两个指标。",
+      "category": "required",
+      "interpretation": "每方案分母7且保留失败/not_checked；判断正确与答案被引文支持分开，另报覆盖、定位、客户端耗时和调用数。"
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "line": 35,
+      "original": "选择一类最关键失败，设计并执行一个能区分两个解释的检查。例如问题来自选证据、材料范围、原文歧义、生成，还是你自己的判分规则？先预测两种解释的不同观察再运行。可以使用离线输入检查。",
+      "category": "required",
+      "interpretation": "至少一类重要失败，先保存竞争解释及不同预测，再做区分性检查；可以离线输入检查。"
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "line": 37,
+      "original": "对至少2个题做等价变体（至少一个来自评测题），保留映射和预测；变体作为鲁棒性检查，不扩充主评测分母。把自设计反例做成一次反事实检查：改变一处主张限定词或资料范围，先预测答案、支持状态或引用怎样变化，再运行检查。保存改动前后的输入与结果，说明检查覆盖的是完整流程还是其中一个组件。它不进入7题主评测分母。",
+      "category": "required",
+      "interpretation": "至少两题等价变体且含评测题；另一次限定词/范围反事实；全部不扩充分母。"
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "line": 41,
+      "original": "做出保留/修改/停止这项改进的决定，并指出接入当前项目的边界（项目介绍见Q群学习指南）。画一条从页面到模型服务再回到证据的请求链，标出你实际测到和没有测到的时间。提出一个未来与推理组共同验证的假设：需要哪些服务端字段，如何控制输入/输出长度和并发，什么结果会否定它。",
+      "category": "required",
+      "interpretation": "保留/修改/停止决定、请求链及计时边界、与推理组未来联合验证假设均需补齐。"
+    },
+    {
+      "path": "进阶/00_共同规则与接口.md",
+      "line": 5,
+      "original": "关键决策包括研究命题、对照/指标、修复方案、结果解释和是否继续。至少保留三项对最终结论有实际影响的决定（基础已有记录可引用，但进阶新增决定须补充），写出：本人当时判断、替代方案、可否定观察、AI/他人影响、证据链接、最终决定。没有事前记录就注明事后整理，禁止补造时间线。",
+      "category": "required",
+      "interpretation": "新增A关键决定，包含本人判断、替代、否定条件、AI影响、证据及决定；不能补造历史预测。"
+    },
+    {
+      "path": "进阶/00_共同规则与接口.md",
+      "line": 13,
+      "original": "接口路径自由，README给出映射。请求至少含query或claim、doc_ids、snapshot、mode；结果至少含request_id、实际使用的文档/快照、answer或claim、evidence、locator_status、support_status、judgment_source、elapsed_ms、run_kind。每项证据有doc_id、snapshot、稳定block_id、原文、page；使用坐标时说明坐标系。不适用字段写null和原因。",
+      "category": "required",
+      "interpretation": "请求含claim/query、doc_ids、snapshot、mode；响应和每项证据的范围、ID、page及状态完整；不适用字段需理由。"
+    },
+    {
+      "path": "进阶/00_共同规则与接口.md",
+      "line": 24,
+      "original": "先写一个主假设及至少一个竞争解释；固定数据版本、主指标、失败分母、主轮次、参数、停止条件。开发与评测分开；配置冻结后运行评测，之后改动只能报告为追加探索。输入公开不代表真正盲测；阅读、筛选或调参的接触情况如实披露。",
+      "category": "required",
+      "interpretation": "先保存主假设/竞争解释/主指标/失败分母/参数/停止条件，冻结后改动只能追加探索。"
+    },
+    {
+      "path": "进阶/05_提交与报告格式.md",
+      "line": 3,
+      "original": "准备时间为一周。请在北京时间2026年10月16日23:59（UTC+8）前推送代码和报告，并在收集表填写仓库链接与最终 commit SHA。截止前可以更新仓库和表单；评审以截止前最后一次有效登记的 commit SHA 为准，Git作者时间不是按时提交的证明。截止后的修改请单独说明。",
+      "category": "required",
+      "interpretation": "截止2026-10-16 23:59北京时间；额外做A不延长截止时间。"
+    },
+    {
+      "path": "进阶/05_提交与报告格式.md",
+      "line": 26,
+      "original": "基础与进阶共用一份整合报告。建议约6页；原始结果和证据索引可放附录。较大的结果文件可放在 GitHub Release，并在仓库 README 中给出固定下载链接及校验值。",
+      "category": "required",
+      "interpretation": "基础与进阶仍共用一份整合报告；本轮不修改既有五份文档。"
+    }
+  ],
+  "uncertainties": [
+    {
+      "topic": "同时提交A与B",
+      "sources": [
+        {
+          "path": "开始阅读.md",
+          "line": 3,
+          "original": "先完成基础题，再从进阶A/B/C选择一套。准备时间为一周，在北京时间2026年10月16日23:59（UTC+8）前推送GitHub作品，并通过收集表登记仓库链接和最终commit SHA。模型调用使用自己的API。",
+          "category": "clarification",
+          "interpretation": "原文规定从三套中选择一套。"
+        },
+        {
+          "path": "进阶/README.md",
+          "line": 3,
+          "original": "先完成基础题，再从A/B/C中选择一套进阶任务。基础与进阶共用一周准备时间，请在北京时间2026年10月16日23:59（UTC+8）前把作品提交到GitHub，并填写收集表。",
+          "category": "clarification",
+          "interpretation": "没有明确同时验收A+B的条款。"
+        }
+      ],
+      "conclusion": "不能宣称同时提交明确获准或明确禁止。建议保留B已交付范围，A作为附加工作准备；正式选择与计分向组织方确认。"
+    },
+    {
+      "topic": "本地模型是否满足A的自费API要求",
+      "sources": [
+        {
+          "path": "进阶/README.md",
+          "line": 15,
+          "original": "模型调用使用自己的API；B样机可以在本地离线运行。资源数量和AI声明统一见《05_提交与报告格式》，密钥和私人账号信息留在本机。",
+          "category": "clarification",
+          "interpretation": "原文只明确B样机可离线运行。"
+        },
+        {
+          "path": "进阶/01_A_研究机制迁移.md",
+          "line": 31,
+          "original": "在3个开发题完成调试，然后冻结代码/参数/选择规则。在7个评测题上各跑基线和改进一次，共14个主任务输出；多轮内部调用全记。自费API；真实生成必须保留实际messages和原始返回。",
+          "category": "clarification",
+          "interpretation": "写有自费API，但未明确自有本地真实服务是否可替代。"
+        }
+      ],
+      "conclusion": "本地HTTP真实生成的技术方案不等于已获规则认可。没有授权购买API，也不因含API字样自行购买或认定免费方案完全合规。"
+    }
+  ],
+  "reading_scope": {
+    "task_documents": "本轮完整读A题目、共同规则、阅读与项目背景、提交格式、进阶入口、材料数据说明及声明模板。",
+    "local_material": "本轮读取sources、sections全部24章/55段正文、figures、page_words结构和样本；阅读AD01—03及公开开发参考。AT只输出ID/split/doc_ids/snapshot元数据，未显示或分析其claim正文。",
+    "prior_paper_evidence_reused": [
+      {
+        "path": "基础/runs/reading/lost-in-middle-evidence.json",
+        "scope": "v3 §2、4、5、7；单篇含答案文档的位置实验不能直接外推跨段/真实PDF任务。"
+      },
+      {
+        "path": "基础/runs/reading/alce-reading-evidence.json",
+        "scope": "§3.2、3.3及图3、§6、附录E/F相关定义；集合支持与单条相关性分开，不自动复现NLI。"
+      },
+      {
+        "path": "基础/runs/reading/p1-reading-evidence.json",
+        "scope": "规则1/2/5/6/7/9/10，既有PDF页序2—3核对。"
+      },
+      {
+        "path": "基础/runs/reading/p2-reading-evidence.json",
+        "scope": "规则2/5/6/7/8/9及图1，既有PDF页序2—6核对。"
+      },
+      {
+        "path": "基础/runs/reading/systems-comparison.json",
+        "scope": "ALCE/Semantic Reader文档比较，非系统实测。"
+      }
+    ],
+    "limits": "未联网、未重新打开算法论文全文、未新做PDF逐页视觉复核或XML到PDF区域映射。旧索引中的72次生成、B未实施等是当时历史，不当作当前进度。"
+  },
+  "source_review": {
+    "provider": "基础/starter/provider.py完整读取：可复用真实请求、回环限制、原始响应、usage及客户端时间；不调用mock。",
+    "runner": "基础/starter/runner.py完整读取：硬连基础cases及answer/citations，不可直接当A入口。记录模式可参考，但不能导入其cases获取A材料。",
+    "student": "基础/starter/student.py完整读取：输入序列化、原文保护可借鉴；中文主张与英文资料不能直接依赖原文字重合评分。",
+    "server": "基础/starter/server.py完整读取；server_exploration.py相关路径/接口/日志/状态分支审查。后者绑定基础冻结目录与开发题范围，不直接移作A。",
+    "candidate": "bounded_candidate.py完整读取：依赖基础证明链，与A主张分类契约不同，不复用计算改答或证明补引用。",
+    "not_present": "未发现A专用Engine/服务/页面/14项主结果。B缓存修复保留，不当A研究改进。"
+  },
+  "observed_materials": {
+    "P1": {
+      "pages": 4,
+      "sections": 11,
+      "paragraphs": 26,
+      "xml_paragraph_characters": 17711,
+      "pdf_word_boxes": 2826
+    },
+    "P2": {
+      "pages": 8,
+      "sections": 13,
+      "paragraphs": 29,
+      "xml_paragraph_characters": 20883,
+      "pdf_word_boxes": 424
+    },
+    "locator_warning": "P2许多所谓word.text实际是一整行的连写文本，不能按424个英语单词理解或宣称逐词高亮精度；P1有分栏，不能按原抽取文本的全页顺序直接拼接。",
+    "integrity": "沿用基础/runs/reading/file-integrity.json：PDF/抽取文本匹配，XML仅CRLF→LF后匹配；本轮不改原件。",
+    "capacity": "未启动模板/分词服务，未实测A token数。不能把字符数或基础题容量成绩充作A容量结果。"
+  }
+}

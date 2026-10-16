@@ -1,0 +1,162 @@
+{
+  "saved_at": "2026-10-15T23:10:03.277042+08:00",
+  "kind": "A开发调试，不是正式冻结",
+  "hypothesis": "同章节相邻原段落可能补回判定所需条件；增加文本也可能引入干扰。",
+  "competing_explanations": [
+    "错误来自中文到英文查询转换或命中不足，邻段未必有用",
+    "证据已足够，但回答模型没有正确处理否定、条件或跨段组合"
+  ],
+  "prediction": "只在邻段确有必要信息时预期改善；语义支持/完整成功无改善则保留简单基线。",
+  "selection": "两个正TF-IDF最高分完整原段；改进补同章节前后各一段，去重并原顺序",
+  "shared_query": "每主张仅一次，两个方案共享同一run_id，实际计1次；各侧分摊50%查询成本并另报整对真实耗时",
+  "orders": [
+    {
+      "task_id": "AD01",
+      "order": [
+        "baseline",
+        "improved"
+      ]
+    },
+    {
+      "task_id": "AD02",
+      "order": [
+        "improved",
+        "baseline"
+      ]
+    },
+    {
+      "task_id": "AD03",
+      "order": [
+        "baseline",
+        "improved"
+      ]
+    }
+  ],
+  "config": {
+    "query": {
+      "provider": "llama.cpp",
+      "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+      "model": "Qwen3-0.6B-Q8_0",
+      "parameters": {
+        "temperature": 0.0,
+        "top_p": 0.8,
+        "top_k": 20,
+        "min_p": 0,
+        "presence_penalty": 1.5,
+        "seed": 42,
+        "max_tokens": 128,
+        "response_format": {
+          "type": "json_schema",
+          "json_schema": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "terms": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "terms"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "timeout_seconds": 180
+    },
+    "answer": {
+      "provider": "llama.cpp",
+      "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+      "model": "Qwen3-0.6B-Q8_0",
+      "parameters": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "min_p": 0,
+        "presence_penalty": 1.5,
+        "seed": 42,
+        "max_tokens": 256,
+        "response_format": {
+          "type": "json_schema",
+          "json_schema": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string",
+                  "enum": [
+                    "supported",
+                    "contradicted",
+                    "insufficient"
+                  ]
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "block_id": {
+                        "type": "string"
+                      },
+                      "quote": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "block_id",
+                      "quote"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "label",
+                "reason",
+                "evidence"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "timeout_seconds": 180
+    }
+  },
+  "generation_limit_this_phase": 9,
+  "A_total_budget": 54,
+  "baseline_cumulative": 534,
+  "quality_retry": false,
+  "technical_failure": "保存后停止，不自动重发；未执行保持未执行",
+  "evaluation": "全部调用结束后由独立评价模块读取开发参考；分别评主张判断、格式、范围ID、必要覆盖、引用支持、无关引用、PDF定位，AI辅助暂判",
+  "stopping_memory": "加载前至少2 GiB；运行可用物理内存连续3次(每2秒)低于1 GiB停止自有PID，分配失败/崩溃停止",
+  "boundaries": "A为附加探索，B为主要交付；双提交与自有本地服务验收未明确，不宣称获认可；未读AT正文。",
+  "preflight_hash": "ed71444ea65eec759e0b7bfe04a5eddbf0eb38108fe567b7e05ce958b6c9881c",
+  "code_hashes": {
+    "进阶/a_exploration/checks.py": "a7fb4838c7c1b5a4a9e912bb0a10df084f0c93bf6f06501b1addedc0f9fca04d",
+    "进阶/a_exploration/checks_extended.py": "30bfb0208ca00badf8fd4ab1ba02dedad5b50457364e3233e8d2900e081a4e7e",
+    "进阶/a_exploration/config.json": "fa8301b773fe5fc64990924e98216ccd7fd510154ffd7cc0a8aec79caa1ce98d",
+    "进阶/a_exploration/development.py": "c77cf152ab4f43a597db74fc8c60601e77ab4bbc736063b32d52a2b2c1947293",
+    "进阶/a_exploration/engine.py": "8075131e4c73fd232575a4ccd786f62c0361cdcebcc1d1c02d183402e0bebb0b",
+    "进阶/a_exploration/index.html": "60863f31aafa1e969d4a1ede15fb3b8300cd65ecf29192e0cc27e4ba5a0ab99a",
+    "进阶/a_exploration/launch.py": "41f83107445a3993ea4f96f7eb0949d8fa8d3091d1ff249a4c212cadfc9cc6e7",
+    "进阶/a_exploration/locator.py": "aa4119455a61af797efb593df7d62504fbcf9e99e26ad1d59631658668dcfb0f",
+    "进阶/a_exploration/preflight.py": "36bdb3c0aee9906bbd68438a01a95f57f4327585b2194121acf10e4fd2b69acb",
+    "进阶/a_exploration/render_pdf.py": "5601349a2a71ab1a36ffa7791456485552dfcca5a63371508f2b5177eace7553",
+    "进阶/a_exploration/runtime.py": "ffd3547445265904b754a9e6f71e4c21ec1713678e3ed0a030bbcf80d8276ed3",
+    "进阶/a_exploration/server.py": "c051990e484d49fe0b5c69efa5afc1e7fb786d5966f154bb176ed0e742bfaa2a"
+  },
+  "data_hashes": {
+    "进阶/materials/sections.json": "870d51183bea80cec693250b114b2ce55caad87783bd2028b4eaf2b2e5a10f9b",
+    "进阶/materials/page_words.json": "118124b6c027e3d64520c350d064c1322a78d1b71eb78987fef3fe2a43344903",
+    "进阶/materials/sources.json": "0c827b69246664b1db9e97363cea6f33ec6893eaf03a76e640de72f6e5a82948",
+    "进阶/materials/papers/P1.pdf": "35648a3880bdd8bf30e8212a3847b7bd35f504ee5ccbd1ad3856d206acd181db",
+    "进阶/materials/papers/P2.pdf": "30af1629e0fe31b51a82c8f01c901a0ecc6d13bb61bc601861aeb3d260397910"
+  },
+  "frozen": false,
+  "implementation_not_effect_claim": true
+}

@@ -1,0 +1,44 @@
+--- diagnose_thinking_compact.py
++++ diagnose_reason_citations.py
+@@ -1,4 +1,4 @@
+-"""固定自动证据的开启思考下重复/紧凑输入对照；复用请求记录器，不重检索或读答案。"""
++"""固定自动证据的紧凑思考下理由和引用提示对照；复用请求记录器，不重检索或读答案。"""
+ from pathlib import Path
+ import argparse, ast, json, socket, subprocess, threading, time, uuid
+ from thinking_modes import ThinkingEngine as Engine
+@@ -16,14 +16,15 @@
+     for path,h in plan['data_hashes'].items():assert sha(ROOT/path)==h,path
+     for p in HERE.glob('*.py'):ast.parse(p.read_text(encoding='utf-8'))
+     from sentence_selection import schema,build_index
+-    from compact_factorial import compact_messages,audit
++    from compact_factorial import audit
++    from reason_citations import adapt
+     assert load(out/'byte-and-scope-audit.json')['passed']
+     for item in inputs:
+         assert item['sentence_index']==build_index(item['blocks'],item['doc_ids'],item['snapshot'])
+-        assert item['configs']['repeated']==item['configs']['compact']
+-        assert item['messages']['compact']==compact_messages(item['messages']['repeated'],item['blocks'],item['sentence_index'],item['doc_ids'],item['snapshot'])
+-        assert audit(item['messages']['compact'],item['blocks'],item['sentence_index'],item['doc_ids'],item['snapshot'])['passed']
+-        for variant in ['repeated','compact']:
++        assert item['configs']['original']==item['configs']['revised']
++        assert item['messages']['revised']==adapt(item['messages']['original'])
++        assert audit(item['messages']['revised'],item['blocks'],item['sentence_index'],item['doc_ids'],item['snapshot'])['passed']
++        for variant in ['original','revised']:
+             conf=item['configs'][variant];assert conf['parameters']['max_tokens']==1024
+             assert conf['parameters']['chat_template_kwargs']=={'enable_thinking':True}
+             assert conf['parameters']['presence_penalty']==1.5
+@@ -62,11 +63,11 @@
+         record.update(load_seconds=time.perf_counter()-start,memory_after_load=memory());phase='template_preflight'
+         write(out/'startup-slot-erase.json',engine.service('slots/0?action=erase',{}))
+         for item in inputs:
+-            for variant in ['repeated','compact']:engine.capacity(item['messages'][variant],item['configs'][variant],'before-'+item['id']+'-'+variant)
++            for variant in ['original','revised']:engine.capacity(item['messages'][variant],item['configs'][variant],'before-'+item['id']+'-'+variant)
+         pairs=[]
+         for item in inputs:
+-            a=load(out/('capacity-before-'+item['id']+'-repeated.json'));b=load(out/('capacity-before-'+item['id']+'-compact.json'))
+-            checks={'same_system':a['actual_request_body']['messages'][0]==b['actual_request_body']['messages'][0],'same_config':item['configs']['repeated']==item['configs']['compact'],'both_on_branch':a['actual_generation_suffix']==b['actual_generation_suffix']=='','both_fit':a['fits'] and b['fits'],'byte_scope_audit':audit(item['messages']['compact'],item['blocks'],item['sentence_index'],item['doc_ids'],item['snapshot'])['passed']}
++            a=load(out/('capacity-before-'+item['id']+'-original.json'));b=load(out/('capacity-before-'+item['id']+'-revised.json'))
++            checks={'only_system_append':b['actual_request_body']['messages']==adapt(a['actual_request_body']['messages']),'same_config':item['configs']['original']==item['configs']['revised'],'both_on_branch':a['actual_generation_suffix']==b['actual_generation_suffix']=='','both_fit':a['fits'] and b['fits'],'byte_scope_audit':audit(item['messages']['revised'],item['blocks'],item['sentence_index'],item['doc_ids'],item['snapshot'])['passed']}
+             pairs.append({'id':item['id'],'checks':checks})
+             write(out/'paired-template-verification.json',{'at':now(),'pairs':pairs,'generation_calls':0})
+             if not all(checks.values()):raise TechnicalStop('共同配置或紧凑原文审计不符，模板证据已保存')

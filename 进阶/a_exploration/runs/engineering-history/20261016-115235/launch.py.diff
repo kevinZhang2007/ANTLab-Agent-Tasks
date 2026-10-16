@@ -1,0 +1,37 @@
+--- old/launch.py
++++ new/launch.py
+@@ -20,11 +20,11 @@
+     plan={'saved_at':now(),'kind':'A开发调试，不是正式冻结','hypothesis':'同章节相邻原段落可能补回判定所需条件；增加文本也可能引入干扰。','competing_explanations':['错误来自中文到英文查询转换或命中不足，邻段未必有用','证据已足够，但回答模型没有正确处理否定、条件或跨段组合'],'prediction':'只在邻段确有必要信息时预期改善；语义支持/完整成功无改善则保留简单基线。','selection':'两个正TF-IDF最高分完整原段；改进补同章节前后各一段，去重并原顺序','shared_query':'每主张仅一次，两个方案共享同一run_id，实际计1次；各侧分摊50%查询成本并另报整对真实耗时','orders':[{'task_id':t['id'],'order':['baseline','improved'] if i%2==0 else ['improved','baseline']} for i,t in enumerate(development)],'config':{'query':config('query'),'answer':config('answer')},'generation_limit_this_phase':9,'A_total_budget':54,'baseline_cumulative':534,'quality_retry':False,'technical_failure':'保存后停止，不自动重发；未执行保持未执行','evaluation':'全部调用结束后由独立评价模块读取开发参考；分别评主张判断、格式、范围ID、必要覆盖、引用支持、无关引用、PDF定位，AI辅助暂判','stopping_memory':'加载前至少2 GiB；运行可用物理内存连续3次(每2秒)低于1 GiB停止自有PID，分配失败/崩溃停止','boundaries':'A为附加探索，B为主要交付；双提交与自有本地服务验收未明确，不宣称获认可；未读AT正文。','preflight_hash':sha(folder/'offline-preflight.json'),'code_hashes':pre['code_hashes'],'data_hashes':pre['data_hashes'],'frozen':False,'implementation_not_effect_claim':True}
+     write(folder/'development-plan.json',plan)
+     base=Path.home()/'AppData/Local/ANTLabLocalModel';launch=[x.replace('%LOCALAPPDATA%/ANTLabLocalModel',str(base)) for x in pre['service_arguments']]
+-    # 槽保存目录移到本轮目录，避免写入旧诊断缓存；不改变生成设置。
+-    slot=launch.index('--slot-save-path');del launch[slot:slot+2]
++    # 原生槽接口需要启用保存目录；使用本轮cwd下的ASCII相对路径。
++    slot=launch.index('--slot-save-path')+1;(folder/'slot-cache').mkdir();launch[slot]='slot-cache'
+     assert sha(Path(launch[0]))==pre['executable_hash'] and sha(Path(launch[launch.index('-m')+1]))==pre['model_hash']
+     process=None;server=None;stop=threading.Event();abort=threading.Event();samples=[];start=time.perf_counter();phase='loading'
+-    runtime={'started_at':now(),'service_arguments':launch,'only_service_argument_difference':'删除非必需slot-save-path，禁用持久槽文件；中文路径被原生参数检查拒绝。模型/采样/上下文不变，仍在每次请求前erase槽。','memory_before':memory(),'technical_stop':False}
++    runtime={'started_at':now(),'service_arguments':launch,'service_working_directory':str(folder),'only_service_argument_difference':'slot-save-path使用本轮cwd内ASCII相对路径，保留槽erase接口；不改模型、采样和上下文。','memory_before':memory(),'technical_stop':False}
+     def monitor():
+         low=0
+         while not stop.is_set():
+@@ -36,7 +36,7 @@
+             stop.wait(2)
+     thread=threading.Thread(target=monitor,daemon=True)
+     try:
+-        with (folder/'model-stdout.log').open('wb') as stdout,(folder/'model-stderr.log').open('wb') as stderr:process=subprocess.Popen(launch,stdout=stdout,stderr=stderr,creationflags=subprocess.CREATE_NO_WINDOW)
++        with (folder/'model-stdout.log').open('wb') as stdout,(folder/'model-stderr.log').open('wb') as stderr:process=subprocess.Popen(launch,stdout=stdout,stderr=stderr,cwd=folder,creationflags=subprocess.CREATE_NO_WINDOW)
+         write(folder/'owned-service.json',{'pid':process.pid,'launcher_pid':os.getpid(),'arguments':launch,'started_at':now()});thread.start();phase='health'
+         while time.perf_counter()-start<120:
+             if abort.is_set() or process.poll() is not None:raise TechnicalStop('内存或模型进程停止')
+@@ -47,7 +47,9 @@
+         else:raise TechnicalStop('健康检查超时')
+         props=engine.service('props');write(folder/'props.json',props)
+         assert props['build_info']=='b11429-d81235049' and props['default_generation_settings']['n_ctx']==4096 and props['total_slots']==1
+-        runtime.update(load_seconds=time.perf_counter()-start,memory_after_load=memory());phase='actual_template_preflight'
++        runtime.update(load_seconds=time.perf_counter()-start,memory_after_load=memory());phase='slot_erase_preflight'
++        write(folder/'startup-slot-erase.json',{'request':{'method':'POST','route':'slots/0?action=erase','body':{}},'response':engine.service('slots/0?action=erase',{}),'generation_calls':0})
++        phase='actual_template_preflight'
+         for t in development:
+             engine.capacity(query_messages(t['claim']),config('query'),'startup-query-'+t['id'])
+             engine.capacity(answer_messages(t['claim'],[]),config('answer'),'startup-empty-'+t['id'])

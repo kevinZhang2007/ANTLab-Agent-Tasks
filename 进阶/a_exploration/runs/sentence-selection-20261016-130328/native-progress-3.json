@@ -1,0 +1,46 @@
+{
+  "tests": [
+    {
+      "case": "AD01",
+      "name": "empty",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "insufficient",
+        "reason": "synthetic structure check",
+        "sentence_ids": []
+      }
+    },
+    {
+      "case": "AD01",
+      "name": "first_last",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "insufficient",
+        "reason": "synthetic structure check",
+        "sentence_ids": [
+          "sent-0001",
+          "sent-0011"
+        ]
+      }
+    },
+    {
+      "case": "AD01",
+      "name": "unknown",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 1921,
+      "response": {
+        "label": "insufficient",
+        "reason": "synthetic structure check",
+        "sentence_ids": [
+          "not-in-index"
+        ]
+      }
+    }
+  ],
+  "generation_calls": 0
+}

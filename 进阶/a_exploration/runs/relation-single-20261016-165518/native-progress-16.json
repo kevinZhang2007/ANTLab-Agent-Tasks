@@ -1,0 +1,229 @@
+{
+  "tests": [
+    {
+      "case": "AD01-original",
+      "name": "entails_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "supported",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "conflicts_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "contradicted",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "undetermined_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "insufficient",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "unknown_id",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 30616,
+      "response": {
+        "label": "supported",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "missing"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "illegal_value",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 9614,
+      "response": {
+        "label": "undefined",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "duplicate_id_program_rejects",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "supported",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001",
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "empty_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "label": "supported",
+        "reason": "self-made structure check",
+        "sentence_ids": []
+      }
+    },
+    {
+      "case": "AD01-original",
+      "name": "extra_field",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 68882,
+      "response": {
+        "label": "supported",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ],
+        "extra": 1
+      }
+    },
+    {
+      "case": "AD01-revised",
+      "name": "entails_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "relation": "entails",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-revised",
+      "name": "conflicts_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "relation": "conflicts",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-revised",
+      "name": "undetermined_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "relation": "undetermined",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-revised",
+      "name": "unknown_id",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 30616,
+      "response": {
+        "relation": "entails",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "missing"
+        ]
+      }
+    },
+    {
+      "case": "AD01-revised",
+      "name": "illegal_value",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 9614,
+      "response": {
+        "relation": "undefined",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-revised",
+      "name": "duplicate_id_program_rejects",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "relation": "entails",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001",
+          "sent-0001"
+        ]
+      }
+    },
+    {
+      "case": "AD01-revised",
+      "name": "empty_valid",
+      "expected": true,
+      "actual": true,
+      "rejected_token": null,
+      "response": {
+        "relation": "entails",
+        "reason": "self-made structure check",
+        "sentence_ids": []
+      }
+    },
+    {
+      "case": "AD01-revised",
+      "name": "extra_field",
+      "expected": false,
+      "actual": false,
+      "rejected_token": 68882,
+      "response": {
+        "relation": "entails",
+        "reason": "self-made structure check",
+        "sentence_ids": [
+          "sent-0001"
+        ],
+        "extra": 1
+      }
+    }
+  ],
+  "generation_calls": 0
+}

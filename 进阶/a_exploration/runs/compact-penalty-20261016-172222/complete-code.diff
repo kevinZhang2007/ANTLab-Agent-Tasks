@@ -1,0 +1,152 @@
+--- /dev/null
++++ b/进阶/a_exploration/compact_factorial.py
+@@ -0,0 +1,52 @@
++"""独立输入组织因素；不改变system、句子选择或原文。"""
++import copy,json,hashlib
++from sentence_selection import build_index
++
++def compact_messages(messages,blocks,index,doc_ids,snapshot):
++    if index!=build_index(blocks,doc_ids,snapshot):raise ValueError('索引与原段/范围不一致')
++    result=copy.deepcopy(messages);user=json.loads(result[1]['content'])
++    if set(user)!={'claim','passages','sentence_index'} or user['sentence_index']!=index or user['passages']!=blocks:raise ValueError('不是已归档句子选择输入')
++    compact=[]
++    for b in blocks:
++        rows=[s for s in index if s['block_id']==b['block_id']]
++        if ''.join(s['text'] for s in rows).encode('utf-8')!=b['text'].encode('utf-8'):raise ValueError('原文无法逐字节重建')
++        compact.append({k:copy.deepcopy(b[k]) for k in ['block_id','doc_id','snapshot','heading']})
++        compact[-1]['sentence_index']=[{'sentence_id':s['sentence_id'],'text':s['text']} for s in rows]
++    result[1]['content']=json.dumps({'passages':compact,'claim':user['claim']},ensure_ascii=False,indent=2)
++    return result
++
++def audit(messages,blocks,index,doc_ids,snapshot):
++    if index!=build_index(blocks,doc_ids,snapshot):raise ValueError('服务端原索引不一致')
++    user=json.loads(messages[1]['content']);ps=user['passages'];seen=[];rows=[]
++    if list(user)!=['passages','claim'] or len(ps)!=len(blocks):raise ValueError('顺序或段落数量不符')
++    for b,p in zip(blocks,ps):
++        if set(p)!={'block_id','doc_id','snapshot','heading','sentence_index'}:raise ValueError('紧凑段落字段不符')
++        if any(p[k]!=b[k] for k in ['block_id','doc_id','snapshot','heading']):raise ValueError('来源/标题/顺序不符')
++        original=[s for s in index if s['block_id']==b['block_id']]
++        if p['sentence_index']!=[{'sentence_id':s['sentence_id'],'text':s['text']} for s in original]:raise ValueError('句子ID/顺序/正文不符')
++        rebuilt=''.join(s['text'] for s in p['sentence_index']).encode('utf-8');raw=b['text'].encode('utf-8')
++        if rebuilt!=raw:raise ValueError('原文UTF-8字节不一致')
++        seen.extend(s['sentence_id'] for s in p['sentence_index']);rows.append({'block_id':b['block_id'],'bytes':len(raw),'source_sha256':hashlib.sha256(raw).hexdigest(),'rebuilt_sha256':hashlib.sha256(rebuilt).hexdigest(),'byte_identical':True})
++    if seen!=[s['sentence_id'] for s in index]:raise ValueError('全局句子顺序不符')
++    return {'passed':True,'paragraphs':rows,'sentence_ids_in_original_order':seen,'claim_last':True,'server_only_fields':['字符位置','offset_unit','interval','segmentation','section_id','paragraph_index'],'semantic_support':'not_checked'}
++
++def offline_checks():
++    from engine import answer_messages,public
++    from sentence_selection import adapt_messages,expand
++    blocks=[{'block_id':'sample-a','doc_id':'made-up','snapshot':'published','section_id':'one','heading':'Made-up heading','paragraph_index':0,'text':'  First "quoted" line.\nSecond\tline 2.5. 重复。重复。🙂\n'},{'block_id':'sample-b','doc_id':'made-up','snapshot':'published','section_id':'two','heading':'Other heading','paragraph_index':0,'text':'Another clause without terminal punctuation  '}]
++    idx=build_index(blocks,['made-up'],'published');ms=adapt_messages(answer_messages('不应删除原文，仅保留一次。',blocks),idx);before=copy.deepcopy((ms,blocks,idx));new=compact_messages(ms,blocks,idx,['made-up'],'published');tests=[]
++    def check(name,value):
++        tests.append({'name':name,'passed':bool(value)})
++        if not value:raise AssertionError(name)
++    check('all_bytes_and_order',audit(new,blocks,idx,['made-up'],'published')['passed'])
++    check('inputs_not_mutated',(ms,blocks,idx)==before)
++    check('system_and_roles_unchanged',new[0]==ms[0] and [m['role'] for m in new]==[m['role'] for m in ms])
++    check('claim_exact_once_and_last',json.loads(new[1]['content'])['claim']==json.loads(ms[1]['content'])['claim'] and new[1]['content'].count('不应删除原文，仅保留一次。')==1 and list(json.loads(new[1]['content']))[-1]=='claim')
++    for name,mutate in [('whitespace',lambda u:u['passages'][0]['sentence_index'][0].update(text=u['passages'][0]['sentence_index'][0]['text'].strip())),('unknown_id',lambda u:u['passages'][0]['sentence_index'][0].update(sentence_id='missing')),('wrong_scope',lambda u:u['passages'][0].update(doc_id='other')),('dropped_sentence',lambda u:u['passages'][0]['sentence_index'].pop()),('order_changed',lambda u:u['passages'].reverse())]:
++        bad=copy.deepcopy(new);u=json.loads(bad[1]['content']);mutate(u);bad[1]['content']=json.dumps(u,ensure_ascii=False)
++        try:audit(bad,blocks,idx,['made-up'],'published');caught=False
++        except ValueError:caught=True
++        check(name+'_rejected',caught)
++    raw=json.dumps({'label':'contradicted','reason':'synthetic','sentence_ids':[idx[1]['sentence_id'],idx[0]['sentence_id']]});a=expand(raw,blocks,idx,['made-up'],'published');check('same_expansion_and_label',a['valid'] and a['expanded_response']['label']=='contradicted' and a['selected_sources'][0]['text']==idx[1]['text'])
++    empty=adapt_messages(answer_messages('No material.',[]),[]);ce=compact_messages(empty,[],[],['made-up'],'published');check('empty_materials',audit(ce,[],[],['made-up'],'published')['passed'])
++    return {'passed':True,'count':len(tests),'checks':tests,'generation_calls':0,'scope':'验证组织与字节，不证明模型理解或语义支持。'}
+--- /dev/null
++++ b/进阶/a_exploration/diagnose_compact_factorial.py
+@@ -0,0 +1,94 @@
++"""固定自动证据的输入组织×presence惩罚四组合对照；复用请求记录器，不重检索或读答案。"""
++from pathlib import Path
++import argparse, ast, json, socket, subprocess, threading, time, uuid
++from runtime import Engine,TechnicalStop,load,write,sha,now,memory,ROOT,HERE
++
++def main():
++    parser=argparse.ArgumentParser();parser.add_argument('--out',type=Path,required=True);a=parser.parse_args();out=a.out.resolve()
++    plan=load(out/'intervention-plan.json');inputs=load(out/'diagnostic-inputs.json')
++    if (out/'owned-service.json').exists() or list(out.glob('run-*.json')):raise ValueError('已有启动或请求记录，不重发')
++    assert load(out/'offline-checks.json')['passed']
++    assert load(out/'byte-and-scope-audit.json')['passed']
++    assert sha(out/'diagnostic-inputs.json')==plan['input_sha256']
++    for path,h in plan['code_hashes'].items():assert sha(ROOT/path)==h,path
++    for path,h in plan['data_hashes'].items():assert sha(ROOT/path)==h,path
++    for p in HERE.glob('*.py'):ast.parse(p.read_text(encoding='utf-8'))
++    from compact_factorial import compact_messages,audit
++    from sentence_selection import schema,build_index
++    for item in inputs:
++        assert item['sentence_index']==build_index(item['blocks'],item['doc_ids'],item['snapshot'])
++        expected=compact_messages(item['messages']['repeated_15'],item['blocks'],item['sentence_index'],item['doc_ids'],item['snapshot'])
++        for variant in item['messages']:
++            conf=item['configs'][variant];assert conf['parameters']['max_tokens']==512
++            assert conf['parameters']['response_format']['json_schema']['schema']==schema(item['sentence_index'])
++            assert item['messages'][variant]==(expected if variant.startswith('compact') else item['messages']['repeated_15'])
++            assert conf['parameters']['presence_penalty']==(1.5 if variant.endswith('15') else 0)
++            if variant.startswith('compact'):audit(item['messages'][variant],item['blocks'],item['sentence_index'],item['doc_ids'],item['snapshot'])
++    with socket.socket() as s:s.bind(('127.0.0.1',8080))
++    m=memory();write(out/'resource-before.json',m)
++    if m['available_bytes']<2*1024**3:
++        write(out/'resource-stop.json',{'at':now(),'available_GiB':m['available_bytes']/2**30,'required_GiB':2,'generation_calls':0});print('RESOURCE_STOP',flush=True);return
++    launch=plan['service_arguments'];assert sha(launch[0])==plan['executable_hash'] and sha(launch[launch.index('-m')+1])==plan['model_hash']
++    (out/'slot-cache').mkdir();engine=Engine(out);clients={};stop=threading.Event();abort=threading.Event();samples=[];process=None;phase='loading';start=time.perf_counter()
++    record={'at':now(),'run_kind':'live_api','diagnostic_input_origin':'automatic_improved_evidence_replay','generations_baseline':plan['cumulative_baseline'],'service_arguments':launch,'memory_before':m}
++    def monitor():
++        low=0
++        while not stop.is_set():
++            sample=memory();samples.append(sample);low=low+1 if sample['available_bytes']<1024**3 else 0
++            if low>=3:
++                abort.set()
++                if process and process.poll() is None:process.terminate()
++                return
++            stop.wait(2)
++    thread=threading.Thread(target=monitor,daemon=True)
++    try:
++        with (out/'model-stdout.log').open('xb') as stdout,(out/'model-stderr.log').open('xb') as stderr:
++            process=subprocess.Popen(launch,stdout=stdout,stderr=stderr,cwd=out,creationflags=subprocess.CREATE_NO_WINDOW)
++        write(out/'owned-service.json',{'pid':process.pid,'started_at':now(),'arguments':launch});thread.start();phase='health'
++        while time.perf_counter()-start<120:
++            if abort.is_set() or process.poll() is not None:raise TechnicalStop('加载期间资源/进程停止')
++            try:
++                if engine.service('health').get('status')=='ok':break
++            except Exception:pass
++            time.sleep(.5)
++        else:raise TechnicalStop('健康超时')
++        props=engine.service('props');write(out/'props.json',props)
++        assert props['build_info']=='b11429-d81235049' and props['default_generation_settings']['n_ctx']==4096 and props['total_slots']==1
++        assert props['default_generation_settings']['params']['repeat_penalty']==1.0
++        record.update(load_seconds=time.perf_counter()-start,memory_after_load=memory());phase='template_preflight'
++        write(out/'startup-slot-erase.json',engine.service('slots/0?action=erase',{}))
++        for item in inputs:
++            for variant in item['messages']:engine.capacity(item['messages'][variant],item['configs'][variant],'before-'+item['id']+'-'+variant)
++        phase='generation'
++        by_id={x['id']:x for x in inputs}
++        for n,entry in enumerate(plan['order']):
++            if abort.is_set() or process.poll() is not None:raise TechnicalStop('请求前资源停止')
++            if sum(c.dispatches for c in clients.values())>=12:raise TechnicalStop('达到12次总上限')
++            item=by_id[entry['id']];variant=entry['variant'];request_id=str(uuid.uuid4())
++            if entry['id'] not in clients:clients[entry['id']]=Engine(out)
++            client=clients[entry['id']]
++            if client.dispatches>=4:raise TechnicalStop('达到单题4次上限')
++            raw=client.generate(item['messages'][variant],item['configs'][variant],f'diagnostic-{n+1}-{entry["id"]}-{variant}',request_id,item['blocks'])
++            expected=next(x for x in load(out/'serialized-request-plan.json') if x['id']==entry['id'] and x['variant']==variant)
++            params=raw['slot_after'][0].get('params',{})
++            verified={'actual_serialization_matches_plan':raw['actual_http_request_raw']==expected['serialized_utf8'],'presence_explicit_in_request':raw['actual_http_request_body']['presence_penalty']==item['configs'][variant]['parameters']['presence_penalty'],'presence_echo_matches':params.get('presence_penalty')==item['configs'][variant]['parameters']['presence_penalty'],'repeat_penalty_echo_1':params.get('repeat_penalty')==1.0,'budget_request_512':raw['actual_http_request_body']['max_tokens']==512,'slot_budget_512':params.get('max_tokens')==512}
++            write(out/f'parameter-check-{n+1:02}.json',verified)
++            if not all(verified.values()):raise TechnicalStop('请求序列化或惩罚回显不符')
++            from sentence_selection import expand
++            expansion=expand(raw['content'],item['blocks'],item['sentence_index'],item['doc_ids'],item['snapshot'])
++            write(out/f'expansion-{n+1:02}.json',expansion)
++            write(out/f'item-{n+1:02}.json',{'at':now(),'id':entry['id'],'variant':variant,'request_id':request_id,'run_id':raw['run_id'],'raw_record':'run-'+raw['run_id']+'.json','input_origin':'automatic_improved_evidence_replay','not_automatic_retrieval':True,'not_end_to_end_score':True})
++            print('SAVED',entry['id'],variant,raw['run_id'],flush=True)
++    except Exception as e:
++        record.update(error=repr(e),failure_phase=phase);write(out/'technical-stop.json',{'at':now(),'phase':phase,'error':repr(e),'dispatches':sum(c.dispatches for c in clients.values()),'confirmed_generations':sum(c.completed for c in clients.values()),'no_automatic_resend':True});print('TECHNICAL_STOP',phase,repr(e),flush=True)
++    finally:
++        stop.set()
++        if thread.is_alive():thread.join(5)
++        if process and process.poll() is None:
++            process.terminate()
++            try:process.wait(10)
++            except subprocess.TimeoutExpired:process.kill();process.wait()
++        record.update(ended_at=now(),dispatches=sum(c.dispatches for c in clients.values()),confirmed_generations=sum(c.completed for c in clients.values()),model_stopped=process is None or process.poll() is not None,memory_samples=samples,memory_after_stop=memory())
++        write(out/'runtime.json',record);print('FINAL',sum(c.completed for c in clients.values()),'STOPPED',record['model_stopped'],flush=True)
++
++if __name__=='__main__':main()

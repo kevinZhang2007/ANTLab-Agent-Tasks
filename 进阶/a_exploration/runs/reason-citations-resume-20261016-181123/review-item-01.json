@@ -1,0 +1,88 @@
+{
+  "at": "2026-10-16T18:11:57.960531+08:00",
+  "id": "AD01",
+  "variant": "original",
+  "request_id": "85069ae0-0172-4b6a-824c-618085e83713",
+  "run_id": "69d65bef-08eb-4564-8ded-632bdf7aac9d",
+  "raw_record": "run-69d65bef-08eb-4564-8ded-632bdf7aac9d.json",
+  "input_origin": "automatic_improved_evidence_replay",
+  "not_automatic_retrieval": true,
+  "not_end_to_end_score": true,
+  "raw_content": "{\n  \"label\": \"insufficient\",\n  \"reason\": \"资料中并未明确支持当手工修改文件时无需记录对象和目的，而是强调即使有这些操作也需详细记录程序、参数等信息（如P1-S02-p02中的sent-0004要求至少记录程序细节）。\",\n  \"sentence_ids\": [\"sent-0004\", \"sent-0011\"]\n}",
+  "parsed_final": {
+    "label": "insufficient",
+    "reason": "资料中并未明确支持当手工修改文件时无需记录对象和目的，而是强调即使有这些操作也需详细记录程序、参数等信息（如P1-S02-p02中的sent-0004要求至少记录程序细节）。",
+    "sentence_ids": [
+      "sent-0004",
+      "sent-0011"
+    ]
+  },
+  "public_reference_label": "contradicted",
+  "label_correct": false,
+  "format_complete": true,
+  "selection_valid": true,
+  "source_authenticity": true,
+  "reason_label_consistent": false,
+  "reason_source_attribution_correct": false,
+  "necessary_evidence_coverage": true,
+  "citation_support_actual_label": false,
+  "has_unrelated_citations": false,
+  "strict_complete_success": false,
+  "basis": "实际0011明确要求无法避免手工操作时记录哪些文件修改/移动及目的，0004要求最低程序细节。两项已覆盖直接反证，但模型给insufficient；理由承认需详细记录却不判反驳。理由将0004说成P1-S02-p02，实际为P1-S02-p03。来源展开真实不消除这些错误。",
+  "selected_sources": [
+    {
+      "sentence_id": "sent-0004",
+      "block_id": "P1-S02-p03",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "text": "As a minimum, you should at least record sufficient details on programs, parameters, and manual procedures to allow yourself, in a year or so, to approximately reproduce the results.",
+      "start": 0,
+      "end": 182,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    },
+    {
+      "sentence_id": "sent-0011",
+      "block_id": "P1-S03-p01",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "text": "If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose.",
+      "start": 752,
+      "end": 888,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    }
+  ],
+  "expanded_response": {
+    "label": "insufficient",
+    "reason": "资料中并未明确支持当手工修改文件时无需记录对象和目的，而是强调即使有这些操作也需详细记录程序、参数等信息（如P1-S02-p02中的sent-0004要求至少记录程序细节）。",
+    "evidence": [
+      {
+        "block_id": "P1-S02-p03",
+        "quote": "As a minimum, you should at least record sufficient details on programs, parameters, and manual procedures to allow yourself, in a year or so, to approximately reproduce the results."
+      },
+      {
+        "block_id": "P1-S03-p01",
+        "quote": "If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose."
+      }
+    ]
+  },
+  "input_tokens": 1036,
+  "usage": {
+    "completion_tokens": 387,
+    "prompt_tokens": 1036,
+    "total_tokens": 1423,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "finish_reason": "stop",
+  "budget_exhausted": false,
+  "truncated": false,
+  "client_seconds": 18.411746500059962,
+  "reasoning_produced": true,
+  "judgment_source": "unverified",
+  "reviewer": "Codex辅助原文复核，尚待本人确认"
+}

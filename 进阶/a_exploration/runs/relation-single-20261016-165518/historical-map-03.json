@@ -1,0 +1,196 @@
+{
+  "at": "2026-10-16T16:55:18.954932+08:00",
+  "id": "AD03",
+  "source_raw_path": "进阶/a_exploration/runs/relation-first-20261016-131824/run-c323c2c5-05e6-460f-bd95-cdbc2c2f83b8.json",
+  "source_raw_sha256": "d1036fa9a07646dee51f1c982de58013d26068122b25513b6f9940db3c212578",
+  "original_response": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"relation\\\": \\\"entails\\\",\\n  \\\"explanation\\\": \\\"证据支持了原主张，即在绘图过程中只保留最终图片满足作者关于图底层数据的建议。\\\",\\n  \\\"sentence_ids\\\": [\\\"sent-0001\\\", \\\"sent-0003\\\", \\\"sent-0005\\\", \\\"sent-0007\\\", \\\"sent-0008\\\", \\\"sent-0016\\\"],\\n  \\\"label\\\": \\\"supported\\\"\\n}\"}}],\"created\":1792128262,\"model\":\"Qwen3-0.6B-Q8_0\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":101,\"prompt_tokens\":2963,\"total_tokens\":3064,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-cYJOEVWQp9SKhQTqHRyga5wz7eReaEL1\",\"timings\":{\"cache_n\":0,\"prompt_n\":2963,\"prompt_ms\":17050.325,\"prompt_per_token_ms\":5.754412757340534,\"prompt_per_second\":173.77967868647664,\"predicted_n\":101,\"predicted_ms\":5884.898,\"predicted_per_token_ms\":58.848980000000005,\"predicted_per_second\":16.992647960933223}}",
+  "original_content": "{\n  \"relation\": \"entails\",\n  \"explanation\": \"证据支持了原主张，即在绘图过程中只保留最终图片满足作者关于图底层数据的建议。\",\n  \"sentence_ids\": [\"sent-0001\", \"sent-0003\", \"sent-0005\", \"sent-0007\", \"sent-0008\", \"sent-0016\"],\n  \"label\": \"supported\"\n}",
+  "original_relation": "entails",
+  "original_label": "supported",
+  "original_explanation": "证据支持了原主张，即在绘图过程中只保留最终图片满足作者关于图底层数据的建议。",
+  "projection_note": "历史explanation逐字投影为reason，不改变文字；原始四字段响应完整保留。",
+  "mapping": {
+    "raw_internal_content": "{\"relation\": \"entails\", \"reason\": \"证据支持了原主张，即在绘图过程中只保留最终图片满足作者关于图底层数据的建议。\", \"sentence_ids\": [\"sent-0001\", \"sent-0003\", \"sent-0005\", \"sent-0007\", \"sent-0008\", \"sent-0016\"]}",
+    "parsed_internal": {
+      "relation": "entails",
+      "reason": "证据支持了原主张，即在绘图过程中只保留最终图片满足作者关于图底层数据的建议。",
+      "sentence_ids": [
+        "sent-0001",
+        "sent-0003",
+        "sent-0005",
+        "sent-0007",
+        "sent-0008",
+        "sent-0016"
+      ]
+    },
+    "valid": true,
+    "expanded_response": {
+      "label": "supported",
+      "reason": "证据支持了原主张，即在绘图过程中只保留最终图片满足作者关于图底层数据的建议。",
+      "evidence": [
+        {
+          "block_id": "P1-S04-p01",
+          "quote": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. "
+        },
+        {
+          "block_id": "P1-S04-p01",
+          "quote": "Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. "
+        },
+        {
+          "block_id": "P1-S04-p01",
+          "quote": "In some cases, all that is needed is to store a single executable or source code file. "
+        },
+        {
+          "block_id": "P1-S04-p01",
+          "quote": "To ensure future availability, the only viable solution may then be to store a full virtual machine image of the operating system and program. "
+        },
+        {
+          "block_id": "P1-S04-p01",
+          "quote": "As a minimum, you should note the exact names and versions of the main programs you use."
+        },
+        {
+          "block_id": "P1-S09-p01",
+          "quote": "When working with summarized results, you should as a minimum at least once generate, inspect, and validate the detailed values underlying the summaries."
+        }
+      ]
+    },
+    "selected_sources": [
+      {
+        "sentence_id": "sent-0001",
+        "block_id": "P1-S04-p01",
+        "doc_id": "P1",
+        "snapshot": "published",
+        "text": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. ",
+        "start": 0,
+        "end": 121,
+        "offset_unit": "unicode_code_point",
+        "interval": "[start,end)",
+        "segmentation": "conservative_punctuation_or_complete_fragment"
+      },
+      {
+        "sentence_id": "sent-0003",
+        "block_id": "P1-S04-p01",
+        "doc_id": "P1",
+        "snapshot": "published",
+        "text": "Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. ",
+        "start": 265,
+        "end": 413,
+        "offset_unit": "unicode_code_point",
+        "interval": "[start,end)",
+        "segmentation": "conservative_punctuation_or_complete_fragment"
+      },
+      {
+        "sentence_id": "sent-0005",
+        "block_id": "P1-S04-p01",
+        "doc_id": "P1",
+        "snapshot": "published",
+        "text": "In some cases, all that is needed is to store a single executable or source code file. ",
+        "start": 515,
+        "end": 602,
+        "offset_unit": "unicode_code_point",
+        "interval": "[start,end)",
+        "segmentation": "conservative_punctuation_or_complete_fragment"
+      },
+      {
+        "sentence_id": "sent-0007",
+        "block_id": "P1-S04-p01",
+        "doc_id": "P1",
+        "snapshot": "published",
+        "text": "To ensure future availability, the only viable solution may then be to store a full virtual machine image of the operating system and program. ",
+        "start": 766,
+        "end": 909,
+        "offset_unit": "unicode_code_point",
+        "interval": "[start,end)",
+        "segmentation": "conservative_punctuation_or_complete_fragment"
+      },
+      {
+        "sentence_id": "sent-0008",
+        "block_id": "P1-S04-p01",
+        "doc_id": "P1",
+        "snapshot": "published",
+        "text": "As a minimum, you should note the exact names and versions of the main programs you use.",
+        "start": 909,
+        "end": 997,
+        "offset_unit": "unicode_code_point",
+        "interval": "[start,end)",
+        "segmentation": "conservative_punctuation_or_complete_fragment"
+      },
+      {
+        "sentence_id": "sent-0016",
+        "block_id": "P1-S09-p01",
+        "doc_id": "P1",
+        "snapshot": "published",
+        "text": "When working with summarized results, you should as a minimum at least once generate, inspect, and validate the detailed values underlying the summaries.",
+        "start": 993,
+        "end": 1146,
+        "offset_unit": "unicode_code_point",
+        "interval": "[start,end)",
+        "segmentation": "conservative_punctuation_or_complete_fragment"
+      }
+    ],
+    "model_original_label": null,
+    "mapped_label": "supported",
+    "mapping_valid": true,
+    "external_label_origin": "deterministic_mapping_from_model_relation",
+    "run_kind": "local_rule",
+    "judgment_source": "rule",
+    "semantic_support": "not_checked",
+    "reason_relation_consistency": "not_checked",
+    "repair_applied": false,
+    "added_unselected_sentences": false,
+    "model_relation": "entails",
+    "projection_for_expansion": {
+      "label": "supported",
+      "reason": "证据支持了原主张，即在绘图过程中只保留最终图片满足作者关于图底层数据的建议。",
+      "sentence_ids": [
+        "sent-0001",
+        "sent-0003",
+        "sent-0005",
+        "sent-0007",
+        "sent-0008",
+        "sent-0016"
+      ]
+    }
+  },
+  "derived_response": {
+    "label": "supported",
+    "reason": "证据支持了原主张，即在绘图过程中只保留最终图片满足作者关于图底层数据的建议。",
+    "evidence": [
+      {
+        "block_id": "P1-S04-p01",
+        "quote": "In order to exactly reproduce a given result, it may be necessary to use programs in the exact versions used originally. "
+      },
+      {
+        "block_id": "P1-S04-p01",
+        "quote": "Even having noted which version was used of a given program, it is not always trivial to get hold of a program in anything but the current version. "
+      },
+      {
+        "block_id": "P1-S04-p01",
+        "quote": "In some cases, all that is needed is to store a single executable or source code file. "
+      },
+      {
+        "block_id": "P1-S04-p01",
+        "quote": "To ensure future availability, the only viable solution may then be to store a full virtual machine image of the operating system and program. "
+      },
+      {
+        "block_id": "P1-S04-p01",
+        "quote": "As a minimum, you should note the exact names and versions of the main programs you use."
+      },
+      {
+        "block_id": "P1-S09-p01",
+        "quote": "When working with summarized results, you should as a minimum at least once generate, inspect, and validate the detailed values underlying the summaries."
+      }
+    ]
+  },
+  "derived_label_origin": "local_rule_mapping_from_historical_model_relation",
+  "mapping_consistent": true,
+  "relation_correct": false,
+  "external_label_correct": false,
+  "original_label_correct": false,
+  "necessary_coverage": false,
+  "citation_support_after_mapping": false,
+  "strict_success_after_mapping": false,
+  "basis": "entails映射仍supported，所选程序版本及检查详细值不支持只留图足够。",
+  "generation_calls": 0,
+  "reviewer": "Codex原文辅助复核，尚待本人确认"
+}

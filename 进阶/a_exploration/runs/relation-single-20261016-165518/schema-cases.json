@@ -1,0 +1,820 @@
+[
+  {
+    "name": "AD01-original",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "sentence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sent-0001",
+              "sent-0002",
+              "sent-0003",
+              "sent-0004",
+              "sent-0005",
+              "sent-0006",
+              "sent-0007",
+              "sent-0008",
+              "sent-0009",
+              "sent-0010",
+              "sent-0011"
+            ]
+          }
+        }
+      },
+      "required": [
+        "label",
+        "reason",
+        "sentence_ids"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "entails_valid",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "conflicts_valid",
+        "response": {
+          "label": "contradicted",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "undetermined_valid",
+        "response": {
+          "label": "insufficient",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "unknown_id",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "missing"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "illegal_value",
+        "response": {
+          "label": "undefined",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "duplicate_id_program_rejects",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001",
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "empty_valid",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": []
+        },
+        "accept": true
+      },
+      {
+        "name": "extra_field",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ],
+          "extra": 1
+        },
+        "accept": false
+      }
+    ]
+  },
+  {
+    "name": "AD01-revised",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "relation": {
+          "type": "string",
+          "enum": [
+            "entails",
+            "conflicts",
+            "undetermined"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "sentence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sent-0001",
+              "sent-0002",
+              "sent-0003",
+              "sent-0004",
+              "sent-0005",
+              "sent-0006",
+              "sent-0007",
+              "sent-0008",
+              "sent-0009",
+              "sent-0010",
+              "sent-0011"
+            ]
+          }
+        }
+      },
+      "required": [
+        "relation",
+        "reason",
+        "sentence_ids"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "entails_valid",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "conflicts_valid",
+        "response": {
+          "relation": "conflicts",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "undetermined_valid",
+        "response": {
+          "relation": "undetermined",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "unknown_id",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "missing"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "illegal_value",
+        "response": {
+          "relation": "undefined",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "duplicate_id_program_rejects",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001",
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "empty_valid",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": []
+        },
+        "accept": true
+      },
+      {
+        "name": "extra_field",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ],
+          "extra": 1
+        },
+        "accept": false
+      }
+    ]
+  },
+  {
+    "name": "AD02-original",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "sentence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sent-0001",
+              "sent-0002",
+              "sent-0003",
+              "sent-0004",
+              "sent-0005",
+              "sent-0006",
+              "sent-0007",
+              "sent-0008",
+              "sent-0009",
+              "sent-0010",
+              "sent-0011",
+              "sent-0012",
+              "sent-0013"
+            ]
+          }
+        }
+      },
+      "required": [
+        "label",
+        "reason",
+        "sentence_ids"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "entails_valid",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "conflicts_valid",
+        "response": {
+          "label": "contradicted",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "undetermined_valid",
+        "response": {
+          "label": "insufficient",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "unknown_id",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "missing"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "illegal_value",
+        "response": {
+          "label": "undefined",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "duplicate_id_program_rejects",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001",
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "empty_valid",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": []
+        },
+        "accept": true
+      },
+      {
+        "name": "extra_field",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ],
+          "extra": 1
+        },
+        "accept": false
+      }
+    ]
+  },
+  {
+    "name": "AD02-revised",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "relation": {
+          "type": "string",
+          "enum": [
+            "entails",
+            "conflicts",
+            "undetermined"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "sentence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sent-0001",
+              "sent-0002",
+              "sent-0003",
+              "sent-0004",
+              "sent-0005",
+              "sent-0006",
+              "sent-0007",
+              "sent-0008",
+              "sent-0009",
+              "sent-0010",
+              "sent-0011",
+              "sent-0012",
+              "sent-0013"
+            ]
+          }
+        }
+      },
+      "required": [
+        "relation",
+        "reason",
+        "sentence_ids"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "entails_valid",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "conflicts_valid",
+        "response": {
+          "relation": "conflicts",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "undetermined_valid",
+        "response": {
+          "relation": "undetermined",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "unknown_id",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "missing"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "illegal_value",
+        "response": {
+          "relation": "undefined",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "duplicate_id_program_rejects",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001",
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "empty_valid",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": []
+        },
+        "accept": true
+      },
+      {
+        "name": "extra_field",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ],
+          "extra": 1
+        },
+        "accept": false
+      }
+    ]
+  },
+  {
+    "name": "AD03-original",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "sentence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sent-0001",
+              "sent-0002",
+              "sent-0003",
+              "sent-0004",
+              "sent-0005",
+              "sent-0006",
+              "sent-0007",
+              "sent-0008",
+              "sent-0009",
+              "sent-0010",
+              "sent-0011",
+              "sent-0012",
+              "sent-0013",
+              "sent-0014",
+              "sent-0015",
+              "sent-0016"
+            ]
+          }
+        }
+      },
+      "required": [
+        "label",
+        "reason",
+        "sentence_ids"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "entails_valid",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "conflicts_valid",
+        "response": {
+          "label": "contradicted",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "undetermined_valid",
+        "response": {
+          "label": "insufficient",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "unknown_id",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "missing"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "illegal_value",
+        "response": {
+          "label": "undefined",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "duplicate_id_program_rejects",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001",
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "empty_valid",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": []
+        },
+        "accept": true
+      },
+      {
+        "name": "extra_field",
+        "response": {
+          "label": "supported",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ],
+          "extra": 1
+        },
+        "accept": false
+      }
+    ]
+  },
+  {
+    "name": "AD03-revised",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "relation": {
+          "type": "string",
+          "enum": [
+            "entails",
+            "conflicts",
+            "undetermined"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "sentence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sent-0001",
+              "sent-0002",
+              "sent-0003",
+              "sent-0004",
+              "sent-0005",
+              "sent-0006",
+              "sent-0007",
+              "sent-0008",
+              "sent-0009",
+              "sent-0010",
+              "sent-0011",
+              "sent-0012",
+              "sent-0013",
+              "sent-0014",
+              "sent-0015",
+              "sent-0016"
+            ]
+          }
+        }
+      },
+      "required": [
+        "relation",
+        "reason",
+        "sentence_ids"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "entails_valid",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "conflicts_valid",
+        "response": {
+          "relation": "conflicts",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "undetermined_valid",
+        "response": {
+          "relation": "undetermined",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "unknown_id",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "missing"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "illegal_value",
+        "response": {
+          "relation": "undefined",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ]
+        },
+        "accept": false
+      },
+      {
+        "name": "duplicate_id_program_rejects",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001",
+            "sent-0001"
+          ]
+        },
+        "accept": true
+      },
+      {
+        "name": "empty_valid",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": []
+        },
+        "accept": true
+      },
+      {
+        "name": "extra_field",
+        "response": {
+          "relation": "entails",
+          "reason": "self-made structure check",
+          "sentence_ids": [
+            "sent-0001"
+          ],
+          "extra": 1
+        },
+        "accept": false
+      }
+    ]
+  }
+]

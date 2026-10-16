@@ -1,0 +1,64 @@
+{
+  "at": "2026-10-16T21:57:31.670389+08:00",
+  "baseline": 630,
+  "max_new_generations": 60,
+  "development_stop_start_at": "2026-10-16T22:35:00+08:00",
+  "only_model": "Qwen3-0.6B-Q8_0",
+  "development_rounds": [
+    {
+      "round": 1,
+      "goal": "共同对象查询＋标题/正文联合检索",
+      "max_calls": 6,
+      "calls": "3新共享关键词＋3改进回答；两方案排名和输入均保存，基线不另生成；历史对照。"
+    },
+    {
+      "round": 2,
+      "goal": "必要证据与无关引用",
+      "max_calls": 3,
+      "calls": "3候选回答；旧侧历史复用，不为凑配对重复生成。"
+    },
+    {
+      "round": 3,
+      "goal": "判断方向及解释先行",
+      "max_calls": 3,
+      "calls": "3候选回答；旧侧历史复用。"
+    },
+    {
+      "round": 4,
+      "goal": "组合验证",
+      "max_calls": 6,
+      "calls": "3题两方案，各一次回答；查询历史复用，明确组件验证。"
+    },
+    {
+      "round": 5,
+      "goal": "稳健性",
+      "max_calls": 0,
+      "calls": "离线自造、ID映射、顺序和边界，不冒充模型验证。"
+    }
+  ],
+  "selection": "严格成功优先，其次标签正确；标签退步明列，不再使用之前的不得退步否决；同分保留简单版本；不得逐题拼接。",
+  "strict_formula": "format_complete AND selection_valid AND label_correct AND necessary_coverage_is_true AND citation_support_is_true AND NOT unrelated",
+  "reason_consistency_separate": true,
+  "technical_failure": "保存后停止整批，不重发；普通准备工程错误可离线修复留档。",
+  "after_development": "先报告并保存最终唯一配置和哈希，再允许读取7评测任务。随后7配对最多21次、2等价变体最多6次、1反事实最多3次。",
+  "variant_design_before_results": [
+    {
+      "source": "AD01",
+      "change": "仅中文等义改写：手工修改或移动无法避免时，保存最终文件就够了，不必记下修改对象与用途。",
+      "prediction": "标签和支持状态应与原主张相同；不改变资料。"
+    },
+    {
+      "source": "按任务文件顺序第一条评测任务，尚未读取正文",
+      "change": "主张不变，仅所有块ID作一致双射重映射，不改正文、标题、顺序、doc_ids。",
+      "prediction": "检索按内容对应一致，语义标签与支持状态应不变，引用归属按映射对应。"
+    }
+  ],
+  "counterfactual_before_results": {
+    "source": "AD01",
+    "change": "将无需记录改成仍应记录；完整新主张：手工修改或移动数据文件确实无法避免时，仍应记录修改或移动了哪些文件，以及目的。",
+    "expected": "supported，引用应覆盖最低限度记录要求；执行完整查询与两方案。",
+    "not_in_main_denominator": true
+  },
+  "AT_not_read": true,
+  "no_auto_commit": true
+}

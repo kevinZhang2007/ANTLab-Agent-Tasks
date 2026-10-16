@@ -1,0 +1,334 @@
+{
+  "at": "2026-10-16T12:24:59.595606+08:00",
+  "rows": [
+    {
+      "at": "2026-10-16T12:23:09.646457+08:00",
+      "id": "AD01",
+      "variant": "original",
+      "request_id": "6580629c-c0df-44aa-bf2a-bd12f81dea78",
+      "run_id": "cf1a0ccb-6fa1-44cd-a044-d7e1549501c5",
+      "raw_record": "run-cf1a0ccb-6fa1-44cd-a044-d7e1549501c5.json",
+      "input_origin": "manual_verified_development_evidence",
+      "not_automatic_retrieval": true,
+      "not_end_to_end_score": true,
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"资料支持了主张，因为该段落明确指出：当手工修改或移动数据文件确实无法避免时，应记录修改对象和目的。\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S03-p01\",\n      \"quote\": \"If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts. If working with integrated frameworks, there will typically be a quite rich collection of components for data manipulation.\"\n    }\n  ]\n}",
+      "parsed": {
+        "label": "supported",
+        "reason": "资料支持了主张，因为该段落明确指出：当手工修改或移动数据文件确实无法避免时，应记录修改对象和目的。",
+        "evidence": [
+          {
+            "block_id": "P1-S03-p01",
+            "quote": "If working at the UNIX command line, manual modification of files can usually be replaced by the use of standard UNIX commands or small custom scripts. If working with integrated frameworks, there will typically be a quite rich collection of components for data manipulation."
+          }
+        ]
+      },
+      "reference_label": "contradicted",
+      "format_complete": true,
+      "answer_correct": false,
+      "id_membership_check": true,
+      "nonempty_references": true,
+      "quote_authenticity_checks": [
+        {
+          "block_id": "P1-S03-p01",
+          "id_valid": true,
+          "quote_continuous_original": true
+        }
+      ],
+      "required_source_passages_present_in_input": true,
+      "quoted_necessary_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "semantic_review_basis": "主张说无需记录；理由却说应记录。所引UNIX替代手工操作片段没有覆盖无法避免时仍须记录的关键句。引用来源属目标文档，但无法支持supported。",
+      "client_seconds": 5.043711100006476,
+      "input_tokens": 442,
+      "usage": {
+        "completion_tokens": 130,
+        "prompt_tokens": 442,
+        "total_tokens": 572,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "truncated": false,
+      "reviewer": "Codex原文辅助复核，尚待本人确认",
+      "evaluation_type": "人工指定证据诊断"
+    },
+    {
+      "at": "2026-10-16T12:23:14.520456+08:00",
+      "id": "AD01",
+      "variant": "revised",
+      "request_id": "e4782c55-389b-46d4-80f9-ffaa7f88c53c",
+      "run_id": "b33c739d-d9a7-4c3d-a057-fc90564505f5",
+      "raw_record": "run-b33c739d-d9a7-4c3d-a057-fc90564505f5.json",
+      "input_origin": "manual_verified_development_evidence",
+      "not_automatic_retrieval": true,
+      "not_end_to_end_score": true,
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"原文明确指出，当手工修改或移动数据文件无法避免时，应记录修改对象和目的。该主张与原文的逻辑一致。\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S03-p01\",\n      \"quote\": \"If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose.\"\n    }\n  ]\n}",
+      "parsed": {
+        "label": "supported",
+        "reason": "原文明确指出，当手工修改或移动数据文件无法避免时，应记录修改对象和目的。该主张与原文的逻辑一致。",
+        "evidence": [
+          {
+            "block_id": "P1-S03-p01",
+            "quote": "If manual operations cannot be avoided, you should as a minimum note down which data files were modified or moved, and for what purpose."
+          }
+        ]
+      },
+      "reference_label": "contradicted",
+      "format_complete": true,
+      "answer_correct": false,
+      "id_membership_check": true,
+      "nonempty_references": true,
+      "quote_authenticity_checks": [
+        {
+          "block_id": "P1-S03-p01",
+          "id_valid": true,
+          "quote_continuous_original": true
+        }
+      ],
+      "required_source_passages_present_in_input": true,
+      "quoted_necessary_coverage": true,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "semantic_review_basis": "引到了If manual operations cannot be avoided...note down which data files...for what purpose，摘录直接要求记录，与无需记录冲突；理由也说应记录，却标supported。证据覆盖不等于支持当前错误label。",
+      "client_seconds": 4.689655299996957,
+      "input_tokens": 516,
+      "usage": {
+        "completion_tokens": 108,
+        "prompt_tokens": 516,
+        "total_tokens": 624,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "truncated": false,
+      "reviewer": "Codex原文辅助复核，尚待本人确认",
+      "evaluation_type": "人工指定证据诊断"
+    },
+    {
+      "at": "2026-10-16T12:23:19.508473+08:00",
+      "id": "AD02",
+      "variant": "revised",
+      "request_id": "1074358b-4e14-4c2d-92b1-9b3ef9ac8dba",
+      "run_id": "d6bc3afb-2696-472a-9810-64ad5b6fa68c",
+      "raw_record": "run-d6bc3afb-2696-472a-9810-64ad5b6fa68c.json",
+      "input_origin": "manual_verified_development_evidence",
+      "not_automatic_retrieval": true,
+      "not_end_to_end_score": true,
+      "raw_content": "{\n  \"label\": \"insufficient\",\n  \"reason\": \"资料中未明确说明是否足以让他人执行原计算，且主张中的否定方向与原文的条件不完全匹配。\",\n  \"evidence\": []\n}",
+      "parsed": {
+        "label": "insufficient",
+        "reason": "资料中未明确说明是否足以让他人执行原计算，且主张中的否定方向与原文的条件不完全匹配。",
+        "evidence": []
+      },
+      "reference_label": "supported",
+      "format_complete": true,
+      "answer_correct": false,
+      "id_membership_check": true,
+      "nonempty_references": false,
+      "quote_authenticity_checks": [],
+      "required_source_passages_present_in_input": true,
+      "quoted_necessary_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "semantic_review_basis": "实际输入已有Read与Run完整段落，回复仍要求逐字说明是否足以执行并称否定不匹配，但没有给出原文冲突或具体缺失条件，空引用。该参考是用途/环境的组合推导，保留解释边界。",
+      "client_seconds": 4.822478899965063,
+      "input_tokens": 751,
+      "usage": {
+        "completion_tokens": 52,
+        "prompt_tokens": 751,
+        "total_tokens": 803,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "truncated": false,
+      "reviewer": "Codex原文辅助复核，尚待本人确认",
+      "evaluation_type": "人工指定证据诊断"
+    },
+    {
+      "at": "2026-10-16T12:23:24.126379+08:00",
+      "id": "AD02",
+      "variant": "original",
+      "request_id": "6efcf0f6-bd2f-46d2-b4bb-9c7c40a4d943",
+      "run_id": "949841c9-1a3d-4767-8500-bf19e5494794",
+      "raw_record": "run-949841c9-1a3d-4767-8500-bf19e5494794.json",
+      "input_origin": "manual_verified_development_evidence",
+      "not_automatic_retrieval": true,
+      "not_end_to_end_score": true,
+      "raw_content": "{\n  \"label\": \"insufficient\",\n  \"reason\": \"资料中未明确说明是否足以让他人执行原计算，仅提到导出为静态HTML/PDF或使用工具如Nbviewer/ Binder 来辅助阅读和运行，但未涉及执行计算本身的能力。\",\n  \"evidence\": []\n}",
+      "parsed": {
+        "label": "insufficient",
+        "reason": "资料中未明确说明是否足以让他人执行原计算，仅提到导出为静态HTML/PDF或使用工具如Nbviewer/ Binder 来辅助阅读和运行，但未涉及执行计算本身的能力。",
+        "evidence": []
+      },
+      "reference_label": "supported",
+      "format_complete": true,
+      "answer_correct": false,
+      "id_membership_check": true,
+      "nonempty_references": false,
+      "quote_authenticity_checks": [],
+      "required_source_passages_present_in_input": true,
+      "quoted_necessary_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "semantic_review_basis": "Read段说明静态HTML/PDF提供readable archival record；Run段另要求运行环境或依赖描述。原主张限定仅此不足执行；回复追问是否足以执行并空引用，未运用组合依据。",
+      "client_seconds": 4.458557499805465,
+      "input_tokens": 677,
+      "usage": {
+        "completion_tokens": 71,
+        "prompt_tokens": 677,
+        "total_tokens": 748,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "truncated": false,
+      "reviewer": "Codex原文辅助复核，尚待本人确认",
+      "evaluation_type": "人工指定证据诊断"
+    },
+    {
+      "at": "2026-10-16T12:23:28.924697+08:00",
+      "id": "AD03",
+      "variant": "original",
+      "request_id": "87c237eb-b18b-4b59-8687-b9cbac2688a9",
+      "run_id": "f7d4de1b-4b66-4593-9086-323837415e17",
+      "raw_record": "run-f7d4de1b-4b66-4593-9086-323837415e17.json",
+      "input_origin": "manual_verified_development_evidence",
+      "not_automatic_retrieval": true,
+      "not_end_to_end_score": true,
+      "raw_content": "{\n  \"label\": \"supported\",\n  \"reason\": \"资料明确支持绘图过程中保留最终图片满足作者关于图底层数据的建议，且提供了系统存储原始数据和处理后的可视化数据的例子。\",\n  \"evidence\": [\n    {\n      \"block_id\": \"P1-S08-p01\",\n      \"quote\": \"An additional advantage of this is that if one really wants to read fine values in a figure, one can consult the raw numbers.\"\n    }\n  ]\n}",
+      "parsed": {
+        "label": "supported",
+        "reason": "资料明确支持绘图过程中保留最终图片满足作者关于图底层数据的建议，且提供了系统存储原始数据和处理后的可视化数据的例子。",
+        "evidence": [
+          {
+            "block_id": "P1-S08-p01",
+            "quote": "An additional advantage of this is that if one really wants to read fine values in a figure, one can consult the raw numbers."
+          }
+        ]
+      },
+      "reference_label": "contradicted",
+      "format_complete": true,
+      "answer_correct": false,
+      "id_membership_check": true,
+      "nonempty_references": true,
+      "quote_authenticity_checks": [
+        {
+          "block_id": "P1-S08-p01",
+          "id_valid": true,
+          "quote_continuous_original": true
+        }
+      ],
+      "required_source_passages_present_in_input": true,
+      "quoted_necessary_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "semantic_review_basis": "完整段落末句As a minimum...note which data...how...reconstructed与只保留最终图片不符。模型引用consult the raw numbers，只覆盖原始数据一种用途，没有覆盖最低记录条件；正确来源不能支持错误supported。",
+      "client_seconds": 4.606797700049356,
+      "input_tokens": 540,
+      "usage": {
+        "completion_tokens": 104,
+        "prompt_tokens": 540,
+        "total_tokens": 644,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "truncated": false,
+      "reviewer": "Codex原文辅助复核，尚待本人确认",
+      "evaluation_type": "人工指定证据诊断"
+    },
+    {
+      "at": "2026-10-16T12:23:33.612182+08:00",
+      "id": "AD03",
+      "variant": "revised",
+      "request_id": "6617e7c5-5fd1-4c91-b642-3644b89cd93a",
+      "run_id": "339eaba6-4f25-4997-9e76-1f0e24c882d7",
+      "raw_record": "run-339eaba6-4f25-4997-9e76-1f0e24c882d7.json",
+      "input_origin": "manual_verified_development_evidence",
+      "not_automatic_retrieval": true,
+      "not_end_to_end_score": true,
+      "raw_content": "{\n  \"label\": \"insufficient\",\n  \"reason\": \"资料中未明确说明绘图过程中数据转换后是否只保留最终图片以满足作者关于图底层数据的建议。虽然提到了存储原始数据和处理后的可视化结果，但缺乏具体信息来支持该主张。\",\n  \"evidence\": []\n}",
+      "parsed": {
+        "label": "insufficient",
+        "reason": "资料中未明确说明绘图过程中数据转换后是否只保留最终图片以满足作者关于图底层数据的建议。虽然提到了存储原始数据和处理后的可视化结果，但缺乏具体信息来支持该主张。",
+        "evidence": []
+      },
+      "reference_label": "contradicted",
+      "format_complete": true,
+      "answer_correct": false,
+      "id_membership_check": true,
+      "nonempty_references": false,
+      "quote_authenticity_checks": [],
+      "required_source_passages_present_in_input": true,
+      "quoted_necessary_coverage": false,
+      "citation_support_actual_judgment": false,
+      "has_unrelated_citations": false,
+      "strict_complete_success": false,
+      "semantic_review_basis": "完整原文已有底层数据、处理值与最低重建说明，回复承认原文提到存原始数据和处理值但仍insufficient；空引用。can be useful不解读为一切数据都必须无例外存储。",
+      "client_seconds": 4.510449700057507,
+      "input_tokens": 614,
+      "usage": {
+        "completion_tokens": 73,
+        "prompt_tokens": 614,
+        "total_tokens": 687,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "finish_reason": "stop",
+      "truncated": false,
+      "reviewer": "Codex原文辅助复核，尚待本人确认",
+      "evaluation_type": "人工指定证据诊断"
+    }
+  ],
+  "groups": {
+    "original": {
+      "denominator": 3,
+      "format_complete": 3,
+      "answer_correct": 0,
+      "quoted_necessary_coverage": 0,
+      "citation_support_actual_judgment": 0,
+      "strict_complete_success": 0,
+      "client_seconds_total": 14.109066299861297
+    },
+    "revised": {
+      "denominator": 3,
+      "format_complete": 3,
+      "answer_correct": 0,
+      "quoted_necessary_coverage": 1,
+      "citation_support_actual_judgment": 0,
+      "strict_complete_success": 0,
+      "client_seconds_total": 14.022583900019526
+    }
+  },
+  "conclusion": {
+    "H1": "补齐/减少证据干扰仍未让原提示任何一题恢复，所以仅检索遗漏不是完整解释；历史比较非同步，不能量化单独证据效应。",
+    "H2": "AD01两侧reason均要求记录但label支持无需记录，AD02继续改变主张方向；完整命题/标签映射错误仍与观察相容。修订提示未改善，不证明内部机制，也不能排除表述、模型限制或其他因素。",
+    "decision": "不采用本轮修订提示，原共同提示保持不变；主候选仍仅同章节邻段补全。人工指定证据不计正式方法或端到端成绩。",
+    "reference_limits": [
+      "AD02是Read/Run用途与环境条件组合推导，不声称任何情形都不能运行静态导出附带的其他材料。",
+      "AD03尊重建议强度，反对仅存最终图满足最低数据重建建议，不强制每种绘图都存全部中间值。"
+    ],
+    "wiring": "实际请求逐项比对：同题仅system追加文字，其余正文、顺序、模型、Schema、采样、256预算相同；未发现接线、范围泄漏或序列化错误。"
+  },
+  "unique_generated_runs": 6,
+  "A_used": 15,
+  "A_remaining": 39,
+  "cumulative": 549,
+  "run_kind": "local_rule",
+  "judgment_source": "unverified",
+  "reviewer": "Codex辅助原文复核，尚待本人确认",
+  "not_official_or_end_to_end_score": true
+}

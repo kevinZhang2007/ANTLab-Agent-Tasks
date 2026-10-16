@@ -7,6 +7,10 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 METRICS = {
+    'a_label_correct': ['label_correct'],
+    'a_source_authenticity': ['source_authenticity'],
+    'a_reason_consistent': ['reason_consistent', 'reason_label_consistent'],
+
     "answer_correct": ["answer_correct", "specified_answer_correct", "answer_correct_specified_form", "answer_correct_under_specified_form", "answer_grounded_and_correct"],
     "semantic_consistent": ["semantic_consistent", "semantic_correct", "semantic_answer_correct", "answer_semantic_agreement"],
     "format_complete": ["format_complete", "json_complete", "json_object_complete"],
@@ -18,7 +22,7 @@ METRICS = {
     "strict_complete_success": ["strict_complete_success", "complete_success"],
     "missing_evidence_response_compliant": ["missing_evidence_response_compliant"],
 }
-FIELDS = ["row_id", "row_kind", "experiment_class", "version", "freeze_path", "freeze_sha256", "case_id", "condition", "variant", "main_task_id", "run_id", "request_id", "stage", "attempt", "retry_of", "model", "configuration_ref", "result_source", "output_origin", "status", "http_status", "elapsed_seconds", "elapsed_scope", "raw_content", "answer", "citations", "usage", "usage_source", "judgment_reason", "run_kind", "judgment_source", "original_run_kind", "original_judgment_source", "count_as_generation", "count_as_b_replay", "scoring_view", "source_path", "source_pointer", "raw_record_path", "assessment_path", "ambiguity", "original_values"] + list(METRICS)
+FIELDS = ["row_id", "row_kind", "experiment_class", "version", "freeze_path", "freeze_sha256", "case_id", "condition", "variant", "main_task_id", "run_id", "request_id", "stage", "attempt", "retry_of", "model", "configuration_ref", "result_source", "output_origin", "status", "http_status", "elapsed_seconds", "elapsed_scope", "raw_content", "answer", "citations", "usage", "usage_source", "judgment_reason", "run_kind", "judgment_source", "original_run_kind", "original_judgment_source", "count_as_generation", "count_as_b_replay", "scoring_view", "source_path", "source_pointer", "raw_record_path", "assessment_path", "ambiguity", "original_values"] + ['label', 'sentence_ids', 'review_acknowledgment'] + list(METRICS)
 
 
 def safe_path(root, relative):

@@ -1,0 +1,526 @@
+{
+  "at": "2026-10-16T22:02:41.587911+08:00",
+  "passed": true,
+  "groups": {
+    "sentence": {
+      "passed": true,
+      "count": 21,
+      "checks": [
+        {
+          "name": "abbreviation_decimal_coverage",
+          "passed": true
+        },
+        {
+          "name": "newline_coverage",
+          "passed": true
+        },
+        {
+          "name": "quotes_coverage",
+          "passed": true
+        },
+        {
+          "name": "unicode_coverage",
+          "passed": true
+        },
+        {
+          "name": "no_safe_boundary_coverage",
+          "passed": true
+        },
+        {
+          "name": "URL_coverage",
+          "passed": true
+        },
+        {
+          "name": "whitespace_coverage",
+          "passed": true
+        },
+        {
+          "name": "repeated_sentences_unique_positions",
+          "passed": true
+        },
+        {
+          "name": "different_sentences_same_block_allowed_order_preserved",
+          "passed": true
+        },
+        {
+          "name": "exact_quote_and_scope",
+          "passed": true
+        },
+        {
+          "name": "unknown_rejected_not_repaired",
+          "passed": true
+        },
+        {
+          "name": "duplicate_rejected_not_repaired",
+          "passed": true
+        },
+        {
+          "name": "empty_selection_preserves_label",
+          "passed": true
+        },
+        {
+          "name": "fence_not_stripped",
+          "passed": true
+        },
+        {
+          "name": "stale_or_wrong_position_rejected",
+          "passed": true
+        },
+        {
+          "name": "never_merge_across_blocks",
+          "passed": true
+        },
+        {
+          "name": "block_id_remapping",
+          "passed": true
+        },
+        {
+          "name": "cross_doc_rejected",
+          "passed": true
+        },
+        {
+          "name": "empty_blocks",
+          "passed": true
+        },
+        {
+          "name": "semantic_rules_unchanged",
+          "passed": true
+        },
+        {
+          "name": "index_text_exact_not_stripped",
+          "passed": true
+        }
+      ],
+      "generation_calls": 0,
+      "limits": "保守标点切分，缩写/链接等不确定处合并，可能多句作为片段；完整覆盖不等于语言学分句完美或语义支持。"
+    },
+    "compact": {
+      "passed": true,
+      "count": 11,
+      "checks": [
+        {
+          "name": "all_bytes_and_order",
+          "passed": true
+        },
+        {
+          "name": "inputs_not_mutated",
+          "passed": true
+        },
+        {
+          "name": "system_and_roles_unchanged",
+          "passed": true
+        },
+        {
+          "name": "claim_exact_once_and_last",
+          "passed": true
+        },
+        {
+          "name": "whitespace_rejected",
+          "passed": true
+        },
+        {
+          "name": "unknown_id_rejected",
+          "passed": true
+        },
+        {
+          "name": "wrong_scope_rejected",
+          "passed": true
+        },
+        {
+          "name": "dropped_sentence_rejected",
+          "passed": true
+        },
+        {
+          "name": "order_changed_rejected",
+          "passed": true
+        },
+        {
+          "name": "same_expansion_and_label",
+          "passed": true
+        },
+        {
+          "name": "empty_materials",
+          "passed": true
+        }
+      ],
+      "generation_calls": 0,
+      "scope": "验证组织与字节，不证明模型理解或语义支持。"
+    },
+    "health": {
+      "passed": true,
+      "count": 8,
+      "rows": [
+        {
+          "name": "ok",
+          "passed": true,
+          "actual": {
+            "at": "2026-10-16T22:02:41.343296+08:00",
+            "url": "http://127.0.0.1:8080/health",
+            "method": "GET",
+            "timeout_seconds": 2,
+            "proxy_policy": "explicit ProxyHandler({})",
+            "http_status": 200,
+            "raw_body": "{\"status\":\"ok\"}",
+            "parsed_body": {
+              "status": "ok"
+            },
+            "healthy": true,
+            "headers": {},
+            "elapsed_seconds": 0.0002185001503676176
+          }
+        },
+        {
+          "name": "wrong_status",
+          "passed": true,
+          "actual": {
+            "at": "2026-10-16T22:02:41.343582+08:00",
+            "url": "http://127.0.0.1:8080/health",
+            "method": "GET",
+            "timeout_seconds": 2,
+            "proxy_policy": "explicit ProxyHandler({})",
+            "http_status": 503,
+            "raw_body": "{\"status\":\"ok\"}",
+            "parsed_body": {
+              "status": "ok"
+            },
+            "healthy": false,
+            "headers": {},
+            "elapsed_seconds": 3.829994238913059e-05
+          }
+        },
+        {
+          "name": "loading",
+          "passed": true,
+          "actual": {
+            "at": "2026-10-16T22:02:41.343637+08:00",
+            "url": "http://127.0.0.1:8080/health",
+            "method": "GET",
+            "timeout_seconds": 2,
+            "proxy_policy": "explicit ProxyHandler({})",
+            "http_status": 200,
+            "raw_body": "{\"status\":\"loading\"}",
+            "parsed_body": {
+              "status": "loading"
+            },
+            "healthy": false,
+            "headers": {},
+            "elapsed_seconds": 2.4399952962994576e-05
+          }
+        },
+        {
+          "name": "wrong_shape",
+          "passed": true,
+          "actual": {
+            "at": "2026-10-16T22:02:41.343671+08:00",
+            "url": "http://127.0.0.1:8080/health",
+            "method": "GET",
+            "timeout_seconds": 2,
+            "proxy_policy": "explicit ProxyHandler({})",
+            "http_status": 200,
+            "raw_body": "[]",
+            "parsed_body": [],
+            "healthy": false,
+            "headers": {},
+            "elapsed_seconds": 1.6399892047047615e-05
+          }
+        },
+        {
+          "name": "bad_json",
+          "passed": true,
+          "actual": {
+            "at": "2026-10-16T22:02:41.343696+08:00",
+            "url": "http://127.0.0.1:8080/health",
+            "method": "GET",
+            "timeout_seconds": 2,
+            "proxy_policy": "explicit ProxyHandler({})",
+            "http_status": 200,
+            "raw_body": "not json",
+            "parsed_body": null,
+            "healthy": false,
+            "headers": {},
+            "exception_type": "JSONDecodeError",
+            "exception_repr": "JSONDecodeError('Expecting value: line 1 column 1 (char 0)')",
+            "exception_string": "Expecting value: line 1 column 1 (char 0)",
+            "errno": null,
+            "winerror": null,
+            "elapsed_seconds": 3.120000474154949e-05
+          }
+        },
+        {
+          "name": "timeout",
+          "passed": true,
+          "actual": {
+            "at": "2026-10-16T22:02:41.343735+08:00",
+            "url": "http://127.0.0.1:8080/health",
+            "method": "GET",
+            "timeout_seconds": 2,
+            "proxy_policy": "explicit ProxyHandler({})",
+            "http_status": null,
+            "raw_body": null,
+            "parsed_body": null,
+            "healthy": false,
+            "exception_type": "TimeoutError",
+            "exception_repr": "TimeoutError('synthetic timeout')",
+            "exception_string": "synthetic timeout",
+            "errno": null,
+            "winerror": null,
+            "elapsed_seconds": 1.750001683831215e-05
+          }
+        },
+        {
+          "name": "refused",
+          "passed": true,
+          "actual": {
+            "at": "2026-10-16T22:02:41.343760+08:00",
+            "url": "http://127.0.0.1:8080/health",
+            "method": "GET",
+            "timeout_seconds": 2,
+            "proxy_policy": "explicit ProxyHandler({})",
+            "http_status": null,
+            "raw_body": null,
+            "parsed_body": null,
+            "healthy": false,
+            "exception_type": "URLError",
+            "exception_repr": "URLError(ConnectionRefusedError(10061, 'synthetic refusal'))",
+            "exception_string": "<urlopen error [Errno 10061] synthetic refusal>",
+            "errno": null,
+            "winerror": null,
+            "reason": {
+              "type": "ConnectionRefusedError",
+              "repr": "ConnectionRefusedError(10061, 'synthetic refusal')",
+              "errno": 10061,
+              "winerror": null
+            },
+            "elapsed_seconds": 2.759997732937336e-05
+          }
+        },
+        {
+          "name": "http503",
+          "passed": true,
+          "actual": {
+            "at": "2026-10-16T22:02:41.343795+08:00",
+            "url": "http://127.0.0.1:8080/health",
+            "method": "GET",
+            "timeout_seconds": 2,
+            "proxy_policy": "explicit ProxyHandler({})",
+            "http_status": 503,
+            "raw_body": "{\"status\":\"loading\"}",
+            "parsed_body": null,
+            "healthy": false,
+            "exception_type": "HTTPError",
+            "exception_repr": "<HTTPError 503: 'loading'>",
+            "exception_string": "HTTP Error 503: loading",
+            "errno": null,
+            "winerror": null,
+            "reason": {
+              "type": "str",
+              "repr": "'loading'",
+              "errno": null,
+              "winerror": null
+            },
+            "elapsed_seconds": 3.8400059565901756e-05
+          }
+        }
+      ],
+      "only_synthetic_no_network": true
+    },
+    "thinking": {
+      "passed": true,
+      "count": 7,
+      "checks": [
+        {
+          "name": "off_suffix_matches_false_branch",
+          "passed": true
+        },
+        {
+          "name": "on_empty_suffix_allowed",
+          "passed": true
+        },
+        {
+          "name": "string_is_not_boolean",
+          "passed": true
+        },
+        {
+          "name": "reasoning_only_not_final_success",
+          "passed": true
+        },
+        {
+          "name": "partial_final_not_repaired",
+          "passed": true
+        },
+        {
+          "name": "only_content_is_projected",
+          "passed": true
+        },
+        {
+          "name": "missing_reasoning_not_invented",
+          "passed": true
+        }
+      ],
+      "generation_calls": 0,
+      "limits": "模式实际生效依据后续HTTP模板/同版本源码；是否产生思考只看真实响应，不把自造模板字符串当服务验证。"
+    },
+    "interface": {
+      "passed": true,
+      "count": 3,
+      "generation_calls": 0,
+      "semantic_judgment": "not_checked"
+    },
+    "existing": {
+      "status": "passed",
+      "passed": 35,
+      "failed": 0,
+      "checks": [
+        {
+          "name": "scope_no_leak",
+          "passed": true
+        },
+        {
+          "name": "unknown_document",
+          "passed": true
+        },
+        {
+          "name": "unknown_snapshot",
+          "passed": true
+        },
+        {
+          "name": "empty_doc_ids",
+          "passed": true
+        },
+        {
+          "name": "positive_scores_only",
+          "passed": true
+        },
+        {
+          "name": "chapter_barrier",
+          "passed": true
+        },
+        {
+          "name": "three_neighbors",
+          "passed": true
+        },
+        {
+          "name": "duplicate_seeds_no_duplicate_output",
+          "passed": true
+        },
+        {
+          "name": "all_full_paragraphs_preserved",
+          "passed": true
+        },
+        {
+          "name": "inputs_unchanged",
+          "passed": true
+        },
+        {
+          "name": "empty_query_retrieval",
+          "passed": true
+        },
+        {
+          "name": "empty_corpus",
+          "passed": true
+        },
+        {
+          "name": "empty_messages_no_answer_fabrication",
+          "passed": true
+        },
+        {
+          "name": "id_remap_content_invariance",
+          "passed": true
+        },
+        {
+          "name": "valid_id_and_quote",
+          "passed": true
+        },
+        {
+          "name": "invalid_reference_not_repaired",
+          "passed": true
+        },
+        {
+          "name": "fabricated_quote_not_repaired",
+          "passed": true
+        },
+        {
+          "name": "invalid_json",
+          "passed": true
+        },
+        {
+          "name": "invalid_query",
+          "passed": true
+        },
+        {
+          "name": "invalid_label",
+          "passed": true
+        },
+        {
+          "name": "answer_schema_required",
+          "passed": true
+        },
+        {
+          "name": "query_schema_required",
+          "passed": true
+        },
+        {
+          "name": "zoom_half",
+          "passed": true
+        },
+        {
+          "name": "zoom_double",
+          "passed": true
+        },
+        {
+          "name": "nonuniform_scale",
+          "passed": true
+        },
+        {
+          "name": "invalid_page_size",
+          "passed": true
+        },
+        {
+          "name": "whole_line_box_precision",
+          "passed": true
+        },
+        {
+          "name": "fake_quote_invalid",
+          "passed": true
+        },
+        {
+          "name": "ambiguous_location_rejected",
+          "passed": true
+        },
+        {
+          "name": "scope_location_no_leak",
+          "passed": true
+        },
+        {
+          "name": "development_parser_stops_before_fourth_object",
+          "passed": true
+        },
+        {
+          "name": "regression_detects_bad_cross_chapter_implementation",
+          "passed": true
+        },
+        {
+          "name": "technical_failure_saved_without_generation",
+          "passed": true
+        },
+        {
+          "name": "technical_failure_blocks_next_generation",
+          "passed": true
+        },
+        {
+          "name": "capacity_failure_blocks_http",
+          "passed": true
+        }
+      ],
+      "run_kind": "local_rule",
+      "generation_calls": 0,
+      "synthetic_only": true
+    }
+  },
+  "additional_checks": [
+    "retrieval_id_remap_and_order",
+    "input_unchanged",
+    "empty_retrieval"
+  ],
+  "generation_calls": 0
+}

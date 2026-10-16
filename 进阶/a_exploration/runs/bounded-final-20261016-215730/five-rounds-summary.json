@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-16T22:27:59.739495+08:00",
+  "rounds": [
+    {
+      "round": 1,
+      "calls": 6,
+      "change": "对象保留查询＋0.75正文/0.25标题检索",
+      "strict": "0/3",
+      "labels": "0/3",
+      "adopt": false,
+      "reason": "AD03检索补回但仍拒判，AD01丢失必要证据；回退查询和标题候选。"
+    },
+    {
+      "round": 2,
+      "calls": 3,
+      "change": "直接依据/限定/背景区分与选句精简",
+      "strict": "0/3",
+      "labels": "1/3",
+      "adopt": false,
+      "reason": "AD01退步，许可无关引用仍在。"
+    },
+    {
+      "round": 3,
+      "calls": 3,
+      "change": "reason→sentence_ids→label及方向核对说明",
+      "strict": "1/3",
+      "labels": "2/3",
+      "adopt": "provisional_then_reverted",
+      "reason": "按improved指标先胜出；第4轮暴露baseline副作用。"
+    },
+    {
+      "round": 4,
+      "calls": 6,
+      "change": "同一配置在三题两侧组合验证",
+      "strict": "baseline 0/3；improved 1/3",
+      "labels": "baseline 1/3；improved 2/3",
+      "adopt": false,
+      "reason": "六输出严格1/6低于旧配置2/6；标签总数同3/6。事前未细化双侧聚合，已披露为保守收尾回退，不伪称预注册。"
+    },
+    {
+      "round": 5,
+      "calls": 0,
+      "change": "ID/顺序/范围/句子展开与自造措辞检查",
+      "strict": "not_model_test",
+      "labels": "not_model_test",
+      "adopt": "retain",
+      "reason": "临时候选与最终回退配置分别13项机制＋35项既有检查；只验证程序，不证明模型语义鲁棒。"
+    }
+  ],
+  "final_profile": "retained",
+  "search_stopped": true,
+  "no_sixth_round": true,
+  "deadline_start_compliance": true,
+  "round5_note": "先在第4轮期间进行临时profile离线检查，回退后对最终profile重查；同一第5轮，均0生成。",
+  "old_full_development_results_source": "进阶/a_exploration/runs/current-e2e-20261016-183739/review-summary.json",
+  "do_not_mix": "最终保留方案的完整开发结果引用旧轮，不拿第3/4轮更好的单题拼接。"
+}

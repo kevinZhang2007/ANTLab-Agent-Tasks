@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-16T16:55:18.921886+08:00",
+  "sources": [
+    {
+      "path": "进阶/00_共同规则与接口.md",
+      "sha256": "bc2ca4ca78435e000f167e94605c0463e8a982fdabfff476a0231f9d5bf5636f",
+      "lines": "13-20",
+      "original": [
+        "接口路径自由，README给出映射。",
+        "- judgment_source：rule / model / human / unverified。人工评测标签不得伪装为系统输出，模型自评不能作为唯一金标准。",
+        "- run_kind：live_api / offline_replay / dry_run / local_rule。成本、延迟按类型分别报告。"
+      ]
+    },
+    {
+      "path": "进阶/01_A_研究机制迁移.md",
+      "sha256": "505804b0bb2e46835ef371e3a0d442c42805798fec16ef309125462b5ae4f2b5",
+      "line": 27,
+      "original": "判定类别为supported/contradicted/insufficient；系统尚不能判断可用not_checked。系统结果、人工评价、模型裁判分开。"
+    }
+  ],
+  "conclusion": "未发现内部relation再适配外部规定类别的明确冲突；外部仍为label/reason/evidence及共同字段。只记录接口技术兼容，不宣称A+B或本地服务验收边界已获认可。",
+  "mapping_provenance": "模型只生成relation；外部标签由local_rule固定映射，语义support_status保持not_checked，模型请求run_kind=live_api；两者分别保存。",
+  "no_semantic_rule_claim": true
+}

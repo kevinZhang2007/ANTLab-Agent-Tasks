@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-16T12:14:32.548198+08:00",
+  "formal_freeze": false,
+  "AT_read_or_run": false,
+  "coverage": [
+    {
+      "requirement": "独立入口/范围/检索/邻段/完整记录",
+      "evidence": [
+        "engine.py",
+        "runtime.py",
+        "config.json",
+        "development-plan.json",
+        "page-closure-audit.json"
+      ],
+      "status": "implemented_and_dev_checked"
+    },
+    {
+      "requirement": "自造离线门禁/空检索/泄漏/非法引用/容量",
+      "evidence": [
+        "synthetic-checks.json",
+        "import-and-failure-gate.json",
+        "offline-capacity.json"
+      ],
+      "status": "35_passed"
+    },
+    {
+      "requirement": "PDF物理页/区域/缩放",
+      "evidence": [
+        "locator-visual-review.json",
+        "page/"
+      ],
+      "status": "fallback_verified_native_pdf_plugin_unverified"
+    },
+    {
+      "requirement": "页面真实请求闭环",
+      "evidence": [
+        "http-*.json",
+        "events.jsonl",
+        "page-closure-audit.json"
+      ],
+      "status": "3_pairs_9_generations"
+    },
+    {
+      "requirement": "三道开发题评价及取舍",
+      "evidence": [
+        "review.json"
+      ],
+      "status": "both_0_of_3_keep_simpler_baseline"
+    },
+    {
+      "requirement": "最终冻结/七道评测/变体/反事实",
+      "status": "not_started_wait_for_dev_review"
+    },
+    {
+      "requirement": "A/B双交付及本地API边界",
+      "status": "unresolved_not_claimed_approved"
+    }
+  ],
+  "budget": {
+    "A_generated": 9,
+    "A_cap": 54,
+    "remaining": 45,
+    "cumulative": 543
+  },
+  "after_generation_display_changes": [
+    "reader.py",
+    "contracts.py",
+    "replay.py",
+    "server.py",
+    "index.html"
+  ],
+  "source_timing_note": "生成前代码哈希见offline-preflight.json；显示层后改历史见runs/engineering-history，不把最新显示哈希当作生成时哈希"
+}

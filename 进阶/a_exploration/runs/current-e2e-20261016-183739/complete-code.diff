@@ -1,0 +1,228 @@
+--- /dev/null
++++ b/进阶/a_exploration/current_candidate.py
+@@ -0,0 +1,84 @@
++"""统一单侧入口及共享查询配对；不读取任务、答案或历史模型输出。"""
++import copy,json,time,uuid,urllib.request,urllib.error
++from runtime import Engine as RecordedEngine,TechnicalStop,CapacityStop,load,write,sha_text,now,config as original_config
++from engine import answer_messages,query_messages,retrieve,neighbors,public,parse_terms
++from sentence_selection import adapt_messages,build_index,schema,expand,CANDIDATE_PROMPT
++from compact_factorial import compact_messages,audit
++from reason_citations import adapt,NOTE
++from sentence_interface import interface_response
++
++def build_answer(claim,blocks,doc_ids,snapshot,base_config):
++    blocks=[public(b) for b in blocks];index=build_index(blocks,doc_ids,snapshot)
++    original=adapt_messages(answer_messages(claim,blocks),index)
++    compact=compact_messages(original,blocks,index,doc_ids,snapshot);messages=adapt(compact)
++    assert messages[0]['content']==CANDIDATE_PROMPT+NOTE and messages[1:]==compact[1:]
++    check=audit(messages,blocks,index,doc_ids,snapshot)
++    conf=copy.deepcopy(base_config);conf['parameters']['response_format']={'type':'json_schema','json_schema':{'schema':schema(index)}}
++    return messages,conf,index,check
++
++def query_config():
++    c=original_config('query');c['parameters']['chat_template_kwargs']={'enable_thinking':False};return c
++
++class CurrentEngine(RecordedEngine):
++    def __init__(self,folder):
++        super().__init__(folder);self.configuration=load(folder/'configuration.json');self.answer_base=self.configuration['request_common']
++    def capacity(self,messages,conf,label):
++        body={'model':conf['model'],'messages':messages,'stream':False,**conf['parameters']};path=self.folder/('capacity-'+label+'.json')
++        check={'checked_at':now(),'label':label,'actual_request_body':body,'context':4096,'output_budget':body['max_tokens'],'run_kind':'local_rule','generation_calls':0};write(path,check)
++        def http(route,payload,key):
++            check[key]={'url':self.url+route,'request':payload};write(path,check)
++            req=urllib.request.Request(self.url+route,data=json.dumps(payload,ensure_ascii=False).encode(),headers={'Content-Type':'application/json'})
++            try:
++                with self.opener.open(req,timeout=30) as r:raw=r.read().decode();status=r.status
++                check[key].update(http_status=status,raw_response=raw);write(path,check);return json.loads(raw)
++            except Exception as e:
++                check[key]['error']=repr(e)
++                if isinstance(e,urllib.error.HTTPError):check[key].update(http_status=e.code,raw_response=e.read().decode(errors='replace'))
++                write(path,check);raise
++        template=http('apply-template',body,'template_http');prompt=template.get('prompt','');check.update(template_response=template,rendered_prompt=prompt);write(path,check)
++        (self.folder/('rendered-'+label+'.txt')).write_text(prompt,encoding='utf-8')
++        tok=http('tokenize',{'content':prompt,'add_special':True,'parse_special':True},'tokenize_http');flag=body['chat_template_kwargs']['enable_thinking'];suffix=prompt.rsplit('<|im_start|>assistant\n',1)[-1]
++        checks={'boolean_mode':type(flag) is bool,'expected_budget':body['max_tokens']==(1024 if flag else 128),'branch':suffix==('' if flag else '<think>\n\n</think>\n\n'),'all_messages_present':all(m['content'] in prompt for m in messages),'fits':len(tok['tokens'])+body['max_tokens']<=4096}
++        check.update(token_response=tok,input_tokens=len(tok['tokens']),checks=checks,fits=checks['fits'],actual_generation_suffix=suffix,actual_enable_thinking_request=flag,not_echoed=['内部enable_thinking布尔状态','编译grammar与PEG对象']);write(path,check)
++        if not all(checks.values()):raise CapacityStop('阶段模板/完整资料/容量门禁失败，证据已保存')
++        return check
++    def execute(self,claim,doc_ids,snapshot,mode='improved'):
++        if mode not in ('baseline','improved'):raise ValueError('unknown mode')
++        return self._execute_modes(claim,doc_ids,snapshot,[mode])
++    def execute_pair(self,claim,doc_ids,snapshot,order):
++        if sorted(order)!=['baseline','improved']:raise ValueError('invalid pair order')
++        return self._execute_modes(claim,doc_ids,snapshot,order)
++    def _execute_modes(self,claim,doc_ids,snapshot,modes):
++        if self.technical_stop:raise TechnicalStop('上次技术失败，不再调用')
++        blocks=self.corpus.scope(doc_ids,snapshot)
++        if not isinstance(claim,str) or not claim.strip():raise ValueError('empty claim')
++        key=sha_text(json.dumps([claim,doc_ids,snapshot],ensure_ascii=False))
++        if key in self.started:raise ValueError('同一输入已尝试，不重发')
++        self.started.add(key);pid=str(uuid.uuid4());start=time.perf_counter();path=self.folder/('pair-'+pid+'.json')
++        pair={'request_id':pid,'claim':claim,'doc_ids':doc_ids,'snapshot':snapshot,'order':modes,'status':'started','shared_query':None,'arms':{},'run_kind':'live_api','judgment_source':'model','started_at':now(),'scope_blocks':[public(b) for b in blocks],'version':'compact-thinking-sentence-reason-citations'}
++        write(path,pair);self.event('pair_start',request_id=pid,doc_ids=doc_ids,snapshot=snapshot,version=pair['version'])
++        try:
++            qstart=time.perf_counter();qraw=self.generate(query_messages(claim),query_config(),'query-'+pid,pid,[]);pair['shared_query']=qraw;pair['shared_query_wall_seconds']=time.perf_counter()-qstart;write(path,pair)
++            try:terms=parse_terms(qraw['content'])
++            except (ValueError,TypeError,json.JSONDecodeError) as e:pair.update(status='query_quality_failure',error=repr(e));return pair
++            rstart=time.perf_counter();seeds,scores=retrieve(terms,blocks);extended,added=neighbors(seeds,blocks);pair.update(retrieval_terms=terms,retrieval_scores=scores,seed_ids=[b['block_id'] for b in seeds],added_neighbors=added,retrieval_seconds=time.perf_counter()-rstart)
++            prepared={};prep_times={}
++            for arm in modes:
++                t=time.perf_counter();used=seeds if arm=='baseline' else extended;ms,conf,index,bytecheck=build_answer(claim,used,doc_ids,snapshot,self.answer_base)
++                self.capacity(ms,conf,'before-pair-'+pid+'-'+arm);prepared[arm]=(used,ms,conf,index,bytecheck);prep_times[arm]=time.perf_counter()-t
++            for arm in modes:
++                used,ms,conf,index,bytecheck=prepared[arm];mid=str(uuid.uuid4());t=time.perf_counter();raw=self.generate(ms,conf,arm+'-'+pid,mid,used)
++                params=raw['slot_after'][0].get('params',{});assert raw['actual_http_request_body']['max_tokens']==1024 and params.get('max_tokens')==1024 and params.get('presence_penalty')==1.5 and params.get('repeat_penalty')==1.0
++                ex=expand(raw['content'],[public(b) for b in used],index,doc_ids,snapshot);write(self.folder/('expansion-'+raw['run_id']+'.json'),ex)
++                interface=interface_response(mid,claim,doc_ids,snapshot,raw['run_id'],ex,raw['elapsed_seconds'],locator=self.locator,actual_input_blocks=used)
++                interface.update(end_to_end_note='自动完整流程，流程组件耗时和整对实测时间另列；非固定证据重放。')
++                view={'main_task_id':mid,'parent_request_id':pid,'variant':arm,'raw_record':raw,'actual_input_passages':[public(b) for b in used],'sentence_index':index,'byte_audit':bytecheck,'format_complete':ex['valid'],'status':'returned' if ex['valid'] else 'answer_quality_failure','parsed':ex['expanded_response'] or {},'claim_judgment':interface['answer'],'claim_judgment_source':'model','support_status':'not_checked','judgment_source':'unverified','locator_status':interface['locator_status'],'evidence':[],'expansion_record':'expansion-'+raw['run_id']+'.json','interface_response':interface}
++                for e in interface['evidence']:view['evidence'].append({**e,'location':e['pdf_location'],'citation_semantic_support':'not_checked'})
++                view.update(answer_stage_wall_seconds=time.perf_counter()-t,preparation_seconds=prep_times[arm],shared_query_cost_share=1/len(modes))
++                view['reconstructed_flow_seconds']=pair['shared_query_wall_seconds']+pair['retrieval_seconds']+view['preparation_seconds']+view['answer_stage_wall_seconds']
++                view['allocated_total_seconds']=(pair['shared_query_wall_seconds']+pair['retrieval_seconds'])/len(modes)+view['preparation_seconds']+view['answer_stage_wall_seconds']
++                view['cost_note']='共享查询只计一次；各侧分摊一半公共耗时和usage。reconstructed_flow_seconds为实测组件和，非两条独立请求计时；pair_elapsed_seconds为整对实测。'
++                pair['arms'][arm]=view;write(path,pair);self.event('arm_result',request_id=mid,parent_request_id=pid,variant=arm,run_id=raw['run_id'],locator_status=view['locator_status'],semantic_support='not_checked')
++            pair['status']='completed';return pair
++        except Exception as e:self.technical_stop=True;pair.update(status='technical_stop',error=repr(e));self.event('technical_stop',request_id=pid,error=repr(e),dispatches=self.dispatches);raise
++        finally:pair.update(pair_elapsed_seconds=time.perf_counter()-start,ended_at=now());write(path,pair);self.event('pair_saved',request_id=pid,status=pair['status'],path=path.name)
+--- /dev/null
++++ b/进阶/a_exploration/current_page.html
+@@ -0,0 +1,19 @@
++<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>进阶A：当前采用版本完整开发配对</title>
++<style>body{font:16px system-ui;max-width:1400px;margin:24px auto;padding:12px}button,select{padding:8px;margin:6px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f5f5;padding:12px}section{border-top:1px solid #ccc;padding:12px}#viewer{position:relative;max-width:none}#viewer img{width:100%;display:block}#viewer svg{position:absolute;left:0;top:0;width:100%;height:100%}.evidence{white-space:pre-wrap}.note{color:#555}#viewport{overflow:auto;max-height:750px;border:1px solid #aaa}</style>
++<h1>进阶A：紧凑＋思考＋句子选择＋理由引用提示</h1><p>附加探索，主要进阶交付仍为B。仅开放三道开发题。一次提交运行共享检索词转换及两个回答，最多3次生成，不自动重试。</p>
++<select id="task"></select><button id="run">运行本题两方案一次</button><button id="stop">停止本轮服务</button><div id="state">尚未执行</div>
++<label>查看方案 <select id="arm"><option value="baseline">baseline：命中两段</option><option value="improved">improved：补同章节邻段</option></select></label>
++<p class="note">模型的主张判断是建议；引用存在、PDF定位与语义支持分开。语义复核尚未完成时显示not_checked。</p>
++<label>回看已保存HTTP记录（不生成） <input id="savedfile" type="file" accept="application/json"></label><section id="result"></section><section><h2>PDF物理页与区域</h2><div id="locator-examples">定位组件抽查（仅原文锚点，不是模型结果）：</div><label>缩放 <input id="zoom" type="range" min="0.5" max="2" step="0.25" value="1"></label><a id="pdf" target="_blank">打开原PDF物理页</a><div id="viewport"><div id="viewer"><img id="page"><svg id="boxes"></svg></div></div><div id="location"></div></section>
++<script>
++const token='__TOKEN__';let tasks=[],pair=null,region=null;const el=id=>document.getElementById(id);
++const text=(tag,value)=>{const x=document.createElement(tag);x.textContent=value;return x};
++async function load(){tasks=await (await fetch('/api/development')).json();for(const t of tasks){const o=document.createElement('option');o.value=t.id;o.textContent=t.id+' '+t.claim;el('task').append(o)}for(const a of await (await fetch('/api/locator-examples')).json()){const b=text('button',a.block.doc_id+' 定位抽查');b.onclick=()=>openRegion(a.block.doc_id,a.location.regions[0]);el('locator-examples').append(b)}}
++function show(){let root=el('result');root.replaceChildren();if(!pair)return;root.append(text('h2','整对请求 '+pair.request_id));root.append(text('pre',JSON.stringify({claim:pair.claim,doc_ids:pair.doc_ids,snapshot:pair.snapshot,shared_query_run_id:pair.shared_query?.run_id,version:pair.version,query_raw_content:pair.shared_query?.content,query_enable_thinking:pair.shared_query?.actual_http_request_body?.chat_template_kwargs?.enable_thinking,terms:pair.retrieval_terms,seed_ids:pair.seed_ids,added_neighbors:pair.added_neighbors,pair_elapsed_seconds:pair.pair_elapsed_seconds},null,2)));let a=pair.arms[el('arm').value];if(!a){root.append(text('p','本方案尚未完成'));return}root.append(text('h3',el('arm').value+' / 主任务 '+a.main_task_id));root.append(text('pre',JSON.stringify({run_id:a.raw_record.run_id,raw_content:a.raw_record.content,reasoning_content:a.raw_record.response?.choices?.[0]?.message?.reasoning_content,expanded_interface:a.interface_response,reconstructed_flow_seconds:a.reconstructed_flow_seconds,preparation_seconds:a.preparation_seconds,claim_judgment:a.claim_judgment,claim_judgment_source:a.claim_judgment_source,locator_status:a.locator_status,citation_semantic_support:'not_checked',answer_stage_seconds:a.answer_stage_wall_seconds,shared_query_cost_share:a.shared_query_cost_share,allocated_total_seconds:a.allocated_total_seconds,cost_note:a.cost_note},null,2)));for(const e of a.evidence){const box=document.createElement('div');box.className='evidence';box.append(text('pre',JSON.stringify(e,null,2)));const b=text('button','回看 '+e.block_id+' 原文区域');b.disabled=e.location.locator_status!=='valid';b.onclick=()=>openRegion(e.doc_id,e.location.regions[0]);box.append(b);root.append(box)}const details=document.createElement('details');details.append(text('summary','本方案实际输入的完整原段落'));details.append(text('pre',JSON.stringify(a.actual_input_passages,null,2)));root.append(details)}
++function openRegion(doc,r){region={doc,...r};el('page').src='/assets/'+doc+'-'+r.page+'.png';el('pdf').href='/reader?doc_id='+encodeURIComponent(doc)+'&page='+r.page;el('pdf').textContent='打开 '+doc+' 物理页 '+r.page;el('boxes').setAttribute('viewBox','0 0 '+r.page_width+' '+r.page_height);el('boxes').replaceChildren();for(const b of r.boxes){const rect=document.createElementNS('http://www.w3.org/2000/svg','rect');rect.setAttribute('x',b.bbox[0]);rect.setAttribute('y',b.bbox[1]);rect.setAttribute('width',b.bbox[2]-b.bbox[0]);rect.setAttribute('height',b.bbox[3]-b.bbox[1]);rect.setAttribute('fill','rgba(255,190,0,.28)');rect.setAttribute('stroke','#946000');rect.setAttribute('stroke-width','.5');el('boxes').append(rect)}el('location').textContent='物理页 '+r.page+'；PDF左上角原点、point；题包原始词/行框，不冒充逐字符精度。';zoom()}
++function zoom(){if(region)el('viewer').style.width=(region.page_width*Number(el('zoom').value))+'px'}
++el('savedfile').onchange=async()=>{try{const data=JSON.parse(await el('savedfile').files[0].text());const stored=data.response||data;if(!stored.request_id||!stored.arms||!stored.claim)throw new Error('不是本页面记录');pair=stored;el('state').textContent='已保存结果回看（0新增生成） '+pair.request_id;show()}catch(e){el('state').textContent='回看失败：'+e.message}};
++el('zoom').oninput=zoom;el('arm').onchange=show;
++el('run').onclick=async()=>{let t=tasks.find(x=>x.id===el('task').value);el('run').disabled=true;el('state').textContent='正在执行，不自动重发。';try{let response=await fetch('/api/run-pair',{method:'POST',headers:{'Content-Type':'application/json','X-A-Session':token},body:JSON.stringify({task_id:t.id,claim:t.claim,doc_ids:t.doc_ids,snapshot:t.snapshot,mode:'paired_live'})});let value=await response.json();if(!response.ok)throw new Error(JSON.stringify(value));pair=value;el('state').textContent='已保存 '+pair.request_id+' / '+pair.status;show()}catch(e){el('state').textContent='停止/失败：'+e.message}finally{el('run').disabled=false}};
++el('stop').onclick=async()=>{await fetch('/api/stop',{method:'POST',headers:{'Content-Type':'application/json','X-A-Session':token},body:'{}'});el('state').textContent='已请求停止自有服务'};load();
++</script></html>
+--- /dev/null
++++ b/进阶/a_exploration/current_server.py
+@@ -0,0 +1,8 @@
++"""仅切换页面，复用原HTTP鉴权、开发白名单、日志和PDF路由。"""
++from server import Handler as OriginalHandler,TOKEN
++from runtime import HERE
++class Handler(OriginalHandler):
++    def do_GET(self):
++        if self.path=='/':
++            raw=(HERE/'current_page.html').read_text(encoding='utf-8').replace('__TOKEN__',TOKEN).encode();self.send_response(200);self.send_header('Content-Type','text/html;charset=utf-8');self.send_header('Content-Length',str(len(raw)));self.send_header('Cache-Control','no-store');self.end_headers();self.wfile.write(raw);return
++        return super().do_GET()
+--- /dev/null
++++ b/进阶/a_exploration/launch_current.py
+@@ -0,0 +1,73 @@
++"""只在门禁通过后启动本轮自有模型与A页面。"""
++from pathlib import Path
++import argparse,subprocess,socket,threading,time,sys,json,os
++from runtime import HERE,ROOT,TechnicalStop,load,write,sha,now,memory
++from current_candidate import CurrentEngine as Engine,query_config,build_answer
++from audited_health import wait_health
++from engine import query_messages,answer_messages,neighbors
++from current_server import Handler
++from http.server import HTTPServer
++from checks import run as offline_checks
++
++def main():
++    p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--port',type=int,default=8890);a=p.parse_args();folder=a.out.resolve()
++    pre=load(folder/'offline-preflight.json');assert pre['passed']
++    if (folder/'owned-service.json').exists() or list(folder.glob('run-*.json')):raise ValueError('已有启动/请求，不重发')
++    for name,h in {**pre['code_hashes'],**pre['data_hashes']}.items():assert sha(ROOT/name)==h,name
++    for port in [8080,a.port]:
++        with socket.socket() as s:s.bind(('127.0.0.1',port))
++    if memory()['available_bytes']<2*1024**3:raise RuntimeError('加载前可用内存低于2 GiB，不加载')
++    engine=Engine(folder);development=load(folder/'development-inputs.json')
++    protected={n:sha(ROOT/n) for n in ['README.md','report.md','decisions.md','declaration.md','基础/开发记录.md','基础/starter/student.py','进阶/challenge_b/challenge.py','进阶/challenge_b/no_cache_engine.py']}
++    plan=load(folder/'development-plan.json')
++    launch=plan['service_arguments'];(folder/'slot-cache').mkdir()
++    assert sha(Path(launch[0]))==pre['executable_hash'] and sha(Path(launch[launch.index('-m')+1]))==pre['model_hash']
++    process=None;server=None;stop=threading.Event();abort=threading.Event();samples=[];start=time.perf_counter();phase='loading'
++    runtime={'started_at':now(),'service_arguments':launch,'service_working_directory':str(folder),'only_service_argument_difference':'slot-save-path使用本轮cwd内ASCII相对路径，保留槽erase接口；不改模型、采样和上下文。','memory_before':memory(),'technical_stop':False}
++    def monitor():
++        low=0
++        while not stop.is_set():
++            m=memory();samples.append(m);low=low+1 if m['available_bytes']<1024**3 else 0
++            if low>=3:
++                abort.set()
++                if process and process.poll() is None:process.terminate()
++                return
++            stop.wait(2)
++    thread=threading.Thread(target=monitor,daemon=True)
++    try:
++        with (folder/'model-stdout.log').open('wb') as stdout,(folder/'model-stderr.log').open('wb') as stderr:process=subprocess.Popen(launch,stdout=stdout,stderr=stderr,cwd=folder,creationflags=subprocess.CREATE_NO_WINDOW)
++        write(folder/'owned-service.json',{'pid':process.pid,'launcher_pid':os.getpid(),'arguments':launch,'started_at':now()});thread.start();phase='health'
++        wait_health(engine,process,folder,abort,start,120)
++        props=engine.service('props');write(folder/'props.json',props)
++        assert props['build_info']=='b11429-d81235049' and props['default_generation_settings']['n_ctx']==4096 and props['total_slots']==1
++        runtime.update(load_seconds=time.perf_counter()-start,memory_after_load=memory());phase='slot_erase_preflight'
++        write(folder/'startup-slot-erase.json',{'request':{'method':'POST','route':'slots/0?action=erase','body':{}},'response':engine.service('slots/0?action=erase',{}),'generation_calls':0})
++        phase='actual_template_preflight'
++        for t in development:
++            engine.capacity(query_messages(t['claim']),query_config(),'startup-query-'+t['id'])
++            for variant,blocks in [('empty',[]),('worst',load(folder/'worst-inputs.json')[t['id']])]:
++                ms,conf,index,audit=build_answer(t['claim'],blocks,t['doc_ids'],t['snapshot'],engine.answer_base)
++                engine.capacity(ms,conf,'startup-'+variant+'-'+t['id'])
++        server=HTTPServer(('127.0.0.1',a.port),Handler);server.engine=engine;server.development=development;server.folder=folder;server.timeout=.5
++        write(folder/'page-ready.json',{'url':f'http://127.0.0.1:{a.port}/','ready_at':now(),'generation_calls':0,'model_pid':process.pid,'actual_template_checks':'passed'})
++        print('PAGE_READY',f'http://127.0.0.1:{a.port}/',flush=True);phase='page_requests'
++        while time.perf_counter()-start<2400 and not (folder/'stop-requested.json').exists():
++            if abort.is_set() or process.poll() is not None:raise TechnicalStop('运行中模型/内存停止')
++            server.handle_request()
++            if engine.technical_stop:raise TechnicalStop('请求发生技术错误，停止')
++    except Exception as e:
++        runtime.update(technical_stop=True,error=repr(e),failure_phase=phase);write(folder/'technical-stop.json',{'at':now(),**runtime,'generation_dispatches':engine.dispatches});print('TECHNICAL_STOP',phase,repr(e),flush=True)
++    finally:
++        if server:server.server_close()
++        runtime.update(exit_code_before_cleanup=process.poll() if process else None)
++        stop.set()
++        if thread.is_alive():thread.join(5)
++        if process and process.poll() is None:
++            process.terminate()
++            try:process.wait(10)
++            except subprocess.TimeoutExpired:process.kill();process.wait()
++        runtime.update(exit_code_after_cleanup=process.poll() if process else None,ended_at=now(),generation_dispatches=engine.dispatches,confirmed_generations=engine.completed,model_stopped=process is None or process.poll() is not None,page_stopped=True,memory_samples=samples,memory_after_stop=memory())
++        write(folder/'runtime.json',runtime);write(folder/'protection.json',{'at':now(),'changed':[n for n,h in protected.items() if sha(ROOT/n)!=h]})
++        print('FINAL',json.dumps({'generations':engine.completed,'dispatches':engine.dispatches,'stopped':True},ensure_ascii=False),flush=True)
++
++if __name__=='__main__':main()
+--- /dev/null
++++ b/进阶/a_exploration/prepare_current_run.py
+@@ -0,0 +1,29 @@
++"""仅准备新目录；不启动模型、不生成，复用锁定代码及容量证据。"""
++from pathlib import Path
++import argparse,copy,shutil
++from runtime import HERE,ROOT,load,write,sha,now
++from current_candidate import query_config
++
++SOURCE=HERE/'runs/current-e2e-20261016-183739'
++def main():
++    p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);a=p.parse_args();folder=a.out.resolve()
++    if folder.exists():raise ValueError('输出目录必须不存在，不覆盖归档')
++    pre=load(SOURCE/'offline-preflight.json')
++    for n,h in {**pre['code_hashes'],**pre['data_hashes']}.items():
++        if sha(ROOT/n)!=h:raise ValueError('锁定文件改变：'+n)
++    plan=load(SOURCE/'development-plan.json');assert query_config()==plan['query_configuration']
++    assert load(SOURCE/'offline-capacity-exact.json')['passed'] and load(SOURCE/'page-generation-gate.json')['passed']
++    for n,h in [(plan['service_arguments'][0],pre['executable_hash']),(plan['service_arguments'][plan['service_arguments'].index('-m')+1],pre['model_hash'])]:
++        if sha(Path(n))!=h:raise ValueError('本机已校验模型或执行文件改变：'+n)
++    folder.mkdir(parents=True)
++    for n in ['configuration.json','development-inputs.json','locator-anchors.json','worst-inputs.json','offline-capacity-exact.json']:
++        shutil.copy2(SOURCE/n,folder/n)
++    plan=copy.deepcopy(plan);plan.update(prepared_at=now(),reproduction_of=SOURCE.relative_to(ROOT).as_posix(),not_executed=True)
++    write(folder/'development-plan.json',plan)
++    pre=copy.deepcopy(pre);pre.update(prepared_at=now(),capacity_reused_only_after_hash_match=True,reproduction_preparer_sha256=sha(Path(__file__)))
++    pre['code_hashes'][Path(__file__).relative_to(ROOT).as_posix()]=sha(Path(__file__))
++    write(folder/'offline-preflight.json',pre)
++    write(folder/'prepared-only.json',{'at':now(),'status':'prepared_not_run','model_service_started':False,'generation_calls':0,'all_locked_dependencies_match':True,'note':'仅准备新目录。实际启动仍需重新检查内存、端口、健康与每阶段实际模板；启动并页面提交会新增生成。'})
++    print(str(folder))
++
++if __name__=='__main__':main()

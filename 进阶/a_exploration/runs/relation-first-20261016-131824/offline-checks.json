@@ -1,0 +1,89 @@
+{
+  "at": "2026-10-16T13:21:31.164389+08:00",
+  "passed": true,
+  "prior_regression": {
+    "passed": 35,
+    "source": "首次准备实际执行成功，复用已存检查结果，不重跑。"
+  },
+  "relation_checks": {
+    "passed": true,
+    "count": 10,
+    "checks": [
+      {
+        "name": "entails_consistent",
+        "passed": true
+      },
+      {
+        "name": "conflicts_consistent",
+        "passed": true
+      },
+      {
+        "name": "undetermined_consistent",
+        "passed": true
+      },
+      {
+        "name": "mismatch_not_fixed",
+        "passed": true
+      },
+      {
+        "name": "empty_allowed_not_forced_all",
+        "passed": true
+      },
+      {
+        "name": "unknown_reject_no_repair",
+        "passed": true
+      },
+      {
+        "name": "duplicate_reject_no_repair",
+        "passed": true
+      },
+      {
+        "name": "missing_fields_not_added",
+        "passed": true
+      },
+      {
+        "name": "only_system_changes",
+        "passed": true
+      },
+      {
+        "name": "independent_relation_label_enums_no_forced_answer",
+        "passed": true
+      }
+    ],
+    "generation_calls": 0,
+    "scope": "只验证关系/标签一致性和真实选句展开；不判断语义正确。"
+  },
+  "native_order_cases": 78,
+  "definitions": [
+    {
+      "text": "All changes must be documented.",
+      "claim": "Changes need not be documented.",
+      "expected_relation": "conflicts",
+      "scope": "自造定义例，不进真实请求。"
+    },
+    {
+      "text": "The file is readable; execution is not described.",
+      "claim": "The file can execute the analysis.",
+      "expected_relation": "undetermined",
+      "scope": "未提到不当反证。"
+    },
+    {
+      "text": "Retaining a summary is recommended, not mandatory.",
+      "claim": "A summary is recommended.",
+      "expected_relation": "entails",
+      "scope": "不将建议强化为强制。"
+    }
+  ],
+  "capacity_tokens": [
+    2332,
+    2412,
+    2628,
+    2708,
+    2883,
+    2963
+  ],
+  "output_budget_both": 512,
+  "extra_margin": 64,
+  "generation_calls": 0,
+  "scope": "模型关系语义是否正确仍须调用后原文复核；原生顺序只保证输出字段次序，不证明内部思维顺序。"
+}

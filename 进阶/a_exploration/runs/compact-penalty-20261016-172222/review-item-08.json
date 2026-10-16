@@ -1,0 +1,92 @@
+{
+  "at": "2026-10-16T17:24:55.657167+08:00",
+  "id": "AD02",
+  "variant": "repeated_15",
+  "request_id": "416b4ae5-d6d9-4f83-bcf2-82a5de843f3c",
+  "run_id": "6722f914-ed6b-478d-9534-767a1f1edfb2",
+  "raw_record": "run-6722f914-ed6b-478d-9534-767a1f1edfb2.json",
+  "input_origin": "automatic_improved_evidence_replay",
+  "not_automatic_retrieval": true,
+  "not_end_to_end_score": true,
+  "raw_content": "{\n  \"label\": \"contradicted\",\n  \"reason\": \"The passage explicitly states that 'only this' (the method of exporting as HTML/PDF) is insufficient for others to run and explore the notebooks, which directly contradicts the original claim.\",\n  \"sentence_ids\": [\n    \"sent-0002\",\n    \"sent-0011\"\n  ]\n}",
+  "parsed": {
+    "label": "contradicted",
+    "reason": "The passage explicitly states that 'only this' (the method of exporting as HTML/PDF) is insufficient for others to run and explore the notebooks, which directly contradicts the original claim.",
+    "sentence_ids": [
+      "sent-0002",
+      "sent-0011"
+    ]
+  },
+  "label": "contradicted",
+  "public_reference_label": "supported",
+  "label_correct": false,
+  "reason_label_consistent": false,
+  "format_complete": true,
+  "selection_valid": true,
+  "source_authenticity": true,
+  "empty_selection": false,
+  "source_truth_failure": false,
+  "necessary_evidence_coverage": false,
+  "citation_support": false,
+  "has_unrelated_evidence": false,
+  "strict_complete_success": false,
+  "basis": "原主张说仅此不足执行，理由也说不足，却判contradicted，否定方向仍错。引言问句和Binder句未覆盖静态阅读的必要来源。",
+  "visible_evidence_semantic_boundary": null,
+  "selected_sources": [
+    {
+      "sentence_id": "sent-0002",
+      "block_id": "P2-S10-p01",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "text": "But how will others access, run, and explore them? ",
+      "start": 112,
+      "end": 163,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    },
+    {
+      "sentence_id": "sent-0011",
+      "block_id": "P2-S10-p03",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "text": "Run: To support others running your notebooks, you can use Binder [ 16 ] to provide a zero-install environment to run your notebooks in the cloud ( https://mybinder.org/ ). ",
+      "start": 0,
+      "end": 173,
+      "offset_unit": "unicode_code_point",
+      "interval": "[start,end)",
+      "segmentation": "conservative_punctuation_or_complete_fragment"
+    }
+  ],
+  "expanded_response": {
+    "label": "contradicted",
+    "reason": "The passage explicitly states that 'only this' (the method of exporting as HTML/PDF) is insufficient for others to run and explore the notebooks, which directly contradicts the original claim.",
+    "evidence": [
+      {
+        "block_id": "P2-S10-p01",
+        "quote": "But how will others access, run, and explore them? "
+      },
+      {
+        "block_id": "P2-S10-p03",
+        "quote": "Run: To support others running your notebooks, you can use Binder [ 16 ] to provide a zero-install environment to run your notebooks in the cloud ( https://mybinder.org/ ). "
+      }
+    ]
+  },
+  "input_tokens": 2628,
+  "usage": {
+    "completion_tokens": 85,
+    "prompt_tokens": 2628,
+    "total_tokens": 2713,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    }
+  },
+  "client_seconds": 19.535896899877116,
+  "finish_reason": "stop",
+  "truncated": false,
+  "presence_penalty_request": 1.5,
+  "presence_penalty_echo": 1.5,
+  "repeat_penalty_echo": 1.0,
+  "judgment_source": "unverified",
+  "reviewer": "Codex原文辅助复核，尚待本人确认"
+}

@@ -1,0 +1,244 @@
+--- /dev/null
++++ b/进阶/a_exploration/sentence_selection.py
+@@ -0,0 +1,113 @@
++"""确定性句子索引及来源展开；不选择证据、不修正模型判断。"""
++import copy,json,re
++from engine import ANSWER_PROMPT
++
++OLD_FORMAT='只返回JSON：{"label":"supported|contradicted|insufficient","reason":"简短中文理由","evidence":[{"block_id":"本次段落ID","quote":"对应连续原文"}]}。'
++NEW_FORMAT='只返回JSON：{"label":"supported|contradicted|insufficient","reason":"简短中文理由","sentence_ids":["本次句子索引ID"]}。'
++assert ANSWER_PROMPT.count(OLD_FORMAT)==1
++FORMAT_NOTE='\n输出格式适配：sentence_ids只选择本次sentence_index中的编号，程序会逐字展开所选片段；模型不生成quote或evidence。不选未知或重复编号，可以返回空列表。没有选中句子不代表判断已被支持。'
++CANDIDATE_PROMPT=ANSWER_PROMPT.replace(OLD_FORMAT,NEW_FORMAT).replace('evidence为空','sentence_ids为空')+FORMAT_NOTE
++ABBREVIATIONS={'e.g','i.e','et','al','fig','figs','dr','mr','mrs','ms','prof','vs','etc','no','vol','pp','p','inc','jr','sr','approx','cf','st'}
++CLOSERS='\"\'”’」』)]）'
++
++def spans(text):
++    if not text:return []
++    result=[];start=0;i=0
++    while i<len(text):
++        char=text[i];boundary=char in '。！？!?'
++        if char=='.':
++            before=text[:i];last=re.search(r'[^\s]+$',before);token=last.group() if last else ''
++            word=re.search(r'(?:[A-Za-z]\.)*[A-Za-z]+$',before);word=word.group().casefold() if word else ''
++            decimal=i>0 and i+1<len(text) and text[i-1].isdigit() and text[i+1].isdigit()
++            acronym=bool(re.fullmatch(r'(?:[A-Za-z]\.)+[A-Za-z]',word))
++            boundary=not(decimal or word in ABBREVIATIONS or (len(word)==1 and word.isalpha()) or acronym or '://' in token or '@' in token or token.startswith('www.'))
++        if boundary:
++            end=i+1
++            while end<len(text) and text[end] in CLOSERS:end+=1
++            # 英文标点后非空白时保守合并；中文句末无需空格。
++            if char in '.!?' and end<len(text) and not text[end].isspace():boundary=False
++            if boundary:
++                while end<len(text) and text[end].isspace():end+=1
++                result.append((start,end));start=end;i=end;continue
++        i+=1
++    if start<len(text):result.append((start,len(text)))
++    return result
++
++def build_index(blocks,doc_ids,snapshot):
++    by_id={}
++    for b in blocks:
++        if b['block_id'] in by_id:raise ValueError('重复块ID')
++        if b['doc_id'] not in doc_ids or b['snapshot']!=snapshot:raise ValueError('块不属于本次资料范围')
++        if not isinstance(b['text'],str):raise ValueError('原文不是字符串')
++        by_id[b['block_id']]=b
++    rows=[]
++    for b in blocks:
++        pieces=spans(b['text']);assert ''.join(b['text'][a:z] for a,z in pieces)==b['text']
++        for start,end in pieces:
++            rows.append({'sentence_id':'sent-'+str(len(rows)+1).zfill(4),'block_id':b['block_id'],'doc_id':b['doc_id'],'snapshot':b['snapshot'],'text':b['text'][start:end],'start':start,'end':end,'offset_unit':'unicode_code_point','interval':'[start,end)','segmentation':'conservative_punctuation_or_complete_fragment'})
++    return rows
++
++def schema(index):
++    ids=[r['sentence_id'] for r in index]
++    if len(ids)!=len(set(ids)):raise ValueError('重复句子索引ID')
++    array={'type':'array','items':{'type':'string'}}
++    if ids:array['items']['enum']=ids
++    else:array['maxItems']=0
++    return {'type':'object','properties':{'label':{'type':'string','enum':['supported','contradicted','insufficient']},'reason':{'type':'string'},'sentence_ids':array},'required':['label','reason','sentence_ids'],'additionalProperties':False}
++
++def adapt_messages(original,index):
++    result=copy.deepcopy(original);assert result[0]['content']==ANSWER_PROMPT
++    result[0]['content']=CANDIDATE_PROMPT;user=json.loads(result[1]['content']);user['sentence_index']=copy.deepcopy(index)
++    result[1]['content']=json.dumps(user,ensure_ascii=False,indent=2)
++    return result
++
++def expand(content,blocks,index,doc_ids,snapshot):
++    outcome={'run_kind':'local_rule','judgment_source':'rule','operation':'model_selection_program_verbatim_expansion','raw_internal_content':content,'parsed_internal':None,'valid':False,'expanded_response':None,'selected_sources':[],'semantic_support':'not_checked','label_changed':False,'repair_applied':False,'added_unselected_sentences':False}
++    try:
++        if index!=build_index(blocks,doc_ids,snapshot):raise ValueError('索引/字符位置与本次完整原文不一致')
++        obj=json.loads(content);outcome['parsed_internal']=obj
++        if not isinstance(obj,dict) or set(obj)!={'label','reason','sentence_ids'}:raise ValueError('内部JSON字段不合法')
++        if obj['label'] not in ('supported','contradicted','insufficient') or not isinstance(obj['reason'],str):raise ValueError('label/reason不合法')
++        selected=obj['sentence_ids'];by_id={r['sentence_id']:r for r in index}
++        if not isinstance(selected,list) or not all(isinstance(x,str) for x in selected):raise ValueError('sentence_ids不是字符串数组')
++        if len(set(selected))!=len(selected):raise ValueError('重复选择sentence_id，不去重修补')
++        if any(x not in by_id for x in selected):raise ValueError('未知sentence_id，不补选')
++        evidence=[]
++        for sid in selected:
++            r=copy.deepcopy(by_id[sid]);b=next(b for b in blocks if b['block_id']==r['block_id'])
++            assert b['doc_id'] in doc_ids and b['snapshot']==snapshot and b['text'][r['start']:r['end']]==r['text']
++            outcome['selected_sources'].append(r);evidence.append({'block_id':r['block_id'],'quote':r['text']})
++        outcome['expanded_response']={'label':obj['label'],'reason':obj['reason'],'evidence':evidence}
++        outcome['valid']=True
++    except (ValueError,TypeError,KeyError,AssertionError) as e:outcome['error']=repr(e)
++    return outcome
++
++def offline_checks():
++    tests=[]
++    def test(name,value):
++        tests.append({'name':name,'passed':bool(value)})
++        if not value:raise AssertionError(name)
++    def block(text,bid='made-up-a',doc='made-up'):return {'block_id':bid,'doc_id':doc,'snapshot':'published','text':text}
++    for name,text,count in [('abbreviation_decimal','Dr. Vale used e.g. version 2.5. Next step.',2),('newline','First line\ncontinues. Next.',2),('quotes','He said "Keep it." Next.',2),('unicode','甲🙂。乙！',2),('no_safe_boundary','Ambiguous fragment without an ending',1),('URL','Use https://example.org/v1.2 safely. Done.',2),('whitespace',' \n ',1)]:
++        ss=spans(text);test(name+'_coverage',len(ss)==count and ''.join(text[a:z] for a,z in ss)==text and (not ss or ss[0][0]==0 and ss[-1][1]==len(text)) and all(ss[i][1]==ss[i+1][0] for i in range(len(ss)-1)))
++    blocks=[block('Same sentence. Same sentence.'),block('Same sentence.','made-up-b')];idx=build_index(blocks,['made-up'],'published')
++    test('repeated_sentences_unique_positions',len(idx)==3 and len({r['sentence_id'] for r in idx})==3 and idx[0]['start']!=idx[1]['start'])
++    def content(ids,label='supported'):return json.dumps({'label':label,'reason':'自造选择，不是语义标签验证','sentence_ids':ids})
++    exp=expand(content([idx[1]['sentence_id'],idx[0]['sentence_id']]),blocks,idx,['made-up'],'published')
++    test('different_sentences_same_block_allowed_order_preserved',exp['valid'] and [r['sentence_id'] for r in exp['selected_sources']]==[idx[1]['sentence_id'],idx[0]['sentence_id']] and len(exp['expanded_response']['evidence'])==2)
++    test('exact_quote_and_scope',all(next(b for b in blocks if b['block_id']==r['block_id'])['text'][r['start']:r['end']]==e['quote'] for r,e in zip(exp['selected_sources'],exp['expanded_response']['evidence'])))
++    for name,selection in [('unknown',['missing']),('duplicate',[idx[0]['sentence_id']]*2)]:
++        bad=expand(content(selection),blocks,idx,['made-up'],'published');test(name+'_rejected_not_repaired',not bad['valid'] and bad['expanded_response'] is None and not bad['repair_applied'] and bad['parsed_internal']['label']=='supported')
++    empty=expand(content([]),blocks,idx,['made-up'],'published');test('empty_selection_preserves_label',empty['valid'] and empty['expanded_response']['label']=='supported' and empty['expanded_response']['evidence']==[] and empty['semantic_support']=='not_checked')
++    test('fence_not_stripped',not expand('```json\n'+content([])+'\n```',blocks,idx,['made-up'],'published')['valid'])
++    corrupt=copy.deepcopy(idx);corrupt[0]['end']-=1;test('stale_or_wrong_position_rejected',not expand(content([idx[0]['sentence_id']]),blocks,corrupt,['made-up'],'published')['valid'])
++    split=[block('An unfinished','one'),block(' continuation.','two')];s=build_index(split,['made-up'],'published');test('never_merge_across_blocks',len(s)==2 and s[0]['block_id']!=s[1]['block_id'])
++    remap=[{**b,'block_id':'remapped-'+str(i)} for i,b in enumerate(blocks)];ri=build_index(remap,['made-up'],'published');rexp=expand(content([ri[0]['sentence_id']]),remap,ri,['made-up'],'published');test('block_id_remapping',rexp['valid'] and rexp['expanded_response']['evidence'][0]['block_id']=='remapped-0')
++    leaked=False
++    try:build_index([block('foreign.','foreign','other-doc')],['made-up'],'published')
++    except ValueError:leaked=True
++    test('cross_doc_rejected',leaked)
++    test('empty_blocks',build_index([],['made-up'],'published')==[] and schema([])['properties']['sentence_ids']['maxItems']==0)
++    test('semantic_rules_unchanged',CANDIDATE_PROMPT[:-len(FORMAT_NOTE)].replace(NEW_FORMAT,OLD_FORMAT).replace('sentence_ids为空','evidence为空')==ANSWER_PROMPT)
++    test('index_text_exact_not_stripped',all(r['text']==next(b for b in blocks if b['block_id']==r['block_id'])['text'][r['start']:r['end']] for r in idx))
++    return {'passed':True,'count':len(tests),'checks':tests,'generation_calls':0,'limits':'保守标点切分，缩写/链接等不确定处合并，可能多句作为片段；完整覆盖不等于语言学分句完美或语义支持。'}
+--- /dev/null
++++ b/进阶/a_exploration/sentence_interface.py
+@@ -0,0 +1,37 @@
++"""对外证据适配；保留模型label，标明quote由程序展开。"""
++import copy,time
++from runtime import load,ROOT
++from locator import Locator
++
++def interface_response(request_id,claim,doc_ids,snapshot,model_run_id,expansion,model_elapsed_seconds,locator=None,actual_input_blocks=None):
++    start=time.perf_counter()
++    actual_input_blocks=[] if actual_input_blocks is None else actual_input_blocks
++    if any(b['doc_id'] not in doc_ids or b['snapshot']!=snapshot for b in actual_input_blocks):raise ValueError('实际模型输入跨范围')
++    by_block={b['block_id']:b for b in actual_input_blocks}
++    response={'request_id':request_id,'claim':claim,'requested_doc_ids':doc_ids,'requested_snapshot':snapshot,'actual_doc_ids':sorted({b['doc_id'] for b in actual_input_blocks}),'actual_snapshots':sorted({b['snapshot'] for b in actual_input_blocks}),'answer':None,'evidence':[],'locator_status':'absent','support_status':'not_checked','judgment_source':'unverified','claim_judgment_source':'model','elapsed_ms':model_elapsed_seconds*1000,'elapsed_scope':'original_nonstream_model_request_only','run_kind':'live_api','model_run_id':model_run_id,'output_origin':'model_selection_program_verbatim_expansion','derivation':{'run_kind':'local_rule','judgment_source':'rule','label_changed':False,'semantic_support':'not_checked','model_generated_quote':False},'status':'selection_quality_failure','end_to_end_ms':None,'end_to_end_note':'固定证据诊断；此适配可离线复算，未测自动检索端到端耗时。'}
++    if expansion['valid']:
++        obj=expansion['expanded_response'];response.update(answer=obj['label'],reason=obj['reason'],status='expanded')
++        for e,r in zip(obj['evidence'],expansion['selected_sources']):
++            if r['doc_id'] not in doc_ids or r['snapshot']!=snapshot:raise ValueError('派生来源跨范围')
++            loc=locator.locate(by_block[r['block_id']],e['quote']) if locator else {'locator_status':'absent','regions':[],'reason':'未执行PDF框映射'}
++            page=loc['regions'][0]['page'] if loc['regions'] else None
++            response['evidence'].append({**copy.deepcopy(e),'doc_id':r['doc_id'],'snapshot':r['snapshot'],'sentence_id':r['sentence_id'],'text':r['text'],'start':r['start'],'end':r['end'],'offset_unit':r['offset_unit'],'page':page,'page_null_reason':None if page is not None else loc['reason'],'locator_status':'valid','pdf_location':loc,'support_status':'not_checked','judgment_source':'unverified','quote_origin':'local_rule_expansion_of_model_selected_sentence','model_generated_quote':False})
++        response['evidence_doc_ids']=sorted({r['doc_id'] for r in expansion['selected_sources']})
++        response['evidence_snapshots']=sorted({r['snapshot'] for r in expansion['selected_sources']})
++        response['locator_status']='valid' if response['evidence'] else 'absent'
++    else:response['error']=expansion.get('error','invalid_selection')
++    response['offline_interface_mapping_ms']=(time.perf_counter()-start)*1000
++    return response
++
++def offline_checks():
++    from sentence_selection import build_index,expand
++    import json
++    b={'block_id':'synthetic','doc_id':'made-up','snapshot':'published','text':'Keep this. Another sentence.'};idx=build_index([b],['made-up'],'published')
++    raw=json.dumps({'label':'contradicted','reason':'synthetic','sentence_ids':[idx[0]['sentence_id']]});x=expand(raw,[b],idx,['made-up'],'published');r=interface_response('synthetic-request','synthetic claim',['made-up'],'published','synthetic-run',x,1.25,actual_input_blocks=[b])
++    assert r['answer']=='contradicted' and r['support_status']=='not_checked' and r['derivation']['model_generated_quote'] is False
++    assert r['evidence'][0]['text']==b['text'][idx[0]['start']:idx[0]['end']] and r['evidence'][0]['page'] is None and r['evidence'][0]['page_null_reason']
++    empty=expand(json.dumps({'label':'supported','reason':'synthetic','sentence_ids':[]}),[b],idx,['made-up'],'published');er=interface_response('empty','claim',['made-up'],'published','run',empty,1,actual_input_blocks=[b])
++    assert er['answer']=='supported' and er['evidence']==[] and er['support_status']=='not_checked' and er['actual_doc_ids']==['made-up']
++    bad=expand(json.dumps({'label':'supported','reason':'synthetic','sentence_ids':['bad']}),[b],idx,['made-up'],'published');br=interface_response('bad','claim',['made-up'],'published','run',bad,1,actual_input_blocks=[b])
++    assert br['status']=='selection_quality_failure' and br['answer'] is None and br['evidence']==[]
++    return {'passed':True,'count':3,'generation_calls':0,'semantic_judgment':'not_checked'}
+--- /dev/null
++++ b/进阶/a_exploration/diagnose_sentence_selection.py
+@@ -0,0 +1,85 @@
++"""固定自动证据的原输出/句子选择对照；复用请求记录器，不重检索或读答案。"""
++from pathlib import Path
++import argparse, ast, json, socket, subprocess, threading, time, uuid
++from runtime import Engine,TechnicalStop,load,write,sha,now,memory,ROOT,HERE
++
++def main():
++    parser=argparse.ArgumentParser();parser.add_argument('--out',type=Path,required=True);a=parser.parse_args();out=a.out.resolve()
++    plan=load(out/'intervention-plan.json');inputs=load(out/'diagnostic-inputs.json')
++    if (out/'owned-service.json').exists() or list(out.glob('run-*.json')):raise ValueError('已有启动或请求记录，不重发')
++    assert load(out/'offline-checks.json')['passed']
++    assert load(out/'interface-adapter-check.json')['passed']
++    assert sha(out/'diagnostic-inputs.json')==plan['input_sha256']
++    for path,h in plan['code_hashes'].items():assert sha(ROOT/path)==h,path
++    for path,h in plan['data_hashes'].items():assert sha(ROOT/path)==h,path
++    for p in HERE.glob('*.py'):ast.parse(p.read_text(encoding='utf-8'))
++    for item in inputs:
++        assert item['blocks'] and all(b['doc_id'] in item['doc_ids'] for b in item['blocks'])
++        from sentence_selection import build_index,adapt_messages,schema
++        assert item['sentence_index']==build_index(item['blocks'],item['doc_ids'],item['snapshot'])
++        assert item['messages']['revised']==adapt_messages(item['messages']['original'],item['sentence_index'])
++        assert item['configs']['revised']['parameters']['response_format']['json_schema']['schema']==schema(item['sentence_index'])
++        assert {k:v for k,v in item['configs']['original']['parameters'].items() if k!='response_format'}=={k:v for k,v in item['configs']['revised']['parameters'].items() if k!='response_format'}
++    with socket.socket() as s:s.bind(('127.0.0.1',8080))
++    m=memory();write(out/'resource-before.json',m)
++    if m['available_bytes']<2*1024**3:
++        write(out/'resource-stop.json',{'at':now(),'available_GiB':m['available_bytes']/2**30,'required_GiB':2,'generation_calls':0});print('RESOURCE_STOP',flush=True);return
++    launch=plan['service_arguments'];assert sha(launch[0])==plan['executable_hash'] and sha(launch[launch.index('-m')+1])==plan['model_hash']
++    (out/'slot-cache').mkdir();engine=Engine(out);stop=threading.Event();abort=threading.Event();samples=[];process=None;phase='loading';start=time.perf_counter()
++    record={'at':now(),'run_kind':'live_api','diagnostic_input_origin':'automatic_improved_evidence_replay','generations_baseline':plan['cumulative_baseline'],'service_arguments':launch,'memory_before':m}
++    def monitor():
++        low=0
++        while not stop.is_set():
++            sample=memory();samples.append(sample);low=low+1 if sample['available_bytes']<1024**3 else 0
++            if low>=3:
++                abort.set()
++                if process and process.poll() is None:process.terminate()
++                return
++            stop.wait(2)
++    thread=threading.Thread(target=monitor,daemon=True)
++    try:
++        with (out/'model-stdout.log').open('xb') as stdout,(out/'model-stderr.log').open('xb') as stderr:
++            process=subprocess.Popen(launch,stdout=stdout,stderr=stderr,cwd=out,creationflags=subprocess.CREATE_NO_WINDOW)
++        write(out/'owned-service.json',{'pid':process.pid,'started_at':now(),'arguments':launch});thread.start();phase='health'
++        while time.perf_counter()-start<120:
++            if abort.is_set() or process.poll() is not None:raise TechnicalStop('加载期间资源/进程停止')
++            try:
++                if engine.service('health').get('status')=='ok':break
++            except Exception:pass
++            time.sleep(.5)
++        else:raise TechnicalStop('健康超时')
++        props=engine.service('props');write(out/'props.json',props)
++        assert props['build_info']=='b11429-d81235049' and props['default_generation_settings']['n_ctx']==4096 and props['total_slots']==1
++        record.update(load_seconds=time.perf_counter()-start,memory_after_load=memory());phase='template_preflight'
++        write(out/'startup-slot-erase.json',engine.service('slots/0?action=erase',{}))
++        for item in inputs:
++            for variant in ['original','revised']:engine.capacity(item['messages'][variant],item['configs'][variant],'before-'+item['id']+'-'+variant)
++        phase='generation'
++        by_id={x['id']:x for x in inputs}
++        for n,entry in enumerate(plan['order']):
++            if abort.is_set() or process.poll() is not None:raise TechnicalStop('请求前资源停止')
++            if engine.dispatches>=6:raise TechnicalStop('达到6次上限')
++            item=by_id[entry['id']];variant=entry['variant'];request_id=str(uuid.uuid4())
++            raw=engine.generate(item['messages'][variant],item['configs'][variant],f'diagnostic-{n+1}-{entry["id"]}-{variant}',request_id,item['blocks'])
++            if variant=='revised':
++                from sentence_selection import expand
++                expansion=expand(raw['content'],item['blocks'],item['sentence_index'],item['doc_ids'],item['snapshot'])
++                write(out/f'expansion-{n+1:02}.json',expansion)
++            else:
++                from common_judgment_candidate import validate_raw
++                write(out/f'old-validation-{n+1:02}.json',validate_raw(raw['content'],item['blocks']))
++            write(out/f'item-{n+1:02}.json',{'at':now(),'id':entry['id'],'variant':variant,'request_id':request_id,'run_id':raw['run_id'],'raw_record':'run-'+raw['run_id']+'.json','input_origin':'automatic_improved_evidence_replay','not_automatic_retrieval':True,'not_end_to_end_score':True})
++            print('SAVED',entry['id'],variant,raw['run_id'],flush=True)
++    except Exception as e:
++        record.update(error=repr(e),failure_phase=phase);write(out/'technical-stop.json',{'at':now(),'phase':phase,'error':repr(e),'dispatches':engine.dispatches,'confirmed_generations':engine.completed,'no_automatic_resend':True});print('TECHNICAL_STOP',phase,repr(e),flush=True)
++    finally:
++        stop.set()
++        if thread.is_alive():thread.join(5)
++        if process and process.poll() is None:
++            process.terminate()
++            try:process.wait(10)
++            except subprocess.TimeoutExpired:process.kill();process.wait()
++        record.update(ended_at=now(),dispatches=engine.dispatches,confirmed_generations=engine.completed,model_stopped=process is None or process.poll() is not None,memory_samples=samples,memory_after_stop=memory())
++        write(out/'runtime.json',record);print('FINAL',engine.completed,'STOPPED',record['model_stopped'],flush=True)
++
++if __name__=='__main__':main()

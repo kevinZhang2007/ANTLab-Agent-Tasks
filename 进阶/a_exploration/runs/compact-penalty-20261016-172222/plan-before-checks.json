@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-16T17:22:23.044313+08:00",
+  "status": "此时仅已写独立紧凑函数，尚未执行离线检查或模型生成",
+  "factors": {
+    "A": "重复原JSON/紧凑原文并把claim移到最后，属于输入组织整体因素，不能单独归因去重。",
+    "B": "请求presence_penalty明确1.5/0，其余不变，不预称修复惩罚。"
+  },
+  "hypothesis": "紧凑组织可能减少冗余输入成本；presence=0可能减少生成中对已出现词的惩罚。语义和引用质量均可能不改善或退步。",
+  "competing_explanation": "表示及主张位置共同改变，输出变化也可能来自提示理解、缺证或随机采样；三题每组合一次不能外推通用作用。",
+  "variants": [
+    "repeated_15",
+    "compact_15",
+    "repeated_0",
+    "compact_0"
+  ],
+  "selection": "严格成功优先，其次标签正确，引用来源真实性不能退步；质量相同仅在实测输入或成本降低时可选择紧凑表示作为效率取舍，不称正确率提升。完全同分惩罚参数保留原1.5。",
+  "planned_order": "按开发题顺序，每题四组合按names左移题目序号位后依次执行；不按输出追加或调序。",
+  "baseline_cumulative": 591,
+  "A_used_before": 57,
+  "A_cap": 90,
+  "A_remaining_before": 33,
+  "generation_cap": 12,
+  "budget_both": 512,
+  "no_new_query": true,
+  "evaluation": "标签、理由标签一致、来源、必要覆盖、支持、无关、严格成功、tokens及完整HTTP耗时分列；程序不翻转语义。",
+  "stopping": "技术请求失败立即停止，不自动重发；质量错误保留不重试；加载前2GiB，运行连续3个2秒样本低于1GiB停止本轮自有PID。",
+  "guard_architecture": "旧runtime.Engine每实例9次上限保留，独立运行器按题使用三个实例各最多4次；外层总上限12，统一服务和逐请求记录，不重置已执行记录。",
+  "AT_read": false
+}

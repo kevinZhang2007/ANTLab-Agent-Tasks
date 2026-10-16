@@ -1,0 +1,13 @@
+char ::= [^"\\\x7F\x00-\x1F] | [\\] (["\\bfnrt] | "u" [0-9a-fA-F]{4})
+evidence ::= "[" space (evidence-item ("," space evidence-item)*)? space "]"
+evidence-item ::= "{" space evidence-item-block-id-kv "," space evidence-item-quote-kv space "}"
+evidence-item-block-id ::= ("\"synthetic-0\"" | "\"synthetic-1\"" | "\"synthetic-2\"")
+evidence-item-block-id-kv ::= "\"block_id\"" space ":" space evidence-item-block-id
+evidence-item-quote-kv ::= "\"quote\"" space ":" space string
+evidence-kv ::= "\"evidence\"" space ":" space evidence
+label ::= ("\"supported\"" | "\"contradicted\"" | "\"insufficient\"")
+label-kv ::= "\"label\"" space ":" space label
+reason-kv ::= "\"reason\"" space ":" space string
+root ::= "{" space label-kv "," space reason-kv "," space evidence-kv space "}"
+space ::= | " " | "\n"{1,2} [ \t]{0,20}
+string ::= "\"" char* "\""

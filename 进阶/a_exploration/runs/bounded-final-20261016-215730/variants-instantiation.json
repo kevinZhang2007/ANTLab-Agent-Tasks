@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-16T22:12:53.491702+08:00",
+  "preplanned_source": "batch-plan.json",
+  "equivalence": [
+    {
+      "id": "VAR-dev",
+      "source": "AD01",
+      "change": "同义中文改写，不改变否定、条件或对象",
+      "expected": "contradicted，与原题同义；支持状态应对应不变。"
+    },
+    {
+      "id": "VAR-eval",
+      "source": "AT01",
+      "change": "全语料块ID双射，主张/正文/标题/doc_ids/章节/顺序不变",
+      "expected": "与该原题标签和引用支持相同，来源按映射对应。"
+    }
+  ],
+  "counterfactual": {
+    "id": "CF-dev",
+    "source": "AD01",
+    "change": "无需记录→仍应记录",
+    "expected_label": "supported",
+    "necessary_basis": "不可避免手工操作时记录文件及目的的直接原句。"
+  },
+  "not_selected_by_results": true,
+  "not_in_main_denominator": true,
+  "no_extra_prompt_examples": true
+}

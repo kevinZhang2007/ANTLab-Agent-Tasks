@@ -1,0 +1,960 @@
+[
+  {
+    "name": "AD01",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "relation": {
+          "type": "string",
+          "enum": [
+            "entails",
+            "conflicts",
+            "undetermined"
+          ]
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "sentence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sent-0001",
+              "sent-0002",
+              "sent-0003",
+              "sent-0004",
+              "sent-0005",
+              "sent-0006",
+              "sent-0007",
+              "sent-0008",
+              "sent-0009",
+              "sent-0010",
+              "sent-0011"
+            ]
+          }
+        },
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient"
+          ]
+        }
+      },
+      "required": [
+        "relation",
+        "explanation",
+        "sentence_ids",
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "order_relation_explanation_sentence_ids_label",
+        "response": {
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "label": "insufficient"
+        },
+        "accept": true
+      },
+      {
+        "name": "order_relation_explanation_label_sentence_ids",
+        "response": {
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_sentence_ids_explanation_label",
+        "response": {
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_sentence_ids_label_explanation",
+        "response": {
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "label": "insufficient",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_label_explanation_sentence_ids",
+        "response": {
+          "relation": "undetermined",
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_label_sentence_ids_explanation",
+        "response": {
+          "relation": "undetermined",
+          "label": "insufficient",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_relation_sentence_ids_label",
+        "response": {
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_relation_label_sentence_ids",
+        "response": {
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "label": "insufficient",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_sentence_ids_relation_label",
+        "response": {
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_sentence_ids_label_relation",
+        "response": {
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "label": "insufficient",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_label_relation_sentence_ids",
+        "response": {
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "relation": "undetermined",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_label_sentence_ids_relation",
+        "response": {
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "sentence_ids": [],
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_relation_explanation_label",
+        "response": {
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_relation_label_explanation",
+        "response": {
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "label": "insufficient",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_explanation_relation_label",
+        "response": {
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_explanation_label_relation",
+        "response": {
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_label_relation_explanation",
+        "response": {
+          "sentence_ids": [],
+          "label": "insufficient",
+          "relation": "undetermined",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_label_explanation_relation",
+        "response": {
+          "sentence_ids": [],
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_relation_explanation_sentence_ids",
+        "response": {
+          "label": "insufficient",
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_relation_sentence_ids_explanation",
+        "response": {
+          "label": "insufficient",
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_explanation_relation_sentence_ids",
+        "response": {
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_explanation_sentence_ids_relation",
+        "response": {
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_sentence_ids_relation_explanation",
+        "response": {
+          "label": "insufficient",
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_sentence_ids_explanation_relation",
+        "response": {
+          "label": "insufficient",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "inconsistent_labels_still_schema_valid",
+        "response": {
+          "relation": "conflicts",
+          "explanation": "synthetic mismatch must not be grammar-corrected",
+          "sentence_ids": [],
+          "label": "supported"
+        },
+        "accept": true
+      },
+      {
+        "name": "unknown_sentence_rejected",
+        "response": {
+          "relation": "entails",
+          "explanation": "synthetic",
+          "sentence_ids": [
+            "foreign-id"
+          ],
+          "label": "supported"
+        },
+        "accept": false
+      }
+    ]
+  },
+  {
+    "name": "AD02",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "relation": {
+          "type": "string",
+          "enum": [
+            "entails",
+            "conflicts",
+            "undetermined"
+          ]
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "sentence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sent-0001",
+              "sent-0002",
+              "sent-0003",
+              "sent-0004",
+              "sent-0005",
+              "sent-0006",
+              "sent-0007",
+              "sent-0008",
+              "sent-0009",
+              "sent-0010",
+              "sent-0011",
+              "sent-0012",
+              "sent-0013"
+            ]
+          }
+        },
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient"
+          ]
+        }
+      },
+      "required": [
+        "relation",
+        "explanation",
+        "sentence_ids",
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "order_relation_explanation_sentence_ids_label",
+        "response": {
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "label": "insufficient"
+        },
+        "accept": true
+      },
+      {
+        "name": "order_relation_explanation_label_sentence_ids",
+        "response": {
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_sentence_ids_explanation_label",
+        "response": {
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_sentence_ids_label_explanation",
+        "response": {
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "label": "insufficient",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_label_explanation_sentence_ids",
+        "response": {
+          "relation": "undetermined",
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_label_sentence_ids_explanation",
+        "response": {
+          "relation": "undetermined",
+          "label": "insufficient",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_relation_sentence_ids_label",
+        "response": {
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_relation_label_sentence_ids",
+        "response": {
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "label": "insufficient",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_sentence_ids_relation_label",
+        "response": {
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_sentence_ids_label_relation",
+        "response": {
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "label": "insufficient",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_label_relation_sentence_ids",
+        "response": {
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "relation": "undetermined",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_label_sentence_ids_relation",
+        "response": {
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "sentence_ids": [],
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_relation_explanation_label",
+        "response": {
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_relation_label_explanation",
+        "response": {
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "label": "insufficient",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_explanation_relation_label",
+        "response": {
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_explanation_label_relation",
+        "response": {
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_label_relation_explanation",
+        "response": {
+          "sentence_ids": [],
+          "label": "insufficient",
+          "relation": "undetermined",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_label_explanation_relation",
+        "response": {
+          "sentence_ids": [],
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_relation_explanation_sentence_ids",
+        "response": {
+          "label": "insufficient",
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_relation_sentence_ids_explanation",
+        "response": {
+          "label": "insufficient",
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_explanation_relation_sentence_ids",
+        "response": {
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_explanation_sentence_ids_relation",
+        "response": {
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_sentence_ids_relation_explanation",
+        "response": {
+          "label": "insufficient",
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_sentence_ids_explanation_relation",
+        "response": {
+          "label": "insufficient",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "inconsistent_labels_still_schema_valid",
+        "response": {
+          "relation": "conflicts",
+          "explanation": "synthetic mismatch must not be grammar-corrected",
+          "sentence_ids": [],
+          "label": "supported"
+        },
+        "accept": true
+      },
+      {
+        "name": "unknown_sentence_rejected",
+        "response": {
+          "relation": "entails",
+          "explanation": "synthetic",
+          "sentence_ids": [
+            "foreign-id"
+          ],
+          "label": "supported"
+        },
+        "accept": false
+      }
+    ]
+  },
+  {
+    "name": "AD03",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "relation": {
+          "type": "string",
+          "enum": [
+            "entails",
+            "conflicts",
+            "undetermined"
+          ]
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "sentence_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "sent-0001",
+              "sent-0002",
+              "sent-0003",
+              "sent-0004",
+              "sent-0005",
+              "sent-0006",
+              "sent-0007",
+              "sent-0008",
+              "sent-0009",
+              "sent-0010",
+              "sent-0011",
+              "sent-0012",
+              "sent-0013",
+              "sent-0014",
+              "sent-0015",
+              "sent-0016"
+            ]
+          }
+        },
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient"
+          ]
+        }
+      },
+      "required": [
+        "relation",
+        "explanation",
+        "sentence_ids",
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "fixtures": [
+      {
+        "name": "order_relation_explanation_sentence_ids_label",
+        "response": {
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "label": "insufficient"
+        },
+        "accept": true
+      },
+      {
+        "name": "order_relation_explanation_label_sentence_ids",
+        "response": {
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_sentence_ids_explanation_label",
+        "response": {
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_sentence_ids_label_explanation",
+        "response": {
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "label": "insufficient",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_label_explanation_sentence_ids",
+        "response": {
+          "relation": "undetermined",
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_relation_label_sentence_ids_explanation",
+        "response": {
+          "relation": "undetermined",
+          "label": "insufficient",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_relation_sentence_ids_label",
+        "response": {
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_relation_label_sentence_ids",
+        "response": {
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "label": "insufficient",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_sentence_ids_relation_label",
+        "response": {
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_sentence_ids_label_relation",
+        "response": {
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "label": "insufficient",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_label_relation_sentence_ids",
+        "response": {
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "relation": "undetermined",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_explanation_label_sentence_ids_relation",
+        "response": {
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "sentence_ids": [],
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_relation_explanation_label",
+        "response": {
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_relation_label_explanation",
+        "response": {
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "label": "insufficient",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_explanation_relation_label",
+        "response": {
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "label": "insufficient"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_explanation_label_relation",
+        "response": {
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "label": "insufficient",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_label_relation_explanation",
+        "response": {
+          "sentence_ids": [],
+          "label": "insufficient",
+          "relation": "undetermined",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_sentence_ids_label_explanation_relation",
+        "response": {
+          "sentence_ids": [],
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_relation_explanation_sentence_ids",
+        "response": {
+          "label": "insufficient",
+          "relation": "undetermined",
+          "explanation": "synthetic structure test",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_relation_sentence_ids_explanation",
+        "response": {
+          "label": "insufficient",
+          "relation": "undetermined",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_explanation_relation_sentence_ids",
+        "response": {
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "relation": "undetermined",
+          "sentence_ids": []
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_explanation_sentence_ids_relation",
+        "response": {
+          "label": "insufficient",
+          "explanation": "synthetic structure test",
+          "sentence_ids": [],
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_sentence_ids_relation_explanation",
+        "response": {
+          "label": "insufficient",
+          "sentence_ids": [],
+          "relation": "undetermined",
+          "explanation": "synthetic structure test"
+        },
+        "accept": false
+      },
+      {
+        "name": "order_label_sentence_ids_explanation_relation",
+        "response": {
+          "label": "insufficient",
+          "sentence_ids": [],
+          "explanation": "synthetic structure test",
+          "relation": "undetermined"
+        },
+        "accept": false
+      },
+      {
+        "name": "inconsistent_labels_still_schema_valid",
+        "response": {
+          "relation": "conflicts",
+          "explanation": "synthetic mismatch must not be grammar-corrected",
+          "sentence_ids": [],
+          "label": "supported"
+        },
+        "accept": true
+      },
+      {
+        "name": "unknown_sentence_rejected",
+        "response": {
+          "relation": "entails",
+          "explanation": "synthetic",
+          "sentence_ids": [
+            "foreign-id"
+          ],
+          "label": "supported"
+        },
+        "accept": false
+      }
+    ]
+  }
+]

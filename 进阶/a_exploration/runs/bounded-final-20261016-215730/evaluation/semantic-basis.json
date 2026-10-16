@@ -1,0 +1,142 @@
+{
+  "AT01": {
+    "reference_label": "insufficient",
+    "reference_source": "冻结后、查看响应前另存的evaluation-original-evidence.json；非官方。",
+    "baseline": {
+      "input": false,
+      "necessary": false,
+      "support": false,
+      "unrelated": false,
+      "consistent": true,
+      "basis": "查询输出fixed-seed-verification被原分词器当作一个词，无任何匹配，两侧实际输入均空。I符合暂判，但这是空检索后的安全拒判，不能算seed/API范围证据已核验；空引用无支持来源。"
+    },
+    "improved": {
+      "input": false,
+      "necessary": false,
+      "support": false,
+      "unrelated": false,
+      "consistent": true,
+      "basis": "与基线相同空检索、空引用；没有实际证据表明API契约，严格不通过，不把正确拒判冒充检索覆盖。"
+    }
+  },
+  "AT02": {
+    "reference_label": "supported",
+    "reference_source": "P2-S09-p02的分层、隐私大小条件及后续复用；人工原文推导暂判。",
+    "baseline": {
+      "input": true,
+      "necessary": true,
+      "support": true,
+      "unrelated": false,
+      "consistent": true,
+      "basis": "所选0006明确raw大小/隐私限制与分层，0007将匿名中型/进一步处理数据与Notebook公开，组合足以支持后续阶段仍有机会复用；0003是必要的上游处理描述背景。虽未引用最后直接结论句，但不要求固定ID；该替代组合属原文推断，尚待本人确认。reason把核心来源写为p01不准确，单列，不据此改模型引用。"
+    },
+    "improved": {
+      "input": true,
+      "necessary": true,
+      "support": true,
+      "unrelated": false,
+      "consistent": true,
+      "basis": "两侧原段完全相同，引用相同；同样认可0006/0007的条件和机制组合，不要求固定末句；DOI等自由理由并非本题必要依据。"
+    }
+  },
+  "AT03": {
+    "reference_label": "contradicted",
+    "reference_source": "P1记录程序参数/流程与链接结果要求，原文推导。",
+    "baseline": {
+      "input": true,
+      "necessary": false,
+      "support": false,
+      "unrelated": false,
+      "consistent": true,
+      "basis": "P1-S02-p03要求记录程序参数及人工步骤，S09允许追溯详细数据，已能反驳无需知道生成过程的关键断言。模型空引用I漏掉反证，理由还错误称未提及深层数据检查。"
+    },
+    "improved": {
+      "input": true,
+      "necessary": true,
+      "support": false,
+      "unrelated": false,
+      "consistent": false,
+      "basis": "所选0002/0004有可执行工作流和记录细节，0009/0011/0012有底层数据和链接，必要反证覆盖成立，但不能支持实际supported。reason说须记录流程却支持无需过程，矛盾。相关工作流背景不临时算无关。"
+    }
+  },
+  "AT04": {
+    "reference_label": "supported",
+    "reference_source": "P2-S08-p02的runs quickly、restart/rerun及删除步骤检查，原文推导。",
+    "baseline": {
+      "input": true,
+      "necessary": true,
+      "support": true,
+      "unrelated": false,
+      "consistent": true,
+      "basis": "所选0007保留运行快的条件、重启并重跑和遗漏步骤检查；0008最终测试补充。0009/0010关于长流程分块和中间结果是同一执行检查上下文的相关冗余，不等同许可等无关引用。无需声称能发现全部错误。"
+    },
+    "improved": {
+      "input": true,
+      "necessary": true,
+      "support": true,
+      "unrelated": false,
+      "consistent": true,
+      "basis": "唯一所选0021完整包括runs quickly、重启所有cells及误删步骤检查，足以支持题目的一种检查办法；reason把建议说成需要/发现后执行有过度表述，另列，不改变引用和label。"
+    }
+  },
+  "AT05": {
+    "reference_label": "supported",
+    "reference_source": "P1-S02/P1-S10与P2-S03的多项合取，原文推导。",
+    "baseline": {
+      "input": false,
+      "necessary": false,
+      "support": false,
+      "unrelated": false,
+      "consistent": true,
+      "basis": "P2所选0009明确代码可捕获而reasoning/intuition未必；P1只有习惯/框架引言，没有文字解释链接精确结果的必要依据。标签虽对，完整合取未被输入或引用覆盖；相关框架背景不强判无关。"
+    },
+    "improved": {
+      "input": false,
+      "necessary": false,
+      "support": false,
+      "unrelated": true,
+      "consistent": true,
+      "basis": "补邻段仍局限P1引言，没有P1-S10文字解释→结果的依据，故多项合取不完整。P2所选0020支持代码与推理区分，但0024姓名联系方式对该判断无关，不能靠选很多句补齐缺项。reason把may not写得绝对并错配句子归属，另列事实问题。"
+    }
+  },
+  "AT06": {
+    "reference_label": "contradicted",
+    "reference_source": "P2-S03-p01必须记录dead ends与之后可精简的阶段区分，原文推导。",
+    "baseline": {
+      "input": true,
+      "necessary": false,
+      "support": false,
+      "unrelated": false,
+      "consistent": false,
+      "basis": "实际p01同时写document all explorations even dead ends和后来可删展示评论，足以反驳全程不用记录。I和空引用忽略明确反证，reason自己提到记录失败但仍拒判。"
+    },
+    "improved": {
+      "input": true,
+      "necessary": true,
+      "support": false,
+      "unrelated": false,
+      "consistent": false,
+      "basis": "0002明确记录all explorations/dead ends，0004限定later pipeline/audience可精简，组合必要覆盖成立却不支持实际supported。reason说须记录失败却支持不记录，方向矛盾；0005及时注释属于相关背景。"
+    }
+  },
+  "AT07": {
+    "reference_label": "insufficient",
+    "reference_source": "两文为规则建议、没有三模块20百分点对照，全文范围核查暂判。",
+    "baseline": {
+      "input": false,
+      "necessary": false,
+      "support": false,
+      "unrelated": true,
+      "consistent": true,
+      "basis": "实际命中中间结果归档与Notebook整理，所选0009仅要求归档中间文件，不能作为三协作模块准确率实验的有效检查来源。I标签符合材料缺证，但单个无关归档句不支持全面断言，严格失败。"
+    },
+    "improved": {
+      "input": false,
+      "necessary": false,
+      "support": false,
+      "unrelated": false,
+      "consistent": true,
+      "basis": "仍无主张所需实验和数字；I合理，但空引用且未展示有效检查来源，不把语义安全拒判计为严格完整成功。"
+    }
+  }
+}

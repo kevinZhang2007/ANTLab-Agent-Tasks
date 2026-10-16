@@ -1,0 +1,242 @@
+{
+  "AD01": [
+    {
+      "block_id": "P1-S01-p04",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S01",
+      "heading": "Introduction (unheaded)",
+      "paragraph_index": 3,
+      "text": "We further note that reproducibility is just as much about the habits that ensure reproducible research as the technologies that can make these processes efficient and realistic. Each of the following ten rules captures a specific aspect of reproducibility, and discusses what is needed in terms of information handling and tracking of procedures. If you are taking a bare-bones approach to bioinformatics analysis, i.e., running various custom scripts from the command line, you will probably need to handle each rule explicitly. If you are instead performing your analyses through an integrated framework (such as GenePattern [10] , Galaxy [11] , LONI pipeline [12] , or Taverna [13] ), the system may already provide full or partial support for most of the rules. What is needed on your part is then merely the knowledge of how to exploit these existing possibilities.",
+      "_order": [
+        0,
+        3
+      ]
+    },
+    {
+      "block_id": "P1-S01-p05",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S01",
+      "heading": "Introduction (unheaded)",
+      "paragraph_index": 4,
+      "text": "In a pragmatic setting, with publication pressure and deadlines, one may face the need to make a trade-off between the ideals of reproducibility and the need to get the research out while it is still relevant. This trade-off becomes more important when considering that a large part of the analyses being tried out never end up yielding any results. However, frequently one will, with the wisdom of hindsight, contemplate the missed opportunity to ensure reproducibility, as it may already be too late to take the necessary notes from memory (or at least much more difficult than to do it while underway). We believe that the rewards of reproducibility will compensate for the risk of having spent valuable time developing an annotated catalog of analyses that turned out as blind alleys.",
+      "_order": [
+        0,
+        4
+      ]
+    },
+    {
+      "block_id": "P1-S01-p06",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S01",
+      "heading": "Introduction (unheaded)",
+      "paragraph_index": 5,
+      "text": "As a minimal requirement, you should at least be able to reproduce the results yourself. This would satisfy the most basic requirements of sound research, allowing any substantial future questioning of the research to be met with a precise explanation. Although it may sound like a very weak requirement, even this level of reproducibility will often require a certain level of care in order to be met. There will for a given analysis be an exponential number of possible combinations of software versions, parameter values, pre-processing steps, and so on, meaning that a failure to take notes may make exact reproduction essentially impossible.",
+      "_order": [
+        0,
+        5
+      ]
+    },
+    {
+      "block_id": "P1-S02-p01",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S02",
+      "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+      "paragraph_index": 0,
+      "text": "Whenever a result may be of potential interest, keep track of how it was produced. When doing this, one will frequently find that getting from raw data to the final result involves many interrelated steps (single commands, scripts, programs). We refer to such a sequence of steps, whether it is automated or performed manually, as an analysis workflow. While the essential part of an analysis is often represented by only one of the steps, the full sequence of pre- and post-processing steps are often critical in order to reach the achieved result. For every involved step, you should ensure that every detail that may influence the execution of the step is recorded. If the step is performed by a computer program, the critical details include the name and version of the program, as well as the exact parameters and inputs that were used.",
+      "_order": [
+        1,
+        0
+      ]
+    },
+    {
+      "block_id": "P1-S02-p02",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S02",
+      "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+      "paragraph_index": 1,
+      "text": "Although manually noting the precise sequence of steps taken allows for an analysis to be reproduced, the documentation can easily get out of sync with how the analysis was really performed in its final version. By instead specifying the full analysis workflow in a form that allows for direct execution, one can ensure that the specification matches the analysis that was (subsequently) performed, and that the analysis can be reproduced by yourself or others in an automated way. Such executable descriptions [10] might come in the form of simple shell scripts or makefiles [15] , [16] at the command line, or in the form of stored workflows in a workflow management system [10] , [11] , [13] , [17] , [18] .",
+      "_order": [
+        1,
+        1
+      ]
+    },
+    {
+      "block_id": "P1-S02-p03",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S02",
+      "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+      "paragraph_index": 2,
+      "text": "As a minimum, you should at least record sufficient details on programs, parameters, and manual procedures to allow yourself, in a year or so, to approximately reproduce the results.",
+      "_order": [
+        1,
+        2
+      ]
+    }
+  ],
+  "AD02": [
+    {
+      "block_id": "P2-S01-p02",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "section_id": "P2-S01",
+      "heading": "Introduction",
+      "paragraph_index": 1,
+      "text": "Reproducibility, the scientific standard that others should be able to recreate your results, requires at a minimum that “data and the computer code used to analyze [that] data be made available to others” [ 2 ]. Achieving even this minimum standard typically requires both machine-readable descriptions of the data, software, dependencies, and computational environment involved (for example, hardware or cloud configuration), as well as human-readable documentation describing how all these pieces fit together. Whereas analysts previously kept code, documentation, and results in separate files, they increasingly use computational notebooks such as Jupyter Notebooks and R Notebooks to both perform analyses and combine code, results, and descriptive text in a single “computational narrative” to be read and rerun by others [ 7 , 8 ]. This ability to combine executable code and descriptive text in a single document has close ties to Knuth’s notion of “literate programming” [ 9 ] and has convinced many researchers to switch to computational notebooks from other programming environments. Jupyter Notebooks in particular have seen widespread adoption: as of December 2018, there were more than 3 million Jupyter Notebooks shared publicly on GitHub ( https://www.github.com ) [ 10 ], many of which document academic research [ 11 ].",
+      "_order": [
+        11,
+        1
+      ]
+    },
+    {
+      "block_id": "P2-S01-p03",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "section_id": "P2-S01",
+      "heading": "Introduction",
+      "paragraph_index": 2,
+      "text": "The interactive and narrative nature of computational notebooks presents unique opportunities for performing and sharing computational research. With some forethought, they can provide not only richly detailed descriptions of analyses but also interactive computing environments for replicating, exploring, and extending them. Yet, as with other computing environments, using notebooks for research requires special care. Interactively running and editing code in notebooks can delete key steps or introduce “hidden state” that confounds analyses and confuses readers [ 12 ]. Analyses documented in notebooks cannot be easily rerun if users do not first freeze their dependencies, share their data, and adequately describe their computing environment [ 13 ]. And many notebooks lack sufficient descriptive text to guide readers in using them [ 11 , 14 ].",
+      "_order": [
+        11,
+        2
+      ]
+    },
+    {
+      "block_id": "P2-S01-p04",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "section_id": "P2-S01",
+      "heading": "Introduction",
+      "paragraph_index": 3,
+      "text": "The explosive growth of computational notebooks provides a unique opportunity to support computational research, but care must be taken when performing and sharing analyses in notebooks. Given these opportunities and challenges, we have compiled a set of rules, tips, tools, and example notebooks to help guide Jupyter Notebook authors. While we focus on a few core uses of Jupyter Notebooks observed in our own research, many of these rules can be applied to other computational notebooks and use cases. In Fig 1 , we give a preview of the rules applied at different phases of the notebook development cycle. Whether you use notebooks to track preliminary analyses, to present polished results to collaborators, as finely tuned pipelines for recurring analyses, or for all of the above, following this advice will help you write and share analyses that are easier to read, run, and explore.",
+      "_order": [
+        11,
+        3
+      ]
+    },
+    {
+      "block_id": "P2-S08-p01",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "section_id": "P2-S08",
+      "heading": "Rule 7: Build a pipeline",
+      "paragraph_index": 0,
+      "text": "Notebooks documenting initial, exploratory investigations will rarely be widely generalizable, but once a stable analysis approach has been identified, a well-designed notebook can be generalized into a pipeline that easily repeats that analysis using different input data and parameters. With this end in mind, design your notebook from the beginning to allow such future repurposing. Place key variable declarations, especially those that will be changed when doing a new analysis, at the top of the notebook rather than burying them somewhere in the middle. Perform preparatory steps, like data cleaning, directly in the notebook and avoid manual interventions.",
+      "_order": [
+        18,
+        0
+      ]
+    },
+    {
+      "block_id": "P2-S08-p02",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "section_id": "P2-S08",
+      "heading": "Rule 7: Build a pipeline",
+      "paragraph_index": 1,
+      "text": "Because notebooks’ interactivity make them vulnerable to accidental overwriting or deletion of critical steps by the user, if your analysis runs quickly, make a habit of regularly restarting your kernel and rerunning all cells to make sure you did not accidentally delete a step while cleaning your notebook (and if you did, retrieve the code for it from version control). Restarting your kernel and running all cells is also a good final test of results. To allow partial execution of complex analyses, break long notebooks into smaller notebooks that focus on one or a few analysis steps. Then, ensure that each notebook stores serialized versions of key intermediate results to disk for subsequent notebooks to use.",
+      "_order": [
+        18,
+        1
+      ]
+    },
+    {
+      "block_id": "P2-S08-p03",
+      "doc_id": "P2",
+      "snapshot": "published",
+      "section_id": "P2-S08",
+      "heading": "Rule 7: Build a pipeline",
+      "paragraph_index": 2,
+      "text": "Once a notebook has been developed, it can be parameterized with a tool such as papermill ( https://github.com/nteract/papermill ). Such notebooks can be used not only interactively but also as command-line tools that can be executed automatically—a great boon for pipelines! Consider linking your analysis pipeline steps via a Makefile or similar tool that allows for complete noninteractive execution of the entire pipeline, either in full or partial steps. Such automation also supports code quality techniques like software testing; consider testing your workflows from end to end each time a change is committed by integrating your repository to a Continuous Integration system (for example, https://travis-ci.org/ ). Last but not least, be aware that pipeline notebooks will almost certainly have a very different story (Rule 1) than the initial analyses that engendered them! Remember to remove any introduction, interpretation, or conclusion text that is not universally applicable to different inputs and results and instead replace it with guidance for the pipeline user on how to run and interpret its (potentially novel) results.",
+      "_order": [
+        18,
+        2
+      ]
+    }
+  ],
+  "AD03": [
+    {
+      "block_id": "P1-S01-p04",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S01",
+      "heading": "Introduction (unheaded)",
+      "paragraph_index": 3,
+      "text": "We further note that reproducibility is just as much about the habits that ensure reproducible research as the technologies that can make these processes efficient and realistic. Each of the following ten rules captures a specific aspect of reproducibility, and discusses what is needed in terms of information handling and tracking of procedures. If you are taking a bare-bones approach to bioinformatics analysis, i.e., running various custom scripts from the command line, you will probably need to handle each rule explicitly. If you are instead performing your analyses through an integrated framework (such as GenePattern [10] , Galaxy [11] , LONI pipeline [12] , or Taverna [13] ), the system may already provide full or partial support for most of the rules. What is needed on your part is then merely the knowledge of how to exploit these existing possibilities.",
+      "_order": [
+        0,
+        3
+      ]
+    },
+    {
+      "block_id": "P1-S01-p05",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S01",
+      "heading": "Introduction (unheaded)",
+      "paragraph_index": 4,
+      "text": "In a pragmatic setting, with publication pressure and deadlines, one may face the need to make a trade-off between the ideals of reproducibility and the need to get the research out while it is still relevant. This trade-off becomes more important when considering that a large part of the analyses being tried out never end up yielding any results. However, frequently one will, with the wisdom of hindsight, contemplate the missed opportunity to ensure reproducibility, as it may already be too late to take the necessary notes from memory (or at least much more difficult than to do it while underway). We believe that the rewards of reproducibility will compensate for the risk of having spent valuable time developing an annotated catalog of analyses that turned out as blind alleys.",
+      "_order": [
+        0,
+        4
+      ]
+    },
+    {
+      "block_id": "P1-S01-p06",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S01",
+      "heading": "Introduction (unheaded)",
+      "paragraph_index": 5,
+      "text": "As a minimal requirement, you should at least be able to reproduce the results yourself. This would satisfy the most basic requirements of sound research, allowing any substantial future questioning of the research to be met with a precise explanation. Although it may sound like a very weak requirement, even this level of reproducibility will often require a certain level of care in order to be met. There will for a given analysis be an exponential number of possible combinations of software versions, parameter values, pre-processing steps, and so on, meaning that a failure to take notes may make exact reproduction essentially impossible.",
+      "_order": [
+        0,
+        5
+      ]
+    },
+    {
+      "block_id": "P1-S02-p01",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S02",
+      "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+      "paragraph_index": 0,
+      "text": "Whenever a result may be of potential interest, keep track of how it was produced. When doing this, one will frequently find that getting from raw data to the final result involves many interrelated steps (single commands, scripts, programs). We refer to such a sequence of steps, whether it is automated or performed manually, as an analysis workflow. While the essential part of an analysis is often represented by only one of the steps, the full sequence of pre- and post-processing steps are often critical in order to reach the achieved result. For every involved step, you should ensure that every detail that may influence the execution of the step is recorded. If the step is performed by a computer program, the critical details include the name and version of the program, as well as the exact parameters and inputs that were used.",
+      "_order": [
+        1,
+        0
+      ]
+    },
+    {
+      "block_id": "P1-S02-p02",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S02",
+      "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+      "paragraph_index": 1,
+      "text": "Although manually noting the precise sequence of steps taken allows for an analysis to be reproduced, the documentation can easily get out of sync with how the analysis was really performed in its final version. By instead specifying the full analysis workflow in a form that allows for direct execution, one can ensure that the specification matches the analysis that was (subsequently) performed, and that the analysis can be reproduced by yourself or others in an automated way. Such executable descriptions [10] might come in the form of simple shell scripts or makefiles [15] , [16] at the command line, or in the form of stored workflows in a workflow management system [10] , [11] , [13] , [17] , [18] .",
+      "_order": [
+        1,
+        1
+      ]
+    },
+    {
+      "block_id": "P1-S02-p03",
+      "doc_id": "P1",
+      "snapshot": "published",
+      "section_id": "P1-S02",
+      "heading": "Rule 1: For Every Result, Keep Track of How It Was Produced",
+      "paragraph_index": 2,
+      "text": "As a minimum, you should at least record sufficient details on programs, parameters, and manual procedures to allow yourself, in a year or so, to approximately reproduce the results.",
+      "_order": [
+        1,
+        2
+      ]
+    }
+  ]
+}

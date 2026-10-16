@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-16T17:52:13.234571+08:00",
+  "hypothesis": "开启思考时，去重并将claim置后的组织方案可能改变判断和必要证据选择，也可能只减少输入和耗时或丢失已正确判断。",
+  "competing_explanation": "模型可能在较短输入上更快地产生同样错误，或忽略跨句证据；A组织因素同时改变表示与claim位置，不能单独归因去重。",
+  "selection": "严格成功优先，其次标签正确；已有标签正确题不得退步（同时检查本轮重复侧及历史已正确题）；必要覆盖与引用支持的退步逐题报告。只有耗时下降单列效率收益，不称正确率提升；质量同分保留重复侧。",
+  "historically_correct_dev_ids_for_evaluation_only": [
+    "AD02"
+  ],
+  "scope": "仅三道开发题及自造样例；同一自动improved证据重放，不重新检索、不用人工充分证据。",
+  "fixed": "两侧Qwen3-0.6B-Q8_0、同原判断system、同句子Schema/展开、同模型和采样，presence1.5/repeat1.0、开启思考、1024共享总输出预算、4096上下文。",
+  "generation_cap": 6,
+  "baseline_cumulative": 609,
+  "A_used_before": 75,
+  "original_plan_budget": 90,
+  "original_plan_remaining_before": 15,
+  "future_reserved_additional": 30,
+  "future_reservation_used": 0,
+  "future_reservation_authorizes_execution": false,
+  "stopping": "所有实际模板保存并检查通过才生成；超限不删原文。技术失败停止不重发，质量错误不重试。沿用2GiB加载和连续3个2秒低于1GiB的自有进程停止规则。",
+  "evaluation": "仅最终content判分，reasoning全留；标签、理由一致、非空来源真实性、必要覆盖、引用支持、严格、输出tokens和完整客户端耗时分列。AD03缺S08边界不借参考补证。",
+  "no_AT_read": true
+}

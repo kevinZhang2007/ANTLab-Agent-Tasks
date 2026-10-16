@@ -1,0 +1,23 @@
+--- old/launch.py
++++ new/launch.py
+@@ -9,6 +9,7 @@
+ def main():
+     p=argparse.ArgumentParser();p.add_argument('--out',type=Path,required=True);p.add_argument('--port',type=int,default=8890);a=p.parse_args();folder=a.out.resolve()
+     pre=load(folder/'offline-preflight.json');assert pre['passed'] and offline_checks()['status']=='passed'
++    gate=load(folder/'import-and-failure-gate.json');assert gate['passed'] and gate['generation_calls']==0
+     if (folder/'owned-service.json').exists():raise ValueError('本目录曾启动，不自动重试')
+     for name,h in {**pre['code_hashes'],**pre['data_hashes']}.items():assert sha(ROOT/name)==h,'预检后文件改变 '+name
+     for port in [8080,a.port]:
+@@ -20,10 +21,10 @@
+     write(folder/'development-plan.json',plan)
+     base=Path.home()/'AppData/Local/ANTLabLocalModel';launch=[x.replace('%LOCALAPPDATA%/ANTLabLocalModel',str(base)) for x in pre['service_arguments']]
+     # 槽保存目录移到本轮目录，避免写入旧诊断缓存；不改变生成设置。
+-    slot=launch.index('--slot-save-path')+1;(folder/'slot-cache').mkdir();launch[slot]=str(folder/'slot-cache')
++    slot=launch.index('--slot-save-path');del launch[slot:slot+2]
+     assert sha(Path(launch[0]))==pre['executable_hash'] and sha(Path(launch[launch.index('-m')+1]))==pre['model_hash']
+     process=None;server=None;stop=threading.Event();abort=threading.Event();samples=[];start=time.perf_counter();phase='loading'
+-    runtime={'started_at':now(),'service_arguments':launch,'only_service_argument_difference':'slot-save-path改为本轮独立目录；不改模型/采样/上下文','memory_before':memory(),'technical_stop':False}
++    runtime={'started_at':now(),'service_arguments':launch,'only_service_argument_difference':'删除非必需slot-save-path，禁用持久槽文件；中文路径被原生参数检查拒绝。模型/采样/上下文不变，仍在每次请求前erase槽。','memory_before':memory(),'technical_stop':False}
+     def monitor():
+         low=0
+         while not stop.is_set():
